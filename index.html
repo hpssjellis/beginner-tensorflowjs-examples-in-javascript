@@ -132,7 +132,7 @@ Use at your own risk!
 <script>
 function myTextGrow(myT, myB){
    myNewDiv = myB.replace('Code','')
-   document.getElementById('myNewDiv').innerHTML = ''
+   document.getElementById(myNewDiv).innerHTML = ''
    document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.6.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
         
    setTimeout(function() {
