@@ -1,0 +1,106 @@
+<script src="https://unpkg.com/deeplearn@0.5.1/dist/deeplearn.js"> </script> 
+
+<script>
+const EPSILON = dl.scalar(1e-7);
+const HIDDEN_UNITS = 12;
+const myOne = dl.scalar(1);
+const myInput = [[0, 0], [0, 1], [1, 0], [1, 1]];
+const myTarget = [[0], [1], [1], [0]];
+const inputTensor = dl.tensor2d(myInput, [4, 2]);
+const targetTensor = dl.tensor2d(myTarget, [4, 1]);
+const fullyConnectedWeights1 = dl.variable(initializeWeights([2, HIDDEN_UNITS], 2));
+const fullyConnectedBias1 = dl.variable(dl.scalar(0));
+const fullyConnectedWeights2 = dl.variable(initializeWeights([HIDDEN_UNITS, 1], HIDDEN_UNITS));
+const fullyConnectedBias2 = dl.variable(dl.scalar(0));
+const optimizer = dl.train.sgd(0.1);
+function initializeWeights(shape, prevLayerSize) {
+    return dl.randomNormal(shape).mul(dl.scalar(Math.sqrt(2.0 / prevLayerSize)));
+}
+function calculateCost(y, output) {
+    return dl.add(y.mul(output.add(EPSILON).log()), myOne.sub(y).mul(myOne.sub(output).add(EPSILON).log())).sum().neg();
+}
+function model(xs) {
+    const hiddenLayer = dl.tidy( function ()  {
+        return xs.matMul(fullyConnectedWeights1).add(fullyConnectedBias1).relu();
+    });
+    return hiddenLayer.matMul(fullyConnectedWeights2).add(fullyConnectedBias2).sigmoid();
+}
+async function train(iterations) {
+    const returnCost = true;
+    let cost;
+    for (let i = 0; i < iterations; i++) {
+        cost = optimizer.minimize(function() {
+            return calculateCost(targetTensor, model(inputTensor));
+        }, returnCost);
+        if (i % 100 === 0) {
+          document.getElementById('myDiv01').innerHTML += 'Loss['+i+']: '+ cost.dataSync()+'<br>'
+        }
+        await dl.nextFrame();
+    }
+    return cost.dataSync();
+}
+async function learnXor() {
+    const timeStart = performance.now();
+    const iterations = Math.floor(Math.random()*200+400); // a random number between 400 and 600
+    document.getElementById('myDiv01').innerHTML += '<br>Total Training Iterations: '+iterations+'<br><br>'
+    const loss = await train(iterations);
+    const time = performance.now() - timeStart;
+    document.getElementById('myDiv01').innerHTML += '<br>Loss['+iterations+']: ' + loss[0]+'<br><br>'
+    document.getElementById('myDiv01').innerHTML += 'Train Duration : '+ Math.round(time/1000).toFixed(2) + ' seconds</br><br>'
+}
+async function testXor(i) {
+    const timeStart2 = performance.now();
+    const inputData = dl.tensor2d([myInput[i]], [1, 2]);
+    const expectedOutput = dl.tensor1d(myTarget[i]);
+    const val = model(inputData);
+    const time2 = performance.now() - timeStart2;
+   
+    document.getElementById('myDiv02').innerHTML = '<br>Testing Duration : '+ time2.toFixed(3) + ' milliseconds</br><br>'
+    document.getElementById('myDiv02').innerHTML +=  await val.data() + '<br>'
+} 
+</script>
+
+<h2 align=center> Deeplearnjs xOr Neural Network.</h2>
+Click the button to train the network. Pull down the select box to test<br>
+
+Training <input type=button value="learnXor()" onclick="{ 
+   learnXor()
+}">
+
+<div id="myDiv01">Loss<br></div>
+
+<hr>
+Testing:  <select size=1 onChange="{
+   if (this.value >= 0){
+      testXor(this.value)
+   }
+}">
+<option value =-1>Pulldown to test xOr </option>
+<option value=0>Expecting ~0 for xOR [0,0] </option> 
+<option value=1>Expecting ~1 for xOR [1,0] </option>
+<option value=2>Expecting ~1 for xOR [0,1] </option>
+<option value=3>Expecting ~0 for xOR [1,1] </option>
+</select>
+
+<div id="myDiv02"><br>Results<br></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br>
+Main page at <a href="https://hpssjellis.github.io/deeplearnjs-javascript-examples/">https://hpssjellis.github.io/deeplearnjs-javascript-examples/</a><br>
+by Jeremy Ellis<br>
+Twitter <a href="https://twitter.com/rocksetta">https://twitter.com/rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!<br>

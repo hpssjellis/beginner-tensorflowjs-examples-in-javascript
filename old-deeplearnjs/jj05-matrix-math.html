@@ -1,0 +1,133 @@
+<h3 align=center>Deeplearnjs in your Browser. Learning Matrix Math</h3>
+<h5 align=center>Note: Using an older version of Deeplearnjs</h5>
+Tutorial video at: <a href="https://www.youtube.com/watch?v=MZomMmG5G0Q&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=4">https://www.youtube.com/watch?v=MZomMmG5G0Q&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=4</a> 
+<br><br>
+
+
+
+<!--   *******************************Start: Which source js file to use? ****************************************************   -->
+
+<!--   In the Github repository will be old  
+    <script src="deeplearn.js"></script>
+ -->
+
+
+<!-- the newest version but all examples may not work 
+<script src="https://unpkg.com/deeplearn"></script> 
+-->
+
+  
+<!-- the online version that these examples were made with  -->
+
+<script src="https://unpkg.com/deeplearn@0.4.2/dist/deeplearn.js"></script>
+
+
+<!--   *******************************Stop: Which source js file to use? ****************************************************   -->
+
+
+
+
+Checkout a really good matrix math explanation site at <a href="http://www.mathsisfun.com/algebra/matrix-inverse.html">http://www.mathsisfun.com/algebra/matrix-inverse.html</a><br>
+<br><br>
+
+<div id="myDiv01Code">
+
+<input id="myButton01" type=button value="Real Life Use of Matrix Math" onclick="{
+
+    class myNDArrayMath extends dl.NDArrayMath {
+       inverse2DSquare(b)  {       
+          var myInverseMultiplier  = 1 / ( (b.getValues()[0] * b.getValues()[3]) - (b.getValues()[1] * b.getValues()[2]) )
+          var myMatrixConverted = dl.Array2D.new([2, 2], [b.getValues()[3]*myInverseMultiplier, b.getValues()[1]*-1*myInverseMultiplier, b.getValues()[2]*-1*myInverseMultiplier, b.getValues()[0]*myInverseMultiplier])
+          return myMatrixConverted
+      }
+   }
+
+   document.getElementById('myDiv01').innerHTML = 'deeplearnjs Version = ' + dl.version + '<br><br>'
+
+   var myMath = dl.ENV.math;
+   var myClass = new myNDArrayMath()                                                                           
+   document.getElementById('myDiv01').innerHTML += 'Child $3.00 bus, $3.50 train, Adult $3.20 bus, $3.60 train <br>' 
+   document.getElementById('myDiv01').innerHTML += 'Total bus = $118.40, Total train = $135.20. How many Children and Adults? <br><br>' 
+
+   var myMatrixOriginal = dl.Array2D.new([2, 2], [3, 3.5, 3.2, 3.6]);
+   var myVector1D = dl.Array1D.new([118.4, 135.2]);
+
+   var myResult1 = myClass.inverse2DSquare(myMatrixOriginal)
+   document.getElementById('myDiv01').innerHTML += 'Intermediate Inverse Matrix shape = ' + myResult1.shape+ ' Intermediate Values = ' + myResult1.getValues() +'<br>'   
+
+   var myResult2 =  myMath.vectorTimesMatrix(myVector1D, myResult1);
+   document.getElementById('myDiv01').innerHTML +=   'Final Result shape:'+ myResult2.shape  +   ',  Train and Bus results: Children = ' + Math.round(myResult2.getValues()[0]) +   ',  Adults = '  +  Math.round(myResult2.getValues()[1])                                            
+
+}"><br>
+
+
+<div id="myDiv01">...</div><br>
+</div>
+<textarea id="myTextarea01"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%"  rows=3  onclick="{myTextGrow('myTextarea01', 'myDiv01Code')}">
+Click to see the code before clicking the button
+</textarea>
+
+<br><br><hr><br>
+
+
+
+
+
+
+
+Example: Solving simultaneous equations using the subtraction technique<br>
+<img src="jj05-simult-subtraction.png"><br><br>
+
+
+Example: Solving simultaneous equations using the substitution technique<br>
+<img src="jj05simult-substitution.png"><br><br>
+
+
+
+Example: Taking the inverse of a 2 x 2 matrix <br>
+<img src="jj05-inverse.png"><br><br>
+For the Bus and Train example using the real values refer to the site at <a href="http://www.mathsisfun.com/algebra/matrix-inverse.html">http://www.mathsisfun.com/algebra/matrix-inverse.html</a><br>
+<br><br>
+
+
+
+
+
+This Github: <a href="https://github.com/hpssjellis/deeplearnjs-javascript-examples"> https://github.com/hpssjellis/deeplearnjs-javascript-examples </a><br>
+This Website Index: <a href="https://hpssjellis.github.io/deeplearnjs-javascript-examples/">https://hpssjellis.github.io/deeplearnjs-javascript-examples/</a><br>
+<br>
+Original Deeplearnjs Github <a href="https://github.com/PAIR-code/deeplearnjs">https://github.com/PAIR-code/deeplearnjs</a><br>
+Check out the <a href="https://github.com/PAIR-code/deeplearnjs/releases"> latest version of deeplearnjs</a> <br> <br>
+This site by<br>
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Use at your own risk!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+function myTextGrow(myT, myB){
+   document.getElementById(myT).value = '\x3Cscript src="https://unpkg.com/deeplearn@0.4.2/dist/deeplearn.js"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+        
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+}  
+</script>  

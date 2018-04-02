@@ -1,0 +1,150 @@
+<h3 align=center>Deeplearnjs in your browser a04-squeezenet.html </h3>
+
+<h1 align=center>Deprecated</h1><h4> Still works but has some issues out of my control</h3>
+
+Note: This code needs version 0.3.13 of deeplearnjs and 0.1.2 version of SqueezeNet. See the code to find out how to load these versions.
+
+
+Tutorial video at: <a href="https://www.youtube.com/watch?v=DBF_sTTkDZw&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E">https://www.youtube.com/watch?v=DBF_sTTkDZw&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E</a> 
+<br><br>
+
+
+
+<!--   *******************************Start: Which source js file to use? ****************************************************   -->
+
+<!--   In the Github repository will be old  
+    <script src="deeplearn.js"></script>
+ -->
+
+
+<!-- the newest version but all examples may not work 
+<script src="https://unpkg.com/deeplearn"></script> 
+-->
+
+  
+<!-- the online version that these examples were made with  SEEMS TO NEED VERSION 0.3.13   -->
+
+<script src="https://unpkg.com/deeplearn@0.3.13/dist/deeplearn.js"></script>
+
+
+<!--   *******************************Stop: Which source js file to use? ****************************************************   -->
+
+
+<div id="myDiv01Code">
+
+<script src='https://unpkg.com/deeplearn-squeezenet@0.1.2/dist/bundle.js'></script>
+    
+<h2 align=center> <a href="https://deeplearnjs.org/demos/playground/examples.html">SqueezeNet and DeeplearnJS Playground</a></h2>
+
+        
+
+   
+<script>
+
+async function myCheckImage(){
+  dl = deeplearn
+  const catImage = document.getElementById('cat');
+  const math = new dl.NDArrayMathGPU();
+  const squeezeNet = new squeezenet.SqueezeNet(math);
+  await squeezeNet.load();
+
+  const image = dl.Array3D.fromPixels(document.getElementById('cat'));
+  const inferenceResult = await squeezeNet.predict(image);
+  const topClassesToProbs = await squeezeNet.getTopKClasses(inferenceResult.logits, 10);
+
+  document.getElementById('myDiv01').innerHTML = ''   // clear the div
+  for (const className in topClassesToProbs) {  
+    document.getElementById('myDiv01').innerHTML += topClassesToProbs[className].toFixed(5) + ' : '+ className + '<br>'
+  }
+}
+
+
+async function myLoadImage(myEvent){
+    myEvent.preventDefault(); 
+    myEvent.stopPropagation();   
+    document.getElementById('cat').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
+    setTimeout('myCheckImage()', 200)
+}
+
+
+</script>
+
+
+Save an image of an animal to a folder and then drag the image on top of the loaded image.  <br> 
+
+
+
+  <img onload="myCheckImage()" id="cat" src="https://storage.googleapis.com/learnjs-data/images/cat.jpeg" width="227" height="227" crossorigin="" ondrop="{ 
+     myLoadImage(event)
+  }" ondragover="{
+    event.preventDefault(); 
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+    document.getElementById('myDiv01').innerHTML = 'drag over'
+  }"><br><br>
+
+
+
+<input type=button value="Reset Output DIV" onclick="{
+   document.getElementById('myDiv01').innerHTML = '...'                                             
+}">
+
+<input type=button value="Search SqueezeNet" onclick="{
+     myCheckImage()                                     
+}"><br><br>
+    
+<div id="myDiv01">...</div><br>                 
+</div>
+    
+<textarea id="myTextarea01"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%"  rows=3  onclick="{
+   myTextGrow('myTextarea01', 'myDiv01Code')
+}">
+Click the button "Reset Output DIV" then click here to see the original code
+</textarea>
+
+<br><br><hr><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+This Github: <a href="https://github.com/hpssjellis/deeplearnjs-javascript-examples"> https://github.com/hpssjellis/deeplearnjs-javascript-examples </a><br>
+This Website Index: <a href="https://hpssjellis.github.io/deeplearnjs-javascript-examples/">https://hpssjellis.github.io/deeplearnjs-javascript-examples/</a><br>
+<br>
+Original Deeplearnjs Github <a href="https://github.com/PAIR-code/deeplearnjs">https://github.com/PAIR-code/deeplearnjs</a><br>
+Check out the <a href="https://github.com/PAIR-code/deeplearnjs/releases"> latest version of deeplearnjs</a> <br> <br>
+This site by<br>
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Use at your own risk!
+
+
+
+
+
+
+
+
+
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+function myTextGrow(myT, myB){
+   document.getElementById(myT).value = '\x3Cscript src="https://unpkg.com/deeplearn@0.3.13/dist/deeplearn.js"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+        
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+}  
+</script>  

@@ -1,0 +1,32 @@
+<script src="https://unpkg.com/deeplearn@0.5.1/dist/deeplearn.js"> </script> 
+
+<input id="myButton04" type="button" value="Mean Square Difference" onclick="{
+                                                          
+  (async function (){
+     const myData = dl.tensor2d([1.0, 2.0, 3.0, 4.0],[2, 2]);
+     const myLabels = dl.tensor1d([0,0,1,1]);
+     const myUnknown = dl.tensor2d([0.0, 2.0, 4.0, 6.0],[2, 2]);
+    
+      const myDiff = dl.sub(myData, myUnknown);   
+      const mySquaredDiff = dl.mul(myDiff, myDiff);
+      const mySum = dl.sum(mySquaredDiff) 
+      const mySize = dl.scalar(myData.size) 
+      const myAverage = dl.div(mySum, mySize)
+   
+      document.getElementById('myDiv04').innerHTML =  'The average = ' + await myAverage.data()
+   })()
+                                                        
+}">
+
+
+
+<div id="myDiv04">...</div><br>
+
+
+
+<br><br><br>
+Main page at <a href="https://hpssjellis.github.io/deeplearnjs-javascript-examples/">https://hpssjellis.github.io/deeplearnjs-javascript-examples/</a><br>
+by Jeremy Ellis<br>
+Twitter <a href="https://twitter.com/rocksetta">https://twitter.com/rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!<br>

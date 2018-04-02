@@ -1,0 +1,51 @@
+<script src="https://unpkg.com/deeplearn@0.5.1/dist/deeplearn.js"> </script> 
+
+<script>
+        
+class myTensor extends dl.Tensor {
+    constructor(a,b) {
+        const t = dl.tensor(a,b)
+   
+        t.myMethod = async function() {
+            const myOutput =  await this.data()
+            alert(myOutput)
+        }
+
+       // add more methods here
+
+       return t;
+      } // end constructor
+}       // end extended class
+
+</script>
+
+To extend the Tensor class while using the dl.tensor constructor, and to allow dl.print to work,
+ click the button with console open. Alert presents data from the extended tensor<br><br>
+
+<input type="button" value="Extended Tensor Class with dl.tensor constructor" onclick="{   
+   const myExtended  = new myTensor([1, 2.97, 3, 4], [2, 2]);
+   myExtended.myMethod()
+   myExtended.print('verbose')
+}"><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br>
+Main page at <a href="https://hpssjellis.github.io/deeplearnjs-javascript-examples/">https://hpssjellis.github.io/deeplearnjs-javascript-examples/</a><br>
+by Jeremy Ellis<br>
+Twitter <a href="https://twitter.com/rocksetta">https://twitter.com/rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!<br>
