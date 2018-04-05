@@ -549,7 +549,7 @@ function ui_renderEvaluateTable(xData, yTrue, yPred, logits) {
     const logitsCell = document.createElement('td');
     const exampleLogits =
         logits.slice(i * IRIS_NUM_CLASSES, (i + 1) * IRIS_NUM_CLASSES);
-    logitsToSpans(exampleLogits).map(logitSpan => {
+    ui_logitsToSpans(exampleLogits).map(logitSpan => {
       logitsCell.appendChild(logitSpan);
     });
     row.appendChild(logitsCell);
