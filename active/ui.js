@@ -15,7 +15,7 @@
  * =============================================================================
  */
 
-import embed from 'vega-embed';
+import embed from 'https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js';
 
 import {IRIS_CLASSES, IRIS_NUM_CLASSES} from './data';
 
