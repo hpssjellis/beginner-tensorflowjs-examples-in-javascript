@@ -17,9 +17,9 @@
 
 //import * as tf from '@tensorflow/tfjs';
 
-import * as data from './data';
-import * as loader from './loader';
-import * as ui from './ui';
+import * as data from './data.js';
+import * as loader from './loader.js';
+import * as ui from './ui.js';
 
 let model;
 
