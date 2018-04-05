@@ -15,7 +15,7 @@
  * =============================================================================
  */
 
-import embed from 'https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js';
+//import embed from 'https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js';
 
 import {IRIS_CLASSES, IRIS_NUM_CLASSES} from './data';
 
@@ -41,7 +41,7 @@ export function plotLosses(lossValues, epoch, newTrainLoss, newValidationLoss) {
   lossValues.push({'epoch': epoch, 'loss': newTrainLoss, 'set': 'train'});
   lossValues.push(
       {'epoch': epoch, 'loss': newValidationLoss, 'set': 'validation'});
-  embed(
+  vegaEmbed(
       '#lossCanvas', {
         '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
         'data': {'values': lossValues},
@@ -69,7 +69,7 @@ export function plotAccuracies(
       {'epoch': epoch, 'accuracy': newTrainAccuracy, 'set': 'train'});
   accuracyValues.push(
       {'epoch': epoch, 'accuracy': newValidationAccuracy, 'set': 'validation'});
-  embed(
+  vegaEmbed(
       '#accuracyCanvas', {
         '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
         'data': {'values': accuracyValues},
