@@ -1,6 +1,6 @@
 
 
-Tensorflowjs examples made to work without compiling or using modules (which cause CORS issues if used locally)
+# Tensorflowjs examples made to work without compiling or using modules (which cause CORS issues if used locally)
 
 Here is the ES6 Modules attempt. Easiest change to make and works sweet, but does not load locally without changes to your browser
 
