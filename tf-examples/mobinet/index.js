@@ -92,7 +92,7 @@ async function predict(imgElement) {
  * @param logits Tensor representing the logits from MobileNet.
  * @param topK The number of top predictions to show.
  */
-export async function getTopKClasses(logits, topK) {
+async function getTopKClasses(logits, topK) {
   const values = await logits.data();
 
   const valuesAndIndices = [];
