@@ -22,6 +22,11 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 This looks good, used namespaces to seperate functions into named functions. had to change function calls to inline format
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-transfer/index.html
 
+
+
+
+Working on this. It has some const and a class that may cause issues. NOT YET WORKING
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-with-layers/index.html
 .
 
 
