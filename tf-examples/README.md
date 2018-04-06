@@ -29,7 +29,8 @@ Working on this. It has some const and a class that may cause issues. NOT YET WO
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-with-layers/index.html
 .
 
-
+Mobinet works
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mobinet/index.html
 
 
 .
