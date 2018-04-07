@@ -34,7 +34,7 @@ mnist: with layers
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-with-layers/index.html
 .
 
-Mobinet works
+Mobinet works  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mobinet/index.html
 
 
