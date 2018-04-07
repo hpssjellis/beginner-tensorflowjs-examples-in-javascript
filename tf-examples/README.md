@@ -12,6 +12,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 addition-rnn  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/addition-rnn/index.html
 
+getting-started  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/getting-started/index.html
+
 Put everything into one file  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/iris.html
 
