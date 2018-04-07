@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Simple ml5.js Example</title>
+    <script src="https://unpkg.com/ml5@0.0.3/dist/ml5.js"></script>
+    <script>
+    // Initialize the imaImageClassifier method with the pre-trained SqueezeNet model.
+    const classifier = new ml5.ImageClassifier('SqueezeNet');
+
+    function onImageReady() {
+      // Get the image element from the page
+      let img = document.getElementById('image');
+      // Get a prediction for that image
+      classifier.predict(img, 10, gotResult);
+    }
+
+    // When we get the results
+    function gotResult(results) {
+      // The results are in an array ordered by probability.
+      document.getElementById('result').innerText = results[0].label;
+      document.getElementById('probability').innerText = results[0].probability.toPrecision(2);
+    }
+    </script>
+  </head>
+  <body>
+    <!--
+    This is the image we want to use.
+    We can change the src later in code.
+    We set crossOrigin to anonymous because imgur
+    will respect that and send CORS headers.
+    Not needed if you're loading an image from your own domain.
+    -->
+    <h1>Simple Image Classification Example</h1>
+    <img onload="onImageReady()" id="image" src="https://i.imgur.com/wxrLX68.jpg" crossOrigin="anonymous" >
+
+    <p>
+      I guess this is a <span id="result">...</span>.
+      My confidence is <span id="probability">...</span>
+    </p>
+  </body>
+</html>
