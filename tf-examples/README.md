@@ -33,7 +33,7 @@ Mobinet works
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mobinet/index.html
 
 
-.
+
 
 
 
@@ -42,7 +42,7 @@ Crunched everything into one html file. Note the best idea
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/curve-to-data.html
 
 
-
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/polynomial-regression/index.html
 
 
 
