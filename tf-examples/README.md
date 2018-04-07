@@ -15,19 +15,22 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 getting-started  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/getting-started/index.html
 
-Put everything into one file  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/iris.html
+Iris  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/iris/index.html
 
-Now kept the individual js files bt everything is one big global set of variables  
+
+mnist-core: Now kept the individual js files bt everything is one big global set of variables  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-core/index.html
 
-This looks good, used namespaces to seperate functions into named functions. had to change function calls to inline format
+
+
+mnist-transfer  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-transfer/index.html
 
 
 
 
-Working on this. It has some const and a class that may cause issues. NOT YET WORKING
+mnist: with layers  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-with-layers/index.html
 .
 
