@@ -19,7 +19,7 @@ Iris
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/iris/index.html
 
 
-mnist-core: Now kept the individual js files bt everything is one big global set of variables  
+mnist-core: Now kept the individual js files but everything is one big global set of variables. Should use namespaces  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-core/index.html
 
 
