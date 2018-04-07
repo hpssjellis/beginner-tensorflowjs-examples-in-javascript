@@ -50,5 +50,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/translation/index.html
+
+
+
 
 more to come
