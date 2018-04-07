@@ -42,23 +42,23 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 
 
 
-Crunched everything into one html file. Note the best idea
+polynomial-regression-core  
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/curve-to-data.html
 
-
+polynomial-regression  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/polynomial-regression/index.html
 
 
-
+sentiment  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/sentiment/index.html
 
 
-
+translation  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/translation/index.html
 
 
-
+webcam-transfer-learning  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/webcam-transfer-learning/index.html
 
 
