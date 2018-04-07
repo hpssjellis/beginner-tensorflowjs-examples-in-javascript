@@ -9,9 +9,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 
 .
 
-
-Put everything into one file  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/additionRNN.html
+addition-rnn  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/addition-rnn/index.html
 
 Put everything into one file  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/iris.html
