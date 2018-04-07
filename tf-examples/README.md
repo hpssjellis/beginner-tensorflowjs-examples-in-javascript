@@ -54,5 +54,6 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/webcam-transfer-learning/index.html
 
-more to come
+
