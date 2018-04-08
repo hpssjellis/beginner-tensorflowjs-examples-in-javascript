@@ -167,13 +167,15 @@ async function myAll3(){
     const x = async function() {                                                                                                                                
        document.getElementById('myDiv226').innerHTML += 'This line added by an inline function. <br>'
    } 
-    
+   const y = async () => {                                                                                                                                
+       document.getElementById('myDiv226').innerHTML += 'This line added by an inline function. <br>'
+   }     
  
 }
     
 </script>    
     
-<input id="myButton226" type="button" value="All three Functions" onclick="{  
+<input id="myButton226" type="button" value="All three Functions together" onclick="{  
                                                                  
    myAll3()   
                                                                  
