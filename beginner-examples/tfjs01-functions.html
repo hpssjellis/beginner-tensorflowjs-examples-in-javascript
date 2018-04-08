@@ -164,14 +164,14 @@ Click here to see the working HTML code.
 <script>
 async function myAll3(){                                                             
     document.getElementById('myDiv226').innerHTML = 'Output set by called function called myAll3(). <br>'
-    const x = function() {                                                                                                                                
-       return 'This wa made using an inline function <br>'
+    var myInline = function() {                                                                                                                                
+       return "This was made using an inline function <br>"
    } 
-   const y = () => {                                                                                                                                
-       return 'This line added by an arrow function. <br>'
+   var myArrow = () => {                                                                                                                                
+       return "This line added by an arrow function. <br>"
    }     
  
-    document.getElementById('myDiv226').innerHTML += x+y
+    document.getElementById('myDiv226').innerHTML += myInline + myArrow
 }
     
 </script>    
@@ -194,6 +194,27 @@ Click here to see the working HTML code.
  
  
  
+
+
+
+
+    
+<div id="myDiv227Code"> 
+   
+    
+<input id="myButton227" type="button" value="Funcitons that return Multiple Variables" onclick="{  
+                                                                 
+
+                                                                 
+}">
+
+</div>
+<div id='myDiv227'>...</div><br>
+<textarea id="myTextarea227"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea227', 'myDiv227Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
 
 
  
