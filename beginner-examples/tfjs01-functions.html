@@ -171,17 +171,25 @@ var myArrow = () => {
    document.getElementById('myDiv226').innerHTML += 'This line was made using an arrow function. <br><br>'
 }    
  
-function myAll3(){                                                             
+function myAll3Functions(){                                                             
     document.getElementById('myDiv226').innerHTML = 'This line was made by the main function. <br><br>'
-    myInline()
-    myArrow()
+
+    let myInline = (function() {                                                                                                                                
+       return 'This line was made using an inline function <br><br>'
+    }  )()
+
+    let myArrow = (() => {                                                                                                                                
+       return 'This line was made using an arrow function. <br><br>'
+   } )()  
+    
+    document.getElementById('myDiv226').innerHTML += myInline + myArrow
 }
     
 </script>    
     
 <input id="myButton226" type="button" value="All three Functions together" onclick="{  
                                                                  
-   myAll3()   
+   myAll3Functions()   
                                                                  
 }">
 
@@ -267,12 +275,10 @@ So Tensorflowjs uses modules, which works great for build tools and reducing the
    var myNameSpace = myNameSpace || {}       // if not already set then set the namespace as an object
                                                                                    
    myNameSpace.myModuleFunction = function() {                                                                                                                                
-       document.getElementById('myDiv229').innerHTML =  'A namespace protected inline function made this line.<br><br>'
+      return 'A namespace protected inline function made this line'
 } 
 
-// call the funciton with this command
-                                                                                   
- myNameSpace.myModuleFunction()                                                                                  
+   document.getElementById('myDiv229').innerHTML =   myNameSpace.myModuleFunction() + '<br><br>'                                                                        
                                                                     
 }">
 
