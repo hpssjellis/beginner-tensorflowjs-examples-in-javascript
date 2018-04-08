@@ -261,17 +261,20 @@ Click here to see the working HTML code.
 
 <div id="myDiv229Code"> 
    
-So Tensorflowjs uses modules, which works great for build tools and can be made to work with pure Javascript, 
- but has CORS issues when run from your local machine. My solution is namespacing <br>    
-<input id="myButton229" type="button" value="Namespaces replace modules" onclick="{  
+So Tensorflowjs uses modules, which works great for build tools and reducing the number of global variables and can be made to work with pure Javascript, 
+ but has CORS issues when run from your local machine. My solution is namespacing and changing regular functions to inline functions.<br>    
+
+ <input id="myButton229" type="button" value="Namespaces replace modules" onclick="{  
       
-                                                                                  
-                                                                                  
-   let {myFoo, myBar} = (function(){ 
-      return {myFoo: 3, myBar: 500} 
-   })();
- 
-   document.getElementById('myDiv229').innerHTML = 'Variable myFoo = ' + myFoo  + ' and variable myBar = ' + myBar                                                                      
+   var myNameSpace = myNameSpace || {}                                                                                 
+   myNameSpace.myModuleFunction = function() {                                                                                                                                
+       document.getElementById('myDiv229').innerHTML +=  'Namespaced function made this line<br><br>'
+} 
+
+// call the funciton with this command
+                                                                                   
+ myNameSpace.myModuleFunction()                                                                                  
+                                                                    
 }">
 
 </div>
