@@ -207,12 +207,11 @@ Click here to see the working HTML code.
     
 <input id="myButton227" type="button" value="Functions that return Multiple Variables as an Array" onclick="{  
                                                                  
+   [x, y] = (function(){ 
+      return [3, 4]; 
+   })();
 
-[x, y] = (function(){ 
-            return [3, 4]; 
-         })();
-
-     document.getElementById('myDiv227').innerHTML = 'Variable x = ' + x  + ' and variable y = ' + y                                                         
+   document.getElementById('myDiv227').innerHTML = 'Variable x = ' + x  + ' and variable y = ' + y                                                         
 }">
 
 </div>
@@ -238,11 +237,11 @@ Click here to see the working HTML code.
     
 <input id="myButton228" type="button" value="Functions that return Multiple Variables as an Object" onclick="{  
                                                                  
-    let {baz, foo} = (function(){ 
-                   return {foo: 3, bar: 500, baz: 40} 
-                 })();
+   let {baz, foo} = (function(){ 
+      return {foo: 3, bar: 500, baz: 40} 
+   })();
  
-    document.getElementById('myDiv228').innerHTML = 'Variable foo = ' + foo  + ' and variable baz = ' + baz                                                                      
+   document.getElementById('myDiv228').innerHTML = 'Variable foo = ' + foo  + ' and variable baz = ' + baz                                                                      
 }">
 
 </div>
