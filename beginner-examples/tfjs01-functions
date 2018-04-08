@@ -1,0 +1,190 @@
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+
+    
+    
+<h2 align=center> </h2>
+
+
+
+
+
+
+    
+<div id="myDiv223Code"> 
+
+<input id="myButton223" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv223').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv223'>...</div><br>
+<textarea id="myTextarea223"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea223', 'myDiv223Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
+
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+
+    
+<div id="myDiv224Code"> 
+
+<input id="myButton224" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv224').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv224'>...</div><br>
+<textarea id="myTextarea224"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea224', 'myDiv224Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
+
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+
+    
+<div id="myDiv225Code"> 
+
+<input id="myButton225" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv225').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv225'>...</div><br>
+<textarea id="myTextarea225"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea225', 'myDiv225Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
+
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+
+    
+<div id="myDiv226Code"> 
+
+<input id="myButton226" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv226').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv226'>...</div><br>
+<textarea id="myTextarea226"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea226', 'myDiv226Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
+
+ 
+ 
+ 
+ 
+
+
+ 
+ 
+
+
+<br><br><br>  
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+function myTextGrow(myT, myB){
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+}  
+</script>  
+ 
+ 
+</body>
