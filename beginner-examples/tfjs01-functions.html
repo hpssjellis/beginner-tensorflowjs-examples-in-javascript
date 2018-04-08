@@ -57,11 +57,11 @@
 async function myShow1(){                                                             
 
       const matrixShape = [2, 3];  // 2 rows, 3 columns.
-      const matrix = dl.Array2D.new(matrixShape, [10, 20, 30, 40, 50, 60]);
-      const vector = dl.Array1D.new([0, 1, 2]);
-      const myResult = dl.ENV.math.matrixTimesVector(matrix, vector);
+      const matrix = tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tensor1d([0, 1, 2]);
+      const myResult = dl.matrixTimesVector(matrix, vector);
                                                            
-      document.getElementById('myDiv01').innerHTML = 'Array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+      document.getElementById('myDiv223').innerHTML = 'Array shape is ' + myResult.shape + ' data is ' + await myResult.data()
 }
     
 </script>    
