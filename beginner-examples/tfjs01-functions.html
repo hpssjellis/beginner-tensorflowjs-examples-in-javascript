@@ -257,6 +257,37 @@ Click here to see the working HTML code.
  
 
 
+
+
+<div id="myDiv229Code"> 
+   
+So Tensorflowjs uses modules, which works great for build tools and can be made to work with pure Javascript, 
+ but has CORS issues when run from your local machine. My solution is namespacing <br>    
+<input id="myButton229" type="button" value="Namespaces replace modules" onclick="{  
+      
+                                                                                  
+                                                                                  
+   let {myFoo, myBar} = (function(){ 
+      return {myFoo: 3, myBar: 500} 
+   })();
+ 
+   document.getElementById('myDiv229').innerHTML = 'Variable myFoo = ' + myFoo  + ' and variable myBar = ' + myBar                                                                      
+}">
+
+</div>
+<div id='myDiv229'>...</div><br>
+<textarea id="myTextarea229"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea229', 'myDiv229Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
+
+
+
+
+
+
+
 <br><br><br>  
 
 
