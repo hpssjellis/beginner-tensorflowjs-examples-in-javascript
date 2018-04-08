@@ -8,3 +8,15 @@ However every file can be accessed by clicking this link and adding the file nam
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples
 
 
+
+
+
+Base template  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/base02.html
+
+
+
+Group of 4 template  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/base-4-group01.html
+
+
