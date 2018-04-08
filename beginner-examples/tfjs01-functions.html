@@ -165,12 +165,13 @@ Click here to see the working HTML code.
 async function myAll3(){                                                             
     document.getElementById('myDiv226').innerHTML = 'Output set by called function called myAll3(). <br>'
     const x = function() {                                                                                                                                
-       document.getElementById('myDiv226').innerHTML += 'This line added by an inline function. <br>'
+       return 'This wa made using an inline function <br>'
    } 
    const y = () => {                                                                                                                                
-       document.getElementById('myDiv226').innerHTML += 'This line added by an inline function. <br>'
+       return 'This line added by an arrow function. <br>'
    }     
  
+    document.getElementById('myDiv226').innerHTML += x+y
 }
     
 </script>    
