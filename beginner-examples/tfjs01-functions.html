@@ -202,16 +202,50 @@ Click here to see the working HTML code.
 <div id="myDiv227Code"> 
    
     
-<input id="myButton227" type="button" value="Functions that return Multiple Variables" onclick="{  
+<input id="myButton227" type="button" value="Functions that return Multiple Variables as an Array" onclick="{  
                                                                  
-alert('hi')
-                                                                 
+
+[x, y] = (function(){ 
+            return [3, 4]; 
+         })();
+
+     document.getElementById('myDiv227').innerHTML += 'Variable x = ' + x  + ' and variable y = ' + y                                                         
 }">
 
 </div>
 <div id='myDiv227'>...</div><br>
 <textarea id="myTextarea227"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
           rows=3 NOWRAP onclick="{myTextGrow('myTextarea227', 'myDiv227Code')}">
+Click here to see the working HTML code.
+</textarea>
+<br><br><hr><br>
+
+
+
+
+
+
+
+
+
+
+    
+<div id="myDiv228Code"> 
+   
+    
+<input id="myButton228" type="button" value="Functions that return Multiple Variables as an Object" onclick="{  
+                                                                 
+    let {baz, foo} = (function(){ 
+                   return {foo: 3, bar: 500, baz: 40} 
+                 })();
+ 
+    document.getElementById('myDiv227').innerHTML += 'Variable foo = ' + foo  + ' and variable baz = ' + baz                                                                      
+}">
+
+</div>
+<div id='myDiv228'>...</div><br>
+<textarea id="myTextarea228"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" 
+          rows=3 NOWRAP onclick="{myTextGrow('myTextarea228', 'myDiv228Code')}">
 Click here to see the working HTML code.
 </textarea>
 <br><br><hr><br>
