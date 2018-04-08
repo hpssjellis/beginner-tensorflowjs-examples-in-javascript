@@ -163,15 +163,14 @@ Click here to see the working HTML code.
 <div id="myDiv226Code"> 
 <script>
 function myAll3(){                                                             
-    document.getElementById('myDiv226').innerHTML = 'Output set by called function called myAll3(). <br>'
-    var myInline = function() {                                                                                                                                
-       return "This was made using an inline function <br>"
+    document.getElementById('myDiv226').innerHTML = 'This line was made by the main function. <br><br>'
+    let myInline = function() {                                                                                                                                
+       document.getElementById('myDiv226').innerHTML +=  "This line was made using an inline function <br><br>"
    } 
    var myArrow = () => {                                                                                                                                
-       return "This line added by an arrow function. <br>"
+      document.getElementById('myDiv226').innerHTML += "This line was made using an arrow function. <br><br>"
    }     
  
-    document.getElementById('myDiv226').innerHTML += myInline + myArrow
 }
     
 </script>    
