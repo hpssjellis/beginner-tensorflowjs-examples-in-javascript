@@ -95,9 +95,19 @@ Click here to see the working HTML code.
     
 <div id="myDiv224Code"> 
 
-<input id="myButton224" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv224').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+input id="myButton224" type="button" value="An Inline Async Function" onclick="{  
+   (async function() {                                                                
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv224').innerHTML = 'Array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+   } )();
+                                                                 
+}">
+
+
 
 </div>
 <div id='myDiv224'>...</div><br>
