@@ -20,3 +20,9 @@ Group of 4 template
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/base-4-group01.html
 
 
+
+fancy base template  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/editable03.html
+
+
+
