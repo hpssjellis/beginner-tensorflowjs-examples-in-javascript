@@ -124,8 +124,10 @@ async function myTest323(){
  await myTensorTable('myDiv323', myMatrix2, 2, 'Table B')  
  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2)
-  document.getElementById('myDiv323').innerHTML += ' A * B Matmul 2D = ' + await myProduct.data()  +'<br>'   
+  //document.getElementById('myDiv323').innerHTML += ' A * B Matmul 2D = ' + await myProduct.data()  +'<br>'   
 
+  await myTensorTable('myDiv323', myProduct, 2, ' A * B Matmul 2D = ')  
+ 
   var  myProduct = tf.matMul(myMatrix1, myMatrix2, 'TRANSPOSED', 'REGULAR')
   document.getElementById('myDiv323').innerHTML += 'A^T * B Matmul 2D = ' + await myProduct.data()  +'<br>'  
 
