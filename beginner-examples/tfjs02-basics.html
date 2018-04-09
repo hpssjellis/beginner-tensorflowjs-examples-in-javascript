@@ -91,7 +91,7 @@ async function myTensorTable(myDiv, myOutTensor, myCols, myTitle){
    
 async function myTest323(){
  
-    document.getElementById('myDiv323').innerHTML ='<br>'   // just to clear the div
+  document.getElementById('myDiv323').innerHTML ='Setup a few tensors<br><br>'  
  
   const matrixShape = [3, 3];  // 2 rows, 3 columns. Could be used in the next line but I didn't
   const myWeights  = tf.tensor2d( [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], matrixShape);
@@ -109,18 +109,15 @@ async function myTest323(){
   const myBias    = tf.scalar(2.3);
   const myBiasOutput = await myBias.data();
   document.getElementById('myDiv323').innerHTML += 'Bias Scalar = ' + myBiasOutput + ' <br><hr>'
-  // Generic math ability set
- // var myAlgorithm = dl.ENV.math
-  // Try the matMul function for Matrix multiplication
 
   var  myProduct = tf.matMul(myWeights, myInputs)
   await myTensorTable('myDiv323', myProduct, 3, 'Product of Weights x Inputs')  
     
  
-   document.getElementById('myDiv323').innerHTML += '<hr><br>Try some Matrix Multiplication and Transposition<br><br>'
  
+  document.getElementById('myDiv323').innerHTML += '<hr><br>Try some Matrix Multiplication and Transposition<br><br>'
  
- 
+
  //  Same thing but a bit more complex 
  const myMatrix1  = tf.tensor2d( [3, 2, 5, 4], [2, 2]);
  const myMatrix2 =  tf.tensor2d( [2, 3, 4, 5], [2, 2]);
@@ -157,8 +154,7 @@ async function myTest323(){
 
 
 
-// long form using tf.tidy
-
+// long form using the tf.tidy function
 
  const myAnswer = tf.tidy( function() {
      const myDot = tf.outerProduct(w, i)
@@ -167,22 +163,22 @@ async function myTest323(){
      return mySig
  })
 
- await myTensorTable('myDiv323', myAnswer, 2, 'sigmoid(add( dot(w, i)+ b) ) ')  
+ await myTensorTable('myDiv323', myAnswer, 2, 'Long form sigmoid(add( dot(w, i)+ b) ) ')  
 
  
  
 // lets try these operations together
 
  const myAnswer2 = tf.tidy( function() {
-    //  var myDot = tf.outerProduct(w, i)
-    //   var mySum = tf.sum(myDot, b)
-    //  var mySig2 = tf.sinh(mySum)
+    // const myDot = tf.outerProduct(w, i)
+    // const mySum = tf.sum(myDot, b)
+    // const mySig2 = tf.sinh(mySum)
   
     var mySig2 = tf.sinh(tf.add(tf.outerProduct(w, i), b))
     return mySig2
  })
 
-   await myTensorTable('myDiv323', myAnswer2, 2, 'sinH(add( dot(w, i)+ b) ) ')  
+   await myTensorTable('myDiv323', myAnswer2, 2, 'Strung operations together and  sinH(add( dot(w, i)+ b) ) ')  
 
 
 // The other way is to string the operations one after the other
@@ -191,18 +187,18 @@ async function myTest323(){
       return  tf.outerProduct(w, i).add(b).prelu(tf.scalar(0.1))
  })
 
-   await myTensorTable('myDiv323', myAnswer3, 2, 'prelu(add( dot(w, i)+ b) ) ') 
+   await myTensorTable('myDiv323', myAnswer3, 2, 'One Operation after the other and  prelu(add( dot(w, i)+ b) ) ') 
  
  
  
  
 // This time we will not use tidy() but will dispose the tensors after 
 
-    var myDot = tf.outerProduct(w, i)
-    var myAdd = tf.add(myDot, b)
-    var myAnswer4 = tf.relu(myAdd)
+    const myDot = tf.outerProduct(w, i)
+    const myAdd = tf.add(myDot, b)
+    const myAnswer4 = tf.relu(myAdd)
 
-    await myTensorTable('myDiv323', myAnswer4, 2, ' relu(add( dot(w, i)+ b) ') 
+    await myTensorTable('myDiv323', myAnswer4, 2, 'Showed how to dispose of tensors and  relu(add( dot(w, i)+ b) ') 
  
     // now cleanup
     myDot.dispose()
