@@ -146,6 +146,7 @@ async function myTest323(){
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////  
  // Now lets try some 1D arrays
+ 
  const w = tf.tensor1d([0.7, -0.3])
  const i = tf.tensor1d([0.1, 0.8])
  const b = tf.scalar(2.1)
@@ -169,7 +170,7 @@ async function myTest323(){
 
  document.getElementById('myDiv323').innerHTML += 'sigmoid(add( dot(w, i)+ b) ) = '+  myAnswer.dataSync()  +'<br>'
 
-
+ await myTensorTable('myDiv323', myAnswer, 1, 'sigmoid(add( dot(w, i)+ b) ) = ')  
 
 
 
