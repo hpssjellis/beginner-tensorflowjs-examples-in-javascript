@@ -162,7 +162,7 @@ async function myTest323(){
      const mySig = tf.sigmoid(myAdd)
      return mySig
  })
- myAnswer.print('verbose')
+ // myAnswer.print('verbose')
  await myTensorTable('myDiv323', myAnswer, 2, 'Long form sigmoid(add( dot(w, i)+ b) ) ')  
 
  
@@ -177,7 +177,7 @@ async function myTest323(){
     var mySig2 = tf.sinh(tf.add(tf.outerProduct(w, i), b))
     return mySig2
  })
-myAnswer2.print('verbose')
+   // myAnswer2.print('verbose')
    await myTensorTable('myDiv323', myAnswer2, 2, 'Strung operations together and  sinH(add( dot(w, i)+ b) ) ')  
 
 
@@ -186,7 +186,7 @@ myAnswer2.print('verbose')
   const myAnswer3 = tf.tidy( function() {
       return  tf.outerProduct(w, i).add(b).prelu(tf.scalar(0.1))
  })
-myAnswer3.print('verbose')
+   // myAnswer3.print('verbose')
    await myTensorTable('myDiv323', myAnswer3, 2, 'One Operation after the other and  prelu(add( dot(w, i)+ b) ) ') 
  
  
@@ -197,7 +197,7 @@ myAnswer3.print('verbose')
     const myDot = tf.outerProduct(w, i)
     const myAdd = tf.add(myDot, b)
     const myAnswer4 = tf.relu(myAdd)
-myAnswer4.print('verbose')
+    // myAnswer4.print('verbose')
     await myTensorTable('myDiv323', myAnswer4, 2, 'Showed how to dispose of tensors and  relu(add( dot(w, i)+ b) ') 
  
     // now cleanup
