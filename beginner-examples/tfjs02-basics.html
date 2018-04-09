@@ -166,40 +166,47 @@ async function myTest323(){
      return mySig
  })
 
-
-
- document.getElementById('myDiv323').innerHTML += 'sigmoid(add( dot(w, i)+ b) ) = '+  myAnswer.dataSync()  +'<br>'
-
- await myTensorTable('myDiv323', myAnswer, 1, 'sigmoid(add( dot(w, i)+ b) ) = ')  
+ await myTensorTable('myDiv323', myAnswer, 2, 'sigmoid(add( dot(w, i)+ b) ) ')  
 
  
  
-// lets try stringing these operations together
+// lets try these operations together
 
  const myAnswer2 = tf.tidy( function() {
-    var myDot = tf.outerProduct(w, i)
-    var mySum = tf.add(myDot, b)
-    var mySig2 = tf.sinh(mySum)
+    //  var myDot = tf.outerProduct(w, i)
+    //   var mySum = tf.add(myDot, b)
+    //  var mySig2 = tf.sinh(mySum)
+  
+    var mySig2 = tf.sinh(add(outerProduct(w, i), b))
     return mySig2
  })
 
+   await myTensorTable('myDiv323', myAnswer2, 2, 'sinH(add( dot(w, i)+ b) ) ')  
 
-    document.getElementById('myDiv323').innerHTML += 'sinH(add( dot(w, i)+ b) ) = '+ myAnswer2.dataSync()  +'<br>'
 
+// The other way is to string the operations one after the other
+ 
+  const myAnswer3 = tf.tidy( function() {
+      return  tf.outerProduct(w, i).add(b).prelu()
+ })
 
+   await myTensorTable('myDiv323', myAnswer3, 2, 'prelu(add( dot(w, i)+ b) ) ') 
+ 
+ 
+ 
+ 
+// This time we will not use tidy() but will dispose the tensors after 
 
     var myDot = tf.outerProduct(w, i)
     var mySum = tf.add(myDot, b)
-    var mySig3 = tf.relu(mySum)
+    var myAnswer4 = tf.relu(mySum)
 
-
-    document.getElementById('myDiv323').innerHTML += 'relu(add( dot(w, i)+ b) ) = '+ mySig3.dataSync()  +'<br><hr>'
-
-    // cleanup
+    await myTensorTable('myDiv323', myAnswer4, 2, ' relu(add( dot(w, i)+ b) ') 
+ 
+    // now cleanup
     myDot.dispose()
     mySum.dispose() 
-    mySig3.dispose()    
-  
+    myAnswer4.dispose()    
   
   
 }
