@@ -200,7 +200,7 @@ async function myTest323(){
 
     var myDot = tf.outerProduct(w, i)
     var myAdd = tf.add(myDot, b)
-    var myAnswer4 = tf.relu(mySum)
+    var myAnswer4 = tf.relu(myAdd)
 
     await myTensorTable('myDiv323', myAnswer4, 2, ' relu(add( dot(w, i)+ b) ') 
  
