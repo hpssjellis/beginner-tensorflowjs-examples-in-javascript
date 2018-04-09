@@ -178,7 +178,7 @@ async function myTest323(){
     //   var mySum = tf.sum(myDot, b)
     //  var mySig2 = tf.sinh(mySum)
   
-    var mySig2 = tf.sinh(add(outerProduct(w, i), b))
+    var mySig2 = tf.sinh(tf.add(tf.outerProduct(w, i), b))
     return mySig2
  })
 
