@@ -90,9 +90,13 @@ async function myTensorTable(myDiv, myOutTensor, myCols, myTitle){
     
    
 async function myTest323(){
+ 
+    document.getElementById(myDiv).innerHTML =''   // just to clear the div
+ 
   const matrixShape = [3, 3];  // 2 rows, 3 columns. Could be used in the next line but I didn't
   const myWeights  = tf.tensor2d( [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], matrixShape);
   const myInputs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8, 9], matrixShape); 
+ 
   // just show what is in the 2D arrays
   await myTensorTable('myDiv323', myWeights, 3, 'Weights [3x3]')  
   await myTensorTable('myDiv323', myInputs, 3, 'Inputs [3x3]')  
