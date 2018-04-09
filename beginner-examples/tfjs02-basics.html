@@ -128,27 +128,30 @@ async function myTest323(){
  await myTensorTable('myDiv323', myMatrix2, 2, 'Table B')  
  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2)
-  //document.getElementById('myDiv323').innerHTML += ' A * B Matmul 2D = ' + await myProduct.data()  +'<br>'   
-
-  await myTensorTable('myDiv323', myProduct, 2, ' A * B Matmul 2D = ')  
+  await myTensorTable('myDiv323', myProduct, 2, ' A x B tf.matMul(myMatrix1, myMatrix2)')  
  
+  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2, 'TRANSPOSED', 'REGULAR')
-  document.getElementById('myDiv323').innerHTML += 'A^T * B Matmul 2D = ' + await myProduct.data()  +'<br>'  
+  await myTensorTable('myDiv323', myProduct, 2, ' A^T x B tf.matMul(myMatrix1, myMatrix2, \'TRANSPOSED\', \'REGULAR\')')   
 
   var  myProduct = tf.matMul(myMatrix2, myMatrix1)
-  document.getElementById('myDiv323').innerHTML += 'B * A Matmul 2D = ' + myProduct.dataSync()  +'<br>' 
+  await myTensorTable('myDiv323', myProduct, 2, ' B x A  tf.matMul(myMatrix2, myMatrix1)')  
+ 
 
-  var  myProduct = tf.matMul(myMatrix2, myMatrix1, 'REGULAR', 'TRANSPOSED')
-  document.getElementById('myDiv323').innerHTML += ' B * A^T  Matmul 2D = ' + myProduct.dataSync()  +'<br><hr>'   
+  var  myProduct = tf.matMul(myMatrix2, myMatrix1, 'REGULAR', 'TRANSPOSED') 
+  await myTensorTable('myDiv323', myProduct, 2, ' B x A^T  tf.matMul(myMatrix2, myMatrix1, \'REGULAR\', \'TRANSPOSED\')')  
+ 
+
+ 
+ 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////  
  // Now lets try some 1D arrays
  const w = tf.tensor1d([0.7, -0.3])
  const i = tf.tensor1d([0.1, 0.8])
  const b = tf.scalar(2.1)
- await myTensorTable('myDiv323', w, 2, 'w as weights')  
- await myTensorTable('myDiv323', i, 2, 'i as inputs ')  
- document.getElementById('myDiv323').innerHTML += 'b as Bias= '+ b.dataSync() +'<br><Br>'
- 
+ await myTensorTable('myDiv323', w, 1, 'w as Weights')  
+ await myTensorTable('myDiv323', i, 1, 'i as Inputs ')   
+ await myTensorTable('myDiv323', b, 1, 'b as Bias')  
 
 
 
