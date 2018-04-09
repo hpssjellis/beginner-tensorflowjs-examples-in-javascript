@@ -162,8 +162,8 @@ async function myTest323(){
 
  const myAnswer = tf.tidy( function() {
      const myDot = tf.outerProduct(w, i)
-     const mySum = tf.add(myDot, b)
-     const mySig = tf.sigmoid(mySum)
+     const myAdd = tf.add(myDot, b)
+     const mySig = tf.sigmoid(myAdd)
      return mySig
  })
 
