@@ -117,15 +117,15 @@ async function myTest323(){
   await myTensorTable('myDiv323', myProduct, 3, 'Product of Weights x Inputs')  
     
  
- 
+ <hr><br>
  
  
  
  //  Same thing but a bit more complex 
  const myMatrix1  = tf.tensor2d( [3, 2, 5, 4], [2, 2]);
  const myMatrix2 =  tf.tensor2d( [2, 3, 4, 5], [2, 2]);
- await myTensorTable('myDiv323', myMatrix1, 2, 'Table A')  
- await myTensorTable('myDiv323', myMatrix2, 2, 'Table B')  
+ await myTensorTable('myDiv323', myMatrix1, 2, 'myMatrix1')  
+ await myTensorTable('myDiv323', myMatrix2, 2, 'myMatrix2')  
  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2)
   await myTensorTable('myDiv323', myProduct, 2, ' A x B tf.matMul(myMatrix1, myMatrix2)')  
