@@ -172,7 +172,9 @@ async function myTest323(){
 
  await myTensorTable('myDiv323', myAnswer, 1, 'sigmoid(add( dot(w, i)+ b) ) = ')  
 
-
+ 
+ 
+// lets try stringing these operations together
 
  const myAnswer2 = tf.tidy( function() {
     var myDot = tf.outerProduct(w, i)
