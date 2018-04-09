@@ -112,6 +112,11 @@ async function myTest323(){
   var  myProduct = tf.matMul(myWeights, myInputs)
   await myTensorTable('myDiv323', myProduct, 3, 'Product of Weights x Inputs')  
     
+ 
+ 
+ 
+ 
+ 
  //  Same thing but a bit more complex 
  const myMatrix1  = tf.tensor2d( [3, 2, 5, 4], [2, 2]);
  const myMatrix2 =  tf.tensor2d( [2, 3, 4, 5], [2, 2]);
@@ -119,16 +124,16 @@ async function myTest323(){
  await myTensorTable('myDiv323', myMatrix2, 2, 'Table B')  
  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2)
-  document.getElementById('myDiv323').innerHTML += ' A * B Matmul 2D = ' + myProduct.data()  +'<br>'   
+  document.getElementById('myDiv323').innerHTML += ' A * B Matmul 2D = ' + myProduct.dataSync()  +'<br>'   
 
   var  myProduct = tf.matMul(myMatrix1, myMatrix2, 'TRANSPOSED', 'REGULAR')
-  document.getElementById('myDiv323').innerHTML += 'A^T * B Matmul 2D = ' + myProduct.data()  +'<br>'  
+  document.getElementById('myDiv323').innerHTML += 'A^T * B Matmul 2D = ' + myProduct.dataSync()  +'<br>'  
 
   var  myProduct = tf.matMul(myMatrix2, myMatrix1)
-  document.getElementById('myDiv323').innerHTML += 'B * A Matmul 2D = ' + myProduct.data()  +'<br>' 
+  document.getElementById('myDiv323').innerHTML += 'B * A Matmul 2D = ' + myProduct.dataSync()  +'<br>' 
 
   var  myProduct = tf.matMul(myMatrix2, myMatrix1, 'REGULAR', 'TRANSPOSED')
-  document.getElementById('myDiv323').innerHTML += ' B * A^T  Matmul 2D = ' + myProduct.data()  +'<br><hr>'   
+  document.getElementById('myDiv323').innerHTML += ' B * A^T  Matmul 2D = ' + myProduct.dataSync()  +'<br><hr>'   
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////  
  // Now lets try some 1D arrays
  const w = tf.tensor1d([0.7, -0.3])
