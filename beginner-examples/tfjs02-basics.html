@@ -117,7 +117,7 @@ async function myTest323(){
   await myTensorTable('myDiv323', myProduct, 3, 'Product of Weights x Inputs')  
     
  
-   document.getElementById('myDiv323').innerHTML += '<hr><br>'
+   document.getElementById('myDiv323').innerHTML += '<hr><br>Try some Matrix Multiplication and Transposition'
  
  
  
@@ -142,10 +142,11 @@ async function myTest323(){
   await myTensorTable('myDiv323', myProduct, 2, ' B x A^T  tf.matMul(myMatrix2, myMatrix1, \'REGULAR\', \'TRANSPOSED\')')  
  
 
- 
+
+   document.getElementById('myDiv323').innerHTML += '<hr><br>Try some 1D Tensors<br>' 
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////  
- // Now lets try some 1D arrays
+ // Now lets try some 1D Tensors
  
  const w = tf.tensor1d([0.7, -0.3])
  const i = tf.tensor1d([0.1, 0.8])
