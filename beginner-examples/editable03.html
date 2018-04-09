@@ -65,7 +65,15 @@
 Click here to see the working HTML code.
 </textarea>
 <input id="myButton123" type=button value="Update Button" onclick="{
-     document.getElementById('myDiv123Code').innerHTML =    document.getElementById('myTextarea123').value                                               
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv123Code').innerHTML =    myJoe                                              
 }"><br><br>
 
 <br><br><hr><br>
