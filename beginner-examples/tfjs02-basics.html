@@ -91,7 +91,7 @@ async function myTensorTable(myDiv, myOutTensor, myCols, myTitle){
    
 async function myTest323(){
  
-    document.getElementById('myDiv323').innerHTML =''   // just to clear the div
+    document.getElementById('myDiv323').innerHTML ='<br>'   // just to clear the div
  
   const matrixShape = [3, 3];  // 2 rows, 3 columns. Could be used in the next line but I didn't
   const myWeights  = tf.tensor2d( [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], matrixShape);
@@ -124,8 +124,8 @@ async function myTest323(){
  //  Same thing but a bit more complex 
  const myMatrix1  = tf.tensor2d( [3, 2, 5, 4], [2, 2]);
  const myMatrix2 =  tf.tensor2d( [2, 3, 4, 5], [2, 2]);
- await myTensorTable('myDiv323', myMatrix1, 2, 'myMatrix1')  
- await myTensorTable('myDiv323', myMatrix2, 2, 'myMatrix2')  
+ await myTensorTable('myDiv323', myMatrix1, 2, 'myMatrix1 or A')  
+ await myTensorTable('myDiv323', myMatrix2, 2, 'myMatrix2 or B')  
  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2)
   await myTensorTable('myDiv323', myProduct, 2, ' A x B tf.matMul(myMatrix1, myMatrix2)')  
