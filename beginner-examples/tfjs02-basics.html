@@ -175,14 +175,14 @@ async function myTest323(){
 
  const myAnswer2 = tf.tidy( function() {
     //  var myDot = tf.outerProduct(w, i)
-    //   var mySum = tf.add(myDot, b)
+    //   var mySum = tf.sum(myDot, b)
     //  var mySig2 = tf.sinh(mySum)
   
     var mySig2 = tf.sinh(sum(outerProduct(w, i), b))
     return mySig2
  })
 
-   await myTensorTable('myDiv323', myAnswer2, 2, 'sinH(add( dot(w, i)+ b) ) ')  
+   await myTensorTable('myDiv323', myAnswer2, 2, 'sinH(sum( dot(w, i)+ b) ) ')  
 
 
 // The other way is to string the operations one after the other
@@ -191,7 +191,7 @@ async function myTest323(){
       return  tf.outerProduct(w, i).sum(b).prelu()
  })
 
-   await myTensorTable('myDiv323', myAnswer3, 2, 'prelu(add( dot(w, i)+ b) ) ') 
+   await myTensorTable('myDiv323', myAnswer3, 2, 'prelu(sum( dot(w, i)+ b) ) ') 
  
  
  
@@ -202,7 +202,7 @@ async function myTest323(){
     var mySum = tf.sum(myDot, b)
     var myAnswer4 = tf.relu(mySum)
 
-    await myTensorTable('myDiv323', myAnswer4, 2, ' relu(add( dot(w, i)+ b) ') 
+    await myTensorTable('myDiv323', myAnswer4, 2, ' relu(sum( dot(w, i)+ b) ') 
  
     // now cleanup
     myDot.dispose()
