@@ -188,7 +188,7 @@ async function myTest323(){
 // The other way is to string the operations one after the other
  
   const myAnswer3 = tf.tidy( function() {
-      return  tf.prelu(tf.outerProduct(w, i).add(b))
+      return  tf.outerProduct(w, i).add(b).prelu(tf.scalar(0.1))
  })
 
    await myTensorTable('myDiv323', myAnswer3, 2, 'prelu(add( dot(w, i)+ b) ) ') 
