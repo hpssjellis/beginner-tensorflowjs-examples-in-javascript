@@ -92,7 +92,8 @@ Click here to see the working HTML code.
 <input type=button value="Convert n to nr" onclick="{
                                                                     
                                                                                 
- document.getElementById('myTextarea123').value =  document.getElementById('myTextarea123').value.replace(/\n/g, '\r\n'); 
+ document.getElementById('myTextarea123').value =  document.getElementById('myTextarea123').value.replace(/\n/g, /\r?\n/g); 
+ //document.getElementById('myTextarea123').value =  document.getElementById('myTextarea123').value.replace(/\n/g, '\r\n'); 
 }">
 
 
