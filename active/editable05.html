@@ -85,6 +85,50 @@ Click here to see the working HTML code.
                                              
 }">
 
+
+
+
+
+<input type=button value="put area into div" onclick="{
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('myTextarea123').value 
+}">
+
+
+
+<input type=button value="only n" onclick="{
+                                                                    
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('myTextarea123').value.replace(/\n/g, '<br />'); 
+}">
+
+
+<input type=button value="only r" onclick="{
+                                                                    
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('myTextarea123').value.replace(/\r/g, '<br />'); 
+}">
+
+
+<input type=button value="again both n r" onclick="{
+                                                                    
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('myTextarea123').value.replace(/\r?\n/g, '<br />'); 
+}">
+
+
+----------------<br><div id="myDiv01">...</div>------------------
+
+
+
+
+
+
+
+
+
+
+
+
 <br><br><br><hr><br><br><br><br>
 
 
