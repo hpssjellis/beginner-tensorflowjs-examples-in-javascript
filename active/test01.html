@@ -16,12 +16,12 @@ fgh
 
 
 <input type=button value="enter \r\n" onclick="{
-   document.getElementById('me').value = 'break\r\nthis is 2 beaks\r\n\r\nthis is only one\r\n end'
+   document.getElementById('me').value = 'breaknow with r and n\r\nthis is 2 beaks\r\n\r\nthis is only one\r\nend'
 
 }">
 
 <input type=button value="enter \n" onclick="{
-   document.getElementById('me').value = 'break\r\nthis is 2 beaks\r\n\r\nthis is only one\r\n end'
+   document.getElementById('me').value = 'break now with only n\nthis is 2 beaks\n\nthis is only one\nend'
 
 }">
 
@@ -35,6 +35,21 @@ fgh
 <input type=button value="put area into div" onclick="{
   document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value 
 }">
+
+
+<input type=button value="put area into div using fancy stuff" onclick="{
+                                                                        
+ for (i=0;  i<= 6; i++){
+        if (document.getElementById('me').value[i] == '\n'){ document.getElementById('me').value[i] = 'Z' }                                                                 
+ }                                                                       
+                                                                        
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value 
+}">
+
+
+
+
 
 
 
