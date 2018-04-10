@@ -48,14 +48,25 @@ fgh
   document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value 
 }">
 
-<input type=button value="again" onclick="{
+<input type=button value="only n" onclick="{
+                                                                    
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value.replace(/\n/g, '<br />'); 
+}">
+
+
+<input type=button value="only r" onclick="{
+                                                                    
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value.replace(/\r/g, '<br />'); 
+}">
+
+
+<input type=button value="again both n r" onclick="{
                                                                     
                                                                         
   document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value.replace(/\r?\n/g, '<br />'); 
 }">
-
-
-
 
 
 <div id="myDiv01">...</div>
