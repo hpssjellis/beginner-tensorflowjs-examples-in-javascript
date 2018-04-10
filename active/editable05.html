@@ -91,8 +91,8 @@ Click here to see the working HTML code.
 
 <input type=button value="Convert n to nr" onclick="{
                                                                     
-                                                                        
-  document.getElementById('myDiv01').innerHTML =  document.getElementById('myTextarea123').value.replace(/\n/g, '<br />'); 
+                                                                                
+ document.getElementById('myTextarea123').value =  document.getElementById('myTextarea123').value.replace(/\n/g, '\r\n'); 
 }">
 
 
@@ -108,10 +108,12 @@ Click here to see the working HTML code.
 
 
 
-<input type=button value="Convert n to rn" onclick="{
-                                                                                                                                     
- document.getElementById('myTextarea123').value =  document.getElementById('myTextarea123').value.replace(/\n/g, '\r\n'); 
+<input type=button value="only n" onclick="{
+                                                                    
+                                                                        
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('myTextarea123').value.replace(/\n/g, '<br />'); 
 }">
+
 
 
 <input type=button value="only r" onclick="{
