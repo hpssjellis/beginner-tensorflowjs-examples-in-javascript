@@ -34,3 +34,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 testing  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs01-functions02.html
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs02-basics02.html
