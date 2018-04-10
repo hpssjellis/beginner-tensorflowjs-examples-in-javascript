@@ -9,32 +9,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 
 
+tfjs01-functions.html  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs01-functions.html
 
 
-Base template  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/base02.html
-
-
-
-Group of 4 template  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/base-4-group01.html
-
-
-
-fancy base template  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/editable04.html
-
-
-
-editable group  
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/editable-group01.html
-
-
-
-testing  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs01-functions02.html
-
-
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs02-basics02.html
+tfjs02-basics.html  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs02-basics.html
