@@ -47,10 +47,10 @@ Click on each of the buttons and then have a look at the example code<br>
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
 Traditional Javascript function, updated by using the "async" and "await" key words. 
-
 </div>
    
 <div id="myDiv223Code"> 
+ 
 <script>
                                                                  
 async function myTypicalFunction(){                                                             
@@ -68,6 +68,16 @@ async function myTypicalFunction(){
                                                                  
    myTypicalFunction()   
                                                                  
+}"><br><br>
+
+</div>
+<div id='myDiv223'>...</div><br>
+<textarea id="myTextarea223"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" rows=3 NOWRAP onclick="{
+  if (myOnce223){
+     myTextGrow('myTextarea223', 'myDiv223Code')
+     document.getElementById('myUpdate223').style.visibility = 'visible'
+     myOnce223 = false
+  }
 }"><br><br>
 
 </div>
@@ -183,7 +193,7 @@ Demonstrating the "arrow" function. This is often used by the Tensorflowjs commu
 </div>
    
 <div id="myDiv225Code"> 
-Tensorflowjs is always using arrow functions!<br>
+
 <input id="myButton225" type="button" value="An Arrow Async Function" onclick="{  
     ( async () => {                                                                
       const matrixShape = [2, 3];  // 2 rows, 3 columns.
