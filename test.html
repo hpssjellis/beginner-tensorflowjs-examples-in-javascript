@@ -1,3 +1,8 @@
+Isssue: Safari and iOS not putting line breaks into the textarea<br>
+
+
+
+
 <textarea id="me" rows=10 cols=60>
 cfhgsfgh
 sdgh
@@ -8,11 +13,29 @@ fgh
 
 </textarea>
 
-<input type=button value=asdf onclick="{
-document.getElementById('me').value = 'break\r\nthis is 2 beaks\r\n\r\nthis is only one\r\n end'
+
+
+<input type=button value="enter \r\n" onclick="{
+   document.getElementById('me').value = 'break\r\nthis is 2 beaks\r\n\r\nthis is only one\r\n end'
 
 }">
+
+<input type=button value="enter \n" onclick="{
+   document.getElementById('me').value = 'break\r\nthis is 2 beaks\r\n\r\nthis is only one\r\n end'
+
+}">
+
 
 <input type=button value=show onclick="{
-alert(document.getElementById('me').value)
+   alert(document.getElementById('me').value)
 }">
+
+
+
+<input type=button value="put area into div" onclick="{
+  document.getElementById('myDiv01').innerHTML =  document.getElementById('me').value 
+}">
+
+
+
+<div id="myDiv01">...</div>
