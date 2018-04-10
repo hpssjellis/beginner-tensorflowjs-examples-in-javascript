@@ -51,9 +51,23 @@ Traditional Javascript function, updated by using the "async" and "await" key wo
 </div>
    
 <div id="myDiv223Code"> 
-
-<input id="myButton223" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv223').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+<script>
+                                                                 
+async function myTypicalFunction(){                                                             
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv223').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+}
+    
+</script>    
+    
+<input id="myButton223" type="button" value="Typical Async Function" onclick="{  
+                                                                 
+   myTypicalFunction()   
+                                                                 
 }"><br><br>
 
 </div>
@@ -99,14 +113,25 @@ Click here to see the working HTML code.
 
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
+Very powerful inline function example, This is the form that I prefer since the keyword "function" reminds beginners what is 
+ happening with the code.
 
 </div>
    
 <div id="myDiv224Code"> 
 
-<input id="myButton224" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv224').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+<input id="myButton224" type="button" value="An Inline Async Function" onclick="{  
+    (async function() {                                                                
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv224').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+   }  )()
+                                                                 
+}">
+<br><br>
 
 </div>
 <div id='myDiv224'>...</div><br>
@@ -150,13 +175,25 @@ Click here to see the working HTML code.
 
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
+Demonstrating the "arrow" function. This is often used by the Tensorflowjs community. Note the similarities between the inline 
+ function and the arrow function. They both work exactly the same, just the 
+ Arrow function has less typing and the arrow is after the brackets whereas 
+ the inline function key word is before the brackets used for passing variables
 
 </div>
    
 <div id="myDiv225Code"> 
-
-<input id="myButton225" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv225').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+Tensorflowjs is always using arrow functions!<br>
+<input id="myButton225" type="button" value="An Arrow Async Function" onclick="{  
+    ( async () => {                                                                
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv225').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+   }   )()
+                                                                 
 }"><br><br>
 
 </div>
@@ -202,13 +239,32 @@ Click here to see the working HTML code.
 
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
-
+All three types of functions used together so you can see how they are written.
 </div>
    
 <div id="myDiv226Code"> 
 
-<input id="myButton226" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv226').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+<script>
+  
+ 
+function myAll3Functions(){                                                             
+    document.getElementById('myDiv226').innerHTML = 'This line was made by the main function. <br><br>'
+    let myInline = (function() {                                                                                                                                
+       return 'This line was made using an inline function <br><br>'
+    }  )()
+    let myArrow = (() => {                                                                                                                                
+       return 'This line was made using an arrow function. <br><br>'
+   } )()  
+    
+    document.getElementById('myDiv226').innerHTML += myInline + myArrow
+}
+    
+</script>    
+    
+<input id="myButton226" type="button" value="All three Functions together" onclick="{  
+                                                                 
+   myAll3Functions()   
+                                                                 
 }"><br><br>
 
 </div>
@@ -252,13 +308,18 @@ Click here to see the working HTML code.
 
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
-
+I often see Tensorflowjs code that returns an array of information from the function into an array of variables. Made the 
+ code very confusing when I first saw it.
 </div>
    
 <div id="myDiv227Code"> 
 
-<input id="myButton227" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv227').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+<input id="myButton227" type="button" value="Functions that return Multiple Variables as an Array" onclick="{  
+                                                                 
+   [myX, myY] = (function(){ 
+      return [3, 4]; 
+   })();
+   document.getElementById('myDiv227').innerHTML = 'Variable myX = ' + myX  + ' and variable myY = ' + myY                                                         
 }"><br><br>
 
 </div>
@@ -303,13 +364,20 @@ Click here to see the working HTML code.
 
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
+Tensorflowjs also often returns an object from a function into several variables. This also made the code very confusing when I first 
+ saw it
 
 </div>
    
 <div id="myDiv228Code"> 
 
-<input id="myButton228" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv228').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+<input id="myButton228" type="button" value="Functions that return Multiple Variables as an Object" onclick="{  
+                                                                 
+   let {myFoo, myBar} = (function(){ 
+      return {myFoo: 3, myBar: 500} 
+   })();
+ 
+   document.getElementById('myDiv228').innerHTML = 'Variable myFoo = ' + myFoo  + ' and variable myBar = ' + myBar                                                                      
 }"><br><br>
 
 </div>
@@ -352,13 +420,27 @@ Click here to see the working HTML code.
 
 
 <div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
-
+All of the Tensorflowjs examples use modules, which works great for build tools and reducing the number of global variables 
+ and can be made with only a few changes to work with pure Javascript, but has CORS issues (Cross-Origin Resource Sharing ) 
+ when run from your local machine. (Which is strange since all the files are on the local machine but it is a security issue that 
+ is a pain to change on Chrome)
+ 
+ My solution to this issue is to use namespacing in the external js files. For namespacing to work you have to change any regular funcitons
+ into inline or arrow functions. My solution works really well as the code used to make the web page is the exact code that any user sees when they 
+ "Right click-View page source" on the page. With build tools the final code is very different from the original Javascript or Typescript<br>    
 </div>
    
 <div id="myDiv229Code"> 
 
-<input id="myButton229" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv229').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+ <input id="myButton229" type="button" value="Namespaces replace modules" onclick="{  
+      
+   var myNameSpace = myNameSpace || {}       // if not already set then set the namespace as an object
+                                                                                   
+   myNameSpace.myModuleFunction = function() {                                                                                                                                
+      return 'A namespace protected inline function made this line'
+} 
+   document.getElementById('myDiv229').innerHTML =   myNameSpace.myModuleFunction() + '<br><br>'                                                                        
+                                                                    
 }"><br><br>
 
 </div>
