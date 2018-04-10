@@ -22,7 +22,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 
 fancy base template  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/editable03.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/editable04.html
 
 
 
