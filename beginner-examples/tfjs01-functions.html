@@ -544,7 +544,7 @@ function myTextGrow(myT, myB){
       } 
    }, 100)
 
-  document.getElementById(myT).value = document.getElementById(myT).value.replace(/\n/g, "\r\n").replace(/\r\r/g, "\r");
+  document.getElementById(myT).value = document.getElementById(myT).value.replace(/\n/g, '\r\n').replace(/\r\r/g, '\r');
   document.getElementById(myT).selectionStart = myCursorStart
   document.getElementById(myT).selectionEnd = myCursorEnd
 
