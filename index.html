@@ -98,29 +98,78 @@ The main github for these pages is at:
    <ol> Most of the examples are in the following format:
      <li> A Description like in this box
      <li> A button to click to see if the Javascript code works
-     <li> An expanding textbox yo copy the code into your text editor
+     <li> An expanding textarea so you can select-all and copy the code into your text editor
+     <li> An edit button that can dynamically make changes to any non script elements  
   </ol>
 </div>
     
     
 
     
-<div id="myDiv01Code"><br>  
-    
-<input id="myButton01" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv01').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+
+
+
+
+
+
+
+
+
+
+
+<div id="myDiv123Code"> 
+
+<input id="myButton123" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
 }"><br><br>
 
-
-<div id="myDiv01">...</div><br>
 </div>
-<textarea id="myTextarea01"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%"   rows=3 NOWRAP onclick="{myTextGrow('myTextarea01', 'myDiv01Code')}">
+<div id='myDiv123'>...</div><br>
+<textarea id="myTextarea123"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" rows=3 NOWRAP onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
 Click here to see the working HTML code.
 </textarea>
 
-<br><br><hr><br><br><br><br><br>
 
-<br><br><br><br><br><br><br><br> 
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <h3>My take on the Tensorflowjs ES6 examples. These pages do not hve to be compiled using Yarn. I have converted them all to pure Javascript
  that can simply be put on your own computer and ran from there. No need to use a server, no need to use compile tools. If you 
@@ -245,19 +294,26 @@ A few related videos:<br><br>
  
  
 
+
 <!--  Following is a helper functions  to grow the textareas  -->
 
 <script>
+myOnce123 = true    // so textareas are only clicked once
+  
+  
 function myTextGrow(myT, myB){
-   myNewDiv = myB.replace('Code','')
-   document.getElementById(myNewDiv).innerHTML = '...'
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
    document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
-        
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
           document.getElementById(myT).rows += 3; 
       } 
    }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
 }  
 </script>  
  
