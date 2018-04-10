@@ -40,7 +40,8 @@ fgh
 <input type=button value="put area into div using fancy stuff" onclick="{
                                                                         
  for (i=0;  i<= document.getElementById('me').value.length-1; i++){
-        if (document.getElementById('me').value[i] == '\n'){ document.getElementById('me').value[i] = 'Z' }                                                                 
+        if (document.getElementById('me').value[i] == '\n'){ document.getElementById('me').value[i] = 'Z' }  
+        if (document.getElementById('me').value[i] == '\r'){ document.getElementById('me').value[i] = 'Q' }                                                                 
  }                                                                       
                                                                         
                                                                         
