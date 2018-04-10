@@ -344,6 +344,60 @@ Click here to see the working HTML code.
  
 
 
+
+
+<div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
+
+</div>
+   
+<div id="myDiv129Code"> 
+
+<input id="myButton129" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv129').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv129'>...</div><br>
+<textarea id="myTextarea129"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" rows=3 NOWRAP onclick="{
+  if (myOnce129){
+     myTextGrow('myTextarea129', 'myDiv129Code')
+     document.getElementById('myUpdate129').style.visibility = 'visible'
+     myOnce129 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate129" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea129').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv129Code').innerHTML =    myJoe 
+  document.getElementById('myButton129').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+ 
+
+
+ 
+ 
+
+
+
  
  
 
@@ -381,6 +435,7 @@ myOnce125 = true
 myOnce126 = true 
 myOnce127 = true 
 myOnce128 = true 
+myOnce129 = true 
 
 function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
