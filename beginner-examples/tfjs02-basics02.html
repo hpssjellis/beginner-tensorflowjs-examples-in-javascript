@@ -1,0 +1,288 @@
+
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center> Most of the examples are in the following format:</h2>
+
+
+
+<div style="background-color:lightgrey; font-size:30px;  width:90%; border:20px solid blue; padding: 20px; margin: 5px;"> 
+This page introduces a few things about Machine Learning using Tensorflowjs in the browser. <ol>
+  <li>Looking at lots of code in one function
+  <li>A helper function called myTensorTable that helps format simple 2D Tensors for the web page
+  <li>A few mathematical methods that Tensorflowjs allows on Tensors.
+  <li>How to tidy or dispose of tensors made during calculations
+  <li>A few of the methods for writing strings of operations
+
+
+</ol>
+</div>
+
+
+    
+<div id="myDiv321Code"> 
+
+<script>
+    
+    
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
+    
+// Helper function just formats Matricies nicely on a webpage
+// myDiv as a string, myOutTensor as a tensor, myCols as an integer, myTitle as a string
+async function myTensorTable(myDiv, myOutTensor, myCols, myTitle){   
+  
+ document.getElementById(myDiv).innerHTML += myTitle + '<br>'
+ const myOutput = await myOutTensor.data()
+ myTemp = '<table border=3><tr>'
+   for (myCount = 0;    myCount <= myOutTensor.size - 1;   myCount++){   
+     myTemp += '<td>'+ myOutput[myCount] + '</td>'
+     if (myCount % myCols == myCols-1){
+         myTemp += '</tr><tr>'
+     }
+   }   
+   myTemp += '</tr></table>'
+   document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+}
+    
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+    
+    
+    
+    
+    
+    
+    
+   
+async function myTest323(){
+ 
+  document.getElementById('myDiv323').innerHTML ='Setup a few tensors<br><br>'  
+ 
+  const matrixShape = [3, 3];  // 2 rows, 3 columns. Could be used in the next line but I didn't
+  const myWeights  = tf.tensor2d( [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], matrixShape);
+  const myInputs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8, 9], matrixShape); 
+ 
+  // just show what is in the 2D arrays
+  await myTensorTable('myDiv323', myWeights, 3, 'Weights [3x3]')  
+  await myTensorTable('myDiv323', myInputs, 3, 'Inputs [3x3]')  
+   
+  // lets flatten an array  
+  var myFlat = myInputs.flatten(myInputs)  
+  await myTensorTable('myDiv323', myFlat, 1, 'flatten the 2D Inputs array into a 1D array')    
+   
+  // lets try some scalars  
+  const myBias    = tf.scalar(2.3);
+  const myBiasOutput = await myBias.data();
+  document.getElementById('myDiv323').innerHTML += 'Bias Scalar = ' + myBiasOutput + ' <br><hr>'
+  var  myProduct = tf.matMul(myWeights, myInputs)
+  await myTensorTable('myDiv323', myProduct, 3, 'Product of Weights x Inputs')  
+    
+ 
+ 
+  document.getElementById('myDiv323').innerHTML += '<hr><br>Try some Matrix Multiplication and Transposition<br><br>'
+ 
+ //  Same thing but a bit more complex 
+ const myMatrix1  = tf.tensor2d( [3, 2, 5, 4], [2, 2]);
+ const myMatrix2 =  tf.tensor2d( [2, 3, 4, 5], [2, 2]);
+ await myTensorTable('myDiv323', myMatrix1, 2, 'myMatrix1 or A')  
+ await myTensorTable('myDiv323', myMatrix2, 2, 'myMatrix2 or B')  
+ 
+  var  myProduct = tf.matMul(myMatrix1, myMatrix2)
+  await myTensorTable('myDiv323', myProduct, 2, ' A x B tf.matMul(myMatrix1, myMatrix2)')  
+ 
+  
+  var  myProduct = tf.matMul(myMatrix1, myMatrix2, 'TRANSPOSED', 'REGULAR')
+  await myTensorTable('myDiv323', myProduct, 2, ' A^T x B tf.matMul(myMatrix1, myMatrix2, \'TRANSPOSED\', \'REGULAR\')')   
+  var  myProduct = tf.matMul(myMatrix2, myMatrix1)
+  await myTensorTable('myDiv323', myProduct, 2, ' B x A  tf.matMul(myMatrix2, myMatrix1)')  
+ 
+  var  myProduct = tf.matMul(myMatrix2, myMatrix1, 'REGULAR', 'TRANSPOSED') 
+  await myTensorTable('myDiv323', myProduct, 2, ' B x A^T  tf.matMul(myMatrix2, myMatrix1, \'REGULAR\', \'TRANSPOSED\')')  
+ 
+   document.getElementById('myDiv323').innerHTML += '<hr><br>Try some 1D Tensors<br><br>' 
+ 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////  
+ // Now lets try some 1D Tensors
+ 
+ const w = tf.tensor1d([0.7, -0.3])
+ const i = tf.tensor1d([0.1, 0.8])
+ const b = tf.scalar(2.1)
+ await myTensorTable('myDiv323', w, 1, 'w as Weights')  
+ await myTensorTable('myDiv323', i, 1, 'i as Inputs ')   
+ await myTensorTable('myDiv323', b, 1, 'b as Bias')  
+// long form using the tf.tidy function
+ const myAnswer = tf.tidy( function() {
+     const myDot = tf.outerProduct(w, i)
+     const myAdd = tf.add(myDot, b)
+     const mySig = tf.sigmoid(myAdd)
+     return mySig
+ })
+ // myAnswer.print('verbose')
+ await myTensorTable('myDiv323', myAnswer, 2, 'Long form sigmoid(add( dot(w, i)+ b) ) ')  
+ 
+ 
+// lets try these operations together
+ const myAnswer2 = tf.tidy( function() {
+    // const myDot = tf.outerProduct(w, i)
+    // const mySum = tf.sum(myDot, b)
+    // const mySig2 = tf.sinh(mySum)
+  
+    var mySig2 = tf.sinh(tf.add(tf.outerProduct(w, i), b))
+    return mySig2
+ })
+   // myAnswer2.print('verbose')
+   await myTensorTable('myDiv323', myAnswer2, 2, 'Strung operations together and  sinH(add( dot(w, i)+ b) ) ')  
+// The other way is to string the operations one after the other
+ 
+  const myAnswer3 = tf.tidy( function() {
+      return  tf.outerProduct(w, i).add(b).prelu(tf.scalar(0.1))
+ })
+   // myAnswer3.print('verbose')
+   await myTensorTable('myDiv323', myAnswer3, 2, 'One Operation after the other and  prelu(add( dot(w, i)+ b) ) ') 
+ 
+ 
+ 
+ 
+// This time we will not use tidy() but will dispose the tensors after 
+    const myDot = tf.outerProduct(w, i)
+    const myAdd = tf.add(myDot, b)
+    const myAnswer4 = tf.relu(myAdd)
+    // myAnswer4.print('verbose')
+    await myTensorTable('myDiv323', myAnswer4, 2, 'Showed how to dispose of tensors and  relu(add( dot(w, i)+ b) ') 
+ 
+    // now cleanup
+    myDot.dispose()
+    myAdd.dispose() 
+    myAnswer4.dispose()    
+  
+  
+}
+</script>
+
+
+
+
+<input type="button" value="Run All" onclick="{
+    myTest323();
+}"><br>><br><br>
+
+</div>
+<div id='myDiv321'>...</div><br>
+<textarea id="myTextarea321"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%" rows=3 NOWRAP onclick="{
+  if (myOnce321){
+     myTextGrow('myTextarea321', 'myDiv321Code')
+     document.getElementById('myUpdate321').style.visibility = 'visible'
+     myOnce321 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate321" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea321').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv321Code').innerHTML =    myJoe 
+  document.getElementById('myButton321').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce321 = true    // so textareas are only clicked once
+
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
