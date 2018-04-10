@@ -92,52 +92,52 @@ async function myTensorTable(myDiv, myOutTensor, myCols, myTitle){
     
     
    
-async function myTest323(){
+async function myTest321(){
  
-  document.getElementById('myDiv323').innerHTML ='Setup a few tensors<br><br>'  
+  document.getElementById('myDiv321').innerHTML ='Setup a few tensors<br><br>'  
  
   const matrixShape = [3, 3];  // 2 rows, 3 columns. Could be used in the next line but I didn't
   const myWeights  = tf.tensor2d( [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], matrixShape);
   const myInputs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8, 9], matrixShape); 
  
   // just show what is in the 2D arrays
-  await myTensorTable('myDiv323', myWeights, 3, 'Weights [3x3]')  
-  await myTensorTable('myDiv323', myInputs, 3, 'Inputs [3x3]')  
+  await myTensorTable('myDiv321', myWeights, 3, 'Weights [3x3]')  
+  await myTensorTable('myDiv321', myInputs, 3, 'Inputs [3x3]')  
    
   // lets flatten an array  
   var myFlat = myInputs.flatten(myInputs)  
-  await myTensorTable('myDiv323', myFlat, 1, 'flatten the 2D Inputs array into a 1D array')    
+  await myTensorTable('myDiv321', myFlat, 1, 'flatten the 2D Inputs array into a 1D array')    
    
   // lets try some scalars  
   const myBias    = tf.scalar(2.3);
   const myBiasOutput = await myBias.data();
-  document.getElementById('myDiv323').innerHTML += 'Bias Scalar = ' + myBiasOutput + ' <br><hr>'
+  document.getElementById('myDiv321').innerHTML += 'Bias Scalar = ' + myBiasOutput + ' <br><hr>'
   var  myProduct = tf.matMul(myWeights, myInputs)
-  await myTensorTable('myDiv323', myProduct, 3, 'Product of Weights x Inputs')  
+  await myTensorTable('myDiv321', myProduct, 3, 'Product of Weights x Inputs')  
     
  
  
-  document.getElementById('myDiv323').innerHTML += '<hr><br>Try some Matrix Multiplication and Transposition<br><br>'
+  document.getElementById('myDiv321').innerHTML += '<hr><br>Try some Matrix Multiplication and Transposition<br><br>'
  
  //  Same thing but a bit more complex 
  const myMatrix1  = tf.tensor2d( [3, 2, 5, 4], [2, 2]);
  const myMatrix2 =  tf.tensor2d( [2, 3, 4, 5], [2, 2]);
- await myTensorTable('myDiv323', myMatrix1, 2, 'myMatrix1 or A')  
- await myTensorTable('myDiv323', myMatrix2, 2, 'myMatrix2 or B')  
+ await myTensorTable('myDiv321', myMatrix1, 2, 'myMatrix1 or A')  
+ await myTensorTable('myDiv321', myMatrix2, 2, 'myMatrix2 or B')  
  
   var  myProduct = tf.matMul(myMatrix1, myMatrix2)
-  await myTensorTable('myDiv323', myProduct, 2, ' A x B tf.matMul(myMatrix1, myMatrix2)')  
+  await myTensorTable('myDiv321', myProduct, 2, ' A x B tf.matMul(myMatrix1, myMatrix2)')  
  
   
   var  myProduct = tf.matMul(myMatrix1, myMatrix2, 'TRANSPOSED', 'REGULAR')
-  await myTensorTable('myDiv323', myProduct, 2, ' A^T x B tf.matMul(myMatrix1, myMatrix2, \'TRANSPOSED\', \'REGULAR\')')   
+  await myTensorTable('myDiv321', myProduct, 2, ' A^T x B tf.matMul(myMatrix1, myMatrix2, \'TRANSPOSED\', \'REGULAR\')')   
   var  myProduct = tf.matMul(myMatrix2, myMatrix1)
-  await myTensorTable('myDiv323', myProduct, 2, ' B x A  tf.matMul(myMatrix2, myMatrix1)')  
+  await myTensorTable('myDiv321', myProduct, 2, ' B x A  tf.matMul(myMatrix2, myMatrix1)')  
  
   var  myProduct = tf.matMul(myMatrix2, myMatrix1, 'REGULAR', 'TRANSPOSED') 
-  await myTensorTable('myDiv323', myProduct, 2, ' B x A^T  tf.matMul(myMatrix2, myMatrix1, \'REGULAR\', \'TRANSPOSED\')')  
+  await myTensorTable('myDiv321', myProduct, 2, ' B x A^T  tf.matMul(myMatrix2, myMatrix1, \'REGULAR\', \'TRANSPOSED\')')  
  
-   document.getElementById('myDiv323').innerHTML += '<hr><br>Try some 1D Tensors<br><br>' 
+   document.getElementById('myDiv321').innerHTML += '<hr><br>Try some 1D Tensors<br><br>' 
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////  
  // Now lets try some 1D Tensors
@@ -145,9 +145,9 @@ async function myTest323(){
  const w = tf.tensor1d([0.7, -0.3])
  const i = tf.tensor1d([0.1, 0.8])
  const b = tf.scalar(2.1)
- await myTensorTable('myDiv323', w, 1, 'w as Weights')  
- await myTensorTable('myDiv323', i, 1, 'i as Inputs ')   
- await myTensorTable('myDiv323', b, 1, 'b as Bias')  
+ await myTensorTable('myDiv321', w, 1, 'w as Weights')  
+ await myTensorTable('myDiv321', i, 1, 'i as Inputs ')   
+ await myTensorTable('myDiv321', b, 1, 'b as Bias')  
 // long form using the tf.tidy function
  const myAnswer = tf.tidy( function() {
      const myDot = tf.outerProduct(w, i)
@@ -156,7 +156,7 @@ async function myTest323(){
      return mySig
  })
  // myAnswer.print('verbose')
- await myTensorTable('myDiv323', myAnswer, 2, 'Long form sigmoid(add( dot(w, i)+ b) ) ')  
+ await myTensorTable('myDiv321', myAnswer, 2, 'Long form sigmoid(add( dot(w, i)+ b) ) ')  
  
  
 // lets try these operations together
@@ -169,14 +169,14 @@ async function myTest323(){
     return mySig2
  })
    // myAnswer2.print('verbose')
-   await myTensorTable('myDiv323', myAnswer2, 2, 'Strung operations together and  sinH(add( dot(w, i)+ b) ) ')  
+   await myTensorTable('myDiv321', myAnswer2, 2, 'Strung operations together and  sinH(add( dot(w, i)+ b) ) ')  
 // The other way is to string the operations one after the other
  
   const myAnswer3 = tf.tidy( function() {
       return  tf.outerProduct(w, i).add(b).prelu(tf.scalar(0.1))
  })
    // myAnswer3.print('verbose')
-   await myTensorTable('myDiv323', myAnswer3, 2, 'One Operation after the other and  prelu(add( dot(w, i)+ b) ) ') 
+   await myTensorTable('myDiv321', myAnswer3, 2, 'One Operation after the other and  prelu(add( dot(w, i)+ b) ) ') 
  
  
  
@@ -186,7 +186,7 @@ async function myTest323(){
     const myAdd = tf.add(myDot, b)
     const myAnswer4 = tf.relu(myAdd)
     // myAnswer4.print('verbose')
-    await myTensorTable('myDiv323', myAnswer4, 2, 'Showed how to dispose of tensors and  relu(add( dot(w, i)+ b) ') 
+    await myTensorTable('myDiv321', myAnswer4, 2, 'Showed how to dispose of tensors and  relu(add( dot(w, i)+ b) ') 
  
     // now cleanup
     myDot.dispose()
@@ -201,7 +201,7 @@ async function myTest323(){
 
 
 <input type="button" value="Run All" onclick="{
-    myTest323();
+    myTest321();
 }"><br><br><br>
 
 </div>
