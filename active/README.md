@@ -14,6 +14,16 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/active
 
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/active/editable04.html
+
+
+
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/active/editable05.html
+
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/active/editable06.html
 
 
