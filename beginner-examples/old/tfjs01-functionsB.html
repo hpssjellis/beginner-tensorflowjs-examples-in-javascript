@@ -1,0 +1,557 @@
+
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+
+    
+    
+    
+<h2 align=center> Using Tensorflowjs expect to see a wide variety of types of functions </h2>
+Click on each of the buttons and then have a look at the example code<br>
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Traditional Javascript function, updated by using the "async" and "await" key words. 
+</div>
+  
+
+
+
+
+
+
+<div id="myDiv223Code"> 
+
+<script>
+                                                                 
+async function myTypicalFunction(){                                                             
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv223').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+}
+    
+</script>    
+    
+<input id="myButton223" type="button" value="Typical Async Function" onclick="{  
+                                                                 
+   myTypicalFunction()   
+                                                                 
+}"><br><br>
+
+</div>
+<div id='myDiv223'>...</div><br>
+<textarea id="myTextarea223"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce223){
+     myTextGrow('myTextarea223', 'myDiv223Code')
+     document.getElementById('myUpdate223').style.visibility = 'visible'
+     myOnce223 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate223" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea223').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv223Code').innerHTML =    myJoe 
+  document.getElementById('myButton223').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Very powerful inline function example, This is the form that I prefer since the keyword "function" reminds beginners what is 
+ happening with the code.
+
+</div>
+   
+<div id="myDiv224Code"> 
+
+<input id="myButton224" type="button" value="An Inline Async Function" onclick="{  
+    (async function() {                                                                
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv224').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+   }  )()
+                                                                 
+}">
+<br><br>
+
+</div>
+<div id='myDiv224'>...</div><br>
+<textarea id="myTextarea224"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce224){
+     myTextGrow('myTextarea224', 'myDiv224Code')
+     document.getElementById('myUpdate224').style.visibility = 'visible'
+     myOnce224 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate224" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea224').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv224Code').innerHTML =    myJoe 
+  document.getElementById('myButton224').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Demonstrating the "arrow" function. This is often used by the Tensorflowjs community. Note the similarities between the inline 
+ function and the arrow function. They both work exactly the same, just the 
+ Arrow function has less typing and the arrow is after the brackets whereas 
+ the inline function key word is before the brackets used for passing variables
+
+</div>
+   
+<div id="myDiv225Code"> 
+
+<input id="myButton225" type="button" value="An Arrow Async Function" onclick="{  
+    ( async () => {                                                                
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv225').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+   }   )()
+                                                                 
+}"><br><br>
+
+</div>
+<div id='myDiv225'>...</div><br>
+<textarea id="myTextarea225"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce225){
+     myTextGrow('myTextarea225', 'myDiv225Code')
+     document.getElementById('myUpdate225').style.visibility = 'visible'
+     myOnce225 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate225" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea225').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv225Code').innerHTML =    myJoe 
+  document.getElementById('myButton225').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+All three types of functions used together so you can see how they are written.
+</div>
+   
+<div id="myDiv226Code"> 
+
+<script>
+   
+function myAll3Functions(){                                                             
+    document.getElementById('myDiv226').innerHTML = 'This line was made by the main function. <br><br>'
+    let myInline = (function() {                                                                                                                                
+       return 'This line was made using an inline function <br><br>'
+    }  )()
+    let myArrow = (() => {                                                                                                                                
+       return 'This line was made using an arrow function. <br><br>'
+   } )()  
+    
+    document.getElementById('myDiv226').innerHTML += myInline + myArrow
+}
+    
+</script>    
+    
+<input id="myButton226" type="button" value="All three Functions together" onclick="{  
+                                                                 
+   myAll3Functions()   
+                                                                 
+}"><br><br>
+
+</div>
+<div id='myDiv226'>...</div><br>
+<textarea id="myTextarea226"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce226){
+     myTextGrow('myTextarea226', 'myDiv226Code')
+     document.getElementById('myUpdate226').style.visibility = 'visible'
+     myOnce226 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate226" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea226').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv226Code').innerHTML =    myJoe 
+  document.getElementById('myButton226').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+ 
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+I often see Tensorflowjs code that returns an array of information from the function into an array of variables. Made the 
+ code very confusing when I first saw it.
+</div>
+   
+<div id="myDiv227Code"> 
+
+<input id="myButton227" type="button" value="Functions that return Multiple Variables as an Array" onclick="{  
+                                                                 
+   [myX, myY] = (function(){ 
+      return [3, 4]; 
+   })();
+   document.getElementById('myDiv227').innerHTML = 'Variable myX = ' + myX  + ' and variable myY = ' + myY                                                         
+}"><br><br>
+
+</div>
+<div id='myDiv227'>...</div><br>
+<textarea id="myTextarea227"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce227){
+     myTextGrow('myTextarea227', 'myDiv227Code')
+     document.getElementById('myUpdate227').style.visibility = 'visible'
+     myOnce227 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate227" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea227').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv227Code').innerHTML =    myJoe 
+  document.getElementById('myButton227').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+ 
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Tensorflowjs also often returns an object from a function into several variables. This also made the code very confusing when I first 
+ saw it
+
+</div>
+   
+<div id="myDiv228Code"> 
+
+<input id="myButton228" type="button" value="Functions that return Multiple Variables as an Object" onclick="{  
+                                                                 
+   let {myFoo, myBar} = (function(){ 
+      return {myFoo: 3, myBar: 500} 
+   })();
+ 
+   document.getElementById('myDiv228').innerHTML = 'Variable myFoo = ' + myFoo  + ' and variable myBar = ' + myBar                                                                      
+}"><br><br>
+
+</div>
+<div id='myDiv228'>...</div><br>
+<textarea id="myTextarea228"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce228){
+     myTextGrow('myTextarea228', 'myDiv228Code')
+     document.getElementById('myUpdate228').style.visibility = 'visible'
+     myOnce228 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate228" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea228').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv228Code').innerHTML =    myJoe 
+  document.getElementById('myButton228').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+ 
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+All of the Tensorflowjs examples use modules, which works great for build tools and reducing the number of global variables 
+ and can be made with only a few changes to work with pure Javascript, but has CORS issues (Cross-Origin Resource Sharing ) 
+ when run from your local machine. (Which is strange since all the files are on the local machine but it is a security issue that 
+ is a pain to change on Chrome)
+ 
+ My solution to this issue is to use namespacing in the external js files. For namespacing to work you have to change any regular functions
+ into inline or arrow functions. My solution works really well as the code used to make the web page is the exact code that any user sees when they 
+ "Right click-View page source" on the page. With build tools the final code is very different from the original Javascript or Typescript<br>    
+</div>
+   
+<div id="myDiv229Code"> 
+
+ <input id="myButton229" type="button" value="Namespaces replace modules" onclick="{  
+      
+   var myNameSpace = myNameSpace || {}       // if not already set then set the namespace as an object
+                                                                                   
+   myNameSpace.myModuleFunction = function() {                                                                                                                                
+      return 'A namespace protected inline function made this line'
+} 
+   document.getElementById('myDiv229').innerHTML =   myNameSpace.myModuleFunction() + '<br><br>'                                                                        
+                                                                    
+}"><br><br>
+
+</div>
+<div id='myDiv229'>...</div><br>
+<textarea id="myTextarea229"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce229){
+     myTextGrow('myTextarea229', 'myDiv229Code')
+     document.getElementById('myUpdate229').style.visibility = 'visible'
+     myOnce229 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea>
+
+
+<input id="myUpdate229" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea229').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv229Code').innerHTML =    myJoe 
+  document.getElementById('myButton229').click()
+                                             
+}">
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+ 
+
+
+ 
+ 
+
+
+
+ 
+ 
+
+
+<br><br><br>  
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce223 = true    // so textareas are only clicked once
+myOnce224 = true 
+myOnce225 = true 
+myOnce226 = true 
+myOnce227 = true 
+myOnce228 = true 
+myOnce229 = true 
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).value = document.getElementById(myT).value.replace(/\n/g, '\r\n').replace(/\r\r/g, '\r');
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
