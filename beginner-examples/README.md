@@ -7,6 +7,8 @@ However every file can be accessed by clicking this link and adding the file nam
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples
 
+testing  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/editable-group08.html
 
 
 tfjs01-functions.html  
