@@ -206,7 +206,7 @@ async function myTest321(){
 
 </div>
 <div id='myDiv321'>...</div><br>
-<textarea id="myTextarea321"   style= "color:blue; background-color:lightyellow;  width:100%" rows=3  onclick="{
+<textarea id="myTextarea321"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
   if (myOnce321){
      myTextGrow('myTextarea321', 'myDiv321Code')
      document.getElementById('myUpdate321').style.visibility = 'visible'
@@ -217,7 +217,7 @@ Click here to see the working HTML code.
 </textarea>
 
 
-<input id="myUpdate321"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+<input id="myUpdate321"  type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
    // first remove first and last line since they are injected
   myFred = document.getElementById('myTextarea321').value.split('\n')
