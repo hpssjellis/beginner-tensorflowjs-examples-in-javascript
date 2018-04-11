@@ -8,6 +8,6 @@ Having real issues with the edit box working great in Chrome but useless in Fire
 Awesome got it working on Firefox. Still need to test IOS
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/active/editable06.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/active/editable07.html
 
 
