@@ -3,7 +3,7 @@
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "com.rocksetta.tensorflowjs-tutorial"
     versionCode = "10"
-    version     = "1.02.03" >      <!-- Change this before each compile -->
+    version     = "1.02.04" >      <!-- Change this before each compile -->
 
   <name>Tensorflowjs Tutorial</name>
   <description>
