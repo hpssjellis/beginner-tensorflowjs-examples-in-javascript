@@ -18,8 +18,7 @@
   <gap:plugin name="cordova-plugin-whitelist" source="npm"/> <!-- Yes this is needed -->
     
    <access origin="*" />
-   <allow-intent href="*" />
-   <allow-navigation href="*" />
+
 
   
   <!-- all platforms -->
