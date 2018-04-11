@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.rocksetta.tensorflowjs-tutorial"
+    versionCode = "10"
+    version     = "1.02.03" >      <!-- Change this before each compile -->
+
+  <name>Tensorflowjs Tutorial</name>
+  <description>
+      Tensorflowjs in an Android App
+  </description>
+  
+  <author href="http://rocksetta.com" email="keyfreemusic@gmail.com">
+      Jeremy Ellis
+  </author>
+  
+  
+  <gap:plugin name="cordova-plugin-whitelist" source="npm"/> <!-- Yes this is needed -->
+
+  
+  <!-- all platforms -->
+  <preference name="phonegap-version" value="cli-6.5.0" />  
+
+ 
+  <preference name="orientation" value="default" />
+  <preference name="fullscreen" value="true" />
+
+
+
+  <!-- Android only -->
+
+  <preference name="android-installLocation" value="auto" />
+  
+  
+
+  
+  
+</widget>
