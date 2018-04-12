@@ -61,3 +61,13 @@ webcam-transfer-learning
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/webcam-transfer-learning/index.html
 
 
+
+
+
+April 12, 2018 Have not yet got tfjs-yolo-tiny working.
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/tfjs-yolo-tiny/index.html
+
+
+
+
+
