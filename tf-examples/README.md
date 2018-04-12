@@ -9,7 +9,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/
 
 
 
-Here is the ES6 Modules attempt. Easiest change to make and works sweet, but does not load locally without changes to your browser
+Here is the ES6 Modules attempt. Example of the CORS issue. Easiest change to make to Tensorflowjs and works sweet, but does not load locally without changes to your browser
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/es6-modules/index.html
 
