@@ -2,6 +2,13 @@
 
 # Tensorflowjs examples made to work without compiling or using modules (which cause CORS issues if used locally)
 
+
+Main demo website for all my Tensorflowjs stuff at  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/
+
+
+
+
 Here is the ES6 Modules attempt. Easiest change to make and works sweet, but does not load locally without changes to your browser
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/es6-modules/index.html
@@ -64,7 +71,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-exa
 
 
 
-April 12, 2018 Have not yet got tfjs-yolo-tiny working.
+April 12, 2018 Have not yet got tfjs-yolo-tiny working.  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/tfjs-yolo-tiny/index.html
 
 
