@@ -1,6 +1,6 @@
 
 
-# Trying to make a pure Javascript no-compile version
+# Trying to make a pure Javascript no-compile version of the tfjs-yolo-tiny WebCam object detector in your browser only
 
 I have had success with all the other Tensorflowjs examples. Just a bit confused here on calling the yolo converted files. Not sure where they are?
 
