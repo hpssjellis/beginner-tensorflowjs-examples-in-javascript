@@ -1,0 +1,68 @@
+﻿<html>
+<head>
+  <meta name="viewport" content="width=600">
+  <link rel="stylesheet" type="text/css" href="index.css">
+
+</head>
+<body>
+  <a
+    class="github-fork-ribbon"
+    href="https://github.com/ModelDepot/tfjs-yolo-tiny-demo"
+    data-ribbon="Fork me on GitHub"
+    title="Fork me on GitHub">
+    Fork me on GitHub
+  </a>
+  <div class="wrapper">
+    <div class="logo-wrapper">
+
+      </a>
+    </div>
+    <div id="loading-message">
+      Loading Skynet (This may take a minute, 40mb)...
+      <div>
+        <img class="spin"  width="100px" src="assets/logo.png">
+      </div>
+    </div>
+    <div id="error-message" style="display:none">
+      Sorry! An error occured while loading the model 😢
+      <br>
+      If you're on an iPhone, please try using Safari.
+    </div>
+    <div id="success-message" style="display:none">
+      Point me at something, but please be a bit patient while I try to figure out what it is!
+      (Ex. person, keyboard, cell phone, car, pet, etc.)
+    </div>
+    <div class="webcam-ui-container">
+      <div id="webcam-wrapper" style="display: none">
+        <video autoplay playsinline muted
+          id="webcam" width="416" height="416">
+        </video>
+      </div>
+    </div>
+    <div style="text-align: center; margin: 25px 0">
+
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"> </script> 
+
+
+  <script src="class_names.js"></script>
+  <script src="postprocess.js"></script>
+  <script src="webcam.js"></script>
+  <script src="yolo.js"></script>
+  <script src="index.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
