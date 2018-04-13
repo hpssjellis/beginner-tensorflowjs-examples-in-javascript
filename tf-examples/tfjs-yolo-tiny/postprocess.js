@@ -126,8 +126,12 @@ function non_max_suppression(boxes, scores, iouThreshold) {
   ];
 }
 
+
+
 // Convert yolo output to bounding box + prob tensors
-export function yolo_head(feats, anchors, num_classes) {
+
+
+function yolo_head(feats, anchors, num_classes) {
   const num_anchors = anchors.shape[0];
 
   const anchors_tensor = tf.reshape(anchors, [1, 1, num_anchors, 2]);
