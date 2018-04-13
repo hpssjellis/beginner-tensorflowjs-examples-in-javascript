@@ -27,7 +27,7 @@
  */
 
 
-
+//var web2cam = web2cam || {}    // make a webcam namespace
 
 
 // import * as tf from '@tensorflow/tfjs';
