@@ -6,7 +6,7 @@
 
 // import { Webcam } from './webcam';
 
-var u=tf
+//var u=tf
 
 
 let model;
