@@ -23,7 +23,7 @@ async function downloadModel(url = DEFAULT_MODEL_LOCATION) {
   return await tf.loadModel(url);
 }
 
-default async function yolo(
+async function yolo(
   input,
   model,
   classProbThreshold = DEFAULT_CLASS_PROB_THRESHOLD,
