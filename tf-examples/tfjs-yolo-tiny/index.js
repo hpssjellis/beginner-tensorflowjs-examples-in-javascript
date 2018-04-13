@@ -41,12 +41,12 @@ async function run() {
 
     const inputImage = webcam.capture();
 
-    const t0 = performance.now();
+   // const t0 = performance.now();
 
     const boxes = await yolo(inputImage, model);
 
-    const t1 = performance.now();
-    console.log("YOLO inference took " + (t1 - t0) + " milliseconds.");
+   // const t1 = performance.now();
+    //console.log("YOLO inference took " + (t1 - t0) + " milliseconds.");
 
     boxes.forEach(box => {
       const {
