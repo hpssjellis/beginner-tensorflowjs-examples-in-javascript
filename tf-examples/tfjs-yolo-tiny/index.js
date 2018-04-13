@@ -10,7 +10,7 @@ var u=tf
 
 
 let model;
-const webcam = new Webcam(document.getElementById('webcam'));
+const webcam = new Webcam(document.getElementById('webcamID'));
 
 (async function main() {
   try {

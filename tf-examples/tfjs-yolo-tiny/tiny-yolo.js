@@ -76,7 +76,7 @@ async function yolo(
       return;
     }
 
-    const className = class_names[class_indx];
+    const className = coco_classes[class_indx];
     let [top, left, bottom, right] = boxes_arr[i];
 
     top = Math.max(0, top);
