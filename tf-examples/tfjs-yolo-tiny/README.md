@@ -7,12 +7,18 @@ I have had success with all the other Tensorflowjs examples. Just a bit confused
 Awesome site by Michael Shi original github at    
 https://github.com/ModelDepot/tfjs-yolo-tiny-demo
 
+and the yolo-tiny github is at  
+https://github.com/ModelDepot/tfjs-yolo-tiny
+
 Original Demo at    
 https://modeldepot.github.io/tfjs-yolo-tiny-demo/
 
+.
+
+.
 
 
-This demo at    
+This No-Build-Tools-Demo is at    
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/tfjs-yolo-tiny/index.html
 
 
