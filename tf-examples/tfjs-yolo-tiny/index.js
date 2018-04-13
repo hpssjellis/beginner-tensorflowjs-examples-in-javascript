@@ -6,6 +6,9 @@
 
 // import { Webcam } from './webcam';
 
+var u=tf
+
+
 let model;
 const webcam = new Webcam(document.getElementById('webcam'));
 
