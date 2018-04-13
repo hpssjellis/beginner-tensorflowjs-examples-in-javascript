@@ -3,6 +3,9 @@
 
 //import { Webcam } from './webcam';
 
+
+myFirst = true
+
 let model;
 const webcam = new Webcam(document.getElementById('webcam'));
 
@@ -44,9 +47,13 @@ async function run() {
         top, left, bottom, right, classProb, className,
       } = box;
 
-      drawRect(left, top, right-left, bottom-top,
-        `${className} Confidence: ${Math.round(classProb * 100)}%`)
+      drawRect(left, top, right-left, bottom-top, `${className} Confidence: ${Math.round(classProb * 100)}%`)
+
+     document.getElementById('myDiv01').innerHTML += className + ' at:'+Math.round(classProb * 100) +'%<br>'   // add text to webpage
+
     });
+
+  
 
     await tf.nextFrame();
   }
@@ -65,9 +72,28 @@ function drawRect(x, y, w, h, text = '', color = 'red') {
   rect.appendChild(label);
 
   webcamElem.appendChild(rect);
+
+ // document.getElementById('myDiv01').innerHTML += text+'<br>'   // add text to webpage
 }
 
+
+
+
 function clearRects() {
+  if (document.getElementById('myDiv01').innerHTML == ''){
+      if (myFirst){ 
+        document.getElementById('myDivOld').innerHTML = '.' 
+         myFirst = false 
+      } else {
+         document.getElementById('myDivOld').innerHTML += '.'
+
+     }
+   } else {
+      myFirst = true
+      document.getElementById('myDivOld').innerHTML = 'was '+document.getElementById('myDiv01').innerHTML  // keep
+      document.getElementById('myDiv01').innerHTML = ''   
+  }                                                 // delete old comment
+
   const rects = document.getElementsByClassName('rect');
   while(rects[0]) {
     rects[0].parentNode.removeChild(rects[0]);
