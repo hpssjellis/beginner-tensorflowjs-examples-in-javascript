@@ -2,7 +2,7 @@
 <head>
   <meta name="viewport" content="width=600">
   <link rel="stylesheet" type="text/css" href="index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.2/gh-fork-ribbon.min.css" />
+
 
 </head>
 <body>
@@ -16,13 +16,13 @@
   <div class="wrapper">
     <div class="logo-wrapper">
       <a href="https://modeldepot.io/?ref=tfjs-yolo-tiny-demo" target="_blank" rel="noopener noreferrer">
-        <img class="logo" src="assets/ModelDepot-logo.png">
+        <img class="logo" width = 100 src="ModelDepot-logo.png">
       </a>
     </div>
     <div id="loading-message">
       Loading Skynet (This may take a minute, 40mb)...
       <div>
-        <img class="spin" src="assets/logo.png">
+        <img class="spin" width = 20 src="logo.png">
       </div>
     </div>
     <div id="error-message" style="display:none">
@@ -47,49 +47,12 @@
       </a>
     </div>
     <div class="intro">
-      <h1>What's going on?</h1>
-      <p>
-        Using
-        <a href="https://js.tensorflow.org" target="_blank" rel="noopener noreferrer">
-        Tensorflow.js</a>, we're able to use deep learning to detect
-        objects from your webcam! Your webcam feed never leaves your
-        computer and all the processing is being done locally!
-        (Trust me, we can't afford the servers to store/process your data)
-      </p>
-      <h1>Can I use something like this in my project?</h1>
-      <p>
-        Yes! Check out it out on
-        <a href="https://modeldepot.io/mikeshi/tiny-yolo-in-javascript" target="_blank" rel="noopener noreferrer">
-          ModelDepot!
-        </a>
-      </p>
-      <h1>Why is it so slow?</h1>
-      <p>
-        Real-time object detection is a challenging task, and most models
-        are optimized to run fast on powerful GPU-powered computers
-        with optimized code.
-        Most of us don't have super fast GPUs
-        (especially if you're browsing on mobile)
-        and Tensorflow.js can't take
-        full advantage of our computer's GPUs.
-      </p>
-      <h1>How does this work?</h1>
-      <p>
-        We're using
-        <a href="https://pjreddie.com/darknet/yolo/" target="_blank" rel="noopener noreferrer">
-        Tiny YOLO</a>, a ML model that's been converted to work
-        in Tensorflow.js.
-      </p>
+      
     </div>
   </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"> </script> 
-  
-  
-  
-  <!-- <script src="https://cdn.jsdelivr.net/npm/tfjs-yolo-tiny"> </script>  -->
-
 
   <script src="coco_classes.js"></script>
   <script src="postprocess.js"></script>
@@ -97,8 +60,6 @@
   
   <script src="webcam.js"></script>
   <script src="index.js"></script>
-
-
 
 </body>
 </html>
