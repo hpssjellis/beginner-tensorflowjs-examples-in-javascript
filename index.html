@@ -15,7 +15,7 @@
 <!-- the online version that these examples were made with  
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"></script>
 -->
 
 
@@ -298,10 +298,11 @@ Note: I have only included Tensorflowjs examples in this chart ignoring the  Dee
     and don't 
     work on production anything, getting the concept and code working as simply as possible is my main concern. Whenever I am 
     working on a complex new idea I don't want a framework or build tool being the problem. I want to get my code working in pure 
-    Javascript not dealing with the mind blowing frustration someone elses bug.<br><br>I have a short video on how to work with the TSC build tool to use 
+    Javascript and not dealing with the mind blowing frustration of someone elses bug.<br><br>I have a short video on how to work with the TSC 
+    build tool to use 
     Intellisense for writing code and then easily switch to pure javascript to see if it works.<br>
-    I used to only work with jQuery when absolutely necessary, but now the Javascript language has changed so much 
-    that I rarely have to even use jQuery. I mainly use it when I am to lazy to convert the code.<br><br>
+    I used to only work with jQuery only when absolutely necessary, but now the Javascript language has changed so much 
+    that I rarely have to use jQuery. I mainly use it when I am to lazy to convert the code.<br><br>
     
    <iframe width="250" height="140" src="https://www.youtube.com/embed/aq4JByHZt9E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
     
@@ -352,7 +353,7 @@ function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
    var myCursorEnd = document.getElementById(myT).selectionEnd
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
