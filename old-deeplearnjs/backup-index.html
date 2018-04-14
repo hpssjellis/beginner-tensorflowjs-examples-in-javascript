@@ -13,7 +13,9 @@
 
   
 <!-- the online version that these examples were made with  
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"></script>
 -->
 
 
@@ -66,7 +68,7 @@ The main github for these pages is at:
 <tr><td><a href="old-deeplearnjs/jj11-mean-square-difference.html">jj11-mean-square-difference.html</a></td>  <td>..</td>   <td>...</td> <td>....</td> <td style="color:red">      0.6.0        </td></tr>
 <tr><td><a href="old-deeplearnjs/jj12-knn.html">jj12-knn.html</a></td>  <td>..</td>  <td>...</td> <td>....</td> <td style="color:red">        0.6.0    </td></tr> 
     
-<tr><th colspan=5 align=center style="font-size:30px; color:green">Tensorflowjs Version 0.8.0</th></tr>    
+<tr><th colspan=5 align=center style="font-size:30px; color:green">Tensorflowjs Version 0.9.0</th></tr>    
 <tr><td><a href="beginner-examples/tfjs01-functions.html">tfjs01-functions.html</a><td> Updated to also show functions with multiple variable returns using arrays and objects and module solutions using namespacing  </td><td>...</td><td>....</td><td style="color:green"> Active Version </td></tr>
 <tr><td><a href="beginner-examples/tfjs02-basics.html">tfjs02-basics.html</a><td> Beware lots of Tensors in one function </td><td>...</td><td>....</td><td style="color:green"> Active Version </td></tr>
 <tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
@@ -92,35 +94,86 @@ The main github for these pages is at:
 
     
 
-<div style="background-color:lightgrey; font-size:30px;  width:100%; border:20px solid blue; padding: 20px; margin: 5px;"> 
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
    <ol> Most of the examples are in the following format:
-     <li> A Description like in this box
+     <li> A description similar to these lines
      <li> A button to click to see if the Javascript code works
-     <li> An expanding textbox yo copy the code into your text editor
+     <li> A textarea to click to see the working code  
+     <li> An expanding textarea, that you can right-click and select-all to copy the code into your text editor
+     <li> An edit button that shows after clicking the textarea and can dynamically make changes to any non-script tag enclosed Javascript
   </ol>
-</div>
+</div><br>
     
     
 
     
-<div id="myDiv01Code"><br>  
-    
-<input id="myButton01" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv01').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+
+
+
+
+
+
+
+
+
+
+
+<div id="myDiv123Code"> 
+
+<input id="myButton123" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
 }"><br><br>
 
-
-<div id="myDiv01">...</div><br>
 </div>
-<textarea id="myTextarea01"   style= "color:blue; background-color:lightyellow; white-space:nowrap; width:100%"   rows=3 NOWRAP onclick="{myTextGrow('myTextarea01', 'myDiv01Code')}">
+<div id='myDiv123'>...</div><br>
+<textarea id="myTextarea123"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
 Click here to see the working HTML code.
-</textarea>
+</textarea><br>
 
-<br><br><hr><br><br><br><br><br>
 
-<br><br><br><br><br><br><br><br> 
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}">
 
-<h3>My take on the Tensorflowjs ES6 examples. These pages do not hve to be compiled using Yarn. I have converted them all to pure Javascript
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>My take on the <a href="https://github.com/tensorflow/tfjs-examples">Tensorflowjs ES6 examples</a>. My examples do not have to be compiled using Yarn. I have converted them all to 
+  pure Javascript
  that can simply be put on your own computer and ran from there. No need to use a server, no need to use compile tools. If you 
 download the script source then these files can be ran without an internet connection.</h3>
 
@@ -138,6 +191,7 @@ download the script source then these files can be ran without an internet conne
   <tr><td><a href="tf-examples/sentiment/index.html">Rocksetta: Layers: Sentiment Analysis Demo</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
   <tr><td><a href="tf-examples/translation/index.html">Rocksetta:Layers: Sequence-to-Sequence (English-French Translation) </a></td><td>Right Click-->View Page Source<td>Works!</td></tr>
   <tr><td><a href="tf-examples/webcam-transfer-learning/index.html">Rocksetta: Pacman Game webcam-transfer-learning</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/tfjs-yolo-tiny/index.html">Rocksetta: tiny-yolo-demo</a></td><td>Right Click-->View Page Source</td><td>Works! just not on my Android 8.0 Mobile</td></tr>
 
 
 </table>  
@@ -156,8 +210,8 @@ download the script source then these files can be ran without an internet conne
  
  
  
-
-<h3>Unorganized links to other TensorFlow.js example programs on the web</h3>
+<a name="tfjslinks"></a>
+  <h3>Unorganized links to other TensorFlow.js example programs on the web</h3>
 Note: I have only included Tensorflowjs examples in this chart ignoring the  Deeplearnjs Demos<br> <br> 
 <table border=1>
   <tr><th>Link</th><th>Code</th><th>Notes: use (ctrl-shift-I) to open browser console </th></tr>
@@ -177,7 +231,7 @@ Note: I have only included Tensorflowjs examples in this chart ignoring the  Dee
   <tr><td><a href="https://www.advancedintegrals.com/facerec/index.html">Webcam Binary Learning</a></td><td><a href="https://github.com/zaidalyafeai/tensorflowjs-binary">Code</a></td><td>Twitter by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a> </td></tr>
   <tr><td><a href="https://medium.com/@alyafey22/a-gentle-introduction-to-tensorflow-js-dba2e5257702">A gentle Introduction to Tensorflowjs</a></td><td>Blog</td><td>Twitter by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a> </td></tr>
   <tr><td><a href="https://medium.com/using-tensorflowjs-to-classify-objects/what-is-tensorflow-js-895a2e0997dc">What is Tensorflowjs</a></td><td>Blog</td><td>Twitter by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a> </td></tr> 
-  <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://github.com/ModelDepot/tfjs-yolo-tiny-demo">tfjs-yolo-tiny-demo: object detection in browser</a></td><td><a href="https://github.com/ModelDepot/tfjs-yolo-tiny-demo">Demo Code</a>, <a href="https://github.com/ModelDepot/tfjs-yolo-tiny">tfjs-yolo-tiny Code</a></td><td>by Michael Shi. This is a really nice demo object detection demo <a href="https://twitter.com/MikeShi42">@MikeShi42</a></td></tr>
   <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
   <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
   <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
@@ -243,19 +297,26 @@ A few related videos:<br><br>
  
  
 
+
 <!--  Following is a helper functions  to grow the textareas  -->
 
 <script>
+myOnce123 = true    // so textareas are only clicked once
+  
+  
 function myTextGrow(myT, myB){
-   myNewDiv = myB.replace('Code','')
-   document.getElementById(myNewDiv).innerHTML = '...'
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
-        
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
           document.getElementById(myT).rows += 3; 
       } 
    }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
 }  
 </script>  
  
