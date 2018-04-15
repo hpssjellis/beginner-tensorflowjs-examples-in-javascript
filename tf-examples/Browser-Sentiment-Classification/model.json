@@ -242,7 +242,7 @@
    "weightsManifest":[  
       {  
          "paths":[  
-            "tf-examples/Browser-Sentiment-Classification/group1-shard1of1"
+            "beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/group1-shard1of1"
          ],
          "weights":[  
             {  
@@ -264,7 +264,7 @@
       },
       {  
          "paths":[  
-            "tf-examples/Browser-Sentiment-Classification/group2-shard1of1"
+            "beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/group2-shard1of1"
          ],
          "weights":[  
             {  
@@ -294,7 +294,7 @@
       },
       {  
          "paths":[  
-            "tf-examples/Browser-Sentiment-Classification/group3-shard1of1"
+            "beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/group3-shard1of1"
          ],
          "weights":[  
             {  
@@ -324,7 +324,7 @@
       },
       {  
          "paths":[  
-            "tf-examples/Browser-Sentiment-Classification/group4-shard1of1"
+            "beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/group4-shard1of1"
          ],
          "weights":[  
             {  
@@ -354,7 +354,7 @@
       },
       {  
          "paths":[  
-            "tf-examples/Browser-Sentiment-Classification/group5-shard1of1"
+            "beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/group5-shard1of1"
          ],
          "weights":[  
             {  
