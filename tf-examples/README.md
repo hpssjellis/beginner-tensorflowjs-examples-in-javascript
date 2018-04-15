@@ -14,6 +14,10 @@ Here is the ES6 Modules attempt. Example of the CORS issue. Easiest change to ma
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/es6-modules/index.html
 
 
+
+Browser-Sentiment-Classification  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/index.html
+
 .
 
 addition-rnn  
