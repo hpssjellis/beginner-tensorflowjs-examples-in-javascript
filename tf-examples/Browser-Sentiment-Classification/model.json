@@ -242,7 +242,7 @@
    "weightsManifest":[  
       {  
          "paths":[  
-            "Browser-Sentiment-Classification/group1-shard1of1"
+            "Browser-Sentiment-Classification/group1-shard1of1.tfjs"
          ],
          "weights":[  
             {  
