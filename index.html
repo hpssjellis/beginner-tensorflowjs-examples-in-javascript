@@ -126,16 +126,6 @@ The main github for these pages is at:
 
 </div>
 <div id='myDiv123'>...</div><br>
-<textarea id="myTextarea123"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
-  if (myOnce123){
-     myTextGrow('myTextarea123', 'myDiv123Code')
-     document.getElementById('myUpdate123').style.visibility = 'visible'
-     myOnce123 = false
-  }
-}">
-Click here to see the working HTML code.
-</textarea><br>
-
 
 <input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
    // first remove first and last line since they are injected
@@ -150,7 +140,18 @@ Click here to see the working HTML code.
                                              
 }">
 
-<br><br><br><hr><br><br><br><br>
+<br>
+<textarea id="myTextarea123"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+<br><br><hr><br><br><br><br>
 
 
 
