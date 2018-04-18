@@ -206,16 +206,6 @@ async function myTest321(){
 
 </div>
 <div id='myDiv321'>...</div><br>
-<textarea id="myTextarea321"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
-  if (myOnce321){
-     myTextGrow('myTextarea321', 'myDiv321Code')
-     document.getElementById('myUpdate321').style.visibility = 'visible'
-     myOnce321 = false
-  }
-}">
-Click here to see the working HTML code.
-</textarea><br>
-
 
 <input id="myUpdate321"  type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
@@ -231,6 +221,19 @@ Click here to see the working HTML code.
   document.getElementById('myButton321').click()
                                              
 }">
+
+<textarea id="myTextarea321"   wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce321){
+     myTextGrow('myTextarea321', 'myDiv321Code')
+     document.getElementById('myUpdate321').style.visibility = 'visible'
+     myOnce321 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
 
 <br><br><br><hr><br><br><br><br>
 
