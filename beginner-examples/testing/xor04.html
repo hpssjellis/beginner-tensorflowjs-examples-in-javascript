@@ -59,7 +59,7 @@ Number of Training batches <input id="myInNumber" type=number value=3000 size=10
 document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs<br>Expecting closs to 0, 1, 1, 0 for inputs [0,0], [0,1], [1,0], [1,1]<br><br>'
 document.getElementById('myDiv123').innerHTML += 'Increase the training batches if you don\'t like the results<br><br>'
 
-document.getElementById('myDiv123').style.backgroundColor = 'red'                                                                    
+document.getElementById('myButton123').style.backgroundColor = 'red'                                                                    
                                                                                                                                           
 async function myGo() {
 const model = tf.sequential();
@@ -76,7 +76,7 @@ const target_data = tf.tensor2d([0,1,1,0]);
 
 const myPredictArray = await model.predict(training_data).dataSync()
 document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0] +',   [0,1] = ' + myPredictArray[1]+',   [1,0] = ' + myPredictArray[2]+',   [1,1] = ' + myPredictArray[3]
-document.getElementById('myDiv123').style.backgroundColor = 'green'   
+document.getElementById('mmyButton123').style.backgroundColor = 'green'   
 }
 
                                                                      
