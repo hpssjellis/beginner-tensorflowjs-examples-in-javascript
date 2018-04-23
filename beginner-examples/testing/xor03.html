@@ -55,9 +55,9 @@ Blah Blah Blah Blah
 
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
 
-document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs'
+document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs<br>'
 
-async function go() {
+async function () {
 const model = tf.sequential();
 
 model.add(tf.layers.dense({units: 10, activation: 'sigmoid',inputShape: [2]}));
@@ -73,7 +73,7 @@ const target_data = tf.tensor2d([0,1,1,0]);
 document.getElementById('myDiv123').innerHTML += training_data.dataSync()
 
 }
-go();  
+
 }"><br><br>
 
 </div>
