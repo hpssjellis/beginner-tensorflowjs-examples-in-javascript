@@ -57,7 +57,7 @@ Blah Blah Blah Blah
 
 document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs<br>'
 
-async function () {
+(async function () {
 const model = tf.sequential();
 
 model.add(tf.layers.dense({units: 10, activation: 'sigmoid',inputShape: [2]}));
@@ -72,7 +72,7 @@ const target_data = tf.tensor2d([0,1,1,0]);
 // model.predict(training_data).print();
 document.getElementById('myDiv123').innerHTML += training_data.dataSync()
 
-}
+}) ()
 
 }"><br><br>
 
