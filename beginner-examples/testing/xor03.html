@@ -72,8 +72,8 @@ const target_data = tf.tensor2d([0,1,1,0]);
 
  var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
 
-document.getElementById('myDiv123').innerHTML += await model.predict(training_data).dataSync()
-
+const myPredictArray = await model.predict(training_data).dataSync()
+document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0] +',   [0,1] = ' + myPredictArray[1]+',   [1,0] = ' + myPredictArray[2]+',   [1,1] = ' + myPredictArray[3]
 }
                                                                             
 myGo()
