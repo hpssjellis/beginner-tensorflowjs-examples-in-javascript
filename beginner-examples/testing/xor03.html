@@ -46,13 +46,15 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+A very simple xOr Neural Network using Tensorflowjs Layers
 </div><br>
 
 
     
 <div id="myDiv123Code"> 
 
+<input id="myInNumber" type=number value=1000> 
+ 
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
 
 document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs<br>'
@@ -68,7 +70,7 @@ model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);
 const target_data = tf.tensor2d([0,1,1,0]);
 
- var h = await model.fit(training_data, target_data, {epochs: 1000});
+ var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
 
 document.getElementById('myDiv123').innerHTML += await model.predict(training_data).dataSync()
 
