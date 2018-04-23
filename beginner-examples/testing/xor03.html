@@ -57,7 +57,7 @@ A very simple xOr Neural Network using Tensorflowjs Layers
  
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
 
-document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs<br>'
+document.getElementById('myDiv123').innerHTML = 'Calculating XOR possible outputs<br>Expecting closs to 0, 1, 1, 0 for inputs [0,0],[0,1],[1,0],[1,1]<br><br>'
 
 async function myGo() {
 const model = tf.sequential();
@@ -75,8 +75,9 @@ const target_data = tf.tensor2d([0,1,1,0]);
 const myPredictArray = await model.predict(training_data).dataSync()
 document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0] +',   [0,1] = ' + myPredictArray[1]+',   [1,0] = ' + myPredictArray[2]+',   [1,1] = ' + myPredictArray[3]
 }
-                                                                            
-myGo()
+
+setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+
 
 }"><br><br>
 
