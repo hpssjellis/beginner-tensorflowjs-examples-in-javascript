@@ -54,6 +54,7 @@ see if it works. If you like it, copy the code to your computer or Github. If it
 <div id="myDiv4254Code"> 
 
 <input id="myButton4254" type=button value="Rocksetta converted Getting Started"  onclick="{
+                                                                                           
 async function myFirstTfjs() {
 
   // Create a simple model.
@@ -63,9 +64,7 @@ async function myFirstTfjs() {
   
   // Prepare the model for training: Specify the loss and the optimizer.
   
-  model.compile({loss: 'meanSquaredError',
-                 optimizer: 'sgd',
-                 useBias: 'true'});
+  model.compile({loss: 'meanSquaredError', optimizer: 'sgd', useBias: 'true'});
                  
   // Generate some synthetic data for training. (y = 2x - 1)
   
@@ -83,8 +82,7 @@ async function myFirstTfjs() {
   
     // Should print approximately 39.
     
-    document.getElementById('myDiv4254').innerText += model.predict(
-        tf.tensor2d([20], [1, 1]));
+    document.getElementById('myDiv4254').innerText = model.predict(tf.tensor2d([20], [1, 1]));
   });
   
   // Manually clean up the memory for these variables.
@@ -93,7 +91,8 @@ async function myFirstTfjs() {
   ys.dispose();
 }
 
-myFirstTfjs();                                                    
+myFirstTfjs();     // this just runs the above function
+                                                                                           
 }"><br><br>
 
 </div>
