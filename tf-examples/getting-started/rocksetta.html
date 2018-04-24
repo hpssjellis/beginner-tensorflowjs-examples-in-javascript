@@ -83,7 +83,7 @@ async function myFirstTfjs() {
     // Should print approximately 39.
     
     document.getElementById('myDiv4254').innerHTML = 'Should print approximately 39 <br> Actual value = '
-    document.getElementById('myDiv4254').innerHTML += model.predict(tf.tensor2d([20], [1, 1])).dataSync().toFixed(2);
+    document.getElementById('myDiv4254').innerHTML += model.predict(tf.tensor2d([20], [1, 1])).dataSync()[0].toFixed(2);
   });
   
   // Manually clean up the memory for these variables.
