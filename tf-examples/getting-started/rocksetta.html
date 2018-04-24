@@ -1,0 +1,186 @@
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>Rocksetta <a href="js.tensorflow.org">Tensorflowjs</a>converted Getting Started</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+This is the same demo written by Tensorflowjs only in my web and mobile editable format. Click on the black box and change anything and 
+see if it works. If you like it, copy the code to your computer or Github. If it doesn't work refresh the page and start again
+</div><br>
+
+
+    
+<div id="myDiv4254Code"> 
+
+<input id="myButton4254" type=button value="Rocksetta converted Getting Started"  onclick="{
+async function myFirstTfjs() {
+
+  // Create a simple model.
+  
+  const model = tf.sequential();
+  model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+  
+  // Prepare the model for training: Specify the loss and the optimizer.
+  
+  model.compile({loss: 'meanSquaredError',
+                 optimizer: 'sgd',
+                 useBias: 'true'});
+                 
+  // Generate some synthetic data for training. (y = 2x - 1)
+  
+  const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
+  const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+  
+  // Train the model using the data.
+  
+  await model.fit(xs, ys, {epochs: 250});
+  
+  // Use the model to do inference on a data point the model hasn't seen.
+  // Perform within a tf.tidy block to perform cleanup on intermediate tensors.
+  
+  tf.tidy(() => {
+  
+    // Should print approximately 39.
+    
+    document.getElementById('myDiv4254').innerText += model.predict(
+        tf.tensor2d([20], [1, 1]));
+  });
+  
+  // Manually clean up the memory for these variables.
+  
+  xs.dispose();
+  ys.dispose();
+}
+
+myFirstTfjs();                                                    
+}"><br><br>
+
+</div>
+<div id='myDiv4254'>...</div><br>
+
+
+
+<input id="myUpdate4254" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea4254').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv4254Code').innerHTML =    myJoe 
+  document.getElementById('myButton4254').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea4254"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce4254){
+     myTextGrow('myTextarea4254', 'myDiv4254Code')
+     document.getElementById('myUpdat4254').style.visibility = 'visible'
+     myOnce4254 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce4254 = true    // so textareas are only clicked once
+
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
