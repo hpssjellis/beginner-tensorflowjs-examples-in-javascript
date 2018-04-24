@@ -15,7 +15,7 @@
 <!-- the online version that these examples were made with  
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.1"></script>
 -->
 
 
@@ -45,6 +45,65 @@
 The main github for these pages is at:
 <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">   https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript </a>
 <br>
+
+
+<a name="myEditable"></a>
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+   <ol> Most of the examples are in the following format:
+     <li> A description similar to these lines
+     <li> A button to click to see if the Javascript code works
+     <li> A textarea to click to see the working code  
+     <li> An expanding textarea, that you can right-click and select-all to copy the code into your text editor
+     <li> An edit button that shows after clicking the textarea and can dynamically make changes to any non-script tag enclosed Javascript
+  </ol>
+  
+  Go ahead, try editing something and click the Update and run button! It's a whole new way to program.
+</div><br>
+    
+    
+
+   
+
+
+<div id="myDiv123Code"> 
+
+<input id="myButton123" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv123'>...</div><br>
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}">
+
+<br>
+<textarea id="myTextarea123"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+<br><br><hr><br><br><br><br>
+
+
+
+
+
 <br><br><h2>  Following is my main table of Pure Javascript, Machine Learning, no need to compile, web examples:</h2><br>
 
 
@@ -90,68 +149,6 @@ The main github for these pages is at:
 </table><br><br>
 
 
-
-
-    
-
-<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-   <ol> Most of the examples are in the following format:
-     <li> A description similar to these lines
-     <li> A button to click to see if the Javascript code works
-     <li> A textarea to click to see the working code  
-     <li> An expanding textarea, that you can right-click and select-all to copy the code into your text editor
-     <li> An edit button that shows after clicking the textarea and can dynamically make changes to any non-script tag enclosed Javascript
-  </ol>
-</div><br>
-    
-    
-
-    
-
-
-
-
-
-
-
-
-
-<a name="myEditable"></a>
-
-<div id="myDiv123Code"> 
-
-<input id="myButton123" type=button value="Tensorflowjs Version?" onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
-
-</div>
-<div id='myDiv123'>...</div><br>
-
-<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
-   // first remove first and last line since they are injected
-  myFred = document.getElementById('myTextarea123').value.split('\n')
-  myFred.pop()
-  myFred.push('')
-  myFred.shift()
-  myFred.shift()
-  myJoe = myFred.join('\n')
-  document.getElementById('myDiv123Code').innerHTML =    myJoe 
-  document.getElementById('myButton123').click()
-                                             
-}">
-
-<br>
-<textarea id="myTextarea123"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
-  if (myOnce123){
-     myTextGrow('myTextarea123', 'myDiv123Code')
-     document.getElementById('myUpdate123').style.visibility = 'visible'
-     myOnce123 = false
-  }
-}">
-Click here to see the working HTML code.
-</textarea><br>
-
-<br><br><hr><br><br><br><br>
 
 
 
@@ -353,7 +350,7 @@ function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
    var myCursorEnd = document.getElementById(myT).selectionEnd
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
