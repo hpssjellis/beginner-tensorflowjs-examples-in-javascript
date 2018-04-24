@@ -44,6 +44,7 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 A very simple xOr Neural Network using Tensorflowjs Layers
+Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network 
 </div><br>
 
 
@@ -62,7 +63,7 @@ Batches <input id="myInNumber" type=number value=3000>
     const model = tf.sequential();
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hiden layer nodes to 1 output
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
 
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 
