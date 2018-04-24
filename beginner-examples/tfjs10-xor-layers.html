@@ -74,10 +74,10 @@ Batches <input id="myInNumber" type=number value=3000>
 
     const myPredictArray = await model.predict(training_data).dataSync()
                                                                                     
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0] +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1] +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2] +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3] +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }
 
