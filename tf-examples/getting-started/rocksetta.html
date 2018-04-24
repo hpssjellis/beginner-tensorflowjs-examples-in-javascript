@@ -82,6 +82,7 @@ async function myFirstTfjs() {
   
     // Should print approximately 39.
     
+    document.getElementById('myDiv4254').innerText = 'Should print approximately 39<br>'
     document.getElementById('myDiv4254').innerText = model.predict(tf.tensor2d([20], [1, 1]));
   });
   
