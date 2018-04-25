@@ -3,6 +3,13 @@
 # Tensorflowjs examples made to work without compiling or using modules (which cause CORS issues if used locally)
 
 
+
+The index.html for this page is at  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/index.html
+
+
+
+
 Main demo website for all my Tensorflowjs stuff at  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/
 
