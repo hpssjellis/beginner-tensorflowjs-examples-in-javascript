@@ -67,6 +67,11 @@ Batches <input id="myInNumber" type=number value=3000>
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
 
+/*                                                                                    
+activation ('elu'|'hardsigmoid'|'linear'|'relu'|'relu6'| 'selu'|'sigmoid'|'softmax'|'softplus'|'softsign'|'tanh'|string) 
+If unspecified, no activation is applied. Optional                                                                                                                                                                        
+*/
+                                                                                                                                                                          
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
