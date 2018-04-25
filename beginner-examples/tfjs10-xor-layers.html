@@ -67,14 +67,18 @@ Batches <input id="myInNumber" type=number value=3000>
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
 
-/*                                                                                    
-activation : 'elu'|'hardsigmoid'|'linear'|'relu'|'relu6'| 'selu'|'sigmoid'|'softmax'|'softplus'|'softsign'|'tanh'  
+/*  
+                                                                                    
+activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
+             'softplus'  |   'softsign'   |  'tanh'  
 If unspecified, no activation is applied. Optional   
+
                                                                                     
-  loss : 'mean_squared_error' | 'mean_absolute_error' | 'mean_absolute_percentage_error' | 'mean_squared_logarithmic_error' | 
+loss : 'mean_squared_error' | 'mean_absolute_error' | 'mean_absolute_percentage_error' | 'mean_squared_logarithmic_error' | 
          'squared_hinge' | 'hinge' | 'categorical_hinge' | 'logcosh'                                                                                 
+ 
                                                                                     
- optimizer: 'sgd' |   'rmsprop'     |  'adagrad'    |  'adadelta'    |  'adam'    |  'adamax'   |  'nadam'    |  'tfoptimizer'     
+optimizer: 'sgd' |   'rmsprop'     |  'adagrad'    |  'adadelta'    |  'adam'    |  'adamax'   |  'nadam'    |  'tfoptimizer'     
                                                                                 
 */
                                                                                                                                                                           
