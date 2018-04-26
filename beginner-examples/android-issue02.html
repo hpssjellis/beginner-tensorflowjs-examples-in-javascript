@@ -65,7 +65,7 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
     const yTrue = tf.tensor1d([4])                                                                
     const yPred = tf.tensor1d([7])  
     const MAX_VALUE = 9   
-    const EPSILON   = 0.0003                                                                                        
+    const EPSILON   =  1.1920928955078125e-7;                                                                                        
                                                                                                       
     //var diff = tf.subtract(yTrue, yPred);                                                        
     var diff = tf.sub(yTrue, yPred);
