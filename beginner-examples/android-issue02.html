@@ -62,7 +62,7 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
 <input id="myButton123" type="button" value="Android Issue Tensorflowjs Simplified update 02" onclick="{
                                                                                                       
     document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'                                                                                                      
-    const yTrue = tf.tensor1d([4])                                                                
+    const yTrue = tf.tensor2d([4,3], [2,1])                                                                
     const yPred = tf.tensor1d([7])  
     const MAX_VALUE = 9000   
     const EPSILON   =  1.1920928955078125e-7;                                                                                        
