@@ -54,7 +54,7 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
 Batches <input id="myInNumber" type=number value=50> 
  
 <input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified"  onclick="{
-  document.getElementById('myDiv123').innerHTML = 'Expecting a number not NaN <br>'
+  document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN <br>'
  
                                                                                                                                                        
   async function myGo() {
@@ -66,12 +66,17 @@ Batches <input id="myInNumber" type=number value=50>
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
     var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
-    const myPredictArray = await model.predict(training_data).data()
-                                                                                    
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
-                                                                            
+                                                                                            
+    for (myCount = 0;   myCount <=10; myCount){                                                                                        
+       var myPredictArray = await model.predict(training_data).data()                                                                                    
+       document.getElementById('myDiv123').innerHTML += myPredictArray[0].toFixed(4) +'<br>'
+    }                                                                        
   }
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+                                                                                            
+                                                                                            
+                                                                                            
+  myGo()  // run the function
+                                                                                            
 }"><br><br>
 
 </div>
