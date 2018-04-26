@@ -143,6 +143,24 @@ Click here to see the working HTML code.
 
 
 
+<pre>
+ Note: from https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3/dist/tf.js
+ This code always does NaN on Android:
+ 
+ 
+    var diff = K.subtract(yTrue, yPred);
+    var clippedTrue = K.clip(K.abs(yTrue), K.epsilon(), Number.MAX_VALUE);
+    var absResult = K.abs(K.divide(diff, clippedTrue));
+    return K.scalarTimesArray(K.getScalar(100.0), K.mean(absResult, -1));
+ 
+ So just have to find out which part of that is the problem :)
+ 
+ </pre>
+ 
+ 
+
+
+
 This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
 this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
 this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
