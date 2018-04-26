@@ -53,49 +53,23 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
     
 <div id="myDiv123Code"> 
 
-Batches <input id="myInNumber" type=number value=50> 
- 
-<input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified"  onclick="{
-  document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'
- 
-                                                                                                                                                       
-  async function myGo() {
-    const model = tf.sequential();
-    model.add(tf.layers.dense({inputShape: [2],  units: 1, activation: 'sigmoid',}) );  
- 
-                                                                                                                                                                          
-    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
-                                                                                            
 
-/*  
-If unspecified, no activation is applied.
-                                                                                    
-activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
-             'softplus'  |   'softsign'   |  'tanh'  
-                                                                                    
-                                                                                      
-                                                               
-loss : 'meanSquaredError'    |     'meanAbsoluteError'    |    'meanAbsolutePercentageError'    |     'meanSquaredLogarithmicError'    |     
-'squaredHinge'    |     'hinge'    |     'categoricalHinge'    |     'logcosh'    |     'categoricalCrossentropy'    |     
-'sparseCategoricalCrossentropy'    |     'binaryCrossentropy'    |     'kullbackLeiblerDivergence'    |     'poisson'    |     
-'cosineProximity'                                                                                            
  
-                                                                                            
-                                                                                            
-                                                                                    
-optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'       
-                                                                                
-*/                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-    const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
-    const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
-                                                                                                                                                                                 
-    const myPredictArray = await model.predict(training_data).data()                                                                                    
-    document.getElementById('myDiv123').innerHTML += myPredictArray[0].toFixed(4) +'<br>'
+<input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified update 02"  onclick="{
+   document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'
+                                                                                                      
+    const yTrue = tf.tensor1D([4])                                                                
+    const yPred = tf.tensor1D([7])  
+    const Number.MAX_VALUE = 9                                                                                             
+                                                                                                      
+    var diff = tf.subtract(yTrue, yPred);
+    var clippedTrue = tf.clip(K.abs(yTrue), tf.epsilon(), Number.MAX_VALUE);
+    var absResult = tf.abs(tf.divide(diff, clippedTrue));
+    const myReturn tf.scalarTimesArray(tf.getScalar(100.0), tf.mean(absResult, -1));
+            
+                                                                                                      
+                                                                                                      
+    document.getElementById('myDiv123').innerHTML += myReturn.dataSync().toFixed(4) +'<br>'
                                                                       
   }
                                                                                             
