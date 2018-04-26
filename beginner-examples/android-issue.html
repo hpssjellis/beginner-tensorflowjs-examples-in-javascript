@@ -44,7 +44,9 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-In it's simplist form this is the issue I am having using Tensorflowjs on my Android 8.0.0 Phone
+In it's simplist form this is the issue I am having using Tensorflowjs on my Android 8.0.0 Phone<br>
+ 
+ If I replace the loss : 'meanSquaredError' with 'hinge' I don't get NaN
 </div><br>
 
 
@@ -54,7 +56,7 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
 Batches <input id="myInNumber" type=number value=50> 
  
 <input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified"  onclick="{
-  document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN <br>'
+  document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'
  
                                                                                                                                                        
   async function myGo() {
@@ -63,6 +65,28 @@ Batches <input id="myInNumber" type=number value=50>
  
                                                                                                                                                                           
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+                                                                                            
+
+/*  
+If unspecified, no activation is applied.
+                                                                                    
+activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
+             'softplus'  |   'softsign'   |  'tanh'  
+                                                                                    
+                                                                                    
+loss : 'meanSquaredError' |  'hinge'  | 'logcosh'    | 'meanAbsoluteError'  |  'meanAbsolutePercentageError'  |
+       'meanSquaredLogarithmicError'  |  'squaredHinge'   |  'poisson'   |  'kullbackLeiblerDivergence'   |  'cosineProximity'    
+                                                               
+                                                                                   
+ 
+                                                                                    
+optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'        
+                                                                                
+*/                                                                                            
+                                                                                            
+                                                                                            
+                                                                                            
+                                                                                            
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
     var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
