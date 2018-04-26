@@ -93,7 +93,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'
 
     var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
 
-    const myPredictArray = await model.predict(training_data).dataSync()
+    const myPredictArray = await model.predict(training_data).data()
                                                                                     
     document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
