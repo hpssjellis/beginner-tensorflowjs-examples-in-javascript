@@ -54,7 +54,7 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
     const myTensor = tf.scalar(2.3) 
     document.getElementById('myDiv123').innerHTML = 'Outputs the scalar aprozimately 2.3 which works fine on everything'                   
-    document.getElementById('myDiv123').innerHTML += 'except Android 8.0.0 which gets NaN --> ' + myTensor.dataSync()                                                           
+    document.getElementById('myDiv123').innerHTML += 'except Android 8.0.0 which gets NaN --> ' + myTensor.dataSync().toFixed(4)                                                           
 }"><br><br>
 
 </div>
