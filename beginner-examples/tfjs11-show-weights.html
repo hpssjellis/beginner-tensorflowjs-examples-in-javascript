@@ -103,8 +103,13 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     
     
     document.getElementById('myDiv123').innerHTML += 'Show the number of layers ' + model.layers.length + '<br>'
+   
+    for (myIt=0; myIt <= model.layers.length; myIt++ ){
+      
+        document.getElementById('myDiv123').innerHTML += 'Show the number of layers ' + model.layers.getWeights() + '<br><br>'                                                                              
+                                                                                    
+}                                                                                
 
-    model.layers[0].getWeights()[0].print()
     
     
     
