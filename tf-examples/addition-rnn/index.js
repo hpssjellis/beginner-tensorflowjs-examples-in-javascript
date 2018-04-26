@@ -235,7 +235,7 @@ function createAndCompileModel(
       {layer: tf.layers.dense({units: vocabularySize})}));
   model.add(tf.layers.activation({activation: 'softmax'}));
   model.compile({
-    loss: 'hinge',
+    loss: 'categoricalCrossentropy',
     optimizer: 'adam',
     metrics: ['accuracy']
   });
