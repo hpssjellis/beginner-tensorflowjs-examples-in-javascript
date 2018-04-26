@@ -51,10 +51,27 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
     
 <div id="myDiv123Code"> 
 
-<input id="myButton123" type=button value="Android Phone Issue NaN"  onclick="{
-    const myTensor = tf.scalar(2.3) 
-    document.getElementById('myDiv123').innerHTML = 'Outputs the scalar aprozimately 2.3 which works fine on everything'                   
-    document.getElementById('myDiv123').innerHTML += 'except Android 8.0.0 which gets NaN --> ' + myTensor.dataSync().toFixed(4)                                                           
+Batches <input id="myInNumber" type=number value=50> 
+ 
+<input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified"  onclick="{
+  document.getElementById('myDiv123').innerHTML = 'Expecting a number not NaN <br>'
+ 
+                                                                                                                                                       
+  async function myGo() {
+    const model = tf.sequential();
+    model.add(tf.layers.dense({inputShape: [2],  units: 1, activation: 'sigmoid',}) );  
+ 
+                                                                                                                                                                          
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+    const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
+    const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
+    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+    const myPredictArray = await model.predict(training_data).data()
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+                                                                            
+  }
+  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 }"><br><br>
 
 </div>
