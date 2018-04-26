@@ -17,3 +17,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 tfjs02-basics.html  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs02-basics.html
+
+
+
+working on weights  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs11-show-weights.html
+
