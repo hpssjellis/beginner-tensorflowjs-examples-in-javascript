@@ -55,21 +55,29 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
 
 
  
-<input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified update 02"  onclick="{
+
+
+
+ 
+<input id="myButton123" type="button" value="Android Issue Tensorflowjs Simplified update 02" onclick="{
                                                                                                       
     document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'                                                                                                      
     const yTrue = tf.tensor1d([4])                                                                
     const yPred = tf.tensor1d([7])  
-    const MAX_VALUE = 9                                                                                             
+    const MAX_VALUE = 9   
+    const EPSILON   = 0.0003                                                                                        
                                                                                                       
-    var diff = tf.subtract(yTrue, yPred);
-    var clippedTrue = tf.clip(K.abs(yTrue), tf.epsilon(), MAX_VALUE);
-    var absResult = tf.abs(tf.divide(diff, clippedTrue));
-    const myReturn = tf.scalarTimesArray(tf.getScalar(100.0), tf.mean(absResult, -1));
+    //var diff = tf.subtract(yTrue, yPred);                                                        
+    var diff = tf.sub(yTrue, yPred);
+   // var clippedTrue = tf.clip(tf.abs(yTrue), tf.epsilon(), MAX_VALUE);
+    var clippedTrue = tf.clipByValue(tf.abs(yTrue), EPSILON , MAX_VALUE);
+    var absResult = tf.abs(tf.div(diff, clippedTrue));
+    const myReturn = tf.mul(tf.scalar(100.0), tf.mean(absResult, -1));
                                                                                                                                                                                                                   
-    document.getElementById('myDiv123').innerHTML += myReturn.dataSync().toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += myReturn.dataSync()[0].toFixed(4) +'<br>'
                                                                                     
 }"><br><br>
+
 
 </div>
 <div id='myDiv123'>...</div><br>
