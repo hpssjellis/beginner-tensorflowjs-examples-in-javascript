@@ -103,15 +103,14 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
          // update textarea                                                                           
-       document.getElementById('myArea01').value = 'L'+model.layers[myIt].getWeights()                                                                  
+       document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()                                                                  
                                                                          
     }                                                                                
    document.getElementById('myArea01').value = model.layers[0].getWeights()       
   // model.layers[0].setWeights(document.getElementById('myArea01').value)                                                                                        
    //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                 
     
-    
-    document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
+                                                                                 
   }
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 }"><br><br>
