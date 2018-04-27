@@ -161,6 +161,7 @@ Batches <input id="myInNumber" type=number value=50>
   myTemp    =  myTemp.replace(/ShapeBias/gi, ', ShapeBias\r\n\r\n');    
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
+  document.getElementById('myArea02').value +='\r\n'
 
  //  document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
  // document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '|')                                   
