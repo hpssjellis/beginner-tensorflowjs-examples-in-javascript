@@ -96,23 +96,24 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     //}        
             
                                                                                     
-   myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)   
+    myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)   
     myEntry   = []
-   // alert(myRowsArray)                                                                                
- for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
+    myArraySpot = 0
+                                                                               
+    for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
       if (myRowsArray[myLoop].includes(',')){
-          myEntry[myLoop] =  myRowsArray[myLoop].split(',')                                                                        
-             if (isNaN(myEntry[myEntry[myLoop].length-1])){   
-                 alert(myEntry[myEntry[myLoop].length-1])                                                                          
-             }  // end if words
-                                                                   
-                                                                                                                                                                     
+          myEntry[myArraySpot] =  myRowsArray[myLoop].split(',')  
+                                                                                    
+          if (isNaN(myEntry[myEntry[myArraySpot].length-1])){   
+              alert(myEntry[myEntry[myArraySpot].length-1])                                                                          
+          }  // end if words
+          myArraySpot +=1                                                                                                                                                                                                                              
       }  // end if comma
-     
+
  }    // end for                                                                            
                                                                                     
-//alert(myEntry.length)                                                               
-//alert(JSON.stringify(myEntry))                                                              
+alert(myEntry.length)                                                               
+alert(JSON.stringify(myEntry))                                                              
 
 //if (!fields || fields.length === 0)                                                                                    
                                                                                     
