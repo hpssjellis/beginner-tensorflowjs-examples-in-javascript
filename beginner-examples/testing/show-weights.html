@@ -78,7 +78,7 @@ Batches <input id="myInNumber" type=number value=50>
     myArraySpot = 0
     console.log(myRowsArray)                                                                       
     for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){   // not sure why not -1 on length
-      if (myRowsArray[myLoop].includes(',')){
+      if (myRowsArray[myLoop].length >= 2){
           myEntry[myArraySpot] =  myRowsArray[myLoop].split(',')  
                                                                                     
           if (isNaN(myEntry[myEntry[myArraySpot].length-1])){   
@@ -90,7 +90,7 @@ Batches <input id="myInNumber" type=number value=50>
               document.getElementById('myDiv123').innerHTML += myEntry[myArraySpot] + '<br>'                                                                          
            }
           myArraySpot +=1                                                                                                                                                                                                                              
-       }  // end if comma
+       }  // end if data in array
 
      }    // end for                                                                            
                                                                                     
