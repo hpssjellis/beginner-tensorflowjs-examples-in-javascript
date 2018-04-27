@@ -119,11 +119,16 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  <textarea id="myArea01" rows=5 cols=70 wrap=false></textarea>
  
  <input type=button value=convert1 onclick="{
-
+//.Replace("\r\n", "\\r\\n")
   myTemp    =  document.getElementById('myArea01').value.replace(/Layer:/gi, '!');    
   myTemp    =  myTemp.replace(/Tensor/gi, '');    
-  myTemp    =  myTemp.replace(/ /gi, '');    
-  document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '|')
+  myTemp    =  myTemp.replace(/ /gi, '');   
+                           
+                          
+                           
+                           
+ // document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '|')
+  document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '\\r\\n ')
  //  document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
                                    
                                     
