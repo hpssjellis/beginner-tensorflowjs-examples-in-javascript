@@ -135,10 +135,11 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + model.layers[myIt].getWeights() + '<br>'    
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
-         // update textarea                                                                           
-       document.getElementById('myArea01').value += '\n\nShape0: ' + model.layers[myIt].getWeights()[0].shape +'\n'     
-       document.getElementById('myArea01').value += 'Shape1: ' + model.layers[myIt].getWeights()[1].shape  +'\n\n'         
-       document.getElementById('myArea01').value += 'Layer:' + model.layers[myIt].getWeights()                                                                 
+         // update textarea                                  
+       document.getElementById('myArea01').value += 'Layer:' + myIt +'\n\n'                                                                       
+       document.getElementById('myArea01').value += '\n\nShape 0: ' + model.layers[myIt].getWeights()[0].shape +'\n'     
+       document.getElementById('myArea01').value += 'Shape 1: ' + model.layers[myIt].getWeights()[1].shape  + '\n\n'         
+       document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()                                                                 
                                                                          
     }   
                                                                                     
