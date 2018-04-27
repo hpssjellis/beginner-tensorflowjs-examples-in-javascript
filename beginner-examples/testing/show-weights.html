@@ -103,7 +103,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
          // update textarea                                                                           
-       document.getElementById('myArea01').value += 'Layer:'+model.layers[myIt].getWeights()                                                                  
+       document.getElementById('myArea01').value += 'Layer:' + model.layers[myIt].getWeights()                                                                  
                                                                          
     }   
                                                                                     
@@ -120,7 +120,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
   myTemp    =  document.getElementById('myArea01').value.replace('/\r?\n|\r/g','')
-  myTemp    =  myTemp.replace(/Layer:/gi, '!\r\n ');                                            
+  myTemp    =  myTemp.replace(/Layer:/gi, '\r\nLayer\r\n ');                                            
   myTemp    =  myTemp.replace(/Tensor/gi, '');    
   myTemp    =  myTemp.replace(/ /gi, '');   
                                                 
