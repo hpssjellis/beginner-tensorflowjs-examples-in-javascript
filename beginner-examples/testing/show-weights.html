@@ -158,10 +158,11 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
   myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                                         
   myTemp    =  myTemp.replace(/Layer/gi, ' Layer\r\n\r\n');                                            
   myTemp    =  myTemp.replace(/Tensor/gi, 'Tensor\r\n\r\n');                                          
-  myTemp    =  myTemp.replace(/~~~/gi, '\r\n\r\n');                                   
+  myTemp    =  myTemp.replace(/~~~/gi, '\r\n\r\n');   
+                                            
+  myTemp    =  myTemp.replace(/ /gi, '');   
   myTemp    =  myTemp.replace(/ShapeKernel/gi, ' ShapeKernel\r\n\r\n');                                 
   myTemp    =  myTemp.replace(/ShapeBias/gi, ' ShapeBias\r\n\r\n');    
-  myTemp    =  myTemp.replace(/ /gi, '');   
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
 
