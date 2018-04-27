@@ -119,9 +119,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  <textarea id="myArea01" rows=5 cols=70 wrap=false></textarea>
  
  <input type=button value=convert1 onclick="{
-   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/g, '');      
-   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/[/g, 'K');  // kernel what about weights        
-   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/]/g, '');                                    
+   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');      
+                                   
                                            
 }"><br>
  
