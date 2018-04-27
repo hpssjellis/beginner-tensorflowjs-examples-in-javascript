@@ -54,6 +54,7 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
 
 Batches <input id="myInNumber" type=number value=50> 
  
+ 
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
   document.getElementById('myDiv123').innerHTML = 'Takes about 10 seconds to train and calculate the XOR possible outputs<br>Expecting closs to 0, 1, 1, 0 for inputs [0,0],[0,1],[1,0],[1,1]<br><br>'
@@ -106,11 +107,15 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
    
     for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
       
-        document.getElementById('myDiv123').innerHTML += 'Layer #' + myIt + ' = ' + model.layers[myIt].getWeights() + '<br><br>'                                                                              
+        document.getElementById('myDiv123').innerHTML += 'Layer #' + myIt + ' = ' + model.layers[myIt].getWeights() + '<br><br>'   
+                                                                       
                                                                                     
     }                                                                                
 
-    
+   document.getElementById('myArea01').value = model.layers[0].getWeights()       
+
+   document.getElementById('myArea01').value = model.layers[0].setWeights()                                                                                        
+                                                                                    
     
     
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
@@ -120,6 +125,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
 
 }"><br><br>
 
+ <textarea id="myArea01" rows=5 cols=70 wrap=false></textarea>
+ 
+ 
 </div>
 <div id='myDiv123'>...</div><br>
 
