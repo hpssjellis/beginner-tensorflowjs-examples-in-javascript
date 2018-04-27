@@ -139,7 +139,12 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  <textarea id="myArea03" rows=5 cols=70 wrap=false></textarea>
  
    <input type=button value=upload onclick="{
-  // document.getElementById('myArea03').value     =  document.getElementById('myArea02').value                                     
+    for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
+      
+           alert(myIt)                                                             
+      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()                                                                  
+                                                                         
+    }                              
                                            
 }"><br>
  
