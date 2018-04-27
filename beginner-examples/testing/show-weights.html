@@ -98,7 +98,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     //}        
                                                                                     
     for (myLoop = 0; myLoop <= document.getElementById('myArea03').rows-1; myLoop++){
-        alert(myLoop)                                                                
+       // alert(myLoop)  
+       alert(document.getElementById('myArea01').row[myLoop].value)
  }                                                                                
                                                                                     
                                                                                     
@@ -167,7 +168,26 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
 }"><br>
  
  
- <textarea id="myArea03" rows=20 cols=70 wrap=false></textarea>
+ <textarea id="myArea03" rows=20 cols=70 wrap=false>
+Tensor
+
+0.4846097,-0.0115162,-0.9841338,
+-1.1753453,-0.0210868,0.1518525,
+Tensor
+
+-0.0523798,-0.056575,-0.0572705
+
+
+Layer
+
+Tensor
+
+-0.0946367,
+-0.342776,
+-0.9755542,
+Tensor
+
+0.0577271</textarea>
  
 
  
