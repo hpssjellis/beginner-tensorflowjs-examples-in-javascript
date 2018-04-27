@@ -99,8 +99,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)   
     myEntry   = []
     myArraySpot = 0
-                                                                               
-    for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
+       console.log(myRowsArray)                                                                       
+    for (myLoop = 0; myLoop <= myRowsArray.length; myLoop++){   // not sure why not -1 on length
       if (myRowsArray[myLoop].includes(',')){
           myEntry[myArraySpot] =  myRowsArray[myLoop].split(',')  
                                                                                     
@@ -120,7 +120,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
 //alert(myEntry.length)                                                               
 //alert(JSON.stringify(myEntry))  
                                                                                     
-                                                                                    
+    console.log(myEntry)                                                                                    
 
   document.getElementById('myDiv123').innerHTML += '<hr>'                                                                                       
 
