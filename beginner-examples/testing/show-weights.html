@@ -105,8 +105,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
          // update textarea                                                                           
        document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()                                                                  
                                                                          
-    }                                                                                
-   document.getElementById('myArea01').value = model.layers[0].getWeights()       
+    }   
+                                                                                    
+   //document.getElementById('myArea01').value = model.layers[0].getWeights()       
   // model.layers[0].setWeights(document.getElementById('myArea01').value)                                                                                        
    //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                 
     
