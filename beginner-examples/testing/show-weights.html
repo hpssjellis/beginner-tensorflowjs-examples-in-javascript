@@ -120,13 +120,14 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
 
-  myTemp    =  document.getElementById('myArea01').value.replace(/Layer:/gi, '!');    
+  myTemp    =  document.getElementById('myArea01').value.replace(/Layer:/gi, '!');                                            
+  myTemp    =  myTemp.replace('\\r\\n','')
   myTemp    =  myTemp.replace(/Tensor/gi, '');    
   myTemp    =  myTemp.replace(/ /gi, '');   
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '\\r\\n ')
 
-                                            //  document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
+ //  document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
  // document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '|')                                   
                                     
 }"><br>
