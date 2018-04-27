@@ -136,7 +136,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
          // update textarea                                  
-       document.getElementById('myArea01').value += 'Layer:' + myIt +'\n\n'                                                                       
+       document.getElementById('myArea01').value += '\n\nLayer:' + myIt +'\n\n'                                                                       
        document.getElementById('myArea01').value += '\n\nShapeKernel: ' + model.layers[myIt].getWeights()[0].shape +'\n'     
        document.getElementById('myArea01').value += 'ShapeBias: ' + model.layers[myIt].getWeights()[1].shape  + '\n\n'         
        document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()                                                                 
