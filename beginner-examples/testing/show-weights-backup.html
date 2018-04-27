@@ -1,6 +1,8 @@
 
 
 
+
+
 <!--   *******************************Start: What source js file to use? ****************************************************   -->
 
 
@@ -100,7 +102,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
    // alert(myRowsArray)                                                                                
  for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
       if (myRowsArray[myLoop].includes(',')){
-          alert(myRowsArray[myLoop])                                                                          
+          //alert(myRowsArray[myLoop])                                                                          
       }
      
  }                                                                                
@@ -133,10 +135,11 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + model.layers[myIt].getWeights() + '<br>'    
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
-         // update textarea      
-        document.getElementById('myArea01').value  += 'Shape0:' model.layers[myIt].getWeights()[0].shape  +'\n'       
-        document.getElementById('myArea01').value  += 'Shape1:' model.layers[myIt].getWeights()[1].shape  +\n\n'                                
-       document.getElementById('myArea01').value += 'Layer:' + model.layers[myIt].getWeights()                                                                  
+         // update textarea                                  
+       document.getElementById('myArea01').value +=  '~~~'+myIt +' Layer\n\n'                                                                       
+       document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()[0].shape + ' ShapeKernel\n'     
+       document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()[1].shape + ' ShapeBias\n\n'         
+       document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()                                                                 
                                                                          
     }   
                                                                                     
@@ -152,10 +155,15 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  <textarea id="myArea01" rows=20 cols=70 wrap=false></textarea>
  
  <input type=button value=convert1 onclick="{
-  myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                                         
-  myTemp    =  myTemp.replace(/Layer:/gi, '\r\n\r\n\r\nLayer\r\n');                                            
-  myTemp    =  myTemp.replace(/Tensor/gi, '\r\nTensor\r\n');    
-  myTemp    =  myTemp.replace(/ /gi, '');   
+  myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                        
+  myTemp    =  myTemp.replace(/,Tensor/gi, '\r\n\r\nTensor\r\n');                           
+  myTemp    =  myTemp.replace(/Tensor/gi, 'Tensor\r\n');                                                       
+  myTemp    =  myTemp.replace(/~~~/gi, '\r\n\r\n\r\n\r\n');   
+                                            
+  myTemp    =  myTemp.replace(/ /gi, '');                                       
+  myTemp    =  myTemp.replace(/Layer/gi, ', Layer\r\n\r\n');                         
+  myTemp    =  myTemp.replace(/ShapeKernel/gi, ', ShapeKernel\r\n\r\n');                                 
+  myTemp    =  myTemp.replace(/ShapeBias/gi, ', ShapeBias\r\n\r\n');    
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
 
