@@ -89,12 +89,21 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
 */
    
                                                                                     
-       for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
+       //for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
       
-           alert(myIt)                                                             
-      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()                                                                  
+         //  alert(myIt)                                                             
+      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()    
+    // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);   
                                                                          
-    }                                                                                   
+    //}        
+                                                                                    
+    for (myLoop = 0; myLoop <= document.getElementById('myArea03').rows-1; myLoop++){
+        alert(myLoop)                                                                
+ }                                                                                
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
                                                                                     
                                                                                     
                                                                                     
@@ -127,7 +136,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
                                                                                     
    //document.getElementById('myArea01').value = model.layers[0].getWeights()       
   // model.layers[0].setWeights(document.getElementById('myArea01').value)                                                                                        
-   //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                 
+                                                                              
     
                                                                                  
   }
@@ -138,8 +147,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
   myTemp    =  document.getElementById('myArea01').value.replace('/\r?\n|\r/g','')
-  myTemp    =  myTemp.replace(/Layer:/gi, '\r\n\r\nLayer\r\n\r\n');                                            
-  myTemp    =  myTemp.replace(/Tensor/gi, '\r\n\r\nTensor\r\n\r\n');    
+  myTemp    =  myTemp.replace(/Layer:/gi, '\r\n\r\nLayer\r\n');                                            
+  myTemp    =  myTemp.replace(/Tensor/gi, '\r\n\r\nTensor\r\n');    
   myTemp    =  myTemp.replace(/ /gi, '');   
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
