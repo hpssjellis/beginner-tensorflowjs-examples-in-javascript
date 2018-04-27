@@ -102,7 +102,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
    // alert(myRowsArray)                                                                                
  for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
       if (myRowsArray[myLoop].includes(',')){
-          alert(myRowsArray[myLoop])                                                                          
+          //alert(myRowsArray[myLoop])                                                                          
       }
      
  }                                                                                
@@ -136,7 +136,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
          // update textarea                                                                           
-       document.getElementById('myArea01').value += 'Layer:' + model.layers[myIt].getWeights()                                                                  
+       document.getElementById('myArea01').value += 'Shape0:' + model.layers[myIt].getWeights()[0].shape      
+       document.getElementById('myArea01').value += 'Shape1:' + model.layers[myIt].getWeights()[1].shape        
+       document.getElementById('myArea01').value += 'Layer:' + model.layers[myIt].getWeights()                                                                 
                                                                          
     }   
                                                                                     
