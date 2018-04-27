@@ -158,7 +158,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
   myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                        
   myTemp    =  myTemp.replace(/,Tensor/gi, '\r\n\r\nTensor\r\n');                           
   myTemp    =  myTemp.replace(/Tensor/gi, 'Tensor\r\n');                                                       
-  myTemp    =  myTemp.replace(/~~~/gi, '\r\n\r\n');   
+  myTemp    =  myTemp.replace(/~~~/gi, '\r\n\r\n\r\n\r\n');   
                                             
   myTemp    =  myTemp.replace(/ /gi, '');                                       
   myTemp    =  myTemp.replace(/Layer/gi, ', Layer\r\n\r\n');                         
