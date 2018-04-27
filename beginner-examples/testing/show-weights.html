@@ -120,9 +120,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
 
-                                            
-   //document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
-   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor\/[\[\]]/gi, '');    
+  myTemp    =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
+  document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, 'K')
+ //  document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
                                    
                                     
 }"><br>
