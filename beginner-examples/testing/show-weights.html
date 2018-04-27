@@ -137,8 +137,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
           
          // update textarea                                  
        document.getElementById('myArea01').value += 'Layer:' + myIt +'\n\n'                                                                       
-       document.getElementById('myArea01').value += '\n\nShape 0: ' + model.layers[myIt].getWeights()[0].shape +'\n'     
-       document.getElementById('myArea01').value += 'Shape 1: ' + model.layers[myIt].getWeights()[1].shape  + '\n\n'         
+       document.getElementById('myArea01').value += '\n\nShapeKernel: ' + model.layers[myIt].getWeights()[0].shape +'\n'     
+       document.getElementById('myArea01').value += 'ShapeBias: ' + model.layers[myIt].getWeights()[1].shape  + '\n\n'         
        document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()                                                                 
                                                                          
     }   
