@@ -93,7 +93,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
       
          //  alert(myIt)                                                             
       // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()    
-    // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);   
+ 
                                                                          
     //}        
             
@@ -107,16 +107,20 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
              if (isNaN(myEntry[myEntry[myLoop].length-1])){   
                    // alert(myEntry[myEntry[myLoop].length-1])
                     myEntry[myLoop].pop() 
-                   alert(myEntry[myLoop])
+                   // alert(myEntry[myLoop])
                                                                                     
              }                                                                      
       }
      
  }                                                                                
                                                                                     
-                                                                                    
-                                                                                       
-                                                                                    
+alert(myEntry.length)                                                               
+alert(myEntry[0])                                                                  
+alert(myEntry[1])                                                                 
+alert(myEntry[2])                                                                 
+alert(myEntry[3])                                                                                  
+    // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                         
+       model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                   
                                                                                     
                                                                                     
                                                                                     
