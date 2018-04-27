@@ -103,12 +103,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
       if (myRowsArray[myLoop].includes(',')){
           myEntry[myLoop] =  myRowsArray[myLoop].split(',')                                                                        
              if (isNaN(myEntry[myEntry[myLoop].length-1])){   
-                   // alert(myEntry[myEntry[myLoop].length-1])
-                    myEntry[myLoop].pop() 
-                   // alert(myEntry[myLoop])                                                                       
+                    myEntry[myLoop].pop()                                                                       
              }  // end if words
-             if (!myEntry[myLoop] || myEntry[myLoop].length === 0){                                                                         
-            // if (myEntry[myLoop] == null){
+             if ((!myEntry[myLoop]) || (myEntry[myLoop].length === 0)){                                                                         
                  alert(myEntry[myLoop])                                                                   
              }  // end if underfined                                                                     
                                                                                                                                                                      
