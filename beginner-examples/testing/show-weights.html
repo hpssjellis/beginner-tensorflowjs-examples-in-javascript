@@ -66,40 +66,17 @@ Batches <input id="myInNumber" type=number value=50>
     const model = tf.sequential();
     model.add(tf.layers.dense({inputShape: [2],  units: 3, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [3], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
-/*  
-If unspecified, no activation is applied.
-                                                                                    
-activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
-             'softplus'  |   'softsign'   |  'tanh'  
-                                                                                    
-                                                                                                                                                   
-loss : 'meanSquaredError'    |     'meanAbsoluteError'    |    'meanAbsolutePercentageError'    |     'meanSquaredLogarithmicError'    |     
-'squaredHinge'    |     'hinge'    |     'categoricalHinge'    |     'logcosh'    |     'categoricalCrossentropy'    |     
-'sparseCategoricalCrossentropy'    |     'binaryCrossentropy'    |     'kullbackLeiblerDivergence'    |     'poisson'    |     
-'cosineProximity'                                                                                            
- 
-                                                                                            
-                                                                                            
-                                                                                    
-optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'       
-      
-                                                                                
-*/
+
    
-                                                                                    
-       //for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
-      
-         //  alert(myIt)                                                             
-      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()    
- 
+
                                                                          
-    //}        
+        
             
-     document.getElementById('myDiv123').innerHTML += '<hr>'                                                                                
+    document.getElementById('myDiv123').innerHTML += '<hr>'                                                                                
     myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)   
     myEntry   = []
     myArraySpot = 0
-       console.log(myRowsArray)                                                                       
+    console.log(myRowsArray)                                                                       
     for (myLoop = 0; myLoop <= myRowsArray.length; myLoop++){   // not sure why not -1 on length
       if (myRowsArray[myLoop].includes(',')){
           myEntry[myArraySpot] =  myRowsArray[myLoop].split(',')  
@@ -225,7 +202,8 @@ Tensor
 
 Tensor
 
--0.0576023</textarea>
+-0.0576023
+ </textarea>
  
 
  
