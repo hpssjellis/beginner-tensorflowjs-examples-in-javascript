@@ -136,7 +136,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
           
          // update textarea                                  
-       document.getElementById('myArea01').value +=  myIt +' Layer\n\n'                                                                       
+       document.getElementById('myArea01').value +=  '~~~'+myIt +' Layer\n\n'                                                                       
        document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()[0].shape + ' ShapeKernel\n'     
        document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()[1].shape + ' ShapeBias\n\n'         
        document.getElementById('myArea01').value +=  model.layers[myIt].getWeights()                                                                 
@@ -156,10 +156,11 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
   myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                                         
-  myTemp    =  myTemp.replace(/Layer/gi, 'Layer\r\n\r\n');                                            
-  myTemp    =  myTemp.replace(/Tensor/gi, 'Tensor\r\n\r\n');                                    
-  myTemp    =  myTemp.replace(/ShapeKernel/gi, 'ShapeKernel\r\n\r\n');                                 
-  myTemp    =  myTemp.replace(/ShapeBias/gi, 'ShapeBias\r\n\r\n');    
+  myTemp    =  myTemp.replace(/Layer/gi, ' Layer\r\n\r\n');                                            
+  myTemp    =  myTemp.replace(/Tensor/gi, 'Tensor\r\n\r\n');                                          
+  myTemp    =  myTemp.replace(/~~/gi, '\r\n\r\n');                                   
+  myTemp    =  myTemp.replace(/ShapeKernel/gi, ' ShapeKernel\r\n\r\n');                                 
+  myTemp    =  myTemp.replace(/ShapeBias/gi, ' ShapeBias\r\n\r\n');    
   myTemp    =  myTemp.replace(/ /gi, '');   
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
