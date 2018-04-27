@@ -96,10 +96,15 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);   
                                                                          
     //}        
+            
                                                                                     
-    for (myLoop = 0; myLoop <= document.getElementById('myArea03').rows-1; myLoop++){
-       // alert(myLoop)  
-       alert(document.getElementById('myArea01').row[myLoop].value)
+   myRowsArray  =   document.getElementById('myArea03').split('\n|\r\n')                                                                               
+    alert(myRowsArray)                                                                                
+    for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
+      if (myRowsArray[myLoop].includes(',')){
+          alert(myRowsArray[myLoop])                                                                          
+      }
+     
  }                                                                                
                                                                                     
                                                                                     
