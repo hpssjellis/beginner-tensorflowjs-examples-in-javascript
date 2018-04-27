@@ -107,7 +107,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
                     myEntry[myLoop].pop() 
                    // alert(myEntry[myLoop])                                                                       
              }  // end if words
-             if (myEntry[myLoop] == null){
+             if (!myEntry[myLoop] || myEntry[myLoop].length === 0){                                                                         
+            // if (myEntry[myLoop] == null){
                  alert(myEntry[myLoop])                                                                   
              }  // end if underfined                                                                     
                                                                                                                                                                      
@@ -118,7 +119,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
 alert(myEntry.length)                                                               
 alert(JSON.stringify(myEntry))                                                              
 
-                                                                                    
+//if (!fields || fields.length === 0)                                                                                    
                                                                                     
     // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                         
      //  model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                   
