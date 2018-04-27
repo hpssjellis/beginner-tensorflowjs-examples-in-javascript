@@ -152,7 +152,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  <textarea id="myArea01" rows=20 cols=70 wrap=false></textarea>
  
  <input type=button value=convert1 onclick="{
-  myTemp    =  document.getElementById('myArea01').value.replace('/\r?\n|\r/g','')
+  myTemp    =  document.getElementById('myArea01').value.replace('/\r\n|\n/g','')                                           
+ // myTemp    =  myTemp.replace('/\r?\n|\r/g','')
   myTemp    =  myTemp.replace(/Layer:/gi, '\r\n\r\n\r\nLayer\r\n');                                            
   myTemp    =  myTemp.replace(/Tensor/gi, '\r\nTensor\r\n');    
   myTemp    =  myTemp.replace(/ /gi, '');   
@@ -187,9 +188,7 @@ Layer
 
 Tensor
 
--0.0946367,
--0.342776,
--0.9755542,
+-0.0946367,-0.342776,-0.9755542,
 Tensor
 
 0.0577271</textarea>
