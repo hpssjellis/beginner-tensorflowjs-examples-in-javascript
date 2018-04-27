@@ -77,7 +77,7 @@ Batches <input id="myInNumber" type=number value=50>
     myEntry   = []
     myArraySpot = 0
     console.log(myRowsArray)                                                                       
-    for (myLoop = 0; myLoop <= myRowsArray.length; myLoop++){   // not sure why not -1 on length
+    for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){   // not sure why not -1 on length
       if (myRowsArray[myLoop].includes(',')){
           myEntry[myArraySpot] =  myRowsArray[myLoop].split(',')  
                                                                                     
@@ -202,7 +202,8 @@ Tensor
 
 Tensor
 
--0.0576023</textarea>
+-0.0576023
+ </textarea>
  
 
  
