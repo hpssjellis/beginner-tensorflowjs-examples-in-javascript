@@ -156,8 +156,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
   myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                                         
-  myTemp    =  myTemp.replace(/Layer:/gi, '\r\n\r\n\r\nLayer\r\n');                                            
-  myTemp    =  myTemp.replace(/Tensor/gi, '\r\nTensor\r\n');    
+  myTemp    =  myTemp.replace(/Layer/gi, '\r\n\r\n\r\nLayer\r\n\r\n');                                            
+  myTemp    =  myTemp.replace(/Tensor/gi, '\r\nTensor\r\n\r\n');                                    
+  myTemp    =  myTemp.replace(/Shape/gi, '\r\nShape\r\n\r\n');    
   myTemp    =  myTemp.replace(/ /gi, '');   
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
