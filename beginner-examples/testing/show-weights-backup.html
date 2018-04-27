@@ -41,10 +41,8 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-A very simple xOr Neural Network using Tensorflowjs Layers<br>
-Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network <br>
-The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was written for NodeJS, his code is at 
- <a href="https://github.com/mattcam/tfjs_xor_example">Code</a>
+Attempt at saving and reloading tensorflowjs layers.
+ 
 </div><br>
 
 
@@ -68,48 +66,45 @@ Batches <input id="myInNumber" type=number value=50>
     const model = tf.sequential();
     model.add(tf.layers.dense({inputShape: [2],  units: 3, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [3], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
-/*  
-If unspecified, no activation is applied.
-                                                                                    
-activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
-             'softplus'  |   'softsign'   |  'tanh'  
-                                                                                    
-                                                                                                                                                   
-loss : 'meanSquaredError'    |     'meanAbsoluteError'    |    'meanAbsolutePercentageError'    |     'meanSquaredLogarithmicError'    |     
-'squaredHinge'    |     'hinge'    |     'categoricalHinge'    |     'logcosh'    |     'categoricalCrossentropy'    |     
-'sparseCategoricalCrossentropy'    |     'binaryCrossentropy'    |     'kullbackLeiblerDivergence'    |     'poisson'    |     
-'cosineProximity'                                                                                            
- 
-                                                                                            
-                                                                                            
-                                                                                    
-optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'       
-      
-                                                                                
-*/
+
    
-                                                                                    
-       //for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
-      
-         //  alert(myIt)                                                             
-      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()    
-    // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);   
+
                                                                          
-    //}        
+        
             
-                                                                                    
-   myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)                                                                                
-   // alert(myRowsArray)                                                                                
- for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
+    document.getElementById('myDiv123').innerHTML += '<hr>'                                                                                
+    myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)   
+    myEntry   = []
+    myArraySpot = 0
+    console.log(myRowsArray)                                                                       
+    for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){   // not sure why not -1 on length
       if (myRowsArray[myLoop].includes(',')){
-          //alert(myRowsArray[myLoop])                                                                          
-      }
-     
- }                                                                                
+          myEntry[myArraySpot] =  myRowsArray[myLoop].split(',')  
                                                                                     
+          if (isNaN(myEntry[myEntry[myArraySpot].length-1])){   
+              //alert(myEntry[myEntry[myArraySpot].length-1])
+              myLabel = myEntry[myArraySpot].pop()
+              document.getElementById('myDiv123').innerHTML += myLabel +'     '+ myEntry[myArraySpot] + '<br>'                                                                         
+          } else {
+              myLabel = 'DATA'
+              document.getElementById('myDiv123').innerHTML += myEntry[myArraySpot] + '<br>'                                                                          
+           }
+          myArraySpot +=1                                                                                                                                                                                                                              
+       }  // end if comma
+
+     }    // end for                                                                            
                                                                                     
+//alert(myEntry.length)                                                               
+//alert(JSON.stringify(myEntry))  
                                                                                     
+    console.log(myEntry)                                                                                    
+
+  document.getElementById('myDiv123').innerHTML += '<hr>'                                                                                       
+
+//if (!fields || fields.length === 0)                                                                                    
                                                                                     
+    // model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                         
+     //  model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                   
                                                                                     
                                                                                     
                                                                                     
@@ -166,6 +161,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
   myTemp    =  myTemp.replace(/ShapeBias/gi, ', ShapeBias\r\n\r\n');    
                                                 
   document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '')
+  document.getElementById('myArea02').value +='\r\n'
 
  //  document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
  // document.getElementById('myArea02').value = myTemp.replace(/[\[\]]/gi, '|')                                   
@@ -182,23 +178,33 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  
  <textarea id="myArea03" rows=20 cols=70 wrap=false>
-Tensor
 
-0.4846097,-0.0115162,-0.9841338,
--1.1753453,-0.0210868,0.1518525,
-Tensor
+0, Layer
 
--0.0523798,-0.056575,-0.0572705
+2,3, ShapeKernel
 
-
-Layer
+3, ShapeBias
 
 Tensor
+-0.0728035,0.3649966,0.2431275,-0.3817373,-0.4001028,-0.7798635
 
--0.0946367,-0.342776,-0.9755542,
 Tensor
 
-0.0577271</textarea>
+-0.0542528,-0.0573954,0.0587411
+
+1, Layer
+
+3,1, ShapeKernel
+
+1, ShapeBias
+
+Tensor
+0.1249157,1.1408875,-0.1129905
+
+Tensor
+
+-0.0576023
+ </textarea>
  
 
  
