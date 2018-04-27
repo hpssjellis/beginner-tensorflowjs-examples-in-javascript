@@ -98,7 +98,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     //}        
             
                                                                                     
-   myRowsArray  =   document.getElementById('myArea03').split('\n|\r\n')                                                                               
+   myRowsArray  =   document.getElementById('myArea03').value.split('\n|\r\n')                                                                               
     alert(myRowsArray)                                                                                
     for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
       if (myRowsArray[myLoop].includes(',')){
