@@ -107,12 +107,15 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
              if (isNaN(myEntry[myEntry[myLoop].length-1])){   
                    // alert(myEntry[myEntry[myLoop].length-1])
                     myEntry[myLoop].pop() 
-                   // alert(myEntry[myLoop])
-                                                                                    
-             }                                                                      
-      }
+                   // alert(myEntry[myLoop])                                                                       
+             }  // end if words
+             if (myEntry[myLoop] == 'undefined'){
+                 alert(myEntry[myLoop])                                                                   
+             }  // end if underfined                                                                     
+                                                                                                                                                                     
+      }  // end if comma
      
- }                                                                                
+ }    // end for                                                                            
                                                                                     
 alert(myEntry.length)                                                               
 alert(myEntry[0])                                                                  
