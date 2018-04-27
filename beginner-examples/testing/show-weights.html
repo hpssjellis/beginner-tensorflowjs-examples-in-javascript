@@ -104,15 +104,15 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
       if (myRowsArray[myLoop].includes(',')){
           myEntry =  myRowsArray[myLoop].split(',')                                                                        
              if (isNaN(myEntry[myEntry.length-1])){   
-                    alert(myEntry[myEntry.length-1])
-                    //myEntry.pop()                                                                
+                   // alert(myEntry[myEntry.length-1])
+                    myEntry.pop()                                                                
              }                                                                      
       }
      
  }                                                                                
                                                                                     
                                                                                     
-                                                                                    
+      alert(myRowsArray)                                                                                       
                                                                                     
                                                                                     
                                                                                     
