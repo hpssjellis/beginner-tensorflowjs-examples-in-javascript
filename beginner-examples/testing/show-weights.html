@@ -119,9 +119,12 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  <textarea id="myArea01" rows=5 cols=70 wrap=false></textarea>
  
  <input type=button value=convert1 onclick="{
-   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');      
+
+                                            
+   //document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor/gi, '');    
+   document.getElementById('myArea02').value     =  document.getElementById('myArea01').value.replace(/Tensor\/[\[\]]/gi, '');    
                                    
-                                           
+                                    
 }"><br>
  
  <textarea id="myArea02" rows=5 cols=70 wrap=false></textarea>
