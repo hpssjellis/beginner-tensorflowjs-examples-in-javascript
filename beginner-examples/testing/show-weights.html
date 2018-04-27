@@ -56,7 +56,18 @@ Batches <input id="myInNumber" type=number value=50>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
   document.getElementById('myDiv123').innerHTML = 'Trying to save weights'
-                                                                            
+   
+     for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
+      
+           alert(myIt)                                                             
+      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()                                                                  
+                                                                         
+    }                                                                                      
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
                                                                             
   async function myGo() {
     const model = tf.sequential();
@@ -113,7 +124,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     
                                                                                  
   }
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+  setTimeout(function(){  myGo() }, 100);   // wait a bit for the GUI to update
 }"><br><br>
 
  <textarea id="myArea01" rows=20 cols=70 wrap=false></textarea>
@@ -142,15 +153,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <textarea id="myArea03" rows=20 cols=70 wrap=false></textarea>
  
-   <input type=button value=upload onclick="{
-    for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
-      
-           alert(myIt)                                                             
-      // document.getElementById('myArea01').value += 'L'+model.layers[myIt].getWeights()                                                                  
-                                                                         
-    }                              
-                                           
-}"><br>
+
  
  
  
