@@ -108,7 +108,10 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
               //alert(myEntry[myEntry[myArraySpot].length-1])
               myLabel = myEntry[myArraySpot].pop()
               document.getElementById('myDiv123').innerHTML += myLabel +'     '+ myEntry[myArraySpot] + '<br>'                                                                         
-          }  // end if words
+          } else {
+              myLabel = 'DATA'
+              document.getElementById('myDiv123').innerHTML += myEntry[myArraySpot] + '<br>'                                                                          
+           }
           myArraySpot +=1                                                                                                                                                                                                                              
        }  // end if comma
 
