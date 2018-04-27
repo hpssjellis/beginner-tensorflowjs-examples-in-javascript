@@ -2,6 +2,7 @@
 
 
 
+
 <!--   *******************************Start: What source js file to use? ****************************************************   -->
 
 
@@ -97,7 +98,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
    
     for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
       
-        document.getElementById('myDiv123').innerHTML += ' Shape' + myIt + ' = ' +      model.layers[myIt].getWeights()[0].shape       + '<br>'  
+        document.getElementById('myDiv123').innerHTML += ' Shape #' + myIt + ' = ' +      model.layers[myIt].getWeights()[0].shape       + '<br>'  
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + model.layers[myIt].getWeights() + '<br>'    
         document.getElementById('myDiv123').innerHTML += ' Layer #' + myIt + ' = ' + JSON.stringify(model.layers[myIt].getWeights()) + '<br><br>'   
                                                                        
