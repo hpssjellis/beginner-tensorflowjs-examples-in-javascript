@@ -103,18 +103,16 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
       if (myRowsArray[myLoop].includes(',')){
           myEntry[myLoop] =  myRowsArray[myLoop].split(',')                                                                        
              if (isNaN(myEntry[myEntry[myLoop].length-1])){   
-                    myEntry[myLoop].pop()                                                                       
+                 alert(myEntry[myEntry[myLoop].length-1])                                                                          
              }  // end if words
-             if ((!myEntry[myLoop]) || (myEntry[myLoop].length === 0)){                                                                         
-                 alert(myEntry[myLoop])                                                                   
-             }  // end if underfined                                                                     
+                                                                   
                                                                                                                                                                      
       }  // end if comma
      
  }    // end for                                                                            
                                                                                     
-alert(myEntry.length)                                                               
-alert(JSON.stringify(myEntry))                                                              
+//alert(myEntry.length)                                                               
+//alert(JSON.stringify(myEntry))                                                              
 
 //if (!fields || fields.length === 0)                                                                                    
                                                                                     
