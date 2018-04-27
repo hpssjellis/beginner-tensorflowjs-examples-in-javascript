@@ -98,21 +98,22 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     //}        
             
                                                                                     
-   myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)                                                                                
+   myRowsArray  =   document.getElementById('myArea03').value.split(/\r\n|\n/)   
+    myEntry   = []
    // alert(myRowsArray)                                                                                
  for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
       if (myRowsArray[myLoop].includes(',')){
-          myEntry =  myRowsArray[myLoop].split(',')                                                                        
-             if (isNaN(myEntry[myEntry.length-1])){   
-                   // alert(myEntry[myEntry.length-1])
-                    myEntry.pop()                                                                
+          myEntry[myLoop] =  myRowsArray[myLoop].split(',')                                                                        
+             if (isNaN(myEntry[myEntry[myLoop].length-1])){   
+                   // alert(myEntry[myEntry[myLoop].length-1])
+                    myEntry[myLoop].pop()                                                                
              }                                                                      
       }
      
  }                                                                                
                                                                                     
                                                                                     
-      alert(myRowsArray)                                                                                       
+      alert(myEntry)                                                                                       
                                                                                     
                                                                                     
                                                                                     
