@@ -156,7 +156,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
  
  <input type=button value=convert1 onclick="{
   myTemp    =  document.getElementById('myArea01').value.replace(/[\r\n]+/g, '');                        
-  myTemp    =  myTemp.replace(/Tensor/gi, 'Tensor\r\n\r\n');                                          
+  myTemp    =  myTemp.replace(/Tensor/gi, '\r\n\r\nTensor\r\n\r\n');                                          
   myTemp    =  myTemp.replace(/~~~/gi, '\r\n\r\n');   
                                             
   myTemp    =  myTemp.replace(/ /gi, '');                                       
