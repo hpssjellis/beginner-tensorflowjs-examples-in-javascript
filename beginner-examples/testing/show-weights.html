@@ -102,9 +102,11 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
    // alert(myRowsArray)                                                                                
  for (myLoop = 0; myLoop <= myRowsArray.length-1; myLoop++){
       if (myRowsArray[myLoop].includes(',')){
-          myEntry =  myRowsArray[myLoop].split(',') 
-                                                                       
-             alert(myEntry[myEntry.length-1])                                                                       
+          myEntry =  myRowsArray[myLoop].split(',')                                                                        
+             if (isNaN(myEntry[myEntry.length-1])){   
+                    alert(myEntry[myEntry.length-1])
+                    //myEntry.pop()                                                                
+             }                                                                      
       }
      
  }                                                                                
