@@ -104,6 +104,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     
     
     document.getElementById('myDiv123').innerHTML += 'Show the number of layers ' + model.layers.length + '<br><br>'
+    document.getElementById('myDiv123').innerHTML += 'Show shape ' + model.layers.shape + '<br><br>'
    
     for (myIt=0; myIt <= model.layers.length-1; myIt++ ){
       
@@ -114,8 +115,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
 
    document.getElementById('myArea01').value = model.layers[0].getWeights()       
 
-   document.getElementById('myArea01').value = model.layers[0].setWeights()                                                                                        
-                                                                                    
+   model.layers[0].setWeights(document.getElementById('myArea01').value)                                                                                        
+   //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                 
     
     
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
