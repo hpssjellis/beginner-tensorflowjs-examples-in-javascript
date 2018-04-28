@@ -66,6 +66,11 @@ Batches <input id="myInNumber" type=number value=50>
     model.add(tf.layers.dense({inputShape: [2],  units: 3, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [3], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
 
+            
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+
+
+
    if (document.getElementById('myArea01').value != ''){
        myShowArray = document.getElementById('myArea01').value.split('~')
      // alert(myShowArray[0])
@@ -75,10 +80,16 @@ Batches <input id="myInNumber" type=number value=50>
       //model.layers[0].setWeights(tf.Tensor.toTensor(document.getElementById('myArea01').value) ) 
 
    //  model.layers[0].setWeights(model.layers[0].getWeights().toString.toTensor ) 
-alert(document.getElementById('myArea01').value.split('\n')[0])
+//alert(document.getElementById('myArea01').value.split('\n')[0])
   //    model.layers[0].setWeights(model.layers[0].getWeights()) 
    //   model.layers[0].setWeights(model.layers[0].getWeights(document.getElementById('myArea01').value.split('\n'))) 
-      model.layers[0].setWeights(model.layers[0].getWeights(document.getElementById('myArea01').value.split('\r\n|\n'))) 
+
+
+
+      model.setWeights(model.getWeights(document.getElementById('myArea01').value.split('\r\n|\n'))) 
+
+
+
      // model.layers[0].setWeights(tf.toTensor(myShowArray) ) 
 
 
@@ -117,8 +128,7 @@ alert(document.getElementById('myArea01').value.split('\n')[0])
      //  model.layers[myIt].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                   
                                                                                     
                                                                                     
-                                                                                    
-    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+                                                                        
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
                                                                                     
@@ -143,10 +153,19 @@ alert(document.getElementById('myArea01').value.split('\n')[0])
          // update textarea                                         
       // document.getElementById('myArea01').value =  JSON.stringify(model.layers[0].getWeights().toString() )  
 
+
+
+
+
+
   
-       document.getElementById('myArea01').value =  model.layers[0].getWeights() 
+       document.getElementById('myArea01').value =  model.getWeights() 
 
     
+
+
+
+
       document.getElementById('myArea03').value =  JSON.stringify(model.layers[1].getWeights().toString() )  
       // document.getElementById('myArea01').value =  model.layers[0].getWeights().toString()     
       // document.getElementById('myArea02').value =  model.layers[1].getWeights().toString()                                                                   
