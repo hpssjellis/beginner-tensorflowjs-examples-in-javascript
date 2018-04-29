@@ -225,7 +225,7 @@ Expect close to 0, 1, 1, 0 for outputs
 
 <textarea type=text id ="myText01" rows=10 cols=60 wrap=false ></textarea><br>
 
-Batches <input id="myInNumber" type=number value=600> 
+Batches <input id="myInNumber" type=number value=650> 
  
 <input id="myButton4949" type=button value="Generate to Textarea Weights for use above"  onclick="{
 										     
@@ -317,8 +317,11 @@ Batches <input id="myInNumber" type=number value=600>
    // document.getElementById('myText01').value = myWeights
 												  
   // document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer[0].shape +'<br><br><br>'
-   document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer[0].value 
-   document.getElementById('myDiv4949').innerHTML += myWeights[0].values.Tensor.split(',')
+   document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer[0].value+'<br><br><br>' 
+   document.getElementById('myDiv4949').innerHTML += myWeights[0].values.Tensor.split(',')+'<br><br><br>'
+   document.getElementById('myDiv4949').innerHTML += myWeights[1].values.Tensor.split(',')+'<br><br><br>'
+   document.getElementById('myDiv4949').innerHTML += myWeights[2].values.Tensor.split(',')+'<br><br><br>'
+   document.getElementById('myDiv4949').innerHTML += myWeights[3].values.Tensor.split(',')+'<br><br><br>'
 												  
    // Lets try to carefull update out JSON object with the latest weights.												  
 												  
