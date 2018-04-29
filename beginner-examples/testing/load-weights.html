@@ -318,14 +318,20 @@ Batches <input id="myInNumber" type=number value=700>
 												  
   // document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer[0].shape +'<br><br><br>'
    document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer[0].value 
-   document.getElementById('myDiv4949').innerHTML += myWeights[0]
+   document.getElementById('myDiv4949').innerHTML += myWeights[0].values
 												  
    // Lets try to carefull update out JSON object with the latest weights.												  
 												  
    weightsJSON2.weights.hiddenLayer[0].shape = myWeights[0].shape		  
-   weightsJSON2.weights.hiddenLayer[0].value = myWeights[0]		  
+   weightsJSON2.weights.hiddenLayer[0].value = myWeights[0].values		  
    weightsJSON2.weights.hiddenLayer[1].shape = myWeights[1].shape		  
-   weightsJSON2.weights.hiddenLayer[1].value = myWeights[1]
+   weightsJSON2.weights.hiddenLayer[1].value = myWeights[1].values
+												  
+												  		  
+   weightsJSON2.weights.outputLayer[0].shape = myWeights[2].shape		  
+   weightsJSON2.weights.outputLayer[0].value = myWeights[2].values		  
+   weightsJSON2.weights.outputLayer[1].shape = myWeights[3].shape		  
+   weightsJSON2.weights.outputLayer[1].value = myWeights[3].values
 												  
 												  
    document.getElementById('myText01').value = JSON.stringify(weightsJSON2, null, 3)                
