@@ -315,8 +315,9 @@ Batches <input id="myInNumber" type=number value=700>
 												  
 												  
    // document.getElementById('myText01').value = myWeights
-
-   document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer.shape
+												  
+   document.getElementById('myDiv4949').innerHTML += weightsJSON2.weights.hiddenLayer[0].shape
+												  
    document.getElementById('myText01').value = JSON.stringify(weightsJSON2, null, 3)                
   }
 
