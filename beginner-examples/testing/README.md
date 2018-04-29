@@ -1,9 +1,8 @@
 
 
 
+Working on saving and loading layers weights 
 
-Just testing
 
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/show-weights.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/load-weights.html
 
