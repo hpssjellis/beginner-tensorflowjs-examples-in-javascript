@@ -26,10 +26,10 @@ Input output. Getting the information from the text box into the div
 
 <div id="myDiv123Code"> 
 
-<input type=text id="myTextIn" value="Stuff written here" size=30>  
+<input type=text id="myTextIn01" value="Stuff written here" size=30>  
     
-<input id="myButton123" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv123').innerHTML = document.getElementById(myTextIn').value // note: use value not innerHTML                                                    
+<input id="myButton123" type=button value="Input / Output"  onclick="{
+      document.getElementById('myDiv123').innerHTML = document.getElementById('myTextIn01').value // note: use value not innerHTML                                                    
 }"><br><br>
 
 </div>
@@ -76,14 +76,22 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Input into a variable and convert the stored value to integers, floating point numbers etc.
 </div><br>
 
 
 <div id="myDiv124Code"> 
+    
+<input type=text id="myTextIn02" value="5.4" size=30>  + <input type=text id="myTextIn02" value="4.6" size=30> 
 
-<input id="myButton124" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv124').innerHTML = 'nothing'                                                           
+<input id="myButton124" type=button value="Add the numbers"  onclick="{
+
+   var myNumber1 = document.getElementById('myTextIn01').value  
+   var myNumber2 = document.getElementById('myTextIn02').value  
+   document.getElementById('myDiv123').innerHTML =  'Numbers added as strings ' +  myNumber1 + ' + ' +    myNumber2 + ' = ' +  myNumber1 + myNumber1  +'<br>'   
+   document.getElementById('myDiv123').innerHTML +=  'Numbers added as strings ' +  myNumber1 + ' + ' +    myNumber2 + ' = ' +  myNumber1 + myNumber1                                                      
+                                                              
+                                                              
 }"><br><br>
 
 </div>
