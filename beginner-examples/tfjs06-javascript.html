@@ -526,7 +526,7 @@ Classes can be extended, so you can add your own functionality to them<br>
     }
 
     myShow(){
-       document.getElementById('myDiv130').innerHTML += 'Hello '+ this.myName + ' You are ' + this.myAge + ' years old<br>'
+       document.getElementById('myDiv130').innerHTML = 'Hello '+ this.myName + '. You are ' + this.myAge + ' years old<br>'
     }
 
  }  // end class myAnimal
@@ -591,13 +591,13 @@ class myAnimal {
        this.myAge = passAge;
     }
     myShow(){
-       document.getElementById('myDiv131').innerHTML += 'Hello '+ this.myName + ' You are ' + this.myAge + ' years old<br>'
+       document.getElementById('myDiv131').innerHTML = 'Hello '+ this.myName + '. You are ' + this.myAge + ' years old<br>'
     }
  }  // end class myAnimal
                                                              
 class myCat extends myAnimal {                                                                      
      myShow(){
-       document.getElementById('myDiv131').innerHTML += this.myName + 'Is a great cat who is ' + this.myAge + ' years old<br>'
+       document.getElementById('myDiv131').innerHTML = this.myName + ' is a great cat who is ' + this.myAge + ' years old<br>'
     }                                                                   
 }    // end extended class myCat
                                                                      
