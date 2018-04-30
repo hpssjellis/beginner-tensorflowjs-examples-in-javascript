@@ -53,7 +53,7 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
     
 <div id="myDiv123Code"> 
 
-Epoch : <input id="myEpoch" type=number value=2> Epoch Batches : <input id="myBatch" type=number value=400><br>
+Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myBatch" type=number value=300><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
@@ -101,7 +101,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
             console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
             document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
         }
-        await tf.nextFrame();   // so that the GUI can update                                                                            
+        await tf.nextFrame();   // This allows the GUI to update every loop if needed                                                                          
     }                                                                                    
                                                                                     
                                                                                     
@@ -116,7 +116,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }
 
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+  // setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color.
+   myGo() 
 
 }"><br><br>
 
