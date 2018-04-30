@@ -53,7 +53,7 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
     
 <div id="myDiv123Code"> 
 
-Batches <input id="myInNumber" type=number value=3000> 
+Epoch : <input id="myEpoch" type=number value=2> Epoch Batches : <input id="myBatch" type=number value=400><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
@@ -93,8 +93,21 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
 
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+   
 
+                                                                                    
+    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
+        var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
+        if (myLoop % 50 == 0){   
+            console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
+            document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+        }
+        await tf.nextFrame();   // so that the GUI can update                                                                            
+    }                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
     const myPredictArray = await model.predict(training_data).data()
                                                                                     
     document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
