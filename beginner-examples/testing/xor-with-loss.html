@@ -96,8 +96,8 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
                                                                                     
    for (let myLoop = 1; myLoop < document.getElementById('myBatch').value; myLoop++) {                                                                                 
       var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
-      console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
-     //  document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + h.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+      //console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
+      document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + h.history.loss[0].toFixed(5) +'<br><br>'                                                                           
    }
                                                                                     
                                                                                     
