@@ -96,7 +96,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
                                                                                     
    for (let myLoss = 1; myLoss < 100; myLoss++) {                                                                                 
       var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
-      console.log('Loss after Epoch ' + i + ' : ' + h.history.loss[0]);
+      console.log('Loss after Epoch ' + myLoss + ' : ' + h.history.loss[0]);
    }
                                                                                     
                                                                                     
