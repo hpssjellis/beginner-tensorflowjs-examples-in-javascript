@@ -134,14 +134,20 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+For loops, making computers do things over and  over and  over and  over and  over and  over and again
 </div><br>
 
 
 <div id="myDiv125Code"> 
 
-<input id="myButton125" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv125').innerHTML = 'nothing'                                                           
+Loop how many times <input type=number id="myTextLoop" value="10" size=10> 
+    
+<input id="myButton125" type=button value="For Loop"  onclick="{
+    document.getElementById('myDiv125').innerHTML = ''   // blank out the DIV                                                        
+    for (myLoop=0;   myLoop <= document.getElementById('myTextLoop').value - 1;   myLoop++){                                                                                                                               
+      document.getElementById('myDiv125').innerHTML += 'Loop #'+ myLoop+'<br>'                                                            
+   }
+                                                               
 }"><br><br>
 
 </div>
