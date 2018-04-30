@@ -380,14 +380,14 @@ Objects store variables with a named index
 <div id="myDiv128Code"> 
     
     
-Store these Items in a Javascript object <input type=text id="myTextArray" value="{firstName:'John', lastName:'Doe', age:50, eyeColor:'blue'}" size=10>      
+Store these Items in a Javascript object <input type=text id="myTextArray" value="{firstName:'John', lastName:'Doe', age:50, eyeColor:'blue'}" >      
     
     
 <input id="myButton128" type=button value="Store as an object"  onclick="{
       
     var myPerson = {}                                                                     
-    myPerson = document.getElementById('myTextArray').value                                                                                                                                                                    
-    document.getElementById('myDiv127').innerHTML +=  'Name:' + myPerson.firstName + ' '+ myPerson.lastName + ', Age:'  + myPerson.age  + ', EyeColor:' + myPerson.eyeColor+ '<br>'
+    myPerson = JSON.stringify(document.getElementById('myTextArray').value)                                                                                                                                                                    
+    document.getElementById('myDiv127').innerHTML +=  'Name: ' + myPerson.firstName + ' '+ myPerson.lastName + ', Age: '  + myPerson.age  + ', EyeColor: ' + myPerson.eyeColor + '<br>'
                                                        
                                                               
 }"><br><br>
