@@ -221,7 +221,15 @@ Change the number <input type=number id="myTextIf" value="4" size=10>
                                                                     
    if (myIf <= 4){                                                                
       document.getElementById('myDiv126').innerHTML += 'That number equals 4 <br>'
-   }    
+   }  
+                                                                            
+   if (myIf == Math.abs(4)){                                                                
+      document.getElementById('myDiv126').innerHTML += 'That number is either positive or negative 4<br>'
+   }  
+                                                                        
+   if (myIf < 0){                                                                
+      document.getElementById('myDiv126').innerHTML += 'That number is a negative number<br>'
+   }  
                                                                     
    if (myIf == 4){                                                                
       document.getElementById('myDiv126').innerHTML += 'That number is less than or equal to 4 <br>'
@@ -246,16 +254,7 @@ Change the number <input type=number id="myTextIf" value="4" size=10>
                                                                        
 
                                                                     
-                                                                          
-                                                                    
- 
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
+                                                                   
 }"><br><br>
 
 </div>
@@ -310,14 +309,25 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-127 Blah Blah Blah Blah 
+Arrays store lots of variables with an index number 
 </div><br>
 
 
 <div id="myDiv127Code"> 
 
+
+Store these numbers in an array <input type=text id="myTextArray" value="3, 7, 9" size=10>        
+    
 <input id="myButton127" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv127').innerHTML = 'nothing'                                                           
+                                                              
+      myArray = []
+      document.getElementById('myDiv127').innerHTML = '' // clear the DIV
+                                                              
+      myArray = document.getElementById('myTextArray').value.split(',')   //splits a string into an array  
+                                                              
+      for (myIndex in myArray){                                                                                                                  
+         document.getElementById('myDiv127').innerHTML +=     myIndex + ' stores : ' + myArray[myIndex] + '<br>'
+      }                                                        
 }"><br><br>
 
 </div>
