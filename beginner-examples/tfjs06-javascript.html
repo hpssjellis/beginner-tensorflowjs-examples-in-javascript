@@ -385,9 +385,9 @@ Store these Items in a Javascript object <input type=text id="myTextArray" value
     
 <input id="myButton128" type=button value="Store as an object"  onclick="{
       
-    var ThePerson = {}                                                                     
-    ThePerson = document.getElementById('myTextArray').value                                                                                                                                                                    
-    document.getElementById('myDiv127').innerHTML +=  'Name:' + ThePerson.firstName + ' '+ ThePerson.lastName + 'Age:'  +   + 'EyeColor:' + + '<br>'
+    var myPerson = {}                                                                     
+    myPerson = document.getElementById('myTextArray').value                                                                                                                                                                    
+    document.getElementById('myDiv127').innerHTML +=  'Name:' + myPerson.firstName + ' '+ myPerson.lastName + ', Age:'  + myPerson.age  + ', EyeColor:' + myPerson.eyeColor+ '<br>'
                                                        
                                                               
 }"><br><br>
