@@ -21,14 +21,15 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Input output. Getting the information from the text box into the div
 </div><br>
-
 
 <div id="myDiv123Code"> 
 
+<input type=text id="myTextIn" value="Stuff written here" size=30>  
+    
 <input id="myButton123" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'nothing'                                                      
+      document.getElementById('myDiv123').innerHTML = document.getElementById(myTextIn').value // note: use value not innerHTML                                                    
 }"><br><br>
 
 </div>
