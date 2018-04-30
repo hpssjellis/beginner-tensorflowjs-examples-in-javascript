@@ -54,7 +54,8 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
   document.getElementById('myButton123').style.backgroundColor = 'red'  
-                                                                            
+  
+ document.myInterval = setInterval(function(){document.getElementById('myDiv123').innerHTML += '.'  }, 100);   // new thread GUI update                                                                          
                                                                             
   async function myGo() {
     const model = tf.sequential();
@@ -87,9 +88,9 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }
 
- // setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+ setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
                                                                                     
- myGo()
+// myGo()
 
 }"><br><br>
 
