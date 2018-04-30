@@ -92,8 +92,16 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
 
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
-
+                                                                                    
+                                                                                    
+   for (let myLoss = 1; myLoss < 100 ; myLoss++) {                                                                                 
+      var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+      console.log("Loss after Epoch " + i + " : " + h.history.loss[0]);
+   }
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
     const myPredictArray = await model.predict(training_data).data()
                                                                                     
     document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
