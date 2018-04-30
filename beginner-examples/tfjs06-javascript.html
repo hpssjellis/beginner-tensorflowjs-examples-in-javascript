@@ -1,45 +1,11 @@
 
-<!--   *******************************Start: What source js file to use? ****************************************************   -->
 
-
-<!-- the online version that these examples were made with  -->
-
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"></script>
-
-
-
-
-
-<!-- the newest version script tag is below but by using it all the examples may not work 
-
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-
--->
-
-
-
-<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
-
-
-<script src="myNewDownloadedTensorflow.js"></script>
-
--->
-
- <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
-
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3/dist/tf.js"></script>
-
---> 
-
-
-
-<!--   *******************************Stop: What source js file to use? ****************************************************   -->
 
 
 
     
     
-<h2 align=center> Most of the examples are in the following format:</h2>
+<h2 align=center> Quick reminder about Javascript:</h2>
 
 
 
@@ -1847,7 +1813,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
