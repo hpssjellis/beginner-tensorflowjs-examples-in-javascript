@@ -55,7 +55,6 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
 
   document.getElementById('myButton123').style.backgroundColor = 'red'  
   
- document.myInterval = setInterval(function(){document.getElementById('myDiv123').innerHTML += '.'  }, 100);   // new thread GUI update                                                                          
                                                                             
   async function myGo() {
     const model = tf.sequential();
@@ -73,8 +72,8 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
       var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
       if (myLoop % 50 == 0){   
-          console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
-          document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+          console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );    // this works fine
+          document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'      // this only shows once when fit is finished                                                                     
       }
    }
                                                                                     
@@ -88,10 +87,11 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }
 
- setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
                                                                                     
-// myGo()
-
+                                                                                    
+                                                                                    
+ setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button background color
+                                                                                    
 }"><br><br>
 
 </div>
