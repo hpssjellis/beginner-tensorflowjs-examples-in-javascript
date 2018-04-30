@@ -82,15 +82,17 @@ Input into a variable and convert the stored value to integers, floating point n
 
 <div id="myDiv124Code"> 
     
-<input type=text id="myTextIn1" value="5.4" size=30>  + <input type=text id="myTextIn2" value="4.6" size=30> 
+<input type=text id="myTextIn1" value="3.4" size=30>  + <input type=text id="myTextIn2" value="5.6" size=30> 
 
 <input id="myButton124" type=button value="Add the numbers"  onclick="{
 
    var my1 = document.getElementById('myTextIn1').value  
    var my2 = document.getElementById('myTextIn2').value  
    document.getElementById('myDiv124').innerHTML =   'Numbers added as strings ' +  my1 + ' + ' +  my2 + ' = ' +  my1 + my2  + '<br>'   
-   document.getElementById('myDiv124').innerHTML +=  'Numbers added as strings ' +  my1 + ' + ' +  myr2 + ' = ' +  my1 + my2  + '<br>'                                                      
-                                                              
+   document.getElementById('myDiv124').innerHTML +=  'Numbers added as integers ' +  my1 + ' + ' +  my2 + ' = ' +  parseInt(my1) + parseInt(my2)  + '<br>'                                                      
+    document.getElementById('myDiv124').innerHTML +=  'Numbers added as Floating Point ' +  my1 + ' + ' +  my2 + ' = ' +  parseFloat(my1) + parseFloat(my2)  + '<br>'                                         
+    document.getElementById('myDiv124').innerHTML +=  'Numbers added using *1 trick ' +  my1 + ' + ' +  my2 + ' = ' +  my1*1 + my2*1  + '<br>'                                                       
+                                                             
                                                               
 }"><br><br>
 
