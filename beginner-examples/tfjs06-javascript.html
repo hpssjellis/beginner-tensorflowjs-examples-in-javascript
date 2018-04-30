@@ -578,14 +578,33 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-131 Blah Blah Blah Blah 
+Here we extend the class myAnimal to myCat
 </div><br>
 
 
 <div id="myDiv131Code"> 
 
-<input id="myButton131" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv131').innerHTML = 'nothing'                                                           
+<input id="myButton131" type=button value="Extend a class"  onclick="{
+class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+    myShow(){
+       document.getElementById('myDiv131').innerHTML += 'Hello '+ this.myName + ' You are ' + this.myAge + ' years old<br>'
+    }
+ }  // end class myAnimal
+                                                             
+class myCat extends myAnimal {                                                                      
+     myShow(){
+       document.getElementById('myDiv131').innerHTML += this.myName + 'Is a great cat who is ' + this.myAge + ' years old<br>'
+    }                                                                   
+}    // end extended class myCat
+                                                                     
+                                                              
+                                                                                                                                                                                                       
+   myPet = new myCat('Fluffy', 14)
+   myPet.myShow()                                                                           
 }"><br><br>
 
 </div>
