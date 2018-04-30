@@ -447,33 +447,21 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-129 Blah Blah Blah Blah 
+Funcitons are the main way to make repeatable code
 </div><br>
 
 
 <div id="myDiv129Code"> 
 
-<input id="myButton129" type=button value="nothing"  onclick="{
-                                                              
-  
- class myAnimal {
-    constructor(passName, passAge) {
-       this.myName = passName;
-       this.myAge = passAge;
-    }
+<input id="myButton129" type=button value="make a function"  onclick="{
 
-    myShow(){
-       document.getElementById('myDiv129').innerHTML += 'Hello '+ this.myName + ' You are ' + this.myAge + ' years old<br>'
-    }
+function myFun(myVar){
+  document.getElementById('myDiv129').innerHTML = 'this line was made in the function ' + myVar + ' was passed to the funciton <br>'                                                                     
+}                                                                     
+                                                                      
 
- }
-
-                                                              
-                                                              
-                                                              
-   myDog = new myAnimal('Snickers', 5)
-   myDog.myShow()
-                                                                                                                       
+myFun('28')      // This activates the function                                                                
+                                                                      
 }"><br><br>
 
 </div>
@@ -519,14 +507,34 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-130 Blah Blah Blah Blah 
+Classes are everything put together.<br>
+Functions inside a class are called "methods"<br>
+Variables inside a class are called "properties"<br>
+If statements, for loops, arrays, objects are all allowed inside a class<br>
+Classes can be extended, so you can add your own functionality to them<br>
 </div><br>
 
 
 <div id="myDiv130Code"> 
 
-<input id="myButton130" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv130').innerHTML = 'nothing'                                                           
+<input id="myButton130" type=button value="Make and Show class animal"  onclick="{
+                                                                                 
+ class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+
+    myShow(){
+       document.getElementById('myDiv130').innerHTML += 'Hello '+ this.myName + ' You are ' + this.myAge + ' years old<br>'
+    }
+
+ }  // end class myAnimal
+                                                             
+   
+                                                                                 
+   myDog = new myAnimal('Snickers', 5)
+   myDog.myShow()                                                       
 }"><br><br>
 
 </div>
