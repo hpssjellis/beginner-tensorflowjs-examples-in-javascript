@@ -52,7 +52,7 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
     
 <div id="myDiv123Code"> 
 
-Epoch : <input id="myEpoch" type=number value=100> Epoch Batches : <input id="myBatch" type=number value=30><br>
+Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBatch" type=number value=700><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
@@ -97,7 +97,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
       var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
       //console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
-      document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+      if (myLoop % 50 == 0){                                                                              
+          document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+      }
    }
                                                                                     
                                                                                     
