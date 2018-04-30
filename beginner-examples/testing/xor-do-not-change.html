@@ -75,6 +75,7 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
           console.log('Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) );
           document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
       }
+      await tf.nextFrame();   // so that the GUI can update                                                                            
    }
                                                                                     
                                                                                                                                                                                                                                                            
