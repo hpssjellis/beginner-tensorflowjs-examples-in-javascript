@@ -386,8 +386,8 @@ Store these Items in a Javascript object <input type=text id="myTextObject" valu
 <input id="myButton128" type=button value="Store as an object"  onclick="{
       
     var myPerson = {}                                                                     
-    myPerson = JSON.stringify(document.getElementById('myTextObject').value)                                                                                                                                                                    
-    document.getElementById('myDiv127').innerHTML +=  'Name: ' + myPerson.firstName + ' '+ myPerson.lastName + ', Age: '  + myPerson.age  + ', EyeColor: ' + myPerson.eyeColor + '<br>'
+    myPerson = JSON.parse(document.getElementById('myTextObject').value)                                                                                                                                                                    
+    document.getElementById('myDiv128').innerHTML +=  'Name: ' + myPerson.firstName + ' '+ myPerson.lastName + ', Age: '  + myPerson.age  + ', EyeColor: ' + myPerson.eyeColor + '<br>'
                                                        
                                                               
 }"><br><br>
@@ -446,7 +446,26 @@ Click here to see the working HTML code.
 <div id="myDiv129Code"> 
 
 <input id="myButton129" type=button value="nothing"  onclick="{
-      document.getElementById('myDiv129').innerHTML = 'nothing'                                                           
+                                                              
+  
+ class myAnimal {
+    constructor(passName, passAge) {
+       this.myName = passName;
+       this.myAge = passAge;
+    }
+
+    myShow(){
+       document.getElementById('myDiv129').innerHTML += 'Hello '+ this.myName + ' You are ' + this.myAge + ' years old<br>'
+    }
+
+ }
+
+                                                              
+                                                              
+                                                              
+   myDog = new myAnimal('Snickers', 5)
+   myDog.myShow()
+                                                                                                                       
 }"><br><br>
 
 </div>
