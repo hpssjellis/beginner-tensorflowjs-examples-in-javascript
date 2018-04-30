@@ -42,10 +42,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-A very simple xOr Neural Network using Tensorflowjs Layers<br>
-Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network <br>
-The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was written for NodeJS, his code is at 
- <a href="https://github.com/mattcam/tfjs_xor_example">Code</a>
+Trying to free up the GUI to show the loss, but the GUI seems to be frozen. The console works fine.
 </div><br>
 
 
@@ -56,7 +53,6 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
- // document.getElementById('myDiv123').innerHTML = 'Takes about 10 seconds to train and calculate the XOR possible outputs<br>Expecting closs to 0, 1, 1, 0 for inputs [0,0],[0,1],[1,0],[1,1]<br><br>'
   document.getElementById('myButton123').style.backgroundColor = 'red'  
                                                                             
                                                                             
@@ -65,34 +61,13 @@ Epoch : <input id="myEpoch" type=number value=1> Epoch Batches : <input id="myBa
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
-
-/*  
-If unspecified, no activation is applied.
-                                                                                    
-activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
-             'softplus'  |   'softsign'   |  'tanh'  
-                                                                                    
-
-                                                                                                                                                   
-loss : 'meanSquaredError'    |     'meanAbsoluteError'    |    'meanAbsolutePercentageError'    |     'meanSquaredLogarithmicError'    |     
-'squaredHinge'    |     'hinge'    |     'categoricalHinge'    |     'logcosh'    |     'categoricalCrossentropy'    |     
-'sparseCategoricalCrossentropy'    |     'binaryCrossentropy'    |     'kullbackLeiblerDivergence'    |     'poisson'    |     
-'cosineProximity'                                                                                            
- 
-                                                                                            
-                                                                                            
-                                                                                    
-optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'       
-      
-                                                                                
-*/
                                                                                                                                                                           
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
 
-                                                                                    
+   // Main training loop. This is where I want to show the loss 
                                                                                     
    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
       var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
@@ -102,9 +77,7 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
       }
    }
                                                                                     
-                                                                                    
-                                                                                    
-                                                                                    
+                                                                                                                                                                                                                                                           
     const myPredictArray = await model.predict(training_data).data()
                                                                                     
     document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
@@ -114,7 +87,9 @@ optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }
 
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+ // setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+                                                                                    
+ myGo()
 
 }"><br><br>
 
