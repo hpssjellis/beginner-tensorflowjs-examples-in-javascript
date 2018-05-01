@@ -19,3 +19,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 to show the issue
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/xor-do-not-change.html
+
+
+
+now converting mnist
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/mnist.html
