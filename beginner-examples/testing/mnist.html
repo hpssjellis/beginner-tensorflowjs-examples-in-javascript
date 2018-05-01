@@ -61,11 +61,11 @@ const IMAGE_SIZE = 784;
 const LABELS_SIZE = 10;
 
 
-//const myMath = tf.ENV.math;
+//const tf = tf.ENV.math;
 
 var myData;
 
-const weights = tf.variable(tf.Array2D.randNormal([IMAGE_SIZE, LABELS_SIZE], 0, 1 / Math.sqrt(IMAGE_SIZE), 'float32'));
+const weights = tf.variable(tf.randNormal([IMAGE_SIZE, LABELS_SIZE], 0, 1 / Math.sqrt(IMAGE_SIZE), 'float32'));
 
 const optimizer = new tf.SGDOptimizer(LEARNING_RATE);
 
@@ -137,8 +137,9 @@ class MnistData {
    
     // Load all the MNIST data 
     async load() {
-        this.dataset = new tf.XhrDataset(mnistConfig);
-        await this.dataset.fetchData();
+      //  this.dataset = new tf.XhrDataset(mnistConfig);
+      //  await this.dataset.fetchData();
+        this.dataset = tf.loadModel(mnistConfig)
         this.dataset.normalizeWithinBounds(0, -1, 1);
         this.trainingData = this.getTrainingData();
         this.testData     = this.getTestData();
@@ -176,7 +177,7 @@ function concatWithNulls(ndarray1, ndarray2) {
     else if (ndarray2 === null) {
         return ndarray1;
     }
-    return myMath.concat2D(ndarray1, ndarray2, 0);
+    return tf.concat2D(ndarray1, ndarray2, 0);
 }
 
 
@@ -193,7 +194,7 @@ async function train(myData) {
     for (let i = 0; i < TRAIN_STEPS; i++) {
         const cost = optimizer.minimize(() => {
             const batch = myData.nextTrainBatch(BATCH_SIZE);
-            return myMath.mean(myMath.softmaxCrossEntropyWithLogits(batch.labels, myMath.matMul(batch.xs, weights)));
+            return tf.mean(tf.softmaxCrossEntropyWithLogits(batch.labels, tf.matMul(batch.xs, weights)));
         }, returnCost);
         document.getElementById('message').innerHTML = 'loss[' + i + ']:' +  cost.dataSync()
         await tf.util.nextFrame();
@@ -211,9 +212,9 @@ async function train(myData) {
 
 // Predict the digit number from a batch of input images.
 function predict(x) {
-    const pred = myMath.scope(() => {
+    const pred = tf.scope(() => {
         const axis = 1;
-        return myMath.argMax(myMath.matMul(x, weights), axis);
+        return tf.argMax(tf.matMul(x, weights), axis);
     });
     return Array.from(pred.dataSync());
 }
@@ -223,7 +224,7 @@ async function showTestResults(batch, predictions, labels) {
     var testExamples = batch.xs.shape[0];
     var totalCorrect = 0;
     for (var i = 0; i < testExamples; i++) {
-        var image = myMath.slice2D(batch.xs, [i, 0], [1, batch.xs.shape[1]]);
+        var image = tf.slice2D(batch.xs, [i, 0], [1, batch.xs.shape[1]]);
         var div = document.createElement('div');
         div.className = 'pred-container';
         var canvas = document.createElement('canvas');
@@ -292,7 +293,7 @@ async function myMnist() {
 
     // Given a logits or label vector, return the class indices.
     const axis = 1;
-    const pred = myMath.argMax(batch.labels, axis);
+    const pred = tf.argMax(batch.labels, axis);
     const labels = Array.from(pred.dataSync());
     
     
