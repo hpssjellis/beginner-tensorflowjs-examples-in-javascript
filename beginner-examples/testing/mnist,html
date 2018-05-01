@@ -39,7 +39,7 @@
 
     
     
-<h2 align=center> Most of the examples are in the following format:</h2>
+<h2 align=center>This is converted first go at using MNIST</h2>
 
 
 
@@ -61,13 +61,13 @@ const IMAGE_SIZE = 784;
 const LABELS_SIZE = 10;
 
 
-const myMath = dl.ENV.math;
+//const myMath = tf.ENV.math;
 
 var myData;
 
-const weights = dl.variable(dl.Array2D.randNormal([IMAGE_SIZE, LABELS_SIZE], 0, 1 / Math.sqrt(IMAGE_SIZE), 'float32'));
+const weights = tf.variable(tf.Array2D.randNormal([IMAGE_SIZE, LABELS_SIZE], 0, 1 / Math.sqrt(IMAGE_SIZE), 'float32'));
 
-const optimizer = new dl.SGDOptimizer(LEARNING_RATE);
+const optimizer = new tf.SGDOptimizer(LEARNING_RATE);
 
 
 const mnistConfig = {
@@ -137,13 +137,13 @@ class MnistData {
    
     // Load all the MNIST data 
     async load() {
-        this.dataset = new dl.XhrDataset(mnistConfig);
+        this.dataset = new tf.XhrDataset(mnistConfig);
         await this.dataset.fetchData();
         this.dataset.normalizeWithinBounds(0, -1, 1);
         this.trainingData = this.getTrainingData();
         this.testData     = this.getTestData();
-        this.trainIndices = dl.util.createShuffledIndices(this.trainingData[0].length);
-        this.testIndices  = dl.util.createShuffledIndices(this.testData[0].length);
+        this.trainIndices = tf.util.createShuffledIndices(this.trainingData[0].length);
+        this.testIndices  = tf.util.createShuffledIndices(this.testData[0].length);
     }
     
     
@@ -196,7 +196,7 @@ async function train(myData) {
             return myMath.mean(myMath.softmaxCrossEntropyWithLogits(batch.labels, myMath.matMul(batch.xs, weights)));
         }, returnCost);
         document.getElementById('message').innerHTML = 'loss[' + i + ']:' +  cost.dataSync()
-        await dl.util.nextFrame();
+        await tf.util.nextFrame();
     }
 }
 
