@@ -25,11 +25,11 @@
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
-            'data': {'values': lossValues, 'orient': 'vertical'},
+            'data': {'values': lossValues, },
             'mark': 'line',
             'encoding': {
-              'x': {'field': 'epoch', 'type': 'quantitative'},
-              'y': {'field': 'loss', 'type': 'quantitative'},
+              'x': {'field': 'epoch', 'type': 'quantitative', 'orient': 'horizontal'},
+              'y': {'field': 'loss', 'type': 'quantitative',  'orient': 'vertical'},
               'color': {'field': 'set', 'type': 'nominal'}
                                              
             }
