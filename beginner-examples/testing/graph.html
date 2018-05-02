@@ -11,7 +11,8 @@
                                                                                                                                           
  if (this.value == 'Stop'){ 
    clearInterval(document.myInterval) 
-   } else {                                                               
+   document.getElementById('myButton123').value =  'Line Graph' 
+ } else {                                                               
    document.myInterval = setInterval(function(){                       
       document.getElementById('myButton123').value =  'Stop'                                                            
       myLoop +=1
