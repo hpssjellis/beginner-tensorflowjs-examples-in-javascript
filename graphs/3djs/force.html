@@ -9,7 +9,7 @@
 
 .nodes circle {
   stroke: #fff;
-  stroke-width: 0.2px;
+  stroke-width: 1.5px;
 }
 
 </style>
@@ -43,7 +43,7 @@ d3.json("mis2.json", function(error, graph) {
     .selectAll("circle")
     .data(graph.nodes)
     .enter().append("circle")
-      .attr("r", 5)
+      .attr("r", 30)
       .attr("fill", function(d) { return color(d.group); })
       .call(d3.drag()
           .on("start", dragstarted)
