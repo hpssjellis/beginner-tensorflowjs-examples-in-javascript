@@ -28,10 +28,10 @@
             'data': {'values': lossValues},
             'mark': 'line',
             'encoding': {
-              'x': {'field': 'epoch', 'type': 'quantitative'},
+              'x': {'field': 'epoch', 'type': 'quantitative', 'orient': 'vertical' },
               'y': {'field': 'loss', 'type': 'quantitative'},
-              'color': {'field': 'set', 'type': 'nominal'},
-              'axis' : {'orient': 'vertical'},                                                  
+              'color': {'field': 'set', 'type': 'nominal'}
+                                             
             }
           },
           {});
