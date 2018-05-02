@@ -10,10 +10,14 @@ Need this script command
 
 
 
-<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 
 
 
+
+Interesting to view the page in a readable format
+
+https://d3js.org/d3.v5.js
 
 
 
