@@ -6,12 +6,12 @@
 
 <input id="myButton123" type="button" value="Line Graph" onclick="{
                                                                   
-
-   var lossValues = []   
-   var myLoop = 0
-                                                         
-   document.myInterval = setInterval(function(){                                                                                                                                                             
-      if (this.value == 'Stop'){ clearInterval(document.myInterval)  } 
+ var lossValues = []   
+ var myLoop = 0
+                                                                                                                                          
+ if (this.value == 'Stop'){ 
+   clearInterval(document.myInterval)                                                        
+   document.myInterval = setInterval(function(){                       
       document.getElementById('myButton123').value =  'Stop'                                                            
       myLoop +=1
       document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
@@ -35,7 +35,7 @@
 
      }, 500); // run the setInterval again every 500 ms    
 
-                                                                           
+  } // end big if statement                                                                           
    
 
  
