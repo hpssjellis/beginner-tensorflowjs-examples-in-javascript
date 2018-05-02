@@ -19,19 +19,25 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/chords.html
 
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/circlewave.html
 
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/click-to-select.html
 
 
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/force-direc.html
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/seperate.html
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
