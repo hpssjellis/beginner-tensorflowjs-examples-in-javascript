@@ -1,0 +1,45 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> </script> 
+
+<script src="https://cdn.jsdelivr.net/npm/vega@3.2.1/build/vega.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@2.3.1/build/vega-lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js"></script>
+
+<input id="myButton123" type="button" value="Line Graph" onclick="{
+
+   var lossValues = []   
+   var myLoop = 0
+   
+   document.myInterval = setInterval(function(){                                                                                                                                                             
+
+      myLoop +=1
+      document.getElementById().innerHTML = 'Loop #' + myLoop + '<br>'
+                                                                                      
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*2,         'set': 'myLoop*2'});
+      lossValues.push({'epoch': myLoop, 'loss': 100+myLoop*-2,    'set': '100+myLoop*-2'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*3+25,      'set': 'myLoop*3+25'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*myLoop+10, 'set': 'myLoop*myLoop+10'});
+      vegaEmbed(
+          '#myDivVega', {
+            '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
+            'data': {'values': lossValues},
+            'mark': 'line',
+            'encoding': {
+              'x': {'field': 'epoch', 'type': 'quantitative'},
+              'y': {'field': 'loss', 'type': 'quantitative'},
+              'color': {'field': 'set', 'type': 'nominal'},
+            }
+          },
+          {});
+
+     }, 100);    // end the setInterval main loop    
+
+                                                                           
+   
+
+ 
+
+
+}"><br><br>
+
+<div id='myDivVega'>...</div><br>
+<div id='myDiv123'>...</div><br>
