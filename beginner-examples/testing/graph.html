@@ -10,7 +10,8 @@
  var myLoop = 0
                                                                                                                                           
  if (this.value == 'Stop'){ 
-   clearInterval(document.myInterval)                                                        
+   clearInterval(document.myInterval) 
+   } else {                                                               
    document.myInterval = setInterval(function(){                       
       document.getElementById('myButton123').value =  'Stop'                                                            
       myLoop +=1
