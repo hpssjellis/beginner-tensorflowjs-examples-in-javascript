@@ -1,7 +1,38 @@
 Testing 3d graphs
 
 
-try this  
+from the exampes at  
+https://github.com/d3/d3/wiki/Gallery
 
+try this 
+
+
+force.html shows nodes  uses mis2.json
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/force.html
+
+
+
+dendrogram.html make connections  uses flare.csv
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/dendrogram.html
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/
 
