@@ -42,3 +42,18 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/3dplain.html
 
+
+
+
+Iris
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/graphs/3djs/iris.html
+
+
+
+
+
+
+
+
+
+
