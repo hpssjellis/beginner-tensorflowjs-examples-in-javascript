@@ -18,10 +18,10 @@
       myLoop +=1
       document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
                                                                                       
-      lossValues.push({'epoch': myLoop, 'loss': myLoop*2,         'set': 'myLoop*2'});
-      lossValues.push({'epoch': myLoop, 'loss': 100+myLoop*-2,    'set': '100+myLoop*-2'});
-      lossValues.push({'epoch': myLoop, 'loss': myLoop*3+25,      'set': 'myLoop*3+25'});
-      lossValues.push({'epoch': myLoop, 'loss': myLoop*myLoop-100, 'set': 'myLoop*myLoop-100'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*2,          'set': 'myLoop*2'});
+      lossValues.push({'epoch': myLoop, 'loss': 300+myLoop*-2,     'set': '300+myLoop*-2'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*6,          'set': 'myLoop*6'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*myLoop-300, 'set': 'myLoop*myLoop-300'});
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
