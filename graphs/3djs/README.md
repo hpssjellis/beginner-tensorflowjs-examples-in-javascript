@@ -4,6 +4,19 @@ Testing 3d graphs
 from the exampes at  
 https://github.com/d3/d3/wiki/Gallery
 
+
+
+Need this script command
+
+
+
+<script src="https://d3js.org/d3.v5.js"></script>
+
+
+
+
+
+
 try this 
 
 
