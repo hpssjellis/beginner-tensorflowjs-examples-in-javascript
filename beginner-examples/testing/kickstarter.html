@@ -20,10 +20,10 @@
       myLoop +=1
       document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
       
-      const myDesire = tf.sigmoid(tf.scalar(myLoop))                                                           
+      const myDesire = tf.sigmoid(tf.scalar(myLoop)).mul(tf.scalar(300))                                                           
                                                                   
       lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': 10,                   'Label': 'Kickstarter Goal'})
-      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myLoop*myLoop-300,    'Label': 'myLoop*myLoop-300'})
+     // lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myLoop*myLoop-300,    'Label': 'myLoop*myLoop-300'})
       lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myDesire.dataSync(),  'Label': 'Desire'})
       vegaEmbed(
           '#myDivVega', {
