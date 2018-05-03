@@ -18,13 +18,13 @@
    document.myInterval = setInterval(function(){                       
       document.getElementById('myButton123').value =  'Stop'                                                            
       myDollarsRaised +=1
-      document.getElementById('myDiv123').innerHTML = 'Loop #' + myDollarsRaised + '<br>'
+      document.getElementById('myDiv123').innerHTML = 'Kickstarter raised in $' + myDollarsRaised + '<br>'
       
-      const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/100)).mul(tf.scalar(500)).dataSync()                                                           
+      const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/100)).mul(tf.scalar(250)).dataSync()                                                           
                                                                   
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,                   'Label': 'Kickstarter Goal'})
      // lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDollarsRaised*myDollarsRaised-300,    'Label': 'myDollarsRaised*myDollarsRaised-300'})
-      lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDesireToWork,  'Label': 'Desire'})
+      lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDesireToWork,  'Label': 'Desire To work'})
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
