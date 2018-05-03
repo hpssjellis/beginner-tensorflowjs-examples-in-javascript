@@ -7,6 +7,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/graph.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/kickstarter.html
 
 
 
