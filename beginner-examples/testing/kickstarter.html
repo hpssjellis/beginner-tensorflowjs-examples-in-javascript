@@ -4,103 +4,50 @@
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@2.3.1/build/vega-lite.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js"></script>
 
-
- 
-
-Epoch : <input id="myEpoch" type="number" value="10"> Epoch Batches : <input id="myBatch" type="number" value="300"><br>
- 
-<input id="myButton123" type="button" value="Tensorflowjs xOr using layers" onclick="{
-
-   document.getElementById('myButton123').style.backgroundColor = 'red'  
-                                                                            
-                                                                            
-  async function myGo() {
-    const model = tf.sequential();
-
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
-
-/*  
-If unspecified, no activation is applied.
-                                                                                    
-activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
-             'softplus'  |   'softsign'   |  'tanh'  
-                                                                                    
-
-                                                                                                                                                   
-loss : 'meanSquaredError'    |     'meanAbsoluteError'    |    'meanAbsolutePercentageError'    |     'meanSquaredLogarithmicError'    |     
-'squaredHinge'    |     'hinge'    |     'categoricalHinge'    |     'logcosh'    |     'categoricalCrossentropy'    |     
-'sparseCategoricalCrossentropy'    |     'binaryCrossentropy'    |     'kullbackLeiblerDivergence'    |     'poisson'    |     
-'cosineProximity'                                                                                            
- 
-                                                                                            
-                                                                                            
-                                                                                    
-optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'       
-      
-                                                                                
-*/
-                                                                                                                                                                          
-    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
-
-    const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
-    const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
-
-   var lossValues = []
-
-                                                                                    
-    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
-        var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
- 
-        if (myLoop % 10 == 0){   
-             await tf.nextFrame();   // This allows the GUI to update every loop if needed  
-             document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) + ' : ' + myFit.history.acc+'<br><br>'                                                                           
- 
-      console.log(myFit.history['val_loss'])
-
-             lossValues.push({'epoch': myLoop, 'loss': myFit.history.loss[0], 'set': 'train'});
-             lossValues.push({'epoch': myLoop, 'hours': 10, 'set': 'Goal'});
-             lossValues.push({'epoch': myLoop, 'hours': 10000, 'set': Max'});
+<input id="myButton123" type="button" value="Line Graph" onclick="{
+                                                                  
+ var lossValues = []   
+ var myLoop = 0
+                                                                                                                                          
+ if (this.value == 'Stop'){ 
+   clearInterval(document.myInterval) 
+   document.getElementById('myButton123').value =  'Line Graph' 
+ } else {                                                               
+   document.myInterval = setInterval(function(){                       
+      document.getElementById('myButton123').value =  'Stop'                                                            
+      myLoop +=1
+      document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
+                                                                                      
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*2,          'set': 'myLoop*2'});
+      lossValues.push({'epoch': myLoop, 'loss': 300+myLoop*-8,     'set': '300+myLoop*-8'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*6,          'set': 'myLoop*6'});
+      lossValues.push({'epoch': myLoop, 'loss': myLoop*myLoop-300, 'set': 'myLoop*myLoop-300'});
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
             'data': {'values': lossValues},
-            'mark': 'line',
+            'mark':  'line',
             'encoding': {
-              'x': {'field': 'Dollars ($)', 'type': 'quantitative'},
-              'y': {'field': 'Work (hours)', 'type': 'quantitative'},
-              'color': {'field': 'set', 'type': 'nominal'},
+              'x': {
+                  'field': 'epoch', 
+                  'type': 'quantitative', 
+                  'axis': {'orient': 'horizontal'} 
+               },
+              'y': {'field': 'loss', 'type': 'quantitative', 'axis': {'orient': 'vertical'} },
+              'color': {'field': 'set', 'type': 'nominal'}                             
             }
           },
           {});
 
-       
+     }, 500); // run the setInterval again every 500 ms    
 
-        }                                                               
-    }                                                                                    
-                                                                                    
-  /*
+  } // end big if statement                                                                           
+   
 
-  const trainLoss = history.history['loss'][0];
-      const trainAccuracy = history.history['acc'][0];
-      const valLoss = history.history['val_loss'][0];
-      const valAccuracy = history.history['val_acc'][0];
-*/                                                                                  
-                                                                                    
-                                                                                    
-    const myPredictArray = await model.predict(training_data).data()
-                                                                                    
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
-    document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
-  }
-
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color.
+ 
 
 
 }"><br><br>
 
-<div id='myDivVega'>...</div><br>
 <div id='myDiv123'>...</div><br>
+<div id='myDivVega'>...</div><br>
