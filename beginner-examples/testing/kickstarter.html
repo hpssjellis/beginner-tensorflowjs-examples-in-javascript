@@ -18,10 +18,8 @@
       myLoop +=1
       document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
                                                                                       
-      lossValues.push({'epoch': myLoop, 'loss': myLoop*2,          'set': 'myLoop*2'});
-      lossValues.push({'epoch': myLoop, 'loss': 300+myLoop*-8,     'set': '300+myLoop*-8'});
-      lossValues.push({'epoch': myLoop, 'loss': myLoop*6,          'set': 'myLoop*6'});
-      lossValues.push({'epoch': myLoop, 'loss': myLoop*myLoop-300, 'set': 'myLoop*myLoop-300'});
+      lossValues.push({'epoch': myLoop, 'Work': 10,          'set': 'Kickstarter Goal'});
+      lossValues.push({'epoch': myLoop, 'Work': myLoop*myLoop-300, 'set': 'myLoop*myLoop-300'});
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
@@ -29,11 +27,10 @@
             'mark':  'line',
             'encoding': {
               'x': {
-                  'field': 'epoch', 
-                  'type': 'quantitative', 
-                  'axis': {'orient': 'horizontal'} 
+                  'field': 'Dollars ($)', 
+                  'type': 'quantitative' 
                },
-              'y': {'field': 'loss', 'type': 'quantitative', 'axis': {'orient': 'vertical'} },
+              'y': {'field': 'Work (Hours)', 'type': 'quantitative' },
               'color': {'field': 'set', 'type': 'nominal'}                             
             }
           },
