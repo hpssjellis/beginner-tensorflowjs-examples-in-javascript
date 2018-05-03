@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> </script> 
+
+<script src="https://cdn.jsdelivr.net/npm/vega@3.2.1/build/vega.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@2.3.1/build/vega-lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js"></script>
+
+<input id="myButton123" type="button" value="Line Graph" onclick="{
+  
+                                                              
+                                                                  
+ var lossValues = []   
+ var myLoop = 0
+                                                                                                                                          
+ if (this.value == 'Stop'){ 
+   clearInterval(document.myInterval) 
+   document.getElementById('myButton123').value =  'Line Graph' 
+ } else {                                                               
+   document.myInterval = setInterval(function(){                       
+      document.getElementById('myButton123').value =  'Stop'                                                            
+      myLoop +=1
+      document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
+      
+      const myDesire = tf.sigmoid(tf.scalar(myLoop)).mul(tf.scalar(300))                                                           
+                                                                  
+      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': 10,                   'Label': 'Kickstarter Goal'})
+     // lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myLoop*myLoop-300,    'Label': 'myLoop*myLoop-300'})
+      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myDesire.dataSync(),  'Label': 'Desire'})
+      vegaEmbed(
+          '#myDivVega', {
+            '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
+            'data': {'values': lossValues},
+            'mark':  'line',
+            'encoding': {
+              'x': {
+                  'field': 'Dollars($)', 
+                  'type': 'quantitative' 
+               },
+              'y': {
+                   'field': 'Work(Hours)',
+                   'type': 'quantitative' 
+                },
+              'color': {'field': 'Label', 'type': 'nominal'}                             
+            }
+          },
+          {});
+
+     }, 500); // run the setInterval again every 500 ms    
+
+  } // end big if statement                                                                           
+   
+
+ 
+
+
+}"><br><br>
+
+<div id='myDiv123'>...</div><br>
+<div id='myDivVega'>...</div><br>
