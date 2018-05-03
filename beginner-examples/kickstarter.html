@@ -64,8 +64,8 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
  var lossValues = []   
  var myDollarsRaised = 0
                                                                   
- lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 100,  'Label': 'Goal $10 = 100 more hours'})
- lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 100,  'Label': 'Desire To work'})
+ lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,  'Label': 'Goal $10 = 10 more hours'})
+ lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,  'Label': 'Desire To work'})
                                                                                                                                           
  if (this.value == 'Stop'){ 
    clearInterval(document.myInterval) 
@@ -80,10 +80,10 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
  
      if (myDollarsRaised % 50 == 0){
                                                                   
-  const myDesireToWork = tf.sigmoid(tf.scalar(((myDollarsRaised/20) - 100)/20)).mul(tf.scalar(1400)).add(tf.scalar(90)).dataSync()                                                              
+  const myDesireToWork = tf.sigmoid(tf.scalar(((myDollarsRaised/20) - 100)/20)).mul(tf.scalar(1400)).add(tf.scalar(9)).dataSync()                                                              
                                                                        
  
-      lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 100,              'Label': 'Goal $10 = 100 more hours'})
+      lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,              'Label': 'Goal $10 = 10 more hours'})
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDesireToWork,  'Label': 'Desire To work'})
       vegaEmbed(
           '#myDivVega', {
