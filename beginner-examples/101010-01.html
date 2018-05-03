@@ -55,7 +55,7 @@ this sequence
     
 <div id="myDiv123Code"> 
 
-Epoch : <input id="myEpoch" type=number value=10>
+Epoch : <input id="myEpoch" type=number value=500>
 Step to test: <input id="myStep" type=number value=10><br> 
  
 <input id="myButton123" type="button" value="Train and solve for which step" onclick="{
@@ -63,7 +63,7 @@ Step to test: <input id="myStep" type=number value=10><br>
    const model = tf.sequential();
                                                                                                                                                                
    model.add(tf.layers.dense({inputShape: [1],  units: 100, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
+   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu',}) );  // from the 10 hidden layer nodes to 1 output layer
    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
                                                                               
                                                                                  
