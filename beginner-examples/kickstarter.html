@@ -76,9 +76,10 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
      // const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/10)).sub(tf.scalar(10)).mul(tf.scalar(1000)).dataSync()     
   //    const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/10)).mul(tf.scalar(1400)).sub(tf.scalar(400)).dataSync()                                                          
      
-     if (myDollarsRaised % 10 == 0){
-       const myDesireToWork = tf.sigmoid(tf.scalar((myDollarsRaised - 200)/10)).mul(tf.scalar(1400)).sub(tf.scalar(400)).dataSync()                                                             
-                                                                  
+   //  if (myDollarsRaised % 10 == 0){
+     //  const myDesireToWork = tf.sigmoid(tf.scalar((myDollarsRaised - 200)/10)).mul(tf.scalar(1400)).sub(tf.scalar(400)).dataSync()                                                             
+     
+       const myDesireToWork = tf.sigmoid(tf.scalar((myDollarsRaised - 100)/20)).mul(tf.scalar(1400)).add(tf.scalar(100)).dataSync()                                                              
                                                                   
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,              'Label': 'Kickstarter Goal $10 = 10 more hours'})
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDesireToWork,  'Label': 'Desire To work'})
@@ -100,7 +101,7 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
             }
           },
           {});
-        } // end if 
+       // } // end if 
      }, 10); // run the setInterval again every 500 ms    
 
   } // end big if statement                                                                           
