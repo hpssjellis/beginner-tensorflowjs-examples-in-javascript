@@ -74,10 +74,11 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
       document.getElementById('myDiv123').innerHTML = 'May 2018 Kickstarter raised $' + myDollarsRaised + '<br>'
       
 
-     if (myDollarsRaised % 10 == 0){
+ 
+     if (myDollarsRaised % 50 == 0){
                                                              
-    const myDesireToWork = tf.sigmoid(tf.scalar(((myDollarsRaised/10) - 100)/20)).mul(tf.scalar(1400)).add(tf.scalar(100)).dataSync()                                                              
-                                                                      
+    const myDesireToWork = tf.sigmoid(tf.scalar(((myDollarsRaised/20) - 100)/20)).mul(tf.scalar(1400)).add(tf.scalar(90)).dataSync()                                                              
+                                                                       
  
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 100,              'Label': 'Goal $10 = 100 more hours'})
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDesireToWork,  'Label': 'Desire To work'})
