@@ -71,7 +71,7 @@ Blah Blah Blah Blah
       myDollarsRaised +=1
       document.getElementById('myDiv123').innerHTML = 'Kickstarter raised in $' + myDollarsRaised + '<br>'
       
-      const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/100)).mul(tf.scalar(250)).dataSync()                                                           
+      const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/1000)).mul(tf.scalar(1000)).dataSync()                                                           
                                                                   
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,                   'Label': 'Kickstarter Goal'})
      // lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDollarsRaised*myDollarsRaised-300,    'Label': 'myDollarsRaised*myDollarsRaised-300'})
@@ -108,14 +108,8 @@ Blah Blah Blah Blah
 <div id='myDiv123'>...</div><br>
 <div id='myDivVega'>...</div><br>
 
-  <h1 align=center>Please support my Kickstarter so that I can get rid of the Deeplearnjs web pages and videos and replace them 
-    with new Tensorflowjs webpages and videos.<br>This Kickstarter is only live until Friday midnight May 18th 
-  <br><br>
- <a href="https://www.kickstarter.com/projects/rocksetta/as-simple-as-possible-deep-learning-tensorflowjs-j">
-   https://www.kickstarter.com/projects/rocksetta/as-simple-as-possible-deep-learning-tensorflowjs-j<br>
- <img src="tfgs.gif" width="600" /> <a/>
- </h1> 
-  <
+
+  
 
 </div>
 <div id='myDiv123'>...</div><br>
@@ -148,7 +142,13 @@ Blah Blah Blah Blah
 Click here to see the working HTML code.
 </textarea><br>
 
-
+  <h1 align=center>Please support my Kickstarter so that I can get rid of the Deeplearnjs web pages and videos and replace them 
+    with new Tensorflowjs webpages and videos.<br>This Kickstarter is only live until Friday midnight May 18th 
+  <br><br>
+ <a href="https://www.kickstarter.com/projects/rocksetta/as-simple-as-possible-deep-learning-tensorflowjs-j">
+   https://www.kickstarter.com/projects/rocksetta/as-simple-as-possible-deep-learning-tensorflowjs-j<br>
+ <img src="tfgs.gif" width="600" /> <a/>
+ </h1> 
 
 
 <br><br><br><hr><br><br><br><br>
