@@ -77,7 +77,7 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
   //    const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/10)).mul(tf.scalar(1400)).sub(tf.scalar(400)).dataSync()                                                          
      
      if (myDollarsRaised % 10 == 0){
-       const myDesireToWork = tf.sigmoid(tf.scalar((myDollarsRaised - 200)/10)).dataSync()                                                                
+       const myDesireToWork = tf.sigmoid(tf.scalar((myDollarsRaised - 200)/10)).mul(tf.scalar(1400)).sub(tf.scalar(400)).dataSync()                                                             
                                                                   
                                                                   
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,              'Label': 'Kickstarter Goal $10 = 10 more hours'})
