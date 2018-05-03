@@ -47,7 +47,8 @@
 this sequence 
  [1, 2, 3, 4, 5, 6, 7, 8] <br>
  generating this sequence <br>
- [1, 0, 1, 0, 1, 0, 1, 0]
+ [1, 0, 1, 0, 1, 0, 1, 0]<br><br>
+ For step 10 Expecting ~0<br>
 </div><br>
 
 
@@ -58,11 +59,13 @@ Epoch : <input id="myEpoch" type=number value=10>
 Step to test: <input id="myStep" type=number value=10><br> 
  
 <input id="myButton123" type="button" value="1, 0, 1, 0, 1, 0, 1, , 0?" onclick="{
-     const model = tf.sequential();
+   document.getElementById('myDiv123').innerHTML =  ''                                                                            
+   const model = tf.sequential();
                                                                                                                                                                
-    model.add(tf.layers.dense({inputShape: [1],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
-                                                                            
+   model.add(tf.layers.dense({inputShape: [1],  units: 100, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
+   model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
+                                                                              
                                                                                  
                                                                                  
                                                                                  
@@ -74,7 +77,7 @@ Step to test: <input id="myStep" type=number value=10><br>
     const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
         // predict for 10 should be 0     
        const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
-      document.getElementById('myDiv123').innerHTML =  'Expecting ~0 Got : ' + myResult.toFixed(3)                                                                           
+      document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(3)                                                                           
     });                                                       
 }"><br><br>
 
