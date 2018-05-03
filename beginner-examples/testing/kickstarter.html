@@ -5,6 +5,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.2.0/build/vega-embed.js"></script>
 
 <input id="myButton123" type="button" value="Line Graph" onclick="{
+  
+                                                              
                                                                   
  var lossValues = []   
  var myLoop = 0
@@ -17,9 +19,12 @@
       document.getElementById('myButton123').value =  'Stop'                                                            
       myLoop +=1
       document.getElementById('myDiv123').innerHTML = 'Loop #' + myLoop + '<br>'
-                                                                                      
-      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': 10,                'set': 'Kickstarter Goal'})
-      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myLoop*myLoop-300, 'set': 'myLoop*myLoop-300'})
+      
+      const myDesire = tf.sigmoid(tf.scalar(myLoop))                                                           
+                                                                  
+      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': 10,                   'Label': 'Kickstarter Goal'})
+      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myLoop*myLoop-300,    'Label': 'myLoop*myLoop-300'})
+      lossValues.push({'Dollars($)': myLoop, 'Work(Hours)': myDesire.dataSync(),  'Label': 'Desire'})
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
@@ -34,7 +39,7 @@
                    'field': 'Work(Hours)',
                    'type': 'quantitative' 
                 },
-              'color': {'field': 'set', 'type': 'nominal'}                             
+              'color': {'field': 'Label', 'type': 'nominal'}                             
             }
           },
           {});
