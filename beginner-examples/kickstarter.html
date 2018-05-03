@@ -81,7 +81,8 @@ Click the button and see how your Kickstarter pledge effects my desire to keep t
      
        const myDesireToWork = tf.sigmoid(tf.scalar((myDollarsRaised - 100)/20)).mul(tf.scalar(1400)).add(tf.scalar(100)).dataSync()                                                              
                                                                   
-      lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,              'Label': 'Kickstarter Goal $10 = 10 more hours'})
+ 
+      lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 100,              'Label': 'Goal $10 = 100 more hours'})
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDesireToWork,  'Label': 'Desire To work'})
       vegaEmbed(
           '#myDivVega', {
