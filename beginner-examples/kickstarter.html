@@ -44,7 +44,9 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Click the button and see how your Kickstarter pledge effects my desire to keep teaching Tensorflowjs. Or just go straight 
+ to my <a href="https://www.kickstarter.com/projects/rocksetta/as-simple-as-possible-deep-learning-tensorflowjs-j">kickstarter</a> 
+ and make a pledge. Even 1$ is appreciated.
 </div><br>
 
 
@@ -71,7 +73,7 @@ Blah Blah Blah Blah
       myDollarsRaised +=1
       document.getElementById('myDiv123').innerHTML = 'Kickstarter raised in $' + myDollarsRaised + '<br>'
       
-      const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/1000)).mul(tf.scalar(1000)).dataSync()                                                           
+      const myDesireToWork = tf.sigmoid(tf.scalar(myDollarsRaised/10)).sub(tf.scalar(10)).mul(tf.scalar(1000)).dataSync()                                                           
                                                                   
       lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': 10,                   'Label': 'Kickstarter Goal'})
      // lossValues.push({'Dollars($)': myDollarsRaised, 'Work(Hours)': myDollarsRaised*myDollarsRaised-300,    'Label': 'myDollarsRaised*myDollarsRaised-300'})
