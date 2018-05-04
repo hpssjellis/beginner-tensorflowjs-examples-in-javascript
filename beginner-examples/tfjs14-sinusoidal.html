@@ -44,13 +44,8 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-this sequence 
- [1, 2, 3, 4, 5, 6, 7, 8] <br>
- generating this sequence <br>
- [1, 0, 1, 0, 1, 0, 1, 0]<br><br>
- For step 10 Expecting ~0<br><br>
- 
- SO THIS IS NOT WORKING VERY WELL. SUPPOSSEDLY SINE FUNCTIONS ARE HARD TO INFER BEYOND THE TRAINING DATA<BR>
+I love sinusoidal curves, especially when you add several of them, but for this webpage I thought I 
+ would test how bad sinusoidals are at infering beyond the data. <BR>
 </div><br>
 
 
@@ -63,7 +58,7 @@ this sequence
 
 Number samples : <input id="mySamples" type="number" value="100"><br>
 Epoch : <input id="myEpoch" type=number value=5>Epoch Batches : <input id="myBatch" type=number value=100>
-Step to test: <input id="myStep" type=number value=200><br> 
+Step to test: <input id="myStep" type=number value=10><br> 
  
  Try this sinusoidal <br>
 y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X - 
@@ -73,8 +68,8 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
  
  
  
- <textarea id="myX" cols=120 cols=10></textarea><br>
- <textarea id="myY" cols=120 cols=10></textarea><br>
+ <textarea id="myX" cols=120 cols=10>1, 2, 3, 4, 5, 6, 7, 8</textarea><br>
+ <textarea id="myY" cols=120 cols=10>1, 0, 1, 0, 1, 0, 1, 0</textarea><br>
  
  
 <input id="myButton123" type="button" value="Line Graph" onclick="{
@@ -154,11 +149,7 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
 
     const xs = tf.tensor2d(document.getElementById('myX').value.split(','), [parseInt(document.getElementById('mySamples').value)+1, 1]);
     const ys = tf.tensor2d(document.getElementById('myY').value.split(','), [parseInt(document.getElementById('mySamples').value)+1, 1]);
-
-    //const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
-
-   
-                                                                                    
+                                                                                       
     for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
         var myFit = await model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value});
         if (myLoop % 20 == 0){   
@@ -167,12 +158,7 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
         }
                                                                    
     }                                                                       
-                                                                      
-                                                                      
-                                                                      
-                                                                      
-                                                                      
-                                                                      
+                                                                    
     const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
                                                                                       
     document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(2)                                                                           
