@@ -78,8 +78,9 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
  
  
 <input id="myButton123" type="button" value="Train and solve for which step" onclick="{
-      myTempY = []            
-      myTempX = []                                                                              
+    myTempY = []            
+    myTempX = [] 
+    lossValues = []
     for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
       myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin((2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
       myTempX[myCount] = myCount
@@ -103,17 +104,10 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
               'color': {'field': 'Label', 'type': 'nominal'}                             
             }
           },
-          {});
-       } // end if 
-     }, 10); // run the setInterval again every 500 ms    
-                                                                                  
+          {})
+
                                                                                       
-                                                                                      
-                                                                                      
-                                                                                      
-                                                                                      
-                                                                                      
-     }                                                                                  
+     }      // end for loop                                                                            
                                                                                       
      document.getElementById('myX').value    = myTempX                     
      document.getElementById('myY').value    = myTempY                                                                            
@@ -144,7 +138,16 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
     });                                                       
 }"><br><br>
 
+ 
+ 
+
+<div id='myDivVega '>...</div><br> 
+ 
 </div>
+ 
+ 
+ 
+ 
 <div id='myDiv123'>...</div><br>
 
 
