@@ -102,7 +102,7 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
       myTempX[myCount] = myCount
       
                                                                                       
-      lossValues.push({'Time': myCount, 'Amount': myTempY[myCount] ,  'Label': 'Sine'})
+      lossValues.push({'Time': myCount, 'Step': myTempY[myCount] ,  'Label': 'Sine'})
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
@@ -114,7 +114,7 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
                   'type': 'quantitative' 
                },
               'y': {
-                   'field': 'Amount',
+                   'field': 'Step',
                    'type': 'quantitative' 
                 },
               'color': {'field': 'Label', 'type': 'nominal'}                             
@@ -144,8 +144,8 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
    document.getElementById('myDiv123').innerHTML =  ''                                                                            
    const model = tf.sequential();
                                                                                                                                                                
-   model.add(tf.layers.dense({inputShape: [1],   units: 100, activation: 'sigmoid'}) );  
-   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [1],   units: 10, activation: 'sigmoid'}) );  
+ //  model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu'}) );  
    model.add(tf.layers.dense({inputShape: [10],  units: 1,   activation: 'sigmoid'}) );  
                                                                               
                                                                                  
