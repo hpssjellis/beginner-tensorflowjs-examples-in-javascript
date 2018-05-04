@@ -83,13 +83,14 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
     lossValues = []
     for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
     //  myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin((2* Math.PI * (myCount - parseFloat(document.getElementById('myXshift').value)))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
-      myTempY[myCount]  = ( (parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * (myCount -    parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+    //  myTempY[myCount]  = ( (parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * (myCount -    parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+       myTempY[myCount]  = (  Math.sin( 2 * Math.PI * (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )                                                              
       
                                                                                       
       myTempX[myCount] = myCount
       
                                                                                       
-      lossValues.push({'Dollars($)': myCount, 'Work(Hours)': myTempY[myCount] ,  'Label': 'Desire To work'})
+      lossValues.push({'Time': myCount, 'Amount': myTempY[myCount] ,  'Label': 'Desire To work'})
       vegaEmbed(
           '#myDivVega', {
             '$schema': 'https://vega.github.io/schema/vega-lite/v2.json',
@@ -97,11 +98,11 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
             'mark':  'line',
             'encoding': {
               'x': {
-                  'field': 'Dollars($)', 
+                  'field': 'Time', 
                   'type': 'quantitative' 
                },
               'y': {
-                   'field': 'Work(Hours)',
+                   'field': 'Amount',
                    'type': 'quantitative' 
                 },
               'color': {'field': 'Label', 'type': 'nominal'}                             
