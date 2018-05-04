@@ -150,8 +150,7 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
                                                                               
                                                                                  
                                                                                  
-                                                                                 
-    model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+   model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 
     const xs = tf.tensor2d(document.getElementById('myX').value.split(','), [parseInt(document.getElementById('mySamples').value)+1, 1]);
     const ys = tf.tensor2d(document.getElementById('myY').value.split(','), [parseInt(document.getElementById('mySamples').value)+1, 1]);
