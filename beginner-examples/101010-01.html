@@ -96,10 +96,7 @@ y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X -
 
       document.getElementById('myDiv123').innerHTML = 'Push stop when ready to train<br>'
       
-
-
-   // for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
-       myTempY[myCount]  = ((parseFloat(document.getElementById('myAmp').value)  *   Math.sin( (2 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  -  parseFloat(document.getElementById('myYshift').value) )                                                            
+       myTempY[myCount]  = (((parseFloat(document.getElementById('myAmp').value)  *   Math.sin( (2 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  -  parseFloat(document.getElementById('myYshift').value) )).toFixed(2)                                                            
       
                                                                                       
       myTempX[myCount] = myCount
@@ -139,7 +136,8 @@ y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X -
                                                                                       
     }       // end else if                                                                        
            
-                                                                            
+ }">
+<input id="myButton123" type="button" value="Train and Test" onclick="{                                                                          
                                                                                       
                                                                                       
                                                                                       
@@ -162,7 +160,7 @@ y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X -
 
     const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
                                                                                       
-    document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(3)                                                                           
+    document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(2)                                                                           
     });                                                       
 }"><br><br>
 
