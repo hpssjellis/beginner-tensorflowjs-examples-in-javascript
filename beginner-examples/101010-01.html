@@ -77,13 +77,28 @@ y =  <input id="myAmp" type=number value=300> * sin((2PI * X -
  <textarea id="myY" cols=80></textarea><br>
  
  
-<input id="myButton123" type="button" value="Train and solve for which step" onclick="{
-    myTempY = []            
-    myTempX = [] 
-    lossValues = []
-    for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
-    //  myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin((2* Math.PI * (myCount - parseFloat(document.getElementById('myXshift').value)))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
-    //  myTempY[myCount]  = ( (parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * (myCount -    parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+<input id="myButton123" type="button" value="Line Graph" onclick="{
+  
+                                                              
+                                                                  
+ var lossValues = []   
+ myCount = 0  
+ myTempY = []            
+ myTempX = [] 
+                                                                  
+                                                                  
+ if (this.value == 'Stop'){ 
+   clearInterval(document.myInterval) 
+   document.getElementById('myButton123').value =  'Line Graph' 
+ } else {                                                               
+   document.myInterval = setInterval(function(){                       
+      document.getElementById('myButton123').value =  'Stop'                                                            
+      myCount +=1
+      document.getElementById('myDiv123').innerHTML = 'Stuff here '<br>'
+      
+
+
+   // for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
        myTempY[myCount]  = ((parseFloat(document.getElementById('myAmp').value)  *   Math.sin( 2 * Math.PI * (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  -  parseFloat(document.getElementById('myYshift').value) )                                                            
       
                                                                                       
@@ -109,14 +124,14 @@ y =  <input id="myAmp" type=number value=300> * sin((2PI * X -
             }
           },
           {})
-
+     }, 10); // run the setInterval again every 500 ms    
         //  document.getElementById('myDivVega').style.display= 'none'         
         //  document.getElementById('myDivVega').style.display= 'block'                                                                           
                                                                                       
          
                                                                                       
                                                                                       
-     }      // end for loop                                                                            
+    }      // end else                                                                          
                                                                                       
      document.getElementById('myX').value    = myTempX                     
      document.getElementById('myY').value    = myTempY                                                                            
