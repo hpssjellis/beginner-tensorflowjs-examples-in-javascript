@@ -144,8 +144,11 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
    document.getElementById('myDiv123').innerHTML =  ''                                                                            
    const model = tf.sequential();
                                                                                                                                                                
-   model.add(tf.layers.dense({inputShape: [1],   units: 100, activation: 'sigmoid'}) );  
-   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [1],   units: 10, activation: 'sigmoid'}) );  
+   model.add(tf.layers.dense({inputShape: [10], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [10], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [10], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [10], units: 10,  activation: 'relu'}) );  
    model.add(tf.layers.dense({inputShape: [10],  units: 1,   activation: 'sigmoid'}) );  
                                                                               
                                                                                  
