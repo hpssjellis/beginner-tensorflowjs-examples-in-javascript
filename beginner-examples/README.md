@@ -36,3 +36,9 @@ https://groups.google.com/a/tensorflow.org/forum/#!topic/tfjs/7QC_Y-ABLSA
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs14-sinusoidal.html
 
 
+
+
+kerase  model 
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs15-keras.html
+
