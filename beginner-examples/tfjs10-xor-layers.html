@@ -75,7 +75,7 @@ Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myB
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
 
-/*  
+/*   -------------------------------------------------------------------------------------------------------
 
 Key words to Search:                                                                                    
 --------------------------------------Layers:------------------------------------
@@ -142,24 +142,54 @@ zeroPadding2d
  ------------------------------------------------------ activation :------------------------------------------                                                                                   
                                                                                     
                                                                                     
-activation : 'elu'  |  'hardsigmoid'  |  'linear'  |  'relu'  |  'relu6'  |  'selu'  |  'sigmoid'  |  'softmax'  |  
-             'softplus'  |   'softsign'   |  'tanh'  
+activation : 
+                                                                                    
+elu    
+hardsigmoid    
+linear    
+relu    
+relu6    
+selu    
+sigmoid    
+softmax                
+softplus     
+softsign     
+tanh  
                                                                                     
 
-------------------------------------------------------------------------------------      
+------------------------------------------loss :------------------------------------------      
                                                                                     
-loss : 'meanSquaredError'    |     'meanAbsoluteError'    |    'meanAbsolutePercentageError'    |     'meanSquaredLogarithmicError'    |     
-'squaredHinge'    |     'hinge'    |     'categoricalHinge'    |     'logcosh'    |     'categoricalCrossentropy'    |     
-'sparseCategoricalCrossentropy'    |     'binaryCrossentropy'    |     'kullbackLeiblerDivergence'    |     'poisson'    |     
-'cosineProximity'                                                                                            
- 
+loss :
+                                                                                    
+meanSquaredError 
+meanAbsoluteError
+meanAbsolutePercentageError
+meanSquaredLogarithmicError
+squaredHinge
+hinge
+categoricalHinge
+logcosh
+categoricalCrossentropy
+sparseCategoricalCrossentropy
+binaryCrossentropy
+kullbackLeiblerDivergence
+poisson
+
+cosineProximity                                                                                   
+                                                                                    
                                                                                             
                                                                                             
--------------------------------------------------------------------------------------  
+---------------------------------------optimizer:----------------------------------------------  
                                                                                     
-optimizer: 'sgd' |   'rmsprop'     |  'adagrad'      |  'adam'  |  'momentum'       
+optimizer: 
+                                                                                    
+sgd       
+rmsprop          
+adagrad           
+adam       
+momentum      
       
-                                                                                
+------------------------------------------END Comments-------------------------------------------                                                                                  
 */
                                                                                                                                                                           
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
