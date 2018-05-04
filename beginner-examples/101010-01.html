@@ -57,6 +57,7 @@ this sequence
     
 <div id="myDiv123Code"> 
 
+Number samples : <input id="mySamples" type="number" value="10"><br>
 Epoch : <input id="myEpoch" type=number value=500>
 Step to test: <input id="myStep" type=number value=10><br> 
  
@@ -75,7 +76,7 @@ y =  <input id="myAmp" type=number value=3> * sin((PI * X -
 <input id="myButton123" type="button" value="Train and solve for which step" onclick="{
       myTempY = []            
       myTempX = []                                                                              
-    for (myCount=0; myCount <= 99; myCount++){
+    for (myCount=0; myCount <= document.getElementById('myAmp').value - 1; myCount++){
       myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
       myTempX[myCount] = myCount
                                                                                       
@@ -99,8 +100,8 @@ y =  <input id="myAmp" type=number value=3> * sin((PI * X -
                                                                                  
     model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
-    const xs = tf.tensor2d(myTempX, [100, 1]);
-    const ys = tf.tensor2d(myTempY, [100, 1]);
+    const xs = tf.tensor2d(myTempX, [document.getElementById('myAmp').value, 1]);
+    const ys = tf.tensor2d(myTempY, [document.getElementById('myAmp').value, 1]);
 
     const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
 
