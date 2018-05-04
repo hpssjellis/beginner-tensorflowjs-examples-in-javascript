@@ -33,6 +33,6 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 Help wanted on Tensorflowjs google group  
 https://groups.google.com/a/tensorflow.org/forum/#!topic/tfjs/7QC_Y-ABLSA  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/101010-01.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs14-sinusoidal.html
 
 
