@@ -61,13 +61,31 @@ Epoch : <input id="myEpoch" type=number value=500>
 Step to test: <input id="myStep" type=number value=10><br> 
  
  Try this sinusoidal <br>
-y =  <input id="myAmp" type=number value=3> x (PI * <input id="myX" type=number value=3> - 
+y =  <input id="myAmp" type=number value=3> * (PI * X - 
  <input id="myXshift" type=number value=6>/<input id="myWavelength" type=number value=4> )
  
  + <input id="myYshift" type=number value=5>
  
  
+ <textarea id="myX"></textrea>
+ <textarea id="myy"></textrea>
+ 
+ 
 <input id="myButton123" type="button" value="Train and solve for which step" onclick="{
+      mytempY = []            
+      mytempX = []                                                                              
+    for (myCount=0; myCount <= 10; myCount++){
+      myTempY[myCount]  = ((  parseFloat(document.getElementById('myAmp').value)  * Math.PI() * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  )   -  parseFloat(document.getElementById('myYshift').value)                                                                        
+      myTempX[myCount] = myCount
+                                                                                      
+     }                                                                                  
+                                                                                      
+     parseFloat(document.getElementById('myX').value    = myTempX                     
+     parseFloat(document.getElementById('myY').value    = myTempY                                                                            
+                                                                                      
+                                                                                      
+                                                                                      
+                                                                                      
    document.getElementById('myDiv123').innerHTML =  ''                                                                            
    const model = tf.sequential();
                                                                                                                                                                
