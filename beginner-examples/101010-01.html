@@ -66,7 +66,7 @@ Epoch : <input id="myEpoch" type=number value=500>
 Step to test: <input id="myStep" type=number value=10><br> 
  
  Try this sinusoidal <br>
-y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X - 
+y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X - 
  <input id="myXshift" type=number value=0>)/<input id="myWavelength" type=number value=40> )
  
 + <input id="myYshift" type=number value=0><br>
@@ -96,7 +96,7 @@ y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X -
 
       document.getElementById('myDiv123').innerHTML = 'Push stop when ready to train<br>'
       
-       myTempY[myCount]  = (((parseFloat(document.getElementById('myAmp').value)  *   Math.sin( (2 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  +  parseFloat(document.getElementById('myYshift').value) )).toFixed(2)                                                            
+       myTempY[myCount]  = (((parseFloat(document.getElementById('myAmp').value) *40 *   Math.sin( (2 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  +  parseFloat(document.getElementById('myYshift').value) )).toFixed(2)                                                            
       
                                                                                       
       myTempX[myCount] = myCount
