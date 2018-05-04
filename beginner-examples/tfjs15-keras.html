@@ -54,9 +54,9 @@ Blah Blah Blah Blah
 <input id="myButton123" type=button value="Tensorflowjs Keras Layers"  onclick="{
    const model = tf.sequential();
 
-    model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 10, activation: 'sigmoid' }) );  
-    model.add(tf.layers.dense({ units:  1, activation: 'sigmoid' }) );  
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
 
    model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
