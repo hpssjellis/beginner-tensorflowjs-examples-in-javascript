@@ -76,7 +76,7 @@ y =  <input id="myAmp" type=number value=3> * ((PI * X -
       myTempY = []            
       myTempX = []                                                                              
     for (myCount=0; myCount <= 10; myCount++){
-      myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * 2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  )   -  parseFloat(document.getElementById('myYshift').value) )                                                                       
+      myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * 2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  )   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
       myTempX[myCount] = myCount
                                                                                       
      }                                                                                  
