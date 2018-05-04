@@ -48,36 +48,66 @@ this sequence
  [1, 2, 3, 4, 5, 6, 7, 8] <br>
  generating this sequence <br>
  [1, 0, 1, 0, 1, 0, 1, 0]<br><br>
- For step 10 Expecting ~0<br>
+ For step 10 Expecting ~0<br><br>
+ 
+ SO THIS IS NOT WORKING VERY WELL. SUPPOSSEDLY SINE FUNCITONS ARE HARD TO INFER BEYOND THE TRAINING DATA<BR>
 </div><br>
 
 
     
 <div id="myDiv123Code"> 
 
+Number samples : <input id="mySamples" type="number" value="10"><br>
 Epoch : <input id="myEpoch" type=number value=500>
 Step to test: <input id="myStep" type=number value=10><br> 
  
+ Try this sinusoidal <br>
+y =  <input id="myAmp" type=number value=3> * sin((2PI * X - 
+ <input id="myXshift" type=number value=6>)/<input id="myWavelength" type=number value=4> )
+ 
+ + <input id="myYshift" type=number value=5><br>
+ 
+ 
+ 
+ <textarea id="myX" cols=80></textarea><br>
+ <textarea id="myY" cols=80></textarea><br>
+ 
+ 
 <input id="myButton123" type="button" value="Train and solve for which step" onclick="{
+      myTempY = []            
+      myTempX = []                                                                              
+    for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
+      myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin((2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+      myTempX[myCount] = myCount
+                                                                                      
+     }                                                                                  
+                                                                                      
+     document.getElementById('myX').value    = myTempX                     
+     document.getElementById('myY').value    = myTempY                                                                            
+                                                                                      
+                                                                                      
+                                                                                      
+                                                                                      
    document.getElementById('myDiv123').innerHTML =  ''                                                                            
    const model = tf.sequential();
                                                                                                                                                                
-   model.add(tf.layers.dense({inputShape: [1],  units: 100, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu',}) );  // from the 10 hidden layer nodes to 1 output layer
-   model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
+   model.add(tf.layers.dense({inputShape: [1],   units: 100, activation: 'sigmoid'}) );  
+   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [10],  units: 1,   activation: 'sigmoid'}) );  
                                                                               
                                                                                  
                                                                                  
                                                                                  
     model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
-    const xs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8], [8, 1]);
-    const ys = tf.tensor2d([1, 0, 1, 0, 1, 0, 1, 0], [8, 1]);
+    const xs = tf.tensor2d(myTempX, [document.getElementById('mySamples').value, 1]);
+    const ys = tf.tensor2d(myTempY, [document.getElementById('mySamples').value, 1]);
 
     const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
-        // predict for 10 should be 0     
-       const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
-      document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(3)                                                                           
+
+    const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
+                                                                                      
+    document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(3)                                                                           
     });                                                       
 }"><br><br>
 
