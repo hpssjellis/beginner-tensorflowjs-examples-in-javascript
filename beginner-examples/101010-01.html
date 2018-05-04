@@ -99,7 +99,7 @@ y =  <input id="myAmp" type=number value=300> * sin((2PI * X -
 
 
    // for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
-       myTempY[myCount]  = ((parseFloat(document.getElementById('myAmp').value)  *   Math.sin( 2 * Math.PI * (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  -  parseFloat(document.getElementById('myYshift').value) )                                                            
+       myTempY[myCount]  = ((parseFloat(document.getElementById('myAmp').value)  *   Math.sin( (2 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift').value)   )) / parseFloat(document.getElementById('myWavelength').value)  )  -  parseFloat(document.getElementById('myYshift').value) )                                                            
       
                                                                                       
       myTempX[myCount] = myCount
@@ -135,7 +135,7 @@ y =  <input id="myAmp" type=number value=300> * sin((2PI * X -
                                                                                       
      document.getElementById('myX').value    = myTempX                     
      document.getElementById('myY').value    = myTempY                                                                            
-                                                                                      
+     document.getElementById('mySamples').value = myCount                                                                                
                                                                                       
                                                                                       
                                                                                       
@@ -151,8 +151,8 @@ y =  <input id="myAmp" type=number value=300> * sin((2PI * X -
                                                                                  
     model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
-    const xs = tf.tensor2d(myTempX, [document.getElementById('mySamples').value, 1]);
-    const ys = tf.tensor2d(myTempY, [document.getElementById('mySamples').value, 1]);
+    const xs = tf.tensor2d(myTempX, [myCount, 1]);
+    const ys = tf.tensor2d(myTempY, [myCount, 1]);
 
     const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
 
