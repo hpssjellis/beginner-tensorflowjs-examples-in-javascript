@@ -48,7 +48,9 @@ this sequence
  [1, 2, 3, 4, 5, 6, 7, 8] <br>
  generating this sequence <br>
  [1, 0, 1, 0, 1, 0, 1, 0]<br><br>
- For step 10 Expecting ~0<br>
+ For step 10 Expecting ~0<br><br>
+ 
+ SO THIS IS NOT WORKING VERY WELL. SUPPOSSEDLY SINE FUNCITONS ARE HARD TO INFER BEYOND THE TRAINING DATA<BR>
 </div><br>
 
 
@@ -62,9 +64,9 @@ Step to test: <input id="myStep" type=number value=10><br>
    document.getElementById('myDiv123').innerHTML =  ''                                                                            
    const model = tf.sequential();
                                                                                                                                                                
-   model.add(tf.layers.dense({inputShape: [1],  units: 100, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu',}) );  // from the 10 hidden layer nodes to 1 output layer
-   model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer
+   model.add(tf.layers.dense({inputShape: [1],   units: 100, activation: 'sigmoid'}) );  
+   model.add(tf.layers.dense({inputShape: [100], units: 10,  activation: 'relu'}) );  
+   model.add(tf.layers.dense({inputShape: [10],  units: 1,   activation: 'sigmoid'}) );  
                                                                               
                                                                                  
                                                                                  
