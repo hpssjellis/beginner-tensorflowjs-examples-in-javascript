@@ -75,7 +75,7 @@ y =  <input id="myAmp" type=number value=3> * ((PI * X -
 <input id="myButton123" type="button" value="Train and solve for which step" onclick="{
       myTempY = []            
       myTempX = []                                                                              
-    for (myCount=0; myCount <= 10; myCount++){
+    for (myCount=0; myCount <= 99; myCount++){
       myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * 2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  )   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
       myTempX[myCount] = myCount
                                                                                       
@@ -99,13 +99,14 @@ y =  <input id="myAmp" type=number value=3> * ((PI * X -
                                                                                  
     model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
-    const xs = tf.tensor2d([1, 2, 3, 4, 5, 6, 7, 8], [8, 1]);
-    const ys = tf.tensor2d([1, 0, 1, 0, 1, 0, 1, 0], [8, 1]);
+    const xs = tf.tensor2d(myTempX, [100, 1]);
+    const ys = tf.tensor2d(myTempY, [100, 1]);
 
     const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
-        // predict for 10 should be 0     
-       const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
-      document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(3)                                                                           
+
+    const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
+                                                                                      
+    document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(3)                                                                           
     });                                                       
 }"><br><br>
 
