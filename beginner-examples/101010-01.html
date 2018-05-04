@@ -61,7 +61,7 @@ Epoch : <input id="myEpoch" type=number value=500>
 Step to test: <input id="myStep" type=number value=10><br> 
  
  Try this sinusoidal <br>
-y =  <input id="myAmp" type=number value=3> * ((PI * X - 
+y =  <input id="myAmp" type=number value=3> * sin((PI * X - 
  <input id="myXshift" type=number value=6>)/<input id="myWavelength" type=number value=4> )
  
  + <input id="myYshift" type=number value=5><br>
@@ -76,7 +76,7 @@ y =  <input id="myAmp" type=number value=3> * ((PI * X -
       myTempY = []            
       myTempX = []                                                                              
     for (myCount=0; myCount <= 99; myCount++){
-      myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * 2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  )   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+      myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * myCount - parseFloat(document.getElementById('myXshift').value)) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
       myTempX[myCount] = myCount
                                                                                       
      }                                                                                  
