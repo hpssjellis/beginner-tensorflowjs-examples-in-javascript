@@ -156,8 +156,24 @@ y =  <input id="myAmp" type=number value=20> * sin(((2PI/180) * X -
     const xs = tf.tensor2d(document.getElementById('myX').value.split(','), [parseInt(document.getElementById('mySamples').value)+1, 1]);
     const ys = tf.tensor2d(document.getElementById('myY').value.split(','), [parseInt(document.getElementById('mySamples').value)+1, 1]);
 
-    const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
+    //const h = model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value}).then(() => {
 
+   
+                                                                                    
+    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys,{'epochs':document.getElementById('myEpoch').value});
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+        }
+                                                                   
+    }                                                                       
+                                                                      
+                                                                      
+                                                                      
+                                                                      
+                                                                      
+                                                                      
     const myResult =    model.predict(tf.tensor2d(document.getElementById('myStep').value.split(','), [1,1])).dataSync()[0]
                                                                                       
     document.getElementById('myDiv123').innerHTML =  'For step '+document.getElementById('myStep').value+' Got : ' + myResult.toFixed(2)                                                                           
