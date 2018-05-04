@@ -82,8 +82,8 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
     myTempX = [] 
     lossValues = []
     for (myCount=0; myCount <= document.getElementById('mySamples').value - 1; myCount++){
-      myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin((2* Math.PI * (myCount - parseFloat(document.getElementById('myXshift').value)))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
-    //  myTempY[myCount]  = ( (parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * (myCount -    parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+    //  myTempY[myCount]  = (((  parseFloat(document.getElementById('myAmp').value)  * Math.sin((2* Math.PI * (myCount - parseFloat(document.getElementById('myXshift').value)))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
+      myTempY[myCount]  = ( (parseFloat(document.getElementById('myAmp').value)  * Math.sin(2* Math.PI * (myCount -    parseFloat(document.getElementById('myXshift').value))) / parseFloat(document.getElementById('myWavelength').value)  ))   -  parseFloat(document.getElementById('myYshift').value) ).toFixed(3)                                                                       
       
                                                                                       
       myTempX[myCount] = myCount
@@ -109,6 +109,10 @@ y =  <input id="myAmp" type=number value=3> * sin((2PI * X -
           },
           {})
 
+          document.getElementById('myDivVega').style.display= 'none'         
+          document.getElementById('myDivVega').style.display= 'block'                                                                           
+                                                                                      
+                                                                                      
                                                                                       
      }      // end for loop                                                                            
                                                                                       
