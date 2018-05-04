@@ -93,7 +93,7 @@ y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X -
  } else {                                                               
    document.myInterval = setInterval(function(){                       
       document.getElementById('myButton123').value =  'Stop'                                                            
-      myCount +=1
+
       document.getElementById('myDiv123').innerHTML = 'Push stop when ready to train<br>'
       
 
@@ -128,8 +128,10 @@ y =  <input id="myAmp" type=number value=300> * sin(((2PI/180) * X -
                                                                   
      document.getElementById('myX').value    = myTempX                     
      document.getElementById('myY').value    = myTempY                                                                            
-     document.getElementById('mySamples').value = myCount                                                                  
+     document.getElementById('mySamples').value = myCount 
                                                                   
+                                                                  
+     myCount +=1                                                             
                                                                                                                                
      }, 10);   // end setInterval
                                                                        
