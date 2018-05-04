@@ -2,6 +2,11 @@
 
 Working on graphing
 
+layers  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/layers.html
+
+
+
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/xor03.html
 
