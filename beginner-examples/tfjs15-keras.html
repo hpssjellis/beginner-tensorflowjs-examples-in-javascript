@@ -54,7 +54,7 @@ Blah Blah Blah Blah
 <input id="myButton123" type=button value="Tensorflowjs Keras Layers"  onclick="{
    const model = tf.sequential();
 
-    model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [1], }) );  
+    model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [1] }) );  
     model.add(tf.layers.dense({ units: 10, activation: 'sigmoid' }) );  
     model.add(tf.layers.dense({ units:  1, activation: 'sigmoid' }) );  
 
@@ -74,8 +74,8 @@ Blah Blah Blah Blah
                                                                             
   (async function () {
                                                                                     
-    for (let myLoop = 1; myLoop <= 10; myLoop++) {                                                                                 
-        var myFit = await model.fit(xs, ys, { epochs: 100 });
+    for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys, { epochs: 10 });
         if (myLoop % 20 == 0){   
              await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
              document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
@@ -88,10 +88,10 @@ Blah Blah Blah Blah
                                                                                     
     const myPredictArray = await  model.predict(tf.tensor2d([[5]], [1, 1]))  
                                                                                     
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0] +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1]+'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2] +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3] +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
                                                                             
      })() // end the inline async funciton                                                                        
