@@ -10,7 +10,7 @@ https://github.com/zaidalyafeai/Browser-Sentiment-Classification
 
 Here is the relevant code
 
-``
+```
 
 export interface UpSampling2DLayerConfig extends LayerConfig {
   size?: [number, number];
@@ -66,4 +66,4 @@ export class UpSampling2D extends Layer
 ClassNameMap.register('UpSampling2D', UpSampling2D);
 
 
-``
+```
