@@ -291,7 +291,7 @@ Batches <input id="myInNumber" type=number value=3000>
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
 
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+  //  var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
 
 										     
     for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
