@@ -70,20 +70,20 @@ Step to test: <input id="myStep" type=number value=10><br>
 
  
  Try this sinusoidal <br>
-y =  <input id="myAmp1" type=number value=20> * sin(((2PI/180) * X - 
+y =  <input id="myAmp1" type=number value=20> * sin(((2*<input id="myMain1" type=number value=100>*PI/180) * X - 
  <input id="myXshift1" type=number value=0>)/<input id="myWavelength1" type=number value=40> )
  
 + <input id="myYshift1" type=number value=0><br>
  
 +<br><br>
-<input id="myAmp2" type=number value=7> * sin(((2PI/180) * X - 
+<input id="myAmp2" type=number value=7> * sin(((2*<input id="myMain2" type=number value=20>*PI/180) * X - 
  <input id="myXshift2" type=number value=0>)/<input id="myWavelength2" type=number value=80> )
  
 + <input id="myYshift2" type=number value=0><br>
  
  +<br><br>
  
- <input id="myAmp3" type=number value=3> * sin(((2PI/180) * X - 
+ <input id="myAmp3" type=number value=3> * sin(((2*<input id="myMain1" type=number value=2>*PI/180) * X - 
  <input id="myXshift3" type=number value=0>)/<input id="myWavelength3" type=number value=200> )
  
 + <input id="myYshift3" type=number value=0><br>
@@ -115,9 +115,9 @@ y =  <input id="myAmp1" type=number value=20> * sin(((2PI/180) * X -
 
       document.getElementById('myDiv123').innerHTML = 'Push stop when ready to train<br>'
       
-       myTempY[myCount]  = ((((parseFloat(document.getElementById('myAmp1').value)  *   Math.sin( (20 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift1').value)   )) / parseFloat(document.getElementById('myWavelength1').value)  )  +  parseFloat(document.getElementById('myYshift1').value) ))    +
-        (((parseFloat(document.getElementById('myAmp2').value)  *   Math.sin( (6 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift2').value)   )) / parseFloat(document.getElementById('myWavelength2').value)  )  +  parseFloat(document.getElementById('myYshift2').value) ))   +
-         (((parseFloat(document.getElementById('myAmp3').value)  *   Math.sin( (2 * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift3').value)   )) / parseFloat(document.getElementById('myWavelength3').value)  )  +  parseFloat(document.getElementById('myYshift3').value) ))).toFixed(2)  
+       myTempY[myCount]  = ((((parseFloat(document.getElementById('myAmp1').value)  *   Math.sin( (2*parseFloat(document.getElementById('myMain1').value) * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift1').value)   )) / parseFloat(document.getElementById('myWavelength1').value)  )  +  parseFloat(document.getElementById('myYshift1').value) ))    +
+        (((parseFloat(document.getElementById('myAmp2').value)  *   Math.sin( (2*parseFloat(document.getElementById('myMain2').value) * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift2').value)   )) / parseFloat(document.getElementById('myWavelength2').value)  )  +  parseFloat(document.getElementById('myYshift2').value) ))   +
+         (((parseFloat(document.getElementById('myAmp3').value)  *   Math.sin( (2*parseFloat(document.getElementById('myMain3').value) * Math.PI / 180)* (  myCount - parseFloat(document.getElementById('myXshift3').value)   )) / parseFloat(document.getElementById('myWavelength3').value)  )  +  parseFloat(document.getElementById('myYshift3').value) ))).toFixed(2)  
       
                                                                                       
       myTempX[myCount] = myCount
