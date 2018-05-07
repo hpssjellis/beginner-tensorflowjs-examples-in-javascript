@@ -50,7 +50,9 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 This is the xOr model with pre-saved weights loaded and used to predict the outcome.
-Expect close to 0, 1, 1, 0 for outputs
+Expect close to 0, 1, 1, 0 for outputs.
+	
+Took 138 seconds to train 10,000 batches (epoch only 1) on my browser	
 </div><br>
 
 
@@ -296,8 +298,8 @@ Batches <input id="myInNumber" type=number value=3000>
 										     
     for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
         var myFit = await model.fit(training_data, target_data, {epochs: 1});
-        if (myLoop % 20 == 0){   
-             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+        if (myLoop % 100 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 100 batches      
              document.getElementById('myDiv4949').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
         }
                                                                    
