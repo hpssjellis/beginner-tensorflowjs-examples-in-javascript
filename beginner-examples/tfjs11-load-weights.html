@@ -274,7 +274,7 @@ format file. Eventually I will automate it, but not today.
 Batches <input id="myInNumber" type=number value=3000> 
  
 <input id="myButton4949" type=button value="Tensorflowjs xOr using layers"  onclick="{
- const startTime = performance.now();
+ const startTime2 = performance.now();
  document.getElementById('myDiv4949').innerHTML = '<br>'
  document.getElementById('myButton4949').style.backgroundColor = 'red'  
                                                                             
@@ -302,8 +302,8 @@ Batches <input id="myInNumber" type=number value=3000>
     document.getElementById('myDiv4949').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv4949').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
 										     
-    const endTime = performance.now();
-    document.getElementById('myDiv5858').innerHTML += 'Duration ' + ((endTime-startTime)/1000).toFixed(0) +' seconds <br>'											     
+    const endTime2 = performance.now();
+    document.getElementById('myDiv5858').innerHTML += 'Duration ' + ((endTime2-startTime2)/1000).toFixed(0) +' seconds <br>'											     
 										     
     document.getElementById('myButton4949').style.backgroundColor = 'lightgray'                                                             
     myWeights = []
