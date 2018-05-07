@@ -14,3 +14,30 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 Convultional Neural Network      
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/tfjs21-convolutional-nn.html
+
+
+
+
+
+
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/
+
+
+
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/
+
+
+
+
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/
