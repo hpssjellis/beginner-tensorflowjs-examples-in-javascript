@@ -274,7 +274,7 @@ format file. Eventually I will automate it, but not today.
 Batches <input id="myInNumber" type=number value=3000> 
  
 <input id="myButton4949" type=button value="Tensorflowjs xOr using layers"  onclick="{
- const startTime2 = now.getTime()
+ const startTime2 = new Date().getTime()
  document.getElementById('myDiv4949').innerHTML = '<br>'
  document.getElementById('myButton4949').style.backgroundColor = 'red'  
                                                                             
@@ -293,6 +293,18 @@ Batches <input id="myInNumber" type=number value=3000>
 
     var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
 
+										     
+    for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
+        var myFit = await model.fit(training_data, target_data, {epochs: 1});
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv4949').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+        }
+                                                                   
+    }										     
+										     
+										     
+										     
 
 
     const myPredictArray = await model.predict(training_data).data()
@@ -302,7 +314,7 @@ Batches <input id="myInNumber" type=number value=3000>
     document.getElementById('myDiv4949').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv4949').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
 										     
-    const endTime2 = now.getTime();;
+    const endTime2 = new Date().getTime()
     document.getElementById('myDiv4949').innerHTML += 'Duration ' + ((endTime2-startTime2)/1000).toFixed(0) +' seconds <br>'											     
 										     
     document.getElementById('myButton4949').style.backgroundColor = 'lightgray'                                                             
