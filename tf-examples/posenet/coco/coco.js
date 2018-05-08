@@ -220,7 +220,7 @@ function setupGui(net) {
   singlePoseDetection.open();
 }
 
-export async function bindPage() {
+async function bindPage() {
   const net = await posenet.load();
 
   setupGui(net);
