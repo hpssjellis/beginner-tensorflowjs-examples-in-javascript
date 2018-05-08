@@ -46,86 +46,116 @@ const images = [
   'two_on_bench.jpg',
 ];
 
-function drawResults(canvas, poses,
+function toImageData(image) {
+  const [height, width] = image.shape;
+
+  const imageData = new ImageData(width, height);
+  const data = image.buffer().values;
+
+  for (let i = 0; i < height * width; i++) {
+    const j = i * 4;
+    const k = i * 4;
+
+    imageData.data[j + 0] = Math.round(255 * data[k + 0]);
+    imageData.data[j + 1] = Math.round(255 * data[k + 1]);
+    imageData.data[j + 2] = Math.round(255 * data[k + 2]);
+    imageData.data[j + 3] = Math.max(20, Math.round(255 * data[k + 3]));
+  }
+
+  return imageData;
+}
+
+function renderToCanvas(image, canvas) {
+  const [height, width] = image.shape;
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, width, height);
+
+  const imageData = toImageData(image);
+
+  ctx.putImageData(imageData, 0, 0);
+}
+
+export function drawHeatmapImage(heatmaps) {
+  const singleChannelImage = posenet.toHeatmapImage(heatmaps);
+  const scaledUp = posenet.resizeBilinearGrayscale(
+    singleChannelImage, [100, 100]);
+
+  renderToCanvas(scaledUp, document.getElementById('heatmap'));
+}
+function drawHeatmapAsAlpha(image, heatmaps, outputStride, canvas) {
+  const singleChannelImage = posenet.toHeatmapImage(heatmaps);
+  const pixels = tf.fromPixels(image);
+  const alphadImage = posenet.setHeatmapAsAlphaChannel(
+    pixels, outputStride, singleChannelImage);
+
+  renderToCanvas(alphadImage, canvas);
+}
+
+function drawResults(image, heatmaps, outputStride, poses,
   minPartConfidence, minPoseConfidence) {
-  renderImageToCanvas(image, [513, 513], canvas);
+  const resultsElement = document.getElementById(`results`);
+  const resultsCanvas = resultsElement.querySelector('canvas');
+
+  resultsElement.querySelector('#outputStride').innerHTML =
+        String(outputStride);
+
+  drawHeatmapAsAlpha(image, heatmaps, outputStride, resultsCanvas);
+
   poses.forEach((pose) => {
     if (pose.score >= minPoseConfidence) {
       drawKeypoints(pose.keypoints,
-        minPartConfidence, canvas.getContext('2d'));
-
+        minPartConfidence, resultsCanvas.getContext('2d'));
       drawSkeleton(pose.keypoints,
-        minPartConfidence, canvas.getContext('2d'));
+        minPartConfidence, resultsCanvas.getContext('2d'));
     }
   });
 }
 
-const imageBucket = 'https://storage.googleapis.com/tfjs-models/assets/posenet/';
-
 async function loadImage(imagePath) {
   const image = new Image();
   const promise = new Promise((resolve, reject) => {
-    image.crossOrigin = '';
     image.onload = () => {
       resolve(image);
     };
   });
 
-  image.src = `${imageBucket}${imagePath}`;
+  image.src = require(`./images/${imagePath}`);
   return promise;
 }
 
-function singlePersonCanvas() {
-  return document.querySelector('#single canvas');
+async function testImageForSinglePoseAndDrawResults(
+  model, imagePath, guiState) {
+  const image = await loadImage(imagePath);
+  const pixels = tf.fromPixels(image);
+
+  const {heatmapScores, offsets} = model.predictForSinglePose(
+    pixels, guiState.outputStride);
+  const pose = await posenet.singlePose.decode(
+    heatmapScores, offsets, guiState.outputStride);
+
+  drawResults(image, heatmapScores, guiState.outputStride, [pose],
+    guiState.minPartConfidence, guiState.minPoseConfidence);
 }
 
-function multiPersonCanvas() {
-  return document.querySelector('#multi canvas');
-}
+async function testImageForMultiplePosesAndDrawResults(
+  model, imagePath, guiState) {
+  const image = await loadImage(imagePath);
+  const pixels = tf.fromPixels(image);
 
-function drawSinglePoseResults(pose) {
-  const canvas = singlePersonCanvas();
-  drawResults(canvas, [pose],
-    guiState.singlePoseDetection.minPartConfidence,
-    guiState.singlePoseDetection.minPoseConfidence);
-}
+  const {heatmapScores, offsets, displacementBwd, displacementFwd} = model.
+    predictForMultiPose(pixels, guiState.outputStride);
 
-function drawMultiplePosesResults(poses) {
-  const canvas = multiPersonCanvas();
-  drawResults(canvas, poses,
-    guiState.multiPoseDetection.minPartConfidence,
-    guiState.multiPoseDetection.minPoseConfidence);
-}
+  const poses = await posenet.multiPose.decode(heatmapScores, offsets,
+    displacementFwd, displacementBwd, guiState.outputStride,
+    guiState.multiPoseDetection.maxDetections, guiState.minPartConfidence,
+    guiState.multiPoseDetection.nmsRadius);
 
-async function decodeSinglePoseAndDrawResults() {
-  if (!modelOutputs) {
-    return;
-  }
-
-  const pose = await posenet.decodeSinglePose(
-    modelOutputs.heatmapScores, modelOutputs.offsets,
-    guiState.outputStride);
-
-  drawSinglePoseResults(pose);
-}
-
-async function decodeMultiplePosesAndDrawResults() {
-  if (!modelOutputs) {
-    return;
-  }
-
-  const poses = await posenet.decodeMultiplePoses(
-    modelOutputs.heatmapScores, modelOutputs.offsets,
-    modelOutputs.displacementFwd, modelOutputs.displacementBwd,
-    guiState.outputStride,
-    guiState.multiPoseDetection.maxDetections, guiState.multiPoseDetection);
-
-  drawMultiplePosesResults(poses);
-}
-
-async function decodeSingleAndMultiplePoses() {
-  decodeSinglePoseAndDrawResults();
-  decodeMultiplePosesAndDrawResults();
+  drawResults(image, heatmapScores, guiState.outputStride, poses,
+    guiState.minPartConfidence, guiState.minPoseConfidence);
 }
 
 function setStatusText(text) {
@@ -133,37 +163,25 @@ function setStatusText(text) {
   resultElement.innerText = text;
 }
 
-let image = null;
-let modelOutputs = null;
-
-function disposeModelOutputs() {
-  if (modelOutputs) {
-    modelOutputs.heatmapScores.dispose();
-    modelOutputs.offsets.dispose();
-    modelOutputs.displacementFwd.dispose();
-    modelOutputs.displacementBwd.dispose();
-  }
-}
-
-async function testImageAndEstimatePoses(net) {
+async function testImageForSinglePoseClick(model, image, guiState) {
   setStatusText('Predicting...');
   document.getElementById('results').style.display = 'none';
 
-  disposeModelOutputs();
-  image = await loadImage(guiState.image);
-
-  const input = tf.fromPixels(image);
-
-  modelOutputs = await net.predictForMultiPose(input, guiState.outputStride);
-
-  await decodeSingleAndMultiplePoses();
+  await testImageForSinglePoseAndDrawResults(model, image, guiState);
 
   setStatusText('');
   document.getElementById('results').style.display = 'block';
-  input.dispose();
 }
 
-let guiState;
+async function testImageForMultiPoseClick(model, image, guiState) {
+  setStatusText('Predicting...');
+  document.getElementById('results').style.display = 'none';
+
+  await testImageForMultiplePosesAndDrawResults(model, image, guiState);
+
+  setStatusText('');
+  document.getElementById('results').style.display = 'block';
+}
 
 function setupGui(model) {
   const guiState = {
@@ -209,13 +227,12 @@ function setupGui(model) {
   multiPoseDetection.add(guiState.multiPoseDetection, 'detect');
 }
 
+export async function bindPage() {
+  const model = new posenet.PoseNet();
 
-async function bindPage() {
-  const net = await posenet.load();
+  await model.load();
 
-  setupGui(net);
-
-  await testImageAndEstimatePoses(net);
+  setupGui(model);
   document.getElementById('loading').style.display = 'none';
   document.getElementById('main').style.display = 'block';
 }
