@@ -43,8 +43,21 @@
             </p>
         </div>
     </div>
-    
-    
+  <script>  
+   javascript:(function(){var script=document.createElement('script');
+    script.onload=function(){
+    var stats=new Stats();
+    document.body.appendChild(stats.dom);
+    requestAnimationFrame(function loop(){
+    stats.update();
+    requestAnimationFrame(loop)});
+    };
+    script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';
+    document.head.appendChild(script);
+    })() 
+     
+    // gotta be an easier way to load this stats.js file  
+    </script>
     <script type="text/javascript" src="dat.gui.min.js"></script>
     <script src="https://unpkg.com/@tensorflow/tfjs"></script> 
     <script src="https://unpkg.com/@tensorflow-models/posenet"></script> 
