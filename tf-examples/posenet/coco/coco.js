@@ -62,7 +62,7 @@ function drawResults(canvas, poses,
 
 const imageBucket = 'https://storage.googleapis.com/tfjs-models/assets/posenet/';
 
-async function loadImage(image.src) {
+async function loadImage(imagePath) {
   const image = new Image();
   const promise = new Promise((resolve, reject) => {
     image.crossOrigin = '';
