@@ -79,7 +79,7 @@ function renderToCanvas(image, canvas) {
   ctx.putImageData(imageData, 0, 0);
 }
 
-export function drawHeatmapImage(heatmaps) {
+function drawHeatmapImage(heatmaps) {
   const singleChannelImage = posenet.toHeatmapImage(heatmaps);
   const scaledUp = posenet.resizeBilinearGrayscale(
     singleChannelImage, [100, 100]);
@@ -123,7 +123,7 @@ async function loadImage(imagePath) {
     };
   });
 
-  image.src = require(`./images/${imagePath}`);
+  image.src = `${imageBucket}${imagePath}`;
   return promise;
 }
 
@@ -227,7 +227,7 @@ function setupGui(model) {
   multiPoseDetection.add(guiState.multiPoseDetection, 'detect');
 }
 
-export async function bindPage() {
+async function bindPage() {
   const model = new posenet.PoseNet();
 
   await model.load();
