@@ -187,11 +187,11 @@ function setupGui(net) {
   };
 
   const gui = new dat.GUI();
-  gui.add(guiState.outputStride, 'outputStride', [32, 16, 8])
+  gui.add(guiState, 'outputStride', [32, 16, 8])
     .onChange((outputStride) => guiState.outputStride =
         Number(outputStride));
   gui.add(guiState.image, 'image', images);
-  gui.add(guiState.detectPoseButton, 'detectPoseButton');
+  gui.add(guiState, 'detectPoseButton');
 
   const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
   multiPoseDetection.open();
