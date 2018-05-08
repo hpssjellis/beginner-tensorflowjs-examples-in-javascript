@@ -190,7 +190,7 @@ function setupGui(net) {
   gui.add(guiState, 'outputStride', [32, 16, 8])
     .onChange((outputStride) => guiState.outputStride =
         Number(outputStride));
-  gui.add(guiState, 'image', images);
+  gui.add(guiState, image, images);
   gui.add(guiState, 'detectPoseButton');
 
   const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
