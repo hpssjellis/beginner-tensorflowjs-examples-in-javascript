@@ -187,14 +187,18 @@ function setupGui(net) {
   };
 
   const gui = new dat.GUI();
-  gui.add(guiState, 'outputStride', [32, 16, 8])
-    .onChange((outputStride) => guiState.outputStride =
-        Number(outputStride));
+  gui.add(guiState, 'outputStride', [32, 16, 8]).onChange(redraw)
+  
+  
+//  gui.add(guiState, 'outputStride', [32, 16, 8]).onChange((outputStride) => guiState.outputStride = Number(outputStride));
  // gui.add(guiState, 'image', images).onChange(loadImage(String(image)));
 //  gui.add(guiState, 'image', images);
+// .onChange(redraw); 
+  
+//  gui.add(guiState, 'image', images).onChange( (image) => guiState.image = String(image) );  
   
   
-  gui.add(guiState, 'image', images).onChange( (image) => guiState.image = String(image) );  
+  gui.add(guiState, 'image', images).onChange(redraw) 
   
   // loadImage(imagePath)
   
