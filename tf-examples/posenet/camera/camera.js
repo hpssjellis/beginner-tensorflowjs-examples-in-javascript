@@ -14,11 +14,14 @@
  * limitations under the License.
  * =============================================================================
  */
-import dat from 'dat.gui';
-import Stats from 'stats.js';
-import * as posenet from '../src';
+// import dat from 'dat.gui';
+// import Stats from 'stats.js';
+// import * as posenet from '../src';
 
-import {drawKeypoints, drawSkeleton} from './demo_util';
+//import {drawKeypoints, drawSkeleton} from './demo_util';
+
+
+
 const maxVideoSize = 513;
 const canvasSize = 400;
 const stats = new Stats();
@@ -241,7 +244,7 @@ function detectPoseInRealTime(video, net) {
   poseDetectionFrame();
 }
 
-export async function bindPage() {
+async function bindPage() {
   const net = await posenet.load();
 
   document.getElementById('loading').style.display = 'none';
