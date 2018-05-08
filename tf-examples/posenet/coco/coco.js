@@ -165,73 +165,50 @@ async function testImageAndEstimatePoses(net) {
 
 let guiState;
 
-function setupGui(net) {
-  guiState = {
-    outputStride: 16,
-    image: 'tennis_in_crowd.jpg',
-    detectPoseButton: () => {
-      testImageAndEstimatePoses(
-        net);
-    },
+function setupGui(model) {
+  const guiState = {
+    outputStride: 8,
+    image: images[0],
+    minPartConfidence: 0.5,
+    minPoseConfidence: 0.5,
     singlePoseDetection: {
-      minPartConfidence: 0.5,
-      minPoseConfidence: 0.5,
+      detect: () => {
+        testImageForSinglePoseClick(
+          model, guiState.image, guiState);
+      },
     },
     multiPoseDetection: {
-      minPartConfidence: 0.5,
-      minPoseConfidence: 0.5,
-      scoreThreshold: 0.5,
-      nmsRadius: 20.0,
+      detect: () => {
+        testImageForMultiPoseClick(
+          model, guiState.image, guiState);
+      },
+      nmsRadius: 13.0,
       maxDetections: 15,
     },
   };
 
   const gui = new dat.GUI();
-  gui.add(guiState, 'outputStride', [32, 16, 8]).onChange(redraw)
-  
-  
-//  gui.add(guiState, 'outputStride', [32, 16, 8]).onChange((outputStride) => guiState.outputStride = Number(outputStride));
- // gui.add(guiState, 'image', images).onChange(loadImage(String(image)));
-//  gui.add(guiState, 'image', images);
-// .onChange(redraw); 
-  
-//  gui.add(guiState, 'image', images).onChange( (image) => guiState.image = String(image) );  
-  
-  
-  gui.add(guiState, 'image', images).onChange(redraw) 
-  
-  // loadImage(imagePath)
-  
-  
-  
-  gui.add(guiState, 'detectPoseButton');
+  gui.add(guiState, 'outputStride', [32, 16, 8])
+    .onChange((outputStride) => guiState.outputStride =
+        Number(outputStride));
+  gui.add(guiState, 'image', images);
+  gui.add(guiState, 'minPartConfidence', 0.0, 1.0);
+  gui.add(guiState, 'minPoseConfidence', 0.0, 1.0);
 
-  const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
+  const singlePoseDetection = gui.addFolder('Single Pose Detection');
+  singlePoseDetection.open();
+  singlePoseDetection.add(guiState.singlePoseDetection, 'detect');
+
+  const multiPoseDetection = gui.addFolder('Multi Pose Detection');
   multiPoseDetection.open();
-  multiPoseDetection.add(
-    guiState.multiPoseDetection, 'minPartConfidence', 0.0, 1.0)
-    .onChange(decodeMultiplePosesAndDrawResults);
-  multiPoseDetection.add(
-    guiState.multiPoseDetection, 'minPoseConfidence', 0.0, 1.0)
-    .onChange(decodeMultiplePosesAndDrawResults);
-
-  multiPoseDetection.add(guiState.multiPoseDetection, 'nmsRadius', 0.0, 40.0)
-    .onChange(decodeMultiplePosesAndDrawResults);
+  multiPoseDetection.add(guiState.multiPoseDetection, 'nmsRadius', 0.0, 40.0);
   multiPoseDetection.add(guiState.multiPoseDetection, 'maxDetections')
     .min(1)
     .max(20)
-    .step(1)
-    .onChange(decodeMultiplePosesAndDrawResults);
-
-  const singlePoseDetection = gui.addFolder('Single Pose Estimation');
-  singlePoseDetection.add(
-    guiState.singlePoseDetection, 'minPartConfidence', 0.0, 1.0)
-    .onChange(decodeSinglePoseAndDrawResults);
-  singlePoseDetection.add(
-    guiState.singlePoseDetection, 'minPoseConfidence', 0.0, 1.0)
-    .onChange(decodeSinglePoseAndDrawResults);
-  singlePoseDetection.open();
+    .step(1);
+  multiPoseDetection.add(guiState.multiPoseDetection, 'detect');
 }
+
 
 async function bindPage() {
   const net = await posenet.load();
