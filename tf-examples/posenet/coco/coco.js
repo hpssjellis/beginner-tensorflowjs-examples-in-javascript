@@ -172,8 +172,8 @@ let guiState;
 
 function setupGui(net) {
   guiState = {
-    outputStride: 16,
-    image: 'tennis_in_crowd.jpg': () => {
+    outputStride: 16,      //  image: 'tennis_in_crowd.jpg',
+    image: () => {
       alert(guiState.image)
     },
     detectPoseButton: () => {
