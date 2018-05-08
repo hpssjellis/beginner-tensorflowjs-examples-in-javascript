@@ -194,8 +194,8 @@ function setupGui(net) {
   gui.add(guiState, 'outputStride', [32, 16, 8])
     .onChange((outputStride) => guiState.outputStride =
         Number(outputStride));
-  gui.add(guiState, 'image', images).onChange(async function(){
-	    await loadImage(guiState.image)
+  gui.add(guiState, 'image', images).onChange(function(){
+	    testImageAndEstimatePoses(net)
 	});
   gui.add(guiState, 'detectPoseButton')
 
