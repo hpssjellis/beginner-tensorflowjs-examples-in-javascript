@@ -107,7 +107,10 @@ async function decodeSinglePoseAndDrawResults() {
   const pose = await posenet.decodeSinglePose(
     modelOutputs.heatmapScores, modelOutputs.offsets,
     guiState.outputStride);
-
+  
+  //////////////////////////////////////////////////////////////////
+    await loadImage(guiState.image)
+/////////////////////////////////////////////////////////////////////////
   drawSinglePoseResults(pose);
 }
 
@@ -193,7 +196,7 @@ function setupGui(net) {
     .onChange((outputStride) => guiState.outputStride =
         Number(outputStride));
   gui.add(guiState, 'image', images)
-  gui.add(guiState, 'detectPoseButton').onChange(loadImage(guiState.image))
+  gui.add(guiState, 'detectPoseButton')
 
   const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
   multiPoseDetection.open();
