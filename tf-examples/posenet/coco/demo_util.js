@@ -14,8 +14,8 @@
  * limitations under the License.
  * =============================================================================
  */
-import * as tf from '@tensorflow/tfjs-core';
-import * as posenet from '../src';
+//import * as tf from '@tensorflow/tfjs-core';
+//import * as posenet from '../src';
 
 const color = 'aqua';
 const lineWidth = 2;
@@ -24,7 +24,7 @@ function toTuple({y, x}) {
   return [y, x];
 }
 
-export function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
+function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
   ctx.beginPath();
   ctx.moveTo(ax * scale, ay * scale);
   ctx.lineTo(bx * scale, by * scale);
@@ -33,7 +33,7 @@ export function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
   ctx.stroke();
 }
 
-export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
   const adjacentKeyPoints = posenet.getAdjacentKeyPoints(
     keypoints, minConfidence);
 
@@ -43,7 +43,7 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
   });
 }
 
-export async function renderToCanvas(a, ctx) {
+async function renderToCanvas(a, ctx) {
   const [height, width] = a.shape;
   const imageData = new ImageData(width, height);
 
@@ -62,7 +62,7 @@ export async function renderToCanvas(a, ctx) {
   ctx.putImageData(imageData, 0, 0);
 }
 
-export function renderImageToCanvas(image, size, canvas) {
+function renderImageToCanvas(image, size, canvas) {
   canvas.width = size[0];
   canvas.height = size[1];
   const ctx = canvas.getContext('2d');
@@ -70,7 +70,7 @@ export function renderImageToCanvas(image, size, canvas) {
   ctx.drawImage(image, 0, 0);
 }
 
-export function drawHeatMapValues(heatMapValues, outputStride, canvas) {
+function drawHeatMapValues(heatMapValues, outputStride, canvas) {
   const ctx = canvas.getContext('2d');
   const radius = 5;
   const scaledValues = heatMapValues.mul(tf.scalar(outputStride, 'int32'));
@@ -94,7 +94,7 @@ function drawPoints(ctx, points, radius, color) {
   }
 }
 
-export function drawOffsetVectors(
+function drawOffsetVectors(
   heatMapValues, offsets, outputStride, scale = 1, ctx) {
   const offsetPoints = posenet.singlePose.getOffsetPoints(
     heatMapValues, outputStride, offsets);
@@ -113,7 +113,7 @@ export function drawOffsetVectors(
   }
 }
 
-export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   for (let i = 0; i < keypoints.length; i++) {
     const keypoint = keypoints[i];
 
@@ -129,7 +129,7 @@ export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   }
 }
 
-export function drawBoundingBox(keypoints, ctx) {
+function drawBoundingBox(keypoints, ctx) {
   const boundingBox = posenet.getBoundingBox(keypoints);
 
   ctx.rect(boundingBox.minX, boundingBox.minY,
