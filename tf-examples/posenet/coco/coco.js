@@ -46,6 +46,12 @@ const images = [
   'two_on_bench.jpg',
 ];
 
+
+
+const imageBucket = 'https://storage.googleapis.com/tfjs-models/assets/posenet/';
+
+
+
 function toImageData(image) {
   const [height, width] = image.shape;
 
