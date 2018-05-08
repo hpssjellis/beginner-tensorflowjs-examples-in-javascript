@@ -92,9 +92,11 @@ function drawSinglePoseResults(pose) {
 
 function drawMultiplePosesResults(poses) {
   const canvas = multiPersonCanvas();
+  alert(guiState.multiPoseDetection.minPoseConfidence)
   drawResults(canvas, poses,
     guiState.multiPoseDetection.minPartConfidence,
     guiState.multiPoseDetection.minPoseConfidence);
+  
 }
 
 async function decodeSinglePoseAndDrawResults() {
@@ -190,7 +192,7 @@ function setupGui(net) {
   gui.add(guiState, 'outputStride', [32, 16, 8])
     .onChange((outputStride) => guiState.outputStride =
         Number(outputStride));
-  gui.add(guiState, 'image', images).onChange(alert(guiState.image))
+  gui.add(guiState, 'image', images)
   gui.add(guiState, 'detectPoseButton');
 
   const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
