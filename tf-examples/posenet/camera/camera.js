@@ -197,14 +197,12 @@ function detectPoseInRealTime(video, net) {
     case 'single-pose':
       const pose = await guiState.net.estimateSinglePose(video, imageScaleFactor, flipHorizontal, outputStride);
       poses.push(pose);
-        
-        
+       
+      myTemp =  await JSON.stringify(pose, null, 3)
+      document.getElementById('myDiv01').value =   myTemp  
       if (document.getElementById('myTimed').checked == true){         
-         document.getElementById('myDiv01').value += await JSON.stringify(pose, null, 3)       
-      } else {  
-         document.getElementById('myDiv01').value =  await JSON.stringify(pose, null, 3)
-      }  
-        
+         document.getElementById('myBackup01').value += myTemp      
+      } 
         
         
         
@@ -221,13 +219,11 @@ function detectPoseInRealTime(video, net) {
 
        
         
-        
+      myTemp =  await JSON.stringify(poses, null, 3)
+      document.getElementById('myDiv01').value =   myTemp  
       if (document.getElementById('myTimed').checked == true){         
-         document.getElementById('myDiv01').value += await JSON.stringify(poses, null, 3)       
-      } else {  
-         document.getElementById('myDiv01').value =  await JSON.stringify(poses, null, 3)
-      }  
-            
+         document.getElementById('myBackup01').value += myTemp      
+      }   
         
         
         
