@@ -37,10 +37,13 @@
     
     
 Timed?<input id="myTimed" type=checkbox checked=false onchange="{    
-    alert('go')
-    document.getElementById('myCountDown').value = 300
+
+   document.myInterval = setInterval(( function(){
+        document.getElementById('myCountDown').value = parseInt(document.getElementById('myCountDown').value) - 1
+    }  ), 1000)   // count down once a second
+   
 }">
-<input id="myDuration" type=number value=2> seconds. Timer: <input type=number id="myCountDown" READONLY> <br>
+<input id="myDuration" type=number value=6> seconds. Timer: <input type=number id="myCountDown" READONLY> <br>
     
     
     
