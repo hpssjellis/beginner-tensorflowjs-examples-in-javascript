@@ -198,7 +198,7 @@ function detectPoseInRealTime(video, net) {
       const pose = await guiState.net.estimateSinglePose(video, imageScaleFactor, flipHorizontal, outputStride);
       poses.push(pose);
         
-      document.getElementById('myDiv01').innerHTML = await JSON.stringify(pose, null, 3)
+      document.getElementById('myDiv01').value = await JSON.stringify(pose, null, 3)
         
       minPoseConfidence = Number(
         guiState.singlePoseDetection.minPoseConfidence);
@@ -212,7 +212,7 @@ function detectPoseInRealTime(video, net) {
         guiState.multiPoseDetection.nmsRadius);
 
        
-      document.getElementById('myDiv01').innerHTML = await JSON.stringify(poses, null, 3)
+      document.getElementById('myDiv01').value = await JSON.stringify(poses, null, 3)
         
       minPoseConfidence = Number(guiState.multiPoseDetection.minPoseConfidence);
       minPartConfidence = Number(guiState.multiPoseDetection.minPartConfidence);
