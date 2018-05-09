@@ -47,7 +47,7 @@ Check for timed Storage (Will store a lot of data!)<br>
         document.getElementById('myCountDown').value = parseInt(document.getElementById('myCountDown').value) - 1
         if (parseInt(document.getElementById('myCountDown').value) <= 0){  
             document.getElementById('myTimed').checked = false
-            document.getElementById('myBackup01').value   =  document.getElementById('myDiv01').value     // store the data                            
+           // document.getElementById('myBackup01').value   =  document.getElementById('myDiv01').value     // store the data                            
             clearInterval(document.myInterval)
             stopCurrentVideoStream()                 // activate the function to stop the video so we don't lose our data                                    
         }
