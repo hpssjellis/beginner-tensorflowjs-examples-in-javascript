@@ -24,8 +24,10 @@ These steps work to generate a working dist folder
 
 Supposedly this should work but I always seem to have issues with it
 
+1. In the main folder
 1. nvm install 8
 1. npm install yarn
 1. Open terminal in the demo folder you want to compile
+1. nvm install 8
 1. yarn
 1. yarn build
