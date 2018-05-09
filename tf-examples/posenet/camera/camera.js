@@ -199,12 +199,11 @@ function detectPoseInRealTime(video, net) {
       poses.push(pose);
         
         
-   //   if (){
-          
-      //    } else { 
-   
-         document.getElementById('myDiv01').value = await pose   /// JSON.stringify(pose, null, 3)
-     //  }  
+      if (document.getElementById('myTimed').checked == true){         
+         document.getElementById('myDiv01').value += await JSON.stringify(pose, null, 3)       
+      } else {  
+         document.getElementById('myDiv01').value =  await JSON.stringify(pose, null, 3)
+      }  
         
         
         
@@ -223,11 +222,12 @@ function detectPoseInRealTime(video, net) {
        
         
         
-        
-        
-      document.getElementById('myDiv01').value = await  JSON.stringify(poses, null, 3)
-        
-        
+      if (document.getElementById('myTimed').checked == true){         
+         document.getElementById('myDiv01').value += await JSON.stringify(poses, null, 3)       
+      } else {  
+         document.getElementById('myDiv01').value =  await JSON.stringify(poses, null, 3)
+      }  
+            
         
         
         
