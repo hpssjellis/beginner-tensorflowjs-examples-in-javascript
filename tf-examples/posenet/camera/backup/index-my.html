@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PoseNet - Camera Feed Demo</title>
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: black;
+    }
+
+    .footer-text {
+        max-width: 600px;
+        text-align: center;
+        margin: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="loading">
+        Loading the model...
+    </div>
+    <div id='main' style='display:none'>
+        <video autoplay="true" id="video" style=" -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        display: none;
+        ">
+        </video>
+        <canvas id="output" />
+    </div>
+<textarea rows=100 cols=70 wrap=false id="myDiv01"></textarea>  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <div class="footer">
+        <div class="footer-text">
+            <p>
+                
+                <br>   </p>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.2/build/dat.gui.js"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script> 
+    <script src="https://unpkg.com/@tensorflow-models/posenet"></script> 
+   
+    <script src="demo_util.js "></script>    
+    <script src="stats.min.js"></script>   
+    <script src="camera.js"></script>
+</body>
+
+</html>
