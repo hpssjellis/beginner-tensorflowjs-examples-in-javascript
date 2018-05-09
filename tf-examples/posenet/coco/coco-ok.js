@@ -172,11 +172,10 @@ let guiState;
 
 function setupGui(net) {
   guiState = {
-    outputStride: 16,
+    outputStride: 16,     
     image: 'tennis_in_crowd.jpg',
     detectPoseButton: () => {
-      testImageAndEstimatePoses(
-        net);
+      testImageAndEstimatePoses(net);
     },
     singlePoseDetection: {
       minPartConfidence: 0.5,
@@ -195,7 +194,9 @@ function setupGui(net) {
   gui.add(guiState, 'outputStride', [32, 16, 8])
     .onChange((outputStride) => guiState.outputStride =
         Number(outputStride));
-  gui.add(guiState, 'image', images)
+  gui.add(guiState, 'image', images).onChange(function(){
+	    testImageAndEstimatePoses(net)
+	});
   gui.add(guiState, 'detectPoseButton')
 
   const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
