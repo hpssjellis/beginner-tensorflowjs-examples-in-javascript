@@ -38,7 +38,8 @@
     
 Timed?<input id="myTimed" type=checkbox  onchange="{    
 
- if (document.getElementById('myTimed').checked == true){   
+ if (document.getElementById('myTimed').checked == true){
+    alert('checked')
    document.myInterval = setInterval(( function(){
         document.getElementById('myCountDown').value = parseInt(document.getElementById('myCountDown').value) - 1
         if (parseInt(document.getElementById('myCountDown').value) <= 0){  
@@ -48,10 +49,11 @@ Timed?<input id="myTimed" type=checkbox  onchange="{
     
     }  ), 1000)   // count down once a second
   } else {
-    clearInterval(document.myInterval)   // just to be on the safe side
+       clearInterval(document.myInterval)   // just to be on the safe side
+       alert('not checked')
     }
 }">
-<input id="myDuration" type=number value=6> seconds. Timer: <input type=number id="myCountDown" > <br>
+<input id="myDuration" type=number value=6> seconds. Timer: <input type=number id="myCountDown" value=0> <br>
     
     
     
