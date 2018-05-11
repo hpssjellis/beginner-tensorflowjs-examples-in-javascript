@@ -191,13 +191,14 @@ function setupGui(net) {
   };
 
   const gui = new dat.GUI();
-  gui.add(guiState, 'outputStride', [32, 16, 8])
-    .onChange((outputStride) => guiState.outputStride =
-        Number(outputStride));
+  //gui.add(guiState, 'outputStride', [32, 16, 8]).onChange((outputStride) => guiState.outputStride = Number(outputStride));
+  gui.add(guiState, 'outputStride', [32, 16, 8]).onChange(function(){
+	    testImageAndEstimatePoses(net)
+	});
   gui.add(guiState, 'image', images).onChange(function(){
 	    testImageAndEstimatePoses(net)
 	});
-  gui.add(guiState, 'detectPoseButton')
+ // gui.add(guiState, 'detectPoseButton')
 
   const multiPoseDetection = gui.addFolder('Multi Pose Estimation');
   multiPoseDetection.open();
