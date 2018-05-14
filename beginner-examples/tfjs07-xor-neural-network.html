@@ -1,0 +1,254 @@
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center> Most of the examples are in the following format:</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+This is as simple a neural network I can think of. 2 inputs and xOR decision and on output. An xOr decision means:
+off output if neither input is on or both inputs are on. On output if either of the inputs are on but the other one has to be off
+<br><br>
+0, 0 = 0<br>
+1, 0 = 1<br>
+0, 1 = 1<br>
+1, 1 = 0<br>
+ 
+ Click LearnXOR() then select which sets of inputs you want to test. this is fairly complex but many Neural Networks will have a similar structure
+
+</div><br>
+
+
+    
+<div id="myDiv531Code"> 
+
+
+
+<script>
+
+const EPSILON = tf.scalar(1e-7);
+const HIDDEN_UNITS = 12;
+const myOne = tf.scalar(1);
+const myInput = [[0, 0], [0, 1], [1, 0], [1, 1]];
+const myTarget = [[0], [1], [1], [0]];
+
+
+const inputTensor = tf.tensor2d(myInput, [4, 2]);
+const targetTensor = tf.tensor2d(myTarget, [4, 1]);
+
+const fullyConnectedWeights1 = tf.variable(initializeWeights([2, HIDDEN_UNITS], 2));
+const fullyConnectedBias1 = tf.variable(tf.scalar(0));
+const fullyConnectedWeights2 = tf.variable(initializeWeights([HIDDEN_UNITS, 1], HIDDEN_UNITS));
+const fullyConnectedBias2 = tf.variable(tf.scalar(0));
+
+
+const optimizer = tf.train.sgd(0.1);
+function initializeWeights(shape, prevLayerSize) {
+    return tf.randomNormal(shape).mul(tf.scalar(Math.sqrt(2.0 / prevLayerSize)));
+}
+
+
+
+function calculateCost(y, output) {
+    return tf.add(y.mul(output.add(EPSILON).log()), myOne.sub(y).mul(myOne.sub(output).add(EPSILON).log())).sum().neg();
+}
+
+
+
+function model(xs) {
+    const hiddenLayer = tf.tidy( function ()  {
+        return xs.matMul(fullyConnectedWeights1).add(fullyConnectedBias1).relu();
+    });
+    return hiddenLayer.matMul(fullyConnectedWeights2).add(fullyConnectedBias2).sigmoid();
+}
+
+
+
+async function train(iterations) {
+    const returnCost = true;
+    let cost;
+    for (let i = 0; i < iterations; i++) {
+        cost = optimizer.minimize(function() {
+            return calculateCost(targetTensor, model(inputTensor));
+        }, returnCost);
+        if (i % 100 === 0) {
+          document.getElementById('myDiv01').innerHTML += 'Loss['+i+']: '+ cost.dataSync()+'<br>'
+        }
+        await tf.nextFrame();
+    }
+    return cost.dataSync();
+}
+
+
+
+async function learnXor() {
+    const timeStart = performance.now();
+    const iterations = Math.floor(Math.random()*200+400); // a random number between 400 and 600
+    document.getElementById('myDiv01').innerHTML += '<br>Total Random Number of Training Iterations: '+iterations+'<br><br>'
+    const loss = await train(iterations);
+    const time = performance.now() - timeStart;
+    document.getElementById('myDiv01').innerHTML += '<br>Loss['+iterations+']: ' + loss[0]+'<br><br>'
+    document.getElementById('myDiv01').innerHTML += 'Train Duration : '+ Math.round(time/1000).toFixed(2) + ' seconds</br><br>'
+}
+
+
+
+async function testXor(i) {
+
+    var timeStart2 = 0
+    var time2 = 0
+
+    timeStart2 = performance.now();
+    const inputData = tf.tensor2d([myInput[i]], [1, 2]);
+    const expectedOutput = tf.tensor1d(myTarget[i]);
+    const val = model(inputData);
+
+
+
+    time2 = performance.now() - timeStart2;
+    document.getElementById('myDiv531').innerHTML = '<br>Testing Duration : '+ time2.toFixed(3) + ' milliseconds</br><br>'
+
+    const myVal = await val.data()
+    document.getElementById('myDiv531').innerHTML +=  'For that selection the learned output is ' + await parseFloat(myVal).toFixed(3) + '<br>'
+ 
+} 
+</script>
+
+<h2 align=center> Tensorflowjs xOr Neural Network.</h2>
+Click the button to train the network. Pull down the select box to test<br>
+
+Training <input type=button id="myButton531" value="learnXOR()" onclick="{ 
+   learnXor()
+}">
+
+<div id="myDiv01"><br></div>
+
+<hr>
+
+Testing: Make a selection from this list  <select size=1 onChange="{
+   if (this.value >= 0){
+      testXor(this.value)
+   }
+}">
+
+
+<option value =-1>Pulldown to test xOr </option>
+<option value=0>Expecting ~0 for xOR [0,0] </option> 
+<option value=1>Expecting ~1 for xOR [1,0] </option>
+<option value=2>Expecting ~1 for xOR [0,1] </option>
+<option value=3>Expecting ~0 for xOR [1,1] </option>
+</select>
+
+
+
+
+
+
+<br><br>
+
+</div>
+<div id='myDiv531'>...</div><br>
+
+<input id="myUpdate531" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea531').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv531Code').innerHTML =    myJoe 
+  document.getElementById('myButton531').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea531"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce531){
+     myTextGrow('myTextarea531', 'myDiv531Code')
+     document.getElementById('myUpdate531').style.visibility = 'visible'
+     myOnce531 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce531 = true    // so textareas are only clicked once
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>

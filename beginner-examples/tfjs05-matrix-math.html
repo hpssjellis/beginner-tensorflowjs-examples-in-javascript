@@ -1,0 +1,212 @@
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>Matrix math using Tensorflowjs</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Checkout a really good matrix math explanation site at <a href="http://www.mathsisfun.com/algebra/matrix-inverse.html">http://www.mathsisfun.com/algebra/matrix-inverse.html</a><br>
+<br><br>
+
+</div><br>
+
+
+    
+<div id="myDiv333Code"> 
+
+
+<input type="Button" id="myButton333" value="Extending a Tensor Class" onclick="{   
+
+
+//////////////////////////// define extended class /////////////////////////////
+
+class myTensor extends tf.Tensor {
+    constructor(a,b) {
+        const myTempTensor = tf.tensor(a,b)
+   
+   myTempTensor.myInverse2DSquare = function(b) {     
+      const myInverseMultiplier  = 1 / ( (b.dataSync()[0] * b.dataSync()[3]) - (b.dataSync()[1] * b.dataSync()[2]) )
+      const myMatrixConverted = tf.tensor2d([ b.dataSync()[3]*myInverseMultiplier, b.dataSync()[1]*-1*myInverseMultiplier, b.dataSync()[2]*-1*myInverseMultiplier, b.dataSync()[0]*myInverseMultiplier], [2, 2])
+         
+      return myMatrixConverted
+      myInverseMultiplier.dispose()
+      myMatrixConverted.dispose() 
+   }
+
+       // add more methods here
+
+       return myTempTensor;
+      } // end constructor
+} // end extended class
+
+
+//////////////////////////// End class definition /////////////////////////////
+
+   document.getElementById('myDiv333').innerHTML += 'Child $3.00 bus, $3.50 train, Adult $3.20 bus, $3.60 train <br>' 
+   document.getElementById('myDiv333').innerHTML += 'Total bus = $118.40, Total train = $135.20. How many Children and Adults? <br><br>' 
+
+   var myOwnTensor = new myTensor()
+ 
+   var myMatrixOriginal = tf.tensor2d([3, 3.5, 3.2, 3.6], [2, 2]);
+   var myVector1D = tf.tensor1d([118.4, 135.2]);
+
+   var myResult1 = myOwnTensor.myInverse2DSquare(myMatrixOriginal)
+   document.getElementById('myDiv333').innerHTML += 'Intermediate Inverse Matrix shape = ' + myResult1.shape+ ' Intermediate Values = ' + myResult1.dataSync()+'<br>'   
+
+   var myResult2 =  tf.vectorTimesMatrix(myVector1D, myResult1);
+   document.getElementById('myDiv333').innerHTML +=   'Final Result shape:'+ myResult2.shape  +   ',  Train and Bus results: Children = ' + Math.round(myResult2.dataSync()[0]) +   ',  Adults = '  +  Math.round(myResult2.dataSync()[1])                                            
+
+}"><br>
+
+
+
+
+
+
+<br><br>
+
+</div>
+<div id='myDiv333'>...</div><br>
+
+<input id="myUpdate333" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea333').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv333Code').innerHTML =    myJoe 
+  document.getElementById('myButton333').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea333"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce333){
+     myTextGrow('myTextarea333', 'myDiv333Code')
+     document.getElementById('myUpdate333').style.visibility = 'visible'
+     myOnce333 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+
+<br><br><br><br>
+
+
+
+
+
+Example: Solving simultaneous equations using the subtraction technique<br>
+<img src="tfjs05-simult-subtraction.png"><br><br>
+
+
+Example: Solving simultaneous equations using the substitution technique<br>
+<img src="tfjs05-simult-substitution.png"><br><br>
+
+
+
+Example: Taking the inverse of a 2 x 2 matrix <br>
+<img src="tfjs05-inverse.png"><br><br>
+For the Bus and Train example using the real values refer to the site at <a href="http://www.mathsisfun.com/algebra/matrix-inverse.html">http://www.mathsisfun.com/algebra/matrix-inverse.html</a><br>
+<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce333 = true    // so textareas are only clicked once
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>

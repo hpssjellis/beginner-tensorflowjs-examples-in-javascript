@@ -1,0 +1,225 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>Demonstrating the Power of Javascript</h2>
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Take a simple Matrix math caculation using Tensorflowjs Tensors and Scalars and add them together. Code doesn;t seem to hard, 
+ but it cannot be changed
+</div><br>
+
+
+<div id="myDiv1234Code"> 
+
+<input id="myButton1234" type=button value="Use GPU math" onclick="{
+                                                                                                                                 
+  const myA = tf.tensor1d([10,20,30])
+  const myB = tf.scalar(2.1)
+  const myResult = tf.add(myA, myB);
+  document.getElementById('myDiv1234').innerHTML = myResult.dataSync() 
+                                                                 
+}"><br><br>
+
+</div>
+<div id='myDiv1234'>...</div><br>
+
+<input id="myUpdate1234" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea1234').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv1234Code').innerHTML =    myJoe 
+  document.getElementById('myButton1234').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea1234"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce1234){
+     myTextGrow('myTextarea1234', 'myDiv1234Code')
+     document.getElementById('myUpdate1234').style.visibility = 'visible'
+     myOnce1234 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+And now use the same Tensorflowjs matrix math but make it completely dynamic using farily easy Javascript input text boxes. 
+ Note how the code looks much more difficult but the dififculty is only the Javascript. The Machine learning the same as the top 
+ example, but looks much more complex in this example
+ 
+ The point being the Javascript is what needs to be understood in this example
+ 
+</div><br>
+
+
+<div id="myDiv12345Code"> 
+
+tf.tensor1d([ <input id="myText01" type=text value="10,20,30"> ])<br>
+tf.scalar(<input id="myText02" type=text value=2.1>)<br><br>
+ 
+.toFixed(<input id="myText04" type=number value=3 min=0>)   Decimal places: only works for individual outputs <br>
+myResult.dataSync()[ <input id="myText03" type=number value=2> ] <= -1 to show all array values. 
+                                                                   Note: First value reference with 0 etc<br><br>
+
+<input id="myButton12345" type=button value="Use GPU math dynamic" onclick="{
+
+   const myA = tf.tensor1d(document.getElementById('myText01').value.split(',')) // must make the string into an array for the tensor1d
+   const myB = tf.scalar(document.getElementById('myText02').value)
+   const myResult = tf.add(myA, myB);
+ 
+   if (document.getElementById('myText03').value >= myResult.shape){
+      document.getElementById('myText03').value = myResult.shape-1
+   }                                                                                                                         
+
+   if (document.getElementById('myText03').value == ''){document.getElementById('myText03').value = -2} // if empty make it negative                                                                        
+   if (document.getElementById('myText03').value >= 0 ) {                                                  
+       document.getElementById('myDiv12345').innerHTML = myResult.dataSync()[document.getElementById('myText03').value].toFixed(document.getElementById('myText04').value)    
+   } else {
+       document.getElementById('myDiv12345').innerHTML = myResult.dataSync()
+   }
+                                                         
+}"><br><br>
+
+</div>
+<div id='myDiv12345'>...</div><br>
+
+<input id="myUpdate12345" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea12345').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv12345Code').innerHTML =    myJoe 
+  document.getElementById('myButton12345').click()
+                                             
+}">
+
+
+<br>
+
+<textarea id="myTextarea12345"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce12345){
+     myTextGrow('myTextarea12345', 'myDiv12345Code')
+     document.getElementById('myUpdate12345').style.visibility = 'visible'
+     myOnce12345 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+<br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce1234 = true    // so textareas are only clicked once
+myOnce12345 = true  
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>

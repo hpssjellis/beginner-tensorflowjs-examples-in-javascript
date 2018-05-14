@@ -1,0 +1,837 @@
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>CSV to K Nearest Neighbor (KNN) Classifier</h2>
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+The K-Nearest Neighbor code in Tensorflowjs is fairly easy. It is just calculating the distance between two points on a 
+ graph. In 2D it would just be the distance formula, kind of like the pythagoras equation for the hypotenus of a right triangle 
+ c = square root of (a squared + b squared).<br><br>
+ Lets try a 3, 4, 5 triangle: If the graph starts at location 0,0 and go 3 along the x axis and 4 up, what is the unknown 
+ distance from the origin to this 3, 4 location<br><br>
+ 
+ Look at how bareable the code is:
+</div><br>
+
+
+<div id="myDiv124Code"> 
+
+<input id="myButton124" type=button value="KNN Basics"  onclick="{
+                                                                 
+  (async function (){     
+      // need to setup the tensors
+                                                              
+      const myData    = tf.tensor2d([0, 0], [1, 2])
+      const myUnknown = tf.tensor2d([3, 4], [1, 2])
+      const mySqrt    = tf.tensor1d([0.5])
+                                               
+                                                              
+      // now do the distance formula  
+                                                                 
+      const myDiff = tf.sub(myData, myUnknown)   
+      const mySquaredDiff = tf.mul(myDiff, myDiff)
+      const axis = 1
+      const mySquaredDiffAdded = mySquaredDiff.sum(axis)
+      const myKNN = mySquaredDiffAdded.pow(mySqrt) 
+      myKnnArray = await myKNN.data()  
+                                                                 
+     
+      // Ops stringed format                                                           
+      // myKnnArray  = await tf.mul(tf.sub(myData, myUnknown),tf.sub(myData, myUnknown)).sum(axis).pow(mySqrt)
+                                                           
+      document.getElementById('myDiv124').innerHTML =  'The KNN distance from the origin at 0,0 to the location 3,4<br>'   
+      document.getElementById('myDiv124').innerHTML +=  'The KNN tensor is [' + myKnnArray +']<br>'                                                               
+ }() )                                                                
+                                                                 
+                                                                 
+                                                                 
+                                                       
+}"><br><br>
+
+</div>
+<div id='myDiv124'>...</div><br>
+
+<input id="myUpdate124" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea124').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv124Code').innerHTML =    myJoe 
+  document.getElementById('myButton124').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea124"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce124){
+     myTextGrow('myTextarea124', 'myDiv124Code')
+     document.getElementById('myUpdate124').style.visibility = 'visible'
+     myOnce124 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Same thing as above but stringing the operations together in one line which is strangely easier to read
+ 
+</div><br>
+
+
+<div id="myDiv125Code"> 
+
+<input id="myButton125" type=button value="KNN Basics Using Stringed Operations"  onclick="{
+                                                                 
+  (async function (){     
+      // need to setup the tensors
+                                                              
+      const myData    = tf.tensor2d([0, 0], [1, 2])
+      const myUnknown = tf.tensor2d([3, 4], [1, 2])
+      const mySqrt    = tf.tensor1d([0.5])
+      const axis = 1
+                                               
+                                                              
+      // now do the distance formula  using stringed operation format
+                                                                 
+
+      const myKNN  = tf.mul(tf.sub(myData, myUnknown),tf.sub(myData, myUnknown)).sum(axis).pow(mySqrt)
+      const myKnnArray = await myKNN.data()  
+                                                           
+      document.getElementById('myDiv125').innerHTML =  'The KNN distance from the origin at 0,0 to the location 3,4<br>'   
+      document.getElementById('myDiv125').innerHTML +=  'The KNN tensor is [' + myKnnArray +']<br>'                                                               
+ }() )                                                                
+                                                                 
+                                                                 
+                                                                 
+                                                       
+}"><br><br>
+
+</div>
+<div id='myDiv125'>...</div><br>
+
+<input id="myUpdate125" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea125').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv125Code').innerHTML =    myJoe 
+  document.getElementById('myButton125').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea125"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce125){
+     myTextGrow('myTextarea125', 'myDiv125Code')
+     document.getElementById('myUpdate125').style.visibility = 'visible'
+     myOnce125 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+
+Now try a KNN with real 2 D or more dimensional data. The Machine Learning part is the same as the above example, however lots of
+ regular Javascript is needed to parse and organise the data before and after running the very small Machine Learning KNN classifier.
+ 
+
+Find other text datasets at <a href="https://archive.ics.uci.edu/ml/datasets.html?sort=nameUp&view=list">
+ https://archive.ics.uci.edu/ml/datasets.html?sort=nameUp&view=list</a><br>
+or at <a href="https://en.m.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research">
+ https://en.m.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research</a><br>
+
+
+</div><br>
+
+
+    
+<div id="myDiv987Code"> 
+
+
+
+
+
+
+
+
+
+<script>
+
+ // line breaks at end of textareas breaks code
+ 
+function myRemoveLineBreak(myBox){
+  while ( (myBox[myBox.length-1]  == '\n' )   || (myBox[myBox.length-1]  == '\r\n' )  )   {
+   myBox = myBox.slice(0, -1);
+ }
+  return myBox 
+}
+
+// helper function for very last step
+
+function flatten(arr) {
+  return [].concat(...arr)
+}
+
+
+function findIndexOfGreatest(array) {
+  var greatest;
+  var indexOfGreatest;
+  for (var i = 0; i < array.length; i++) {
+    if (!greatest || array[i] > greatest) {
+      greatest = array[i];
+      indexOfGreatest = i;
+    }
+  }
+  return indexOfGreatest;
+}
+</script>
+
+<br>
+
+
+<br><br>
+Original CSV:<br><textarea id="myArea02" rows=10 cols=100 nowrap placeholder="length,width,height,label&#10;2,3,4,small&#10;4,6,7,big">
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+5.4,3.7,1.5,0.2,setosa
+4.8,3.4,1.6,0.2,setosa
+4.8,3,1.4,0.1,setosa
+4.3,3,1.1,0.1,setosa
+5.8,4,1.2,0.2,setosa
+5.7,4.4,1.5,0.4,setosa
+5.4,3.9,1.3,0.4,setosa
+5.1,3.5,1.4,0.3,setosa
+5.7,3.8,1.7,0.3,setosa
+5.1,3.8,1.5,0.3,setosa
+5.4,3.4,1.7,0.2,setosa
+5.1,3.7,1.5,0.4,setosa
+4.6,3.6,1,0.2,setosa
+5.1,3.3,1.7,0.5,setosa
+4.8,3.4,1.9,0.2,setosa
+5,3,1.6,0.2,setosa
+5,3.4,1.6,0.4,setosa
+5.2,3.5,1.5,0.2,setosa
+5.2,3.4,1.4,0.2,setosa
+4.7,3.2,1.6,0.2,setosa
+4.8,3.1,1.6,0.2,setosa
+5.4,3.4,1.5,0.4,setosa
+5.2,4.1,1.5,0.1,setosa
+5.5,4.2,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+5,3.2,1.2,0.2,setosa
+5.5,3.5,1.3,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+4.4,3,1.3,0.2,setosa
+5.1,3.4,1.5,0.2,setosa
+5,3.5,1.3,0.3,setosa
+4.5,2.3,1.3,0.3,setosa
+4.4,3.2,1.3,0.2,setosa
+5,3.5,1.6,0.6,setosa
+5.1,3.8,1.9,0.4,setosa
+4.8,3,1.4,0.3,setosa
+5.1,3.8,1.6,0.2,setosa
+4.6,3.2,1.4,0.2,setosa
+5.3,3.7,1.5,0.2,setosa
+5,3.3,1.4,0.2,setosa
+7,3.2,4.7,1.4,versicolor
+6.4,3.2,4.5,1.5,versicolor
+6.9,3.1,4.9,1.5,versicolor
+5.5,2.3,4,1.3,versicolor
+6.5,2.8,4.6,1.5,versicolor
+5.7,2.8,4.5,1.3,versicolor
+6.3,3.3,4.7,1.6,versicolor
+4.9,2.4,3.3,1,versicolor
+6.6,2.9,4.6,1.3,versicolor
+5.2,2.7,3.9,1.4,versicolor
+5,2,3.5,1,versicolor
+5.9,3,4.2,1.5,versicolor
+6,2.2,4,1,versicolor
+6.1,2.9,4.7,1.4,versicolor
+5.6,2.9,3.6,1.3,versicolor
+6.7,3.1,4.4,1.4,versicolor
+5.6,3,4.5,1.5,versicolor
+5.8,2.7,4.1,1,versicolor
+6.2,2.2,4.5,1.5,versicolor
+5.6,2.5,3.9,1.1,versicolor
+5.9,3.2,4.8,1.8,versicolor
+6.1,2.8,4,1.3,versicolor
+6.3,2.5,4.9,1.5,versicolor
+6.1,2.8,4.7,1.2,versicolor
+6.4,2.9,4.3,1.3,versicolor
+6.6,3,4.4,1.4,versicolor
+6.8,2.8,4.8,1.4,versicolor
+6.7,3,5,1.7,versicolor
+6,2.9,4.5,1.5,versicolor
+5.7,2.6,3.5,1,versicolor
+5.5,2.4,3.8,1.1,versicolor
+5.5,2.4,3.7,1,versicolor
+5.8,2.7,3.9,1.2,versicolor
+6,2.7,5.1,1.6,versicolor
+5.4,3,4.5,1.5,versicolor
+6,3.4,4.5,1.6,versicolor
+6.7,3.1,4.7,1.5,versicolor
+6.3,2.3,4.4,1.3,versicolor
+5.6,3,4.1,1.3,versicolor
+5.5,2.5,4,1.3,versicolor
+5.5,2.6,4.4,1.2,versicolor
+6.1,3,4.6,1.4,versicolor
+5.8,2.6,4,1.2,versicolor
+5,2.3,3.3,1,versicolor
+5.6,2.7,4.2,1.3,versicolor
+5.7,3,4.2,1.2,versicolor
+5.7,2.9,4.2,1.3,versicolor
+6.2,2.9,4.3,1.3,versicolor
+5.1,2.5,3,1.1,versicolor
+5.7,2.8,4.1,1.3,versicolor
+6.3,3.3,6,2.5,virginica
+5.8,2.7,5.1,1.9,virginica
+7.1,3,5.9,2.1,virginica
+6.3,2.9,5.6,1.8,virginica
+6.5,3,5.8,2.2,virginica
+7.6,3,6.6,2.1,virginica
+4.9,2.5,4.5,1.7,virginica
+7.3,2.9,6.3,1.8,virginica
+6.7,2.5,5.8,1.8,virginica
+7.2,3.6,6.1,2.5,virginica
+6.5,3.2,5.1,2,virginica
+6.4,2.7,5.3,1.9,virginica
+6.8,3,5.5,2.1,virginica
+5.7,2.5,5,2,virginica
+5.8,2.8,5.1,2.4,virginica
+6.4,3.2,5.3,2.3,virginica
+6.5,3,5.5,1.8,virginica
+7.7,3.8,6.7,2.2,virginica
+7.7,2.6,6.9,2.3,virginica
+6,2.2,5,1.5,virginica
+6.9,3.2,5.7,2.3,virginica
+5.6,2.8,4.9,2,virginica
+7.7,2.8,6.7,2,virginica
+6.3,2.7,4.9,1.8,virginica
+6.7,3.3,5.7,2.1,virginica
+7.2,3.2,6,1.8,virginica
+6.2,2.8,4.8,1.8,virginica
+6.1,3,4.9,1.8,virginica
+6.4,2.8,5.6,2.1,virginica
+7.2,3,5.8,1.6,virginica
+7.4,2.8,6.1,1.9,virginica
+7.9,3.8,6.4,2,virginica
+6.4,2.8,5.6,2.2,virginica
+6.3,2.8,5.1,1.5,virginica
+6.1,2.6,5.6,1.4,virginica
+7.7,3,6.1,2.3,virginica
+6.3,3.4,5.6,2.4,virginica
+6.4,3.1,5.5,1.8,virginica
+6,3,4.8,1.8,virginica
+6.9,3.1,5.4,2.1,virginica
+6.7,3.1,5.6,2.4,virginica
+6.9,3.1,5.1,2.3,virginica
+5.8,2.7,5.1,1.9,virginica
+6.8,3.2,5.9,2.3,virginica
+6.7,3.3,5.7,2.5,virginica
+6.7,3,5.2,2.3,virginica
+6.3,2.5,5,1.9,virginica
+6.5,3,5.2,2,virginica
+6.2,3.4,5.4,2.3,virginica
+5.9,3,5.1,1.8,virginica</textarea><br><br>
+
+<input type=button value="Seperate Data and Labels" onclick="{
+ 
+   document.getElementById('myArea01').value = '' 
+   document.getElementById('myText02').value = '' 
+   document.getElementById('myText03').value = '' 
+   document.getElementById('myLabelsSpot').innerHTML = ''                                                          
+                                                                                                              
+                                                                                                           
+   document.getElementById('myArea02').value = myRemoveLineBreak(document.getElementById('myArea02').value)
+                                                                                                                                  
+                                                             
+                                                             
+                                                             
+                                                             
+//  alert('not yet ready\nUsing the testing data below') 
+  //myIncoming = new Array()                                                           
+ myIncoming = document.getElementById('myArea02').value.split(/\r\n|\n/)                                                    
+// alert(myIncoming.length)    
+                                                            
+  myLabelsTemp = new Array(myIncoming.length)
+   myInSplit =    new Array(myIncoming.length)   
+   
+                                                      
+ for(var t=0;  t <= myIncoming.length-1; t++){
+    myInSplit[t] =  myIncoming[t].split(',')                                                   
+                                                 
+}                                                                                                                        
+      
+// alert()                                                          
+                                                             
+//alert( myInSplit[0])  
+                                                             
+//alert(myLabelsTemp)                                                          
+                                                             
+                                                                                                          
+ // put label label in table    
+                                                             
+  Lab =     myInSplit[0].pop()                                                          
+                                                             
+ document.getElementById('myLabelsSpot').innerHTML =  Lab
+                                                             
+                                                                                              
+ document.getElementById('myText03').value =  myInSplit[0]                                                         
+                                                             
+                                                                                                   
+                                                             
+                                                             
+                                                             
+ //shift(myLabelsTemp)  
+                                                             
+
+                                                        
+  // randomly pick an unknown                                                           
+  myRand = Math.floor(Math.random() * myIncoming.length-1)                                                      
+                                                                         
+                                                             
+    for(var j=1;  j<=myIncoming.length-1; j++ ){  
+      Lab2 =     myInSplit[j].pop()                                                                                                                     
+     document.getElementById('myText02').value    +=  Lab2+'\n'  
+     document.getElementById('myArea01').value  +=   myInSplit[j]+'\n'                                                         
+        if ( myRand == j ){
+        document.getElementById('myText01').value  =    myInSplit[j]                                               
+    }                                                                  
+ }
+       document.getElementById('myArea01').value.trim()
+       document.getElementById('myText02').value.trim()                                                      
+                                                             
+   //for(var k=1;  k<=myInSplit.length-1; k++ ){                                                           
+                                                             
+     //}       
+                                         
+                                                             
+}"><br><br>
+
+
+
+<table border=1>
+<tr><th colsspan=2>Headings:</th><td></td></tr>
+<tr>
+<td >
+<textarea id="myText03" rows=1 cols=70 nowrap placeholder="length, width, height">
+Size, Weight</textarea>
+
+</td><td id='myLabelsSpot'></td></tr>
+
+<tr><th>Data:</th><th>Labels</th></tr>
+
+<tr><td><textarea id="myArea01" rows=10 cols=70 nowrap onScroll="{
+ 
+ document.getElementById('myText02').scrollTop =  document.getElementById('myArea01').scrollTop                                                    
+             
+ }" placeholder="length,width,height,label&#10;2,3,4,small&#10;4,6,7,big">
+1.0, 34
+9.8, 88
+5.0, 67
+6.0, 57
+7.0, 77
+2.3, 14
+12.1, 99
+15.1, 123</textarea></td><td>
+
+
+<textarea id="myText02" rows=10 cols=20 nowrap onScroll="{
+                                                         
+ document.getElementById('myArea01').scrollTop =  document.getElementById('myText02').scrollTop                                                    
+             
+}" placeholder="length,width,height,label&#10;2,3,4,small&#10;4,6,7,big">
+small
+big
+medium
+medium
+medium
+small
+big
+big</textarea></td></tr>
+</table>
+
+The K value: <input id="myKvalue" type=text value="3" placeholder="5"><br>
+The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.1, 8.6"><br>
+
+<br>
+<input  type="button" id="myButton987" value="Solve K-Nearest-Neigbor" onclick="{
+
+  (async function (){
+                                                               
+    document.getElementById('myArea01').value = myRemoveLineBreak(document.getElementById('myArea01').value)
+     
+    document.getElementById('myText01').value = myRemoveLineBreak(document.getElementById('myText01').value)
+    document.getElementById('myText02').value = myRemoveLineBreak(document.getElementById('myText02').value)
+    document.getElementById('myText03').value = myRemoveLineBreak(document.getElementById('myText03').value)
+                                                                                 
+                                                                                          
+                                                                                          
+                                                               
+                                                               
+                                                               
+                                                               
+                                                               
+                                                               
+   myMainArray = document.getElementById('myArea01').value.split(/\r\n|\n/);  // split at end of line
+                                                    
+   //myData = tf.tensor1d(myMainArray); 
+   myUnknown = tf.tensor1d(document.getElementById('myText01').value.split(',')); 
+                                           
+   myHeadingsArray = document.getElementById('myText03').value.split(',')
+
+
+
+//////////////////////////////////////////////////////////////////// issues
+
+
+   // Need to load the data
+   myDataArray = new Array(myHeadingsArray.length)
+
+
+   for (myA=0;  myA <= myMainArray.length-1 ; myA++){
+        myDataArray[myA] = myMainArray[myA].split(',')
+     
+   }
+
+ //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
+
+   //myData = tf.tensor1d(flatten(myDataArray),'float32', [5,2]); 
+   myData = tf.tensor(myDataArray); 
+
+
+//////////////////////////////////////////////////////////////
+
+ 
+
+
+
+   myLabelsArray = document.getElementById('myText02').value.split(/\r\n|\n/);
+ 
+
+
+   //myLabelsArray.length
+
+   myOriginalLoc = new Array(myLabelsArray.length)
+   for (x=0;  x <= myLabelsArray.length-1; x++ ){
+      myOriginalLoc[x] = x
+   }     
+   
+    
+  // check K value less than amount of data
+    if (document.getElementById('myKvalue').value > myLabelsArray.length){
+        alert('Forcing K value to less than data points')
+        document.getElementById('myKvalue').value = myLabelsArray.length
+     }
+
+                                                  
+// myData.print('verbose')
+    //  document.getElementById('myDiv987').innerHTML =  'The Data tensor is [' + await myData.data() +']<br>'   
+      document.getElementById('myDiv987').innerHTML =  'The Groups Length ' + myLabelsArray.length + '<br>'  
+  //   document.getElementById('myDiv987').innerHTML =  ', myLabels tensor is [' + myLabelsArray +']<br>'   
+     document.getElementById('myDiv987').innerHTML +=  'The Unknown tensor is [' + await myUnknown.data() +']<br>'  
+
+
+      // Got to grab the shape to setup a pow sqrt tensor       
+
+      //alert(myLabelsArray.length)
+      //alert(myHeadingsArray.length)
+      myMainShape = new Array(2)
+      myMainShape[0] =myLabelsArray.length  
+      myMainShape[1] = myHeadingsArray.length
+      //alert(JSON.stringify(myMainShape))
+  
+      //const mySqrt = tf.tensor1d([0.5, 0.5, 0.5, 0.5, 0.5]);                                                                             
+      const mySqrt = tf.fill([myLabelsArray.length], 0.5)                                                             
+     // const mySqrt = tf.fill(myMainShape, 0.5)         // thought I needed multi-dimensional squareRoot, but will sum tensor first
+
+
+ 
+      //mySqrt.print('verbose')
+    
+      const myDiff = tf.sub(myData, myUnknown);   
+      const mySquaredDiff = tf.mul(myDiff, myDiff);
+     
+      const axis = 1;
+      const mySquaredDiffAdded = mySquaredDiff.sum(axis);
+ 
+      const myKNN = mySquaredDiffAdded.pow(mySqrt) 
+      myKnnArray = await myKNN.data()                                                                            
+                                                                                       
+   //   document.getElementById('myDiv987').innerHTML +=  'The KNN tensor is [' + myKnnArray +']<br>'
+
+      //myKnnArray = await myKNN.buffer()
+      
+       //   myKNN.print('verbose')                                                          
+       //alert(myKnnArray)                                           
+      // alert(myLabelsArray)                                           
+      // alert(myOriginalLoc)                                                             
+                                                                    
+      myJoinedArray = new Array(myLabelsArray.length)
+
+      for (y=0; y <= myLabelsArray.length-1; y++){
+         myJoinedArray[y] = new Array(3)
+      }
+
+
+
+
+      myJoinedArray = myJoinedArray.map(function(value, index){
+            return [myKnnArray[index], myLabelsArray[index], myOriginalLoc[index]];
+         })
+
+                                   
+       //alert(myJoinedArray)      
+
+
+
+
+
+
+
+
+
+// sort the triple array of KNN, label, location in original array                                            
+                                            
+  myJoinedArray.sort(function(a,b){
+     return a[0] - b[0];
+  });
+                                            
+
+  myTemp=''
+  myLabelAverage = ''
+  myLabelGroup = new Array(myLabelsArray.length)    
+  myLabelGroup[0] = new Array(2)                                            
+  myGrouping = 0;        
+
+  myUniqueLables = Array.from(new Set(myLabelsArray))  
+  myCount = new Array() 
+  for (h=0;  h<= myUniqueLables.length-1; h++){
+       myCount[h]=0
+   }                                         
+    // alert(myLabelsArray)
+    // alert(myUniqueLables)  
+
+
+
+
+
+
+                                    
+for (c=0;  c <= parseInt(document.getElementById('myKvalue').value)-1;   c++){
+   myTemp += myMainArray[myJoinedArray[c][2]] + ' label = '+ myJoinedArray[c][1] +'<br>'                                            
+  //  alert(myJoinedArray[c][0]+', '+myJoinedArray[c][1])
+                                            
+
+          for (h=0;  h<= myUniqueLables.length-1; h++){
+            if (myJoinedArray[c][1] == myUniqueLables[h]){
+               myCount[h] += 1
+            }
+          }
+       
+
+                                                     
+                                            
+  }                                            
+
+// alert(myTemp+', LabelArrayCount = '+ myUniqueLables[findIndexOfGreatest(myCount)])                                                 
+
+
+
+
+  document.getElementById('myDiv987').innerHTML +=  '<br>For the unknown: <font color=green>'+document.getElementById('myText01').value+
+        '</font>  <br>The K-Nearest-Neighbors :<br> <font color=blue>'+myTemp+'</font> Best Label = <font color=blue>'+myUniqueLables[findIndexOfGreatest(myCount)] +'</font><br>'   
+    
+
+    
+   })()
+
+
+}"><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+</div>
+<div id='myDiv987'>...</div><br>
+
+<input id="myUpdate987" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea987').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv987Code').innerHTML =    myJoe 
+  document.getElementById('myButton987').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea987"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce987){
+     myTextGrow('myTextarea987', 'myDiv987Code')
+     document.getElementById('myUpdate987').style.visibility = 'visible'
+     myOnce987 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce987 = true    // so textareas are only clicked once
+myOnce124 = true   
+myOnce125 = true   
+ 
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>
