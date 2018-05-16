@@ -39,29 +39,81 @@
 
     
     
-<h2 align=center> Most of the examples are in the following format:</h2>
+<h2 align=center>Several Keras Layers Examples using Tensorflowjs</h2>
 
 
 
 
 
+
+
+
+  
+    
+<h2 align=center> Training simple Neural Networks with Keras layers using Tensorflowjs</h2>
 
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Training Input x = [1], [2], [3], [4] <br>
+Training output y = [1], [3], [5], [7]  <br>
+ What is the output going to be if the input is 5 using a reasonably simple keras layer?<br>
+ The answer should be close to 9.
 </div><br>
 
 
+    
 <div id="myDiv123Code"> 
 
-<input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+ 
+<input type=number id="myAsk" value=5><br> 
+ 
+<input id="myButton123" type=button value="Keras Layers Train and Test"  onclick="{
+       document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
+                                                                                
+    model = tf.sequential(); // no const so that it is a global variable 
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+   // Generate some synthetic data for training.
+   const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
+   const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
+                                                                  
+  (async function () {   // inline async so we can use promises and await
+                                                                                    
+    for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys, { epochs: 10 });
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+        }
+                                                                   
+    }                                                                                    
+                                                                                    
+                                                                                 
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
+                                                                            
+  })() // end the inline async funciton                                                                        
+                                                                            
+                                                                                                                                                       
+}">   
+
+ 
+<input id="myButton123b" type=button value="re-Test"  onclick="{
+   (async function () {                                                                
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   })() // end the inline async funciton                                                                                     
+                                                                                  
+ }"><br><br>
 
 </div>
 <div id='myDiv123'>...</div><br>
-
 <input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
    // first remove first and last line since they are injected
@@ -101,17 +153,69 @@ Click here to see the working HTML code.
 
 
 
+  
+    
+<h2 align=center> Training simple Neural Networks with Keras layers using Tensorflowjs</h2>
+
+
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Training Input x = [1], [2], [3], [4] <br>
+Training output y = [1], [3], [5], [7]  <br>
+ What is the output going to be if the input is 5 using a reasonably simple keras layer?<br>
+ The answer should be close to 9.
 </div><br>
 
 
+    
 <div id="myDiv124Code"> 
 
-<input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+ 
+<input type=number id="myAsk" value=5><br> 
+ 
+<input id="myButton124" type=button value="Keras Layers Train and Test"  onclick="{
+       document.getElementById('myButton124').style.backgroundColor = 'red'                                                                              
+                                                                                
+    model = tf.sequential(); // no const so that it is a global variable 
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+   // Generate some synthetic data for training.
+   const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
+   const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
+                                                                  
+  (async function () {   // inline async so we can use promises and await
+                                                                                    
+    for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys, { epochs: 10 });
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv124').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+        }
+                                                                   
+    }                                                                                    
+                                                                                    
+                                                                                 
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+    document.getElementById('myDiv124').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton124').style.backgroundColor = 'lightgray'                                                                                
+                                                                            
+  })() // end the inline async funciton                                                                        
+                                                                            
+                                                                                                                                                       
+}">   
+
+ 
+<input id="myButton124b" type=button value="re-Test"  onclick="{
+   (async function () {                                                                
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+   document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   })() // end the inline async funciton                                                                                     
+                                                                                  
+ }"><br><br>
 
 </div>
 <div id='myDiv124'>...</div><br>
@@ -152,16 +256,72 @@ Click here to see the working HTML code.
 
 
 
+  
+    
+<h2 align=center> Training simple Neural Networks with Keras layers using Tensorflowjs</h2>
+
+
+
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Training Input x = [1], [2], [3], [4] <br>
+Training output y = [1], [3], [5], [7]  <br>
+ What is the output going to be if the input is 5 using a reasonably simple keras layer?<br>
+ The answer should be close to 9.
 </div><br>
 
 
+    
 <div id="myDiv125Code"> 
 
-<input id="myButton125" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv125').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+ 
+<input type=number id="myAsk" value=5><br> 
+ 
+<input id="myButton125" type=button value="Keras Layers Train and Test"  onclick="{
+       document.getElementById('myButton125').style.backgroundColor = 'red'                                                                              
+                                                                                
+    model = tf.sequential(); // no const so that it is a global variable 
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+   // Generate some synthetic data for training.
+   const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
+   const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
+                                                                  
+  (async function () {   // inline async so we can use promises and await
+                                                                                    
+    for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys, { epochs: 10 });
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv125').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+        }
+                                                                   
+    }                                                                                    
+                                                                                    
+                                                                                 
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+    document.getElementById('myDiv125').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton125').style.backgroundColor = 'lightgray'                                                                                
+                                                                            
+  })() // end the inline async funciton                                                                        
+                                                                            
+                                                                                                                                                       
+}">   
+
+ 
+<input id="myButton125b" type=button value="re-Test"  onclick="{
+   (async function () {                                                                
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+   document.getElementById('myDiv125').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   })() // end the inline async funciton                                                                                     
+                                                                                  
+ }"><br><br>
+
+</div>
+<div id='myDiv125'>...</div><br>
 
 </div>
 <div id='myDiv125'>...</div><br>
@@ -201,17 +361,72 @@ Click here to see the working HTML code.
 
 
 
+  
+    
+<h2 align=center> Training simple Neural Networks with Keras layers using Tensorflowjs</h2>
+
+
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Training Input x = [1], [2], [3], [4] <br>
+Training output y = [1], [3], [5], [7]  <br>
+ What is the output going to be if the input is 5 using a reasonably simple keras layer?<br>
+ The answer should be close to 9.
 </div><br>
 
 
+    
 <div id="myDiv126Code"> 
 
-<input id="myButton126" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv126').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+ 
+<input type=number id="myAsk" value=5><br> 
+ 
+<input id="myButton126" type=button value="Keras Layers Train and Test"  onclick="{
+       document.getElementById('myButton126').style.backgroundColor = 'red'                                                                              
+                                                                                
+    model = tf.sequential(); // no const so that it is a global variable 
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+   // Generate some synthetic data for training.
+   const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
+   const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
+                                                                  
+  (async function () {   // inline async so we can use promises and await
+                                                                                    
+    for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys, { epochs: 10 });
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv126').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+        }
+                                                                   
+    }                                                                                    
+                                                                                    
+                                                                                 
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+    document.getElementById('myDiv126').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton126').style.backgroundColor = 'lightgray'                                                                                
+                                                                            
+  })() // end the inline async funciton                                                                        
+                                                                            
+                                                                                                                                                       
+}">   
+
+ 
+<input id="myButton126b" type=button value="re-Test"  onclick="{
+   (async function () {                                                                
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                    
+   document.getElementById('myDiv126').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   })() // end the inline async funciton                                                                                     
+                                                                                  
+ }"><br><br>
+
+</div>
+<div id='myDiv126'>...</div><br>
 
 </div>
 <div id='myDiv126'>...</div><br>
