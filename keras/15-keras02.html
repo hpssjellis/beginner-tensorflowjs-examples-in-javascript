@@ -44,10 +44,12 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Training Input x = [1], [2], [3], [4] <br>
+ <h2>A Multilayer Perceptron</h2><br>
+ Training Input x = [1], [2], [3], [4] <br>
 Training output y = [1], [3], [5], [7]  <br>
  What is the output going to be if the input is 5 using a reasonably simple keras layer?<br>
- The answer should be close to 9.
+ The answer should be close to 9.<br>
+
 </div><br>
 
 
@@ -62,9 +64,10 @@ Training output y = [1], [3], [5], [7]  <br>
                                                                                 
     model = tf.sequential(); // no const so that it is a global variable 
 
-    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 10 }) );  
-    model.add(tf.layers.dense({ units:  1 }) );  
+    model.add(tf.layers.dense({ units: 10, activation: 'relu',  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 20, activation: 'relu' }) );  
+    model.add(tf.layers.dense({ units: 10, activation: 'relu' }) );  
+    model.add(tf.layers.dense({ units:  1, activation: 'sigmoid' }) );  
 
    model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
