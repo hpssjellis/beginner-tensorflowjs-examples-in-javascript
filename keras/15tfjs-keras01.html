@@ -60,7 +60,7 @@ Training output y = [1], [3], [5], [7]  <br>
 <input id="myButton123" type=button value="Keras Layers Train and Test"  onclick="{
        document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
                                                                                 
-   const document.model = tf.sequential();
+    document.model = tf.sequential();  
 
     document.model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
     document.model.add(tf.layers.dense({ units: 10 }) );  
@@ -100,7 +100,7 @@ Training output y = [1], [3], [5], [7]  <br>
    (async function () {                                                                
    const myPredictArray = await  document.model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
                                                                                     
-   document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
    })() // end the inline async funciton                                                                                     
                                                                                   
  }"><br><br>
