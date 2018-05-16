@@ -29,6 +29,18 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 Resources
 
+
+
+fchollet   
 https://github.com/fchollet/keras-resources
+
+Jason Brownlee  
+
+Good overview  
+https://machinelearningmastery.com/keras-functional-api-deep-learning/
+
+Good LSTM
+https://machinelearningmastery.com/understanding-stateful-lstm-recurrent-neural-networks-python-keras/
+
 
 
