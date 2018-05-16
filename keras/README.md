@@ -23,3 +23,12 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 Convolution   
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-convulu.html
+
+
+
+
+Resources
+
+https://github.com/fchollet/keras-resources
+
+
