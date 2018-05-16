@@ -266,7 +266,7 @@ function setupGui(net) {
  * Kicks off the demo by loading the posenet model and estimating
  * poses on a default image
  */
-export async function bindPage() {
+async function bindPage() {
     const net = await posenet.load();
 
     setupGui(net);
