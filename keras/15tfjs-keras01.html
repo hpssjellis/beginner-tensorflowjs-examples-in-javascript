@@ -73,7 +73,7 @@ Training output y = [1], [3], [5], [7]  <br>
    const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
 
                                                                   
-  (async function () {   // inline aswwync so we can use promises and await
+  (async function () {   // inline async so we can use promises and await
                                                                                     
     for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
         var myFit = await model.fit(xs, ys, { epochs: 10 });
@@ -97,11 +97,11 @@ Training output y = [1], [3], [5], [7]  <br>
 
  
 <input id="myButton123b" type=button value="re-Test"  onclick="{
-                                                               
+   (async function () {                                                                
    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
                                                                                     
    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
-                                                                                   
+   })() // end the inline async funciton                                                                                     
                                                                                   
  }"><br><br>
 
