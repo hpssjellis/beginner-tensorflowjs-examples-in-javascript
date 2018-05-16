@@ -8,3 +8,11 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 15tfjs-keras-group.html  
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras-group.html 
+
+
+
+
+
+2nd model  
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras02.html
