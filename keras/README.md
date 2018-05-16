@@ -16,3 +16,10 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 2nd model  
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras02.html
+
+
+
+
+
+Convolution   
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-convulu.html
