@@ -17,3 +17,22 @@ model.add(LeakyReLU(alpha=0.1))
 
 model.add(Conv2DTranspose(
     channel, kernel_size=(9, 9), strides=(2, 2), padding='same', name='deconvolution'))
+
+
+
+
+
+
+
+
+
+
+bad
+
+   // Brownless's example had a 64,64,1 input layer
+    model.add(tf.layers.conv2d({ units: 32, kernelSize: 4,  activation: 'relu',  inputShape: [1] }) );  
+    model.add(tf.layers.maxPooling2d({ units: 20, poolSize : [2,2] }) );  
+    model.add(tf.layers.conv2d({ units: 16, kernelSize: 4,  activation: 'relu' }) );  
+    model.add(tf.layers.maxPooling2d({ units: 20, poolSize : [2,2] }) );  
+    model.add(tf.layers.dense({ units: 10, activation: 'linear' }) );  
+    model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
