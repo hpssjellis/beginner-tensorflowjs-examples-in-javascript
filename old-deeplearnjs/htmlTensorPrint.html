@@ -317,22 +317,22 @@ class myTensor extends dl.Tensor {
 Using the code <br>
 <textarea rows=3 cols=90 readonly>
     const myWeights  = new myTensor([2,2],'float32',[1,2,3,4]);
-    myWeights.htmlPrint('myDiv01',  'Weights [2,2]', true, 3, false)
+    myWeights.htmlPrint('myDiv125',  'Weights [2,2]', true, 3, false)
 </textarea><br>
 
 Passing the variables: TheDiv, TheTitle, Table or Flattened, Fixed Decimals, Print html to console<br>
  
 
-<input type="button" value="tensor.htmlPrint()" onclick="{
+<input type="button" id="myButton125" value="tensor.htmlPrint()" onclick="{
    const myWeights  = new myTensor([2,2],'float32',[1,2,3,4]);
    //myWeights.print()
 
-   myWeights.htmlPrint('myDiv01',  'Weights [2,2]', true, 3, false)
+   myWeights.htmlPrint('myDiv125',  'Weights [2,2]', true, 3, false)
 }"><br><br>
 
 
 
-<div id="myDiv01"></div><br><br><br><br>
+<div id="myDiv125"></div><br><br><br><br>
 
 
 
@@ -641,18 +641,18 @@ const myWeights  = new myTensor([<input id="myArg" Title="Define Matrix Shape"  
 
 Then HTML Print Tensor<br> 
 
-myWeights.htmlPrint(<span title="The Div the information gets sent to">'myDiv02'</span>,<input id="myTitle2" Title="Define the Matrix Title" type=text value="myWeights[2,3,2,2]" placeholder="myWeights[2,3,2,2]" >
+myWeights.htmlPrint(<span title="The Div the information gets sent to">'myDiv126'</span>,<input id="myTitle2" Title="Define the Matrix Title" type=text value="myWeights[2,3,2,2]" placeholder="myWeights[2,3,2,2]" >
 <select id="mySel" Title="Print as a table or flattened in a textarea" size=1><option value=true>true<option value=false>false</select>, 
 <select id="myDec" Title="-1 for no effect, else Fixed Decimal Places" size=1><option value=-1>-1<option value=0>0<option value=1>1<option value=2>2<option value=3>3<option value=4>4<option value=5>5<option value=6>6<option value=7>7<option value=8>8<option value=9>9</select>,
 <select id="myShow" Title="Show HTML code in console" size=1><option value=false>false<option value=true>true</select> )<br><br> 
 
 
-<input type="button" value="Dynamic tensor.htmlPrint()" onclick="{
+<input type="button" id="myButton126" value="Dynamic tensor.htmlPrint()" onclick="{
 
    my1 = document.getElementById('myArg').value.split(',').map(Number)
    my2 = document.getElementById('myType').value
    my3 = document.getElementById('myFlat').value.split(',').map(Number)
-   my4 = 'myDiv02'
+   my4 = 'myDiv126'
    my5 = document.getElementById('myTitle2').value
    my6 = JSON.parse(document.getElementById('mySel').value)
    my7 = parseInt(document.getElementById('myDec').value)
