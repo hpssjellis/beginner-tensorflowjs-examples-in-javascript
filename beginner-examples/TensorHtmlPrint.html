@@ -1,0 +1,774 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>An attempt at making a helper function to show on a web page tensors of any dimension</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Demonstrating a method to show any dimension Tensor in an HTML chart. This example shows a 2D Tensor
+</div><br>
+
+
+<div id="myDiv125Code"> 
+
+<script>
+// Class myTensor.htmlPrint parameters    
+    
+// myDiv : HTML div tag id to put table or textarea into, 
+// myTitle : optional string table title. Default no title, 
+// myTableBoolean : optional boolean true print as a table, false print flattened in a textarea. Default true,
+// myFixedDecimal : optiona  integer print to fixed decimal places Default -1 no effect. 
+// myConsoleBoolean : optional print the HTML to the console. Default false  
+        
+class myTensor extends tf.Tensor {
+    async htmlPrint(myDiv, myTitle='', myTableBoolean=true, myFixedDecimal=-1, myConsoleBoolean = false)  {
+    
+    // Matricies with a shape of 1 messes up the chart
+    var myRealRank = 0
+    for (var myRank=0; myRank <= this.rank-1; myRank++){
+       if (this.shape[myRank] != 1){myRealRank += 1}
+       //console.log(myRank+', '+this.shape[myRank]+', '+myRealRank)
+    }
+    
+           
+       document.getElementById(myDiv).innerHTML = '<b>'+myTitle + '</b><br>'
+       const myOutput =  await this.data()
+       const myBuffer = await this.buffer()
+       
+       
+       if (myTableBoolean){           
+          var myTotalOutput = ''
+          var myCount = 0
+          var my1dEnd = parseInt(this.shape[0])
+          var myRowEnd   = parseInt(this.shape[1])
+          var myChartEnd = parseInt(this.shape[0])*parseInt(this.shape[1])
+          var my3dEnd = parseInt(this.shape[0]) * parseInt(this.shape[1]) * parseInt(this.shape[2])
+          var my4dEnd = parseInt(this.shape[0]) * parseInt(this.shape[1]) * parseInt(this.shape[2])* parseInt(this.shape[3])
+
+          // console.log(myRowEnd+', '+myChartEnd+', '+my3dEnd+', '+my4dEnd)
+
+          if (myRealRank==1){
+             if (myConsoleBoolean){
+                console.log('Rank = 1')
+              }  
+              myCount = 0;
+              var myTemp = '<table border=1>\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount += 1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  }  
+                  if (myCount == my1dEnd){
+                     myTemp += '</tr>\n</table>'
+                  }                         
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+           
+
+
+
+          if (myRealRank==2){
+             if (myConsoleBoolean){
+                console.log('Rank = 2')
+              }  
+              myCount = 0;
+//console.log(myFixedDecimal)
+              var myTemp = '<table border=1>\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                  if(myCount % myRowEnd == 0){
+                     if (myCount == myChartEnd){
+                        myTemp += '</tr>\n</table>'
+                     } else {
+                        myTemp +=  '</tr>\n<tr>' 
+                     } 
+                  }              
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+           
+
+
+
+          if (myRealRank==3){
+             if (myConsoleBoolean){
+                console.log('Rank = 3')
+              }  
+              myCount = 0;
+
+              var myTemp = '<table border=1>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                if (myCount % my3dEnd==0){
+                     myTemp += '</tr>\n</table>\n</td></tr>\n</table>\n'
+                } else {
+                     if(myCount % myRowEnd == 0){
+                        if (myCount % myChartEnd == 0){
+                           myTemp += '</tr>\n</table>\n</td><td>\n<table border=1 width="100%">\n'
+                        } else {
+                           myTemp +=  '</tr>\n<tr>' 
+                       } 
+                    } 
+                 }             
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+             
+   
+
+
+
+
+
+          if (myRealRank==4){
+             if (myConsoleBoolean){
+                console.log('Rank = 4')
+              }  
+              myCount = 0;
+
+              var myTemp = '<table border=1>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                if (myCount == my4dEnd){
+                     myTemp += '</tr>\n</table>\n</td></tr>\n</table>\n'
+                } else {
+                     if(myCount % myRowEnd == 0){
+                        if (myCount % myChartEnd == 0){
+
+                            if(myCount == my3dEnd){ 
+                               myTemp += '</tr>\n</table>\n</td></tr>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+                           } else {
+
+
+                           myTemp += '</tr>\n</table>\n</td><td>\n<table border=1 width="100%">\n'
+                        }} else {
+                          
+                               myTemp +=  '</tr>\n<tr>' 
+                          
+                       } 
+                    } 
+                 }             
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+             
+
+
+  
+
+          if (myRealRank > 4){
+             if (myConsoleBoolean){
+                console.log('Rank > 4')
+              }             
+              myCount = 0;
+              var myStartEachLoop = 0
+          for (var myBig=0; myBig <= myRealRank-1; myBig++){
+             myStartEachLoop = myBig * my4dEnd 
+
+              var myTemp = '<table border=1>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+              for (var myLoop=myStartEachLoop; myLoop <= (((myBig+1) * my4dEnd)-1); myLoop++){
+
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                if (myCount % my4dEnd==0){
+                     myTemp += '</tr>\n</table>\n</td></tr>\n</table>\n'
+                } else {
+                     if(myCount % myRowEnd == 0){
+                        if (myCount % myChartEnd == 0){
+
+                            if(myCount % my3dEnd==0){ 
+                               myTemp += '</tr>\n</table>\n</td></tr>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+                           } else {
+
+
+                           myTemp += '</tr>\n</table>\n</td><td>\n<table border=1 width="100%">\n'
+                        }} else {
+                          
+                               myTemp +=  '</tr>\n<tr>' 
+                          
+                       } 
+                    } 
+                 }             
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+             
+      } // big for loop end
+
+
+ 
+          
+           
+           
+       } else {      // end table output start flattened textarea output 
+            var myTemp = '<textarea rows=10 cols=70>'
+            for (var myCount = 0;    myCount <= this.size - 1;   myCount++){ 
+                if (myFixedDecimal >=0){
+                   myTemp += myOutput[myCount].toFixed(myFixedDecimal) + ', ' 
+                } else {
+                    myTemp += myOutput[myCount] +', '
+                }     
+            } 
+            myTemp += '</textarea>'
+            document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            if (myConsoleBoolean ){
+                 console.log(myTemp)
+            }
+
+       }    // end myTableBoolean else
+    }       // end htmlPrint
+}           // end myTensor class
+    
+</script>
+
+
+<h2 align=center>Demonstrating the method .htmlPrint using deeplearnjs</h2>
+
+Using the code <br>
+<textarea rows=3 cols=90 readonly>
+    const myWeights  = new myTensor([2,2],'float32',[1,2,3,4]);
+    myWeights.htmlPrint('myDiv125',  'Weights [2,2]', true, 3, false)
+</textarea><br>
+
+Passing the variables: TheDiv, TheTitle, Table or Flattened, Fixed Decimals, Print html to console<br>
+ 
+
+<input type="button" id="myButton125" value="tensor.htmlPrint()" onclick="{
+   const myWeights  = new myTensor([2,2],'float32',[1,2,3,4]);
+   //myWeights.print()
+
+   myWeights.htmlPrint('myDiv125',  'Weights [2,2]', true, 3, false)
+}"><br><br>
+
+
+
+<div id="myDiv125"></div><br><br><br><br>
+
+
+
+
+</div>
+<div id='myDiv125'>...</div><br>
+
+<input id="myUpdate125" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea125').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv125Code').innerHTML =    myJoe 
+  document.getElementById('myButton125').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea125"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce125){
+     myTextGrow('myTextarea125', 'myDiv125Code')
+     document.getElementById('myUpdate125').style.visibility = 'visible'
+     myOnce125 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Demonstrating a method to show any dimension Tensor in an HTML chart. This example shows a 4D Tensor, with dynamic adjustable inputs
+</div><br>
+
+
+<div id="myDiv126Code"> 
+
+<script>
+// Class myTensor.htmlPrint parameters    
+    
+// myDiv : HTML div tag id to put table or textarea into, 
+// myTitle : optional string table title. Default no title, 
+// myTableBoolean : optional boolean true print as a table, false print flattened in a textarea. Default true,
+// myFixedDecimal : optiona  integer print to fixed decimal places Default -1 no effect. 
+// myConsoleBoolean : optional print the HTML to the console. Default false  
+        
+class myTensor2 extends tf.Tensor {
+    async htmlPrint(myDiv, myTitle='', myTableBoolean=true, myFixedDecimal=-1, myConsoleBoolean = false)  {
+    
+    // Matricies with a shape of 1 messes up the chart
+    var myRealRank = 0
+    for (var myRank=0; myRank <= this.rank-1; myRank++){
+       if (this.shape[myRank] != 1){myRealRank += 1}
+       //console.log(myRank+', '+this.shape[myRank]+', '+myRealRank)
+    }
+    
+           
+       document.getElementById(myDiv).innerHTML = '<b>'+myTitle + '</b><br>'
+       const myOutput =  await this.data()
+       const myBuffer = await this.buffer()
+       
+       
+       if (myTableBoolean){           
+          var myTotalOutput = ''
+          var myCount = 0
+          var my1dEnd = parseInt(this.shape[0])
+          var myRowEnd   = parseInt(this.shape[1])
+          var myChartEnd = parseInt(this.shape[0])*parseInt(this.shape[1])
+          var my3dEnd = parseInt(this.shape[0]) * parseInt(this.shape[1]) * parseInt(this.shape[2])
+          var my4dEnd = parseInt(this.shape[0]) * parseInt(this.shape[1]) * parseInt(this.shape[2])* parseInt(this.shape[3])
+
+          // console.log(myRowEnd+', '+myChartEnd+', '+my3dEnd+', '+my4dEnd)
+
+          if (myRealRank==1){
+             if (myConsoleBoolean){
+                console.log('Rank = 1')
+              }  
+              myCount = 0;
+              var myTemp = '<table border=1>\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount += 1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  }  
+                  if (myCount == my1dEnd){
+                     myTemp += '</tr>\n</table>'
+                  }                         
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+           
+
+
+
+          if (myRealRank==2){
+             if (myConsoleBoolean){
+                console.log('Rank = 2')
+              }  
+              myCount = 0;
+//console.log(myFixedDecimal)
+              var myTemp = '<table border=1>\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                  if(myCount % myRowEnd == 0){
+                     if (myCount == myChartEnd){
+                        myTemp += '</tr>\n</table>'
+                     } else {
+                        myTemp +=  '</tr>\n<tr>' 
+                     } 
+                  }              
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+           
+
+
+
+          if (myRealRank==3){
+             if (myConsoleBoolean){
+                console.log('Rank = 3')
+              }  
+              myCount = 0;
+
+              var myTemp = '<table border=1>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                if (myCount % my3dEnd==0){
+                     myTemp += '</tr>\n</table>\n</td></tr>\n</table>\n'
+                } else {
+                     if(myCount % myRowEnd == 0){
+                        if (myCount % myChartEnd == 0){
+                           myTemp += '</tr>\n</table>\n</td><td>\n<table border=1 width="100%">\n'
+                        } else {
+                           myTemp +=  '</tr>\n<tr>' 
+                       } 
+                    } 
+                 }             
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+             
+   
+
+
+
+
+
+          if (myRealRank==4){
+             if (myConsoleBoolean){
+                console.log('Rank = 4')
+              }  
+              myCount = 0;
+
+              var myTemp = '<table border=1>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+              for (var myLoop=0; myLoop <= this.size-1; myLoop++){
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                if (myCount == my4dEnd){
+                     myTemp += '</tr>\n</table>\n</td></tr>\n</table>\n'
+                } else {
+                     if(myCount % myRowEnd == 0){
+                        if (myCount % myChartEnd == 0){
+
+                            if(myCount == my3dEnd){ 
+                               myTemp += '</tr>\n</table>\n</td></tr>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+                           } else {
+
+
+                           myTemp += '</tr>\n</table>\n</td><td>\n<table border=1 width="100%">\n'
+                        }} else {
+                          
+                               myTemp +=  '</tr>\n<tr>' 
+                          
+                       } 
+                    } 
+                 }             
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+             
+
+
+  
+
+          if (myRealRank > 4){
+             if (myConsoleBoolean){
+                console.log('Rank > 4')
+              }             
+              myCount = 0;
+              var myStartEachLoop = 0
+          for (var myBig=0; myBig <= myRealRank-1; myBig++){
+             myStartEachLoop = myBig * my4dEnd 
+
+              var myTemp = '<table border=1>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+              for (var myLoop=myStartEachLoop; myLoop <= (((myBig+1) * my4dEnd)-1); myLoop++){
+
+                  myCount +=1
+                  if (myFixedDecimal >=0){
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop].toFixed(myFixedDecimal) +'</td>'
+                  } else {
+                     myTemp +=  '<td title='+ myBuffer.get(myLoop)+'>'+myOutput[myLoop] +'</td>'
+                  } 
+                if (myCount % my4dEnd==0){
+                     myTemp += '</tr>\n</table>\n</td></tr>\n</table>\n'
+                } else {
+                     if(myCount % myRowEnd == 0){
+                        if (myCount % myChartEnd == 0){
+
+                            if(myCount % my3dEnd==0){ 
+                               myTemp += '</tr>\n</table>\n</td></tr>\n<tr><td>\n<table border=1 width="100%">\n<tr>'
+                           } else {
+
+
+                           myTemp += '</tr>\n</table>\n</td><td>\n<table border=1 width="100%">\n'
+                        }} else {
+                          
+                               myTemp +=  '</tr>\n<tr>' 
+                          
+                       } 
+                    } 
+                 }             
+               }
+              if (myConsoleBoolean ){
+                 console.log(myTemp)
+              }
+              document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            }
+             
+      } // big for loop end
+
+
+ 
+          
+           
+           
+       } else {      // end table output start flattened textarea output 
+            var myTemp = '<textarea rows=10 cols=70>'
+            for (var myCount = 0;    myCount <= this.size - 1;   myCount++){ 
+                if (myFixedDecimal >=0){
+                   myTemp += myOutput[myCount].toFixed(myFixedDecimal) + ', ' 
+                } else {
+                    myTemp += myOutput[myCount] +', '
+                }     
+            } 
+            myTemp += '</textarea>'
+            document.getElementById(myDiv).innerHTML += myTemp + '<br>'
+            if (myConsoleBoolean ){
+                 console.log(myTemp)
+            }
+
+       }    // end myTableBoolean else
+    }       // end htmlPrint
+}           // end myTensor class
+    
+</script>
+
+
+
+<h3>Setup a Dynamic Tensor </h3>
+
+
+const myWeights  = new myTensor([<input id="myArg" Title="Define Matrix Shape"   type=text value="2,3,2,2" placeholder="2,3,2,2" >],
+<select id="myType" Title="Define Matrix Type" size=1><option value='float32'>float32<option value='int32'>int32<option value=bool>bool</select>,
+[<input id="myFlat" Title="Define Matrix Values" type=text value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24" size=90 placeholder="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24" >])<br><br> 
+
+Then HTML Print Tensor<br> 
+
+myWeights.htmlPrint(<span title="The Div the information gets sent to">'myDiv126'</span>,<input id="myTitle2" Title="Define the Matrix Title" type=text value="myWeights[2,3,2,2]" placeholder="myWeights[2,3,2,2]" >
+<select id="mySel" Title="Print as a table or flattened in a textarea" size=1><option value=true>true<option value=false>false</select>, 
+<select id="myDec" Title="-1 for no effect, else Fixed Decimal Places" size=1><option value=-1>-1<option value=0>0<option value=1>1<option value=2>2<option value=3>3<option value=4>4<option value=5>5<option value=6>6<option value=7>7<option value=8>8<option value=9>9</select>,
+<select id="myShow" Title="Show HTML code in console" size=1><option value=false>false<option value=true>true</select> )<br><br> 
+
+
+<input type="button" id="myButton126" value="Dynamic tensor.htmlPrint()" onclick="{
+
+   my1 = document.getElementById('myArg').value.split(',').map(Number)
+   my2 = document.getElementById('myType').value
+   my3 = document.getElementById('myFlat').value.split(',').map(Number)
+   my4 = 'myDiv126'
+   my5 = document.getElementById('myTitle2').value
+   my6 = JSON.parse(document.getElementById('mySel').value)
+   my7 = parseInt(document.getElementById('myDec').value)
+   my8 = JSON.parse(document.getElementById('myShow').value)
+
+   const myWeights  = new myTensor2(my1, my2, my3);
+   //myWeights.print()
+
+   myWeights.htmlPrint(my4, my5, my6, my7, my8)
+
+
+}"><br><br>
+
+
+
+
+
+</div>
+<div id='myDiv126'>...</div><br>
+
+<input id="myUpdate126" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea126').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv126Code').innerHTML =    myJoe 
+  document.getElementById('myButton126').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea126"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce126){
+     myTextGrow('myTextarea126', 'myDiv126Code')
+     document.getElementById('myUpdate126').style.visibility = 'visible'
+     myOnce126 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+
+myOnce125 = true  
+myOnce126 = true  
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
