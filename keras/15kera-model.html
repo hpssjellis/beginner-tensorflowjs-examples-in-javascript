@@ -57,7 +57,7 @@ Training output y = [1], [3], [5], [7]  <br>
 <div id="myDiv123Code"> 
 
  
-<input type=number id="myAsk" value=5><br> 
+<input type=number id="myAsk" value=1,2,3,4,5,6,7,8,9,10><br> 
  
 <input id="myButton123" type=button value="Keras Layers Train and Test"  onclick="{
        document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
@@ -70,20 +70,32 @@ Training output y = [1], [3], [5], [7]  <br>
                                                                                   
                                                                                   
                                                                                   
-    model = tf.sequential(); // no const so that it is a global variable 
+   // model = tf.sequential(); // no const so that it is a global variable 
 
-   // model.add(tf.layers.dense({ units: 10, activation: 'linear',  inputShape: [1] }) );  
-                                                                                   
-    model.add(tf.layers.gru({ units: 10, recurrentInitializer: 'glorotNormal', inputShape: [1] }));  
-    model.add(tf.layers.dense({ units: 20, activation: 'linear' }) );  
-    model.add(tf.layers.dense({ units: 10, activation: 'linear' }) );  
-    model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+                                                                                  
+     const input = tf.input({shape: [5]});
+                                                                                  
+     const denseLayer1 = tf.layers.dense({units: 10, activation: 'relu'});
+     const denseLayer2 = tf.layers.dense({units: 2, activation: 'softmax'});
+
+     const output = denseLayer2.apply(denseLayer1.apply(input));
+
+     const model = tf.model({inputs: input, outputs: output});
+
+     //model.predict(tf.ones([2, 5])).print();                                                                              
+                                                                                  
+                                                                                  
+
 
    model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
    // Generate some synthetic data for training.
-   const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
-   const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
+   const xs = tf.tensor2d([[1, 2, 3, 4, 5],[2, 4, 6, 8, 10]], [2, 5]);
+   const ys = tf.tensor2d([[3, 6, 9, 12, 15],[18, 21, 24, 27, 30]], [2, 5]);
 
                                                                   
   (async function () {   // inline async so we can use promises and await
@@ -98,7 +110,7 @@ Training output y = [1], [3], [5], [7]  <br>
     }                                                                                    
                                                                                     
                                                                                  
-    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [2,5]))  
                                                                                     
     document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
