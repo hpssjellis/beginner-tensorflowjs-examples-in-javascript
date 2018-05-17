@@ -10,7 +10,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras-group.html 
 
 
-
+gru  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15kera-gru.html
 
 
 2nd model  
