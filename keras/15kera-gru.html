@@ -61,10 +61,20 @@ Training output y = [1], [3], [5], [7]  <br>
  
 <input id="myButton123" type=button value="Keras Layers Train and Test"  onclick="{
        document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
-                                                                                
+   
+                                                                                  
+ /*
+        model.add(tf.layers.gru({ units: hiddenSize, recurrentInitializer: 'glorotNormal', inputShape: [maxLen, vocabularySize] }));    
+                                                                                  
+                                                                                  */
+                                                                                  
+                                                                                  
+                                                                                  
     model = tf.sequential(); // no const so that it is a global variable 
 
     model.add(tf.layers.dense({ units: 10, activation: 'linear',  inputShape: [1] }) );  
+                                                                                  
+    model.add(tf.layers.gru({ units: hiddenSize, recurrentInitializer: 'glorotNormal', inputShape: [maxLen, vocabularySize] }));  
     model.add(tf.layers.dense({ units: 20, activation: 'linear' }) );  
     model.add(tf.layers.dense({ units: 10, activation: 'linear' }) );  
     model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
