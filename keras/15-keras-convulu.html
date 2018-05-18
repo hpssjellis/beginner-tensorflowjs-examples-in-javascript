@@ -44,7 +44,7 @@ const ys = tf.tensor2d([1, 3, 5, 7 ], [4, 1]);
 model = tf.sequential(); // no const so that it is a global variable for the entire web page 
                                                                                   
 model.add(tf.layers.conv2d({
-  inputShape: [4, 4, 1],
+  inputShape: [4, 4, 1, 1],
   kernelSize: 2,
   filters: 2,
   strides: 1,
