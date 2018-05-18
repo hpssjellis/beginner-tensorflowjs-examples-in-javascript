@@ -1,14 +1,29 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> </script> 
 
- 
-
- 
-<input type="number" id="myAsk" value="5"><br> 
+<input type="number" id="myAsk" value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br> 
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{
-       document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
-                                                                                
+document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
+
+
+// Generate some synthetic data for training.
+ const xs = tf.tensor3d([[[1,1,1,1],[0,0,0,0],[1,1,1,1],[0,0,0,0]],[[1,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,0,0]],[[1,1,1,1],[0,0,0,0],[1,1,1,1],[1,1,1,1]],[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]], [4, 4, 4]).print();
+                                                                                                                                                                                                                                
+ /*
+     Easier to see when formatted like this                                                                             
+ const xs = tf.tensor3d([
+       [[1,1,1,1],[0,0,0,0],[1,1,1,1],[0,0,0,0]],
+       [[1,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,0,0]],
+       [[1,1,1,1],[0,0,0,0],[1,1,1,1],[1,1,1,1]],
+       [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    ], [4, 4, 4]);
+                                                                                                                                                                                   
+ */
+                                                                                   
+   // make some nonsense labels                                                                               
+   const ys = tf.tensor2d([1, 3, 5, 7 ] [4, 1]);                                                                                   
+                                                                                                                                                                                                                                                        
 model = tf.sequential(); // no const so that it is a global variable 
                                                                                   
 model.add(tf.layers.conv2d({
@@ -20,7 +35,7 @@ model.add(tf.layers.conv2d({
   kernelInitializer: 'varianceScaling'
 }));
                                                                                   
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2] }));
                                                                                   
 model.add(tf.layers.conv2d({
   kernelSize: 2,
@@ -30,45 +45,15 @@ model.add(tf.layers.conv2d({
   kernelInitializer: 'varianceScaling'
 }));
                                                                                   
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2] }));
                                                                                   
 model.add(tf.layers.flatten());
-model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'})); 
-                                                                                  
+model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'}));                                                                                  
 model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
 
-                                                                                  
-                                                                                  
-   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
-
-   // Generate some synthetic data for training.
-        const xs = tf.tensor3d([[[1,1,1,1],[0,0,0,0],[1,1,1,1],[0,0,0,0]],[[1,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,0,0]],[[1,1,1,1],[0,0,0,0],[1,1,1,1],[1,1,1,1]],[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]], [4, 4, 4]).print();
-                                                                                                                                              
-                                                                                  
- /*
-     Easier to see when formatted like this                                                                             
-        const xs = tf.tensor3d([
-       [[1,1,1,1],[0,0,0,0],[1,1,1,1],[0,0,0,0]],
-       [[1,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,0,0]],
-       [[1,1,1,1],[0,0,0,0],[1,1,1,1],[1,1,1,1]],
-       [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
-    ], [4, 4, 4]);
-                                                                                                    
-                                                                                  
- */
-                                                                                  
-                                                                                  
-                                                                                  
-   // make some labels                                                                               
-   const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
-                                                                                  
-                                                                                  
-                                                                                  
-   //const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
-   //const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
-
-                                                                  
-  (async function () {   // inline async so we can use promises and await
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+                                                                 
+(async function () {   // inline async so we can use promises and await
                                                                                     
     for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
         var myFit = await model.fit(xs, ys, { epochs: 10 });
@@ -78,14 +63,13 @@ model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );
         }
                                                                    
     }                                                                                    
-                                                                                    
-                                                                                 
-    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+                                                                                                                                                                
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4]))  
                                                                                     
     document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
                                                                             
-  })() // end the inline async funciton                                                                        
+ })() // end the inline async funciton                                                                        
                                                                             
                                                                                                                                                        
 }" style="background-color: red;">   
@@ -93,7 +77,7 @@ model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );
  
 <input id="myButton123b" type="button" value="re-Test" onclick="{
    (async function () {                                                                
-   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4]))  
                                                                                     
    document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
    })() // end the inline async funciton                                                                                     
