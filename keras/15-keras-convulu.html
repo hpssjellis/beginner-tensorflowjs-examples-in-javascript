@@ -1,7 +1,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> </script> 
 
-<input type="text" id="myAsk" value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br> 
+<input type="text" id="myAsk" sizde=40 value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br> 
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{
 document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
@@ -21,8 +21,8 @@ document.getElementById('myButton123').style.backgroundColor = 'red'
                                                                                                                                                                                    
  */
                                                                                    
-   // make some nonsense labels                                                                               
-   const ys = tf.tensor2d([1, 3, 5, 7 ] [4, 1]);                                                                                   
+// make some nonsense labels                                                                               
+const ys = tf.tensor2d([1, 3, 5, 7 ] [4, 1]);                                                                                   
                                                                                                                                                                                                                                                         
 model = tf.sequential(); // no const so that it is a global variable 
                                                                                   
