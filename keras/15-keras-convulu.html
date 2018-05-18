@@ -45,10 +45,8 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
  <h2>A Convolutional Neural Network</h2><br>
- Training Input x = [1], [2], [3], [4] <br>
-Training output y = [1], [3], [5], [7]  <br>
- What is the output going to be if the input is 5 using a reasonably simple keras layer?<br>
- The answer should be close to 9.<br>
+ <h2>A Convolutional Neural Network</h2><br>
+Lets try a [4,4,1] tensor fed into a simple convolution model
 
 </div><br>
 
@@ -62,29 +60,33 @@ Training output y = [1], [3], [5], [7]  <br>
 <input id="myButton123" type=button value="Keras Layers Train and Test"  onclick="{
        document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
                                                                                 
-    model = tf.sequential(); // no const so that it is a global variable 
+model = tf.sequential(); // no const so that it is a global variable 
    // Brownless's example had a 64,64,1 input layer
    // TFJS's example had a 28, 28, 1 input layer
+                                                                                  
 model.add(tf.layers.conv2d({
-  inputShape: [1, 1, 1],
-  kernelSize: 5,
-  filters: 8,
+  inputShape: [4, 4, 1],
+  kernelSize: 3,
+  filters: 3,
   strides: 1,
   activation: 'relu',
   kernelInitializer: 'varianceScaling'
 }));
+                                                                                  
 model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
+                                                                                  
 model.add(tf.layers.conv2d({
-  kernelSize: 5,
-  filters: 16,
+  kernelSize: 3,
+  filters: 3,
   strides: 1,
   activation: 'relu',
   kernelInitializer: 'varianceScaling'
 }));
+                                                                                  
 model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
+                                                                                  
 model.add(tf.layers.flatten());
-model.add(tf.layers.dense(
-    {units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'})); 
+model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'})); 
                                                                                   
 model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
 
@@ -93,8 +95,21 @@ model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );
    model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
    // Generate some synthetic data for training.
-   const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
+   const xs = tf.tensor3d([
+       [1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0],
+       [1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0],
+       [1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1],
+       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    ], [4, 4, 1]);
+                                                                                  
+                                                                                  
+                                                                                  
    const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
+                                                                                  
+                                                                                  
+                                                                                  
+   //const xs = tf.tensor2d([[1], [2], [3], [4]], [4, 1]);
+   //const ys = tf.tensor2d([[1], [3], [5], [7]], [4, 1]);
 
                                                                   
   (async function () {   // inline async so we can use promises and await
