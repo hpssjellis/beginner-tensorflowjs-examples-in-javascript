@@ -61,13 +61,11 @@ Lets try a [4,4,1] tensor fed into a simple convolution model
        document.getElementById('myButton123').style.backgroundColor = 'red'                                                                              
                                                                                 
 model = tf.sequential(); // no const so that it is a global variable 
-   // Brownless's example had a 64,64,1 input layer
-   // TFJS's example had a 28, 28, 1 input layer
                                                                                   
 model.add(tf.layers.conv2d({
   inputShape: [4, 4, 1],
-  kernelSize: 3,
-  filters: 3,
+  kernelSize: 2,
+  filters: 2,
   strides: 1,
   activation: 'relu',
   kernelInitializer: 'varianceScaling'
@@ -76,8 +74,8 @@ model.add(tf.layers.conv2d({
 model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
                                                                                   
 model.add(tf.layers.conv2d({
-  kernelSize: 3,
-  filters: 3,
+  kernelSize: 2,
+  filters: 2,
   strides: 1,
   activation: 'relu',
   kernelInitializer: 'varianceScaling'
