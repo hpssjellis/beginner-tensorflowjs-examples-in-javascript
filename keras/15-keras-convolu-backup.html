@@ -3,41 +3,12 @@
 
 <input type="text" id="myAsk" size=40 value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br> 
  
-<input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{
+<input id="myButton123" type="button" value="Convolutional Train and Test" onclick="{
 
 document.getElementById('myButton123').style.backgroundColor = 'red'     // just to show something is happening                                                                         
 
-
 // Generate some synthetic data for training.
-// const xs = tf.tensor3d([[[1,1,1,1],[0,0,0,0],[1,1,1,1],[0,0,0,0]],[[1,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,0,0]],[[1,1,1,1],[0,0,0,0],[1,1,1,1],[1,1,1,1]],[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]], [4, 4, 4]).print();
-/*                                                                           
- const xs = tf.tensor3d([
-                                                                                   
-      [[1,1,1,1],
-       [0,0,0,0],
-       [1,1,1,1],
-       [0,0,0,0]],
-                                                                                   
-      [[1,1,1,1],
-       [1,1,1,1],
-       [1,1,1,1],
-       [0,0,0,0]],
-                                                                                                                                                                    
-      [[1,1,1,1],
-       [0,0,0,0],
-       [1,1,1,1],
-       [1,1,1,1]],
-                                                                                   
-      [[0,0,0,0],
-       [0,0,0,0],
-       [0,0,0,0],
-       [0,0,0,0]]
-                                                                                   
-    ], [4, 4, 4]);
-*/
-                                                                                   
-                                                                                   
-                                                                                   
+                                                                                                                                                  
 const xs = tf.tensor4d([
 
 0,0,0,0,
@@ -58,20 +29,17 @@ const xs = tf.tensor4d([
 0,0,0,0,
 0,0,0,0,
 1,1,1,1,
-0,0,0,0,  
+0,0,0,0  
 
-], [1, 4, 4, 4] );                                                                                 
-                                                                                   
-                                                                                   
-
-                                                                                   
+], [4, 4, 4, 1],'float32' );                                                                                 
+                                                                                                                                                                                                                                                       
 // make some nonsense labels                                                                               
-const ys = tf.tensor2d([1, 3, 5, 7 ], [4, 1]);                                                                                   
+const ys = tf.tensor2d([1, 3, 5, 7 ], [4, 1],'float32');                                                                                   
                                                                                                                                                                                                                                                         
 model = tf.sequential(); // no const so that it is a global variable for the entire web page 
                                                                                   
 model.add(tf.layers.conv2d({
-  inputShape: [4, 4, 4],
+  inputShape: [4, 4, 1],
   kernelSize: 2,
   filters: 2,
   strides: 1,
@@ -114,14 +82,13 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
                                                                             
  })() // end the inline async funciton                                                                        
-                                                                            
-                                                                                                                                                       
+                                                                                                                                                                                                                                   
 }" >
 
  
-<input id="myButton123b" type="button" value="re-Test" onclick="{
+<input id="myButton123b" type="button" value="Just Test" onclick="{
    (async function () {                                                                
-   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4]))  
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4],'float32'))  
                                                                                     
    document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
    })() // end the inline async funciton                                                                                     
