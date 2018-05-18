@@ -31,33 +31,20 @@ const xs = tf.tensor4d([
 1,1,1,1,
 0,0,0,0  
 
-], [4, 4, 4, 1],'float32' );                                                                                 
+], [4, 4, 4, 1], 'bool' );                                                                                 
                                                                                                                                                                                                                                                        
 // make some nonsense labels                                                                               
-const ys = tf.tensor2d([1, 3, 5, 7 ], [4, 1],'float32');                                                                                   
+const ys = tf.tensor2d([1, 3, 5, 7 ], [4, 1]);                                                                                   
                                                                                                                                                                                                                                                         
 model = tf.sequential(); // no const so that it is a global variable for the entire web page 
                                                                                   
-model.add(tf.layers.conv2d({
-  inputShape: [4, 4, 1],
-  kernelSize: 2,
-  filters: 2,
-  strides: 1,
-  activation: 'relu',
-  kernelInitializer: 'varianceScaling'
-}));
+model.add(tf.layers.conv2d({ inputShape: [4, 4, 1] }));
                                                                                   
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2] }));
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [1, 1] }));
                                                                                   
-model.add(tf.layers.conv2d({
-  kernelSize: 2,
-  filters: 2,
-  strides: 1,
-  activation: 'relu',
-  kernelInitializer: 'varianceScaling'
-}));
+model.add(tf.layers.conv2d({ }));
                                                                                   
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2] }));
+model.add(tf.layers.maxPooling2d( {poolSize: [2, 2], strides: [1, 1] }));
                                                                                   
 model.add(tf.layers.flatten());
 model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'}));                                                                                  
@@ -88,7 +75,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 <input id="myButton123b" type="button" value="Just Test" onclick="{
    (async function () {                                                                
-   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4],'float32'))  
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4]'))  
                                                                                     
    document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
    })() // end the inline async funciton                                                                                     
