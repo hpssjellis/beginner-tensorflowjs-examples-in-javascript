@@ -1,0 +1,81 @@
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> </script> 
+
+<input type="text" id="myAsk" size=40 value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br> 
+ 
+<input id="myButton123" type="button" value="Convolutional Train and Test" onclick="{
+
+document.getElementById('myButton123').style.backgroundColor = 'red'     // just to show something is happening                                                                         
+
+// Generate some synthetic data for training. Just trying to count lines. Can add many more.
+                                                                                                                                                  
+const xs = tf.tensor4d([
+
+0,0,0,0,
+0,1,0,0,
+0,0,0,0,
+0,0,1,0,
+
+0,0,0,0,
+0,0,0,0,
+1,1,1,1,
+0,0,0,0,
+
+0,1,0,0,
+0,1,0,0,
+0,1,0,0,
+0,1,0,0,
+  
+0,0,0,1,
+0,0,0,1,
+1,1,1,1,
+0,0,0,1  
+
+], [4, 4, 4, 1] );                                                                                 
+                                                                                                                                                                                                                                                       
+// make some nonsense labels                                                                               
+const ys = tf.tensor2d([0, 1, 1, 2 ], [4, 1]);                                                                                   
+                                                                                                                                                                                                                                                        
+model = tf.sequential(); // no const so that it is a global variable for the entire web page 
+                                                                                  
+model.add(tf.layers.conv2d({ 
+  inputShape: [4, 4, 1],                                                                                    
+  kernelSize: 3,
+  filters: 4,
+  strides: 1,
+  activation: 'relu',
+  kernelInitializer: 'varianceScaling'                                                                                   
+}));
+                                                                                  
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [1, 1] }));                                                                                  
+model.add(tf.layers.conv2d({ kernelSize: 4, filters: 8, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                  
+model.add(tf.layers.maxPooling2d( {poolSize: [2, 2], strides: [1, 1] }));                                                                                  
+model.add(tf.layers.flatten());
+model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'}));                                                                                  
+model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
+                                                                                   
+const optimizer = tf.train.sgd(0.15);
+//model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });                                                                                    
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});       
+                                                                                    
+                                                                                    
+(async function () {   // inline async so we can use promises and await                                                                                    
+    for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+        var myFit = await model.fit(xs, ys, { epochs: 10 });
+        if (myLoop % 20 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+             document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+        }                                                                   
+    }                                                                                    
+ 
+    // Do a prediction on the given textbox data                                                                                   
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4]))  
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
+                                                                            
+ })() // end the inline async funciton                                                                        
+                                                                                                                                                                                                                                   
+}" >
+
+<div id='myDiv123'>...</div><br>
