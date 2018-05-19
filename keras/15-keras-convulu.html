@@ -85,14 +85,4 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                                                                                                                                                                    
 }" >
 
- 
-<input id="myButton123b" type="button" value="Just Test" onclick="{
-   (async function () {                                                                
-   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4],'float32'))  
-                                                                                    
-   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
-   })() // end the inline async funciton                                                                                     
-                                                                                  
- }"><br><br>
-
 <div id='myDiv123'>...</div><br>
