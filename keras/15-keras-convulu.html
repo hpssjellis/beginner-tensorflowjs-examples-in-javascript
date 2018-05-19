@@ -7,8 +7,7 @@
 
 document.getElementById('myButton123').style.backgroundColor = 'red'     // just to show something is happening                                                                         
 
-// Generate some synthetic data for training.
-                                                                                                                                                  
+// Generate some synthetic data for training.                                                                                                                                                 
 const xs = tf.tensor4d([
 
 0,0,0,0,
@@ -33,10 +32,10 @@ const xs = tf.tensor4d([
 
 ], [4, 4, 4, 1] );                                                                                 
                                                                                                                                                                                                                                                        
-// How many lines in each image                                                                               
+// Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                               
 const ys = tf.tensor2d([0, 1, 1, 2 ], [4, 1]);                                                                                   
                                                                                                                                                                                                                                                         
-model = tf.sequential(); // no const so that it is a global variable for the entire web page 
+const model = tf.sequential(); 
                                                                                   
 model.add(tf.layers.conv2d({
   inputShape: [4, 4, 1],
@@ -47,20 +46,12 @@ model.add(tf.layers.conv2d({
   kernelInitializer: 'varianceScaling'
 }));
                                                                                   
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2] }));
-                                                                                  
-model.add(tf.layers.conv2d({
-  kernelSize: 2,
-  filters: 2,
-  strides: 1,
-  activation: 'relu',
-  kernelInitializer: 'varianceScaling'
-}));
-                                                                                  
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2] }));
+model.add(tf.layers.maxPooling2d({ poolSize: [2, 2], strides: [2, 2] }));                                                                                 
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 2, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                 
+model.add(tf.layers.maxPooling2d({ poolSize: [2, 2], strides: [2, 2] }));
                                                                                   
 model.add(tf.layers.flatten());
-model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'}));                                                                                  
+model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                                  
 model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
 
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
@@ -72,16 +63,14 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
         if (myLoop % 20 == 0){   
              await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
              document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
-        }
-                                                                   
-    }                                                                                    
-                                                                                                                                                                
+        }                                                              
+    }                                                                                                                                                                                                                                                    
     const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [4, 4]))  
                                                                                     
     document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
-                                                                            
- })() // end the inline async funciton                                                                        
+                                                                           
+ })() // end the inline async function                                                                        
                                                                                                                                                                                                                                    
 }" >
 
