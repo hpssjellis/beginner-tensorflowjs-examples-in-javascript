@@ -55,8 +55,10 @@ model.add(tf.layers.dense({units: 10, kernelInitializer: 'varianceScaling', acti
 model.add(tf.layers.dense({ units:  1, activation: 'linear' }) );  
                                                                                    
 const optimizer = tf.train.sgd(0.15);
-model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });                                                                                    
-                                                                 
+//model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });                                                                                    
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});       
+                                                                                    
+                                                                                    
 (async function () {   // inline async so we can use promises and await                                                                                    
     for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
         var myFit = await model.fit(xs, ys, { epochs: 10 });
