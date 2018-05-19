@@ -1,5 +1,23 @@
 This is to store any keras information that I might use in the examples
 
+
+
+
+
+
+Convolution   
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-convulu.html
+
+
+
+
+.
+
+
+
+
+
+
 testing keras  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras01.html
 
@@ -22,13 +40,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 
 
-Convolution   
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-convulu.html
 
 
-
-
-Resources
+##Resources
 
 
 
@@ -42,6 +56,10 @@ https://machinelearningmastery.com/keras-functional-api-deep-learning/
 
 Good LSTM
 https://machinelearningmastery.com/understanding-stateful-lstm-recurrent-neural-networks-python-keras/
+
+Conv2d explained  
+https://www.learnopencv.com/image-classification-using-convolutional-neural-networks-in-keras/
+
 
 
 
