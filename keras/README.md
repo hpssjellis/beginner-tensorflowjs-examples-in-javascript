@@ -61,6 +61,10 @@ https://machinelearningmastery.com/understanding-stateful-lstm-recurrent-neural-
 Conv2d explained  
 https://www.learnopencv.com/image-classification-using-convolutional-neural-networks-in-keras/
 
+docs
+
+https://keras.io/getting-started/sequential-model-guide/
+
 
 
 
