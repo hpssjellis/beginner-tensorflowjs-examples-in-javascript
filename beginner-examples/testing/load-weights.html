@@ -224,16 +224,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
   document.getElementById('myDiv5858').innerHTML = '<br>'
   document.getElementById('myButton5858').style.backgroundColor = 'red'  
                                                                                                                                                         
-  async function myGo() {
-												  											 												  
-   // const model = tf.sequential();
-   // model.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
-   // model.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
-
-
- 
-   // model.loadWeights(weightsJSON);
-
+  async function myGo3() {
 
     const loadedModel = await tf.loadModel('localstorage://my-local-model-01');	
     const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
@@ -249,7 +240,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
     document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
   }
 
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+  setTimeout(function(){  myGo3() }, 10);   // wait a bit for the GUI to update
 						     
 }">
 	
