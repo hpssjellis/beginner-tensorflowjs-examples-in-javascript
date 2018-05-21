@@ -217,8 +217,39 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
 }">
 
-<input id="myLocal5858" type=button value="Load from local storage"  onclick="{	
-   alert('local')								     
+<input id="myLocal5858" type=button value="Load from local storage"  onclick="{	 
+
+  const startTime = performance.now();
+  document.getElementById('myDiv5858').innerHTML = '<br>'
+  document.getElementById('myButton5858').style.backgroundColor = 'red'  
+                                                                                                                                                        
+  async function myGo() {
+												  											 												  
+   // const model = tf.sequential();
+   // model.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
+   // model.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
+
+
+ 
+   // model.loadWeights(weightsJSON);
+
+
+    const loadedModel = await tf.loadModel('localstorage://my-local-model-01');	
+    const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
+    const myPredictArray3 = await loadedModel.predict(training_data2).data()
+
+    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray3[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray3[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray3[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray3[3].toFixed(4) +'<br>'
+
+    const endTime = performance.now();
+    document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
+  }
+
+  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+						     
 }">
 	
 	
@@ -347,8 +378,9 @@ Batches <input id="myInNumber" type=number value=3000>
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
 }">
-<input id="myLocal5858" type=button value="Save to local storage"  onclick="{	
-   alert('local')								     
+<input id="myLocal5858" type=button value="Save to local storage"  onclick="{
+    const saveResults = await model.save('localstorage://my-local-model-01');									    
+   alert(saveResults)								     
 }">
 	
 	
