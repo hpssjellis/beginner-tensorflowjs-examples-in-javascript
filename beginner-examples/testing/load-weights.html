@@ -254,7 +254,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
                                                                                                                                                         
   async function myGo4() {
 								     
-    const loadedModel4 = await model.loadModel('Downloads://my-file-model-01');	
+    const loadedModel4 = await model.loadModel('downloads://my-file-model-01');	
     const training_data4 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const myPredictArray4 = await loadedModel.predict(training_data4).data()
 
@@ -402,7 +402,7 @@ Batches <input id="myInNumber" type=number value=3000>
 	
 <input id="myFile5858" type=button value="Save to downloads"  onclick="{	
    ( async function (){									    
-          const saveResults2 = await model4949.save('Downloads://my-file-model-01');							    
+          const saveResults2 = await model4949.save('downloads://my-file-model-01');							    
           alert(JSON.stringify(saveResults2))
    })()  // inline async function								     
 }">	<br><br>
