@@ -222,7 +222,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
   const startTime = performance.now();
   document.getElementById('myDiv5858').innerHTML = '<br>'
-  document.getElementById('myButton5858').style.backgroundColor = 'red'  
+ // document.getElementById('myButton5858').style.backgroundColor = 'red'  
                                                                                                                                                         
   async function myGo3() {
 
@@ -250,7 +250,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 								     
   const startTime = performance.now();
   document.getElementById('myDiv5858').innerHTML = '<br>'
-  document.getElementById('myButton5858').style.backgroundColor = 'red'  
+ // document.getElementById('myButton5858').style.backgroundColor = 'red'  
                                                                                                                                                         
   async function myGo4() {
 								     
@@ -269,7 +269,43 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
   }
 
   setTimeout(function(){  myGo4() }, 10);   // wait a bit for the GUI to update								     
-}">	
+}"><br>	
+	
+
+	
+json-upload: <input type=file id="json-upload">   weights-upload:	<input type=file id="weights-upload">	
+<input id="myFile5858" type=button value="Load chosen files"  onclick="{
+								     
+  const startTime = performance.now();
+  document.getElementById('myDiv5858').innerHTML = '<br>'
+ // document.getElementById('myButton5858').style.backgroundColor = 'red'  
+                                                                                                                                                        
+  async function myGo4() {
+			
+								       
+     const jsonUpload = document.getElementById('json-upload');
+     const weightsUpload = document.getElementById('weights-upload');
+
+
+     const loadedModel5 = await tf.loadModel(tf.io.browserFiles([jsonUpload.files[0], weightsUpload.files[0]]));
+								       
+								       
+    //const loadedModel4 = await model.loadModel('downloads://my-file-model-01');	
+    const training_data5 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
+    const myPredictArray5 = await loadedModel.predict(training_data4).data()
+
+    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray5[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray5[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray5[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray5[3].toFixed(4) +'<br>'
+
+    const endTime = performance.now();
+    document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
+  }
+
+  setTimeout(function(){  myGo4() }, 10);   // wait a bit for the GUI to update								     
+}">		
 	
 <br><br>
 
