@@ -226,8 +226,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
                                                                                                                                                         
   async function myGo3() {
 
-   // const loadedModel = await tf.loadModel('localstorage://my-local-model-01');	
-    const loadedModel = await tf.loadModel('ellis-offline\tensorflowjs://my-local-model-01');	
+    const loadedModel = await tf.loadModel('localstorage://my-local-model-01');		
     const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray3 = await loadedModel.predict(training_data3).data()
 
