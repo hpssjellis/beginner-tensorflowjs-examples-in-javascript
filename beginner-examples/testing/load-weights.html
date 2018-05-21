@@ -261,6 +261,8 @@ Click here to see the working HTML code.
 
 
 
+
+
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 This can create the weights used in the above example. Look at the console for more information about the Tensors.
 Increase the batches to get values close to 0, 1, 1, 0 for outputs.<br><br>
@@ -373,6 +375,118 @@ Click here to see the working HTML code.
 
 
 
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+This can create the weights used in the above example. Look at the console for more information about the Tensors.
+Increase the batches to get values close to 0, 1, 1, 0 for outputs.<br><br>
+Until Tensorflowjs makes getWeights() easier to work with, we will have to manually move the tensors to the above textarea JSON
+format file. Eventually I will automate it, but not today.
+</div><br>
+
+
+<div id="myDiv4950Code"> 
+
+<textarea type=text id ="myText01" rows=10 cols=60 wrap=false ></textarea><br>
+
+Batches <input id="myInNumber" type=number value=3000> 
+ 
+<input id="myButton4950" type=button value="Tensorflowjs xOr using layers"  onclick="{
+ const startTime2 = new Date().getTime()
+ document.getElementById('myDiv4950').innerHTML = '<br>'
+ document.getElementById('myButton4950').style.backgroundColor = 'red'  
+                                                                            
+                                                                            
+  async function myGo() {
+    const model = tf.sequential();
+
+
+    model.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
+    model.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
+                                        
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+
+    const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
+    const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
+
+  //  var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+
+										     
+    for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
+        var myFit = await model.fit(training_data, target_data, {epochs: 1});
+        if (myLoop % 100 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 100 batches      
+             document.getElementById('myDiv4950').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+        }
+                                                                   
+    }										     
+										     
+										     
+										     
+
+
+    const myPredictArray = await model.predict(training_data).data()
+                                                                                    
+    document.getElementById('myDiv4950').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv4950').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv4950').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv4950').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+										     
+    const endTime2 = new Date().getTime()
+    document.getElementById('myDiv4950').innerHTML += 'Duration ' + ((endTime2-startTime2)/1000).toFixed(0) +' seconds <br>'											     
+										     
+    document.getElementById('myButton4950').style.backgroundColor = 'lightgray'                                                             
+    myWeights = []
+    myWeights = model.getWeights()
+    myWeights[0].print('verbose')
+    myWeights[1].print('verbose')
+    myWeights[2].print('verbose')
+    myWeights[3].print('verbose')
+    document.getElementById('myText01').value = myWeights
+                  
+  }
+
+  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+
+}"><br><br>
+
+</div>
+<div id='myDiv4950'>...</div><br>
+
+<input id="myUpdate4950" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea4950').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv4950Code').innerHTML =    myJoe 
+  document.getElementById('myButton4950').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea4950"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce4950){
+     myTextGrow('myTextarea4950', 'myDiv4950Code')
+     document.getElementById('myUpdate4950').style.visibility = 'visible'
+     myOnce4950 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
 
 
 
@@ -408,7 +522,7 @@ Use at your own risk!
 
 myOnce5858 = true    // so textareas are only clicked once
 myOnce4949 = true  
-
+myOnce4950 = true  
 
 function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
