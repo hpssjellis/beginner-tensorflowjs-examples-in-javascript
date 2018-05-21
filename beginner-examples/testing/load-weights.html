@@ -226,7 +226,8 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
                                                                                                                                                         
   async function myGo3() {
 
-    const loadedModel = await tf.loadModel('localstorage://my-local-model-01');	
+   // const loadedModel = await tf.loadModel('localstorage://my-local-model-01');	
+    const loadedModel = await tf.loadModel('C:\ellis-offline\tensorflowjs://my-local-model-01');	
     const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray3 = await loadedModel.predict(training_data3).data()
 
@@ -401,7 +402,7 @@ Batches <input id="myInNumber" type=number value=3000>
 	
 <input id="myFile5858" type=button value="Save as files"  onclick="{	
    ( async function (){									    
-          const saveResults2 = await model4949.save('downloads://my-file-model-01');							    
+          const saveResults2 = await model4949.save('C:\ellis-offline\tensorflowjs://my-file-model-01');							    
           alert(saveResults2)
    })()  // inline async function								     
 }">	<br><br>
