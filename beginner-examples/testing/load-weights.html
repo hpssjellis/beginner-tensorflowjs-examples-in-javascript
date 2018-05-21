@@ -50,6 +50,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+GO TO THE SECOND BOX AND TRAIN THE MODEL IF THIS IS YOUR FIRST TIME.<BR>	
 This is the xOr model with pre-saved weights loaded and used to predict the outcome.
 Expect close to 0, 1, 1, 0 for outputs.
 	
@@ -245,30 +246,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 }">
 	
 	
-<input id="myFile5858" type=button value="Load from Downloaded files"  onclick="{
-								     
-  const startTime = performance.now();
-  document.getElementById('myDiv5858').innerHTML = '<br>'
- // document.getElementById('myButton5858').style.backgroundColor = 'red'  
-                                                                                                                                                        
-  async function myGo4() {
-								     
-    const loadedModel4 = await model.loadModel('downloads://my-file-model-01');	
-    const training_data4 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
-    const myPredictArray4 = await loadedModel.predict(training_data4).data()
-
-    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray4[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray4[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray4[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray4[3].toFixed(4) +'<br>'
-
-    const endTime = performance.now();
-    document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
-    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
-  }
-
-  setTimeout(function(){  myGo4() }, 10);   // wait a bit for the GUI to update								     
-}"><br>	<br>
+<br>	<br>
 	
 
 	
