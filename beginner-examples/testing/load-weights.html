@@ -228,7 +228,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
     const loadedModel = await tf.loadModel('localstorage://my-local-model-01');	
     const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
-    const myPredictArray3 = await loadedModel.predict(training_data2).data()
+    const myPredictArray3 = await loadedModel.predict(training_data3).data()
 
     document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray3[0].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray3[1].toFixed(4) +'<br>'
