@@ -1,6 +1,13 @@
 
 
-letest using load
+
+now with URL
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/load-weights-url.html
+
+
+latest using load
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/load-weights.html
