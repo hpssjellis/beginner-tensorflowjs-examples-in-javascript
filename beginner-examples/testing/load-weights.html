@@ -246,7 +246,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 }">
 	
 	
-<input id="myFile5858" type=button value="Load from files"  onclick="{
+<input id="myFile5858" type=button value="Load from Downloaded files"  onclick="{
 								     
   const startTime = performance.now();
   document.getElementById('myDiv5858').innerHTML = '<br>'
@@ -395,15 +395,15 @@ Batches <input id="myInNumber" type=number value=3000>
 <input id="myLocal5858" type=button value="Save to local storage"  onclick="{
    ( async function (){									    
        const saveResults = await model4949.save('localstorage://my-local-model-01');									    
-       alert(saveResults)
+       alert(JSON.stringify(saveResults))
    })()  // inline async function									    
 }">
 	
 	
-<input id="myFile5858" type=button value="Save as files"  onclick="{	
+<input id="myFile5858" type=button value="Save to downloads"  onclick="{	
    ( async function (){									    
           const saveResults2 = await model4949.save('Downloads://my-file-model-01');							    
-          alert(saveResults2)
+          alert(JSON.stringify(saveResults2))
    })()  // inline async function								     
 }">	<br><br>
 
