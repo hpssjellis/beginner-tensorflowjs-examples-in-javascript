@@ -268,7 +268,7 @@ json-upload: <input type=file id="json-upload">   weights-upload:	<input type=fi
 								       
 								       	
     const training_data5 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
-    const myPredictArray5 = await loadedModel.predict(training_data5).data()
+    const myPredictArray5 = await loadedModel5.predict(training_data5).data()
 
     document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray5[0].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray5[1].toFixed(4) +'<br>'
