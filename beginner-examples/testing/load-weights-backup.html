@@ -1,5 +1,4 @@
 
-
 <!--   *******************************Start: What source js file to use? ****************************************************   -->
 
 
@@ -51,7 +50,9 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 This is the xOr model with pre-saved weights loaded and used to predict the outcome.
-Expect close to 0, 1, 1, 0 for outputs
+Expect close to 0, 1, 1, 0 for outputs.
+	
+Took 138 seconds to train 10,000 batches (epoch only 1) on my browser	
 </div><br>
 
 
@@ -184,14 +185,13 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
 
   const weightsJSON =   JSON.parse(document.getElementById('myJsonArea').value)
-
+  const startTime = performance.now();
   document.getElementById('myDiv5858').innerHTML = '<br>'
   document.getElementById('myButton5858').style.backgroundColor = 'red'  
-                                                                            
-                                                                            
+                                                                                                                                                        
   async function myGo() {
+												  											 												  
     const model = tf.sequential();
-
     model.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
     model.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
 
@@ -208,8 +208,9 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
     document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray2[3].toFixed(4) +'<br>'
 
- 
-  document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
+    const endTime = performance.now();
+    document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
   }
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
@@ -275,9 +276,9 @@ format file. Eventually I will automate it, but not today.
 Batches <input id="myInNumber" type=number value=3000> 
  
 <input id="myButton4949" type=button value="Tensorflowjs xOr using layers"  onclick="{
-
-  document.getElementById('myDiv4949').innerHTML = '<br>'
-  document.getElementById('myButton4949').style.backgroundColor = 'red'  
+ const startTime2 = new Date().getTime()
+ document.getElementById('myDiv4949').innerHTML = '<br>'
+ document.getElementById('myButton4949').style.backgroundColor = 'red'  
                                                                             
                                                                             
   async function myGo() {
@@ -292,8 +293,20 @@ Batches <input id="myInNumber" type=number value=3000>
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
 
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+  //  var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
 
+										     
+    for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
+        var myFit = await model.fit(training_data, target_data, {epochs: 1});
+        if (myLoop % 100 == 0){   
+             await tf.nextFrame();   // This allows the GUI to update but only every 100 batches      
+             document.getElementById('myDiv4949').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
+        }
+                                                                   
+    }										     
+										     
+										     
+										     
 
 
     const myPredictArray = await model.predict(training_data).data()
@@ -302,16 +315,18 @@ Batches <input id="myInNumber" type=number value=3000>
     document.getElementById('myDiv4949').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
     document.getElementById('myDiv4949').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv4949').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+										     
+    const endTime2 = new Date().getTime()
+    document.getElementById('myDiv4949').innerHTML += 'Duration ' + ((endTime2-startTime2)/1000).toFixed(0) +' seconds <br>'											     
+										     
     document.getElementById('myButton4949').style.backgroundColor = 'lightgray'                                                             
     myWeights = []
     myWeights = model.getWeights()
-   myWeights[0].print('verbose')
-   myWeights[1].print('verbose')
-   myWeights[2].print('verbose')
-   myWeights[3].print('verbose')
+    myWeights[0].print('verbose')
+    myWeights[1].print('verbose')
+    myWeights[2].print('verbose')
+    myWeights[3].print('verbose')
     document.getElementById('myText01').value = myWeights
-
- 
                   
   }
 
