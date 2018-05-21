@@ -269,7 +269,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
   }
 
   setTimeout(function(){  myGo4() }, 10);   // wait a bit for the GUI to update								     
-}"><br>	
+}"><br>	<br>
 	
 
 	
@@ -280,7 +280,7 @@ json-upload: <input type=file id="json-upload">   weights-upload:	<input type=fi
   document.getElementById('myDiv5858').innerHTML = '<br>'
  // document.getElementById('myButton5858').style.backgroundColor = 'red'  
                                                                                                                                                         
-  async function myGo4() {
+  async function myGo5() {
 			
 								       
      const jsonUpload = document.getElementById('json-upload');
@@ -289,10 +289,9 @@ json-upload: <input type=file id="json-upload">   weights-upload:	<input type=fi
 
      const loadedModel5 = await tf.loadModel(tf.io.browserFiles([jsonUpload.files[0], weightsUpload.files[0]]));
 								       
-								       
-    //const loadedModel4 = await model.loadModel('downloads://my-file-model-01');	
+								       	
     const training_data5 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
-    const myPredictArray5 = await loadedModel.predict(training_data4).data()
+    const myPredictArray5 = await loadedModel.predict(training_data5).data()
 
     document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray5[0].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray5[1].toFixed(4) +'<br>'
@@ -304,7 +303,7 @@ json-upload: <input type=file id="json-upload">   weights-upload:	<input type=fi
     document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
   }
 
-  setTimeout(function(){  myGo4() }, 10);   // wait a bit for the GUI to update								     
+  setTimeout(function(){  myGo5() }, 10);   // wait a bit for the GUI to update								     
 }">		
 	
 <br><br>
@@ -434,6 +433,17 @@ Batches <input id="myInNumber" type=number value=3000>
        alert(JSON.stringify(saveResults))
    })()  // inline async function									    
 }">
+	
+	
+<input id="myFile5858" type=button value="View Saved"  onclick="{	
+   ( async function (){									    
+ 
+	 document.getElementById('myDiv4949').innerHTML = Object.keys(await tf.io.listModels())							
+								
+								
+   })()  // inline async function								     
+}">	
+	
 	
 	
 <input id="myFile5858" type=button value="Save to downloads"  onclick="{	
