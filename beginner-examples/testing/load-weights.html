@@ -325,13 +325,13 @@ Batches <input id="myInNumber" type=number value=3000>
                                                                             
                                                                             
   async function myGo() {
-    const model = tf.sequential();
+    model4949 = tf.sequential(); // make it global
 
 
-    model.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
-    model.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
+    model4949.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
+    model4949.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
                                         
-    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+    model4949.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
@@ -340,7 +340,7 @@ Batches <input id="myInNumber" type=number value=3000>
 
 										     
     for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
-        var myFit = await model.fit(training_data, target_data, {epochs: 1});
+        var myFit = await model4949.fit(training_data, target_data, {epochs: 1});
         if (myLoop % 100 == 0){   
              await tf.nextFrame();   // This allows the GUI to update but only every 100 batches      
              document.getElementById('myDiv4949').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
@@ -352,7 +352,7 @@ Batches <input id="myInNumber" type=number value=3000>
 										     
 
 
-    const myPredictArray = await model.predict(training_data).data()
+    const myPredictArray = await model4949.predict(training_data).data()
                                                                                     
     document.getElementById('myDiv4949').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
     document.getElementById('myDiv4949').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
@@ -363,13 +363,13 @@ Batches <input id="myInNumber" type=number value=3000>
     document.getElementById('myDiv4949').innerHTML += 'Duration ' + ((endTime2-startTime2)/1000).toFixed(0) +' seconds <br>'											     
 										     
     document.getElementById('myButton4949').style.backgroundColor = 'lightgray'                                                             
-  //  myWeights = []
- //   myWeights = model.getWeights()
-//    myWeights[0].print('verbose')
- //   myWeights[1].print('verbose')
- //   myWeights[2].print('verbose')
- //   myWeights[3].print('verbose')
- //   document.getElementById('myText01').value = myWeights
+    myWeights = []
+    myWeights = model4949.getWeights()
+    myWeights[0].print('verbose')
+    myWeights[1].print('verbose')
+    myWeights[2].print('verbose')
+    myWeights[3].print('verbose')
+    document.getElementById('myText01').value = myWeights
    
 										     
 										     
@@ -379,13 +379,18 @@ Batches <input id="myInNumber" type=number value=3000>
 
 }">
 <input id="myLocal5858" type=button value="Save to local storage"  onclick="{
-    const saveResults = await model.save('localstorage://my-local-model-01');									    
-   alert(saveResults)								     
+   ( async function (){									    
+       const saveResults = await model4949.save('localstorage://my-local-model-01');									    
+       alert(saveResults)
+   })()  // inline async function									    
 }">
 	
 	
 <input id="myFile5858" type=button value="Save as files"  onclick="{	
-   alert('files')								     
+   ( async function (){									    
+          const saveResults2 = await model4949.save('downloads://my-file-model-01');							    
+       alert(saveResults2)
+   })()  // inline async function								     
 }">	<br><br>
 
 </div>
