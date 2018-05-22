@@ -217,16 +217,16 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
-}"><br>
+}"><br><br><br>
 
 	
 <input id="myFile5858" type=button value="View Saved local storage files"  onclick="{	
    ( async function (){									    
-	 document.getElementById('myDiv4949').innerHTML = Object.keys(await tf.io.listModels())							
+	 document.getElementById('myDiv5858').innerHTML = Object.keys(await tf.io.listModels())							
 																
    })()  // inline async function								     
 }"> 	
-<input type=text id="myInFileName" size=70 value="my-local-model-01">	
+<input type=text id="myInFileName" size=40 value="my-local-model-01">	
 	
 <input id="myLocal5858" type=button value="Load from local storage"  onclick="{	 
 
