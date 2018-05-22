@@ -53,7 +53,7 @@ model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', act
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                           
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
-(async function myGo() { // inline async so we can use promises and await                                                                                                   
+async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
   for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
@@ -66,14 +66,10 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
   document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                            
   document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
 
-})()
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
-                                                                                    
-                                                                                    
+}
+                                                                                                                                                                      
+ setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
+                                                                                                                                                                       
 }" > 
 
 
