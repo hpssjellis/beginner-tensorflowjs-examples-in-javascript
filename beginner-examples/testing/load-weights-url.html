@@ -509,15 +509,17 @@ Let's try loading the weights and JSON from a URL
 
 <div id="myDiv4950Code"> 
 
-<textarea type=text id ="myText01" rows=10 cols=60 wrap=false ></textarea><br>
+
 
 LOAD URL <input id="myInFile" type=text size=120 value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/my-file-model-02.json"><br>  
+
+<!--	
 Test Data:<textarea id="myInData" rows=6 cols=60 wrap=false>0,0,
 0,1,
 1,0,
 1,1</textarea><br>
 Data Shape <input id="myInShape" type=text value="4,2"><br>
-
+-->
  
 <input id="myButton4950" type=button value="Load everything from a URL and test the data"  onclick="{
 
@@ -527,8 +529,10 @@ Data Shape <input id="myInShape" type=text value="4,2"><br>
                                                                                                                                                         
   async function myGo6() {
 			
-    const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)				       	
-    const training_data6 = tf.tensor2d(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
+    const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
+    const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  												    
+												    
+    //const training_data6 = tf.tensor2d(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
     training_data6.print(true)
     console.log(document.getElementById('myInData').value.split(','))	
     console.log(document.getElementById('myInShape').value.split(','))										    
