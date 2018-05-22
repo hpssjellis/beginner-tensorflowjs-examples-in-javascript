@@ -403,7 +403,13 @@ Batches <input id="myInNumber" type=number value=3000>
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
-}">
+}"><br><br>
+Local or Download file name <input type=text id="myFileName" value="my-file-model-01">	<br>	
+	
+	
+	
+	
+	
 <input id="myLocal5858" type=button value="Save to local storage"  onclick="{
    ( async function (){									    
        const saveResults = await model4949.save('localstorage://my-local-model-01');									    
@@ -411,24 +417,25 @@ Batches <input id="myInNumber" type=number value=3000>
    })()  // inline async function									    
 }">
 	
+<input id="myFile5858" type=button value="Save to downloads"  onclick="{	
+   ( async function (){									    
+          const saveResults2 = await model4949.save('downloads://'+document.getElementById('myFileName').value);							    
+          alert(JSON.stringify(saveResults2))
+   })()  // inline async function								     
+}"><br>	
 	
-<input id="myFile5858" type=button value="View Saved"  onclick="{	
+	
+<input id="myFile5858" type=button value="View Saved local storage"  onclick="{	
    ( async function (){									    
  
 	 document.getElementById('myDiv4949').innerHTML = Object.keys(await tf.io.listModels())							
 								
 								
    })()  // inline async function								     
-}"><br>	
+}">  View file system saved files <input type=file size = 80> <br>	
 	
-<input type=text id="myFileName" value="my-file-model-01">	
 	
-<input id="myFile5858" type=button value="Save to downloads"  onclick="{	
-   ( async function (){									    
-          const saveResults2 = await model4949.save('downloads://'+document.getElementById('myFileName').value);							    
-          alert(JSON.stringify(saveResults2))
-   })()  // inline async function								     
-}">	<br><br>
+<br><br>
 
 </div>
 <div id='myDiv4949'>...</div><br>
