@@ -529,6 +529,7 @@ Data Shape <input id="myInShape" type=text value="4,2"><br>
 			
     const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)				       	
     const training_data6 = tf.tensor(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
+    training_data6.print()
     const myPredictArray6 = await loadedModel6.predict(training_data6).data()
 
     document.getElementById('myDiv4950').innerHTML += '[0,0] = ' + myPredictArray6[0].toFixed(4) +'<br>'
