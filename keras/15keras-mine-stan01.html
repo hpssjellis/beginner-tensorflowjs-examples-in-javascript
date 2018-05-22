@@ -65,8 +65,15 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
   const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                              
   document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                            
   document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
-                                                                                                                                                                        
-  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color                                                                                                                               
+
+})()
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
+                                                                                    
+                                                                                    
 }" > 
 
 
