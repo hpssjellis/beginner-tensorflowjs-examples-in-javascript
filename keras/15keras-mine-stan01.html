@@ -26,17 +26,22 @@ const xs = tf.tensor4d([
 0,0,0,0,                                                                                                                                                                
 0,0,0,0,                                                                                                                                                                
 0,0,0,0,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
+1,1,1,1,    
+                                                                                    
+0,1,0,0,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                               
                                                                                                                                                                         
 0,0,1,0,                                                                                                                                                                
 0,0,1,0,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
 0,0,1,0 
                                                                                     
-], [4, 4, 4, 1] );                                                                                                                                                         
+], [4, 4, 5, 1] );                                                                                                                                                         
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([0, 1, 1, 2 ], [4, 1]);                                                                                                                          
+const ys = tf.tensor2d([0, 1, 1, 2, 2 ], [5, 1]);                                                                                                                          
                                                                                                                                                                         
                                                                                                                                                                         
 const model = tf.sequential();                                                                                                                                          
