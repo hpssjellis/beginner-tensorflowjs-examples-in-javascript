@@ -1,13 +1,11 @@
-<html>
-  <head>
-  </head>
-  <body>
-     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> </script>
-     <!--  <script src="./tf.js"> </script>-->
-    <input type="text" id="myAsk" size=40 value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br>
 
-<input id="myButton123" type="button" value="Convolutional Train and Test" onclick="                                                                                    
-{ document.getElementById('myButton123').style.backgroundColor = 'red' // just to show something is happening // Generate some synthetic data for training.             
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> </script>
+
+<input type="text" id="myAsk" size=40 value="1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0"><br>
+
+<input id="myButton123" type="button" value="Convolutional Train and Test" onclick="{ 
+  
+ document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
 const xs = tf.tensor4d([                                                                                                                                                
                                                                                                                                                                         
@@ -29,9 +27,9 @@ const xs = tf.tensor4d([
 0,0,1,0,                                                                                                                                                                
 0,0,1,0,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
-0,0,1,0 ],                                                                                                                                                              
-                                                                                                                                                                        
-[4, 4, 4, 1] );                                                                                                                                                         
+0,0,1,0 
+                                                                                    
+], [4, 4, 4, 1] );                                                                                                                                                         
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
 const ys = tf.tensor2d([0, 1, 1, 2 ], [4, 1]);                                                                                                                          
@@ -55,7 +53,7 @@ model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', act
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                           
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
-(async function () { // inline async so we can use promises and await                                                                                                   
+(async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
   for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
@@ -68,7 +66,10 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
   document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                            
   document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
                                                                                                                                                                         
-})() // end the inline async function                                                                                                                                   
-}" > <div id='myDiv123'>...</div><br>
-</body>
-<html>
+  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color                                                                                                                               
+}" > 
+
+
+
+<div id='myDiv123'>...</div><br>
+
