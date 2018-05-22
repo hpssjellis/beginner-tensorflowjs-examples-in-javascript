@@ -217,8 +217,17 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
-}">
+}"><br>
 
+	
+<input id="myFile5858" type=button value="View Saved local storage files"  onclick="{	
+   ( async function (){									    
+	 document.getElementById('myDiv4949').innerHTML = Object.keys(await tf.io.listModels())							
+																
+   })()  // inline async function								     
+}"> 	
+<input type=text id="myInFileName" size=70 value="my-local-model-01">	
+	
 <input id="myLocal5858" type=button value="Load from local storage"  onclick="{	 
 
   const startTime = performance.now();
@@ -227,7 +236,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
                                                                                                                                                         
   async function myGo3() {
 
-    const loadedModel = await tf.loadModel('localstorage://my-local-model-01');		
+    const loadedModel = await tf.loadModel('localstorage://'+document.getElementById('myInFileName').value);		
     const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray3 = await loadedModel.predict(training_data3).data()
 
