@@ -1,8 +1,9 @@
 This is to store any keras information that I might use in the examples
 
+Stan  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-stan-conv2d.html
 
-
-Latest COnvolution  
+Latest Convolution  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-conv2d-latest.html
 
 
