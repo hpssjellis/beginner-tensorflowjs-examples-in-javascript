@@ -1,5 +1,10 @@
 This is to store any keras information that I might use in the examples
 
+
+mine and stans  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15keras-mine-stan01.html
+
+
 Stan  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-stan-conv2d.html
 
