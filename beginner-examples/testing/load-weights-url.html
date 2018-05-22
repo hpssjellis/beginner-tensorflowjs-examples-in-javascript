@@ -422,7 +422,7 @@ DON'T CHANGE THIS FILE NAME WHEN SAVING TO COMPUTER AS IT NAMES THE WEIGHTS FILE
 	
 <input id="myLocal5858" type=button value="Save to local storage"  onclick="{
    ( async function (){									    
-       const saveResults = await model4949.save('localstorage://my-local-model-01');									    
+       const saveResults = await model4949.save('localstorage://'+document.getElementById('myFileName').value)								    
        alert(JSON.stringify(saveResults))
    })()  // inline async function									    
 }">
