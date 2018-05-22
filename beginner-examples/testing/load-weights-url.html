@@ -528,7 +528,7 @@ Data Shape <input id="myInShape" type=text value="4,2"><br>
   async function myGo6() {
 			
     const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)				       	
-    const training_data6 = tf.tensor(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
+    const training_data6 = tf.tensor2d(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
     training_data6.print(true)
     console.log(document.getElementById('myInData').value.split(','))	
     console.log(document.getElementById('myInShape').value.split(','))										    
