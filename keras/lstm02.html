@@ -13,6 +13,11 @@ Digits = <br>3.
 This is the test array for the default 3 digit seed of  1,6,9 we are expecting 3,9,9,3 as the output<br>
 NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
 
+
+
+
+
+
 <input id="myButton123" type="button" value="LSTM RNN Train and Test" onclick="{ 
   
  document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
@@ -21,14 +26,11 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
                                                                                
 const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);                               
       
- xs.print(true)                                                                              
-                                                                               
-                                                                               
-                                                                               
+xs.print(true)                                                                              
                                                                                
 const model = tf.sequential();                                                                                                                                          
                                                                               
-model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 50, 1] }))                                                                              
+model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 50] }))                                                                              
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
@@ -60,6 +62,17 @@ async function myGo() { // inline async so we can use promises and await
 }" > 
 
 <div id='myDiv123'>...</div><br>
+
+
+
+
+
+
+
+
+
+
+
 
 
 Check out <a href="https://github.com/HorvathDavid/LSTM-tensorflowjs-example">HorvathDavid</a>
