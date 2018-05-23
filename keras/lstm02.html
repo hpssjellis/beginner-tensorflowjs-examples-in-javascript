@@ -36,8 +36,8 @@ model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', act
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
                                                                                
                                                                                
-model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
-//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
+//model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
