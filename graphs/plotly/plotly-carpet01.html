@@ -1,0 +1,29 @@
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script> -->
+
+<script src="https://cdn.plot.ly/plotly-1.37.1.min.js"></script>
+
+
+
+Latest releases of plot.ly<a href="https://github.com/plotly/plotly.js/releases/">https://github.com/plotly/plotly.js/releases/</a><br>
+
+Cheat Sheet <a href="https://images.plot.ly/plotly-documentation/images/plotly_js_cheat_sheet.pdf">https://images.plot.ly/plotly-documentation/images/plotly_js_cheat_sheet.pdf</a><br>
+
+Examples <a href="https://plot.ly/javascript/">https://plot.ly/javascript/</a>
+
+<div id="myDiv" style="width:90%; height:90%; "></div>
+
+<script>
+
+
+ var data = {
+    type: 'carpet',
+    a: [4, 4, 4, 4.5, 4.5, 4.5, 5, 5, 5, 6, 6, 6],
+    b: [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
+    y: [2, 3.5, 4, 3, 4.5, 5, 5.5, 6.5, 7.5, 8, 8.5, 10]
+}
+    
+var data = [data]
+
+Plotly.plot('myDiv', data);
+</script>
