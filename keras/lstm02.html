@@ -38,11 +38,11 @@ model.add(tf.layers.dense({ units: 1, activation: 'linear' }) );
                                                                                
 //model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
-                                                                                                                                                                        
+console.log('did compile')                                                                                                                                                                        
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
   for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
-                                                                                                                                                                                 
+      console.log(myLoop)                                                                                                                                                                                
      var myFit = await model.fit(xs, { epochs: 10 });                                                                             
                                                                                
      if (myLoop % 20 == 0){                                                                                                                                              
