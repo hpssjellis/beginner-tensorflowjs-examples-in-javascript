@@ -23,12 +23,17 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
  document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 // No labels for a typical LSTM
-  
-const myDataArray =   document.getElementById('myTrainData').value.split(',') 
+ 
+myDataArray = []
+myLabelArray = []                                                                               
+                                                                               
+                                                                               
+                                                                               
+myDataArray =   document.getElementById('myTrainData').value.split(',') 
 alert(myDataArray)
 const xs = tf.tensor2d(myDataArray, [50, 1]); 
                                                                                
-const myLabelArray = myDataArray.push(myDataArray.shift())  
+myLabelArray = myDataArray.push(myDataArray.shift())  
 alert(myLabelArray)                                                                             
 const ys =   tf.tensor2d(myLabelArray, [50, 1]);   
                                                                                
