@@ -23,12 +23,13 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
  document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 // No labels for a typical LSTM
+  
+const myDataArray =   document.getElementById('myTrainData').value.split(',')                                                                                                                                                            
+const xs = tf.tensor2d(myInArray, [50, 1]); 
                                                                                
-const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);   
-var myxShiftedOne =  xs.dataSync()                                                                              
-var myxShiftedOne = myxShiftedOne.push(myxShiftedOne.shift())
-alert(myxShiftedOne)                                                                               
-const ys =   tf.tensor2d(myxShiftedOne, [50, 1]);                                                                             
+const myLabelArray = myInArray.push(myDataArray.shift())                                                                               
+const ys =   tf.tensor2d(myLabelArray, [50, 1]);   
+                                                                               
 xs.print(true)  
 ys.print(true)                                                                               
                                                                                
