@@ -25,7 +25,7 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
 // No labels for a typical LSTM
   
 const myDataArray =   document.getElementById('myTrainData').value.split(',')                                                                                                                                                            
-const xs = tf.tensor2d(myInArray, [50, 1]); 
+const xs = tf.tensor2d(myDataArray, [50, 1]); 
                                                                                
 const myLabelArray = myInArray.push(myDataArray.shift())                                                                               
 const ys =   tf.tensor2d(myLabelArray, [50, 1]);   
