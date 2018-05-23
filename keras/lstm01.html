@@ -2,7 +2,7 @@
 
 <h2 align = center>PI to 50 digits to train an LSTM and then enter a few digits and see what it continues</h2>
 
-PI to a 50 digits Digits = <br>3.
+PI to a 50 digits, Digits = <br>3.
 
 <textarea id="myTrainData" rows=6 cols=20 >1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
 
@@ -15,15 +15,145 @@ This is the test array for the default 1,6,9 we are expecting 3,9,9,3 <br><input
 // No labels for a typical LSTM
                                                                                
 const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-const model = tf.sequential();                                                                                                                                          
-                                                                              
-model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 50, 1] }))                                                                              
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
-model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
-                                                                                    
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
+
+const numIterations = 20000
+const learning_rate = 0.001
+const rnn_hidden = 64                                                                              
+                                                                               
+                                                                               
+  // building the model
+const wordVector = tf.input({ shape: [50, 1] });
+const cells = [tf.layers.lstmCell({ units: rnn_hidden }),];
+const rnn = tf.layers.rnn({ cell: cells, returnSequences: false });
+
+const rnn_out = rnn.apply(wordVector);
+const output = tf.layers.dense({ units: wordMapLength, useBias: true }).apply(rnn_out)
+
+const model = tf.model({ inputs: wordVector, outputs: output })
+
+ const numIterations = 3                                                                              
+
+const train = async (numIterations) => {
+
+  //  let lossCounter = null
+
+    for (let iter = 0; iter < numIterations; iter++) {
+
+      //  let labelProbVector
+      //  let lossValue
+     //   let pred
+     //   let losse
+     //   let samplesTensor
+
+        const samples = xs;
+        })
+
+       // labelProbVector = encode(samples.splice(-1))
+
+        if (stop_training) {
+            stop_training = false
+            break
+        }
+
+        // optimizer.minimize is where the training happens. 
+
+        // The function it takes must return a numerical estimate (i.e. loss) 
+        // of how well we are doing using the current state of
+        // the variables we created at the start.
+
+        // This optimizer does the 'backward' step of our training process
+        // updating variables defined previously in order to minimize the
+        // loss.
+                                                                               
+                                                                               
+         /*                                                                      
+        lossValue = optimizer.minimize(() => {
+          
+            samplesTensor = tf.tensor(samples, [1, 50, 1])
+            pred = predict(samplesTensor);
+            //losse = loss(labelProbVector, pred);
+            //return losse
+        }, true);
+
+        if (lossCounter === null) {
+            lossCounter = lossValue.dataSync()[0]
+        }
+        lossCounter += lossValue.dataSync()[0]
+
+                                                               
+                                                                               
+                                                                               
+
+        if (iter % 100 === 0 && iter > 50) {
+            const lvdsy = lossCounter / 100
+            lossCounter = 0
+            console.log(`
+            --------
+            Step number: ${iter}
+            The average loss is (last 100 steps):  ${lvdsy}
+            Number of tensors in memory: ${tf.memory().numTensors}
+            --------`)
+            chart.data.datasets[0].data.push(lvdsy)
+            chart.data.labels.push(iter)
+            chart.update()
+        }
+                                                                               
+                                                                               
+  */
+
+        // Use tf.nextFrame to not block the browser.
+        await tf.nextFrame();
+     //   pred.dispose()
+     //   labelProbVector.dispose()
+     //   lossValue.dispose()
+     //   losse.dispose()
+     //   samplesTensor.dispose()
+    }
+} 
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+/*
+// sample shape: [batch, sequence, feature], here is [1, 50, 1]
+const predict = (xs) => {
+    return model.predict(samples)
+}
+
+const loss = (labels, predictions) => {
+    return tf.losses.softmaxCrossEntropy(labels, predictions).mean();
+}                                                                             
+   
+*/
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+ symbolCollector = []                                                                              
+                                                                               
+    for (let i = 0; i < 30; i++) {
+        const predProbVector = predict(tf.tensor([1,6,9], [1, 3, 1]))
+        symbolCollector.push(decode(predProbVector));
+    }                                                                           
+                                                                               
+   document.getElementById('myDiv123').innerHTML +=   symbolCollector                                                                             
+  console.log( symbolCollector)                                                                             
+                                                                               
+                                                                                                   
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
