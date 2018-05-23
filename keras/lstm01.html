@@ -6,9 +6,9 @@
 
 PI to a 50 digits after the decimal point. Digits = 3.<textarea id="myTrainData" rows=2 cols=50 wrap=false>
 
-1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br>
+1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
 
-This is the test array to be continued with 3,9,9,3 <input type=text id="myAsk" value = "1,6,9">
+This is the test array to be continued with 3,9,9,3 <br><input type=text id="myAsk" value = "1,6,9">
 
 <input id="myButton123" type="button" value="LSTM RNN Train and Test" onclick="{ 
   
@@ -19,25 +19,11 @@ This is the test array to be continued with 3,9,9,3 <input type=text id="myAsk" 
 // No labels for a typical LSTM
                                                                                
 const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);                               
-//const ys = tf.tensor2d([0, 1, 1, 2, 2 ], [5, 1]);   // no labels used                                                                                                                      
-                                                                                                                                                                        
-                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 const model = tf.sequential();                                                                                                                                          
-
-                                                                               
+                                                                              
 model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 50, 1] }))                                                                              
-                                                                               
-                                                                               
-model.add(tf.layers.conv2d({                                                                                                                                            
-inputShape: [null, 50, 1],                                                                                                                                                  
-kernelSize: 2,                                                                                                                                                          
-filters: 4,                                                                                                                                                             
-strides: 1,                                                                                                                                                             
-activation: 'relu',                                                                                                                                                     
-kernelInitializer: 'varianceScaling'                                                                                                                                    
-}));                                                                                                                                                                    
-                                                                                                                                                                        
-                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
                                                                                     
@@ -54,7 +40,7 @@ async function myGo() { // inline async so we can use promises and await
     }                                                                                                                                                                   
   }                                                                                                                                                                     
   //const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                               
-  const myPredictArray = await model.predict(tf.tensor4d([1,6,9], [1, 4, 4, 1]))                                             
+  const myPredictArray = await model.predict(tf.tensor4d([1,6,9], [null, 3, 1] ))                                             
   document.getElementById('myButton123').style.backgroundColor = 'lightgray'     
                                                                                     
   document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
