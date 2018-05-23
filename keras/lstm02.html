@@ -24,9 +24,13 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 // No labels for a typical LSTM
                                                                                
-const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);                               
-      
-xs.print(true)                                                                              
+const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);   
+var myxShiftedOne =  await xs.data()                                                                              
+var myxShiftedOne = myxShiftedOne.push(myXs.shift())
+alert(myxShiftedOne)                                                                               
+const ys =   tf.tensor2d(myxShiftedOne, [50, 1]);                                                                             
+xs.print(true)  
+ys.print(true)                                                                               
                                                                                
 const model = tf.sequential();                                                                                                                                          
                                                                               
@@ -43,8 +47,8 @@ async function myGo() { // inline async so we can use promises and await
                                                                                                                                                                         
   for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
       console.log(myLoop)                                                                                                                                                                                
-     var myFit = await model.fit(xs, { epochs: 10 });                                                                             
-                                                                               
+     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                             
+            console.log('done fit')                                                                             
      if (myLoop % 20 == 0){                                                                                                                                              
        await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
        document.getElementById('myDiv123').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                          
