@@ -1,21 +1,17 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.1"> </script>
 
-
 <h2 align = center>PI to 50 digits train an LSTM and then enter a few digits and see what it continues</h2>
 
+PI to a 50 digits after the decimal point. Digits = 3.
 
-PI to a 50 digits after the decimal point. Digits = 3.<textarea id="myTrainData" rows=2 cols=50 wrap=false>
+<textarea id="myTrainData" rows=2 cols=50 wrap=false>1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
 
-1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
-
-This is the test array to be continued with 3,9,9,3 <br><input type=text id="myAsk" value = "1,6,9">
+This is the test array for the default 1,6,9 we are expecting 3,9,9,3 <br><input type=text id="myAsk" value = "1,6,9">
 
 <input id="myButton123" type="button" value="LSTM RNN Train and Test" onclick="{ 
   
  document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
-                                                                                                                                                                        
-                                                                                                                                                        
-                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 // No labels for a typical LSTM
                                                                                
 const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);                               
@@ -49,7 +45,5 @@ async function myGo() { // inline async so we can use promises and await
  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
                                                                                                                                                                        
 }" > 
-
-
 
 <div id='myDiv123'>...</div><br>
