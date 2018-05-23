@@ -6,7 +6,7 @@ To make this more interesting lets train it on PI. <br>
 </h2>
 
 PI to a 50 digits <br>
-Digits = <br>3.
+Digits = <br>3.<br>
 
 <textarea id="myTrainData" rows=6 cols=20 >1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
 
@@ -26,7 +26,7 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
                                                                                
 const xs = tf.tensor2d(document.getElementById('myTrainData').value.split(','), [50, 1]);   
 var myxShiftedOne =  xs.dataSync()                                                                              
-var myxShiftedOne = myxShiftedOne.push(myXs.shift())
+var myxShiftedOne = myxShiftedOne.push(myxShiftedOne.shift())
 alert(myxShiftedOne)                                                                               
 const ys =   tf.tensor2d(myxShiftedOne, [50, 1]);                                                                             
 xs.print(true)  
