@@ -1,8 +1,93 @@
 This is to store any keras information that I might use in the examples
 
 
-mine and stans  
+mine and stans conv2d.   
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15keras-mine-stan01.html
+
+
+LSTM  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm01.html
+
+
+
+
+.
+
+
+
+Eventually want to get this fully working
+
+15tfjs-keras-group.html  
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras-group.html 
+
+
+
+.
+
+
+
+
+
+.
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Stan  
@@ -30,9 +115,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 
 
-15tfjs-keras-group.html  
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras-group.html 
 
 
 gru  
