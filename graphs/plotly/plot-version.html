@@ -1,0 +1,41 @@
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script> -->
+
+<script src="https://cdn.plot.ly/plotly-1.37.1.min.js"></script>
+
+
+
+Latest releases of plot.ly<a href="https://github.com/plotly/plotly.js/releases/">https://github.com/plotly/plotly.js/releases/</a><br>
+<div id="myDiv" style="width:90%;height:90%;"></div>
+<script>
+var d3 = Plotly.d3;
+var img_jpg= d3.select('#jpg-export');
+
+// Ploting the Graph
+
+var trace={x:[3,9,8,10,4,6,5],y:[5,7,6,7,8,9,8],type:"scatter"};
+var trace1={x:[3,4,1,6,8,9,5],y:[4,2,5,2,1,7,3],type:"scatter"};
+var data = [trace,trace1];
+var layout = {title : "Simple Javascript Graph"};
+
+Plotly.plot(
+  'myDiv',
+   data,
+   layout)
+
+// static image in jpg format
+
+.then(
+    function(gd)
+     {
+      Plotly.toImage(gd,{height:300,width:300})
+         .then(
+            function(url)
+         {
+             img_jpg.attr("src", url);
+             return Plotly.toImage(gd,{format:'jpeg',height:400,width:400});
+         }
+         )
+    });
+
+</script>

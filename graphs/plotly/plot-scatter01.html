@@ -1,0 +1,40 @@
+<!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script> -->
+
+<script src="https://cdn.plot.ly/plotly-1.37.1.min.js"></script>
+
+
+
+Latest releases of plot.ly<a href="https://github.com/plotly/plotly.js/releases/">https://github.com/plotly/plotly.js/releases/</a><br>
+<div id="myDiv" style="width:90%;height:90%;"></div>
+
+
+
+
+<script>
+
+var trace1 = {
+  x: [1, 2, 3, 4],
+  y: [10, 15, 13, 17],
+  mode: 'markers'
+};
+
+var trace2 = {
+  x: [2, 3, 4, 5],
+  y: [16, 5, 11, 10],
+  mode: 'lines'
+};
+
+var trace3 = {
+  x: [1, 2, 3, 4],
+  y: [12, 9, 15, 12],
+  mode: 'lines+markers'
+};
+
+var data = [ trace1, trace2, trace3 ];
+
+var layout = {};
+
+Plotly.newPlot('myDiv', data, layout);
+
+</script>
