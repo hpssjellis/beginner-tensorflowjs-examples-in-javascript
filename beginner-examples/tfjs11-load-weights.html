@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 
 
 
@@ -14,6 +14,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.0"></script>
 -->
 
 
@@ -49,6 +50,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+GO TO THE SECOND BOX AND TRAIN THE MODEL IF THIS IS YOUR FIRST TIME.<BR>	
 This is the xOr model with pre-saved weights loaded and used to predict the outcome.
 Expect close to 0, 1, 1, 0 for outputs.
 	
@@ -134,7 +136,7 @@ Took 138 seconds to train 10,000 batches (epoch only 1) on my browser
 
 
  
-<input id="myButton5858" type=button value="Load pre-saved weights from 10,000 batches"  onclick="{
+<input id="myButton5858" type=button value="Load pre-saved weights from textarea 10,000 batches"  onclick="{
 
 
 /*
@@ -215,7 +217,82 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
-}"><br><br>
+}"><br><br><br>
+
+	
+<input id="myFile5858" type=button value="View Saved local storage files"  onclick="{	
+   ( async function (){									    
+	 document.getElementById('myDiv5858').innerHTML = Object.keys(await tf.io.listModels())							
+																
+   })()  // inline async function								     
+}"> 	
+<input type=text id="myInFileName" size=40 value="my-local-model-01">	
+	
+<input id="myLocal5858" type=button value="Load from local storage"  onclick="{	 
+
+  const startTime = performance.now();
+  document.getElementById('myDiv5858').innerHTML = '<br>'
+ // document.getElementById('myButton5858').style.backgroundColor = 'red'  
+                                                                                                                                                        
+  async function myGo3() {
+
+    const loadedModel = await tf.loadModel('localstorage://'+document.getElementById('myInFileName').value);		
+    const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
+    const myPredictArray3 = await loadedModel.predict(training_data3).data()
+
+    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray3[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray3[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray3[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray3[3].toFixed(4) +'<br>'
+
+    const endTime = performance.now();
+    document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
+  }
+
+  setTimeout(function(){  myGo3() }, 10);   // wait a bit for the GUI to update
+						     
+}">
+	
+	
+<br>	<br>
+	
+
+	
+json-upload: <input type=file id="json-upload">   weights-upload:	<input type=file id="weights-upload">	
+<input id="myFile5858" type=button value="Load chosen files"  onclick="{
+								     
+  const startTime = performance.now();
+  document.getElementById('myDiv5858').innerHTML = '<br>'
+ // document.getElementById('myButton5858').style.backgroundColor = 'red'  
+                                                                                                                                                        
+  async function myGo5() {
+			
+								       
+     const jsonUpload = document.getElementById('json-upload');
+     const weightsUpload = document.getElementById('weights-upload');
+
+
+     const loadedModel5 = await tf.loadModel(tf.io.browserFiles([jsonUpload.files[0], weightsUpload.files[0]]));
+								       
+								       	
+    const training_data5 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
+    const myPredictArray5 = await loadedModel5.predict(training_data5).data()
+
+    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray5[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray5[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray5[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray5[3].toFixed(4) +'<br>'
+
+    const endTime = performance.now();
+    document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
+  }
+
+  setTimeout(function(){  myGo5() }, 10);   // wait a bit for the GUI to update								     
+}">		
+	
+<br><br>
 
 
 </div>
@@ -261,11 +338,12 @@ Click here to see the working HTML code.
 
 
 
+
+
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 This can create the weights used in the above example. Look at the console for more information about the Tensors.
 Increase the batches to get values close to 0, 1, 1, 0 for outputs.<br><br>
-Until Tensorflowjs makes getWeights() easier to work with, we will have to manually move the tensors to the above textarea JSON
-format file. Eventually I will automate it, but not today.
+Tensorflowjs version 0.11.0 just made it easierr to load and save models and weights<br>
 </div><br>
 
 
@@ -282,13 +360,13 @@ Batches <input id="myInNumber" type=number value=3000>
                                                                             
                                                                             
   async function myGo() {
-    const model = tf.sequential();
+    model4949 = tf.sequential(); // make it global
 
 
-    model.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
-    model.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
+    model4949.add(tf.layers.dense({ units: 3, name: 'hiddenLayer',  activation: 'sigmoid' , inputShape: [2] }) );  
+    model4949.add(tf.layers.dense({ units: 1, name: 'outputLayer', activation: 'sigmoid' }) );    
                                         
-    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+    model4949.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
 
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
@@ -297,7 +375,7 @@ Batches <input id="myInNumber" type=number value=3000>
 
 										     
     for (let myLoop = 1; myLoop <= document.getElementById('myInNumber').value; myLoop++) {                                                                                 
-        var myFit = await model.fit(training_data, target_data, {epochs: 1});
+        var myFit = await model4949.fit(training_data, target_data, {epochs: 1});
         if (myLoop % 100 == 0){   
              await tf.nextFrame();   // This allows the GUI to update but only every 100 batches      
              document.getElementById('myDiv4949').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
@@ -309,7 +387,7 @@ Batches <input id="myInNumber" type=number value=3000>
 										     
 
 
-    const myPredictArray = await model.predict(training_data).data()
+    const myPredictArray = await model4949.predict(training_data).data()
                                                                                     
     document.getElementById('myDiv4949').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
     document.getElementById('myDiv4949').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
@@ -321,18 +399,53 @@ Batches <input id="myInNumber" type=number value=3000>
 										     
     document.getElementById('myButton4949').style.backgroundColor = 'lightgray'                                                             
     myWeights = []
-    myWeights = model.getWeights()
-    myWeights[0].print('verbose')
-    myWeights[1].print('verbose')
-    myWeights[2].print('verbose')
-    myWeights[3].print('verbose')
+    myWeights = model4949.getWeights()
+//myWeights[0].print('verbose')
+ //   myWeights[1].print('verbose')
+ //   myWeights[2].print('verbose')
+ //   myWeights[3].print('verbose')
     document.getElementById('myText01').value = myWeights
-                  
+   
+										     
+										     
   }
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
 }"><br><br>
+Local or Download file name <input type=text id="myFileName" value="my-file-model-01"> 
+DON'T CHANGE THIS FILE NAME WHEN SAVING TO COMPUTER AS IT NAMES THE WEIGHTS FILE RELATIVE PATH! 	<br>	
+	
+	
+	
+	
+	
+<input id="myLocal5858" type=button value="Save to local storage"  onclick="{
+   ( async function (){									    
+       const saveResults = await model4949.save('localstorage://'+document.getElementById('myFileName').value)								    
+       alert(JSON.stringify(saveResults))
+   })()  // inline async function									    
+}">
+	
+<input id="myFile5858" type=button value="Save to downloads"  onclick="{	
+   ( async function (){									    
+          const saveResults2 = await model4949.save('downloads://'+document.getElementById('myFileName').value);							    
+          alert(JSON.stringify(saveResults2))
+   })()  // inline async function								     
+}"><br>	
+	
+	
+<input id="myFile5858" type=button value="View Saved local storage"  onclick="{	
+   ( async function (){									    
+ 
+	 document.getElementById('myDiv4949').innerHTML = Object.keys(await tf.io.listModels())							
+								
+								
+   })()  // inline async function								     
+}">  View file system saved files <input type=file size = 80> <br>	
+	
+	
+<br><br>
 
 </div>
 <div id='myDiv4949'>...</div><br>
@@ -357,6 +470,132 @@ Batches <input id="myInNumber" type=number value=3000>
      myTextGrow('myTextarea4949', 'myDiv4949Code')
      document.getElementById('myUpdate4949').style.visibility = 'visible'
      myOnce4949 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Let's try loading the weights and JSON from a URL
+</div><br>
+
+
+<div id="myDiv4950Code"> 
+
+
+
+LOAD URL <input id="myInFile" type=text size=120 value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br>  
+
+<!--	
+Test Data:<textarea id="myInData" rows=6 cols=60 wrap=false>0,0,
+0,1,
+1,0,
+1,1</textarea><br>
+Data Shape <input id="myInShape" type=text value="4,2"><br>
+-->
+ 
+<input id="myButton4950" type=button value="Load everything from a URL and test the data"  onclick="{
+
+  const startTime = performance.now();
+  document.getElementById('myDiv4950').innerHTML = '<br>'
+  document.getElementById('myButton4950').style.backgroundColor = 'red'  
+                                                                                                                                                        
+  async function myGo6() {
+			
+    const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
+    const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  												    
+												    
+    //const training_data6 = tf.tensor2d(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
+   // training_data6.print(true)
+   // console.log(document.getElementById('myInData').value.split(','))	
+   // console.log(document.getElementById('myInShape').value.split(','))										    
+												    
+												    
+    const myPredictArray6 = await loadedModel6.predict(training_data6).data()
+
+    document.getElementById('myDiv4950').innerHTML += '[0,0] = ' + myPredictArray6[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv4950').innerHTML += '[1,0] = ' + myPredictArray6[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv4950').innerHTML += '[0,1] = ' + myPredictArray6[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv4950').innerHTML += '[1,1] = ' + myPredictArray6[3].toFixed(4) +'<br>'
+
+    const endTime = performance.now();
+    document.getElementById('myDiv4950').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+    document.getElementById('myButton4950').style.backgroundColor = 'lightgrey'                    
+  }
+
+  setTimeout(function(){  myGo6() }, 10);   // wait a bit for the GUI to update	
+}">
+	
+	
+	<br><br>
+
+</div>
+<div id='myDiv4950'>...</div><br>
+
+<input id="myUpdate4950" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea4950').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv4950Code').innerHTML =    myJoe 
+  document.getElementById('myButton4950').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea4950"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce4950){
+     myTextGrow('myTextarea4950', 'myDiv4950Code')
+     document.getElementById('myUpdate4950').style.visibility = 'visible'
+     myOnce4950 = false
   }
 }">
 Click here to see the working HTML code.
@@ -408,14 +647,14 @@ Use at your own risk!
 
 myOnce5858 = true    // so textareas are only clicked once
 myOnce4949 = true  
-
+myOnce4950 = true  
 
 function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
