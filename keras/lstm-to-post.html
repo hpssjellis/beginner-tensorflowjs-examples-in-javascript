@@ -1,0 +1,97 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.1"> </script>
+
+<h4 align = center>Can an LSTM learn a sequence of numbers? When seeded with some of the numbers can it return the next few numbers.<br>
+To make this more interesting lets train it on PI. <br>
+  Note: We are not trying to learn the PI equation, just a sequence of numbers.
+</h4>
+
+PI to a 50 digits <br>
+Digits = <br>3.<br>
+
+<textarea id="myTrainData" rows=6 cols=20 >1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
+
+This is the test array for the default 3 digit seed of  1,6,9 we are expecting 3,9,9,3 as the output<br>
+<input type=text id="myAsk" value = "1,6,9">
+
+
+
+
+
+
+<input id="myButton123" type="button" value="LSTM RNN Train and Test" onclick="{ 
+  
+ document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+// No labels for a typical LSTM
+ 
+myDataArray  = []
+myLabelArray = []                                                                               
+                                                                               
+                                                                               
+                                                                               
+myDataArray =   document.getElementById('myTrainData').value.split(',') 
+
+const xs = tf.tensor2d(myDataArray, [50, 1]); 
+myLabelArray = myDataArray                                                                              
+myLabelArray.push(myLabelArray.shift())  // rotate the labels by one step ????
+                                                                            
+const ys =   tf.tensor2d(myLabelArray, [50, 1]);   
+                                                                               
+xs.print(true)  
+ys.print(true)                                                                               
+                                                                               
+const model = tf.sequential();                                                                                                                                          
+                                                                              
+model.add(tf.layers.lstm({units: 32, returnSequences: true, inputShape: [null, 50, 1 ] }))                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
+                                                                               
+model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
+//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
+console.log('did compile')                                                                                                                                                                        
+async function myGo() { // inline async so we can use promises and await                                                                                                   
+                                                                                                                                                                        
+  for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
+      console.log(myLoop)                                                                                                                                                                                
+     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                             
+            console.log('done fit loop'+ myLoop)                                                                             
+     if (myLoop % 20 == 0){                                                                                                                                              
+       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
+       document.getElementById('myDiv123').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                          
+     }                                                                                                                                                                   
+  }                                                                                                                                                                     
+  //const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [null, 3, 1]))                                               
+  const myPredictArray = await model.predict(tf.tensor3d([1,6,9], [null, 3, 1] ))                                             
+  document.getElementById('myButton123').style.backgroundColor = 'lightgray'     
+                                                                                    
+  document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
+}
+                                                                                                                                                                      
+ setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
+                                                                                                                                                                       
+}" > 
+
+<div id='myDiv123'>...</div><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+Check out <a href="https://github.com/HorvathDavid/LSTM-tensorflowjs-example">HorvathDavid</a>
+
+
+<br><br>
+
+My website of it <a href="https://hpssjellis.github.io/LSTM-tensorflowjs-example/">https://hpssjellis.github.io/LSTM-tensorflowjs-example/</a>
+<br><br>
+
+My github of it <a href="https://github.com/hpssjellis/LSTM-tensorflowjs-example">https://github.com/hpssjellis/LSTM-tensorflowjs-example</a>
