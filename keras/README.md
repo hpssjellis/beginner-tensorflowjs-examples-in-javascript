@@ -8,7 +8,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 LSTM  Try predicting the next values of PI
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm02.html
 
-
+LSTM posted on discussion  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm03-to-post.html
 
 
 .
