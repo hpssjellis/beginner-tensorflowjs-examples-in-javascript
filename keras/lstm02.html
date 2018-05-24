@@ -1,6 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.1"> </script>
 
-<h4 align = center>Can an LSTM learn a sequence of numbers? When seeded with a few of the numbers can it return the next few numbers.
+<h4 align = center>Can an LSTM learn a sequence of numbers? When seeded with some of the numbers can it return the next few numbers.<br>
 To make this more interesting lets train it on PI. <br>
   Note: We are not trying to learn the PI equation, just a sequence of numbers.
 </h4>
@@ -11,7 +11,7 @@ Digits = <br>3.<br>
 <textarea id="myTrainData" rows=6 cols=20 >1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
 
 This is the test array for the default 3 digit seed of  1,6,9 we are expecting 3,9,9,3 as the output<br>
-NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
+<input type=text id="myAsk" value = "1,6,9">
 
 
 
@@ -24,7 +24,7 @@ NOT ACTIVE YET<input type=text id="myAsk" value = "1,6,9">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 // No labels for a typical LSTM
  
-myDataArray = []
+myDataArray  = []
 myLabelArray = []                                                                               
                                                                                
                                                                                
@@ -42,7 +42,7 @@ ys.print(true)
                                                                                
 const model = tf.sequential();                                                                                                                                          
                                                                               
-model.add(tf.layers.lstm({units: 128, returnSequences: true, inputShape: [50, 1 ] }))                                                                              
+model.add(tf.layers.lstm({units: 32, returnSequences: true, inputShape: [nul, 50, 1 ] }))                                                                              
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
