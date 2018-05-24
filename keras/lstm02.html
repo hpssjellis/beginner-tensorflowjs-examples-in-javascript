@@ -42,7 +42,7 @@ ys.print(true)
                                                                                
 const model = tf.sequential();                                                                                                                                          
                                                                               
-model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 50, 1 ] }))                                                                              
+model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 1 ] }))                                                                              
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
