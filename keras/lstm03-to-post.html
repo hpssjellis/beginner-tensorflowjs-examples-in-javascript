@@ -10,24 +10,14 @@ Digits = <br>3.<br>
 
 <textarea id="myTrainData" rows=6 cols=20 >1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0</textarea><br><br>
 
-This is the test array for the default 3 digit seed of  1,6,9 we are expecting 3,9,9,3 as the output<br>
-<input type=text id="myAsk" value = "1,6,9">
-
-
-
-
-
+This is the test array for the default 3 digit seed of  1,6,9 we are expecting 3,9,9,3 as the output.<br>
 
 <input id="myButton123" type="button" value="LSTM RNN Train and Test" onclick="{ 
   
  document.getElementById('myButton123').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-// No labels for a typical LSTM
- 
 myDataArray  = []
 myLabelArray = []                                                                               
-                                                                               
-                                                                               
                                                                                
 myDataArray =   document.getElementById('myTrainData').value.split(',') 
 
@@ -47,21 +37,17 @@ model.add(tf.layers.lstm({units: 32, returnSequences: true, inputShape: [null, 5
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
                                                                                
-model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
-//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
-console.log('did compile')                                                                                                                                                                        
+model.compile(loss='mean_squared_error', optimizer='adam')  
+                                                                                                                                                                                                                                                                                                                                                              
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
-      console.log(myLoop)                                                                                                                                                                                
-     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                             
-            console.log('done fit loop'+ myLoop)                                                                             
+  for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                                                                                                                                                                                                 
+     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                                                        
      if (myLoop % 20 == 0){                                                                                                                                              
        await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
        document.getElementById('myDiv123').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                          
      }                                                                                                                                                                   
-  }                                                                                                                                                                     
-  //const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [null, 3, 1]))                                               
+  }                                                                                                                                                                                                                
   const myPredictArray = await model.predict(tf.tensor3d([1,6,9], [null, 3, 1] ))                                             
   document.getElementById('myButton123').style.backgroundColor = 'lightgray'     
                                                                                     
@@ -75,23 +61,3 @@ async function myGo() { // inline async so we can use promises and await
 <div id='myDiv123'>...</div><br>
 
 
-
-
-
-
-
-
-
-
-
-
-
-Check out <a href="https://github.com/HorvathDavid/LSTM-tensorflowjs-example">HorvathDavid</a>
-
-
-<br><br>
-
-My website of it <a href="https://hpssjellis.github.io/LSTM-tensorflowjs-example/">https://hpssjellis.github.io/LSTM-tensorflowjs-example/</a>
-<br><br>
-
-My github of it <a href="https://github.com/hpssjellis/LSTM-tensorflowjs-example">https://github.com/hpssjellis/LSTM-tensorflowjs-example</a>
