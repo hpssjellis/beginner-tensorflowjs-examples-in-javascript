@@ -30,11 +30,11 @@ myLabelArray = []
                                                                                
                                                                                
 myDataArray =   document.getElementById('myTrainData').value.split(',') 
-alert(myDataArray)
+
 const xs = tf.tensor2d(myDataArray, [50, 1]); 
 myLabelArray = myDataArray                                                                              
 myLabelArray.push(myLabelArray.shift())  // rotate the labels by one step ????
-alert(myLabelArray)                                                                             
+                                                                            
 const ys =   tf.tensor2d(myLabelArray, [50, 1]);   
                                                                                
 xs.print(true)  
@@ -42,7 +42,7 @@ ys.print(true)
                                                                                
 const model = tf.sequential();                                                                                                                                          
                                                                               
-model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 1 ] }))                                                                              
+model.add(tf.layers.lstm({units: 8, returnSequences: true, inputShape: [null, 50 ] }))                                                                              
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
@@ -56,7 +56,7 @@ async function myGo() { // inline async so we can use promises and await
   for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
       console.log(myLoop)                                                                                                                                                                                
      var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                             
-            console.log('done fit')                                                                             
+            console.log('done fit loop'+ myLoop)                                                                             
      if (myLoop % 20 == 0){                                                                                                                                              
        await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
        document.getElementById('myDiv123').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                          
