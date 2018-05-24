@@ -47,9 +47,8 @@ model.add(tf.layers.lstm({units: 32, returnSequences: true, inputShape: [nul, 50
 model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); 
                                                                                
-                                                                               
-//model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
+model.compile(loss='mean_squared_error', optimizer='adam')                                                                                    
+//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
 console.log('did compile')                                                                                                                                                                        
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
