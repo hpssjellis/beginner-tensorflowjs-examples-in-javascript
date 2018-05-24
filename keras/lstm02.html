@@ -33,7 +33,7 @@ myDataArray =   document.getElementById('myTrainData').value.split(',')
 alert(myDataArray)
 const xs = tf.tensor2d(myDataArray, [50, 1]); 
 myLabelArray = myDataArray                                                                              
-myLabelArray.push(myLabelArray.shift())  
+myLabelArray.push(myLabelArray.shift())  // rotate the labels by one step ????
 alert(myLabelArray)                                                                             
 const ys =   tf.tensor2d(myLabelArray, [50, 1]);   
                                                                                
