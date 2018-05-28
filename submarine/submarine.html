@@ -72,14 +72,15 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
  
 // Fit the model:
 model.fit(xs, ys, { epochs: 100} );
-                                                                           
+
+}">                                                                           
                                                                           
 // Prediction:
-const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
+//const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
+const pred = tf.tensor([5.0, 3.4, 1.5, 0.3], shape=[1, 4])
 model.predict(pred).print()   
                                                                                                            
 
-}">
 
 
 
