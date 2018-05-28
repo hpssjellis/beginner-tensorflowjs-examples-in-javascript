@@ -1,6 +1,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> 
 
-Converted to a webpage from a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
+Converted to a webpage from a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a><br><br>
 
 
 
@@ -77,8 +77,23 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
 
   
 // Fit the model:
-await model.fit(xs, ys, { epochs: 100} );
+//await model.fit(xs, ys, { epochs: 100} );
 
+                                                                           
+  for (let myLoop = 1; myLoop <= 10; myLoop++) {                                                                                 
+     var myFit = await model.fit(xs, ys, { epochs: 10 });
+     if (myLoop % 20 == 0){   
+         await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+         document.getElementById('myOutput').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+     }
+                                                                   
+ }                                                                                    
+                                                                                  
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+                                                                           
                                                                         
                                                                           
 // Prediction:
