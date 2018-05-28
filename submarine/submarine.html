@@ -7,7 +7,7 @@ From a tweet by   <a href="https://twitter.com/Submarineering/status/10006005011
 <input id="myButton123" type="button" value="Iris-submarineering" onclick="{
 
 //load data
-ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
+//ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
 
 (async function(){
 
@@ -20,6 +20,13 @@ ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris
 
    ds = await myOut
 
+ // setup data
+xsArray = [];
+for(i=0; i<150; i++){ 
+  await  xsArray.push([[ds.json[i]['sepalLength']],[ds.json[i]['sepalWidth']], [ds.json[i][’petalLength']],[ds.json[i]['petalWidth ']]]);
+}                                                                          
+                                                                           
+                                                                           
 })() }">                                                                           
                                                                            
                                                                            
@@ -27,11 +34,7 @@ ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris
                                                                            
                                                                            
                                                                            
-// setup data
-xsArray = [];
-for(i=0; i<150; i++){ 
-   xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i][’petalLength']],[ds.responseJSON[i]['petalWidth ']]]);
-}
+
 const xs = tf.tensor(xsArray);
 xs = xs.reshape([150, 4]);
 xs.print(true)   
