@@ -1,16 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> 
 
-From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
-
-<input id="myButton123" type="button" value="Load Data" onclick="{ 
-(async function(){
-   let myResponse = await fetch('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json')
-   document.ds = await myResponse.json()
-  // alert(ds[0].sepalLength)                                                                                                                                                 
-})() }">        
+Converted to a webpage from a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a><br><br>
 
 
-<input id="myButton123" type="button" value="Iris-submarineering" onclick="{
+
+<input id="myButton123" type="button" value="Iris-Submarineering" onclick="{
 
 (async function(){
    let myResponse = await fetch('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json')
@@ -83,16 +77,34 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
 
   
 // Fit the model:
-await model.fit(xs, ys, { epochs: 100} );
+//await model.fit(xs, ys, { epochs: 100} );
 
+                                                                           
+  for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+     var myFit = await model.fit(xs, ys, { epochs: 10 });
+     if (myLoop % 20 == 0){   
+         await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
+         document.getElementById('myOutput').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+     }
+                                                                   
+ }                                                                                    
+                                                                                  
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+                                                                           
                                                                         
                                                                           
 // Prediction:
 const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
 await model.predict(pred).print()   
+const myFinal = await model.predict(pred)  
  
                                                                            
-document.getElementById('myOutput').innerHTML = 'wow'  
+document.getElementById('myOutput').innerHTML = 'predicting [[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4] on IRIS dataset<br>'    
+document.getElementById('myOutput').innerHTML = 'Getting results <br>'             
+document.getElementById('myOutput').innerHTML += await myFinal  
 
                                                                                                                                                       
                                                                            
