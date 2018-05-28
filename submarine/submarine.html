@@ -11,7 +11,7 @@ Converted to a webpage from a tweet by   <a href="https://twitter.com/Submarinee
    document.ds = await myResponse.json()
   // alert(ds[0].sepalLength)    
                                                                            
-                                                                           
+   document.getElementById('myIris').innerHTML  = await   document.ds                                                                    
                                                                            
                                                                            
             
@@ -105,11 +105,28 @@ const myFinal = await model.predict(pred)
 document.getElementById('myOutput').innerHTML = 'predicting [[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4] on IRIS dataset<br>'    
 document.getElementById('myOutput').innerHTML = 'Getting results <br>'             
 
-alert(myFinal[0])                                                                           
+                                                                          
                                                                            
-document.getElementById('myOutput').innerHTML += await myFinal  
+document.getElementById('myOutput').innerHTML += await myFinal  +'<br>'
+                                                                           
+if (myFinal.dataSync()[0] > 0.75){                                                                           
+                                                                           
+    document.getElementById('myOutput').innerHTML += ' First group<br>'
 
-                                                                                                                                                      
+}                                                                           
+  
+if (myFinal.dataSync()[1] > 0.75){                                                                           
+                                                                           
+    document.getElementById('myOutput').innerHTML += ' Second group<br>'
+
+}                                                                           
+      
+if (myFinal.dataSync()[2] > 0.75){                                                                           
+                                                                           
+    document.getElementById('myOutput').innerHTML += ' Third group<br>'
+
+}                                                                           
+      
                                                                            
 })() }">        
                
@@ -117,7 +134,8 @@ document.getElementById('myOutput').innerHTML += await myFinal
 
 
 
-<div id="myOutput">...</div>
+<div id="myOutput">...</div><br>
+<div id="myIris">...</div>
 
 
 
