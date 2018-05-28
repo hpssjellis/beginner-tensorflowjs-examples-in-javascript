@@ -1,97 +1,85 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> 
-
-<div id="wow">...</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script> 
+ 
 
 From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
- 
+
+
+<input id="myButton123" type="button" value="Load Data" onclick="{ 
+(async function(){
+   let myResponse = await fetch('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json')
+   document.ds = await myResponse.json()
+  // alert(ds[0].sepalLength)                                                                                                                                                 
+})() }">        
+
+
+
+
+
+
 <input id="myButton123" type="button" value="Iris-submarineering" onclick="{
 
-//load data
-//ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
+   //alert(document.ds[0]['sepalLength'])
+                                                                           
+                                                                     
+                                                                           
 
-(async function(){
-
-   let urlB2 = 'https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json';
-   let myResponse = await fetch(urlB2)
-   myOut = await myResponse.json()
-  // let myCoinCost = await parseFloat(myOut.CAD_USD.val).toFixed(4)  
-   //document.getElementById('myB5').innerHTML = await myCoinCost
-   document.getElementById('wow').value = await myOut
-
-   ds = await myOut
-
- // setup data
+// setup data
 xsArray = [];
-for(i=0; i<150; i++){ 
-  await  xsArray.push([[ds.json[i]['sepalLength']],[ds.json[i]['sepalWidth']], [ds.json[i][’petalLength']],[ds.json[i]['petalWidth ']]]);
-}                                                                          
-                                                                           
-                                                                           
-})()                                                                        
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-
-const xs = tf.tensor(xsArray);
+for(i=0; i < 150; i++){ 
+   xsArray.push([[document.ds[i]['sepalLength']],[document.ds[i]['sepalWidth']], [document.ds[i]['petalLength']],[document.ds[i]['petalWidth']]]);
+}
+xs = tf.tensor(xsArray);
 xs = xs.reshape([150, 4]);
-xs.print(true)   
+//xs.print(true)  
                                                                            
-                                                                           
+                                                                          
 y1Array = [];
-for (i=0; i<50; i++){
+for (i=0; i < 50; i++){
    y1Array.push([1,0,0])
 } 
 y1 = tf.tensor(y1Array); 
-y1.print(true)      
-                                                                           
+//y1.print(true)  
+
 y2Array = [];                                                                            
 for (i=0; i<50; i++){
    y2Array.push([0, 1, 0])
 }                                                                           
 y2 = tf.tensor(y2Array);    
-y2.print(true)                                                                              
+//y2.print(true)                                                                              
                                                                            
 y3Array = [];                                                                            
-for (i=0; i<50; i++){
+for (i=0; i < 50; i++){
     y3Array.push([0, 0, 1])
  }                                                                           
-y3 = tf.tensor(y3Array);                                                                           
-y3 = tf.stack([y1, y2, y3]); 
-y3 = y3.reshape([1 50, 3]);                                                                           
-y3.print(true)                                                                              
+y3 = tf.tensor(y3Array);    
                                                                            
-                                                                           
-                                                                           
-                                                                           
+ys = tf.stack([y1, y2, y3]); 
+ys = y3.reshape([150, 3]);                                                                           
+ys.print(true)                                                                              
                                                                            
 // Model:                                                                           
                                                                            
 const model = tf.sequential();
-
+//alert([xs.shape[1]])  // equaled [4]                                                                         
+model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]] }));
+//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [4]  }));
                                                                            
-  model.add(tf.layers.dense({ units: 10, activation: ‘sigmoid', inputShape: [xs.shape[1]] } ));
-  model.add(tf.layers.dense({ units: 3, activation: 'softmax'} ));
-  const optimizer = tf.train.adam(0.01);
-  model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] } );
+model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));                                                                           
+const optimizer = tf.train.adam(0.01);
+model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
 
-
+ 
 // Fit the model:
 model.fit(xs, ys, { epochs: 100} );
-                                                                           
-                                                                           
-                                                                           
+
+}">                                                                           
+                                                                          
 // Prediction:
-const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
+//const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
+const pred = tf.tensor([5.0, 3.4, 1.5, 0.3], shape=[1, 4])
 model.predict(pred).print()   
-                                                                           
-                                                                           
-                                                                           
-
-}">
-
+                                                                                                           
 
 
 
