@@ -1,0 +1,84 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script> 
+ 
+
+From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
+ 
+<input id="myButton123" type="button" value="Iris-submarineering" onclick="{
+
+//load data
+ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
+
+// setup data
+xsArray = [];
+for(i=0; i<150; i++){ 
+   xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i][’petalLength']],[ds.responseJSON[i]['petalWidth ']]]);
+}
+const xs = tf.tensor(xsArray);
+xs = xs.reshape([150, 4]);
+xs.print(true)   
+                                                                           
+                                                                           
+y1Array = [];
+for (i=0; i<50; i++){
+   y1Array.push([1,0,0])
+} 
+y1 = tf.tensor(y1Array); 
+y1.print(true)      
+                                                                           
+y2Array = [];                                                                            
+for (i=0; i<50; i++){
+   y2Array.push([0, 1, 0])
+}                                                                           
+y2 = tf.tensor(y2Array);    
+y2.print(true)                                                                              
+                                                                           
+y3Array = [];                                                                            
+for (i=0; i<50; i++){
+    y3Array.push([0, 0, 1])
+ }                                                                           
+y3 = tf.tensor(y3Array);                                                                           
+y3 = tf.stack([y1, y2, y3]); 
+y3 = y3.reshape([1 50, 3]);                                                                           
+y3.print(true)                                                                              
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+// Model:                                                                           
+                                                                           
+const model = tf.sequential();
+
+                                                                           
+  model.add(tf.layers.dense({ units: 10, activation: ‘sigmoid', inputShape: [xs.shape[1]] } ));
+  model.add(tf.layers.dense({ units: 3, activation: 'softmax'} ));
+  const optimizer = tf.train.adam(0.01);
+  model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] } );
+
+
+// Fit the model:
+model.fit(xs, ys, { epochs: 100} );
+                                                                           
+                                                                           
+                                                                           
+// Prediction:
+const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
+model.predict(pred).print()   
+                                                                           
+                                                                           
+                                                                           
+
+}">
+
+
+
+
+
+
+
+
+
+
+
+
