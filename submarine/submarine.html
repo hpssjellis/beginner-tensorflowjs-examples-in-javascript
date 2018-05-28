@@ -52,10 +52,11 @@ y3Array = [];
 for (i=0; i < 50; i++){
     y3Array.push([0, 0, 1])
  }                                                                           
-y3 = tf.tensor(y3Array);                                                                           
-y3 = tf.stack([y1, y2, y3]); 
-y3 = y3.reshape([150, 3]);                                                                           
-//y3.print(true)                                                                              
+y3 = tf.tensor(y3Array);    
+                                                                           
+ys = tf.stack([y1, y2, y3]); 
+ys = y3.reshape([150, 3]);                                                                           
+//ys.print(true)                                                                              
                                                                            
 // Model:                                                                           
                                                                            
