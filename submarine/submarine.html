@@ -17,7 +17,7 @@ xsArray = [];
 for(i=0; i < 150; i++){ 
    xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i]['petalLength']],[ds.responseJSON[i]['petalWidth']]]);
 }
-const xs = tf.tensor(xsArray);
+xs = tf.tensor(xsArray);
 xs = xs.reshape([150, 4]);
 xs.print(true)  
                                                                            
