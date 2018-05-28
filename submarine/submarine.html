@@ -12,8 +12,15 @@ From a tweet by   <a href="https://twitter.com/Submarineering/status/10006005011
 
 <input id="myButton123" type="button" value="Iris-submarineering" onclick="{
 
-   //alert(document.ds[0]['sepalLength'])
+(async function(){
+   let myResponse = await fetch('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json')
+   document.ds = await myResponse.json()
+  // alert(ds[0].sepalLength)    
                                                                            
+                                                                           
+                                                                           
+                                                                           
+            
                                                                      
                                                                            
 
@@ -76,19 +83,21 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
 
   
 // Fit the model:
-model.fit(xs, ys, { epochs: 1000} );
+await model.fit(xs, ys, { epochs: 100} );
 
                                                                         
                                                                           
 // Prediction:
 const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
-model.predict(pred).print()   
+await model.predict(pred).print()   
  
                                                                            
 document.getElementById('myOutput').innerHTML = 'wow'  
 
                                                                                                                                                       
- }"> 
+                                                                           
+})() }">        
+               
 
 
 
