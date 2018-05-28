@@ -102,7 +102,9 @@ await model.predict(pred).print()
 const myFinal = await model.predict(pred)  
  
                                                                            
-document.getElementById('myOutput').innerHTML = await myFinal  
+document.getElementById('myOutput').innerHTML = 'predicting [[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4] on IRIS dataset<br>'    
+document.getElementById('myOutput').innerHTML = 'Getting results <br>'             
+document.getElementById('myOutput').innerHTML += await myFinal  
 
                                                                                                                                                       
                                                                            
