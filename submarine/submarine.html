@@ -3,7 +3,24 @@
  
 
 From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
- 
+
+
+<input id="myButton123" type="button" value="try Iris load" onclick="{ 
+(async function(){
+
+   let myResponse = await fetch('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json')
+   ds = await myResponse.json()
+
+   alert(ds)
+                                                                       
+                                                                           
+})() }">        
+
+
+
+
+
+
 <input id="myButton123" type="button" value="Iris-submarineering" onclick="{
 
 //load data
