@@ -62,9 +62,14 @@ y3.print(true)
 const model = tf.sequential();
                                                                            
 //model.add(tf.layers.dense({ units: 10, activation: ‘sigmoid', inputShape: [xs.shape[1]] }));
+model.add(tf.layers.dense({ units: 10, activation: ‘sigmoid', inputShape: [150,4]  }));
+                                                                          
+model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));                                                                           
+const optimizer = tf.train.adam(0.01);
+model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
 
                                                                            
-                                                                           
+                                                                          
                                                                            
                                                                            
                                                                            
@@ -73,12 +78,7 @@ const model = tf.sequential();
 
 
                                                                            
-                                                                           
-model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));                                                                           
-const optimizer = tf.train.adam(0.01);
-model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
-
-
+ 
 // Fit the model:
 model.fit(xs, ys, { epochs: 100} );
                                                                            
