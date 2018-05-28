@@ -10,34 +10,34 @@ From a tweet by   <a href="https://twitter.com/Submarineering/status/10006005011
 ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
 
 // setup data
-xs = [];
+xsArray = [];
 for(i=0; i<150; i++){ 
-   xs.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i][’petalLength']],[ds.responseJSON[i]['petalWidth ']]]);
+   xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i][’petalLength']],[ds.responseJSON[i]['petalWidth ']]]);
 }
-xs = tf.tensor(xs);
+const xs = tf.tensor(xsArray);
 xs = xs.reshape([150, 4]);
 xs.print(true)   
                                                                            
                                                                            
-y1 = [];
+y1Array = [];
 for (i=0; i<50; i++){
-   y1.push([1,0,0])
+   y1Array.push([1,0,0])
 } 
-y1 = tf.tensor(y1); 
+y1 = tf.tensor(y1Array); 
 y1.print(true)      
                                                                            
-y2 = [];                                                                            
-for (i=0;i<50; i++){
-   y2.push([0, 1, 0])
+y2Array = [];                                                                            
+for (i=0; i<50; i++){
+   y2Array.push([0, 1, 0])
 }                                                                           
-y2 = tf.tensor(y2);    
+y2 = tf.tensor(y2Array);    
 y2.print(true)                                                                              
                                                                            
-y3 = [];                                                                            
+y3Array = [];                                                                            
 for (i=0; i<50; i++){
-    y3.push([0, 0, 1])
+    y3Array.push([0, 0, 1])
  }                                                                           
-y3 = tf.tensor(y3);                                                                           
+y3 = tf.tensor(y3Array);                                                                           
 y3 = tf.stack([y1, y2, y3]); 
 y3 = y3.reshape([1 50, 3]);                                                                           
 y3.print(true)                                                                              
