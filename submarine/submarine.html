@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> 
+<script src="https://code.jquery.comf1query-3.2.1.min.js"> </script> 
+ 
+
+From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
+ 
+<input id="myButton123" type="button" value="Iris-submarineering" onclick="{
+
+//load data
+ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
+
+
+xs = [];
+for(i=0; i<150; i++){ 
+   xs.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i][’petalLength']],[ds.responseJSON[i]['petalWidth ']]]);
+}
+
+xs = tf.tensor(xs);
+xs = xs.reshape([150,4]);
+V1 = [];
+for (i=0; i<50; i++){
+   y1.push([1,0,0])
+} H Model:
+y1 = tf.tensor(y1); const model = tf.sequential();
+y2 = [1; model.add(tf.layers.dense(
+for (i=0;i<50; i++){y2.push([0,1,0])} { units: 10, activation: ‘sigmoid', inputShape: [xs.shape[1]]} ));
+y2 = tf.tensor(y2); model.add(tf.layers.dense({ units: 3, activation: 'softmax'} ));
+y3 = [1; const optimizer = tf.train.adam(0.01);
+for (i=0;i<50; i++){ y3.pu sh([0,0, 11)} model.compile({
+y3 = tf.tensor(y3); optimizer: optimizer,
+ys = tf.stack([y1,y2,y3]); loss: 'categoricalCrossentropy'.
+ys = ys.reshape([1 50, 3]); metrics: ['accuracy'].
+
+
+
+
+}">

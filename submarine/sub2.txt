@@ -1,0 +1,11 @@
+TensorFlow.js Iris Classification 
+Open the browser and type about:blank. CT RL+SHIFT+i to open the console ilload tensorflow.js: var script = document.createElement('script'); script.type = text/javascripe; script.src = ihttps://cdn.jsdelivr.nettnpm/@tensorflawqs@O.11.1'; documenthead.appendChild(script); 
+Nov.' execute every block Note both scripts could be loaded from a html document also. Ilload jquery: var script = document.createElement('script); script.type = 'text/javascript', script.src = ihttps://code jquery corn/query-3.2 1 min js': document.head.appendChild(script); 
+//load data: ds = $.getJSON('httpsfiraw.githubusercontent.com/domoritz/maps/master/datafirisison'), 
+//set up the data: xs = for0=0:1<150,i++){ xs.push([[ds xs = tftensor(xs); xs = xs.reshape([150,44]); y1 = for (i=0;k50; i++){ y1.push([1,0 y1 = tf.tensor(y1): Y2 = fl: for (i=0;i<50; i++){ y2 push([0,1 y2 = tf tensor(y2): y3=0: for (i=0:i<50; i++){ y3.push([0,0 y3 = tf tensor(y3). ys = tf stack([y1 y2 y3]); ys = ys.reshape([150,3]); 
+.responseJSONDifsepalLengthl[ds.responseJSON[TsepaINdthl. [ds.responseJSON[i]rpetalLengthlUds.responseJSON[I]['petaR/Vidth]]] 
+
+11 Model: const model = tf.sequential(). model.add(tflayers.dense( { units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]]} )); model.add(tflayers.dense({ units: 3, activation: 'softmax'} )): const optimizer = tf.train.adam(0.01): model.compile({ optimizer: optimizer, loss: icategoricalCrossentropy, metrics: ['accuracy]. ); 
+II Fit the model: modellit(xs, ys, { epochs: 100} ); 
+II Prediction: pred = tf.tensor([[5.0, 3.4. 1.5, 0.3], [5.3.2.2,3.51.1]], shape=[2,4]) model.predict(pred).print() 
+I.} 
