@@ -62,8 +62,8 @@ ys.print(true)
                                                                            
 const model = tf.sequential();
 //alert([xs.shape[1]])  // equaled [4]                                                                         
-model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]] }));
-//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [4]  }));
+//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]] }));
+model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [150, 3] }));
  }">                                                                               
 model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));  
                                                                         
