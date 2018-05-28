@@ -12,18 +12,7 @@ ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris
                                                                            
 alert(ds.responseJSON[0])                                                                           
                                                                            
-// setup data
-xsArray = [];
-for(i=0; i < 150; i++){ 
-   xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i]['petalLength']],[ds.responseJSON[i]['petalWidth']]]);
-}
-xs = tf.tensor(xsArray);
-xs = xs.reshape([150, 4]);
-xs.print(true)  
-                                                                           
-                                                                           
-                                                                           
-                                                                           
+                                                     
                                                                            
                                                                            
                                                                            
@@ -39,7 +28,18 @@ xs.print(true)
 
 
 
-
+// setup data
+xsArray = [];
+for(i=0; i < 150; i++){ 
+   xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i]['petalLength']],[ds.responseJSON[i]['petalWidth']]]);
+}
+xs = tf.tensor(xsArray);
+xs = xs.reshape([150, 4]);
+xs.print(true)  
+                                                                           
+                                                                           
+                                                                           
+                      
 
 
                                                                            
