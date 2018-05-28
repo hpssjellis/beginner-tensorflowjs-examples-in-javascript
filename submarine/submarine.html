@@ -80,7 +80,7 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
 //await model.fit(xs, ys, { epochs: 100} );
 
                                                                            
-  for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
+  for (let myLoop = 1; myLoop <= 20; myLoop++) {                                                                                 
      var myFit = await model.fit(xs, ys, { epochs: 10 });
      if (myLoop % 2 == 0){   
          await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
