@@ -1,40 +1,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> </script> 
-
-<div id="wow">...</div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script> 
+ 
 
 From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
  
 <input id="myButton123" type="button" value="Iris-submarineering" onclick="{
 
 //load data
-//ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
+ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
 
-(async function(){
-
-   let urlB2 = 'https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json';
-   let myResponse = await fetch(urlB2)
-   myOut = await myResponse.json()
-  // let myCoinCost = await parseFloat(myOut.CAD_USD.val).toFixed(4)  
-   //document.getElementById('myB5').innerHTML = await myCoinCost
-   document.getElementById('wow').value = await myOut
-
-   ds = await myOut
-
- // setup data
+// setup data
 xsArray = [];
 for(i=0; i<150; i++){ 
-  await  xsArray.push([[ds.json[i]['sepalLength']],[ds.json[i]['sepalWidth']], [ds.json[i][’petalLength']],[ds.json[i]['petalWidth ']]]);
-}                                                                          
-                                                                           
-                                                                           
-})()                                                                        
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-
+   xsArray.push([[ds.responseJSON[i]['sepalLength']],[ds.responseJSON[i]['sepalWidth']], [ds.responseJSON[i][’petalLength']],[ds.responseJSON[i]['petalWidth ']]]);
+}
 const xs = tf.tensor(xsArray);
 xs = xs.reshape([150, 4]);
 xs.print(true)   
@@ -91,8 +70,6 @@ model.predict(pred).print()
                                                                            
 
 }">
-
-
 
 
 
