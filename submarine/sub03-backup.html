@@ -31,7 +31,7 @@ for(i=0; i < 150; i++){
 }
 xs = tf.tensor(xsArray);
 xs = xs.reshape([150, 4]);
-//xs.print(true)  
+xs.print(true)  
                                                                            
                                                                           
 y1Array = [];
@@ -55,36 +55,46 @@ for (i=0; i < 50; i++){
 y3 = tf.tensor(y3Array);    
                                                                            
 ys = tf.stack([y1, y2, y3]); 
-ys = y3.reshape([150, 3]);                                                                           
+ys = ys.reshape([150, 3]);                                                                           
 ys.print(true)                                                                              
                                                                            
 // Model:                                                                           
                                                                            
 const model = tf.sequential();
+                                                                           
+
+
+
+
+
 //alert([xs.shape[1]])  // equaled [4]                                                                         
 model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]] }));
-//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [4]  }));
+//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [150, 3] }));
+
                                                                            
-model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));                                                                           
+                                                                           
+
+
+
+model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));  
+                                                                        
 const optimizer = tf.train.adam(0.01);
 model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
 
- 
+  
 // Fit the model:
 model.fit(xs, ys, { epochs: 100} );
 
-}">                                                                           
+                                                                        
                                                                           
 // Prediction:
-//const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
-const pred = tf.tensor([5.0, 3.4, 1.5, 0.3], shape=[1, 4])
+const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])
+//const pred = tf.tensor([5.0, 3.4, 1.5, 0.3], shape=[1, 4])
 model.predict(pred).print()   
                                                                                                            
 
-
-
-
-
+                                                                                                                                                      
+ }"> 
 
 
 
