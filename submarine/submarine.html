@@ -55,23 +55,29 @@ for (i=0; i < 50; i++){
 y3 = tf.tensor(y3Array);    
                                                                            
 ys = tf.stack([y1, y2, y3]); 
-ys = y3.reshape([150, 3]);                                                                           
+ys = ys.reshape([150, 3]);                                                                           
 ys.print(true)                                                                              
                                                                            
 // Model:                                                                           
                                                                            
 const model = tf.sequential();
                                                                            
-                                                                           
- }"> 
+
 
 
 
 
 //alert([xs.shape[1]])  // equaled [4]                                                                         
-//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]] }));
-model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [150, 3] }));
-                                                                              
+model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [xs.shape[1]] }));
+//model.add(tf.layers.dense({ units: 10, activation: 'sigmoid', inputShape: [150, 3] }));
+
+                                                                           
+                                                                           
+                                                                                                                                                      
+ }"> 
+
+
+
 model.add(tf.layers.dense({ units: 3, activation: 'softmax' }));  
                                                                         
 const optimizer = tf.train.adam(0.01);
