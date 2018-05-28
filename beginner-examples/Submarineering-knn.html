@@ -83,7 +83,7 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
      var myFit = await model.fit(xs, ys, { epochs: 10 });
      if (myLoop % 2 == 0){   
          await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
-         document.getElementById('myOutput').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
+         document.getElementById('myOutput').innerHTML  =  'Loss after Batch ' + myLoop + ' of 20 batches : ' + myFit.history.loss[0] +'<br><br>'                                                                           
      }
                                                                    
  }                                                                                    
@@ -98,7 +98,7 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
 // Prediction:
 //const pred = tf.tensor([[5.0, 3.4, 1.5, 0.3], [5.3, 2.2, 3.5, 1.1]], shape=[2,4])    // tests two at once
 //const pred = tf.tensor([5.0, 3.4, 1.5, 0.3], shape=[1,4])            // tests only one
-const pred = tf.tensor(document.getElementById('myFlower').value.split(','), shape=[1,4])   // grab from text box
+const pred = await tf.tensor(document.getElementById('myFlower').value.split(','), shape=[1,4])   // grab from text box
 await model.predict(pred).print()   
 const myFinal = await model.predict(pred)  
  
