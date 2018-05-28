@@ -82,7 +82,7 @@ model.compile({ optimizer: optimizer, loss: 'categoricalCrossentropy', metrics: 
                                                                            
   for (let myLoop = 1; myLoop <= 100; myLoop++) {                                                                                 
      var myFit = await model.fit(xs, ys, { epochs: 10 });
-     if (myLoop % 20 == 0){   
+     if (myLoop % 2 == 0){   
          await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
          document.getElementById('myOutput').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                                                           
      }
