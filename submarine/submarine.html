@@ -5,13 +5,13 @@
 From a tweet by   <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a>
 
 
-<input id="myButton123" type="button" value="try Iris load" onclick="{ 
+<input id="myButton123" type="button" value="Load Data" onclick="{ 
 (async function(){
 
    let myResponse = await fetch('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json')
-   ds = await myResponse.json()
+   document.ds = await myResponse.json()
 
-   alert(ds)
+   alert(ds[0])
                                                                        
                                                                            
 })() }">        
@@ -23,27 +23,10 @@ From a tweet by   <a href="https://twitter.com/Submarineering/status/10006005011
 
 <input id="myButton123" type="button" value="Iris-submarineering" onclick="{
 
-//load data
-ds = $.getJSON('https://raw.githubusercontent.com/domoritz/maps/master/data/iris.json');
-
+   alert(document.ds[0])
                                                                            
-alert(ds.responseJSON)                                                                           
+}">                                                                            
                                                                            
-                                                     
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-                                                                           
-}">   
-
-
-
-
-
-
-
 
 // setup data
 xsArray = [];
