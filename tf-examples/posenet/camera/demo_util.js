@@ -112,7 +112,7 @@ function renderImageToCanvas(image, size, canvas) {
   canvas.height = size[1];
   const ctx = canvas.getContext('2d');
 
-  ctx.drawImage(image, 0, 0);
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 }
 
 /**
