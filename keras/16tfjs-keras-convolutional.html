@@ -132,7 +132,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 100; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 300; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
