@@ -229,15 +229,13 @@ const learnToGuessWord = async () => {
 
     console.log(generatedText)
 }
-
-document.getElementById('start_training').addEventListener('click', learnToGuessWord, { once: true })
-document.getElementById('stop_training').addEventListener('click', () => stop_training = true)
-
-
-
-    
-    
     </script>
+
+
+
+    
+    
+
 
   </head>
   <body>
@@ -246,6 +244,11 @@ document.getElementById('stop_training').addEventListener('click', () => stop_tr
     <button id="start_training">Start training</button>
     <button id="stop_training">Stop training</button>
    
-    
+   <script>
+     
+     document.getElementById('start_training').addEventListener('click', learnToGuessWord, { once: true })
+document.getElementById('stop_training').addEventListener('click', () => stop_training = true)
+
+    </script>
   </body>
 </html>
