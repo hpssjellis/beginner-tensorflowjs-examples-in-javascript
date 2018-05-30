@@ -89,47 +89,6 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 
 
-Stan  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-stan-conv2d.html
-
-Latest Convolution  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-conv2d-latest.html
-
-
-Convolution   
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras-convulu.html
-
-
-
-
-.
-
-
-
-
-
-
-testing keras  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras01.html
-
-
-
-
-
-
-gru  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15kera-gru.html
-
-
-2nd model  
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15-keras02.html
-
-
-
-
-
-
 
 ##Resources
 
@@ -153,6 +112,8 @@ docs
 
 https://keras.io/getting-started/sequential-model-guide/
 
+David Horath  
+https://github.com/HorvathDavid/LSTM-tensorflowjs-example
 
 
 
