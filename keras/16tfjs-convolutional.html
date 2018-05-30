@@ -1,0 +1,233 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center> Most of the examples are in the following format:</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Blah Blah Blah Blah 
+</div><br>
+
+
+    
+<div id="myDiv7979Code"> 
+
+<textarea id="myAsk" rows=7 cols=20 wrap=false>
+1,0,0,0,
+1,0,0,0,
+1,0,0,0,
+1,0,0,0</textarea><br>
+<input id="myButton7979" type="button" value="Convolutional Train and Test" onclick="{ 
+  
+ document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
+                                                                                                                                                                        
+const xs = tf.tensor4d([                                                                                                                                                
+                                                                                                                                                                        
+0,0,0,0,                                                                                                                                                                
+0,0,1,0,                                                                                                                                                                
+1,0,0,0,                                                                                                                                                                
+0,0,0,0,                                                                                                                                                                
+                                                                                                                                                                        
+0,0,0,0,                                                                                                                                                                
+0,0,0,0,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+0,0,0,0,                                                                                                                                                                
+                                                                                                                                                                        
+0,0,0,0,                                                                                                                                                                
+0,0,0,0,                                                                                                                                                                
+0,0,0,0,                                                                                                                                                                
+1,1,1,1,    
+                                                                                    
+0,1,0,0,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+1,1,1,1,    
+                                                                                     
+0,1,0,0,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+0,0,0,0, 
+                                                                                                                                                              
+1,1,1,1,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+1,1,1,1,  
+                                                                                                                                                              
+0,1,0,0,                                                                                                                                                                
+0,0,0,0,                                                                                                                                                                
+0,1,0,0,                                                                                                                                                                
+1,0,1,0,  
+                                                                                                                                                                        
+0,0,1,0,                                                                                                                                                                
+0,0,1,0,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+0,0,1,0 
+                                                                                    
+], [8, 4, 4, 1] );                                                                                                                                                         
+                                                                                                                                                                        
+// Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
+const ys = tf.tensor2d([0, 1, 1, 2, 2, 3, 0, 2], [8, 1]);                                                                                                                          
+                                                                                                                                                                        
+                                                                                                                                                                        
+const model = tf.sequential();                                                                                                                                          
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({                                                                                                                                            
+inputShape: [4, 4, 1],                                                                                                                                                  
+kernelSize: 2,                                                                                                                                                          
+filters: 4,                                                                                                                                                             
+strides: 1,                                                                                                                                                             
+activation: 'relu',                                                                                                                                                     
+kernelInitializer: 'varianceScaling'                                                                                                                                    
+}));                                                                                                                                                                    
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
+                                                                                                                                                                        
+model.add(tf.layers.flatten());                                                                                                                                         
+model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                           
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
+                                                                                                                                                                        
+async function myGo() { // inline async so we can use promises and await                                                                                                   
+                                                                                                                                                                        
+  for ( let myLoop = 1; myLoop <= 300; myLoop++ ) {                                                                                                                     
+    var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
+    if (myLoop % 20 == 0){                                                                                                                                              
+      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                          
+    }                                                                                                                                                                   
+  }                                                                                                                                                                     
+  const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                              
+  document.getElementById('myButton7979').style.backgroundColor = 'lightgray'                                                                                            
+  document.getElementById('myDiv7979').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
+}
+                                                                                                                                                                      
+ setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
+                                                                                                                                                                       
+}" > 
+</div>
+<div id='myDiv7979'>...</div><br>
+
+
+
+<input id="myUpdate7979" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea7979').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv7979Code').innerHTML =    myJoe 
+  document.getElementById('myButton7979').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea7979"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce7979){
+     myTextGrow('myTextarea7979', 'myDiv7979Code')
+     document.getElementById('myUpdate7979').style.visibility = 'visible'
+     myOnce7979 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce7979 = true    // so textareas are only clicked once
+
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
