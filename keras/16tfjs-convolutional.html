@@ -44,7 +44,14 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Keras Convolutional Layer<br>
+Trying to simplify Convolutional Keras Layers, which is fairly hard to do since COnvolutional Layers tend to be made for
+images with tons of pixels. For this demo I used a 4x4 black and white "image" that you can just enter as the number 1 and 0<br>
+The program then sets up a convolutional layer and trys to match the number of rows of 1's<br>
+Users should make much more input images to have any chance of teaching this neural network.  
+
+
+Thanks for your help Stan Bileschi Twitter @xtan<br>
 </div><br>
 
 
@@ -52,7 +59,7 @@ Blah Blah Blah Blah
 <div id="myDiv7979Code"> 
 
 <textarea id="myAsk" rows=7 cols=20 wrap=false>
-1,0,0,0,
+1,1,1,1,
 1,0,0,0,
 1,0,0,0,
 1,0,0,0</textarea><br>
@@ -102,10 +109,10 @@ const xs = tf.tensor4d([
 1,1,1,1,                                                                                                                                                                
 0,0,1,0 
                                                                                     
-], [8, 4, 4, 1] );                                                                                                                                                         
+], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([0, 1, 1, 2, 2, 3, 0, 2], [8, 1]);                                                                                                                          
+const ys = tf.tensor2d([0, 1, 1, 2, 2, 3, 0, 2], shape=[8, 1]);        // 8 images 1 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 const model = tf.sequential();                                                                                                                                          
