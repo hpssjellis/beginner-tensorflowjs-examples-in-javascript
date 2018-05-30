@@ -21,7 +21,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 
 
-
+To show david horath   
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/show-david.html
 
 
 
