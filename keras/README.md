@@ -11,21 +11,12 @@ LSTM posted on discussion
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm03-to-post.html
 
 
+LSTM to work on
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/17tfjs-lstm.html
 .
 
 
 
-Eventually want to get this fully working
-
-15tfjs-keras-group.html  
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras-group.html 
-
-
-
-.
-My Basic template
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras01.html
 
 
 
