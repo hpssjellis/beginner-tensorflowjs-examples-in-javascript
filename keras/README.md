@@ -15,7 +15,9 @@ LSTM to work on
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/17tfjs-lstm.html
 .
 
+LSTM with words not just numbers
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/18tfjs-lstm-words.html
 
 
 
