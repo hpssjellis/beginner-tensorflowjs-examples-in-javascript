@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <title>Differential Evolution Optimization</title>
 
     <script>
@@ -26,7 +23,7 @@ const preparedDataforTestSet = inputText.split(' ')
 const examinedNumberOfWord = 6
 const endOfSeq = preparedDataforTestSet.length - (examinedNumberOfWord + 1)
 const optimizer = tf.train.rmsprop(learning_rate)
-let chart
+//let chart
 let stop_training = false
 
 
@@ -188,9 +185,9 @@ const train = async (numIterations) => {
             The average loss is (last 100 steps):  ${lvdsy}
             Number of tensors in memory: ${tf.memory().numTensors}
             --------`)
-            chart.data.datasets[0].data.push(lvdsy)
-            chart.data.labels.push(iter)
-            chart.update()
+           // chart.data.datasets[0].data.push(lvdsy)
+           // chart.data.labels.push(iter)
+            //chart.update()
         }
 
         // Use tf.nextFrame to not block the browser.
@@ -206,7 +203,7 @@ const train = async (numIterations) => {
 const learnToGuessWord = async () => {
     console.log('TRAINING START')
 
-    chart = drawChart([], [])
+   // chart = drawChart([], [])
 
     await train(numIterations);
 
@@ -243,9 +240,7 @@ document.getElementById('stop_training').addEventListener('click', () => stop_tr
     Original code by  David Horvath at <a href="https://github.com/HorvathDavid/LSTM-tensorflowjs-example">github<a/>
     <button id="start_training">Start training</button>
     <button id="stop_training">Stop training</button>
-    <canvas id="myChart" width="400" height="400"></canvas>
-    
-    
+   
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
     
   </body>
