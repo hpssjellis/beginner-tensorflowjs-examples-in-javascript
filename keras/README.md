@@ -5,8 +5,7 @@ mine and stans conv2d.
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15keras-mine-stan01.html
 
 
-LSTM  Try predicting the next values of PI
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm02.html
+
 
 LSTM posted on discussion  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm03-to-post.html
@@ -25,6 +24,11 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 
 .
+My Basic template
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/15tfjs-keras01.html
+
+
+
 
 
 
