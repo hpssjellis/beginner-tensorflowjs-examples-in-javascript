@@ -46,12 +46,12 @@ const createWordMap = (textData) => {
         return acc
     }, {})
 
-    const arraOfshit = []
+    const myArrayWords = []
     for (let key in countedWordObject) {
-        arraOfshit.push({ word: key, occurence: countedWordObject[key] })
+        myArrayWords.push({ word: key, occurence: countedWordObject[key] })
     }
 
-    const wordMap = _.sortBy(arraOfshit, 'occurence').reverse().map((e, i) => {
+    const wordMap = _.sortBy(myArrayWords, 'occurence').reverse().map((e, i) => {
         e['code'] = i
         return e
     })
@@ -91,7 +91,8 @@ encode = (symbol) => {           // made global
     // console.log(symbol)
     return tf.tidy(() => {
         const symbolTensor1d = tf.tensor1d(symbol)
-        return tf.oneHot(symbolTensor1d, parseInt(wordMapLength))
+        //return tf.oneHot(symbolTensor1d, parseInt(wordMapLength))
+        return tf.oneHot(symbolTensor1d, wordMapLength)
       
     })
 }
