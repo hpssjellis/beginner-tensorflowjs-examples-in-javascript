@@ -280,6 +280,8 @@ function detectPoseInRealTime(video, net) {
  */
  async function bindPage() {
   // Load the PoseNet model weights for version 1.01
+  document.getElementById('myVersion').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs 
+   
   const net = await posenet.load();
 
   document.getElementById('loading').style.display = 'none';
