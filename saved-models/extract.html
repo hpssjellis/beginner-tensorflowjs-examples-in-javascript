@@ -28,13 +28,15 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
     for (let x=0; x <= 100; x++){
        try  {
 										    
-	   //var output = '';
-           //for (var key in loadedModel6.getLayer('fred', x)) {
-           //      output += loadedModel6.getLayer('fred', x)[key];
-            //}
-            //document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
+	   var output = '';
+           for (var key in loadedModel6.getLayer('fred', x)) {
+                 output += loadedModel6.getLayer('fred', x)[key];
+            }
+            document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
+	    document.getElementById('myLayer').value = output
 										    
-	   document.getElementById('myDiv4950').innerHTML += await JSON.Stringify(await loadedModel6.getLayer('unknown', x), null, 4) + '<br>'				     
+										    
+	  // document.getElementById('myDiv4950').innerHTML += await JSON.Stringify(await loadedModel6.getLayer('unknown', x), null, 4) + '<br>'				     
        } catch(err) {
              break     // exit the for loop when no more layers
        }
@@ -64,6 +66,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 
 <div id='myDiv4950'>...</div><br><br>
 <textarea id="myJSON" rows=20 cols="100%"></textarea>
+<textarea id="myLayers" rows=20 cols="100%"></textarea>
 
 
 
