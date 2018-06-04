@@ -279,10 +279,11 @@ function detectPoseInRealTime(video, net) {
  * camera devices, and setting off the detectPoseInRealTime function.
  */
  async function bindPage() {
+   
+  document.getElementById('myVersionDiv').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs  
+   
+   
   // Load the PoseNet model weights for version 1.01
-   
-      document.getElementById('myVersionDiv').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs  
-   
   const net = await posenet.load();
 
   document.getElementById('loading').style.display = 'none';
