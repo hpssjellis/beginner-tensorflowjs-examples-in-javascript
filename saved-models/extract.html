@@ -33,7 +33,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
             //}
             //document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
 										    
-	   document.getElementById('myDiv4950').innerHTML += JSON.Stringify(loadedModel6.getLayer('unknown', x), null, 4) + '<br>'				     
+	   document.getElementById('myDiv4950').innerHTML += await JSON.Stringify(await loadedModel6.getLayer('unknown', x), null, 4) + '<br>'				     
        } catch(err) {
              break     // exit the for loop when no more layers
        }
