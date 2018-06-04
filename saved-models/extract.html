@@ -27,7 +27,14 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
     for (let x=0; x <= 100; x++){
        try  {
            // console.log(loadedModel6.getLayer('fred', x))
-	   document.getElementById('myDiv4950').innerHTML += loadedModel6.getLayer('unknown', x).modelTopology						     
+										    
+	   var output = '';
+           for (var key in loadedModel6.getLayer('fred', x)) {
+                 output += my_obj[key];
+            }
+            document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
+										    
+	  // document.getElementById('myDiv4950').innerHTML += loadedModel6.getLayer('unknown', x)					     
        } catch(err) {
              break     // exit the for loop when no more layers
        }
