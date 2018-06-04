@@ -33,7 +33,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 		//console.log(key)								    
                  output += loadedModel6.getLayer('fred', x)[key] + '\n\n'
 										    
-           for (let [key, value] of Object.entries(loadedModel6.getLayer('fred', x))){
+           for (let [key, value] of Object.entries(loadedModel6.getLayer('fred', x)._trainableWeights)){
 	         document.getElementById('myDiv4950').innerHTML += 'key =' + key+ ', value = ' + value + '<br>'									    
             }  								    
 										    
