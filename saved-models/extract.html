@@ -22,7 +22,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
     const myPredictArray6 = await loadedModel6.predict(training_data6).data()
     myIncoming =  await fetch(document.getElementById('myInFile').value)
     //console.log(myIncoming)	
-     document.getElementById('myJSON').value = await JSON.stringify(myIncoming)
+     document.getElementById('myJSON').value = await myIncoming.json()
 
 
     for (let x=0; x <= 100; x++){
