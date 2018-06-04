@@ -23,6 +23,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
     myIncoming =  await fetch(document.getElementById('myInFile').value)
     myJ = await myIncoming.json()
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
+     document.getElementById('myJSON').value = myJ[0]
 
 
     for (let x=0; x <= 100; x++){
