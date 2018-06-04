@@ -5,7 +5,7 @@ Should extract the binary files using the json file
 
 LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br>  
 
-<input id="myButton4950" type="button" value="Load everything from a URL and test the data" onclick="{
+<input id="myButton4950" type="button" value="View" onclick="{
 
   const startTime = performance.now();
   document.getElementById('myDiv4950').innerHTML = '<br>'
@@ -26,7 +26,8 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 															
     for (let x=0; x <= 100; x++){
        try  {
-          console.log(loadedModel6.getLayer('fred', x))
+         // console.log(loadedModel6.getLayer('fred', x))
+	document.getElementById('myDiv4950').innerHTML += loadedModel6.getLayer('unknown', x)						     
        } catch(err) {
              break     // exit the for loop when no more layers
        }
