@@ -41,7 +41,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
            // document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
 	    document.getElementById('myLayers').value = output
 	 // console.dir(output)									    
-										    
+		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[0] + '<br>'										    
 										    
 	  // document.getElementById('myDiv4950').innerHTML += await JSON.Stringify(await loadedModel6.getLayer('unknown', x), null, 4) + '<br>'				     
        } catch(err) {
@@ -51,7 +51,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
    }
 
 
-	 document.getElementById('myDiv4950').innerHTML += JSON.stringify(loadedModel6.getWeights(), null, 4)											     
+										     
 												     
 												     
 			     
