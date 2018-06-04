@@ -14,18 +14,16 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
   async function myGo6() {
 			
     const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
-    const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  									    
-	
-
-
+												     
+												     
+												     
+												     
 			    
-    const myPredictArray6 = await loadedModel6.predict(training_data6).data()
-    myIncoming =  await fetch(document.getElementById('myInFile').value)
-    myJ = await myIncoming.json()
+     myIncoming =  await fetch(document.getElementById('myInFile').value)
+     myJ = await myIncoming.json()
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
-     document.getElementById('myJSON').value = myJ[0]
-
-
+												     
+															
     for (let x=0; x <= 100; x++){
        try  {
           console.log(loadedModel6.getLayer('fred', x))
@@ -35,13 +33,14 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 
    }
 
-
-
-
     document.getElementById('myDiv4950').innerHTML += loadedModel6.getLayer('fred', 0) + '<br>'
 
-
-
+												     
+												     
+												     
+			     
+    const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
+    const myPredictArray6 = await loadedModel6.predict(training_data6).data()
 
     const endTime = performance.now();
     document.getElementById('myDiv4950').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
