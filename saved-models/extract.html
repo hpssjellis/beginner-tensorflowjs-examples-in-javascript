@@ -22,7 +22,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
     const myPredictArray6 = await loadedModel6.predict(training_data6).data()
     myIncoming =  await fetch(document.getElementById('myInFile').value)
     myJ = await myIncoming.json()
-     document.getElementById('myJSON').value = await JSON.stringify(myJ)
+     document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
 
 
     for (let x=0; x <= 100; x++){
@@ -53,11 +53,11 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 	
 	<br><br>
 
-<textarea id="myJSON" rows=5 cols=70></textarea>
+
+<div id='myDiv4950'>...</div><br><br>
+<textarea id="myJSON" rows=20 cols="1--%"></textarea>
 
 
 
 
 
-
-<div id='myDiv4950'>...</div><br>
