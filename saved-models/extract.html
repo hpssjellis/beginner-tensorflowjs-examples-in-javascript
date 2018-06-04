@@ -29,7 +29,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
        try  {
 										    
 	   var output = '';
-           for (var key in loadedModel6.getLayer('fred', x)) {
+           for (var key in loadedModel6.getLayer('fred', x)._trainableWeights) {
 		//console.log(key)								    
                  output += loadedModel6.getLayer('fred', x)[key] + '\n\n'
 										    
