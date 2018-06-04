@@ -16,7 +16,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
     const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
 												     
 												     
-												     
+	console.log(await loadedModel6.getWeights() )											     
 												     
 			    
      myIncoming =  await fetch(document.getElementById('myInFile').value)
