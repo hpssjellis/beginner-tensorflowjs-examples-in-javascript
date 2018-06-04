@@ -29,8 +29,8 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
            // console.log(loadedModel6.getLayer('fred', x))
 										    
 	   var output = '';
-           for (var key in await loadedModel6.getLayer('fred', x)) {
-                 output += my_obj[key];
+           for (var key in loadedModel6.getLayer('fred', x)) {
+                 output += loadedModel6.getLayer('fred', x)[key];
             }
             document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
 										    
