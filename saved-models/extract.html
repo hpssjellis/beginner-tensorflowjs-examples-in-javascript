@@ -106,7 +106,7 @@ console.log(weightManifest)
 console.log(weightManifest.weightsManifest[0].paths[0])											    
 										    
 			
-const weightMap = await tf.io.loadWeights(weightManifest.weightsManifest);										    
+const weightMap = await tf.io.loadWeights( weightManifest, weightManifest.weightsManifest[0].paths[0] );										    
 										    
 	console.log()								    
 	console.log(weightMap)								    
