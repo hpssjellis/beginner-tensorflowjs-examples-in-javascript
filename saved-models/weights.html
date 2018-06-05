@@ -4,7 +4,7 @@
 Should extract the binary files using the json file
 
 LOAD JSON URL <input id="myJsonFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
-Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
+Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
 
 <input id="myButton4950" type="button" value="View Saved Weights and JSON" onclick="{
 
@@ -20,11 +20,13 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
       var weightManifest = await manifest.json();
 										    
       weightManifest.weightsManifest[0].paths[0] = document.getElementById('myBinaryFile').value										    
-      console.log('Weights data')								    
-      console.log(weightManifest)								    
+      console.log('Showing the weightManifest')								    
+      console.log(weightManifest)									    
+      console.log('URL to load weights')								    
       console.log(weightManifest.weightsManifest[0].paths[0])											    
 										    			
-      const weightMap = await tf.io.loadWeights( weightManifest.weightsManifest );										    
+      const weightMap = await tf.io.loadWeights( weightManifest.weightsManifest );									    									    
+      console.log('Showing the weightMap')								
       console.log(weightMap)								    
 
       const endTime = performance.now();
