@@ -3,7 +3,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
 Should extract the binary files using the json file
 
-LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br>  
+LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
+Load Binary  URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
+
 
 <input id="myButton4950" type="button" value="View Saved Weights and JSON" onclick="{
 
@@ -48,7 +50,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
    }
 
 
-for (let myW=0; myW <= loadedModel6.getWeights().length;  myW++){
+for (let myW=0; myW <= loadedModel6.getWeights().length-1;  myW++){
 		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[myW] + '<br><br>'											    
 }										     
 												     
@@ -72,6 +74,7 @@ for (let myW=0; myW <= loadedModel6.getWeights().length;  myW++){
 <div id='myDiv4950'>...</div><br><br>
 <textarea id="myJSON" rows=20 cols="100%"></textarea>
 <textarea id="myLayers" rows=20 cols="100%"></textarea>
+<textarea id="myBinary" rows=20 cols="100%"></textarea>
 
 
 
