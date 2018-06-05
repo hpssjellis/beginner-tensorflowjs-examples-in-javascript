@@ -1,0 +1,47 @@
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
+Should extract the binary files using the json file
+
+LOAD JSON URL <input id="myJsonFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
+Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
+<br>
+Strange, the only way I can get this running is when tf.io.loadWeights() is inserting the main URL "https://hpssjellis.github.io/"<br>
+<input id="myButton4950" type="button" value="View Saved Weights and JSON" onclick="{
+
+  const startTime = performance.now();
+  document.getElementById('myDiv4950').innerHTML = '<br>'
+  document.getElementById('myButton4950').style.backgroundColor = 'red'  
+                                                                                                                                                        
+  async function myGo6() {
+										    
+      const weightManifestUrl = document.getElementById('myJsonFile').value;
+
+      const manifest = await fetch(weightManifestUrl);
+      var weightManifest = await manifest.json();
+										    
+      weightManifest.weightsManifest[0].paths[0] = document.getElementById('myBinaryFile').value										    
+      console.log('Showing the weightManifest')								    
+      console.log(weightManifest)									    
+      console.log('URL to load weights')								    
+      console.log(weightManifest.weightsManifest[0].paths[0])											    
+										    			
+      const weightMap = await tf.io.loadWeights( weightManifest.weightsManifest );									    									    
+      console.log('Showing the weightMap')								
+      console.log(weightMap)								    
+
+      const endTime = performance.now();
+      document.getElementById('myDiv4950').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'		
+      document.getElementById('myLayers').value =  JSON.stringify(weightMap, null, 4)												  
+      document.getElementById('myButton4950').style.backgroundColor = 'lightgrey'                    
+  }
+
+  setTimeout(function(){  myGo6() }, 10);   // wait a bit for the GUI to update	
+}">
+		
+	<br><br>
+
+<div id='myDiv4950'>...</div><br><br>
+
+<textarea id="myLayers" rows=20 cols="100%"></textarea>
+
+
