@@ -32,7 +32,7 @@ Strange, the only way I can get this running is when tf.io.loadWeights() is inse
 
       const endTime = performance.now();
       document.getElementById('myDiv4950').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'		
-      document.getElementById('myDiv4950').innerHTML +=  weightMap												  
+      document.getElementById('myDiv4950').innerHTML +=  JSON.stringify(weightMap)												  
       document.getElementById('myButton4950').style.backgroundColor = 'lightgrey'                    
   }
 
