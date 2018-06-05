@@ -95,8 +95,7 @@ const weightManifestUrl = document.getElementById('myInFile').value;
 
 const manifest = await fetch(weightManifestUrl);
 var weightManifest = await manifest.json();
-										    
-console.log()								    
+										    							    
 console.log(weightManifest)								    
 console.log(weightManifest.weightsManifest[0].paths[0])	
 										    
@@ -104,16 +103,9 @@ weightManifest.weightsManifest[0].paths[0] = document.getElementById('myBinaryFi
 console.log()								    
 console.log(weightManifest)								    
 console.log(weightManifest.weightsManifest[0].paths[0])											    
-										    
-			
-const weightMap = await tf.io.loadWeights( weightManifest, weightManifest.weightsManifest[0].paths[0] );										    
-										    
-	console.log()								    
-	console.log(weightMap)								    
-	console.log()											    
-										    
-										    
-										    
+										    			
+const weightMap = await tf.io.loadWeights( weightManifest);										    
+console.log(weightMap)								    
 										    
 			     
     const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
