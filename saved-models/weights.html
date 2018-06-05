@@ -24,7 +24,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
       console.log(weightManifest)								    
       console.log(weightManifest.weightsManifest[0].paths[0])											    
 										    			
-      const weightMap = await tf.io.loadWeights( weightManifest );										    
+      const weightMap = await tf.io.loadWeights( weightManifest.weightsManifest );										    
       console.log(weightMap)								    
 
       const endTime = performance.now();
