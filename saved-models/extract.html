@@ -15,7 +15,19 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
   document.getElementById('myButton4950').style.backgroundColor = 'red'  
                                                                                                                                                         
   async function myGo6() {
-		
+
+										    
+										    
+const weightManifestUrl = document.getElementById('myBinaryFile').value;
+
+const manifest = await fetch(weightManifestUrl);
+this.weightManifest = await manifest.json();
+const weightMap = await tf.io.loadWeights(this.weightManifest, document.getElementById('myBinaryFile').value);										    
+										    
+	console.log()								    
+	console.log(weightMap)								    
+	console.log()									    
+										    
     
 /*										    
 	var req = new XMLHttpRequest();  
