@@ -23,8 +23,8 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
      var f32 = new Float32Array(buffer);     // or use a size	
      var myView = new DataView(f32.buffer);
     // var msbVal = view.getFloat32(0):  									    
-	console.log(await f32)									    
 										    
+      document.getElementById('myBinary').value = 'wow'										    
 										    
      const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
 												     
