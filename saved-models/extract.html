@@ -20,7 +20,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
 										    
 	var req = new XMLHttpRequest();  
     req.open('GET', document.getElementById('myBinaryFile').value);  
-    req.responseType = "arraybuffer";  
+    req.responseType = 'arraybuffer';  
     req.send();  
 
     req.onreadystatechange = function () {  
