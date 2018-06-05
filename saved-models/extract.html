@@ -23,7 +23,7 @@ const weightManifestUrl = document.getElementById('myInFile').value;
 const manifest = await fetch(weightManifestUrl);
 const weightManifest = await manifest.json();
 console.log()								    
-console.log(weightMap)								    
+console.log(weightManifest)								    
 console.log()									    
 			
 const weightMap = await tf.io.loadWeights(weightManifest, document.getElementById('myBinaryFile').value);										    
