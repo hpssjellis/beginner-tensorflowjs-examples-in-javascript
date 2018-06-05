@@ -20,13 +20,13 @@ Strange, the only way I can get this running is when tf.io.loadWeights() is inse
       const manifest = await fetch(weightManifestUrl);
       var weightManifest = await manifest.json();
 										    
-      weightManifest.weightsManifest[0].paths[0] = document.getElementById('myBinaryFile').value										    
+      //weightManifest.weightsManifest[0].paths[0] = document.getElementById('myBinaryFile').value										    
       console.log('Showing the weightManifest')								    
       console.log(weightManifest)									    
       console.log('URL to load weights')								    
       console.log(weightManifest.weightsManifest[0].paths[0])											    
 										    			
-      const weightMap = await tf.io.loadWeights( document.getElementById('myBinaryFile').value );									    									    
+      const weightMap = await tf.io.loadWeights(weightManifest, document.getElementById('myBinaryFile').value );									    									    
       console.log('Showing the weightMap')								
       console.log(weightMap)								    
 
