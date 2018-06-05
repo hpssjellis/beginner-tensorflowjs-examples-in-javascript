@@ -5,7 +5,8 @@ Should extract the binary files using the json file
 
 LOAD JSON URL <input id="myJsonFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
 Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
-Strange tf.io.loadWeights inserting the main URL<br>
+<br>
+Strange, the only way I can get this running is when tf.io.loadWeights() is inserting the main URL "https://hpssjellis.github.io/"<br>
 <input id="myButton4950" type="button" value="View Saved Weights and JSON" onclick="{
 
   const startTime = performance.now();
