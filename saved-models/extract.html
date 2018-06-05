@@ -18,7 +18,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
 
 										    
 										    
-const weightManifestUrl = document.getElementById('myBinaryFile').value;
+const weightManifestUrl = document.getElementById('myInFile').value;
 
 const manifest = await fetch(weightManifestUrl);
 const weightManifest = await manifest.json();
@@ -32,8 +32,8 @@ const weightMap = await tf.io.loadWeights(weightManifest, document.getElementByI
 	console.log(weightMap)								    
 	console.log()									    
 										    
-    
-/*										    
+/*    
+										    
 	var req = new XMLHttpRequest();  
     req.open('GET', document.getElementById('myBinaryFile').value);  
     req.responseType = 'arraybuffer';  
