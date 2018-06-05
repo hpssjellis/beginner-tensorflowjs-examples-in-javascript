@@ -18,19 +18,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
 
 										    
 										    
-const weightManifestUrl = document.getElementById('myInFile').value;
-
-const manifest = await fetch(weightManifestUrl);
-const weightManifest = await manifest.json();
-console.log()								    
-console.log(weightManifest)								    
-console.log()									    
-			
-const weightMap = await tf.io.loadWeights(weightManifest, document.getElementById('myBinaryFile').value);										    
-										    
-	console.log()								    
-	console.log(weightMap)								    
-	console.log()									    
+								    
 										    
 /*    
 										    
@@ -101,7 +89,25 @@ for (let myW=0; myW <= loadedModel6.getWeights().length-1;  myW++){
 		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[myW] + '<br><br>'											    
 }										     
 												     
-												     
+	
+										    
+const weightManifestUrl = document.getElementById('myInFile').value;
+
+const manifest = await fetch(weightManifestUrl);
+loadedModel6.weightManifest = await manifest.json();
+console.log()								    
+console.log(weightManifest)								    
+console.log()									    
+			
+const weightMap = await tf.io.loadWeights(loadedModel6.weightManifest, document.getElementById('myBinaryFile').value);										    
+										    
+	console.log()								    
+	console.log(weightMap)								    
+	console.log()											    
+										    
+										    
+										    
+										    
 			     
     const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const myPredictArray6 = await loadedModel6.predict(training_data6).data()
