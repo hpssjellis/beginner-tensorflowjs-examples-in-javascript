@@ -21,10 +21,10 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
      buffer = await fetch(document.getElementById('myBinaryFile').value)	 
      //var view = new DataView(buffer);        // flexible view supporting endianness
      var f32 = new Float32Array(await buffer);     // or use a size	
-     var myView = new DataView(f32.buffer);
-    // var msbVal = view.getFloat32(0):  									    
+     var myView = new DataView(await f32.buffer);
+    // var msbVal = view.getFloat32(0)  									    
 										    
-      document.getElementById('myBinary').value = await  f32[0]										    
+      document.getElementById('myBinary').value = await  myView.getFloat32(0)										    
 										    
      const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
 												     
