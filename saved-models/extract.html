@@ -27,9 +27,9 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
         if (req.readyState === 4) {  
             var buffer = req.response;  
             var dataView = new DataView(buffer);  
-            var ints = new Int32Array(dataView.byteLength / 4);  
+            var ints = new Float32Array(dataView.byteLength / 4);  
             for (var i = 0; i < ints.length; i++) {  
-                ints[i] = dataview.getInt32(i * 4);  
+                ints[i] = dataview.getFloat32(i * 4);  
             }  
         alert(ints[10]);  
         }  
