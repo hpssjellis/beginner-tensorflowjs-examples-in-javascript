@@ -30,20 +30,17 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 										    
 	   var output = '';
            for (var key in loadedModel6.getLayer('fred', x)._trainableWeights) {
-		//console.log(key)								    
+								    
                  output += loadedModel6.getLayer('fred', x)[key] + '\n\n'
 										    
-       //    for (let [key, value] of Object.entries(loadedModel6.getLayer('fred', x)._trainableWeights)){
-	 //        document.getElementById('myDiv4950').innerHTML += 'key =' + key+ ', value = ' + value + '<br>'									    
-         //   }  								    
+								    
 										    
             }
-           // document.getElementById('myDiv4950').innerHTML +=output + '<br>'									    
+								    
 	    document.getElementById('myLayers').value = loadedModel6.getWeights()
-	 // console.dir(output)									    
-		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[x] + '<br>'										    
+								    
+		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[x] + '<br><br>'										    
 										    
-	  // document.getElementById('myDiv4950').innerHTML += await JSON.Stringify(await loadedModel6.getLayer('unknown', x), null, 4) + '<br>'				     
        } catch(err) {
              break     // exit the for loop when no more layers
        }
