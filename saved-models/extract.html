@@ -19,7 +19,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
     
      var buffer = new ArrayBuffer(1024);    // some raw byte buffer									    
      buffer = await fetch(document.getElementById('myBinaryFile').value)
-     console.log(await buffer.json())	
+     console.log(await buffer.json)	
 										    
      //var view = new DataView(buffer);        // flexible view supporting endianness
      var f32 = new Float32Array(await buffer, 0);     // or use a size	
