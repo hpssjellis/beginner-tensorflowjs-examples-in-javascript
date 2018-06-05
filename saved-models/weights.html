@@ -3,6 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
 Should extract the binary files using the json file
 
+
 LOAD JSON URL <input id="myJsonFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
 Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="strange"><br>  
 <br>
@@ -39,13 +40,35 @@ instead of the URL https://hpssjellis.github.io/beginner-tensorflowjs-examples-i
   }
 
   setTimeout(function(){  myGo6() }, 10);   // wait a bit for the GUI to update	
-}">
-		
-	<br><br>
+}"><br><br>
 
 <div id='myDiv4950'>...</div><br><br>
 
-<textarea id="myLayers" rows=20 cols="100%"></textarea>
+<textarea id="myLayers" rows=5 cols="100%"></textarea><br><br>
 
+LOAD BASE URL <input id="myBaseURL" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models"><br><br>
 
+<input id="myButton4950" type="button" value="From TFJS" onclick="{
+                                                                                                                                                        
+  async function myGo6() {
+										    
+      const weightManifestUrl = document.getElementById('myJsonFile').value;
+
+      const manifest = await fetch(weightManifestUrl);
+      var weightManifest = await manifest.json();
+										   									    
+      console.log('Showing the weightManifest')								    
+      console.log(weightManifest)									    
+      console.log('URL to load weights')								    
+      console.log(weightManifest.weightsManifest[0].paths[0])											    
+										    			
+      const weightMap = await tf.io.loadWeights(weightManifest, document.getElementById('myBaseURL').value );									    									    
+      console.log('Showing the weightMap')								
+      console.log(weightMap)								    
+	
+      document.getElementById('myLayers').value =  JSON.stringify(weightMap, null, 4)												                    
+  }
+
+  setTimeout(function(){  myGo6() }, 10);   // wait a bit for the GUI to update	
+}"><br><br>
 
