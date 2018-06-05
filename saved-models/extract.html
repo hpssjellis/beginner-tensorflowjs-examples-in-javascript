@@ -98,12 +98,12 @@ var weightManifest = await manifest.json();
 										    
 console.log()								    
 console.log(weightManifest)								    
-console.log()	
+console.log(weightManifest.weightsManifest[0].paths[0])	
 										    
 weightManifest.weightsManifest[0].paths[0] = document.getElementById('myBinaryFile').value										    
 console.log()								    
 console.log(weightManifest)								    
-console.log()											    
+console.log(weightManifest.weightsManifest[0].paths[0])											    
 										    
 			
 const weightMap = await tf.io.loadWeights(weightManifest.weightsManifest);										    
