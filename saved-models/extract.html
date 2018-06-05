@@ -94,13 +94,13 @@ for (let myW=0; myW <= loadedModel6.getWeights().length-1;  myW++){
 const weightManifestUrl = document.getElementById('myInFile').value;
 
 const manifest = await fetch(weightManifestUrl);
-var weightsManifest = await manifest.json();
+var weightManifest = await manifest.json();
 myBinFile = document.getElementById('myBinaryFile').value									    
 console.log()								    
-console.log(weightsManifest)								    
+console.log(weightManifest)								    
 console.log()									    
 			
-const weightMap = await tf.io.loadWeights(weightsManifest, myBinFile);										    
+const weightMap = await tf.io.loadWeights(weightManifest.weightsManifest, myBinFile);										    
 										    
 	console.log()								    
 	console.log(weightMap)								    
