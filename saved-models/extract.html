@@ -91,7 +91,7 @@ for (let myW=0; myW <= loadedModel6.getWeights().length-1;  myW++){
 												     
 	
 										    
-//const weightManifestUrl = document.getElementById('myInFile').value;
+const weightManifestUrl = document.getElementById('myInFile').value;
 
 const manifest = await fetch(weightManifestUrl);
 var weightsManifest = await manifest.json();
