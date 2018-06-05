@@ -39,7 +39,7 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
 								    
 	    document.getElementById('myLayers').value = loadedModel6.getWeights()
 								    
-		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[x] + '<br><br>'										    
+									    
 										    
        } catch(err) {
              break     // exit the for loop when no more layers
@@ -48,7 +48,9 @@ LOAD URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.g
    }
 
 
-										     
+for (let myW=0; myW <= loadedModel6.getWeights().length;  myW++){
+		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[myW] + '<br><br>'											    
+}										     
 												     
 												     
 			     
