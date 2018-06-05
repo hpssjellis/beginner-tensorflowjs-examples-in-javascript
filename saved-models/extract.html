@@ -4,7 +4,7 @@
 Should extract the binary files using the json file
 
 LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
-Load Binary  URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
+Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
 
 
 <input id="myButton4950" type="button" value="View Saved Weights and JSON" onclick="{
@@ -15,13 +15,16 @@ Load Binary  URL <input id="myInFile" type="text" size="120" value="https://hpss
                                                                                                                                                         
   async function myGo6() {
 			
-    const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
-												     
-	console.log('weights start')											     
-	console.log(await loadedModel6.getWeights() )									     
-	console.log(await loadedModel6.getWeights()[0] )											     								     
-	console.log('weights end')												     
-			    
+     const loadBinary = await fetch(document.getElementById('myBinaryFile').value)
+
+   document.getElementById('myBinary').value = await loadBinary
+										    
+										    
+										    
+										    
+										    
+     const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
+										    
      myIncoming =  await fetch(document.getElementById('myInFile').value)
      myJ = await myIncoming.json()
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
