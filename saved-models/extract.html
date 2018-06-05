@@ -17,6 +17,28 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
   async function myGo6() {
 		
     
+										    
+	var req = new XMLHttpRequest();  
+    req.open('GET', document.getElementById('myBinaryFile').value);  
+    req.responseType = "arraybuffer";  
+    req.send();  
+
+    req.onreadystatechange = function () {  
+        if (req.readyState === 4) {  
+            var buffer = req.response;  
+            var dataView = new DataView(buffer);  
+            var ints = new Int32Array(dataView.byteLength / 4);  
+            for (var i = 0; i < ints.length; i++) {  
+                ints[i] = dataview.getInt32(i * 4);  
+            }  
+        alert(ints[10]);  
+        }  
+    }  									    
+										    
+										    
+										    
+										    
+										    
      var buffer = new ArrayBuffer(1024);    // some raw byte buffer									    
      buffer = await fetch(document.getElementById('myBinaryFile').value)
      //console.log(await buffer.json)	
