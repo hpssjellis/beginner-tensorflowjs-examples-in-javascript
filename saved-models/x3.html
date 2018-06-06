@@ -1,12 +1,8 @@
-
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
-<script>
-                                                                                                                                                        
-  let myInline = (async function myGo6() {
-							    								    
+<script>                                                                                                                                                       
+  let myInline = (async function myGo6() {							    								    
      const loadedModel6 = await	 tf.loadModel("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json")
-     document.getElementById('myWeights').value = loadedModel6.getWeights()
-     
+     document.getElementById('myWeights').value = loadedModel6.getWeights()    
      })()
  </script>
 <textarea id="myWeights" rows=10 cols="100%"></textarea><br><br>
