@@ -30,3 +30,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 Possible validity check
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x5.html
+
+
+Output json test  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x6.html
