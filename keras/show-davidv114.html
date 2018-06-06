@@ -127,7 +127,7 @@ model = tf.model({ inputs: wordVector, outputs: output })   // madde global
 
 // sample shape: [batch, sequence, feature], here is [1, number of words, 1]
 predict = (samples) => {      // made global
-    return model.predict(samples)
+    return model.predict(samples, 'int32')
 }
 
 loss = (labels, predictions) => {    // made global
