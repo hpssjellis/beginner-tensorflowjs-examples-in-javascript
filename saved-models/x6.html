@@ -3,7 +3,7 @@
   let myInline = (async function myGo6() {							    								    
      const loadedModel6 = await	 tf.loadModel("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json")
      //document.getElementById('myWeights').value =  JSON.stringify(Array.from(loadedModel6.getWeights()))     
-     document.getElementById('myWeights').value = loadedModel6.getLayer('fred', 0)     
+     document.getElementById('myWeights').value = JSON.stringify(loadedModel6.getLayer('fred', 0) )    
      })()
  </script>
 <textarea id="myWeights" rows=10 cols="100%"></textarea><br>
