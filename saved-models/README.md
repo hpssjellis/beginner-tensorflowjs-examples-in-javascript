@@ -10,3 +10,13 @@ Working on just the weights
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/weights.html
 
+Just testing   
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x1.html
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x2.html
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x3.html
