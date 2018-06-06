@@ -127,7 +127,7 @@ model = tf.model({ inputs: wordVector, outputs: output })   // madde global
 
 // sample shape: [batch, sequence, feature], here is [1, number of words, 1]
 predict = (samples) => {      // made global
-    return model.predict(samples, 'int32')
+    return model.predict(samples)
 }
 
 loss = (labels, predictions) => {    // made global
@@ -186,7 +186,7 @@ const train = async (numIterations) => {
         // loss.
         lossValue = optimizer.minimize(() => {
             // Feed the examples into the model
-            samplesTensor = tf.tensor(samples, [1, examinedNumberOfWord, 1],'int32')
+            samplesTensor = tf.tensor(samples, [1, examinedNumberOfWord, 1],'float32')
             pred = predict(samplesTensor);
             losse = loss(labelProbVector, pred);
             return losse
