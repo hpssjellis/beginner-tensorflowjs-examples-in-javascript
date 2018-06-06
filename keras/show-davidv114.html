@@ -186,7 +186,7 @@ const train = async (numIterations) => {
         // loss.
         lossValue = optimizer.minimize(() => {
             // Feed the examples into the model
-            samplesTensor = tf.tensor(samples, [1, examinedNumberOfWord, 1],'float32')
+            samplesTensor = tf.tensor(samples, [1, examinedNumberOfWord, 1],'int32')
             pred = predict(samplesTensor);
             losse = loss(labelProbVector, pred);
             return losse
