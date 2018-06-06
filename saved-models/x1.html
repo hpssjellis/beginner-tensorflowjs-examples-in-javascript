@@ -1,10 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
 <script>
-  async function myGo6() {
+  let myInline2 = (async function() {	
       const manifest = await fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json");
       var weightManifest = await manifest.json();								    										    			
-      const weightMap = await tf.io.loadWeights(weightManifest.weightsManifest, 'strange' );      
+      const weightMap = await tf.io.loadWeights(weightManifest.weightsManifest, "strange" );      
       document.getElementById('myLayers').value =  JSON.stringify(weightMap, null, 4)												                     
-  }
+  } )()
 </script>
 <textarea id="myLayers" rows=5 cols="100%"></textarea><br><br>
