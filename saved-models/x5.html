@@ -10,7 +10,7 @@ Load any Tensorflowjs saved model JSON file by url<br>
         const loadedModel6 = await tf.loadModel(document.getElementById('myInFile').value)
         document.getElementById('myWeights').value = loadedModel6.getWeights() 
      } catch(myError) {
-        document.getElementById('myWeights').value = 'The data may be invalid! File Load Error : ' + myError
+        document.getElementById('myWeights').value = 'The data may be invalid!\n Check console for any extra information\n File Load Error : ' + myError
      }                                                                                 
 
    })()
