@@ -4,7 +4,7 @@
       const manifest = await fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json");
       var weightManifest = await manifest.json();		
     console.log(weightManifest)
-      const weightMap = await tf.io.loadWeights(weightManifest.weightsManifest, "https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models" );									    									    
+      const weightMap = await tf.io.loadWeights(weightManifest.modelTopology, "https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models" );									    									    
       document.getElementById('myLayers2').value =  JSON.stringify(weightMap, null, 4)												                    
   } )()
 </script>
