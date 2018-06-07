@@ -2,7 +2,8 @@
 Extract weights for consistent float32 Tensorflowjs saved model binary url <br>
 <input id="myBinaryFile" type="text" size="100%" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br><br>
 
-<script>                                                                                                                                                       
+
+<input id="myButton4950" type="button" value="Extract Weights in JSON format" onclick="{                                                                                                                                                       
   let myInline = (async function () {							    								    
      const myBinaryFile = await	fetch(document.getElementById('myBinaryFile').value)    
      const myBuffer =await  myBinaryFile.arrayBuffer() 
@@ -18,5 +19,5 @@ Extract weights for consistent float32 Tensorflowjs saved model binary url <br>
      const myWeightsJSON = JSON.stringify(f32,null,4)  	  
      document.getElementById('myWeights').value =  myWeightsJSON 
      })()
- </script>
+}"><br>
 <textarea id="myWeights" rows=15 cols="50"></textarea><br>
