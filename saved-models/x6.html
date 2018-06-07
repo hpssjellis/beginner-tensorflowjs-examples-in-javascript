@@ -15,17 +15,22 @@ console.log(fAry)
     
     
 //  var fa = new Float32Array(64);
-var ba = new Uint8Array(fAry.buffer, 0, Float32Array.BYTES_PER_ELEMENT);   
-    console.log(ba)
+//var ba = new Uint8Array(fAry.buffer, 0, Float32Array.BYTES_PER_ELEMENT);   
+//    console.log(ba)
     
+ /*   
+ var dv = new DataView(buffer);
+var f32 = new Float32Array(buffer.byteLength / 4);
+var littleEndian = true;
+for (var i = 0; i<f32.length; i++) {
+  f32[i] = dv.getFloat32(i*4, littleEndian);
+}   
     
-    
-    
-    
+ */   
     
    //   var myFloatData = new Float32Array(await myData);
    //  console.log(await myFloatData)
-     document.getElementById('myWeights').value =  await myData   
+     document.getElementById('myWeights').value =  await myData.buffer   
     // document.getElementById('myWeights').value = JSON.stringify(loadedModel6.getLayer('fred', 0) )    
      })()
  </script>
