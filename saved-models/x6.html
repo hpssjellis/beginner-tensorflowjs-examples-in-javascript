@@ -1,8 +1,12 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
 <script>                                                                                                                                                       
   let myInline = (async function myGo6() {							    								    
-     const loadedModel6 = await	 tf.loadModel("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json")
-     document.getElementById('myWeights').value =  JSON.stringify(Array.from(loadedModel6.getWeights()))     
+     const myBinaryFile = await	 fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin")
+    
+     myBinaryFile.responseType = 'arraybuffer';
+      var myFloatData = new Float32Array(myBinaryFile);
+     console.log(myFloatData)
+     document.getElementById('myWeights').value =  myFloatData    
     // document.getElementById('myWeights').value = JSON.stringify(loadedModel6.getLayer('fred', 0) )    
      })()
  </script>
