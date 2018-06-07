@@ -15,7 +15,7 @@ Extract weights for consistent float32 Tensorflowjs saved model binary url <br>
         f32[i] = dv.getFloat32(i*4, littleEndian);
      }   
 
-     const myWeightsJSON = await JSON.stringify(f32,null,4)  	  
+     const myWeightsJSON = JSON.stringify(f32,null,4)  	  
      document.getElementById('myWeights').value =  myWeightsJSON 
      })()
  </script>
