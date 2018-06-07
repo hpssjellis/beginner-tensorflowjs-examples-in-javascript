@@ -2,7 +2,7 @@
 <script>                                                                                                                                                       
   let myInline = (async function myGo6() {							    								    
      const myBinaryFile = await	fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin")
-
+ /* 
     var myData = await myBinaryFile.blob()
         console.log( await myData) 
     
@@ -17,16 +17,18 @@ console.log(fAry)
 //  var fa = new Float32Array(64);
 //var ba = new Uint8Array(fAry.buffer, 0, Float32Array.BYTES_PER_ELEMENT);   
 //    console.log(ba)
-    
- /*   
- var dv = new DataView(buffer);
+  */ 
+     
+     
+  
+ var dv = new DataView(myBinaryFile);
 var f32 = new Float32Array(buffer.byteLength / 4);
 var littleEndian = true;
 for (var i = 0; i<f32.length; i++) {
   f32[i] = dv.getFloat32(i*4, littleEndian);
 }   
     
- */   
+  console.log(f32)
     
    //   var myFloatData = new Float32Array(await myData);
    //  console.log(await myFloatData)
