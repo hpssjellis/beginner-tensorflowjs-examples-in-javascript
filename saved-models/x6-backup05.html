@@ -1,0 +1,22 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
+Extract weights for consistent float32 Tensorflowjs saved model binary url <br>
+<input id="myBinaryFile" type="text" size="100%" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br><br>
+
+<script>                                                                                                                                                       
+  let myInline = (async function () {							    								    
+     const myBinaryFile = await	fetch(document.getElementById('myBinaryFile').value)    
+     const myBuffer =await  myBinaryFile.arrayBuffer() 
+     
+     const dv = new DataView(myBuffer);
+     var f32 = new Float32Array(myBuffer.byteLength / 4);
+     const littleEndian = true;
+	  
+     for (let i = 0; i < f32.length; i++) {
+        f32[i] = dv.getFloat32(i*4, littleEndian);
+     }   
+
+     const myWeightsJSON = JSON.stringify(f32,null,4)  	  
+     document.getElementById('myWeights').value =  myWeightsJSON 
+     })()
+ </script>
+<textarea id="myWeights" rows=15 cols="50"></textarea><br>
