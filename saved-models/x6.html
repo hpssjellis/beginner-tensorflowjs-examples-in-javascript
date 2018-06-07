@@ -7,6 +7,21 @@
         console.log( await myData) 
     
     
+  	fLen	= myData.length / Float32Array.BYTES_PER_ELEMENT,						// How many floats can be made, but be even
+	dView	= new DataView( new ArrayBuffer(Float32Array.BYTES_PER_ELEMENT) ),	// ArrayBuffer/DataView to convert 4 bytes into 1 float.
+	fAry	= new Float32Array(fLen),											// Final Output at the correct size
+console.log(fAry)  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
       var myFloatData = new Float32Array(await myData);
      console.log(await myFloatData)
      document.getElementById('myWeights').value =  await myData   
