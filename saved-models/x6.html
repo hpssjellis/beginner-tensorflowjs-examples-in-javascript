@@ -2,15 +2,15 @@
 <script>                                                                                                                                                       
   let myInline = (async function () {							    								    
      const myBinaryFile = await	fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin")    
-     var myBuffer = await  myBinaryFile.arrayBuffer()     
-     var dv = new DataView(myBuffer);
+     const myBuffer = await  myBinaryFile.arrayBuffer() 
+     
+     const dv = new DataView(myBuffer);
      var f32 = new Float32Array(myBuffer.byteLength / 4);
-     var littleEndian = true;
+     const littleEndian = true;
 	  
-     for (var i = 0; i<f32.length; i++) {
+     for (let i = 0; i < f32.length; i++) {
         f32[i] = dv.getFloat32(i*4, littleEndian);
      }   
-
      document.getElementById('myWeights').value =  await  JSON.stringify(f32,null,4)   
      })()
  </script>
