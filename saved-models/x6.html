@@ -19,10 +19,10 @@ console.log(fAry)
 //    console.log(ba)
   */ 
      
-     
+ var myBuffer = await  myBinaryFile.arrayBuffer()   
   
- var dv = new DataView(await myBinaryFile.arrayBuffer());
-var f32 = new Float32Array(buffer.byteLength / 4);
+ var dv = new DataView(myBuffer);
+var f32 = new Float32Array(myBuffer.byteLength / 4);
 var littleEndian = true;
 for (var i = 0; i<f32.length; i++) {
   f32[i] = dv.getFloat32(i*4, littleEndian);
