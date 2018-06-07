@@ -34,3 +34,10 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 Output json test  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x6.html
+
+
+console test
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/x7.html
+
+
