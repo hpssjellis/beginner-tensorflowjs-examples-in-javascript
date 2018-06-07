@@ -1,7 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.4"> </script> 
+Extract the wedights from any Tensorflowjs saved model binary url<br>
+<input id="myBinaryFile" type="text" size="100%" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br><br>
+
 <script>                                                                                                                                                       
   let myInline = (async function () {							    								    
-     const myBinaryFile = await	fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin")    
+     const myBinaryFile = await	fetch(document.getElementById('myBinaryFile').value)    
      const myBuffer = await  myBinaryFile.arrayBuffer() 
      
      const dv = new DataView(myBuffer);
