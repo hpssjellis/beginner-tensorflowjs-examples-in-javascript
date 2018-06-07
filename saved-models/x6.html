@@ -6,7 +6,7 @@
      myBinaryFile.responseType = 'arraybuffer';
       var myFloatData = new Float32Array(myBinaryFile);
      console.log(myFloatData)
-     document.getElementById('myWeights').value =  myFloatData    
+     document.getElementById('myWeights').value =  myFloatData[0]    
     // document.getElementById('myWeights').value = JSON.stringify(loadedModel6.getLayer('fred', 0) )    
      })()
  </script>
