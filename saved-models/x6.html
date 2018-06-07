@@ -8,9 +8,9 @@
     var myData = await myBinaryFile.Float32Array()
         console.log( await myData) 
     
-      var myFloatData = new Float32Array(await myBinaryFile);
-     console.log(await myFloatData)
-     document.getElementById('myWeights').value =  await myFloatData   
+     // var myFloatData = new Float32Array(await myBinaryFile);
+    // console.log(await myFloatData)
+     document.getElementById('myWeights').value =  await myData   
     // document.getElementById('myWeights').value = JSON.stringify(loadedModel6.getLayer('fred', 0) )    
      })()
  </script>
