@@ -3,12 +3,12 @@
   let myInline = (async function myGo6() {							    								    
      const myBinaryFile = await	 fetch("https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin")
     
-     //myBinaryFile.responseType = 'arraybuffer';
+     myBinaryFile.responseType = 'arraybuffer';
     var myData = await myBinaryFile.blob()
         console.log( await myData) 
     
-    //  var myFloatData = new Float32Array(await myBinaryFile);
-   //  console.log(myFloatData)
+      var myFloatData = new Float32Array(await myBinaryFile);
+     console.log(await myFloatData)
    //  document.getElementById('myWeights').value =  myFloatData[0]    
     // document.getElementById('myWeights').value = JSON.stringify(loadedModel6.getLayer('fred', 0) )    
      })()
