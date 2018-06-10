@@ -1,0 +1,216 @@
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script> 
+
+ 
+
+<input id="myButton123" type="button" value="Tensorflowjs Version?" onclick="{
+
+
+
+      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs  
+
+
+
+                                                         
+}"><br><br>
+
+<div id='myDiv123'>...</div><br>
+
+
+
+return doSomething(foo).then(function(result) {
+  // ...
+}).then(function(result2) {
+  // ...
+}).then(function(result3) {
+  // ...
+}).catch(function(error) {
+  // ...
+}).finally(function() {
+  // ...
+});
+
+
+
+
+getPromise()
+    .then(function(response) {
+         return response.body;
+    })
+    .then(function(body) {
+         return body.user;
+    });
+
+
+
+
+
+fetch('/article/promise-chaining/user.json')
+  // .then below runs when the remote server responds
+  .then(function(response) {
+    // response.text() returns a new promise that resolves with the full response text
+    // when we finish downloading it
+    return response.text();
+  })
+  .then(function(text) {
+    // ...and here's the content of the remote file
+    alert(text); // {"name": "iliakan", isAdmin: true}
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+ 
+var firstMethod = function() {
+   var promise = new Promise(function(resolve, reject){
+      setTimeout(function() {
+         console.log('first method completed');
+         resolve({data: '123'});
+      }, 2000);
+   });
+   return promise;
+};
+ 
+ 
+var secondMethod = function(someStuff) {
+   var promise = new Promise(function(resolve, reject){
+      setTimeout(function() {
+         console.log('second method completed');
+         resolve({newData: someStuff.data + ' some more data'});
+      }, 2000);
+   });
+   return promise;
+};
+ 
+var thirdMethod = function(someStuff) {
+   var promise = new Promise(function(resolve, reject){
+      setTimeout(function() {
+         console.log('third method completed');
+         resolve({result: someStuff.newData});
+      }, 3000);
+   });
+   return promise;
+};
+ 
+firstMethod()
+   .then(secondMethod)
+   .then(thirdMethod);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function doubleAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x * 2);
+    }, 2000);
+  });
+}
+
+function addPromise(x){
+  return new Promise(resolve => {
+    doubleAfter2Seconds(10).then((a) => {
+      doubleAfter2Seconds(20).then((b) => {
+        doubleAfter2Seconds(30).then((c) => {
+          resolve(x + a + b + c);
+      	})
+      })
+    })
+  });
+}
+
+addPromise(10).then((sum) => {
+  console.log(sum);
+});
+
+
+
+
+
+
+function doubleAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x * 2);
+    }, 2000);
+  });
+}
+
+async function addAsync(x) {
+  const a = await doubleAfter2Seconds(10);
+  const b = await doubleAfter2Seconds(20);
+  const c = await doubleAfter2Seconds(30);
+  return x + a + b + c;
+}
+
+
+addAsync(10).then((sum) => {
+  console.log(sum);
+});
