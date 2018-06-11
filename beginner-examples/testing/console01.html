@@ -1,0 +1,53 @@
+<script>
+// remove both script tags to copy paste and run in the console (ctrl-shift-I to open console) 
+
+// copy from here to the cosole
+
+
+
+// load tensorflow
+
+var myScript = document.createElement('script')
+myScript.type = 'text/javascript'
+myScript.src = 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.5'   // check the latest version at   https://github.com/tensorflow/tfjs/releases
+document.head.appendChild(myScript)
+
+
+
+
+
+
+window.addEventListener('load', function () {
+   var myDiv = document.createElement('div');
+   myDiv.innerHTML = "..dghdfghdfg.";
+   myDiv.id = "myDiv223";
+   document.body.appendChild(myDiv);
+
+//alert('This version of Tensorflowjs = ' + tf.version.tfjs )    
+
+
+
+
+
+// Do some matrix addition
+
+(async function (){                                                             
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], shape=[2, 3]);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv223').innerHTML =   'Shape = '+ myResult.shape + ', data is ' + await myResult.data()
+})()
+    
+ 
+
+
+});
+
+
+   
+// stop copying to the console
+
+
+// remove both script tags to copy paste and run in the console (ctrl-shift-I to open console) 
+</script>
