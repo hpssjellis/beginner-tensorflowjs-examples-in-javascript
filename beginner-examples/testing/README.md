@@ -1,6 +1,14 @@
 
 
 
+console  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/testing/console01.html
+
+
+
+
+
+
 now with URL
 
 
