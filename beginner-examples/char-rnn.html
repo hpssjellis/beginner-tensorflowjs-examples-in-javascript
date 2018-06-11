@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10"></script>
+
+    <title>CHAR-RNN</title>
+
+    
+ <script>   
+    
+    
+ 
+   
+ 
+console.log('Tensorflowjs version = '+tf.version.tfjs )
+inputText = `long ago , the mice had a general council to consider what measures they could take to outwit their common enemy , the cat . some said this , and some said that but at last a young mouse got up and said he had a proposal to make , which he thought would meet the case . you will all agree , said he , that our chief danger consists in the sly and treacherous manner in which the enemy approaches us . now , if we could receive some signal of her approach , we could easily escape from her . i venture , therefore , to propose that a small bell be procured , and attached by a ribbon round the neck of the cat . by this means we should always know when she was about , and could easily retire while she was in the neighbourhood . this proposal met with general applause , until an old mouse got up and said that is all very well , but who is to bell the cat ? the mice looked at one another and nobody spoke . then the old mouse said it is easy to propose impossible remedies .`
+
+numIterations = 1000    // 20000    // made it global
+const learning_rate = 0.001
+const rnn_hidden = 64
+const preparedDataforTestSet = inputText.split(' ')
+const examinedNumberOfWord = 6
+const endOfSeq = preparedDataforTestSet.length - (examinedNumberOfWord + 1)
+const optimizer = tf.train.rmsprop(learning_rate)
+//let chart
+let stop_training = false
+
+DonethisFunction = 'start'
+
+
+// preparing data
+
+async function myPrep(){
+const createWordMap = (textData) => {
+    const wordArray = textData.split(' ')
+    const countedWordObject = wordArray.reduce((acc, cur, i) => {
+        if (acc[cur] === undefined) {
+            acc[cur] = 1
+        } else {
+            acc[cur] += 1
+        }
+        return acc
+    }, {})
+
+    const arraOfshit = []
+    for (let key in countedWordObject) {
+        arraOfshit.push({ word: key, occurence: countedWordObject[key] })
+    }
+
+    const wordMap = _.sortBy(arraOfshit, 'occurence').reverse().map((e, i) => {
+        e['code'] = i
+        return e
+    })
+
+    return wordMap
+
+}
+
+
+
+
+const wordMap = createWordMap(inputText)
+const wordMapLength = Object.keys(wordMap).length
+
+console.log(`
+    Number of unique words:  ${wordMapLength}
+    Length of examined text: ${preparedDataforTestSet.length}
+`)
+
+
+// return a word
+fromSymbol = (symbol) => {  //made global
+    const object = wordMap.filter(e => e.code === symbol)[0]
+    
+
+    return object.word
+}
+
+// return a symbol
+toSymbol = (word) => {       // made global
+    const object = wordMap.filter(e => e.word === word)[0]
+    return object.code
+}
+
+// return onehot vector, for compare with probability distribution vector
+encode = (symbol) => {           // made global
+    // console.log(symbol)
+    return tf.tidy(() => {
+        const symbolTensor1d = tf.tensor1d(symbol)
+        return tf.oneHot(symbolTensor1d, wordMapLength)
+      
+    })
+}
+
+// return a symbol
+decode = (probDistVector) => {     // made global
+    // It could be swithced to tf.argMax(), but I experiment with values below treshold.
+    const probs = probDistVector.softmax().dataSync()
+    const maxOfProbs = _.max(probs)
+    const probIndexes = []
+
+    for (let prob of probs) {
+        if (prob > (maxOfProbs - 0.3)) {
+            probIndexes.push(probs.indexOf(prob))
+        }
+    }
+    DonethisFunction = 'decode'
+    return probIndexes[_.random(0, probIndexes.length - 1)]
+}
+
+
+// building the model
+const wordVector = tf.input({ shape: [examinedNumberOfWord, 1] });
+const cells = [
+    tf.layers.lstmCell({ units: rnn_hidden }),
+    // tf.layers.lstmCell({ units: rnn_hidden }),
+];
+const rnn = tf.layers.rnn({ cell: cells, returnSequences: false });
+
+const rnn_out = rnn.apply(wordVector);
+const output = tf.layers.dense({ units: wordMapLength, useBias: true }).apply(rnn_out)
+
+model = tf.model({ inputs: wordVector, outputs: output })   // madde global
+
+
+// sample shape: [batch, sequence, feature], here is [1, number of words, 1]
+predict = (samples) => {      // made global
+    return model.predict(samples)
+}
+
+loss = (labels, predictions) => {    // made global
+    return tf.losses.softmaxCrossEntropy(labels, predictions).mean();
+}
+
+// performance could be improved if toSymbol the whole set
+// then random select from encodings not from string of arrays
+getSamples = () => {       // made a global variable
+    const startOfSeq = _.random(0, endOfSeq, false)
+    const retVal = preparedDataforTestSet.slice(startOfSeq, startOfSeq + (examinedNumberOfWord + 1))
+    DonethisFunction = 'getSamples'
+    return retVal
+}
+
+
+
+console.log('Done so far : '+DonethisFunction)
+document.getElementById('myLoadButton').style.backgroundColor = 'lightGrey'  
+document.getElementById('myDiv01').innerHTML = 'Done Loading Data...........................'
+
+}   // end myPrep() function
+
+const train = async (numIterations) => {
+
+    let lossCounter = null
+
+    for (let iter = 0; iter < numIterations; iter++) {
+
+        let labelProbVector
+        let lossValue
+        let pred
+        let losse
+        let samplesTensor
+
+        const samples = getSamples().map(s => {
+            return toSymbol(s)
+        })
+
+        labelProbVector = encode(samples.splice(-1))
+
+        if (stop_training) {
+            stop_training = false
+            numIterations = 0
+            break
+        }
+
+        // optimizer.minimize is where the training happens. 
+
+        // The function it takes must return a numerical estimate (i.e. loss) 
+        // of how well we are doing using the current state of
+        // the variables we created at the start.
+
+        // This optimizer does the 'backward' step of our training process
+        // updating variables defined previously in order to minimize the
+        // loss.
+        lossValue = optimizer.minimize(() => {
+            // Feed the examples into the model
+            samplesTensor = tf.tensor(samples, [1, examinedNumberOfWord, 1])
+            pred = predict(samplesTensor);
+            losse = loss(labelProbVector, pred);
+            return losse
+        }, true);
+
+        if (lossCounter === null) {
+            lossCounter = lossValue.dataSync()[0]
+        }
+        lossCounter += lossValue.dataSync()[0]
+
+
+        if (iter % 100 === 0 && iter > 50) {
+            const lvdsy = lossCounter / 100
+            lossCounter = 0
+            console.log(`
+            --------
+            Step number: ${iter}
+            The average loss is (last 100 steps):  ${lvdsy}
+            Number of tensors in memory: ${tf.memory().numTensors}
+            --------`)
+          document.getElementById('myDiv01').innerHTML = 'Step : ' + iter+' / ' + numIterations + ', Loss = ' + lvdsy
+
+        }
+
+        // Use tf.nextFrame to not block the browser.
+        await tf.nextFrame();
+        pred.dispose()
+        labelProbVector.dispose()
+        lossValue.dispose()
+        losse.dispose()
+        samplesTensor.dispose()
+    }
+}
+
+const learnToGuessWord = async () => {
+    console.log('TRAINING START')
+
+
+
+    await train(numIterations);
+
+    console.log('TRAINING IS OVER')
+
+    const symbolCollector = _.shuffle(getSamples()).map(s => {
+        return toSymbol(s)
+    })
+
+    
+
+    for (let i = 0; i < document.getElementById('myWords').value; i++) {
+        const predProbVector = predict(tf.tensor(symbolCollector.slice(-examinedNumberOfWord), [1, examinedNumberOfWord, 1]))
+        symbolCollector.push(decode(predProbVector));
+    }
+
+    const generatedText = symbolCollector.map(s => {
+        return fromSymbol(s)
+    }).join(' ')
+
+    console.log(generatedText)
+    document.getElementById('myDiv01').innerHTML = generatedText
+    document.getElementById('myTrainButton').style.backgroundColor = 'lightgray' 
+    document.getElementById('myStopButton').style.backgroundColor = 'lightgray' 
+}  
+   
+   
+   
+</script>
+  </head>
+  <body>
+    <h1>char-RNN</h1>
+    Original Char-RNN by<a href="https://github.com/karpathy/char-rnn"> Andrej Karpathy </a><br><br>
+    Which I had a lot of fun with in 2016 making Shakespeare, Music and 3D Printing by <a href="http://rocksetta.com/tensorflow-teacher/3d-print-tensorflow/">Jeremy Ellis</a> <br><br>   
+    Original for tensorflowjs by <a href="https://github.com/HorvathDavid/LSTM-tensorflowjs-example">David Horvath </a><br><br>
+    
+
+    <script> var exports = {}; </script>
+
+    <textarea id="myBlurb" rows=12 cols="100%">long ago , the mice had a general council to consider what measures they could take to outwit their common enemy , the cat . some said this , and some said that but at last a young mouse got up and said he had a proposal to make , which he thought would meet the case . you will all agree , said he , that our chief danger consists in the sly and treacherous manner in which the enemy approaches us . now , if we could receive some signal of her approach , we could easily escape from her . i venture , therefore , to propose that a small bell be procured , and attached by a ribbon round the neck of the cat . by this means we should always know when she was about , and could easily retire while she was in the neighbourhood . this proposal met with general applause , until an old mouse got up and said that is all very well , but who is to bell the cat ? the mice looked at one another and nobody spoke . then the old mouse said it is easy to propose impossible remedies .</textarea>
+    <br>
+    <input type=button id="myLoadButton" value="Load" onclick="{                                                               
+      document.getElementById('myLoadButton').style.backgroundColor = 'red'            
+      inputText = document.getElementById('myBlurb').value     // Grab the textarea  
+      document.getElementById('myDiv01').innerHTML = 'Loading the data...'                                                         
+      setTimeout(function(){ myPrep() }, 10);                                                          
+      
+    
+    }"> Can take a while depending on your computer speed<br><br>
+    
+    Training Iterations: <input type=number id="myIter" style="width:100px" value=1000>(Original was 20000 but that takes a while)<br><br>
+    
+    <input type=button id="myTrainButton" value="Train or Train more" onclick="{                                                                                                               
+      document.getElementById('myTrainButton').style.backgroundColor = 'red'  
+      stop_training = false
+      numIterations = document.getElementById('myIter').value   
+      document.getElementById('myDiv01').innerHTML = 'Training the Data...'
+      
+      setTimeout(function(){ learnToGuessWord() }, 10);          
+    }"> <br><br>
+ 
+    
+    
+    
+     <input type=button  value="Peek" onclick="{                                                                                                                                     
+      stop_training = true
+      document.getElementById('myDiv01').innerHTML = 'Showing the output and continuing to train'                                                                             
+      learnToGuessWord()  
+    }"> <br><br>
+    
+       
+    
+    
+    
+    
+  Output Batches of 30 Characters: <input type=number id="myWords" style="width:40px" value=50><br>
+    
+    <input type=button id="myStopButton" value="Stop Training or Show Again" onclick="{                                                                                                                                     
+      document.getElementById('myStopButton').style.backgroundColor = 'red'  
+      stop_training = true
+      document.getElementById('myDiv01').innerHTML = 'Showing the Output ...'      
+      numIterations = 0          // my hack to stop it                                                                          
+      setTimeout(function(){ learnToGuessWord() }, 10);   
+    }"> <br><br>
+    
+    
+    
+    <div id="myDiv01">...</div>
+    
+    
+    
+    
+  </body>
+</html>
