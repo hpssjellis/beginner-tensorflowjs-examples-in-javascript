@@ -277,12 +277,12 @@ class AdditionRNNDemo {
       const trainAccuracy = history.history['acc'][0];
       const valLoss = history.history['val_loss'][0];
       const valAccuracy = history.history['val_acc'][0];
-      document.getElementById('trainStatus').textContent =
-          `Iteration ${i}: train loss = ${trainLoss.toFixed(6)}; ` +
-          `train accuracy = ${trainAccuracy.toFixed(6)}; ` +
-          `validation loss = ${valLoss.toFixed(6)}; ` +
-          `validation accuracy = ${valAccuracy.toFixed(6)} ` +
-          `(${examplesPerSec.toFixed(1)} examples/s)`;
+      document.getElementById('trainStatus').innerHTML =
+          `Iteration ${i}: train loss = ${trainLoss.toFixed(6)}; <br>` +
+          `train accuracy = ${trainAccuracy.toFixed(6)};  <br>` +
+          `validation loss = ${valLoss.toFixed(6)};  <br>` +
+          `validation accuracy = ${valAccuracy.toFixed(6)}  <br>` +
+          `(${examplesPerSec.toFixed(1)} examples/s) <br>`;
 /*
       lossValues.push({'epoch': i, 'loss': trainLoss, 'set': 'train'});
       lossValues.push({'epoch': i, 'loss': valLoss, 'set': 'validation'});
