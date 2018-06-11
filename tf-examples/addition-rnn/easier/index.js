@@ -283,7 +283,7 @@ class AdditionRNNDemo {
           `validation loss = ${valLoss.toFixed(6)}; ` +
           `validation accuracy = ${valAccuracy.toFixed(6)} ` +
           `(${examplesPerSec.toFixed(1)} examples/s)`;
-
+/*
       lossValues.push({'epoch': i, 'loss': trainLoss, 'set': 'train'});
       lossValues.push({'epoch': i, 'loss': valLoss, 'set': 'validation'});
       embed(
@@ -326,6 +326,9 @@ class AdditionRNNDemo {
             }
           },
           {});
+      
+      
+      */
 
       if (this.testXsForDisplay == null ||
           this.testXsForDisplay.shape[0] !== numTestExamples) {
