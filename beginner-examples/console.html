@@ -1,18 +1,5 @@
 
 
-<script>
-// don't copy script tags to console
-
-
-
-
-
-
-
-
-
-
-
 // start copy here 
 
 
@@ -46,9 +33,9 @@ setTimeout(function(){
 
   (async function (){  
 
-    const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], shape=[2, 3]);
-    const vector = tf.tensor1d([0, 1, 2]);
-    const myResult = tf.matrixTimesVector(matrix, vector);
+    let matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], shape=[2, 3]);
+    let myVector = tf.tensor2d([0, 1, 2], shape=[3, 1]);
+    let myResult = tf.matMul(matrix, myVector);
                                                            
     document.getElementById('myDiv223').innerHTML =   'Shape = '+ myResult.shape + ', data is ' + await myResult.data()
 
@@ -62,14 +49,3 @@ setTimeout(function(){
 // end copy here, past in the console (ctrl-shift-I)
 
 
-
-
-
-
-
-
-
-
-
-// don't copy script tags to console
-</script>
