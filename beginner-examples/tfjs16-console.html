@@ -1,5 +1,3 @@
-
-
 <script>
 // don't copy script tags to console
 
@@ -13,24 +11,10 @@
 
 
 
-// start copy here 
+  // start copy here ----------------------------------------------------------------------------------
 
-
-// Loads a webpage into the console.
-
-setTimeout(function(){ document.body.innerHTML = `
-
-   <h2 align=center>HTML title here</h2>
-   Web page stuff here<br>
-   Then the div to take output
-   <div id='myDiv223'>...</div>
-
-`}, 0);  // Load your webpage
-console.log('Webpage loaded')
-
-
-
- // load script tag(s) check the latest version at   https://github.com/tensorflow/tfjs/releases
+  // load script tag(s) ------------------------------------------------------------------------------
+  // check the latest version of tensorflowjs at   https://github.com/tensorflow/tfjs/releases
 
   var myScript01 = document.createElement('script')
   myScript01.type = 'text/javascript'
@@ -41,25 +25,48 @@ console.log('Webpage loaded')
 
 
 
-// run your async command here
-setTimeout(function(){ 
 
-  (async function (){  
+  // Load web page here -----------------------------------------------------------------------------------
+  // Loads a webpage into the console.
 
-    const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], shape=[2, 3]);
-    const vector = tf.tensor2d([0, 1, 2], shape=[3, 1]);
-    const myResult = tf.matMul(matrix, vector);
-                                                           
-    document.getElementById('myDiv223').innerHTML =   'Shape = '+ myResult.shape + ', data is ' + await myResult.data()
+  setTimeout(function(){ document.body.innerHTML = `
 
-    console.log('Async function loaded')
-  })()
-}, 100);   // wait a millisecond for the script tag to load
+    <h2 align=center>Full Tensorflowjs in the console</h2>
+    Load saved URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br>  
+ 
+    <input id="myButton4950" type="button" value="Load everything from a URL and test the data" onclick="{
+
+     const startTime = performance.now();
+     document.getElementById('myDiv4950').innerHTML = '<br>'
+     document.getElementById('myButton4950').style.backgroundColor = 'red'  
+                                                                                                                                                        
+     async function myGo6() {
+			
+       const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
+       const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  																    
+       const myPredictArray6 = await loadedModel6.predict(training_data6).data()
+
+       document.getElementById('myDiv4950').innerHTML += '[0,0] = ' + myPredictArray6[0].toFixed(4) +'<br>'
+       document.getElementById('myDiv4950').innerHTML += '[1,0] = ' + myPredictArray6[1].toFixed(4) +'<br>'
+       document.getElementById('myDiv4950').innerHTML += '[0,1] = ' + myPredictArray6[2].toFixed(4) +'<br>'
+       document.getElementById('myDiv4950').innerHTML += '[1,1] = ' + myPredictArray6[3].toFixed(4) +'<br>'
+
+       const endTime = performance.now();
+       document.getElementById('myDiv4950').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
+       document.getElementById('myButton4950').style.backgroundColor = 'lightgrey'                    
+     }
+
+     setTimeout(function(){  myGo6() }, 10);   // wait a bit for the GUI to update	
+   }"><br><br>
+
+  <div id='myDiv4950'>...</div><br>
+
+`}, 0);  // Loads your webpage slightly after the script is loaded 
+  
+console.log('Webpage loaded')
 
 
-
-
-// end copy here, paste into the console (ctrl-shift-I)
+  // end copy here, paste into the console (ctrl-shift-I) ------------------------------------------------------
 
 
 
