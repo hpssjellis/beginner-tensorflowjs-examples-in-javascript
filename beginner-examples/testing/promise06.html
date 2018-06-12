@@ -1,0 +1,26 @@
+<script>
+
+fetch('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myText01.txt')
+
+  .then(function(response) {
+    return response.text();
+  })
+
+  .then(function(text) {
+    document.getElementById('myDiv01').innerHTML = text + '<br>'
+  })
+
+  .then(function() {
+    fetch('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myText02.txt')
+
+
+  .then(function(response2) {
+    return response2.text()
+  })
+  .then(function(text2) {
+    document.getElementById('myDiv01').innerHTML += text2 + '<br>'
+  })
+  })
+
+</script>
+<div id="myDiv01">...</div>
