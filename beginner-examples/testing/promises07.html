@@ -1,0 +1,34 @@
+<h2 align=center>Multiple Sequential Javascript Promises</h2>
+
+<script>
+console.log('Fetching the file myText01')
+fetch('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myText01.txt')
+
+  .then(function(response) {
+    console.log('Fetched the file myText01')
+    return response.text();
+  })
+
+  .then(function(text) {
+    document.getElementById('myDiv01').innerHTML = text + '<br>'
+    console.log('put the file myText01 on the web page')
+  })
+
+  .then(function() {
+    console.log('Fetching the file myText02')
+    fetch('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myText02.txt')
+
+      .then(function(response2) {
+          console.log('Fetched the file myText02')
+          return response2.text()
+      })
+
+     .then(function(text2) {
+         document.getElementById('myDiv01').innerHTML += text2 + '<br>'
+         console.log('put the file myText02 on the web page')
+     })
+
+  })
+
+</script>
+<div id="myDiv01">...</div>
