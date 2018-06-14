@@ -1,6 +1,11 @@
 This is to store any keras information that I might use in the examples
 
 
+from scai  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm-scai-04.html
+
+
+
 mine and stans conv2d.   
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/16tfjs-convolutional.html
 
