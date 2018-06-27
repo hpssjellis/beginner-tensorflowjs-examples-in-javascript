@@ -1,10 +1,5 @@
-<script src="https://unpkg.com/deeplearn@0.3.13/dist/deeplearn.js"> </script> 
 
-
-
-<script src="https://unpkg.com/deeplearn-squeezenet@0.1.2/dist/bundle.js"></script>
-    
-<h2 align="center"> <a href="https://deeplearnjs.org/demos/playground/examples.html">SqueezeNet and DeeplearnJS Playground</a></h2>
+<script src="https://cdn.rawgit.com/justadudewhohacks/face-api.js/b9ca0b9b/dist/face-api.js"></script>
 
         
 
@@ -55,7 +50,6 @@ Save an image of an animal to a folder and then drag the image on top of the loa
 
 
 
-<script src="https://cdn.rawgit.com/justadudewhohacks/face-api.js/b9ca0b9b/dist/face-api.js"></script>
 
 
 
@@ -77,7 +71,8 @@ Save an image of an animal to a folder and then drag the image on top of the loa
      const maxResults = 10
 
      // inputs can be html canvas, img or video element or their ids ...
-     myImg = document.getElementById('myImgTag')                                // made global not const
+    /myImg = document.getElementById('myDiv01')                                // made global not const
+     //myImg = document.getElementById('myImgTag')                                // made global not const
      detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
      
     console.log('End detect')
