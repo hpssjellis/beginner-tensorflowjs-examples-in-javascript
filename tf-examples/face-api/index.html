@@ -3,18 +3,6 @@
 
   
 
-<canvas id="myCanvas01" width="100%" style="position:absolute; left:0px; top:0px;"> </canvas><br>
-                
-<img id="myImg01" width="100%"  style="position:absolute; left:0px; top:0px;" src="bigbang01.jpg" crossorigin="" ondrop="{ 
-     myLoadImage(event)
-  }" ondragover="{
-    event.preventDefault(); 
-    event.stopPropagation();
-    event.dataTransfer.dropEffect = 'copy';
-    //document.getElementById('myDiv02').innerHTML = 'drag over'
-    //document.getElementById('myDetectButton').click()   // activate the detect funciton
-}"   />
-
       
 
    
@@ -44,7 +32,7 @@ async function myImageToCanvas(myEvent){
 </script>
 
 
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 <h2 align=center>Minimal Face-Api.js</h2>
 See original github at <a href="https://github.com/justadudewhohacks/face-api.js">https://github.com/justadudewhohacks/face-api.js</a><br>
 
@@ -140,6 +128,20 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 <canvas id="overlay" />
+
+
+<canvas id="myCanvas01" width="100%" style="position:absolute; left:0px; top:0px;"> </canvas><br>
+                
+<img id="myImg01" width="100%"  style="position:absolute; left:0px; top:0px;" src="bigbang01.jpg" crossorigin="" ondrop="{ 
+     myLoadImage(event)
+  }" ondragover="{
+    event.preventDefault(); 
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+    //document.getElementById('myDiv02').innerHTML = 'drag over'
+    //document.getElementById('myDetectButton').click()   // activate the detect funciton
+}"   />
+
 
 
 
