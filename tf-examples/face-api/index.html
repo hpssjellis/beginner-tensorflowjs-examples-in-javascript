@@ -73,7 +73,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
      const maxResults = 10
 
      // inputs can be html canvas, img or video element or their ids ...
-    /myImg = document.getElementById('myDiv01')                                // made global not const
+     myImg = document.getElementById('myDiv01')                                // made global not const
      //myImg = document.getElementById('myImgTag')                                // made global not const
      detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
      
