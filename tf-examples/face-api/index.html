@@ -80,7 +80,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     console.log('start draw')
     // resize the detected boxes in case your displayed image has a different size then the original
     const detectionsForSize = detections.map(det => det.forSize(myImg.width, myImg.height))
-    const canvas = document.getElementById('overlay')
+    const canvas = document.getElementById('myDiv01')
     canvas.width = myImg.width
     canvas.height = myImg.height
     faceapi.drawDetection(canvas, detectionsForSize, { withScore: false }) 
