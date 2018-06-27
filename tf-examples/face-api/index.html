@@ -43,15 +43,45 @@
     canvas.height = myImg.height
     faceapi.drawDetection(canvas, detectionsForSize, { withScore: false }) 
     
-    console.log('end draw')
+    console.log('end draw ')
+    console.log(faceapi)
+    })()
+}"><br><br>
+
+<input type=button value=landmark onclick="{
+( async function (){
+    const landmarks = await faceapi.detectLandmarks(myImg)
+    
+    // adjust the landmark positions in case your displayed image has a different size then the original
+    const landmarksForSize = landmarks.forSize(myImg.width, myImg.height)
+    const canvas = document.getElementById('overlay')
+    canvas.width = myImg.width
+    canvas.height = myImg.height
+    faceapi.drawLandmarks(canvas, landmarksForSize, { drawLines: true })
+    
+    
+    const landmarkPositions = landmarks.getPositions()
+
+     // or get the positions of individual contours
+   const jawOutline = landmarks.getJawOutline()
+   const nose = landmarks.getNose()
+   const mouth = landmarks.getMouth()
+   const leftEye = landmarks.getLeftEye()
+   const rightEye = landmarks.getRightEye()
+   const leftEyeBbrow = landmarks.getLeftEyeBrow()
+   const rightEyeBrow = landmarks.getRightEyeBrow()   
+    
     })()
 }"><br><br>
 
 
 
-...<br>
-<img id="myImgTag" src="sheldon3.png"></img><br>
-...<br>
-<canvas id="overlay" ></canvas><br>
 
-...<br>
+
+
+
+<br>
+    <div style="position: relative" >
+      <img id="myImgTag" src="sheldon3.png" style="max-width: 800px;" />
+      <canvas id="overlay" />
+    </div>
