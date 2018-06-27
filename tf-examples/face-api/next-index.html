@@ -1,0 +1,156 @@
+
+<script src="https://cdn.rawgit.com/justadudewhohacks/face-api.js/b9ca0b9b/dist/face-api.js"></script>
+
+
+      
+
+   
+<script>
+
+async function myCheckImage(){
+console.log('Perhaps click the ')
+//document.getElementById('myDetectButton').click()        
+}
+
+
+async function myLoadImage(myEvent){
+    myEvent.preventDefault(); 
+    myEvent.stopPropagation();   
+    document.getElementById('myImg01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
+    setTimeout("document.getElementById('myDetectButton').click()", 200)
+}
+
+                                                                  
+async function myImageToCanvas(myEvent){
+    var c=document.getElementById("myCanvas01");
+    var ctx=c.getContext("2d");
+    ctx.globalAlpha = 0.5;
+    var img=document.getElementById("myImg01");  
+    ctx.drawImage(img, 0, 0);
+};
+
+</script>
+
+
+
+<h2 align=center>Minimal Face-Api.js</h2>
+See original github at <a href="https://github.com/justadudewhohacks/face-api.js">https://github.com/justadudewhohacks/face-api.js</a><br>
+
+
+Save an image of a character from the Big Bang Theory and then drag the image from your computer onto the top of the pre-loaded image.  <br> 
+
+
+
+
+<input type=button value="Load Once" onclick="{
+( async function (){
+     console.log('Start Loading')
+     await faceapi.loadFaceDetectionModel('./weights/')
+     await faceapi.loadFaceLandmarkModel('./weights/')
+     await faceapi.loadFaceRecognitionModel('./weights/')
+     console.log('Waiting for all loads to happen')
+  })()
+}">
+
+
+<input type=button id="myDetectButton" value=Detect onclick="{
+( async function (){
+
+    console.log('Start detect')
+     // optional arguments
+     const minConfidence = 0.8
+     const maxResults = 10
+
+     // inputs can be html canvas, img or video element or their ids ...
+     myImg = document.getElementById('myImg01')                                // made global not const
+     //myImg = document.getElementById('myImgTag')                                // made global not const
+     detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
+    console.log('End detect')
+                                                             
+    await document.getElementById('myDrawButton').click()
+  })()
+}">
+
+
+
+
+
+
+
+<input type=hidden id="myDrawButton" value=draw onclick="{  // was a button when developing
+( async function (){
+    console.log('start draw')
+    // resize the detected boxes in case your displayed image has a different size then the original
+    const detectionsForSize = detections.map(det => det.forSize(myImg.width, myImg.height))
+    const canvas = document.getElementById('myCanvas01')
+    canvas.width = myImg.width
+    canvas.height = myImg.height
+    faceapi.drawDetection(canvas, detectionsForSize, { withScore: true }) 
+    
+    console.log('end draw ')
+    console.log(faceapi)
+    
+    await document.getElementById('myToCanvasButton').click() 
+                                                         
+                                                         
+    })()
+}">
+
+
+<input type=hidden id="myToCanvasButton" value="Image to Canvas" onclick="{   // was a button when developing
+    myImageToCanvas()
+}">
+<input type=button value=landmark onclick="{
+( async function (){
+    const landmarks = await faceapi.detectLandmarks(myImg)
+    
+    // adjust the landmark positions in case your displayed image has a different size then the original
+    const landmarksForSize = landmarks.forSize(myImg.width, myImg.height)
+    const canvas = document.getElementById('overlay')
+    canvas.width = myImg.width
+    canvas.height = myImg.height
+    faceapi.drawLandmarks(canvas, landmarksForSize, { drawLines: true })
+    
+    
+    const landmarkPositions = landmarks.getPositions()
+
+     // or get the positions of individual contours
+  // const jawOutline = landmarks.getJawOutline()
+  // const nose = landmarks.getNose()
+  // const mouth = landmarks.getMouth()
+  // const leftEye = landmarks.getLeftEye()
+  // const rightEye = landmarks.getRightEye()
+  // const leftEyeBbrow = landmarks.getLeftEyeBrow()
+  // const rightEyeBrow = landmarks.getRightEyeBrow()   
+    
+    })()
+}"><br><br>
+
+
+
+  
+
+                
+<img id="myImg01"    src="bigbang01.png" crossorigin="" ondrop="{ 
+     myLoadImage(event)
+  }" ondragover="{
+    event.preventDefault(); 
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+    //document.getElementById('myDiv02').innerHTML = 'drag over'
+    //document.getElementById('myDetectButton').click()   // activate the detect funciton
+}"   /><br>
+
+
+<canvas id="myCanvas01"  > </canvas><br>
+
+
+<canvas id="overlay" />
+
+
+
+
+
+
+
+
