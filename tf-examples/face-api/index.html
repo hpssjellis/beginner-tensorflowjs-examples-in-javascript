@@ -16,7 +16,7 @@ async function myLoadImage(myEvent){
     myEvent.preventDefault(); 
     myEvent.stopPropagation();   
     document.getElementById('myDiv01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
-    setTimeout('myCheckImage()', 200)
+    setTimeout('document.getElementById('myDetectButton').click()', 200)
 }
 
 
@@ -34,7 +34,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     event.stopPropagation();
     event.dataTransfer.dropEffect = 'copy';
     document.getElementById('myDiv02').innerHTML = 'drag over'
-    document.getElementById('myDetectButton').click()   // activate the detect funciton
+    //document.getElementById('myDetectButton').click()   // activate the detect funciton
   }"><br><br>
 
     
@@ -123,10 +123,9 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 <br>
-    <div style="position: relative" >
-      <img id="myImgTag" src="sheldon3.png" style="max-width: 800px;" />
+
       <canvas id="overlay" />
-    </div>
+
 
 
 
