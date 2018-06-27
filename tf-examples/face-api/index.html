@@ -25,9 +25,7 @@ async function myImageToCanvas(myEvent){
     var c=document.getElementById("myCanvas01");
     var ctx=c.getContext("2d");
     ctx.globalAlpha = 0.5;
-    var img=document.getElementById("myImg01");
-   // img.width = myImg.width
-  //  img.height = myImg.height      
+    var img=document.getElementById("myImg01");  
     ctx.drawImage(img, 0, 0);
 };
 
@@ -67,8 +65,9 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
      myImg = document.getElementById('myImg01')                                // made global not const
      //myImg = document.getElementById('myImgTag')                                // made global not const
      detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
-     
     console.log('End detect')
+                                                             
+    await document.getElementById('myDrawButton').click()
   })()
 }">
 
@@ -78,7 +77,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 
-<input type=button value=draw onclick="{
+<input type=button id="myDrawButton" value=draw onclick="{
 ( async function (){
     console.log('start draw')
     // resize the detected boxes in case your displayed image has a different size then the original
@@ -90,11 +89,15 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     
     console.log('end draw ')
     console.log(faceapi)
+    
+    await document.getElementById('myToCanvasButton').click() 
+                                                         
+                                                         
     })()
 }">
 
 
-<input type=button value="Image to Canvas" onclick="{
+<input type=button id="myToCanvasButton" value="Image to Canvas" onclick="{
     myImageToCanvas()
 }">
 <input type=button value=landmark onclick="{
@@ -127,7 +130,6 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
   
 
-<canvas id="myCanvas01"  > </canvas><br>
                 
 <img id="myImg01"    src="bigbang01.jpg" crossorigin="" ondrop="{ 
      myLoadImage(event)
@@ -140,6 +142,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 }"   /><br>
 
 
+<canvas id="myCanvas01"  > </canvas><br>
 
 
 <canvas id="overlay" />
