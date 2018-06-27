@@ -15,7 +15,7 @@ console.log('Perhaps click the ')
 async function myLoadImage(myEvent){
     myEvent.preventDefault(); 
     myEvent.stopPropagation();   
-    document.getElementById('myCanvas01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
+    document.getElementById('myImg01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
     setTimeout("document.getElementById('myDetectButton').click()", 200)
 }
 
@@ -53,7 +53,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
      const maxResults = 10
 
      // inputs can be html canvas, img or video element or their ids ...
-     myImg = document.getElementById('myCanvas01')                                // made global not const
+     myImg = document.getElementById('myImg01')                                // made global not const
      //myImg = document.getElementById('myImgTag')                                // made global not const
      detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
      
@@ -75,7 +75,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     const canvas = document.getElementById('myCanvas01')
     canvas.width = myImg.width
     canvas.height = myImg.height
-    faceapi.drawDetection(canvas, detectionsForSize, { withScore: false }) 
+    faceapi.drawDetection(canvas, detectionsForSize, { withScore: true }) 
     
     console.log('end draw ')
     console.log(faceapi)
@@ -113,7 +113,10 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 
-<canvas id="myCanvas01"  src="bigbang01.jpg" width="227" height="227" crossorigin="" ondrop="{ 
+<canvas id="myCanvas01"> </canvas>
+        
+        
+<img id="myImg01" src="bigbang01.jpg" width="227" height="227" crossorigin="" ondrop="{ 
      myLoadImage(event)
   }" ondragover="{
     event.preventDefault(); 
@@ -121,7 +124,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     event.dataTransfer.dropEffect = 'copy';
     //document.getElementById('myDiv02').innerHTML = 'drag over'
     //document.getElementById('myDetectButton').click()   // activate the detect funciton
-  }"   />
+}"   />
 
 
 
