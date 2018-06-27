@@ -130,7 +130,7 @@ await console.log('Disposes tensors')
 // get the face tensors for the aligned face images from the image (have to be disposed manually)
 const alignedFaceTensors = (await faceapi.extractFaceTensors(myImg, alignedFaceBoxes))
 
-await console.log('extraced')
+await console.log('extracted')
 // compute the face descriptors from the aligned face images
 const descriptors = await Promise.all(alignedFaceTensors.map(
   faceTensor => faceapi.computeFaceDescriptor(faceTensor)
@@ -139,7 +139,7 @@ const descriptors = await Promise.all(alignedFaceTensors.map(
 await console.log('Computed, now drawing text')
                                                     
          
-//console.log(alignedFaceTensors[0].id)
+console.log('alignedFaceTensors[0].id = '+alignedFaceTensors[0].id)
                                                     
 ////////////////// from common.js ///////////////////////////////                                                    
    
@@ -244,6 +244,7 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
                                                     
       fullFaceDescriptions.forEach(({ detection, descriptor }) => {
         faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
+console.log(descriptor)
         const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
         const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
         const { x, y, height: boxHeight } = detection.getBox()
