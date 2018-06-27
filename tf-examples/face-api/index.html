@@ -4,9 +4,9 @@
 
 <input type=button value=load onclick="{
 ( async function (){
-     await faceapi.loadFaceDetectionModel('../weights/')
-     await faceapi.loadFaceLandmarkModel('../weights/')
-     await faceapi.loadFaceRecognitionModel('../weights/')
+     await faceapi.loadFaceDetectionModel('./weights/')
+     await faceapi.loadFaceLandmarkModel('./weights/')
+     await faceapi.loadFaceRecognitionModel('./weights/')
   })()
 }">
 
