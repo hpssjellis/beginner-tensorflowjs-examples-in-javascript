@@ -55,9 +55,11 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 <input type=button value=load onclick="{
 ( async function (){
+     console.log('Start Loading')
      await faceapi.loadFaceDetectionModel('./weights/')
      await faceapi.loadFaceLandmarkModel('./weights/')
      await faceapi.loadFaceRecognitionModel('./weights/')
+     console.log('Waiting for all loads to happen')
   })()
 }">
 
