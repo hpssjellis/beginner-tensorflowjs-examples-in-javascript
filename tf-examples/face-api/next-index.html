@@ -135,11 +135,10 @@ const descriptors = await Promise.all(alignedFaceTensors.map(
   faceTensor => faceapi.computeFaceDescriptor(faceTensor)
 ))
 
-await console.log('Computed')
+await console.log('Computed, now drawing text')
                                                     
- 
-await console.log(descriptors)         
-await console.log(alignedFaceTensors)
+         
+console.log(alignedFaceTensors[0].id)
                                                     
 // free memory for face image tensors after we computed their descriptors
 alignedFaceTensors.forEach(t => t.dispose())
