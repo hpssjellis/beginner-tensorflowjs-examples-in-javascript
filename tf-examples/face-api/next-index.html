@@ -142,7 +142,8 @@ console.log(alignedFaceTensors[0].id)
                                                     
 /////////////////////////////////////////////////                                                    
                                                     
-                                                    
+       let detectionNet, recognitionNet, landmarkNet
+       let trainDescriptorsByClass = []                                                 
                                                     
                                                     
       const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
