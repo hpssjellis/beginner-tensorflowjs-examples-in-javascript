@@ -47,7 +47,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 ( async function (){
      console.log('Start Loading')
      await faceapi.loadFaceDetectionModel('./weights/')
-     await faceapi.loadFaceLandmarkModel('./weights/')
+    // await faceapi.loadFaceLandmarkModel('./weights/')      // not needed for this demo. I think
      await faceapi.loadFaceRecognitionModel('./weights/')
      console.log('Waiting for all loads to happen')
   })()
