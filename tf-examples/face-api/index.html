@@ -77,7 +77,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 
-<input type=button id="myDrawButton" value=draw onclick="{
+<input type=hidden id="myDrawButton" value=draw onclick="{  // was a button when developing
 ( async function (){
     console.log('start draw')
     // resize the detected boxes in case your displayed image has a different size then the original
@@ -97,7 +97,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 }">
 
 
-<input type=button id="myToCanvasButton" value="Image to Canvas" onclick="{
+<input type=hidden id="myToCanvasButton" value="Image to Canvas" onclick="{   // was a button when developing
     myImageToCanvas()
 }">
 <input type=button value=landmark onclick="{
