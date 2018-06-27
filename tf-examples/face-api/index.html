@@ -5,7 +5,7 @@
 
 <canvas id="myCanvas01" width="100%" style="position:absolute; left:0px; top:0px;"> </canvas><br>
                 
-<img id="myImg01" width="100%"  style="position:absolute; left:0px; top:0px; src="bigbang01.jpg" crossorigin="" ondrop="{ 
+<img id="myImg01" width="100%"  style="position:absolute; left:0px; top:0px;" src="bigbang01.jpg" crossorigin="" ondrop="{ 
      myLoadImage(event)
   }" ondragover="{
     event.preventDefault(); 
@@ -33,6 +33,13 @@ async function myLoadImage(myEvent){
     setTimeout("document.getElementById('myDetectButton').click()", 200)
 }
 
+                                                                  
+async function myImageToCanvas(myEvent){
+    var c=document.getElementById("myCanvas01");
+    var ctx=c.getContext("2d");
+    var img=document.getElementById("myImg01");
+    ctx.drawImage(img,10,10);
+};
 
 </script>
 
@@ -94,8 +101,12 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     console.log('end draw ')
     console.log(faceapi)
     })()
-}"><br><br>
+}">
 
+
+<input type=button value="Image to Canvas" onclick="{
+    myImageToCanvas()
+}">
 <input type=button value=landmark onclick="{
 ( async function (){
     const landmarks = await faceapi.detectLandmarks(myImg)
