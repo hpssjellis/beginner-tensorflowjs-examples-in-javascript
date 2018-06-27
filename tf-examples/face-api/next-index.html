@@ -140,6 +140,47 @@ await console.log('Computed, now drawing text')
          
 console.log(alignedFaceTensors[0].id)
                                                     
+/////////////////////////////////////////////////                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+      const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
+                                                    
+                                                    
+      fullFaceDescriptions.forEach(({ detection, descriptor }) => {
+        faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
+        const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
+        const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
+        const { x, y, height: boxHeight } = detection.getBox()
+        faceapi.drawText(
+          canvas.getContext('2d'),
+          x,
+          y + boxHeight,
+          text,
+          Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 16 })
+        )
+      })
+    }                                                   
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+ ////////////////////////////////////////////                                                   
+                                                    
 // free memory for face image tensors after we computed their descriptors
 alignedFaceTensors.forEach(t => t.dispose())
  
