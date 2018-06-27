@@ -26,8 +26,8 @@ async function myImageToCanvas(myEvent){
     var ctx=c.getContext("2d");
     ctx.globalAlpha = 0.5;
     var img=document.getElementById("myImg01");
-    img.width = myImg.width
-    img.height = myImg.height      
+   // img.width = myImg.width
+  //  img.height = myImg.height      
     ctx.drawImage(img, 0, 0);
 };
 
@@ -127,9 +127,9 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
   
 
-<canvas id="myCanvas01" width="100%" > </canvas><br>
+<canvas id="myCanvas01"  > </canvas><br>
                 
-<img id="myImg01" width="100%"   src="bigbang01.jpg" crossorigin="" ondrop="{ 
+<img id="myImg01"    src="bigbang01.jpg" crossorigin="" ondrop="{ 
      myLoadImage(event)
   }" ondragover="{
     event.preventDefault(); 
