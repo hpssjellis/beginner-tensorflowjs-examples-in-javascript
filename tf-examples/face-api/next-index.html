@@ -100,33 +100,46 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 <input type=hidden id="myToCanvasButton" value="Image to Canvas" onclick="{   // was a button when developing
     myImageToCanvas()
 }">
+
+
+
+
+
 <input type=button value="Grab Face Areas" onclick="{
 ( async function (){
-
+console.log('Face Grab Start')
 const faceTensors = (await faceapi.extractFaceTensors(myImg, detections))
 
+await console.log('Faces extracted')
+                                                    
 // detect landmarks and get the aligned face image bounding boxes
 const alignedFaceBoxes = await Promise.all(faceTensors.map(
   async (faceTensor, i) => {
+    await  console.log('face #'+i)                                                
     const faceLandmarks = await faceapi.detectLandmarks(faceTensor)
     return faceLandmarks.align(detections[i])
   }
 ))
 
+await console.log('Done Aligned')
 // free memory for face image tensors after we detected the face landmarks
 faceTensors.forEach(t => t.dispose())
 
+await console.log('Disposes tensors')
 // get the face tensors for the aligned face images from the image (have to be disposed manually)
 const alignedFaceTensors = (await faceapi.extractFaceTensors(myImg, alignedFaceBoxes))
 
+await console.log('extraced')
 // compute the face descriptors from the aligned face images
 const descriptors = await Promise.all(alignedFaceTensors.map(
   faceTensor => faceapi.computeFaceDescriptor(faceTensor)
 ))
 
+await console.log('Computed')
 // free memory for face image tensors after we computed their descriptors
 alignedFaceTensors.forEach(t => t.dispose())
-    
+ 
+await console.log('each tensor disposed')   
     })()
 }"><br><br>
 
