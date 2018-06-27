@@ -100,32 +100,6 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 <input type=hidden id="myToCanvasButton" value="Image to Canvas" onclick="{   // was a button when developing
     myImageToCanvas()
 }">
-<input type=button value=landmark onclick="{
-( async function (){
-    const landmarks = await faceapi.detectLandmarks(myImg)
-    
-    // adjust the landmark positions in case your displayed image has a different size then the original
-    const landmarksForSize = landmarks.forSize(myImg.width, myImg.height)
-    const canvas = document.getElementById('overlay')
-    canvas.width = myImg.width
-    canvas.height = myImg.height
-    faceapi.drawLandmarks(canvas, landmarksForSize, { drawLines: true })
-    
-    
-    const landmarkPositions = landmarks.getPositions()
-
-     // or get the positions of individual contours
-  // const jawOutline = landmarks.getJawOutline()
-  // const nose = landmarks.getNose()
-  // const mouth = landmarks.getMouth()
-  // const leftEye = landmarks.getLeftEye()
-  // const rightEye = landmarks.getRightEye()
-  // const leftEyeBbrow = landmarks.getLeftEyeBrow()
-  // const rightEyeBrow = landmarks.getRightEyeBrow()   
-    
-    })()
-}"><br><br>
-
 
 
   
