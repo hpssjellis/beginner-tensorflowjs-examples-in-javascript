@@ -24,6 +24,7 @@ async function myLoadImage(myEvent){
 async function myImageToCanvas(myEvent){
     var c=document.getElementById("myCanvas01");
     var ctx=c.getContext("2d");
+    ctx.globalAlpha = 0.5;
     var img=document.getElementById("myImg01");
     ctx.drawImage(img, 0, 0);
 };
