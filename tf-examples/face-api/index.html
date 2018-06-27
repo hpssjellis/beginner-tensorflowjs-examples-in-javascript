@@ -15,7 +15,7 @@ console.log('Perhaps click the ')
 async function myLoadImage(myEvent){
     myEvent.preventDefault(); 
     myEvent.stopPropagation();   
-    document.getElementById('cat').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
+    document.getElementById('myDiv01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
     setTimeout('myCheckImage()', 200)
 }
 
