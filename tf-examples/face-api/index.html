@@ -7,8 +7,8 @@
 <script>
 
 async function myCheckImage(){
-console.log('Activating myDetectButton')
-document.getElementById('myDetectButton').click()        
+console.log('Perhaps click the ')
+//document.getElementById('myDetectButton').click()        
 }
 
 
@@ -27,31 +27,26 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 
-  <img onload="myCheckImage()" id="cat" src="https://storage.googleapis.com/learnjs-data/images/cat.jpeg" width="227" height="227" crossorigin="" ondrop="{ 
+  <img  id="myDiv01" src="https://storage.googleapis.com/learnjs-data/images/cat.jpeg" width="227" height="227" crossorigin="" ondrop="{ 
      myLoadImage(event)
   }" ondragover="{
     event.preventDefault(); 
     event.stopPropagation();
     event.dataTransfer.dropEffect = 'copy';
-    document.getElementById('myDiv01').innerHTML = 'drag over'
+    document.getElementById('myDiv02').innerHTML = 'drag over'
   }"><br><br>
 
 
 
 <input type="button" value="Reset Output DIV" onclick="{
-   document.getElementById('myDiv01').innerHTML = '...'                                             
+   document.getElementById('myDiv02').innerHTML = '...'                                             
 }">
 
 <input type="button" value="Search SqueezeNet" onclick="{
      myCheckImage()                                     
 }"><br><br>
     
-<canvas id="myDiv01">...</canvas>
-
-
-
-
-
+<div id="myDiv02">...</div><br>
 
 
 <input type=button value=load onclick="{
