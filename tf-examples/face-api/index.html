@@ -16,7 +16,7 @@ async function myLoadImage(myEvent){
     myEvent.preventDefault(); 
     myEvent.stopPropagation();   
     document.getElementById('myDiv01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
-    setTimeout('document.getElementById('myDetectButton').click()', 200)
+    setTimeout("document.getElementById('myDetectButton').click()", 200)
 }
 
 
@@ -122,7 +122,6 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 
-<br>
 
       <canvas id="overlay" />
 
