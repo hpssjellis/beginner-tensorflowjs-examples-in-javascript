@@ -1,4 +1,5 @@
 
+
 <script src="https://cdn.rawgit.com/justadudewhohacks/face-api.js/b9ca0b9b/dist/face-api.js"></script>
 
         
@@ -75,7 +76,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     const canvas = document.getElementById('myCanvas01')
     canvas.width = myImg.width
     canvas.height = myImg.height
-    faceapi.drawDetection(canvas, detectionsForSize, { withScore: false }) 
+    faceapi.drawDetection(canvas, detectionsForSize, { withScore: true }) 
     
     console.log('end draw ')
     console.log(faceapi)
@@ -113,8 +114,10 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 
 
 
-<canvas id="myCanvas01">  </canvas>
-  <img  id="myImg01" src="bigbang01.jpg" width="227" height="227" crossorigin="" ondrop="{ 
+<canvas id="myCanvas01"> </canvas>
+        
+        
+<img id="myImg01" src="bigbang01.jpg" width="227" height="227" crossorigin="" ondrop="{ 
      myLoadImage(event)
   }" ondragover="{
     event.preventDefault(); 
@@ -122,7 +125,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
     event.dataTransfer.dropEffect = 'copy';
     //document.getElementById('myDiv02').innerHTML = 'drag over'
     //document.getElementById('myDetectButton').click()   // activate the detect funciton
-  }">
+}"   />
 
 
 
