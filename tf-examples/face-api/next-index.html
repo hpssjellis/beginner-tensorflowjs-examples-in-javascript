@@ -115,7 +115,7 @@ await console.log('Faces extracted')
 // detect landmarks and get the aligned face image bounding boxes
 const alignedFaceBoxes = await Promise.all(faceTensors.map(
   async (faceTensor, i) => {
-    await  console.log('face #'+i)                                                
+   // await  console.log('face #'+i)                                                
     const faceLandmarks = await faceapi.detectLandmarks(faceTensor)
     return faceLandmarks.align(detections[i])
   }
@@ -138,13 +138,13 @@ const descriptors = await Promise.all(alignedFaceTensors.map(
 await console.log('Computed, now drawing text')
                                                     
          
-console.log(alignedFaceTensors[0].id)
+//console.log(alignedFaceTensors[0].id)
                                                     
 /////////////////////////////////////////////////                                                    
                                                     
        let detectionNet, recognitionNet, landmarkNet
        let trainDescriptorsByClass = []                                                 
-                                                    
+       let minConfidence = 0.2                                             
                                                     
       const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
                                                     
