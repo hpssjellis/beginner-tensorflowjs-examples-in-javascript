@@ -7,7 +7,8 @@
 <script>
 
 async function myCheckImage(){
-console.log('Should do stuff')
+console.log('Activating myDetectButton')
+document.getElementById('myDetectButton').click()        
 }
 
 
@@ -64,7 +65,7 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
 }">
 
 
-<input type=button value=Detect onclick="{
+<input type=button id="myDetectButton" value=Detect onclick="{
 ( async function (){
 
     console.log('Start detect')
