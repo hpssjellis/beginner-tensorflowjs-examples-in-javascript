@@ -1,0 +1,57 @@
+<script src="https://cdn.rawgit.com/justadudewhohacks/face-api.js/b9ca0b9b/dist/face-api.js"></script>
+
+
+
+<input type=button value=load onclick="{
+( async function (){
+     await faceapi.loadFaceDetectionModel('../weights/')
+     await faceapi.loadFaceLandmarkModel('../weights/')
+     await faceapi.loadFaceRecognitionModel('../weights/')
+  })()
+}">
+
+
+<input type=button value=Detect onclick="{
+( async function (){
+
+    console.log('Start detect')
+     // optional arguments
+     const minConfidence = 0.8
+     const maxResults = 10
+
+     // inputs can be html canvas, img or video element or their ids ...
+     myImg = document.getElementById('myImgTag')                                // made global not const
+     detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
+     
+    console.log('End detect')
+  })()
+}">
+
+
+
+
+
+
+
+<input type=button value=draw onclick="{
+( async function (){
+    console.log('start draw')
+    // resize the detected boxes in case your displayed image has a different size then the original
+    const detectionsForSize = detections.map(det => det.forSize(myImg.width, myImg.height))
+    const canvas = document.getElementById('overlay')
+    canvas.width = myImg.width
+    canvas.height = myImg.height
+    faceapi.drawDetection(canvas, detectionsForSize, { withScore: false }) 
+    
+    console.log('end draw')
+    })()
+}"><br><br>
+
+
+
+...<br>
+<img id="myImgTag" src="sheldon1.png"></img><br>
+...<br>
+<canvas id="overlay" ></canvas><br>
+
+...<br>
