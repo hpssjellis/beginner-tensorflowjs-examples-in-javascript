@@ -272,12 +272,13 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
         faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
         //console.log(descriptor)
                                                     
-        const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
                                                     
-       // console.log('trainDescriptorsByClass')        
-       // console.log(trainDescriptorsByClass)   
-       // console.log('descriptor')                    
-       // console.log(descriptor)                    
+        console.log('trainDescriptorsByClass')        
+        console.log(trainDescriptorsByClass)   
+        console.log('descriptor')                    
+        console.log(descriptor)              
+                                                    
+        const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
                                                     
         const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
                                                     
