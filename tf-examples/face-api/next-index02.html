@@ -131,7 +131,7 @@ alignedFaceBoxes = await Promise.all(faceTensors.map(
    // await  console.log('face #'+i)                                                
     const faceLandmarks = await faceapi.detectLandmarks(faceTensor)
     
-   // console.log(detections[i])   
+    console.log(detections[i])   
     document.detect2[i] = detections[i]                                                
     return faceLandmarks.align(detections[i])
   }                                                  
@@ -174,6 +174,9 @@ await console.log('Computed, now drawing text')
        const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
        
        // possible repeat canvas here                                             
+       console.log( 'document.detect2')                                            
+       console.log( document.detect2)   
+                                                    
                                                     
        const canvas = document.getElementById('overlay')
        canvas.width = myImg.width
@@ -182,8 +185,8 @@ await console.log('Computed, now drawing text')
         fullFaceDescriptions.forEach(({ detection, descriptor }) => {
         faceapi.drawDetection(canvas, [detection], { withScore: false })
                            
-        console.log('fullFaceDescriptions')  
-        console.log(fullFaceDescriptions)                                         
+       // console.log('fullFaceDescriptions')  
+       // console.log(fullFaceDescriptions)                                         
                                                     
                                                     
         //console.log(descriptor)
@@ -206,7 +209,7 @@ await console.log('Computed, now drawing text')
                    
       //  console.log(text)                                                      
                                                     
-        const { x, y, height: boxHeight } = detection[2]._box()    // need to fix this
+        const { x, y, height: boxHeight } = document.detect2[2]._box    // need to fix this
                                                     
      //   const x = 200
       //  const y = 100
