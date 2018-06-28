@@ -272,13 +272,18 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
         faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
         //console.log(descriptor)
                                                     
-                                                    
-        console.log('trainDescriptorsByClass')        
-        console.log(trainDescriptorsByClass)   
+                                                
         console.log('descriptor')                    
         console.log(descriptor)              
+        
+        console.log('trainDescriptorsByClass')        
+        console.log(trainDescriptorsByClass) 
+                                                    
                                                     
         const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
+              
+                                                    
+                                                    
                                                     
         const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
                                                     
@@ -329,7 +334,7 @@ await console.log('each tensor disposed')
 <input type=button id="myLoadDescriptors" value="Test making descriptors" onclick="{
 ( async function (){
    trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
-  //  await console.log(trainDescriptorsByClass)
+    await console.log(trainDescriptorsByClass)
     })()
 }"><br><br>
 
