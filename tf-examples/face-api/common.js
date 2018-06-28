@@ -5,6 +5,7 @@ function getImageUri(imageName) {
 }
 
 function getFaceImageUri(className, idx) {
+  console.log('Getting face image')
   return `images/${className}/${className}${idx}.png`
 }
 
@@ -39,6 +40,8 @@ async function requestExternalImage(imageUrl) {
 // fetch first image of each class and compute their descriptors
 async function initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
   const maxAvailableImagesPerClass = 5
+  
+  console.log('starting initTrainDescriptorsByClass')
   numImagesForTraining = Math.min(numImagesForTraining, maxAvailableImagesPerClass)
   return Promise.all(classes.map(
     async className => {
@@ -58,6 +61,8 @@ async function initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
 }
 
 function getBestMatch(descriptorsByClass, queryDescriptor) {
+  
+  console.log('starting get best match')
   function computeMeanDistance(descriptorsOfClass) {
     return faceapi.round(
       descriptorsOfClass
