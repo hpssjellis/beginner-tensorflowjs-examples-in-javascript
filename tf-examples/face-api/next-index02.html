@@ -177,8 +177,8 @@ await console.log('Computed, now drawing text')
         fullFaceDescriptions.forEach(({ detection, descriptor }) => {
         faceapi.drawDetection(canvas, [detection], { withScore: false })
                            
-        console.log('detection')  
-        console.log(detection)                                         
+      //  console.log('detection')  
+      //  console.log(detection)                                         
                                                     
                                                     
         //console.log(descriptor)
@@ -199,9 +199,14 @@ await console.log('Computed, now drawing text')
         const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
                                                     
                    
-        console.log(text)                                                      
+      //  console.log(text)                                                      
                                                     
-        const { x, y, height: boxHeight } = detection.getBox()
+       // const { x, y, height: boxHeight } = detection.getBox()    // need to fix this
+                                                    
+        const x = 200
+        const y = 100
+         const boxHeight = 60
+                                                    
         faceapi.drawText(
           canvas.getContext('2d'),
           x,
