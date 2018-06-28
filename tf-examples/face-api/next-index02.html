@@ -264,7 +264,8 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
                                                     
                                                     
        let detectionNet, recognitionNet, landmarkNet                                      
-       let minConfidence = 0.2                                             
+       let minConfidence = 0.2    
+       let maxDistance  = 0.4                                             
                                                     
        const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
                                                     
