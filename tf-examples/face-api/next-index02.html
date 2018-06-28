@@ -321,7 +321,7 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
                                                     
 // free memory for face image tensors after we computed their descriptors
 alignedFaceTensors.forEach(t => t.dispose())
- 
+
 await console.log('each tensor disposed')   
     })()
 }">
@@ -334,6 +334,8 @@ await console.log('each tensor disposed')
 <input type=button id="myLoadDescriptors" value="Test making descriptors" onclick="{
 ( async function (){
    trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
+                                                                                   
+    console.log('trainDescriptorsByClass')  
     await console.log(trainDescriptorsByClass)
     })()
 }"><br><br>
