@@ -1,0 +1,333 @@
+
+<script src="https://cdn.rawgit.com/justadudewhohacks/face-api.js/b9ca0b9b/dist/face-api.js"></script>
+
+
+
+      
+
+   
+<script>
+
+async function myCheckImage(){
+console.log('Perhaps click the ')
+//document.getElementById('myDetectButton').click()        
+}
+
+
+async function myLoadImage(myEvent){
+    myEvent.preventDefault(); 
+    myEvent.stopPropagation();   
+    document.getElementById('myImg01').src = await window.URL.createObjectURL(myEvent.dataTransfer.files[0]); 
+    setTimeout("document.getElementById('myDetectButton').click()", 200)
+}
+
+                                                                  
+async function myImageToCanvas(myEvent){
+    var c=document.getElementById("myCanvas01");
+    var ctx=c.getContext("2d");
+    ctx.globalAlpha = 0.5;
+    var img=document.getElementById("myImg01");  
+    ctx.drawImage(img, 0, 0);
+};
+
+</script>
+
+
+
+<h2 align=center>Minimal Face-Api.js</h2>
+See original github at <a href="https://github.com/justadudewhohacks/face-api.js">https://github.com/justadudewhohacks/face-api.js</a><br>
+
+
+Save an image of a character from the Big Bang Theory and then drag the image from your computer onto the top of the pre-loaded image.  <br> 
+
+
+
+
+<input type=button value="Load Once" onclick="{
+( async function (){
+     console.log('Start Loading')
+     await faceapi.loadFaceDetectionModel('./weights/')
+     await faceapi.loadFaceLandmarkModel('./weights/')    
+     await faceapi.loadFaceRecognitionModel('./weights/')
+     await console.log('All 3 models loaded')
+  })()
+}">
+
+
+<input type=button id="myDetectButton" value=Detect onclick="{
+( async function (){
+
+    console.log('Start detect, wait for a bit...')
+     // optional arguments
+     const minConfidence = 0.8
+     const maxResults = 10
+
+     // inputs can be html canvas, img or video element or their ids ...
+     myImg = document.getElementById('myImg01')                                // made global not const
+     //myImg = document.getElementById('myImgTag')                                // made global not const
+     detections = await faceapi.locateFaces(myImg, minConfidence, maxResults)   // made global not const
+    console.log('End detect')
+                                                             
+    await document.getElementById('myDrawButton').click()
+  })()
+}">
+
+
+
+
+
+
+
+<input type=hidden id="myDrawButton" value=draw onclick="{  // was a button when developing
+( async function (){
+    console.log('start draw')
+    // resize the detected boxes in case your displayed image has a different size then the original
+    const detectionsForSize = detections.map(det => det.forSize(myImg.width, myImg.height))
+    const canvas = document.getElementById('myCanvas01')
+    canvas.width = myImg.width
+    canvas.height = myImg.height
+    faceapi.drawDetection(canvas, detectionsForSize, { withScore: false }) 
+    
+    console.log('end draw ')
+    console.log(faceapi)
+    
+    await document.getElementById('myToCanvasButton').click() 
+                                                         
+                                                         
+    })()
+}">
+
+
+<input type=hidden id="myToCanvasButton" value="Image to Canvas" onclick="{   // was a button when developing
+    myImageToCanvas()
+}">
+
+
+
+
+
+<input type=button value="Grab Face Areas" onclick="{
+( async function (){
+console.log('Face Grab Start')
+const faceTensors = (await faceapi.extractFaceTensors(myImg, detections))
+
+await console.log('Faces extracted')
+                                                    
+// detect landmarks and get the aligned face image bounding boxes
+const alignedFaceBoxes = await Promise.all(faceTensors.map(
+  async (faceTensor, i) => {
+   // await  console.log('face #'+i)                                                
+    const faceLandmarks = await faceapi.detectLandmarks(faceTensor)
+    return faceLandmarks.align(detections[i])
+  }
+))
+
+await console.log('Done Aligned')
+// free memory for face image tensors after we detected the face landmarks
+faceTensors.forEach(t => t.dispose())
+
+await console.log('Disposes tensors')
+// get the face tensors for the aligned face images from the image (have to be disposed manually)
+const alignedFaceTensors = (await faceapi.extractFaceTensors(myImg, alignedFaceBoxes))
+
+await console.log('extracted')
+// compute the face descriptors from the aligned face images
+const descriptors = await Promise.all(alignedFaceTensors.map(
+  faceTensor => faceapi.computeFaceDescriptor(faceTensor)
+))
+
+await console.log('Computed, now drawing text')
+                                                    
+         
+console.log('alignedFaceTensors[0].id = '+alignedFaceTensors[0].id)
+                                                    
+////////////////// from common.js ///////////////////////////////                                                    
+   
+                                                    
+                                                    
+                                                 
+                                                    
+const classes = ['amy', 'bernadette', 'howard', 'leonard', 'penny', 'raj', 'sheldon', 'stuart']
+
+                                                    
+                                                    
+                                                    
+/*
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+function getImageUri(imageName) {
+  return `images/${imageName}`
+}
+
+function getFaceImageUri(className, idx) {
+  return `images/${className}/${className}${idx}.png`
+}
+
+async function fetchImage(uri) {
+  return (await fetch(uri)).blob()
+}
+
+async function requestExternalImage(imageUrl) {
+  const res = await fetch('fetch_external_image', {
+    method: 'post',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ imageUrl })
+  })
+  if (!(res.status < 400)) {
+    console.error(res.status + ' : ' + await res.text())
+    throw new Error('failed to fetch image from url: ' + imageUrl)
+  }
+
+  let blob
+  try {
+    blob = await res.blob()
+    return await faceapi.bufferToImage(blob)
+  } catch (e) {
+    console.error('received blob:', blob)
+    console.error('error:', e)
+    throw new Error('failed to load image from url: ' + imageUrl)
+  }
+}
+
+// fetch first image of each class and compute their descriptors
+async function initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
+  const maxAvailableImagesPerClass = 5
+  numImagesForTraining = Math.min(numImagesForTraining, maxAvailableImagesPerClass)
+  return Promise.all(classes.map(
+    async className => {
+      const descriptors = []
+      for (let i = 1; i < (numImagesForTraining + 1); i++) {
+        const img = await faceapi.bufferToImage(
+          await fetchImage(getFaceImageUri(className, i))
+        )
+        descriptors.push(await net.computeFaceDescriptor(img))
+      }
+      return {
+        descriptors,
+        className
+      }
+    }
+  ))
+}
+
+                                                    
+                                                    
+                                                    
+*/
+                                                    
+                                                    
+                                                    
+                                                    
+function getBestMatch(descriptorsByClass, queryDescriptor) {
+  console.log('Inside getBestMatch')                                                  
+  function computeMeanDistance(descriptorsOfClass) {
+    return faceapi.round(
+      descriptorsOfClass
+        .map(d => faceapi.euclideanDistance(d, queryDescriptor))
+        .reduce((d1, d2) => d1 + d2, 0)
+          / (descriptorsOfClass.length || 1)
+      )
+  }
+  return descriptorsByClass
+    .map(
+      ({ descriptors, className }) => ({
+        distance: computeMeanDistance(descriptors),
+        className
+      })
+    )
+    .reduce((best, curr) => best.distance < curr.distance ? best : curr)
+    console.log('Done getBestMatch')                                                         
+}                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+////////////////////////////////////////////////////////////////////////////////////////////                                                    
+                                                    
+                                                    
+       let detectionNet, recognitionNet, landmarkNet
+       let trainDescriptorsByClass = []                                                 
+       let minConfidence = 0.2                                             
+                                                    
+       const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
+                                                    
+                                                    
+        fullFaceDescriptions.forEach(({ detection, descriptor }) => {
+        faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
+        console.log(descriptor)
+        const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
+        console.log(trainDescriptorsByClass)   
+                                                    
+        const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
+        const { x, y, height: boxHeight } = detection.getBox()
+        faceapi.drawText(
+          canvas.getContext('2d'),
+          x,
+          y + boxHeight,
+          text,
+          Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 16 })
+        )
+      })
+                                                       
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+ ////////////////////////////////////////////                                                   
+                                                    
+// free memory for face image tensors after we computed their descriptors
+alignedFaceTensors.forEach(t => t.dispose())
+ 
+await console.log('each tensor disposed')   
+    })()
+}"><br><br>
+
+
+
+  
+
+                
+<img id="myImg01"    src="bigbang01.png" crossorigin="" ondrop="{ 
+     myLoadImage(event)
+  }" ondragover="{
+    event.preventDefault(); 
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = 'copy';
+    //document.getElementById('myDiv02').innerHTML = 'drag over'
+    //document.getElementById('myDetectButton').click()   // activate the detect funciton
+}"   /><br>
+
+
+<canvas id="myCanvas01"  > </canvas><br>
+
+
+<canvas id="overlay" />
+
+
+
+
+
+
+
