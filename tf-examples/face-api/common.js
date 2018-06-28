@@ -64,6 +64,8 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
   
   console.log('starting get best match')
   function computeMeanDistance(descriptorsOfClass) {
+    
+  console.log('starting Computer Mean distance')
     return faceapi.round(
       descriptorsOfClass
         .map(d => faceapi.euclideanDistance(d, queryDescriptor))
