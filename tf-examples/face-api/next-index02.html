@@ -145,7 +145,7 @@ const descriptors = await Promise.all(alignedFaceTensors.map(
 await console.log('Computed, now drawing text')
                                                     
          
-console.log('alignedFaceTensors[0].id = '+alignedFaceTensors[0].id)
+//console.log('alignedFaceTensors[0].id = '+alignedFaceTensors[0].id)
                                                     
 ////////////////// from common.js ///////////////////////////////                                                    
    
@@ -262,7 +262,7 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
                                                     
                                                     
        let detectionNet, recognitionNet, landmarkNet
-        trainDescriptorsByClass = []        // make it global                                          
+       trainDescriptorsByClass = []        // make it global                                          
        let minConfidence = 0.2                                             
                                                     
        const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
@@ -272,9 +272,17 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
         faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
         console.log(descriptor)
         const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
-        console.log(trainDescriptorsByClass)   
+                                                    
+       // console.log('trainDescriptorsByClass')        
+       // console.log(trainDescriptorsByClass)   
+       // console.log('descriptor')                    
+       // console.log(descriptor)                    
                                                     
         const text = `${bestMatch.distance < maxDistance ? bestMatch.className : 'unkown'} (${bestMatch.distance})`
+                                                    
+                   
+        console.log(text)                                                      
+                                                    
         const { x, y, height: boxHeight } = detection.getBox()
         faceapi.drawText(
           canvas.getContext('2d'),
