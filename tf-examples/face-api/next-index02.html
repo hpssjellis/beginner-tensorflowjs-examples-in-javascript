@@ -270,7 +270,8 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
                                                     
         fullFaceDescriptions.forEach(({ detection, descriptor }) => {
         faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
-        console.log(descriptor)
+        //console.log(descriptor)
+                                                    
         const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
                                                     
        // console.log('trainDescriptorsByClass')        
@@ -289,7 +290,7 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
           x,
           y + boxHeight,
           text,
-          Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 16 })
+          Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 22 })
         )
       })
                                                        
