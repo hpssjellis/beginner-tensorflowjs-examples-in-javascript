@@ -179,8 +179,8 @@ await console.log('Computed, now drawing text')
        canvas.width = myImg.width
        canvas.height = myImg.height                                             
                                                     
-        fullFaceDescriptions.forEach(({ detection, descriptor }) => {
-        faceapi.drawDetection(canvas, [detection], { withScore: false })
+        fullFaceDescriptions.forEach(({ document.detect2, descriptor }) => {
+        faceapi.drawDetection(canvas, [document.detect2], { withScore: false })
                            
       //  console.log('detection')  
       //  console.log(detection)                                         
@@ -206,13 +206,13 @@ await console.log('Computed, now drawing text')
                    
       //  console.log(text)                                                      
                                                     
-        const { x, y, height: boxHeight } = detection.getBox()    // need to fix this
+        const { x, y, height: boxHeight } = document.detect2.getBox()    // need to fix this
                                                     
      //   const x = 200
       //  const y = 100
       //   const boxHeight = 60
-            console.log('document.detect2')  
-            console.log(document.detect2)   
+          //  console.log('document.detect2')  
+          //  console.log(document.detect2)   
                                                     
         faceapi.drawText(
           canvas.getContext('2d'),
