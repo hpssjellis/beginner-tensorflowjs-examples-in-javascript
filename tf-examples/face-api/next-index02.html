@@ -50,7 +50,12 @@ Save an image of a character from the Big Bang Theory and then drag the image fr
      await faceapi.loadFaceDetectionModel('./weights/')
      await faceapi.loadFaceLandmarkModel('./weights/')    
      await faceapi.loadFaceRecognitionModel('./weights/')
-     await console.log('All 3 models loaded')
+     await console.log('All 3 models loaded, load descriptors')
+         
+    await document.getElementById('myLoadDescriptors').click()
+                                              
+     await console.log('Descriptors loaded')
+                                              
   })()
 }">
 
@@ -311,10 +316,10 @@ await console.log('each tensor disposed')
 
 
 
-<input type=button value="Test making descriptors" onclick="{
+<input type=hidden id="myLoadDescriptors" value="Test making descriptors" onclick="{
 ( async function (){
    trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
-    await console.log(trainDescriptorsByClass)
+  //  await console.log(trainDescriptorsByClass)
     })()
 }"><br><br>
 
