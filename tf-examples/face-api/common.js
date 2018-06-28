@@ -42,7 +42,7 @@ async function requestExternalImage(imageUrl) {
 async function initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
   const maxAvailableImagesPerClass = 5
   
-  console.log('starting initTrainDescriptorsByClass')
+  //console.log('starting initTrainDescriptorsByClass')
   numImagesForTraining = Math.min(numImagesForTraining, maxAvailableImagesPerClass)
   return Promise.all(classes.map(
     async className => {
@@ -63,10 +63,10 @@ async function initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
 
 function getBestMatch(descriptorsByClass, queryDescriptor) {
   
-  console.log('starting get best match')
+  //console.log('starting get best match')
   function computeMeanDistance(descriptorsOfClass) {
     
-  console.log('starting Computer Mean distance')
+  //console.log('starting Computer Mean distance')
     return faceapi.round(
       descriptorsOfClass
         .map(d => faceapi.euclideanDistance(d, queryDescriptor))
