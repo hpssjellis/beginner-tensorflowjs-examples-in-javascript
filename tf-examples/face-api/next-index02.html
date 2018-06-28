@@ -152,7 +152,7 @@ const classes = ['amy', 'bernadette', 'howard', 'leonard', 'penny', 'raj', 'shel
                                                     
                                                     
                                                     
-/*
+
                                                     
                                                     
                                                     
@@ -218,7 +218,7 @@ async function initTrainDescriptorsByClass(net, numImagesForTraining = 1) {
                                                     
                                                     
                                                     
-*/
+
                                                     
                                                     
                                                     
@@ -302,11 +302,20 @@ alignedFaceTensors.forEach(t => t.dispose())
  
 await console.log('each tensor disposed')   
     })()
+}">
+
+
+
+
+
+
+<input type=button value="Test making descriptors" onclick="{
+( async function (){
+   trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
+  
+    })()
 }"><br><br>
 
-
-
-  
 
                 
 <img id="myImg01"    src="bigbang01.png" crossorigin="" ondrop="{ 
