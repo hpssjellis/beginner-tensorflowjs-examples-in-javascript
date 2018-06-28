@@ -9,8 +9,10 @@
    
 <script>
       
-      document.trainDescriptorsByClass = []        // make it global    
-
+document.trainDescriptorsByClass = []        // make it global    
+document.detect2 = []
+      
+      
 async function myCheckImage(){
 console.log('Perhaps click the ')
 //document.getElementById('myDetectButton').click()        
@@ -129,7 +131,8 @@ alignedFaceBoxes = await Promise.all(faceTensors.map(
    // await  console.log('face #'+i)                                                
     const faceLandmarks = await faceapi.detectLandmarks(faceTensor)
     
-   // console.log(detections[i])                                                 
+   // console.log(detections[i])   
+    document.detect2[i] = detections[i]                                                
     return faceLandmarks.align(detections[i])
   }                                                  
 ))
@@ -208,6 +211,8 @@ await console.log('Computed, now drawing text')
      //   const x = 200
       //  const y = 100
       //   const boxHeight = 60
+            console.log('document.detect2')  
+            console.log(document.detect2)   
                                                     
         faceapi.drawText(
           canvas.getContext('2d'),
