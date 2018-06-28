@@ -314,7 +314,7 @@ await console.log('each tensor disposed')
 <input type=button value="Test making descriptors" onclick="{
 ( async function (){
    trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
-  
+    await console.log(trainDescriptorsByClass)
     })()
 }"><br><br>
 
