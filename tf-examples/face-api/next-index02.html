@@ -128,9 +128,10 @@ const alignedFaceBoxes = await Promise.all(faceTensors.map(
   async (faceTensor, i) => {
    // await  console.log('face #'+i)                                                
     const faceLandmarks = await faceapi.detectLandmarks(faceTensor)
+    
+    console.log(detections[i])                                                 
     return faceLandmarks.align(detections[i])
-  }
- console.log(detections)                                                   
+  }                                                  
 ))
 
 await console.log('Done Aligned')
