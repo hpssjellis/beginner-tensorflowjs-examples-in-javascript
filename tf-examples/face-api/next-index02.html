@@ -8,6 +8,8 @@
 
    
 <script>
+      
+      document.trainDescriptorsByClass = []        // make it global    
 
 async function myCheckImage(){
 console.log('Perhaps click the ')
@@ -261,8 +263,7 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
 ////////////////////////////////////////////////////////////////////////////////////////////                                                    
                                                     
                                                     
-       let detectionNet, recognitionNet, landmarkNet
-       trainDescriptorsByClass = []        // make it global                                          
+       let detectionNet, recognitionNet, landmarkNet                                      
        let minConfidence = 0.2                                             
                                                     
        const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
@@ -277,10 +278,10 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
        // console.log(descriptor)              
         
         console.log('trainDescriptorsByClass')        
-        console.log(trainDescriptorsByClass) 
+        console.log(document.trainDescriptorsByClass) 
                                                     
                                                     
-        const bestMatch = getBestMatch(trainDescriptorsByClass, descriptor)
+        const bestMatch = getBestMatch(document.trainDescriptorsByClass, descriptor)
               
                                                     
                                                     
@@ -336,7 +337,7 @@ await console.log('each tensor disposed')
    trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
                                                                                    
     console.log('trainDescriptorsByClass')  
-    await console.log(trainDescriptorsByClass)
+    await console.log(document.trainDescriptorsByClass)
     })()
 }"><br><br>
 
