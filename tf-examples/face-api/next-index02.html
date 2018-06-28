@@ -31,6 +31,8 @@ async function myImageToCanvas(myEvent){
     ctx.globalAlpha = 0.5;
     var img=document.getElementById("myImg01");  
     ctx.drawImage(img, 0, 0);
+    var img=document.getElementById("overlay");  
+    ctx.drawImage(img, 0, 0);
 };
 
 </script>
@@ -168,14 +170,15 @@ await console.log('Computed, now drawing text')
        
        // possible repeat canvas here                                             
                                                     
-       const canvas = document.getElementById('myCanvas01')
+       const canvas = document.getElementById('overlay')
        canvas.width = myImg.width
        canvas.height = myImg.height                                             
                                                     
         fullFaceDescriptions.forEach(({ detection, descriptor }) => {
-      //  faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
         faceapi.drawDetection(canvas, [detection], { withScore: false })
-                                                    
+                           
+        console.log('detection')  
+        console.log(detection)                                         
                                                     
                                                     
         //console.log(descriptor)
@@ -204,7 +207,7 @@ await console.log('Computed, now drawing text')
           x,
           y + boxHeight,
           text,
-          Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 22 })
+          Object.assign(faceapi.getDefaultDrawOptions(), { color: 'red', fontSize: 16 })
         )
       })
                                                        
@@ -264,7 +267,7 @@ await console.log('each tensor disposed')
 <canvas id="myCanvas01"  > </canvas><br>
 
 
-<canvas id="overlay" />
+<canvas id="overlay" /><br>
 
 
 
