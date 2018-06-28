@@ -268,7 +268,12 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
        let maxDistance  = 0.4                                             
                                                     
        const fullFaceDescriptions = (await faceapi.allFaces(myImg, minConfidence)).map(fd => fd.forSize(width, height))
+       
+       // possible repeat canvas here                                             
                                                     
+       const canvas = document.getElementById('myCanvas01')
+       canvas.width = myImg.width
+       canvas.height = myImg.height                                             
                                                     
         fullFaceDescriptions.forEach(({ detection, descriptor }) => {
       //  faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
