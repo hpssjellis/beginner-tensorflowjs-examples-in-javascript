@@ -271,7 +271,11 @@ function getBestMatch(descriptorsByClass, queryDescriptor) {
                                                     
                                                     
         fullFaceDescriptions.forEach(({ detection, descriptor }) => {
-        faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
+      //  faceapi.drawDetection('myCanvas01', [detection], { withScore: false })
+        faceapi.drawDetection(canvas, [detection], { withScore: false })
+                                                    
+                                                    
+                                                    
         //console.log(descriptor)
                                                     
                                                 
