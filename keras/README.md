@@ -1,5 +1,15 @@
 This is to store any keras information that I might use in the examples
 
+Latest batch of files Jun 29, 2018
+
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/kl01-basic.html
+
+
+
+
+
 
 from scai  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/lstm-scai-04.html
