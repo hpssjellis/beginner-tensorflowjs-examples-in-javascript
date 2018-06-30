@@ -55,7 +55,7 @@ So now lets make a keras layers Neural Network with both integer inputs and outp
     
 <div id="myDiv123Code"> 
 Samples per batch : <input id="myBatch" type=number value=30>, 
-Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br>
+Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br>
  
 <input type="number" id="myAsk" value="5"><br> 
  
@@ -101,7 +101,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br>
                                                                                  
     const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
                                                                                     
-    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + Math.round(await myPredictArray.data()) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                 
   }   // end myGo function
 
@@ -114,7 +114,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br>
    (async function () {                                                                
    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
                                                                                     
-   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + Math.round(await myPredictArray.data()) +'<br>'
    })() // end the inline async funciton                                                                                     
                                                                                   
  }"><br><br>
