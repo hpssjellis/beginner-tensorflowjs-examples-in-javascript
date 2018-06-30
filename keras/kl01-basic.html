@@ -1,147 +1,91 @@
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> </script>
-
-
-
-
-<pre>
-TensorFlow.js example: Trains LSTM model to perform the following sequence task:
-
-Given a sequence of 0s and 1s of fixed length (10), output a single binary number (0 or 1).
-
-The training data has the following pattern:
-
-The output (i.e., label) is 1 if there are four or more consecutive and identical
-items (either 0s or 1s) in the input sequence. Otherwise, the output is 0. For example:
-   Sequence [0, 1, 0, 1, 0, 1, 0, 0, 1, 0] --> Label: 0.
-   Sequence [0, 1, 1, 1, 1, 0, 1, 0, 0, 1] --> Label: 1.
-   Sequence [0, 0, 0, 0, 0, 0, 1, 0, 0, 1] --> Label: 1.
-</pre>
 
 
 
 
 
 
-<div>
-  <span>Epochs to train:</span>
-  <input id="epochs-to-train" value="30"></input>
-  <div>
-    <button id="start-training" onclick="train()">Start training</button>
-  </div>
-</div>
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
 
-<br/>
 
-<div>
-  <div id="myDiv01">...</div>
+<!-- the online version that these examples were made with  -->
 
-</div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"></script>
 
 
 
 
 
-<script>
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
 
 
 
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
 
-const sequenceLength = 10;
-const stretchLengthThreshold = 4;
-
-
-// Returns:
-//   1. An Array of randomly-generated 0s and 1s.
-//   2. The associated output (label): a 0 or a 1.
-
-function generateSequenceAndLabel(len) {
-  const sequence = [];
-  let currentItem = -1;
-  let stretchLength = 0;
-  let label = 0;
-  for (let i = 0; i < len; ++i) {
-    const item = Math.random() > 0.5 ? 1 : 0;
-    sequence.push(item);
-    if (currentItem === item) {
-      stretchLength++;
-    } else {
-      currentItem = item;
-      stretchLength = 1;
-    }
-    if (stretchLength >= stretchLengthThreshold) {
-      label = 1;
-    }
-  }
-  return [sequence, label];
-}
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7/dist/tf.js"></script>
+--> 
 
 
 
-
-// Generates a dataset consisting of sequences and their corresponding labels.
-//
-// Args:
-//   numExamples: Number of examples to generate.
-//   sequenceLength: Length of each individual sequence.
-//
-// Returns:
-//   1. Sequence Tensor: a Tensor of shape [numExamples, sequenceLength, 2].
-//      The first dimension is the batch examples.
-//      The second dimension is the time axis (sequence items).
-//      The third dimension is the one-hot encoding of the 0/1 items.
-//   2. Label Tensor: a Tensor of shape [numExamples, 1].
-//      Each element of this Tensor is 0 or 1. 
-
-function generateDataset(numExamples, sequenceLength) {
-  const sequencesBuffer = tf.buffer([numExamples, sequenceLength, 2]);
-  const labelsBuffer = tf.buffer([numExamples, 1]);
-  for (let i = 0; i < numExamples; ++i) {
-    const [sequence, label] = generateSequenceAndLabel(sequenceLength);
-    for (let j = 0; j < sequenceLength; ++j) {
-      sequencesBuffer.set(1, i, j, sequence[j]);
-    }
-    labelsBuffer.set(label, i, 0);
-  }
-//sequencesBuffer.toTensor().print()
-//labelsBuffer.toTensor().print()
-  return [sequencesBuffer.toTensor(), labelsBuffer.toTensor()];
-}
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
 
 
 
+    
+    
+<h2 align=center> Most of the examples are in the following format:</h2>
 
 
-// Train a model to predict the label based on the sequence.
 
-async function train() {
-  // Define the topology of the model.
-  const model = tf.sequential();
-  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 2]}));
-  model.add(tf.layers.dense({units: 1, activation: 'sigmoid'}));
-  
-  // Compile model to prepare for training.
-  const learningRate = 4e-3;
-  const optimizer = tf.train.rmsprop(learningRate);
-  model.compile({
-    loss: 'binaryCrossentropy',
-    optimizer: optimizer,
-    metrics: ['acc']
-  });
-  
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+A very simple xOr Neural Network using Tensorflowjs Layers<br>
+Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network <br>
+The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was written for NodeJS, his code is at 
+ <a href="https://github.com/mattcam/tfjs_xor_example">Code</a><br>
+ The expected output for xOr input is<br>
+ [0,0] = ~ 0<br>
+ [1,0] = ~ 1<br>
+ [0,1] = ~ 1<br>
+ [1,1] = ~ 0<br>
+ 
+ 
+ 
+ 
+</div><br>
 
 
-  // Generate a number of examples for training.
+    
+<div id="myDiv123Code"> 
 
-  const numTrainExamples = 500;
-  console.log('Generating training data...');
-  const [trainSequences, trainLabels] = generateDataset(numTrainExamples, 10);
+Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myBatch" type=number value=300><br>
+ 
+<input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
-  console.log('Training model...');
-  const fitOutput = await model.fit(
-      trainSequences, trainLabels, {
-        epochs: Number.parseInt(document.getElementById('epochs-to-train').value),
+   document.getElementById('myButton123').style.backgroundColor = 'red'  
+                                                                            
+                                                                            
+  async function myGo() {
+    const model = tf.sequential();
+
+    model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
+                                                                                                                                                                          
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
+
+    const training_data   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
+    const training_target = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
+
+   
+
+                                                                                    
+                                                                       
+        var myFit = await model.fit(training_data, training_target, {epochs: Number.parseInt(document.getElementById('myEpoch').value}), 
         validationSplit: 0.15,
         callbacks: {
           onBatchEnd: async (batch, logs) => {
@@ -149,34 +93,103 @@ async function train() {
           },
           onEpochEnd: async (epoch, logs) => {
             // Update the UI to display the current loss and accuracy values.
-            document.getElementById('myDiv01').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
-            document.getElementById('myDiv01').innerHTML += 'Training loss: ' + logs.loss + '<br>'
-            document.getElementById('myDiv01').innerHTML += 'Training accuracy: ' + logs.acc + '<br>'
-            document.getElementById('myDiv01').innerHTML += 'Validation loss: ' + logs.val_loss + '<br>'
-            document.getElementById('myDiv01').innerHTML += 'Validation accuracy: ' + logs.val_acc + '<br><br>'
-            document.getElementById('myDiv01').innerHTML += 'The following are one hot encoded. So value 0 = [1,0] and 1 = [0,1]  <br>'
-            document.getElementById('myDiv01').innerHTML += 'Example Sequence: ' + trainSequences + '<br><br>'
-            document.getElementById('myDiv01').innerHTML += 'Example Label for each group of ten above: ' + trainLabels + '<br>'
-
+            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+            document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
         }
-      });
-  
-  // Memory clean up: Dispose the training data.
-  trainSequences.dispose();
-  trainLabels.dispose();
-}
+      });                                                                         
+                                                                                  
+    const myPredictArray = await model.predict(training_data).data()
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray' // reset button color                                                                               
+  }
+
+   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color.
+
+
+}"><br><br>
+
+</div>
+<div id='myDiv123'>...</div><br>
+
+
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea123"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
 
 
 
 
+<br><br><br><hr><br><br><br><br>
 
 
 
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
 
 
-</script>
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
 
 
-      
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce123 = true    // so textareas are only clicked once
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>
+
