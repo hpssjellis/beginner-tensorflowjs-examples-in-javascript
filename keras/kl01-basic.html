@@ -97,7 +97,7 @@ Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myB
             document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
-        }
+        
       });                                                                         
                                                                                   
     const myPredictArray = await model.predict(training_data).data()
@@ -107,7 +107,7 @@ Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myB
     document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' // reset button color                                                                               
-  }
+  }   // end myGo function
 
    setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color.
 
