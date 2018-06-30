@@ -52,7 +52,9 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
  [0,0] = ~ 0<br>
  [1,0] = ~ 1<br>
  [0,1] = ~ 1<br>
- [1,1] = ~ 0<br>
+ [1,1] = ~ 0<br><br>
+ 
+ Warning takes a while to train as the Neural Network only has a 2 node input, 10 node hidden layer and one node output.
  
  
  
@@ -63,7 +65,8 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
     
 <div id="myDiv123Code"> 
 
-Samples per batch : <input id="myBatch" type=number value=4>, Epochs (# of batches to run) : <input id="myEpoch" type=number value=3000><br>
+Samples per batch : <input id="myBatch" type=number value=4>, 
+Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
@@ -74,25 +77,14 @@ Samples per batch : <input id="myBatch" type=number value=4>, Epochs (# of batch
     const model = tf.sequential();
 
     model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({units: 20,  activation: 'sigmoid', }) );  // then to 1 output layer
-    model.add(tf.layers.dense({units: 30,  activation: 'sigmoid', }) );  // then to 1 output layer
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
-     
-                                                                                    
-                                                                                    
-                                                                                    
+                                                                                  
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
-
-                                                                          
-                                                                                    
+                                                                                   
     const training_data   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
     const training_target = tf.tensor2d([0,1,1,0], shape=[4,1]);             // needs shape defined
-
-   
-
-                                                                                    
                                                                        
-        var myFit = await model.fit(training_data, training_target, {
+    var myFit = await model.fit(training_data, training_target, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
         epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
@@ -110,7 +102,7 @@ Samples per batch : <input id="myBatch" type=number value=4>, Epochs (# of batch
           },
         }  // end all callbacks
       }    // end configurtions
-      );   // end fit                                                                       
+     );   // end fit                                                                       
                                                                                   
     const myPredictArray = await model.predict(training_data).data()
                                                                                     
@@ -121,8 +113,8 @@ Samples per batch : <input id="myBatch" type=number value=4>, Epochs (# of batch
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' // reset button color                                                                               
   }   // end myGo function
 
-  //setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color.
-  myGo()
+  //setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color if needed.
+  myGo()   // run this function
 
 }"><br><br>
 
