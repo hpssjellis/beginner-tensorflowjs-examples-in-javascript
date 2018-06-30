@@ -86,6 +86,7 @@ Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myB
                                                                                     
                                                                        
         var myFit = await model.fit(training_data, training_target, {
+        batchSize :  Number.parseInt(document.getElementById('myBatch').value),                                                                           
         epochs: Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15 percent for testing
         initialEpoch : 0,        // for restarting training
