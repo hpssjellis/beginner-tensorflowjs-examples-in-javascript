@@ -54,7 +54,9 @@ So now lets make a keras layers Neural Network with both integer inputs and outp
 
     
 <div id="myDiv123Code"> 
-
+Samples per batch : <input id="myBatch" type=number value=30>, 
+Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br>
+ 
 <input type="number" id="myAsk" value="5"><br> 
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{
@@ -64,15 +66,17 @@ So now lets make a keras layers Neural Network with both integer inputs and outp
                                                                             
                                                                             
   async function myGo() {
-    const model = tf.sequential();
+    model = tf.sequential(); // no const so that it is a global variable 
 
-    model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
                                                                                   
-    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                    
-    const training_data   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
-    const training_target = tf.tensor2d([0,1,1,0], shape=[4,1]);             // needs shape defined
+    const training_data   = tf.tensor2d([[1], [2], [3], [4]], shape=[4, 1]);
+    const training_target = tf.tensor2d([[1], [3], [5], [7]], shape=[4, 1]);
+
                                                                        
     var myFit = await model.fit(training_data, training_target, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
@@ -94,13 +98,11 @@ So now lets make a keras layers Neural Network with both integer inputs and outp
       }    // end configurtions
      );   // end fit                                                                       
                                                                                   
-    const myPredictArray = await model.predict(training_data).data()
+                                                                                 
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], [1, 1]))  
                                                                                     
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
-    document.getElementById('myButton123').style.backgroundColor = 'lightgray' // reset button color                                                                               
+    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                 
   }   // end myGo function
 
   //setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color if needed.
