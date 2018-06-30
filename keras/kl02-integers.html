@@ -39,7 +39,7 @@
 
     
     
-<h2 align=center> Most of the examples are in the following format:</h2>
+<h2 align=center>Keras Layers as easy as I can make them</h2>
 
 
 
@@ -55,10 +55,10 @@ So now lets make a keras layers Neural Network with both integer inputs and outp
     
 <div id="myDiv123Code"> 
 
-Samples per batch : <input id="myBatch" type=number value=4>, 
-Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
+<input type="number" id="myAsk" value="5"><br> 
  
-<input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
+<input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{
+       document.getElementById('myButton123').style.backgroundColor = 'red'     
 
    document.getElementById('myButton123').style.backgroundColor = 'red'  
                                                                             
@@ -106,7 +106,19 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
   //setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color if needed.
   myGo()   // run this function
 
-}"><br><br>
+}">
+ 
+ <input id="myButton123b" type="button" value="re-Test" onclick="{
+   (async function () {                                                                
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
+                                                                                    
+   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   })() // end the inline async funciton                                                                                     
+                                                                                  
+ }"><br><br>
+ 
+ 
+
 
 </div>
 <div id='myDiv123'>...</div><br>
