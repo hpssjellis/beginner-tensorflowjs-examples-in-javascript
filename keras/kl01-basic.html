@@ -63,7 +63,7 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
     
 <div id="myDiv123Code"> 
 
-Samples per batch : <input id="myBatch" type=number value=4>, Epoch (# of batches to run) : <input id="myEpoch" type=number value=2000><br>
+Samples per batch : <input id="myBatch" type=number value=4>, Epochs (# of batches to run) : <input id="myEpoch" type=number value=2000><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
@@ -78,8 +78,8 @@ Samples per batch : <input id="myBatch" type=number value=4>, Epoch (# of batche
                                                                                                                                                                           
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
 
-    const training_data   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
-    const training_target = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
+    const training_data   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
+    const training_target = tf.tensor2d([0,1,1,0], shape=[4,1]);             // needs shape defined
 
    
 
