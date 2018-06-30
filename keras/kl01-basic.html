@@ -74,22 +74,16 @@ Samples per batch : <input id="myBatch" type=number value=4>, Epochs (# of batch
     const model = tf.sequential();
 
     model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({units: 20,  activation: 'sigmoid', }) );  // then to 1 output layer
+    model.add(tf.layers.dense({units: 30,  activation: 'sigmoid', }) );  // then to 1 output layer
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
      
                                                                                     
                                                                                     
                                                                                     
-  //  model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
 
-    // Compile model to prepare for training.
-  const learningRate = 4e-3;
-  const optimizer = tf.train.rmsprop(learningRate);
-  model.compile({
-    loss: 'binaryCrossentropy',
-    optimizer: optimizer,
-    metrics: ['acc']
-  });                                                                                  
-                                                                                    
+                                                                          
                                                                                     
     const training_data   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
     const training_target = tf.tensor2d([0,1,1,0], shape=[4,1]);             // needs shape defined
