@@ -85,8 +85,11 @@ Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myB
 
                                                                                     
                                                                        
-        var myFit = await model.fit(training_data, training_target, {epochs: Number.parseInt(document.getElementById('myEpoch').value)}, 
-        validationSplit: 0.15,
+        var myFit = await model.fit(training_data, training_target, {
+        epochs: Number.parseInt(document.getElementById('myEpoch').value),  
+        validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15 percent for testing
+        initialEpoch : 0,        // for restarting training
+        shuffle : true,          // shuffle input data                                                                   
         callbacks: {
           onBatchEnd: async (batch, logs) => {
             await tf.nextFrame();  // This improves UI responsiveness during training.
@@ -97,8 +100,9 @@ Epoch : <input id="myEpoch" type=number value=10> Epoch Batches : <input id="myB
             document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
-        }
-      });                                                                         
+        }  // end all callbacks
+      }   // end configurtions
+      );  // end fit                                                                       
                                                                                   
     const myPredictArray = await model.predict(training_data).data()
                                                                                     
