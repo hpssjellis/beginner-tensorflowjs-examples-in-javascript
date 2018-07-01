@@ -79,14 +79,13 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                                    
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // generates a random number between 0.001 and 500.000
-      yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3                                                                            
+      document.getElementById('myX').value += xTrainingDataArray[myLoop] + ',' 
+      yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
+      document.getElementById('myY').value  += yTrainingTargetArray[myLoop] + ','                                                                           
    }                                                                                
    //console.log(xTrainingDataArray)
    //console.log(yTrainingTargetArray)                                                                                 
-   
-   document.getElementById('myX').value = xTrainingDataArray      
-   document.getElementById('myY').value = yTrainingTargetArray                                                                               
-                                                                                   
+                                                                                                                                                                
    const xTrainingData   = tf.tensor2d(xTrainingDataArray, shape=[myInputs, 1]);
    const yTrainingTarget = tf.tensor2d(yTrainingTargetArray, shape=[myInputs, 1]);
                                                                           
