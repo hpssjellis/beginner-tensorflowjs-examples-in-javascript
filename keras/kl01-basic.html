@@ -73,7 +73,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
    document.getElementById('myButton123').style.backgroundColor = 'red'  
                                                                             
                                                                             
-  async function myGo() {
+  (async function() {
     const model = tf.sequential();
 
     model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
@@ -111,10 +111,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
     document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' // reset button color                                                                               
-  }   // end myGo function
-
-  //setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color if needed.
-  myGo()   // run this function
+  })()  // end large async inline function
 
 }"><br><br>
 
