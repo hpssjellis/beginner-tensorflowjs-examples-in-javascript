@@ -4,9 +4,6 @@ Latest batch of files Jun 29, 2018
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/kl01-basic.html
-
-
 A menu of issues at 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-links.html
