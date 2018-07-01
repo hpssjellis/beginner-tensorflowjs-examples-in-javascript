@@ -1,0 +1,246 @@
+
+
+
+
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>Keras Layers as easy as I can make them</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+So now lets make a keras layers Neural Network with both decimal inputs and outputs<br><br>
+
+xTrainingData a random set of 5 (default) decimal numbers as X between the values 0.001 and 500.00 <br>
+yTrainingTarget y calculated from 2X+3 <br>
+ 
+ 
+ 
+</div><br>
+
+
+    
+<div id="myDiv123Code"> 
+Samples per batch : <input id="myBatch" type=number value=4>, 
+Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br><br>
+ 
+ 
+xTrainingData: <input type="text" id="myX" size="100" value="1.20, 2.10, 3.40, 4.20"><br>  
+yTrainingTarget: <input type="text" id="myY" size="100" value="5.40, 7.20, 9.80, 11.40"><br><br> 
+ 
+Enter your own data for your own equation, or generate data based on the equation 2X+3<br>
+<input type="button" value="Random Generate" onClick="{
+                                                      
+   let xTrainingDataArray   = []                                                                             
+   let yTrainingTargetArray = []      
+   document.getElementById('myX').value = ''    
+   document.getElementById('myY').value = ''                                                   
+                                                      
+   myInputs =  Number.parseInt(document.getElementById('myBatch').value)
+                                                      
+   for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
+      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 500)/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
+      yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
+      if (myLoop == myInputs-1)  {   // last value does not want a comma on the end  
+         document.getElementById('myX').value += xTrainingDataArray[myLoop]                                                       
+         document.getElementById('myY').value += yTrainingTargetArray[myLoop]  
+      } else {                                                
+         document.getElementById('myX').value += xTrainingDataArray[myLoop] + ','                                                       
+         document.getElementById('myY').value += yTrainingTargetArray[myLoop] + ','  
+      }                                                
+   }                                                   
+ }"> <br><br> 
+ 
+Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
+     document.getElementById('myAnswer').value = document.getElementById('myAsk').value*2 + 3
+ }"> --> For 2X+3 should equal about <input type="number" id="myAnswer" value="13.64"><br><br><br>
+ 
+ 
+ 
+<input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{  
+
+   document.getElementById('myButton123').style.backgroundColor = 'red'  
+
+/////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
+
+   let xArray = document.getElementById('myX').value.split(',')
+   let yArray = document.getElementById('myY').value.split(',')   
+                                                                                   
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+                                           
+  // console.log(xTrainingData)
+  // console.log(yTrainingTarget)  
+                                                                               
+
+/////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
+                                                                                   
+  (async function() {
+    model = tf.sequential(); // no const so that it is a global variable 
+
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
+                                                                                  
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+ 
+/////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+    
+    //xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+    //yTrainingTarget.print()
+                                                                                   
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
+        epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
+        validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
+        initialEpoch : 0,        // for restarting training
+        shuffle : false,         // shuffle input data                                                                   
+        callbacks: {
+          onBatchEnd: async (batch, logs) => {
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
+          onEpochEnd: async (epoch, logs) => {
+            // Update the UI to display the current loss and accuracy values.
+            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+            document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
+        }  // end all callbacks
+      }    // end configurtions
+     );   // end fit                                                                       
+                                                                                  
+ 
+/////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////  
+                                                                                   
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray'  
+                                                                                   
+  })()   // End large inline async function
+
+}">
+ 
+ <input id="myButton123b" type="button" value="re-Test" onclick="{
+   (async function () {                                                                
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
+                                                                                    
+   document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
+   })() // end the inline async funciton                                                                                     
+                                                                                  
+ }"><br><br>
+ 
+ 
+
+
+</div>
+<div id='myDiv123'>...</div><br>
+
+
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea123"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce123 = true    // so textareas are only clicked once
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>
