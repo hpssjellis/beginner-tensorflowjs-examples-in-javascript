@@ -77,9 +77,11 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    document.getElementById('myButton123').style.backgroundColor = 'red'  
 
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
-                                                                                                                                                                                                                                                                                 
-   const xTrainingData   = tf.tensor2d(document.getElementById('myX').value.split(','), shape=[document.getElementById('myX').value.length, 1]);
-   const yTrainingTarget = tf.tensor2d(document.getElementById('myY').value.split(','), shape=[document.getElementById('myY').value.length, 1]);
+   let xArray = document.getElementById('myX').value.split(',')
+   let yArray = document.getElementById('myY').value.split(',')   
+                                                                                   
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
    console.log(xTrainingDataArray)
    console.log(yTrainingTargetArray)                                                                           
