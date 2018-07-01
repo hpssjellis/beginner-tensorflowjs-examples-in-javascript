@@ -44,7 +44,7 @@
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 So now lets make a keras layers Neural Network with both integer inputs and outputs<br><br>
 
-xTrainingData a random set of 100 decimal numbers as x between the values 0.001 and 500.00 <br>
+xTrainingData a random set of 100 (default) decimal numbers as x between the values 0.001 and 500.00 <br>
 yTrainingTarget y calculated from 2X+3 <br>
  
  
@@ -57,6 +57,7 @@ yTrainingTarget y calculated from 2X+3 <br>
 Samples per batch : <input id="myBatch" type=number value=30>, 
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br><br>
  
+Number of decimals to train: <input type="number" id="myNumber" value="100"><br> 
 Test the data: <input type="number" id="myAsk" value="5.32"><br> 
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{  
@@ -67,7 +68,7 @@ Test the data: <input type="number" id="myAsk" value="5.32"><br>
    
    let xTrainingDataArray   = []                                                                             
    let yTrainingTargetArray = []                                                                                
-   for (let myLoop = 1; myLoop <= 100; myLoop++){
+   for (let myLoop = 1; myLoop <= Number.parseInt(document.getElementById('myBatch').value)-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // gernerates a random number between 0.001 and 500.000
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3                                                                            
    }                                                                                
