@@ -58,7 +58,9 @@ Samples per batch : <input id="myBatch" type=number value=30>,
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br><br>
  
 Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="100"><br> 
-Test the data: <input type="number" id="myAsk" value="5.32"><br> 
+Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
+    alert(document.getElementById('myAsk').value)
+ }"> --> should equal about <input type="number" id="myAnswer" value="13.64"><br> 
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{  
 
