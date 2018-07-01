@@ -79,8 +79,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    //console.log(xTrainingDataArray)
    //console.log(yTrainingTargetArray)                                                                                 
                                                                                    
-   const xTrainingData   = tf.tensor2d(xTrainingDataArray, shape=[myInputs, 1]);
-   const yTrainingTarget = tf.tensor2d(yTrainingTargetArray, shape=[myInputs, 1]);
+   const xTrainingData   = tf.tensor2d(xTrainingDataArray, shape=[1, myInputs]);
+   const yTrainingTarget = tf.tensor2d(yTrainingTargetArray, shape=[1, myInputs]);
                                                                           
 
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
