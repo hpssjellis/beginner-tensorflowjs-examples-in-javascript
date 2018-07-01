@@ -61,9 +61,6 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br><br
 xTrainingData: <input type="text" id="myX" size="100" value="1.20, 2.10, 3.40, 4.20"><br>  
 yTrainingTarget: <input type="text" id="myY" size="100" value="5.40, 7.20, 9.80, 11.40"><br><br><br> 
 
- 
-Number of decimals to generate: <input type="number" id="myNumberOfDecimals" value="4"><br> 
- 
 <input type="button" value="Random Generate" onClick="{
                                                       
    let xTrainingDataArray   = []                                                                             
@@ -71,8 +68,7 @@ Number of decimals to generate: <input type="number" id="myNumberOfDecimals" val
    document.getElementById('myX').value = ''    
    document.getElementById('myY').value = ''                                                   
                                                       
-   myInputs =  Number.parseInt(document.getElementById('myNumberOfDecimals').value)
-   document.getElementById('myBatch').value =  myInputs
+   myInputs =  Number.parseInt(document.getElementById('myBatch').value)
                                                       
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 500)/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
