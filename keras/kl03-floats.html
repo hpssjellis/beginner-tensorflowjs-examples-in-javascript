@@ -73,7 +73,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    myInputs =  Number.parseInt(document.getElementById('myNumberOfDecimals').value)
                                                                                    
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
-      xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // gernerates a random number between 0.001 and 500.000
+      xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // generates a random number between 0.001 and 500.000
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3                                                                            
    }                                                                                
    //console.log(xTrainingDataArray)
@@ -96,8 +96,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
  
 /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
     
-    xTrainingData.print()    // have a look at the training tensor in the console                                                                             
-    yTrainingTarget.print()
+    //xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+    //yTrainingTarget.print()
                                                                                    
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
