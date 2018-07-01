@@ -75,7 +75,7 @@ Number of decimals to generate: <input type="number" id="myNumberOfDecimals" val
    document.getElementById('myBatch').value =  myInputs
                                                       
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
-      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 50000)/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
+      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 500)/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
       document.getElementById('myX').value += xTrainingDataArray[myLoop] + ',' 
                                                       
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
