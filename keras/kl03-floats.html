@@ -57,7 +57,7 @@ yTrainingTarget y calculated from 2X+3 <br>
 Samples per batch : <input id="myBatch" type=number value=30>, 
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br><br>
  
-Number of decimals to train: <input type="number" id="myNumber" value="100"><br> 
+Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="100"><br> 
 Test the data: <input type="number" id="myAsk" value="5.32"><br> 
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{  
@@ -68,7 +68,7 @@ Test the data: <input type="number" id="myAsk" value="5.32"><br>
    
    let xTrainingDataArray   = []                                                                             
    let yTrainingTargetArray = []                                                                                
-   for (let myLoop = 1; myLoop <= Number.parseInt(document.getElementById('myBatch').value)-1; myLoop++){
+   for (let myLoop = 1; myLoop <= Number.parseInt(document.getElementById('myNumberOfDecimals').value)-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // gernerates a random number between 0.001 and 500.000
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3                                                                            
    }                                                                                
