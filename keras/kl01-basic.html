@@ -71,10 +71,14 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
 
    document.getElementById('myButton123').style.backgroundColor = 'red'  
-                                                                                                                                                             
+                                                                                    
+/////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////  
+                                                                                    
    const xTrainingData   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
-                                                                                                                                                                       
+
+/////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////   
+                                                                                    
   (async function() {
     const model = tf.sequential();
 
@@ -82,7 +86,9 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
                                                                                   
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
-                                                                       
+
+/////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////       
+                                                                                    
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
         epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
@@ -102,7 +108,9 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
         }  // end all callbacks
       }    // end configurtions
      );   // end fit                                                                       
-                                                                                  
+
+/////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////   
+                                                                                    
     const myPredictArray = await model.predict(xTrainingData).data()
                                                                                     
     document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
