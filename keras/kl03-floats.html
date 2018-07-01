@@ -57,11 +57,16 @@ yTrainingTarget y calculated from 2X+3 <br>
 Samples per batch : <input id="myBatch" type=number value=30>, 
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br><br>
  
-Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="5"><br> <br> 
  
 xTrainingData: <input type="text" id="myX" size="100" value="1.2, 2.1, 3.4, 4.2"><br>  
 yTrainingTarget: <input type="text" id="myY" size="100" value="1.1, 3.3, 5.2, 7.1"><br> <br> 
+
  
+Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="5"><br> <br> 
+ 
+<input type="button" value="Random Generate" onchange="{
+     alert()
+ }"> <br> 
  
 Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
      document.getElementById('myAnswer').value = document.getElementById('myAsk').value*2 + 3
@@ -72,23 +77,12 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    document.getElementById('myButton123').style.backgroundColor = 'red'  
 
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
-   
-   xTrainingDataArray   = []                                                                             
-   yTrainingTargetArray = []       
-   myInputs =  Number.parseInt(document.getElementById('myNumberOfDecimals').value)
-                                                                                   
-   for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
-      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 50000)/100 + 0.001)   // generates a random number between 0.001 and 500.000
-      document.getElementById('myX').value += xTrainingDataArray[myLoop].toFixed(3) + ',' 
-      yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
-      document.getElementById('myY').value  += yTrainingTargetArray[myLoop].toFixed(3) + ','                                                                           
-   }                                                                                
-   //console.log(xTrainingDataArray)
-   //console.log(yTrainingTargetArray)                                                                                 
-                                                                                                                                                                
+                                                                                                                                                                                                                                                                                 
    const xTrainingData   = tf.tensor2d(document.getElementById('myX').value.split(','), shape=[document.getElementById('myX').value.length, 1]);
    const yTrainingTarget = tf.tensor2d(document.getElementById('myY').value.split(','), shape=[document.getElementById('myY').value.length, 1]);
-                                                                          
+                                           
+   console.log(xTrainingDataArray)
+   console.log(yTrainingTargetArray)                                                                           
 
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
                                                                                    
