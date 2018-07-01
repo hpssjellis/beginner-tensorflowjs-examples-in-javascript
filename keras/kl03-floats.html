@@ -73,10 +73,14 @@ Enter your own data for your own equation, or generate data based on the equatio
                                                       
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 500)/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
-      document.getElementById('myX').value += xTrainingDataArray[myLoop] + ',' 
-                                                      
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
-      document.getElementById('myY').value  += yTrainingTargetArray[myLoop] + ','  
+      if (myLoop == myInputs-1)  {   // last value does not want a comma on the end  
+         document.getElementById('myX').value += xTrainingDataArray[myLoop]                                                       
+         document.getElementById('myY').value += yTrainingTargetArray[myLoop]  
+      } else {                                                
+         document.getElementById('myX').value += xTrainingDataArray[myLoop] + ','                                                       
+         document.getElementById('myY').value += yTrainingTargetArray[myLoop] + ','  
+      }                                                
    }                                                   
  }"> <br><br> 
  
