@@ -92,6 +92,9 @@ Test the data: <input type="number" id="myAsk" value="5.32"><br>
    model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+    
+    xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+    yTrainingTarget.print()
                                                                                    
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
