@@ -59,8 +59,8 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br><br>
  
 Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="5"><br> <br> 
  
-xTrainingData: <input type="text" id="myX" size="100" ><br>  
-yTrainingTarget: <input type="text" id="myY" size="100" ><br> <br> 
+xTrainingData: <input type="text" id="myX" size="100" value="1.2, 2.1, 3.4, 4.2"><br>  
+yTrainingTarget: <input type="text" id="myY" size="100" value="1.1, 3.3, 5.2, 7.1"><br> <br> 
  
  
 Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
@@ -86,8 +86,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    //console.log(xTrainingDataArray)
    //console.log(yTrainingTargetArray)                                                                                 
                                                                                                                                                                 
-   const xTrainingData   = tf.tensor2d(xTrainingDataArray, shape=[myInputs, 1]);
-   const yTrainingTarget = tf.tensor2d(yTrainingTargetArray, shape=[myInputs, 1]);
+   const xTrainingData   = tf.tensor2d(document.getElementById('myX').value.split(','), shape=[document.getElementById('myX').value.length, 1]);
+   const yTrainingTarget = tf.tensor2d(document.getElementById('myY').value.split(','), shape=[document.getElementById('myY').value.length, 1]);
                                                                           
 
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
