@@ -44,7 +44,7 @@
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 So now lets make a keras layers Neural Network with both decimal inputs and outputs<br><br>
 
-xTrainingData a random set of 100 (default) decimal numbers as x between the values 0.001 and 500.00 <br>
+xTrainingData a random set of 5 (default) decimal numbers as x between the values 0.001 and 500.00 <br>
 yTrainingTarget y calculated from 2X+3 <br>
  
  
@@ -57,7 +57,12 @@ yTrainingTarget y calculated from 2X+3 <br>
 Samples per batch : <input id="myBatch" type=number value=30>, 
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=80><br><br>
  
-Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="100"><br> 
+Number of decimals to train: <input type="number" id="myNumberOfDecimals" value="5"><br> <br> 
+ 
+xTrainingData: <input type="number" id="myX" ><br> <br> 
+yTrainingTarget: <input type="number" id="myY" ><br> <br> 
+ 
+ 
 Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
      document.getElementById('myAnswer').value = document.getElementById('myAsk').value*2 + 3
  }"> --> should equal about <input type="number" id="myAnswer" value="13.64"><br> 
@@ -78,6 +83,9 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    }                                                                                
    //console.log(xTrainingDataArray)
    //console.log(yTrainingTargetArray)                                                                                 
+   
+   document.getElementById('myX').value = xTrainingDataArray      
+   document.getElementById('myY').value = yTrainingTargetArray                                                                               
                                                                                    
    const xTrainingData   = tf.tensor2d(xTrainingDataArray, shape=[myInputs, 1]);
    const yTrainingTarget = tf.tensor2d(yTrainingTargetArray, shape=[myInputs, 1]);
