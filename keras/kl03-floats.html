@@ -68,9 +68,9 @@ Test the data: <input type="number" id="myAsk" value="5.32"><br>
    
    xTrainingDataArray   = []                                                                             
    yTrainingTargetArray = []       
-   myInputs =  Number.parseInt(document.getElementById('myNumberOfDecimals').value)-1
+   myInputs =  Number.parseInt(document.getElementById('myNumberOfDecimals').value)
                                                                                    
-   for (let myLoop = 0; myLoop <= myInputs; myLoop++){
+   for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // gernerates a random number between 0.001 and 500.000
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3                                                                            
    }                                                                                
