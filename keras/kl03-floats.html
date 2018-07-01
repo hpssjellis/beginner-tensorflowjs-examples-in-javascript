@@ -79,9 +79,9 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                                    
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
       xTrainingDataArray[myLoop] = (Math.random() * 500 + 0.001)   // generates a random number between 0.001 and 500.000
-      document.getElementById('myX').value += xTrainingDataArray[myLoop] + ',' 
+      document.getElementById('myX').value += xTrainingDataArray[myLoop].toFixed(3) + ',' 
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
-      document.getElementById('myY').value  += yTrainingTargetArray[myLoop] + ','                                                                           
+      document.getElementById('myY').value  += yTrainingTargetArray[myLoop].toFixed(3) + ','                                                                           
    }                                                                                
    //console.log(xTrainingDataArray)
    //console.log(yTrainingTargetArray)                                                                                 
