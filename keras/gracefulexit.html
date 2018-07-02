@@ -71,6 +71,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
    stopRequested = false 
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
+       model.summary()                                                                             
        stopRequested = true
    }                                                                                  
    document.getElementById('myButton123').style.backgroundColor = 'red'  
