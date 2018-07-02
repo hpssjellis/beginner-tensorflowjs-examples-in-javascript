@@ -5,6 +5,7 @@
 
 
 
+
 <!--   *******************************Start: What source js file to use? ****************************************************   -->
 
 
@@ -64,16 +65,15 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
     
 <div id="myDiv123Code"> 
 
-<button id="start-training">Start training</button>
-
-<button id="stop-training">Stop training</button>
-
-<input readonly="true" id="status"></input>
 Samples per batch : <input id="myBatch" type=number value=4>, 
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
+   stopRequested = false 
+   if(document.getElementById('myButton123').style.backgroundColor == 'red'){
+       stopRequested = true
 
+   }                                                                                  
    document.getElementById('myButton123').style.backgroundColor = 'red'  
                                                                                     
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////  
@@ -90,38 +90,35 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
                                                                                   
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
-const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
-const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
 
-let stopRequested = false;
-
-const status = document.getElementById('status');
-const startTraining = document.getElementById('start-training');
-const stopTraining = document.getElementById('stop-training');
-
-class EarlyStoppingCallback extends tf.Callback {
+   class EarlyStoppingCallback extends tf.Callback {
   async onEpochEnd(epoch, logs) {
-    status.value = `epoch ${epoch + 1}`;
     await tf.nextFrame();
     if (stopRequested) {
       this.model.stopTraining = true;
     }
   }
-}
+}                                                                                 
+                                                                                    
+                                                                                    
+                                                                                    
+/////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////       
+                                                                                    
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
+        epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
+        validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
+        initialEpoch : 0,        // for restarting training
+        shuffle : false,         // shuffle input data                                                                   
+        callbacks:  new EarlyStoppingCallback(), {
+          onBatchEnd: async (batch, logs) => {
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
 
-startTraining.addEventListener('click', () => {
-  stopRequested = false;
-  model.fit(xs, ys, {
-    epochs: 1e6,
-    callbacks: new EarlyStoppingCallback()
-    }).then(history => {
-    console.log('fit() call completed:', history.history);
-  });
-});
+        }  // end all callbacks
+      }    // end configurtions
+     );   // end fit                                                                       
 
-stopTraining.addEventListener('click', () => {
-  stopRequested = true;
-});
 /////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////   
                                                                                     
     const myPredictArray = await model.predict(xTrainingData).data()
