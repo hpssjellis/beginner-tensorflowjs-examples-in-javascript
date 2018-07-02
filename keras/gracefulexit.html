@@ -93,8 +93,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
    class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {
          if (stopRequested) {
-            console.log(epochs)    
-            console.log(this.model.epochs)                                                                       
+                                                                 
             this.model.stopTraining = true;
                                                                                     
         }
