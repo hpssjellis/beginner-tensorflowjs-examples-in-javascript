@@ -83,7 +83,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////   
                                                                                     
   (async function() {
-    const model = tf.sequential();
+    model = tf.sequential();
 
     model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
