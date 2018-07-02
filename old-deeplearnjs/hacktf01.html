@@ -1,0 +1,302 @@
+<b>my Tensorflowjs API</b>
+
+<!--   *******************************Start What source js file to use****************************************************   -->
+
+<!--   In the Github repository will be old  
+    <script src="tf.js"></script>
+ -->
+
+
+<!-- the newest version but all examples may not work 
+<script src="https://unpkg.com/deeplearn"></script> 
+-->
+
+  
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> </script> 
+
+
+<!--   *******************************Stop What source js file to use****************************************************   -->
+
+<script >
+
+
+   myGraph             = new tf.Graph();
+   myNDArrayMathGPU    = new tf.NDArrayMathGPU();
+   myNDArrayMath       = new tf.NDArrayMath();
+   myScalar            = new tf.Scalar.new(Math.random())
+   myScalar2            = new tf.Scalar.new(Math.random())
+   myArray1D           = new tf.Array1D.new([1,2,3])
+   myCheckpointLoader  = new tf.CheckpointLoader('.')
+   mySession           = new tf.Session(myGraph, myNDArrayMathGPU);
+   myArray2D           = new tf.Array2D.new([2,3], [10, 20, 30, 40, 50, 60])
+   mySGDOptimizer      = new tf.SGDOptimizer(.01)     
+   myGPGPUContext      = new tf.GPGPUContext()
+   myGraphRunner       = new tf.GraphRunner(myNDArrayMathGPU,mySession) // should also pass a GraphRunnerEventObserver ?
+   myModel             = new tf.model // should also pass a GraphRunnerEventObserver ?
+
+ 
+
+// not working but interesting
+
+ //myNDArray          = new tf.NDArray.new()  // not working
+ //myArrayData         = new ArrayData(3)  // not really sure how to use types
+
+
+
+
+// working but not interesting
+
+// myConstantInitializer = new tf.ConstantInitializer(3); // works but not interesting
+// myNDArrayInitializer = new tf.NDArrayInitializer(myArray1D)
+// myOnesInitializer   = new tf.OnesInitializer()
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<body bgcolor="#81F7F3">		<br>
+		Object Sort base
+<html xmlns:v="urn:schemas-microsoft-com:vml">
+<head><title>moving objects</title>
+<style>
+ v\:* {BEHAVIOR: url(#default#VML)}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head><title>objects</title>
+
+<li>Deeplearnjs github <a href="https://github.com/PAIR-code/deeplearnjs">https://github.com/PAIR-code/deeplearnjs</a>	
+<li>Deeplearnjs API<a href="https://deeplearnjs.org/docs/api/globals.html">https://deeplearnjs.org/docs/api/globals.html</a>	
+<li>Deeplearnjs latest versions<a href="https://github.com/PAIR-code/deeplearnjs/releases">https://github.com/PAIR-code/deeplearnjs/releases</a>	
+<li><a href=""></a>	
+<li><a href=""></a>	
+<li><a href=""></a>	
+	
+	
+
+<script>
+document.name="myDocument"
+window.name="myWindow"
+document.cookie = "cookieName=fred"
+var splitIndex = 0;
+var splitArray = new Array();
+function splits(string,text) {
+    var strLength = string.length, txtLength = text.length;
+    if ((strLength == 0) || (txtLength == 0)) return;
+    var i = string.indexOf(text);
+    if ((!i) && (text != string.substring(0,txtLength))) return;
+    if (i == -1) {
+        splitArray[splitIndex++] = string;
+        return;
+    }
+    splitArray[splitIndex++] = string.substring(0,i);
+    
+    if (i+txtLength < strLength)
+        splits(string.substring(i+txtLength,strLength),text);
+    return;
+}
+function split(string,text) {
+    splitIndex = 0;
+    splits(string,text);
+}
+function join(arrayName) {
+    var temp = '';
+    for (var i=0; i<splitIndex; i++)
+        temp += arrayName[i] + '\n';
+    if (escape(temp.substring(0,1)) == '%0A')
+        return temp.substring(1,temp.length);
+    else
+        return temp;
+}
+function sort(arrayName) {
+    for (var i=0; i<(splitIndex-1); i++)
+        for (var j=i+1; j<splitIndex; j++)
+            if (arrayName[j] < arrayName[i]) {
+                var dummy = arrayName[i];
+                arrayName[i] = arrayName[j];
+                arrayName[j] = dummy;
+            }
+}
+function sorttext() {
+    split(document.myForm.myTextarea.value,'\n');
+    sort(splitArray);
+    document.myForm.myTextarea.value = join(splitArray);
+}
+//--></script>
+
+<script language="JavaScript1.1"><!--
+function split(string,text) {
+    splitArray = string.split(text);
+    splitIndex = splitArray.length;
+}
+function myObjectData(myObject){
+ window.status = 'Please Wait'
+ document.myForm.myText1.value = ''
+ document.myForm.myTextarea.value = ''
+ myLoop = 0
+ for (var prop in myObject){
+    myLoop+=1
+    document.myForm.myTextarea.value+=myObject.name+'.'+prop+'='+myObject[prop]+ '\n'
+    if (myLoop % 3 == 1){
+ window.status += '.'}   
+ }
+ document.myForm.myText1.value =this.parent.name + '.'+myObject.name
+ window.status += 'Loaded '  
+  sorttext() 
+ window.status += 'Sorted.'  
+}
+document.counter=0   // one time set counter = 0
+function moreAnimations(){
+  document.counter+=1
+  document.all.myPic1.style.pixelLeft+=2
+  document.all.myPic1.style.pixelTop+=1
+  if ((document.counter>10) && (document.counter<20)){
+      document.all.myPic1.style.height=parseInt(document.all.myPic1.style.height)+10
+  }
+}
+</script></head>
+
+
+
+<BODY >
+
+ 
+  
+  
+  
+<h3>Instructions</h3>
+Use the first 15 buttons to decide on what words to enter for the last 5 buttons to gain
+  interesting information from your present web browser. Note: The results may be different on
+  Chrome, Safari, IE or phonegap. Those differences may be useful when programming. Also note: 
+  Objects will not work until a real instance of the object is on the web page!
+
+
+
+<br><br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+
+
+<img id="move1" style="position:absolute;left:600px;top:1560px" src="http://www.autos.ca/wp-content/uploads/2013/03/001-ferrari-laferrari.jpg" width="400" height="200">
+
+<form name="myForm2">
+  <textarea name="myTextarea">wow</textarea>
+
+  <input type=text name="myText1" id="myText2" size=50 value=""><br>
+
+
+</form>
+
+
+<h3>Click the buttons to see all useable properties and methods of the object. Click refresh to reset Browser</h3>
+<form name="myForm">
+
+
+
+
+<bgsound id="myFred3" src="">
+<input type=text name="myText1" size=50 value=""><br>
+
+
+<input type=button value="1 window" onclick="{myObjectData(window)}">
+<input type=button value="2 document" onclick="{myObjectData(document)}">
+<input type=button value="3 deeplearn" onclick="{myObjectData(deeplearn)}">
+<input type=button value="4 " onclick="{)}">
+
+
+<input type=button value="5 new tf.Graph() works for functions" onclick="{myObjectData(new tf.Graph())}">
+<input type=button value="6   " onclick="{myObjectData())}">
+<input type=button value="7  " onclick="{myObjectData()}">
+<input type=button value="8 " onclick="{myObjectData()}">
+<input type=button value="9 mySession.math" onclick="{myObjectData(mySession.math)}">
+<input type=button value="10 myGPGPUContext" onclick="{myObjectData(myGPGPUContext)}">
+<input type=button value="11 mySGDOptimizer" onclick="{myObjectData(mySGDOptimizer)}">
+<input type=button value="12 document.getElementById('move1').style" onclick="{myObjectData(document.getElementById('move1').style)}">
+<input type=button value="13 myArray2D" onclick="{myObjectData(myArray2D)}">
+<input type=button value="14 " onclick="{myObjectData()}">
+<input type=button value="15 mySession" onclick="{myObjectData(mySession)}">
+<input type=button value="16 myCheckpointLoader" onclick="{myObjectData(myCheckpointLoader)}">
+<input type=button value="17 myGraph" onclick="{myObjectData(myGraph)}">
+<input type=button value="18 myArray1D " onclick="{myObjectData(myArray1D)}">
+<input type=button value="19 myScalar" onclick="{myObjectData(myScalar)}">
+<input type=button value="20 myNDArrayMathGPU" onclick="{myObjectData(myNDArrayMathGPU)}">
+
+
+<input type=button value="21 myGraphRunner" onclick="{myObjectData(myGraphRunner)}">
+<input type=button value="22 myNDArrayMath   " onclick="{myObjectData(myNDArrayMath)}">
+<input type=button value="23 myModel" onclick="{myObjectData(myModel)}">
+<input type=button value="24 " onclick="{myObjectData()}">
+<input type=button value="25 " onclick="{myObjectData()}">
+<input type=button value="26 " onclick="{myObjectData()}">
+<input type=button value="27 " onclick="{myObjectData()}">
+<input type=button value="28 " onclick="{myObjectData()}">
+<input type=button value="29 " onclick="{myObjectData()}">
+<input type=button value="30 " onclick="{myObjectData()}"><br><br>
+
+
+
+<input type=button value="100 Function Math.random() " onclick="{document.myForm.myTextarea.value = Math.random()}">
+<input type=button value="101 Function tf.util.arraysEqual([1, 2, 3, 6], [1, 2, 3, 6])" onclick="{document.myForm.myTextarea.value = tf.util.arraysEqual([1, 2, 3, 6], [1, 2, 3, 6])}">
+<input type=button value="102 Function " onclick="{document.myForm.myTextarea.value = ' '}">
+<input type=button value="103 Function distSquared 2" onclick="{document.myForm.myTextarea.value = tf.util.distSquared(myScalar,myScalar2)}">
+<input type=button value="104 Function myScalar.getValues()" onclick="{document.myForm.myTextarea.value = myScalar.getValues()}">
+<input type=button value="105 Function myScalar.getValues()" onclick="{document.myForm.myTextarea.value = myScalar2.getValues()}">
+<input type=button value="106 Function " onclick="{document.myForm.myTextarea.value = ''}">
+<input type=button value="107 Function " onclick="{document.myForm.myTextarea.value = ''}">
+<input type=button value="108 Function " onclick="{document.myForm.myTextarea.value = ''}">
+<input type=button value="109 Function " onclick="{document.myForm.myTextarea.value = ''}">
+<input type=button value="110 Function " onclick="{document.myForm.myTextarea.value = ''}">
+<input type=button value="111 Function " onclick="{document.myForm.myTextarea.value = ''}">
+
+<br>
+
+<textarea name="myTextarea" rows=20 cols=70 wrap></textarea>
+</form>
+
+
+
+
+
+<br>At the bottom of every page make sure you include the following button:<br>
+
+<input type=button value="Back" style="font-size:25px" onclick="{window.history.back()}"><br><br>
+
+</body>
+</html>
