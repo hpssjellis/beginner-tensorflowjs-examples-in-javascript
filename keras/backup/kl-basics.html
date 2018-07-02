@@ -1,0 +1,201 @@
+
+
+
+
+
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+-->
+
+
+
+<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>Keras Layers: As easy as I can make them</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+A very simple xOr Neural Network using Tensorflowjs Layers<br>
+Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network <br>
+The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was written for NodeJS, his code is at 
+ <a href="https://github.com/mattcam/tfjs_xor_example">Code</a><br> and also @sqcai code-pen example <a href="https://codepen.io/caisq/pen/vrxOvy">https://codepen.io/caisq/pen/vrxOvy</a>
+ The expected output for xOr input is<br><br>
+ [0,0] = ~ 0<br>
+ [1,0] = ~ 1<br>
+ [0,1] = ~ 1<br>
+ [1,1] = ~ 0<br><br>
+ 
+ Warning takes a while to train as the Neural Network only has a 2 node input, 10 node hidden layer and one node output.
+ 
+ 
+ 
+ 
+</div><br>
+
+
+    
+<div id="myDiv123Code"> 
+
+Samples per batch : <input id="myBatch" type=number value=4>, 
+Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
+ 
+<input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
+
+   document.getElementById('myButton123').style.backgroundColor = 'red'  
+                                                                                    
+/////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////  
+                                                                                    
+   const xTrainingData   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
+   const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
+
+/////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////   
+                                                                                    
+  (async function() {
+    const model = tf.sequential();
+
+    model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
+                                                                                  
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
+
+/////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////       
+                                                                                    
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
+        epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
+        validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
+        initialEpoch : 0,        // for restarting training
+        shuffle : false,         // shuffle input data                                                                   
+        callbacks: {
+          onBatchEnd: async (batch, logs) => {
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
+          onEpochEnd: async (epoch, logs) => {
+            // Update the UI to display the current loss and accuracy values.
+            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+            document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
+        }  // end all callbacks
+      }    // end configurtions
+     );   // end fit                                                                       
+
+/////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////   
+                                                                                    
+    const myPredictArray = await model.predict(xTrainingData).data()
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray' // reset button color                                                                               
+  })()  // end large async inline function
+
+}"><br><br>
+
+</div>
+<div id='myDiv123'>...</div><br>
+
+
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea123"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce123 = true    // so textareas are only clicked once
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>
