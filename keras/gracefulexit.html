@@ -92,12 +92,12 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
 
    class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {
-         document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
-         document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
-         await tf.nextFrame();  // This improves UI responsiveness during training.
          if (stopRequested) {
             this.model.stopTraining = true;
         }
+        document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+        document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+        await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
      }
    }                                                                                 
                                                                                     
