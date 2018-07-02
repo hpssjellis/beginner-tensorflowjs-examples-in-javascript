@@ -86,7 +86,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
                                                                                   
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
-
+    model.summary()
 /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////       
                                                                                     
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
