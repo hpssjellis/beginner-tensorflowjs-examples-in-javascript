@@ -112,9 +112,9 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
         callbacks:  new EarlyStoppingCallback(), 
           onBatchEnd: async (batch, logs) => {
             await tf.nextFrame();  // This improves UI responsiveness during training.
-          },
+         // },
 
-        //}  // end all callbacks
+        }  // end all callbacks
       }    // end configurtions
      );   // end fit                                                                       
 
