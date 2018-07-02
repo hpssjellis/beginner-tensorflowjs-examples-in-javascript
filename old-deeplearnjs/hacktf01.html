@@ -23,8 +23,11 @@
 
 
    myTensor2D    = tf.tensor2d([0,1,1,0], shape=[4,1]);  
-   myModel       = tf.sequential();
-
+   const model       = tf.sequential();
+    model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
+                                                                                  
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
  
 
 // not working but interesting
@@ -227,7 +230,6 @@ Use the first 15 buttons to decide on what words to enter for the last 5 buttons
 <input type=button value="1 window" onclick="{myObjectData(window)}">
 <input type=button value="2 document" onclick="{myObjectData(document)}">
 <input type=button value="3 tensorflowjs" onclick="{myObjectData(tf)}">
-<input type=button value="4 " onclick="{)}">
 
 
 
