@@ -28,7 +28,7 @@
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
                                                                                   
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
- const loadedModel = await tf.loadModel('localstorage://my-model-1');
+ const loadedModel = tf.loadModel('localstorage://my-model-1');
 
 // not working but interesting
 
