@@ -22,19 +22,8 @@
 <script >
 
 
-   myGraph             = new tf.Graph();
-   myNDArrayMathGPU    = new tf.NDArrayMathGPU();
-   myNDArrayMath       = new tf.NDArrayMath();
-   myScalar            = new tf.Scalar.new(Math.random())
-   myScalar2            = new tf.Scalar.new(Math.random())
-   myArray1D           = new tf.Array1D.new([1,2,3])
-   myCheckpointLoader  = new tf.CheckpointLoader('.')
-   mySession           = new tf.Session(myGraph, myNDArrayMathGPU);
-   myArray2D           = new tf.Array2D.new([2,3], [10, 20, 30, 40, 50, 60])
-   mySGDOptimizer      = new tf.SGDOptimizer(.01)     
-   myGPGPUContext      = new tf.GPGPUContext()
-   myGraphRunner       = new tf.GraphRunner(myNDArrayMathGPU,mySession) // should also pass a GraphRunnerEventObserver ?
-   myModel             = new tf.model // should also pass a GraphRunnerEventObserver ?
+   myTensor2D    = tf.tensor2d([0,1,1,0], shape=[4,1]);  
+   myModel       = tf.sequential();
 
  
 
@@ -241,29 +230,25 @@ Use the first 15 buttons to decide on what words to enter for the last 5 buttons
 <input type=button value="4 " onclick="{)}">
 
 
-<input type=button value="5 new tf.Graph() works for functions" onclick="{myObjectData(new tf.Graph())}">
-<input type=button value="6   " onclick="{myObjectData())}">
-<input type=button value="7  " onclick="{myObjectData()}">
-<input type=button value="8 " onclick="{myObjectData()}">
-<input type=button value="9 mySession.math" onclick="{myObjectData(mySession.math)}">
-<input type=button value="10 myGPGPUContext" onclick="{myObjectData(myGPGPUContext)}">
-<input type=button value="11 mySGDOptimizer" onclick="{myObjectData(mySGDOptimizer)}">
-<input type=button value="12 document.getElementById('move1').style" onclick="{myObjectData(document.getElementById('move1').style)}">
-<input type=button value="13 myArray2D" onclick="{myObjectData(myArray2D)}">
-<input type=button value="14 " onclick="{myObjectData()}">
-<input type=button value="15 mySession" onclick="{myObjectData(mySession)}">
-<input type=button value="16 myCheckpointLoader" onclick="{myObjectData(myCheckpointLoader)}">
-<input type=button value="17 myGraph" onclick="{myObjectData(myGraph)}">
-<input type=button value="18 myArray1D " onclick="{myObjectData(myArray1D)}">
-<input type=button value="19 myScalar" onclick="{myObjectData(myScalar)}">
-<input type=button value="20 myNDArrayMathGPU" onclick="{myObjectData(myNDArrayMathGPU)}">
 
-
-<input type=button value="21 myGraphRunner" onclick="{myObjectData(myGraphRunner)}">
-<input type=button value="22 myNDArrayMath   " onclick="{myObjectData(myNDArrayMath)}">
 <input type=button value="23 myModel" onclick="{myObjectData(myModel)}">
-<input type=button value="24 " onclick="{myObjectData()}">
+<input type=button value="24 myTensor2D" onclick="{myObjectData(myTensor2D)}">
 <input type=button value="25 " onclick="{myObjectData()}">
+<input type=button value="25 " onclick="{myObjectData()}">
+<input type=button value="26 " onclick="{myObjectData()}">
+<input type=button value="27 " onclick="{myObjectData()}">
+<input type=button value="28 " onclick="{myObjectData()}">
+<input type=button value="29 " onclick="{myObjectData()}">
+<input type=button value="25 " onclick="{myObjectData()}">
+<input type=button value="26 " onclick="{myObjectData()}">
+<input type=button value="27 " onclick="{myObjectData()}">
+<input type=button value="28 " onclick="{myObjectData()}">
+<input type=button value="29 " onclick="{myObjectData()}">
+<input type=button value="25 " onclick="{myObjectData()}">
+<input type=button value="26 " onclick="{myObjectData()}">
+<input type=button value="27 " onclick="{myObjectData()}">
+<input type=button value="28 " onclick="{myObjectData()}">
+<input type=button value="29 " onclick="{myObjectData()}">
 <input type=button value="26 " onclick="{myObjectData()}">
 <input type=button value="27 " onclick="{myObjectData()}">
 <input type=button value="28 " onclick="{myObjectData()}">
