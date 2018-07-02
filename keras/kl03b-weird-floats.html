@@ -62,7 +62,11 @@ xTrainingData: <input type="text" id="myX" size="100" value="1.20, 2.10, 3.40, 4
 yTrainingTarget: <input type="text" id="myY" size="100" value="5.40, 7.20, 9.80, 11.40"><br><br> 
  
 Enter your own data for your own equation, or generate data based on the equation 2X+3<br>
-<input type="button" value="Random Generate" onClick="{
+Digit Multiplier 10x weird NaN errors randomly when multiplier above 20x 
+ <input type="text" id="myWeird" size="10" value="10">  <br><br> 
+ 
+ 
+ <input type="button" value="Random Generate" onClick="{
                                                       
    let xTrainingDataArray   = []                                                                             
    let yTrainingTargetArray = []      
@@ -82,8 +86,7 @@ Enter your own data for your own equation, or generate data based on the equatio
          document.getElementById('myY').value += yTrainingTargetArray[myLoop] + ','  
       }                                                
    }                                                   
- }"> Digit Multiplier 10x weird NaN errors randomly when multiplier above 20x <input type="text" id="myWeird" size="10" value="10">  <br><br> 
- 
+ }"> 
 Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
      document.getElementById('myAnswer').value = document.getElementById('myAsk').value*2 + 3
  }"> --> For 2X+3 should equal about <input type="number" id="myAnswer" value="13.64"><br><br><br>
