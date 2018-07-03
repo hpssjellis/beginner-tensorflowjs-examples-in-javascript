@@ -115,8 +115,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
   (async function() {
     model = tf.sequential(); // no const so that it is a global variable 
 
-    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 10 }) );  
+    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 20 }) );  
     model.add(tf.layers.dense({ units:  1 }) );  
                                                                                                                                                                                                                                                            
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)                                                                          
