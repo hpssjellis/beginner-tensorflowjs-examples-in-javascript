@@ -119,11 +119,13 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
     model.add(tf.layers.dense({ units: 10 }) );  
     model.add(tf.layers.dense({ units:  1 }) );  
                                                                                                                                                                                                                                                            
-    const learningRate = parseFloat(document.getElementById('myWeird').value)
-    const optimizer = tf.train.sgd(learningRate);            
+    const myLearningRate = Number.parseFloat(document.getElementById('myWeird').value)
+    concole.log(myLearningRate)                                                                               
+    const myOptimizer = tf.train.sgd(myLearningRate); 
+    console.log(myOptimizer)                                                                               
                    
-   model.compile({optimizer: optimizer, loss: 'meanSquaredError'});                                                                               
-   //model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+   //model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
+   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
     
