@@ -143,7 +143,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
           },
           onEpochEnd: async (epoch, logs) => {
             if (epoch % 20 == 0){
-               console.log('Epoch:' + epoch + ', loss:' logs.loss)                                                                      
+               console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
             }                                                                        
             // Update the UI to display the current loss and accuracy values.
             document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
