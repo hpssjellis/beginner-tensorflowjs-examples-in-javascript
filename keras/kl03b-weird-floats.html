@@ -120,7 +120,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
     model.add(tf.layers.dense({ units:  1 }) );  
                                                                                                                                                                                                                                                            
     const myLearningRate = Number.parseFloat(document.getElementById('myWeird').value)
-    concole.log(myLearningRate)                                                                               
+    console.log(myLearningRate)                                                                               
     const myOptimizer = tf.train.sgd(myLearningRate); 
     console.log(myOptimizer)                                                                               
                    
