@@ -54,7 +54,7 @@ yTrainingTarget y calculated from 2X+3 <br>
 
     
 <div id="myDiv123Code"> 
-Learning Rate: <input id="myLearn" type=number value=0.15><br><br>
+Learning Rate: <input id="myLearn" type=text value=0.01><br><br>
 Samples per batch : <input id="myBatch" type=number value=4>, 
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=200><br><br>
  
@@ -119,7 +119,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
     model.add(tf.layers.dense({ units: 10 }) );  
     model.add(tf.layers.dense({ units:  1 }) );  
                                                                                                                                                                                                                                                            
-    const learningRate = 0.01;
+    const learningRate = parseFloat(document.getElementById('myWeird').value)
     const optimizer = tf.train.sgd(learningRate);            
                    
    model.compile({optimizer: optimizer, loss: 'meanSquaredError'});                                                                               
