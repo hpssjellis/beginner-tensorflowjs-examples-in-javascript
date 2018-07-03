@@ -142,6 +142,9 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
           onEpochEnd: async (epoch, logs) => {
+            if (epoch % 20 == 0){
+               console.log('Epoch:' + epoch + ', loss:' logs.loss)                                                                      
+            }                                                                        
             // Update the UI to display the current loss and accuracy values.
             document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
             document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
