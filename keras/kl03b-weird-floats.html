@@ -77,7 +77,7 @@ Interesting how different multipliers effect the learning rate. Larger 20x 70x 2
    myInputs =  Number.parseInt(document.getElementById('myBatch').value)
                                                       
    for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
-      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 50 * parseInt(document.getElementById('myWeird').value))/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
+      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 50 * parseFloat(document.getElementById('myWeird').value))/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
       yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
       if (myLoop == myInputs-1)  {   // last value does not want a comma on the end  
          document.getElementById('myX').value += parseFloat(xTrainingDataArray[myLoop]).toFixed(2)                                                         
