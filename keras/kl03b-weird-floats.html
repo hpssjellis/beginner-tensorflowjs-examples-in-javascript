@@ -123,8 +123,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
     const myOptimizer = tf.train.sgd(myLearningRate); 
     console.log(myOptimizer)                                                                               
                    
-   //model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
-   model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
+   model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
+   //model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
     
