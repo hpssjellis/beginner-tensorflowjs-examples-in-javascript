@@ -169,25 +169,25 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                                           
         epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
-        initialEpoch : document.lastEpoch,        // for restarting training
+        initialEpoch : Number.parseInt(document.lastEpoch),        // for restarting training
         shuffle : false,         // shuffle input data                                                                   
         callbacks: {
           onBatchEnd: async (batch, logs) => {
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
           onEpochEnd: async (epoch, logs) => {
-           //  myEpoch = epoch   // backup value                                                                  
+             myEpoch = epoch   // backup value                                                                  
             if (epoch % 20 == 0){
                console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
             }   
                                                                                    
                                                                                    
              if (document.stopRequested){
-                 document.lastEpoch = await epoch   
-                 document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  document.lastEpoch +' '                                                                     
+                 document.lastEpoch =  mtEpoch   
+                 document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  await document.lastEpoch +' '                                                                     
                                                                                                                                              
                 // document.stopRequested = false                                                                 
-                  throw 'Wow an error was thrown to stop fit'                                                                  
+                  throw 'Wow an error was thrown to stop the fit function'                                                                  
                                                                                    
              }                                                                      
                                                                                    
