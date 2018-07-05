@@ -176,13 +176,14 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
           onEpochEnd: async (epoch, logs) => {
+           //  myEpoch = epoch   // backup value                                                                  
             if (epoch % 20 == 0){
                console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
             }   
                                                                                    
                                                                                    
              if (document.stopRequested){
-                 document.lastEpoch = epoch   
+                 document.lastEpoch = await epoch   
                  document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  document.lastEpoch +' '                                                                     
                                                                                                                                              
                 // document.stopRequested = false                                                                 
