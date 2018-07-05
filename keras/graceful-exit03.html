@@ -204,17 +204,12 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
            } )   // end catch and fit                                                                       
                                                                                   
  
-/////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////  
-                                                                                   
-    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
-                                                                                    
-    document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
-    document.getElementById('myButtonPause').style.backgroundColor = 'lightgray'  
-                                                                                   
+                                                                              
   })()   // End large inline async function                                                                  
                                                                       
                                                                       
-                                                               
+     document.getElementById('myButtonTest').click()
+                                                                                                               
                                                                
                                                                
                                                                
@@ -224,7 +219,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
  
  
  
- <input id="myButton123b" type="button" value="re-Test only" onclick="{
+ <input id="myButtonTest" type="button" value="re-Test only" onclick="{
    (async function () {                                                                
    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
                                                                                     
