@@ -175,7 +175,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
         }// end all callbacks
       }    // end configurations
      ).catch((e) => {
-               document.getElementById('myDiv123').innerHTML += 'Error ' + e                                                                         
+               document.getElementById('myDivError').innerHTML += 'Error ' + e                                                                         
            } )   // end catch and fit                                                                       
                                                                                   
  
@@ -205,7 +205,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 </div>
 <div id='myDiv123'>...</div><br>
 
-
+<div id='myDivError'>...</div><br>
 
 <input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
    // first remove first and last line since they are injected
