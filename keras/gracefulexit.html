@@ -74,7 +74,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
    stopRequested = false 
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
-       model.summary()                                                                             
+     //  model.summary()                                                                             
        stopRequested = true
    }                                                                                  
    document.getElementById('myButton123').style.backgroundColor = 'red'  
@@ -93,7 +93,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
     model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
                                                                                   
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
-
+/*
    class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {
          if (stopRequested) {
@@ -107,7 +107,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
      }
    }                                                                                 
                                                                                     
-                                                                                    
+*/                                                                                    
                                                                                     
 /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////       
                                                                                     
@@ -117,12 +117,17 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
         validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
         initialEpoch : 0,        // for restarting training
         shuffle : false,         // shuffle input data                                                                   
-        callbacks:  new EarlyStoppingCallback(), 
-          onBatchEnd: async (batch, logs) => {
+       // callbacks:  new EarlyStoppingCallback(), 
+          callbacks:                                                                         
+          onBatchEnd: async (batch, logs) => {  
+            if(stopRequested) {   
+                stopRequested = false
+                throw 'Wow it stopped'                                                                   
+            }                                                                     
             await tf.nextFrame();  // This improves UI responsiveness during training.
          // },
 
-        }  // end all callbacks
+        }.catch((e) => console.log(e))  // end all callbacks
       }    // end configurtions
      );   // end fit                                                                       
 
