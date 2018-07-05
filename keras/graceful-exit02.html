@@ -103,7 +103,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
        document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
        document.stopRequested = true
         //alert(model.epochs)  
-         document.getElementById('myDivError').innerHTML +=   JSON.stringify(model, null, 4)                                                                     
+         document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
    }    else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
        document.getElementById('myButton123').style.backgroundColor = 'red'  
   }
@@ -203,6 +203,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 <div id='myDiv123'>...</div><br>
 
 <div id='myDivError'>...</div><br>
+
+<textarea id=myArea></textarea>
 
 <input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
    // first remove first and last line since they are injected
