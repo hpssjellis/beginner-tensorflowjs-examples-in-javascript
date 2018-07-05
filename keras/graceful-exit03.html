@@ -100,15 +100,9 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{  
 
   
-   if(document.getElementById('myButton123').style.backgroundColor == 'red'){
-       document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
-       document.stopRequested = true
-     
-        // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
-   }    else {     
-         document.stopRequested = false                                                                            
+                                                                            
        document.getElementById('myButton123').style.backgroundColor = 'red'  
-  }
+  
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
 
    let xArray = document.getElementById('myX').value.split(',')
@@ -188,6 +182,26 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
   })()   // End large inline async function
 
 }">
+ 
+ 
+ 
+<input id="myButtonPause" type="button" value="Pause" onclick="{  
+
+  
+   if(document.getElementById('myButton123').style.backgroundColor == 'red'){
+       document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
+       document.stopRequested = true
+     
+        // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
+   }    else {     
+         document.stopRequested = false                                                                            
+       document.getElementById('myButton123').style.backgroundColor = 'red'  
+  }
+ }">
+ 
+ 
+ 
+ 
  
  <input id="myButton123b" type="button" value="re-Test" onclick="{
    (async function () {                                                                
