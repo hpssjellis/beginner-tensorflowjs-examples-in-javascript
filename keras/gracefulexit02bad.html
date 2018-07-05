@@ -54,7 +54,7 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
  The expected output for xOr input is<br><br>
  [0,0] = ~ 0<br>
  [1,0] = ~ 1<br>
- [0,1] = ~ 1<br>
+ [0,1] = ~ 1<br
  [1,1] = ~ 0<br><br>
  
  Warning takes a while to train as the Neural Network only has a 2 node input, 10 node hidden layer and one node output.
@@ -64,7 +64,6 @@ The Original by  <a href="https://twitter.com/mattcameron">Matt Cameron</a> was 
  
 </div><br>
 
-
     
 <div id="myDiv123Code"> 
 
@@ -72,7 +71,7 @@ Samples per batch : <input id="myBatch" type=number value=4>,
 Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
  
 <input id="myButton123" type=button value="Tensorflowjs xOr using layers"  onclick="{
-   stopRequested = false 
+   stopRequested = false
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
      //  model.summary()                                                                             
        stopRequested = true
@@ -81,7 +80,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
                                                                                     
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////  
                                                                                     
-   const xTrainingData   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shape
+   const xTrainingData   = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);         // array defines shap
    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
 
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////   
@@ -90,7 +89,7 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
     model = tf.sequential();
 
     model.add(tf.layers.dense({units: 10, activation: 'sigmoid', inputShape: [2], }) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output layer
+    model.add(tf.layers.dense({units: 1,  activation: 'sigmoid', }) );  // then to 1 output laye
                                                                                   
     model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop', });
 /*
@@ -211,14 +210,4 @@ function myTextGrow(myT, myB){
    document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
-      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
-          document.getElementById(myT).rows += 3; 
-      } 
-   }, 100)
-  document.getElementById(myT).selectionStart = myCursorStart
-  document.getElementById(myT).selectionEnd = myCursorEnd
-}  
-</script>  
- 
- 
-</body>
+      while (  document.getElementById(myT).clientHeight < docume
