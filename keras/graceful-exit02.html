@@ -100,16 +100,11 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 
    document.stopRequested = false 
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
-                                                                                 
+       document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
        document.stopRequested = true
-   }                                                                                                 
-                                                                                   
-                                                                                   
-                                                                                   
-                                                                                   
-                                                                                   
-   document.getElementById('myButton123').style.backgroundColor = 'red'  
-
+   }    else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+       document.getElementById('myButton123').style.backgroundColor = 'red'  
+  }
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
 
    let xArray = document.getElementById('myX').value.split(',')
