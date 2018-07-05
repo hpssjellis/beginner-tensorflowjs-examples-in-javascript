@@ -118,14 +118,14 @@ Epochs (# of batches to run) : <input id="myEpoch" type=number value=2500><br>
         initialEpoch : 0,        // for restarting training
         shuffle : false,         // shuffle input data                                                                   
        // callbacks:  new EarlyStoppingCallback(), 
-          callbacks:                                                                         
+          callbacks:  {                                                                       
           onBatchEnd: async (batch, logs) => {  
             if(stopRequested) {   
                 stopRequested = false
                 throw 'Wow it stopped'                                                                   
             }                                                                     
             await tf.nextFrame();  // This improves UI responsiveness during training.
-         // },
+          },
 
         }.catch((e) =>    document.getElementById('myDiv123').innerHTML += 'Error is ' + e )  // end all callbacks and catch error 
       }    // end configurtions
