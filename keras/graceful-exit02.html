@@ -172,9 +172,11 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
             document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
-        }.catch((e) => document.getElementById('myDiv123').innerHTML += 'Error ' + e  )   // end all callbacks
-      }    // end configurtions
-     );   // end fit                                                                       
+        }// end all callbacks
+      }    // end configurations
+     ).catch((e) => {
+               document.getElementById('myDiv123').innerHTML += 'Error ' + e                                                                         
+           } )   // end catch and fit                                                                       
                                                                                   
  
 /////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////  
