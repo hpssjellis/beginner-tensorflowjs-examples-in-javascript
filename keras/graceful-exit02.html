@@ -102,7 +102,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
        document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
        document.stopRequested = true
-        alert(model.epochs)                                                                           
+        //alert(model.epochs)  
+         document.getElementById('myDivError').innerHTML += model                                                                          
    }    else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
        document.getElementById('myButton123').style.backgroundColor = 'red'  
   }
