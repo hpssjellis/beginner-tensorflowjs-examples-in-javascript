@@ -98,13 +98,14 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
  
 <input id="myButton123" type="button" value="Keras Layers Train and Test" onclick="{  
 
-   document.stopRequested = false 
+  
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
        document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
        document.stopRequested = true
         //alert(model.epochs)  
          document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
-   }    else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+   }    else {     
+         document.stopRequested = false                                                                            
        document.getElementById('myButton123').style.backgroundColor = 'red'  
   }
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
@@ -158,7 +159,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                                    
              if (document.stopRequested){
                                                                                    
-                  document.stopRequested = false                                                                 
+                //  document.stopRequested = false                                                                 
                   throw 'Wow an error'                                                                  
                                                                                    
              }                                                                      
