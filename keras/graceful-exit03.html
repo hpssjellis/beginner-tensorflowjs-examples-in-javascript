@@ -117,7 +117,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
                                                                                    
-  (async function() {
+
     model = tf.sequential(); // no const so that it is a global variable 
 
     model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
@@ -131,8 +131,34 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
    //model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
-/////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+
+
+}">
+ 
+ 
+ 
+<input id="myButtonPause" type="button" value="Fit and Test" onclick="{  
+
+  
+   if(document.getElementById('myButton123').style.backgroundColor == 'red'){
+       document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
+       document.stopRequested = true
+     
+        // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
+   }    else {     
+         document.stopRequested = false                                                                            
+         document.getElementById('myButton123').style.backgroundColor = 'red'  
+  }
+                                                               
+     
+                                                                      
+                                                                      
+    /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
     
+                                                                      
+    (async function() {
+                                                                      
+                                                                      
     //xTrainingData.print()    // have a look at the training tensor in the console                                                                             
     //yTrainingTarget.print()
                                                                                    
@@ -179,31 +205,20 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
     document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'  
                                                                                    
-  })()   // End large inline async function
-
-}">
- 
- 
- 
-<input id="myButtonPause" type="button" value="Pause" onclick="{  
-
-  
-   if(document.getElementById('myButton123').style.backgroundColor == 'red'){
-       document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
-       document.stopRequested = true
-     
-        // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
-   }    else {     
-         document.stopRequested = false                                                                            
-       document.getElementById('myButton123').style.backgroundColor = 'red'  
-  }
+  })()   // End large inline async function                                                                  
+                                                                      
+                                                                      
+                                                               
+                                                               
+                                                               
+                                                               
  }">
  
  
  
  
  
- <input id="myButton123b" type="button" value="re-Test" onclick="{
+ <input id="myButton123b" type="button" value="re-Test only" onclick="{
    (async function () {                                                                
    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
                                                                                     
