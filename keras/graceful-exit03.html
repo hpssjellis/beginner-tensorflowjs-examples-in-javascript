@@ -101,7 +101,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 
   
                                                                             
-       document.getElementById('myButton123').style.backgroundColor = 'red'  
+     //  document.getElementById('myButton123').style.backgroundColor = 'red'  
   
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
 
@@ -132,22 +132,23 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
    //model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 
-
+    document.getElementById('myButtonPause').click()
+                                                                        
 }">
  
  
  
-<input id="myButtonPause" type="button" value="Fit and Test" onclick="{  
+<input id="myButtonPause" type="button" value="Fit and Test or Pause" onclick="{  
 
   
-   if(document.getElementById('myButton123').style.backgroundColor == 'red'){
-       document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                          
+   if(document.getElementById('myButtonPause').style.backgroundColor == 'red'){
+       document.getElementById('myButtonPause').style.backgroundColor = 'lightgray'                                                                          
        document.stopRequested = true
      
         // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                                     
    }    else {     
          document.stopRequested = false                                                                            
-         document.getElementById('myButton123').style.backgroundColor = 'red'  
+         document.getElementById('myButtonPause').style.backgroundColor = 'red'  
   }
                                                                
      
