@@ -100,7 +100,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 
    document.stopRequested = false 
    if(document.getElementById('myButton123').style.backgroundColor == 'red'){
-       model.summary()                                                                             
+                                                                                 
        document.stopRequested = true
    }                                                                                                 
                                                                                    
@@ -160,7 +160,9 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                                    
                                                                                    
              if (document.stopRequested){
-                  alert()                                                                   
+                                                                                   
+                  document.stopRequested = false                                                                 
+                  throw 'Wow an error'                                                                  
                                                                                    
              }                                                                      
                                                                                    
@@ -170,7 +172,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
             document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
-        }.catch((e) => console.log(e))// end all callbacks
+        }.catch((e) => document.getElementById('myDiv123').innerHTML += 'Error ' + e  )   // end all callbacks
       }    // end configurtions
      );   // end fit                                                                       
                                                                                   
