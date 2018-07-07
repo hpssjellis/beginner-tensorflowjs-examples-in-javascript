@@ -4839,7 +4839,7 @@
                                 callbackMetrics = outLabels.slice();
                             }
                             callbacks = standardizeCallbacks(config.callbacks);
-                            return [4, this.fitLoop(trainFunction, ins, outLabels, batchSize, config.epochs, config.verbose, callbacks, valFunction, valIns, config.shuffle, callbackMetrics, null, null, null)];
+                            return [4, this.fitLoop(trainFunction, ins, outLabels, batchSize, config.epochs, config.verbose, callbacks, valFunction, valIns, config.shuffle, callbackMetrics, config.initialEpoch, null, null)];
                         case 1:
                             out = _a.sent();
                             if (needValidationDisposal) {
