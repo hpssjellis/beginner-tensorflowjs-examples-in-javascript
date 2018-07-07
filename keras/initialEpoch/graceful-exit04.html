@@ -183,7 +183,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                                    
              if (document.stopRequested){
                  document.lastEpoch =  myEpoch   
-                 document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  await document.lastEpoch +' '                                                                     
+                 document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  document.getElementById('myLastEpoch').value +' '                                                                     
                                                                                                                                              
                 // document.stopRequested = false                                                                 
                   throw 'Wow an error was thrown to stop the fit function'                                                                  
