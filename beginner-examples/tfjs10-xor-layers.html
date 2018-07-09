@@ -208,10 +208,9 @@ momentum
     for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
         var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
         if (myLoop % 20 == 0){   
-             await tf.nextFrame();   // This allows the GUI to update but only every 20 batches      
              document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
         }
-                                                                   
+      await tf.nextFrame();     //  GUI update every batch                                                              
     }                                                                                    
                                                                                     
                                                                                     
