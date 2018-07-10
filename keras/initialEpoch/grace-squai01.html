@@ -117,7 +117,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                                                                                                                                                                                                            
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)                                                                          
     const myOptimizer = tf.train.sgd(myLearningRate); 
-    console.log(myOptimizer)                                                                               
+    // console.log(myOptimizer)                                                                               
                    
    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
    //model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
@@ -133,8 +133,13 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 
 class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {
+          if (epoch % 20 == 0){
+             console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
+         }  
          if (document.stopRequested) {                                                                 
-            this.model.stopTraining = true;                                                                                    
+            this.model.stopTraining = true;  
+            document.getElementById('myLastEpoch').value = epoch   // backup value                                                                  
+                                                                               
         }
         document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
         document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
@@ -188,17 +193,7 @@ class EarlyStoppingCallback extends tf.Callback {
           onBatchEnd: async (batch, logs) => {
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
-          onEpochEnd: async (epoch, logs) => {
-            document.getElementById('myLastEpoch').value = epoch   // backup value                                                                  
-            if (epoch % 20 == 0){
-               console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
-            }   
-                                                                                                                                                                                                                                      
-            // Update the UI to display the current loss and accuracy values.
-            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
-            document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
-            await tf.nextFrame();  // This improves UI responsiveness during training.
-          },
+
         }// end all callbacks
 
                                                                          
