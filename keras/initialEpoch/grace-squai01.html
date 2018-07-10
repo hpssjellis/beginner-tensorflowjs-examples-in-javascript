@@ -132,14 +132,13 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 <input id="myButtonPause" type="button" value="Fit and Test or Pause" onclick="{  
 
 class EarlyStoppingCallback extends tf.Callback {
-      async onEpochEnd(epoch, logs) {
-          if (epoch % 20 == 0){
+      async onEpochEnd(epoch, logs) {                                                                               
+         document.getElementById('myLastEpoch').value = epoch   // backup value    
+         if (epoch % 20 == 0){
              console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
          }  
-         if (document.stopRequested) {                                                                 
-            this.model.stopTraining = true;  
-            document.getElementById('myLastEpoch').value = epoch   // backup value                                                                  
-                                                                               
+         if (document.stopRequested) {                                                                  
+            this.model.stopTraining = true;                                                                                                                                             
         }
         document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
         document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
