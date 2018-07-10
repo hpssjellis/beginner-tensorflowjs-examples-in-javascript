@@ -192,7 +192,7 @@ class EarlyStoppingCallback extends tf.Callback {
         callbacks:  new EarlyStoppingCallback() 
                                                                        
       }) // end .fit              
-                                                                               
+     console.log(myFit.history)                                                                          
      document.getElementById('myButtonPause').style.backgroundColor = 'lightgray'              
      document.getElementById('myButtonTest').click()                                                                          
   })()   // End large inline async function                                                                  
