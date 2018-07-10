@@ -189,9 +189,13 @@ class EarlyStoppingCallback extends tf.Callback {
         epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testin  
         initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),        // for restarting training                                                                       
-        callbacks:  new EarlyStoppingCallback(), {} 
-                                                                       
-      }) // end .fit              
+        callbacks:  new EarlyStoppingCallback(),  
+            onEpochEnd: async (epoch, logs) => {                                                               
+                if (epoch % 20 == 0){
+                     console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
+               }
+           }      // end all callbacks                                                              
+      })          // end model.fit              
      console.log(myFit.history)                                                                          
      document.getElementById('myButtonPause').style.backgroundColor = 'lightgray'              
      document.getElementById('myButtonTest').click()                                                                          
