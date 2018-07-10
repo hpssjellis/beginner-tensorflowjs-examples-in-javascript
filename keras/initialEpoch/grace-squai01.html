@@ -133,7 +133,8 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 <input id="myButtonPause" type="button" value="Fit and Test or Pause" onclick="{  
 
 class EarlyStoppingCallback extends tf.Callback {
-      async onEpochEnd(epoch, logs) {                                                                               
+      async onEpochEnd(epoch, logs) {     
+         console.log('history.history.loss.length = '+history.history.loss.length)
          document.getElementById('myLastEpoch').value = epoch + 1      
          if (epoch % 20 == 0){
              console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
@@ -141,7 +142,7 @@ class EarlyStoppingCallback extends tf.Callback {
          if (document.stopRequested) {                                                                  
             this.model.stopTraining = true;                                                                                                                                             
         }
-        console.log('history.history.loss.length = '+history.history.loss.length)
+
         document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
         document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
         await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
