@@ -203,11 +203,13 @@ class EarlyStoppingCallback extends tf.Callback {
  
  
  <input id="myButtonTest" type="button" value="re-Test only" onclick="{
+document.getElementById('myButtonTest').style.backgroundColor = 'red'
    (async function () {                                                                
    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], shape=[1, 1]))  
                                                                                     
    document.getElementById('myDivError').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'
-   })() // end the inline async funciton                                                                                     
+   document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
+ })() // end the inline async funciton                                                                                     
                                                                                   
  }"><br><br>
  
