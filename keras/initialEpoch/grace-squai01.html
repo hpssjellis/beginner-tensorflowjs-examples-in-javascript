@@ -189,8 +189,9 @@ class EarlyStoppingCallback extends tf.Callback {
         initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),        // for restarting training                                                                       
         callbacks:  new EarlyStoppingCallback() 
                                                                        
-      }) // end .fit                                       
-                   
+      }) // end .fit              
+                                                                               
+     document.getElementById('myButtonPause').style.backgroundColor = 'lightgray'              
      document.getElementById('myButtonTest').click()                                                                          
   })()   // End large inline async function                                                                  
                                                                       
