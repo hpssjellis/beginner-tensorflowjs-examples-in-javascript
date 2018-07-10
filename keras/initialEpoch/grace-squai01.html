@@ -103,12 +103,13 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
                                                                             
      //  document.getElementById('myButton123').style.backgroundColor = 'red'  
   
- document.lastEpoch = 6    // so training epoch starts ar zero
+
                                                                                
 
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
                                                                                    
-
+    document.getElementById('myLastEpoch').value = 0   // so initialEpoch will reset to zero if changed
+                                                                        
     model = tf.sequential(); // no const so that it is a global variable 
 
     model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
