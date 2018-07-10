@@ -133,7 +133,7 @@ Test the data: <input type="number" id="myAsk" value="5.32" onchange="{
 
 class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {                                                                               
-         document.getElementById('myLastEpoch').value = epoch   // backup value    
+         document.getElementById('myLastEpoch').value = epoch + 1      
          if (epoch % 20 == 0){
              console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
          }  
