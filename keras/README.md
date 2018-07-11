@@ -3,7 +3,7 @@ This is to store any keras information that I might use in the examples
 Working on July 10th, 2018
 
 A basic starting point for any Keras models using Tensorflowjs  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/19-keras-web-app.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/19tfjs-keras-web-app.html
 
 
 
