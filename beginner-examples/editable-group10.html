@@ -35,11 +35,6 @@
 
 <!--   *******************************Stop: What source js file to use? ****************************************************   -->
 
-<script>
-
-  var rocksetta = rocksetta || {}   // make a global namespace if it is not already made     
- 
-</script>
 
     
     
@@ -185,7 +180,9 @@ Now lets try the above in a full Machine Learning Web App
 <input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
- 
+"}>
+
+<script>
  
  class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {     
@@ -347,10 +344,9 @@ async function mySaveDisk(){
   const saveResults = await model.save(myFileName);
   model.summary()
 }
-                                                                           
-  }">
 
 
+</script>
                                                                  
                                                                             
 <br><br>
