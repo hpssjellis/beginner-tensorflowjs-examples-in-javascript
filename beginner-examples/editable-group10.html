@@ -175,15 +175,12 @@ Now lets try the above in a full Machine Learning Web App
 
  
 
- <!-- Next we define the Javacript inside a web element so that they can be refreshed when changed -->
+ <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
  
  
 <input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
-  }">
 
-
-<script>
  
  
  class EarlyStoppingCallback extends tf.Callback {
@@ -347,7 +344,10 @@ async function mySaveDisk(){
   model.summary()
 }
                                                                            
- </script>                                                                            
+  }">
+
+
+                                                                 
                                                                             
 <br><br>
 
