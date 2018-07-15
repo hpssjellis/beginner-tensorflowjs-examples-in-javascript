@@ -180,9 +180,7 @@ Now lets try the above in a full Machine Learning Web App
 <input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
-}">
 
-<script>
  
  class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {     
@@ -207,7 +205,7 @@ function myResetButtons(){
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
 }
 
-async function myLoadData(){
+myLoadData = async function (){
  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
  const myData = await fetch(myFileName)
  document.getElementById('myX').value = await myData.text() 
@@ -345,8 +343,8 @@ async function mySaveDisk(){
   model.summary()
 }
 
+}">
 
-</script>
                                                                  
                                                                             
 <br><br>
