@@ -127,7 +127,7 @@ Now lets try the above in a full Machine Learning Web App
 <h3>Data:</h3>
 <table border=1>
   <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="1.20, 2.10, 3.40, 4.20">1.20, 2.10, 3.40, 4.20</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
-   rocksetta.myLoadData()                                                                             
+   myLoadData()                                                                             
     }">  </td></tr>
   <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="5.40, 7.20, 9.80, 11.40">5.40, 7.20, 9.80, 11.40</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
@@ -207,7 +207,7 @@ function myResetButtons(){
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
 }
 
-async function rocksetta.myLoadData(){
+async function myLoadData(){
  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
  const myData = await fetch(myFileName)
  document.getElementById('myX').value = await myData.text() 
