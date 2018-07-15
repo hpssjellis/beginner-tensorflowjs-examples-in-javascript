@@ -198,40 +198,40 @@ Now lets try the above in a full Machine Learning Web App
    } 
 
 
-function myResetButtons(){ 
+myResetButtons = function(){ 
      document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
 }
 
-myLoadData = async function (){
+myLoadData = async function(){
  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
  const myData = await fetch(myFileName)
  document.getElementById('myX').value = await myData.text() 
 }
 
-async function myLoadTarget(){
+ myLoadTarget = async function(){
   const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01target.txt');
   const myTarget = await fetch(myFileName) 
   document.getElementById('myY').value = await myTarget.text()  
 }
 
-async function myLoadImage(){ // not working yet
+ myLoadImage = async function(){ // not working yet
   const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/jj06-dog02.jpg');
   const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
   document.getElementById('myDivForImage').innerHTML = await myTarget.blob()  
 }
 
 
-async function myRunAll(){
+ myRunAll = async function(){
   document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
   await myCompile()
   await myTrain()
   await myTest()
 }
 
-async function myCompile(){
+ myCompile = async function(){
     document.getElementById('myLastEpoch').value = 0   // reset initialEpoch                                                                       
     model = tf.sequential(); // no const so that it is a global variable 
     model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
@@ -246,7 +246,7 @@ async function myCompile(){
     document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
 }
 
-async function myTrain(){                                                                                                                                                       
+ myTrain = async function(){                                                                                                                                                       
    if(document.getElementById('myButtonTrain').style.backgroundColor == 'red'){
        document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'
        document.stopRequested = true     
@@ -295,7 +295,7 @@ async function myTrain(){
     
 }
 
-async function myTest(){
+ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
@@ -311,7 +311,7 @@ async function myTest(){
 }
 
 
-async function myLoadLocal(){
+ myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   
@@ -320,7 +320,7 @@ async function myLoadLocal(){
   await myTest()
 }
 
-async function myLoadUrl(){
+ myLoadUrl = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
   
@@ -330,13 +330,13 @@ async function myLoadUrl(){
 }
 
 
-async function mySaveLocal(){
+ mySaveLocal = async function(){
   const myFileName = prompt('Enter filename to store this model','localstorage://myModel01');
   const saveResults = await model.save(myFileName);
   model.summary()
 }
 
-async function mySaveDisk(){
+ mySaveDisk = async function(){
   alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
   const myFileName = prompt('Enter filename to store this model','downloads://myModel01');
   const saveResults = await model.save(myFileName);
