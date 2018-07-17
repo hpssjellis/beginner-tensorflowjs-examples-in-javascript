@@ -69,10 +69,9 @@ The expected output for xOr input is<br>
 
  
 <input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
-
-  document.getElementById('myButton123').style.backgroundColor = 'red'  
                                                                                      
-  async function myGo() {
+  (async function myGo() {
+    document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
@@ -101,12 +100,10 @@ The expected output for xOr input is<br>
     document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
-    document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
-  }  // end main async
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
-myGo()
-                                                                              
-                                                                              
+  } )() // end Async function
+                                                                                                                                                                                                                                        
 }"><br>
 
 
