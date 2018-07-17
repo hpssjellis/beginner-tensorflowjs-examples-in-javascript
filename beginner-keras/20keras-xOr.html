@@ -67,43 +67,40 @@ The expected output for xOr input is<br>
 
 <div id="myDiv123Code"> 
 
-Epoch : <input id="myEpoch" type="number" value="10"> Epoch Batches : <input id="myBatch" type="number" value="300"><br>
  
 <input id="myButton123" type="button" value="Tensorflowjs xOr using layers" onclick="{
 
   document.getElementById('myButton123').style.backgroundColor = 'red'  
                                                                            
-  async function myGo() {
+  async function () {
     const model = tf.sequential();
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
     const myOptimizer = tf.train.sgd(0.5); 
-    // console.log(myOptimizer)                                                                                                  
+                                                                                               
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
 
-    const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
-    const target_data = tf.tensor2d([0,1,1,0],[4,1]);               // needs shape defined
+    const xTrainingData = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);         // array defines shape
+    const yTrainingTarget = tf.tensor2d([0,1,1,0],shape=[4,1]);           // needs shape defined
                                                                                  
-    for (let myLoop = 1; myLoop <= document.getElementById('myBatch').value; myLoop++) {                                                                                 
-        var myFit = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpoch').value});
-        if (myLoop % 20 == 0){   
-             document.getElementById('myDiv123').innerHTML  =  'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0].toFixed(5) +'<br><br>'                                                                           
-        }
-      await tf.nextFrame();     //  GUI update every batch                                                              
-    }                                                                                    
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : 4,
+        epochs    : 300,                                                                      
+        callbacks:   
+          onEpochEnd: async (batch, logs) => {                                                               
+               await tf.nextFrame();  // This improves UI responsiveness during training.  
+          }    // end all callbacks                                                              
+      })       // end model.fit                                                                                      
                                                                                 
-    const myPredictArray = await model.predict(training_data).data()   // just throw all the training data back in
+    const myPredictArray = await model.predict(xTrainingData).data()   // just throw all the training data back in
                                                                                     
     document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
     document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
-  }
-
-  // setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button color.
-   myGo() 
+  }  // end main async
 
 }" >
 
