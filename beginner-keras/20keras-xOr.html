@@ -81,8 +81,8 @@ The expected output for xOr input is<br>
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
 
-    const xTrainingData = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);         // array defines shape
-    const yTrainingTarget = tf.tensor2d([0,1,1,0],shape=[4,1]);           // needs shape defined
+    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
+    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
                                                                                  
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : 4,
@@ -103,8 +103,11 @@ The expected output for xOr input is<br>
     document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }  // end main async
+                                                                              
 myGo()
-}" ><br>
+                                                                              
+                                                                              
+}"><br>
 
 
 
