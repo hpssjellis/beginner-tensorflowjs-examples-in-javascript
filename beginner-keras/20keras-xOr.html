@@ -71,7 +71,6 @@ The expected output for xOr input is<br>
 <input id="myButton123" type="button" value="Tensorflowjs xOr using layers" onclick="{
 
   document.getElementById('myButton123').style.backgroundColor = 'red'  
-  document.getElementById('myDiv123').innerHTML = ''
                                                                                      
   async function myGo() {
     const model = tf.sequential();
@@ -90,7 +89,7 @@ The expected output for xOr input is<br>
         epochs    : 300,                                                                      
         callbacks:  { 
           onEpochEnd: async (batch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML += 'Loss: ' + logs.loss
+            document.getElementById('myDiv123').innerHTML = 'Loss: ' + logs.loss
             await tf.nextFrame();  // This improves UI responsiveness during training.  
           }    
         }// end all callbacks                                                              
