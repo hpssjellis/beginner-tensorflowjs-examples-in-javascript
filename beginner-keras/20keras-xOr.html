@@ -89,10 +89,10 @@ The expected output for xOr input is<br>
         epochs    : 300,                                                                      
         callbacks:  { 
           onEpochEnd: async (batch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Loss: ' + logs.loss
+            document.getElementById('myDiv123').innerHTML = 'Loss: ' + logs.loss + '<br>'
             await tf.nextFrame();  // This improves UI responsiveness during training.  
-          }    
-        }// end all callbacks                                                              
+          }    // end onEpochEnd  
+        }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
                                                                                 
     const myPredictArray = await model.predict(xTrainingData).data()   // just throw all the training data back in
@@ -104,7 +104,7 @@ The expected output for xOr input is<br>
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'                                                                                
   }  // end main async
 myGo()
-}" >
+}" ><br>
 
 
 
