@@ -87,8 +87,8 @@ The expected output for xOr input is<br>
         batchSize : 4,
         epochs    : 300,                                                                      
         callbacks:  { 
-          onEpochEnd: async (batch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Loss: ' + logs.loss + '<br><br>'
+          onEpochEnd: async (epoch, logs) => {                                                                                         
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + epoch + ', Loss: ' + logs.loss + '<br><br>'
             await tf.nextFrame();  // This improves UI responsiveness during training.  
           }    // end onEpochEnd  
         }      // end all callbacks                                                              
