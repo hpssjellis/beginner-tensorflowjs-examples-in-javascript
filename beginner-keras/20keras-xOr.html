@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.2"></script>
 
 
 
@@ -242,6 +242,7 @@ myLoadData = async function(){
     const myOptimizer = tf.train.sgd(myLearningRate);               
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                 
     console.log(model)
+    document.getElementById('myDivSummary').innerHTML = ''                                                                        
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
 }
@@ -315,7 +316,8 @@ myLoadData = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   
-  model = await tf.loadModel(myFileName);  
+  model = await tf.loadModel(myFileName); 
+  document.getElementById('myDivSummary').innerHTML = ''     
   await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
   await myTest()
 }
@@ -324,7 +326,8 @@ myLoadData = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
   
-  model = await tf.loadModel(myFileName);  
+  model = await tf.loadModel(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''      
   await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
    await myTest()
 }
@@ -333,6 +336,7 @@ myLoadData = async function(){
  mySaveLocal = async function(){
   const myFileName = prompt('Enter filename to store this model','localstorage://myModel01');
   const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
 }
 
@@ -340,6 +344,7 @@ myLoadData = async function(){
   alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
   const myFileName = prompt('Enter filename to store this model','downloads://myModel01');
   const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
 }
 
@@ -436,7 +441,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.2"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
