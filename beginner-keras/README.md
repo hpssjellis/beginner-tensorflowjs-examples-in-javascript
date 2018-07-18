@@ -22,3 +22,5 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 
 
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/21keras-integers.html
