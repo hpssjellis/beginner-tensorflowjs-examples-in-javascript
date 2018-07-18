@@ -24,3 +24,12 @@ keras now demonstrating integers
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/21keras-integers.html
+
+
+
+Decimal (float) inputs and outputs  
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/22keras-decimal.html
+
+
+
