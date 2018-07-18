@@ -51,7 +51,9 @@
 So now lets make a keras layers Neural Network with both integer inputs and outputs<br><br>
 
 xTrainingData    &nbsp;&nbsp;[1], [2], [3], [4] <br>
-yTrainingTarget [1], [3], [5], [7]<br>
+yTrainingTarget [1], [3], [5], [7]<br><br>
+ 
+ For this example I have put in a few HTML inputs to make it a bit more interesting. Later have a look at the full web App below.
  
 </div><br>
 
@@ -299,8 +301,8 @@ myLoadData = async function(){
  myCompile = async function(){
     document.getElementById('myLastEpoch').value = 0   // reset initialEpoch                                                                       
     model = tf.sequential(); // no const so that it is a global variable 
-    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 20 }) );  
+    model.add(tf.layers.dense({ units: 10,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 10 }) );  
     model.add(tf.layers.dense({ units:  1 }) );  
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
