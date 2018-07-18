@@ -166,9 +166,9 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Pre-Set Values:</h3>
 <table border=1 >
-  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.01"></td></tr>
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.5"></td></tr>
   <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
-  <tr><td>Epochs (# of batches to run) :</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
+  <tr><td>Epochs (# of batches to run) :</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=3000 placeholder="200"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in deciaml form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
@@ -284,9 +284,9 @@ myLoadData = async function(){
  myCompile = async function(){
     document.getElementById('myLastEpoch').value = 0   // reset initialEpoch                                                                       
     model = tf.sequential(); // no const so that it is a global variable 
-    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 20 }) );  
-    model.add(tf.layers.dense({ units:  1 }) );  
+
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer        
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
     const myOptimizer = tf.train.sgd(myLearningRate);               
