@@ -32,4 +32,14 @@ Decimal (float) inputs and outputs
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/22keras-decimal.html
 
 
+Digital inputs and outputs  
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/23keras-digital.html
+
+
+One-Hot inputs and outputs  
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/24keras-one-hot.html
+
+
 
