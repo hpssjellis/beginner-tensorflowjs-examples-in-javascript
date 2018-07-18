@@ -51,6 +51,8 @@
 Now lets try decimal (float) inputs and outputs.
 For every X value we train the Neural Network on y = 2X + 3 (or any other equation for that matter) <br><br>
  
+I have made the Keras model.fit a bit simpler than the Web App below. This model has no gradceful exit Class, but is easier to understand.<br><br> 
+ 
  For this example we will test the data on x = 5.32 which should provide a y close to 13.64<br><br>
  For more flexible testing see the web App below
 </div><br>
@@ -105,7 +107,7 @@ For every X value we train the Neural Network on y = 2X + 3 (or any other equati
                console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
             }                                                                        
             // Update the UI to display the current loss and accuracy values.
-            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '/200<br>'
             document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
             await tf.nextFrame();  // This improves UI responsiveness during training.
           },
