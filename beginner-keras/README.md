@@ -12,7 +12,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 
 
-First xOR demo at
+First xOR demo at  
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/20keras-xOr.html
@@ -20,7 +20,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginn
 
 
 
-
+keras now demonstrating integers  
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/21keras-integers.html
