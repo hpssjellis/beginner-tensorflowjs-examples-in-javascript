@@ -48,15 +48,82 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Now lets try decimal (float) inputs and outputs.
+For every X value we train the Neural Network on y = 2X + 3 (or any other equation for that matter) <br><br>
+ 
+ For this example we will test the data on x = 5.32 which should provide a y close to 13.64<br><br>
+ For more flexible testing see the web App below
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
-<input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+ 
+ 
+ 
+<input id="myButton123" type="button" value="Run Keras using Floats" onclick="{  
+   document.getElementById('myButton123').style.backgroundColor = 'red'  
+/////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
+
+                                                                                   
+   const xTrainingData   = tf.tensor2d([1.20, 2.10, 3.40, 4.20], shape=[4, 1]);
+   const yTrainingTarget = tf.tensor2d([5.40, 7.20, 9.80, 11.40], shape=[4, 1]);
+                                           
+  // console.log(xTrainingData)
+  // console.log(yTrainingTarget)  
+                                                                               
+/////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
+                                                                                   
+  (async function() {
+    model = tf.sequential(); // no const so that it is a global variable 
+    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 20 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
+                                                                                                                                                                                                                                                           
+    const myLearningRate = 0.01                                                                          
+    const myOptimizer = tf.train.sgd(myLearningRate); 
+                                                                                              
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
+
+ 
+/////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+    
+    //xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+    //yTrainingTarget.print()
+                                                                                   
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : 4,                                                                           
+        epochs    : 200,  
+        validationSplit: 0.00,   // for seperating percent of data for testing  0.15 = 15% for testing
+        initialEpoch : 0,        // for restarting training                                                              
+        callbacks: {
+          onBatchEnd: async (batch, logs) => {
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
+          onEpochEnd: async (epoch, logs) => {
+            if (epoch % 20 == 0){
+               console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
+            }                                                                        
+            // Update the UI to display the current loss and accuracy values.
+            document.getElementById('myDiv123').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+            document.getElementById('myDiv123').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+            await tf.nextFrame();  // This improves UI responsiveness during training.
+          },
+        }  // end all callbacks
+      }    // end configurtions
+     );   // end fit                                                                       
+                                                                                  
+ 
+/////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////  
+                                                                                   
+    const myPredictArray = await  model.predict(tf.tensor2d([5.32], shape=[1, 1]))  
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += 'Input fixed at 5.32, Output = ' + await myPredictArray.data() +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray'  
+                                                                                   
+  })()   // End large inline async function
 }"><br><br>
+ 
 
 </div>
 <div id='myDiv123'>...</div><br>
@@ -133,6 +200,28 @@ Now lets try the above in a full Machine Learning Web App
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table>
+  <input type="text" id="myWeird" size="10" value="10">  <br> 
+  <input type="button" value="Random Generate" onClick="{
+                                                      
+   let xTrainingDataArray   = []                                                                             
+   let yTrainingTargetArray = []      
+   document.getElementById('myX').value = ''    
+   document.getElementById('myY').value = ''                                                   
+                                                      
+   myInputs =  Number.parseInt(document.getElementById('myBatch').value)
+                                                      
+   for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
+      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 50 * parseFloat(document.getElementById('myWeird').value))/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
+      yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
+      if (myLoop == myInputs-1)  {   // last value does not want a comma on the end  
+         document.getElementById('myX').value += parseFloat(xTrainingDataArray[myLoop]).toFixed(2)                                                         
+         document.getElementById('myY').value += parseFloat(yTrainingTargetArray[myLoop]).toFixed(2)  
+      } else {                                                
+         document.getElementById('myX').value += parseFloat(xTrainingDataArray[myLoop]).toFixed(2) + ', '                                                       
+         document.getElementById('myY').value += parseFloat(yTrainingTargetArray[myLoop]).toFixed(2) + ', '  
+      }                                                
+   }                                                   
+ }"> <br><br>
 <br><br><br>
 
 
