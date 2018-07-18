@@ -184,19 +184,19 @@ Now lets try the above in a full Machine Learning Web App
 <h3>Pre-Set Values:</h3>
 <table border=1 >
   <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.01"></td></tr>
-  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
-  <tr><td>Epochs (# of batches to run) :</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
- <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in deciaml form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=30  title="Batch = Number of samples to run together" placeholder="30"></td></tr>
+  <tr><td>Epochs (# of batches to run) :</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=80 placeholder="80"></td></tr>
+ <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
 
 
 <h3>Data:</h3>
 <table border=1>
-  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="1.20, 2.10, 3.40, 4.20">1.20, 2.10, 3.40, 4.20</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="1, 2, 3, 4">1, 2, 3, 4</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }">  </td></tr>
-  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="5.40, 7.20, 9.80, 11.40">5.40, 7.20, 9.80, 11.40</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="1, 3, 5, 7">1, 3, 5, 7</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table>
@@ -233,7 +233,7 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5">5</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
 </table><br>
 
 
@@ -371,7 +371,7 @@ myLoadData = async function(){
       //document.getElementById('myButtonTest').style.backgroundColor = 'red'  
       const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
       document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
-        ', Output = ' + await myPredictArray.data() +'<br>'
+        ', Output (rounded) = ' + Math.round(await myPredictArray.data()) +'<br>'
       //document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
       console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())
   
