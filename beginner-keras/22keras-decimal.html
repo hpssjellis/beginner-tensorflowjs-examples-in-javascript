@@ -300,8 +300,10 @@ myResetButtons = function(){
 
 myLoadData = async function(){
  const myFileName = prompt('Enter the URL of your stored data', '');
- const myData = await fetch(myFileName)
- document.getElementById('myX').value = await myData.text() 
+ if (myFileName != null){                                                                           
+    const myData = await fetch(myFileName)
+    document.getElementById('myX').value = await myData.text() 
+ }
 }
 
  myLoadTarget = async function(){
