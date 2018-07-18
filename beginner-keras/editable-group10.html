@@ -207,20 +207,26 @@ myResetButtons = function(){
 
 myLoadData = async function(){
  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
- const myData = await fetch(myFileName)
- document.getElementById('myX').value = await myData.text() 
+ if (myFileName != null){  
+   const myData = await fetch(myFileName)
+   document.getElementById('myX').value = await myData.text() 
+ }                                                                           
 }
 
  myLoadTarget = async function(){
   const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01target.txt');
-  const myTarget = await fetch(myFileName) 
-  document.getElementById('myY').value = await myTarget.text()  
+  if (myFileName != null){                                                                            
+    const myTarget = await fetch(myFileName) 
+    document.getElementById('myY').value = await myTarget.text() 
+  }                                                                          
 }
 
  myLoadImage = async function(){ // not working yet
   const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/jj06-dog02.jpg');
-  const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
-  document.getElementById('myDivForImage').innerHTML = await myTarget.blob()  
+  if (myFileName != null){  
+    const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
+    document.getElementById('myDivForImage').innerHTML = await myTarget.blob()  
+  }                                                                          
 }
 
 
@@ -315,21 +321,23 @@ myLoadData = async function(){
  myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
-  
-  model = await tf.loadModel(myFileName); 
-  document.getElementById('myDivSummary').innerHTML = ''     
-  await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-  await myTest()
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName); 
+    document.getElementById('myDivSummary').innerHTML = ''     
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                          
 }
 
  myLoadUrl = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
-  
-  model = await tf.loadModel(myFileName);
-  document.getElementById('myDivSummary').innerHTML = ''      
-  await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-   await myTest()
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                           
 }
 
 
