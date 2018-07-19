@@ -422,7 +422,7 @@ myLoadData = async function(){
 
  myLoadUrl = async function(){
   alert('The test function will need to be changed if other models are loaded')
-  const myFileName = prompt('Enter URL of stored model', '');
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
    if (myFileName != null){      
       model = await tf.loadModel(myFileName);
      document.getElementById('myDivSummary').innerHTML = ''      
