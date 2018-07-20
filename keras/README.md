@@ -1,5 +1,12 @@
 This is to store any keras information that I might use in the examples
 
+
+absolute minimum model
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-rpi3.html
+
+
+
+
 Working on July 10th, 2018
 
 A basic starting point for any Keras models using Tensorflowjs  
