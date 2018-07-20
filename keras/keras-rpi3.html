@@ -27,6 +27,12 @@
 
 Shape: <input type="text" id="myShape" title="Define the shape of your testing data" value="1,1" placeholder="1,1"><br><br>
                                                                                                                            
+<div id="myDiv124">...</div>
+
+
+
+
+
 
  <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
  
@@ -60,8 +66,6 @@ Shape: <input type="text" id="myShape" title="Define the shape of your testing d
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
    if (myFileName != null){      
       model = await tf.loadModel(myFileName);
-     document.getElementById('myDivSummary').innerHTML = ''      
-     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
       await myTest()
   }                                                                          
 }
