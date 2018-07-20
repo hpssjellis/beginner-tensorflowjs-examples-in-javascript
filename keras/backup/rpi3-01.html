@@ -1,0 +1,86 @@
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.2"></script>
+
+<body onload="document.getElementById('myButton124').click()">
+
+
+<h5 align=center>Testing the simplist Tensorflowjs model for RPI3</h5>
+
+
+
+
+
+
+
+ <input id="myButtonLoad" type="button" value="Load From URL" onclick="{ 
+   myLoadUrl()                                                                             
+}"> 
+
+
+
+ <input id="myButtonTest" type="button" value="Test again" onclick="{ 
+   myTest()                                                                             
+}"> <br><br>
+
+<textarea id="myAsk" rows="2" cols="100%" nowrap="" placeholder="5.32">5.32</textarea><br>
+
+Shape: <input type="text" id="myShape" title="Define the shape of your testing data" value="1,1" placeholder="1,1"><br><br>
+                                                                                                                           
+<div id="myDiv124">...</div><br><br>
+
+
+
+
+
+
+ <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
+ 
+ 
+<input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
+      document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+                                                                      
+
+
+
+
+ myTest = async function(){
+ 
+  const myShape = document.getElementById('myShape').value.split(',').map(Number);
+  
+
+      //document.getElementById('myButtonTest').style.backgroundColor = 'red'  
+      const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+      document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
+        ', Output = ' + await myPredictArray.data() +'<br>'
+      //document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
+      console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())
+  
+    document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+}
+
+
+
+ myLoadUrl = async function(){
+  alert('The test function will need to be changed if other models are loaded')
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
+   if (myFileName != null){      
+      model = await tf.loadModel(myFileName);
+      await myTest()
+  }                                                                          
+}
+
+
+
+
+}"><br><br>
+
+                                                                 
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+</body>    
+    
