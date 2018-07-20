@@ -19,6 +19,7 @@
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
    if (myFileName != null){      
       model = await tf.loadModel(myFileName);
+      document.getElementById('myDivSummary').innerHTML = ''      
       await myTest()
   }                                                                          
 }
@@ -41,6 +42,10 @@
 Shape: <input type="text" id="myShape" title="Define the shape of your testing data" value="1,1" placeholder="1,1"><br><br>
                                                                                                                            
 <div id="myDiv124">...</div><br><br>
+                                                                                    
+<div id="myDivSummary">...</div><br><br>
+
+
 
 By Jeremy Ellis <br>
 Tensorflowjs Tutorials <a href="http://rocksetta.com/tensorflowjs/">http://rocksetta.com/tensorflowjs/</a><br>
