@@ -19,7 +19,8 @@
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
    if (myFileName != null){      
       model = await tf.loadModel(myFileName);
-      document.getElementById('myDivSummary').innerHTML = ''      
+      document.getElementById('myDivSummary').innerHTML = '' 
+      await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
       await myTest()
   }                                                                          
 }
