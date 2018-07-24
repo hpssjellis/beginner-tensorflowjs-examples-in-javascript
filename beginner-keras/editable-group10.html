@@ -257,11 +257,13 @@ myLoadData = async function(){
  myTrain = async function(){                                                                                                                                                       
    if(document.getElementById('myButtonTrain').style.backgroundColor == 'red'){
        document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'
+       document.getElementById('myButtonTrain').value = 'Continue Training'
        document.stopRequested = true     
         // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                
    }    else {     
          document.stopRequested = false
-         document.getElementById('myButtonTrain').style.backgroundColor = 'red'  
+         document.getElementById('myButtonTrain').style.backgroundColor = 'red'                                                                           
+         document.getElementById('myButtonTrain').value = 'Pause Training'
   }
                                                                
      /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
@@ -296,7 +298,8 @@ myLoadData = async function(){
           }      // end all callbacks                                                              
       })          // end model.fit              
      console.log(myFit.history)                                                                          
-     document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'              
+     document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'                                                                              
+     document.getElementById('myButtonTrain').value = 'Train'
                                                                          
  // })()   // End large inline async function                                                                  
                                                                       
