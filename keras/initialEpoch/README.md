@@ -1,5 +1,8 @@
 try to get initial epoch working
 
+with the testing 12.3
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/initialEpoch/graceful-exit05.html
 
 with the thorwing and error method
 
