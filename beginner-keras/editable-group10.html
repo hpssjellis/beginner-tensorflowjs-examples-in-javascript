@@ -254,7 +254,10 @@ myLoadData = async function(){
     document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
 }
 
- myTrain = async function(){                                                                                                                                                       
+ myTrain = async function(){  
+   if (document.getElementById('myLastEpoch').value == document.getElementById('myEpochs').value) {
+      alert('Already completed all epochs. To continue training increase "Epochs" above and re-click')                                                                        
+   }                                                                         
    if(document.getElementById('myButtonTrain').style.backgroundColor == 'red'){
        document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'
        document.getElementById('myButtonTrain').value = 'Continue Training'
@@ -291,7 +294,7 @@ myLoadData = async function(){
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                             epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value),   // for seperating percent of data for testing  0.15 = 15% for testin  
-        initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),        // for restarting training                                                                       
+        initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),            // for restarting training                                                                       
         callbacks:  new EarlyStoppingCallback(),  
           onBatchEnd: async (batch, logs) => {                                                               
                await tf.nextFrame();  // This improves UI responsiveness during training.  
