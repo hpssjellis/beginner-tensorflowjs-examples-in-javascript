@@ -112,7 +112,7 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     const xTestData  = tf.tensor2d([ 0,0,1,1,0,0,1,0], shape=[1,8])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
                                                                                     
-    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + myPredictArray.syncData() +'<br><br>'
+    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + myPredictArray.data()[0] +'<br><br>'
     document.getElementById('myDiv123').innerHTML += 'Send a text'+ myPredictArray[0] +'<br>'
     document.getElementById('myDiv123').innerHTML += 'Fan '+ myPredictArray[1] +'<br>'
     document.getElementById('myDiv123').innerHTML += 'Heat lamp '+ myPredictArray[2] +'<br>'
