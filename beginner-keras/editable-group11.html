@@ -177,7 +177,7 @@ Now lets try the above in a full Machine Learning Web App
  <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
  
  
-<style id="myButton124"   onclick="{
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
