@@ -299,9 +299,9 @@ myLoadData = async function(){
                                                                                              
                                                                                              
     model = tf.sequential(); // no const so that it is a global variable 
-    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 20 }) );  
-    model.add(tf.layers.dense({ units:  1 }) );  
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer        
+ 
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
     const myOptimizer = tf.train.sgd(myLearningRate);               
@@ -331,7 +331,7 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/2, 2]);
    const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
    // console.log(xTrainingData)
