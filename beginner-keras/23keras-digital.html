@@ -114,12 +114,19 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     const myPredictArray = await model.predict(xTestData).data()   
     
     console.log(myPredictArray)                                                                           
-    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray +'<br><br>'
-    document.getElementById('myDiv123').innerHTML += 'Note: 0 means off and 1 = on<br>'
+    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray +'<br>'
+    document.getElementById('myDiv123').innerHTML += ' <ul>Sensors for this fixed demo'+
+    '<li>light : 0 = off<li>Rangefinder: 0 = no object detected'+
+    '<li>Air Moisture: 1 = Ok level <li>Soil Moisture:  1 = Ok Level'+
+    '<li>CO2 0,0 = too low'+
+    '<li>Temperature:  1,0 = high but OK'+
+    '</ul><br>'
+    document.getElementById('myDiv123').innerHTML += 'Note For the output: 0 means off and 1 = on<br><br>'
     document.getElementById('myDiv123').innerHTML += 'Send a text '+ Math.round(myPredictArray[0]) +'<br>'
     document.getElementById('myDiv123').innerHTML += 'Fan '+ Math.round(myPredictArray[1]) +'<br>'
     document.getElementById('myDiv123').innerHTML += 'Heat lamp '+ Math.round(myPredictArray[2]) +'<br>'
-    document.getElementById('myDiv123').innerHTML += 'Water '+ Math.round(myPredictArray[3]) +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Water '+ Math.round(myPredictArray[3]) +'<br><br>'
+    document.getElementById('myDiv123').innerHTML += 'In practice this test would happen continuously turning devices on and off as needed'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
   } )() // end Async function
