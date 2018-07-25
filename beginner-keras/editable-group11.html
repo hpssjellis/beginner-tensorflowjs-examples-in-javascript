@@ -18,7 +18,7 @@
 
 
 
-<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
 
 
 <script src="myNewDownloadedTensorflow.js"></script>
@@ -107,7 +107,7 @@ Now lets try the above in a full Machine Learning Web App
 </div><br>
 
 <div id="myDiv124Code"> 
- <!-- Web page elements here  -->
+ <!-- ********************************************   Web page elements here *********************************** -->
  
  
 
@@ -176,16 +176,15 @@ Now lets try the above in a full Machine Learning Web App
 
  
 
- <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
  
- <!--   The entire next line can be replaced with the <script> tag for a more conventional approch. This method allowed dynamic scripts -->
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
 
 <style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
                                                                                              
-      document.getElementById('myDiv124-A').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+  document.getElementById('myDiv124-A').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
- 
  class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {     
          document.getElementById('myLastEpoch').value = epoch + 1      
@@ -246,7 +245,12 @@ myLoadData = async function(){
 }
 
  myCompile = async function(){
-    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch                                                                       
+    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
+                                                                                             
+
+     /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                             
+                                                                                             
     model = tf.sequential(); // no const so that it is a global variable 
     model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
     model.add(tf.layers.dense({ units: 20 }) );  
@@ -283,22 +287,16 @@ myLoadData = async function(){
    const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
    const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
-  // console.log(xTrainingData)
-  // console.log(yTrainingTarget) 
-                                                                      
-                                                                      
-    /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
-    
-                                                                      
-  //  (async function() {
-                                                                      
-                                                                      
-    //xTrainingData.print()    // have a look at the training tensor in the console                                                                             
-    //yTrainingTarget.print()
-                                  
-       //document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  document.lastEpoch +' '                                                                     
-    console.log('Starting Training')               
-    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+   // console.log(xTrainingData)
+   // console.log(yTrainingTarget) 
+                                                                                                                                         
+   /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+                                                                    
+   // xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+   // yTrainingTarget.print()
+                                                                                                 
+   console.log('Starting Training')               
+   var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                             epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value),   // for seperating percent of data for testing  0.15 = 15% for testin  
         initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),             // for restarting training                                                                       
@@ -310,29 +308,23 @@ myLoadData = async function(){
      console.log(myFit.history)                                                                          
      document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'                                                                              
      document.getElementById('myButtonTrain').value = 'Continue Training'
-                                                                         
- // })()   // End large inline async function                                                                  
-                                                                      
-    
+                                                                           
 }
 
- myTest = async function(){
+myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-
-      //document.getElementById('myButtonTest').style.backgroundColor = 'red'  
-      const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
-      document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
+  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+  document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
-      //document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
-      console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())
-  
-    document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+                                                                                             
+  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) 
+  document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
 
 
- myLoadLocal = async function(){
+myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   if (myFileName != null){  
@@ -374,7 +366,6 @@ myLoadData = async function(){
 }"></style>
 <!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
                                                                  
-
 
 </div>
 <div id='myDiv124'>...</div><br>
