@@ -38,7 +38,7 @@
 
     
     
-<h2 align=center>Digital Inputs and OUtputs to a Neural Network</h2>
+<h2 align=center>Digital Inputs and Outputs from an IoT device using Neural Network</h2>
 
 
 
@@ -69,10 +69,10 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
  </ul><br>
  
  <ul>Actuators
-  <li> pre-defined text 1 bit: 0 don't send 1 send
+  <li> pre-defined text 1 bit: 0 don't send, 1 send
   <li>Fan  1 bit: 0 off, 1 on
   <li>Heat Lamp  1 bit:  0 off, 1 on
-  <li>Watere  1 bit: 0 off, 1 on
+  <li>Water  1 bit: 0 off, 1 on
 
  </ul><br>
  
@@ -95,26 +95,24 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
-    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
+    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   0,0,1,1,0,0,1,0], shape=[6,8]);      
+    const yTrainingTarget = tf.tensor2d([1,1,1,1,   0,0,0,0,   1,0,1,0,   0,1,0,1,   1,1,0,0,   0,0,1,1], shape=[6,4]);          
                                                                                  
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : 4,
-        epochs    : 3000,                                                                      
+        epochs    : 300,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/3000, Loss: ' + logs.loss + '<br><br>'
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/300, Loss: ' + logs.loss + '<br><br>'
             await tf.nextFrame();  // This improves UI responsiveness during training.  
           }    // end onEpochEnd callback 
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
-                                                                                
-    const myPredictArray = await model.predict(xTrainingData).data()   // just throw all the training data back in
+              
+    const xTestData  = tf.tensor2d([ 0,0,1,1,0,0,1,0], shape=[1,8])                                                                         
+    const myPredictArray = await model.predict(xTestData).data()   
                                                                                     
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Input = ' + xTestData.data()+ 'Output: '+ myPredictArray +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
   } )() // end Async function
