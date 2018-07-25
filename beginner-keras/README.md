@@ -3,6 +3,15 @@ This folder is for Keras only demos that will be on the webpage.
 
 
 
+
+July 24, 2018
+
+found an error with the editable-group10.html template where making a webpage on your own computer would not work, so here is the next version
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/editable-group11.html
+
+
+
 Starting July 17, 2018
 
 Template at
