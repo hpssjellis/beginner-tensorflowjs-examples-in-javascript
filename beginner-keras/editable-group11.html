@@ -193,7 +193,7 @@ Now lets try the above in a full Machine Learning Web App
  
 <!-- weird little trick I made to allow easy loading of script tags by changing it to a style tag -->
 
-<style id="myButton124"  onload="document.getElementById('myButton124').click()"  onclick="{
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
