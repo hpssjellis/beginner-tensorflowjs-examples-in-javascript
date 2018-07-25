@@ -100,10 +100,10 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
                                                                                  
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : 4,
-        epochs    : 300,                                                                      
+        epochs    : 1000,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/300, Loss: ' + logs.loss + '<br><br>'
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/1000, Loss: ' + logs.loss + '<br><br>'
             await tf.nextFrame();  // This improves UI responsiveness during training.  
           }    // end onEpochEnd callback 
         }      // end all callbacks                                                              
