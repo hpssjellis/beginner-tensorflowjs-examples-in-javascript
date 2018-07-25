@@ -404,10 +404,13 @@ myTest = async function(){
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
   const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
-  document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
-        ', Output = ' + await myPredictArray.data() +'<br>'
-                                                                                             
-  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) 
+  document.getElementById('myDiv124-A').innerHTML = 'Sensors: light, rangefinder, air, soil, CO2 x2, Temp x2<br>'+
+       'Input: '+document.getElementById('myAsk').value + '<br><br>'
+       'Output:  <br>' + await myPredictArray.data() +'<br>'
+  document.getElementById('myDiv124-A').innerHTML +=  'Text: '  + await Math.round(myPredictArray.data()[0] + '<br>'
+  document.getElementById('myDiv124-A').innerHTML +=   'Fan: '  + await Math.round(myPredictArray.data()[1] + '<br>' 
+  document.getElementById('myDiv124-A').innerHTML +=   'Heat: ' + await Math.round(myPredictArray.data()[2] + '<br>' 
+  document.getElementById('myDiv124-A').innerHTML +=   'Water: '+ await Math.round(myPredictArray.data()[3] + '<br>' 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
 
