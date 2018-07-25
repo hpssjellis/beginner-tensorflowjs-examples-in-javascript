@@ -9,8 +9,8 @@
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
   document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
-        ', Output = ' + await myPredictArray.data() +'<br>'+
-   'tf.getBackend() = '+ tf.getBackend()
+        ', Output = ' + await myPredictArray.data() +'<br><br>'+
+   'Note: tf.getBackend() = '+ tf.getBackend()
 
   console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())  
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
