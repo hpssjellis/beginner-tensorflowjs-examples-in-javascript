@@ -201,6 +201,31 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td></tr>
   </table>
 <br><br><br>
+ Multiplier for the Random Generate <input type="text" id="myWeird" size="10" value="10" onChange="{
+       alert(As the multiplier gets larger the Learning Rate needs to get much smaller.)
+   }">  Note: "Samples per Batch" above effects the generator 
+  <input type="button" value="Random Generate Y = 2X + 3" onClick="{
+                                                      
+   let xTrainingDataArray   = []                                                                             
+   let yTrainingTargetArray = []      
+   document.getElementById('myX').value = ''    
+   document.getElementById('myY').value = ''                                                   
+                                                      
+   myInputs =  Number.parseInt(document.getElementById('myBatch').value)
+                                                      
+   for (let myLoop = 0; myLoop <= myInputs-1; myLoop++){
+      xTrainingDataArray[myLoop] = (Math.floor(Math.random() * 50 * parseFloat(document.getElementById('myWeird').value))/100 + 0.001).toFixed(2)   // generates a random number between 0.001 and 500.000
+      yTrainingTargetArray[myLoop] =  2 * xTrainingDataArray[myLoop] + 3  
+      if (myLoop == myInputs-1)  {   // last value does not want a comma on the end  
+         document.getElementById('myX').value += parseFloat(xTrainingDataArray[myLoop]).toFixed(2)                                                         
+         document.getElementById('myY').value += parseFloat(yTrainingTargetArray[myLoop]).toFixed(2)  
+      } else {                                                
+         document.getElementById('myX').value += parseFloat(xTrainingDataArray[myLoop]).toFixed(2) + ', '                                                       
+         document.getElementById('myY').value += parseFloat(yTrainingTargetArray[myLoop]).toFixed(2) + ', '  
+      }                                                
+   }                                                   
+ }"> <br><br>
+<br><br><br>
 
 
 
