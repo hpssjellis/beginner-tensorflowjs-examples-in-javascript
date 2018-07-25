@@ -112,12 +112,14 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     const xTestArray = [0,0,1,1,0,0,1,0]
     const xTestData  = tf.tensor2d(xTestArray, shape=[1,8])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
-                                                                                    
+    
+    console.log(myPredictArray)                                                                           
     document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray +'<br><br>'
-    document.getElementById('myDiv123').innerHTML += 'Send a text'+ myPredictArray[0] +'<br>'
-    document.getElementById('myDiv123').innerHTML += 'Fan '+ myPredictArray[1] +'<br>'
-    document.getElementById('myDiv123').innerHTML += 'Heat lamp '+ myPredictArray[2] +'<br>'
-    document.getElementById('myDiv123').innerHTML += 'Water '+ myPredictArray[3] +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Note: 0 means off and 1 = on<br>'
+    document.getElementById('myDiv123').innerHTML += 'Send a text '+ Math.round(myPredictArray[0]) +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Fan '+ Math.round(myPredictArray[1]) +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Heat lamp '+ Math.round(myPredictArray[2]) +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Water '+ Math.round(myPredictArray[3]) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
   } )() // end Async function
