@@ -11,6 +11,9 @@ found an error with the editable-group10.html template where making a webpage on
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/editable-group11.html
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/test.html
+
+
 
 Starting July 17, 2018
 
