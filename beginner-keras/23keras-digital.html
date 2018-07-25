@@ -109,7 +109,7 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
     
-    const xTestArray = [0,0,1,1,0,0,1,0]
+    const xTestArray = [0,0,1,1,0,0,0,1]
     const xTestData  = tf.tensor2d(xTestArray, shape=[1,8])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
@@ -119,8 +119,8 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     document.getElementById('myDiv123').innerHTML += ' <ul>Sensors for this fixed demo'+
     '<li>light : 0 = off<li>Rangefinder: 0 = no object detected'+
     '<li>Air Moisture: 1 = Ok level <li>Soil Moisture:  1 = Ok Level'+
-    '<li>CO2 0,0 = too low'+
-    '<li>Temperature:  1,0 = high but OK'+
+    '<li>CO2: 0,0 = too low'+
+    '<li>Temperature:  0,1 = Low but OK'+
     '</ul><br>'
                                                                                   
     document.getElementById('myDiv123').innerHTML += 'Note For the output: 0 means off and 1 = on<br><br>'
