@@ -38,7 +38,7 @@
 
     
     
-<h2 align=center>DRAFT DIGITAL NEURAL NETWORK FOR USE WITH DIGITAL INPUTS AND OUTPUTS. VERY SIMILIAR TO THE XoR EXAMPLE</h2>
+<h2 align=center>Digital Inputs and OUtputs to a Neural Network</h2>
 
 
 
@@ -48,16 +48,33 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-One of the easiest Keras Layers is xOR. It has 4 fixed inputs 2 digit and 4 fixed one digit outputs.<br><br>
-This is a very simple xOr Neural Network using Tensorflowjs Layers<br>
-Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network<br> 
- The Original by Matt Cameron was written for NodeJS, his code is at <a href="https://github.com/mattcam/tfjs_xor_example">Code</a><br>
-The expected output for xOr input is<br>
-[0,0] = ~ 0<br>
-[1,0] = ~ 1<br>
-[0,1] = ~ 1<br>
-[1,1] = ~ 0<br>
+Using 8 digital inputs (Think Bits) and 4 digital outputs, say from an IoT device such as an internet connected Arduino, 
+ <a href="https://www.particle.io/products/hardware/photon-wifi">Particle Photon </a> (or the new Mesh devices ), 
+ Raspberry Pi or similiar IoT sensor Actuator arrangement.<br><br>
  
+This example shows how to take a small set of sensor inputs and actuator outputs  train a Neural Network and then 
+ continuously monitor your IoT setup.<br><br>
+ 
+ Note: This is a theoretical setup, in actual practice I am sure it would be much harder to train and fine tune. See my 
+ <a href="https://www.youtube.com/playlist?list=PL57Dnr1H_egsL0r4RXPA4PY2yZhOJk5Nr">Robotics video playlist and supporting Github Tutorials.</a> 
+ 
+Like the xOr example the inputs and outputs will be a series of ones and zeros, say for a smart garden<br>
+ <ul>Sensors
+  <li>light 1 bit: 0 no light, 1 light
+  <li>Rangefinder  1 bit: 0 no one, 1 entry detected
+  <li>Air Moisture  1 bit: 0 low air moisture, 1 Ok level
+  <li>Soil Moisture  1 bit: 0 too dry, 1 Ok
+  <li>CO2  2 bit: 0,0 too low, 0,1 low OK, 1,0 high OK, 1,1 Too High
+  <li>Temperature  2 bit: 0,0 too low, 0,1 low OK, 1,0 high OK, 1,1 Too High
+ </ul><br>
+ 
+ <ul>Actuators
+  <li> pre-defined text 1 bit: 0 don't send 1 send
+  <li>Fan  1 bit: 0 off, 1 on
+  <li>Heat Lamp  1 bit:  0 off, 1 on
+  <li>Watere  1 bit: 0 off, 1 on
+
+ </ul><br>
  
  
  
