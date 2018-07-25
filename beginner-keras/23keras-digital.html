@@ -251,7 +251,7 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="0,0">0,0</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,2" placeHolder="1,1"></td><tr>
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="0,0,1,1,0,0,0,1">0,0,1,1,0,0,0,1</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,8" placeHolder="1,8"></td><tr>
 </table><br>
 
 <div id='myDiv124-A'>...</div><br>
@@ -369,8 +369,8 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/2, 2]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/8, 8]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 8]);
                                            
    // console.log(xTrainingData)
    // console.log(yTrainingTarget) 
