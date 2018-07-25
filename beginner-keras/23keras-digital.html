@@ -202,7 +202,7 @@ Now lets try the above in a full Machine Learning Web App
 <h3>Pre-Set Values:</h3>
 <table border=1 >
   <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.5 title="From about 0.5 to 0.0001" placeholder="0.5"></td></tr>
-  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=24  title="Batch = Number of samples to run together" placeholder="24"></td></tr>
   <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=1000 placeholder="1000"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
@@ -211,10 +211,10 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Data:</h3>
 <table border=1>
-  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="0,0, 0,1, 1,0, 1,1">0,0, 0,1, 1,0, 1,1</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   0,0,1,1,0,0,1,0">0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   0,0,1,1,0,0,1,0</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }">  </td></tr>
-  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="0, 1, 1, 0">0, 1, 1, 0</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="1,0,0,0,   0,0,1,0,   1,0,1,0,   0,1,0,1,   0,1,0,0,   1,0,1,1">1,0,0,0,   0,0,1,0,   1,0,1,0,   0,1,0,1,   0,1,0,0,   1,0,1,1</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table>
@@ -298,7 +298,7 @@ myResetButtons = function(){
 }
 
 myLoadData = async function(){
- const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
+ const myFileName = prompt('Enter the URL of your stored data', '');
  if (myFileName != null){  
    const myData = await fetch(myFileName)
    document.getElementById('myX').value = await myData.text() 
@@ -306,7 +306,7 @@ myLoadData = async function(){
 }
 
  myLoadTarget = async function(){
-  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01target.txt');
+  const myFileName = prompt('Enter the URL of your stored data', '');
   if (myFileName != null){                                                                            
     const myTarget = await fetch(myFileName) 
     document.getElementById('myY').value = await myTarget.text() 
@@ -337,9 +337,9 @@ myLoadData = async function(){
                                                                                              
                                                                                              
     model = tf.sequential(); // no const so that it is a global variable 
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer        
- 
+    model.add(tf.layers.dense({ units: 30, activation: 'sigmoid', inputShape: [8], }) );  // 8 inputs to 30 hidden layer nodes
+    model.add(tf.layers.dense({ units: 4,  activation: 'sigmoid', }) );  // from the 30 hidden layer nodes to 4 output layer                                                                                  
+   
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
     const myOptimizer = tf.train.sgd(myLearningRate);               
@@ -411,7 +411,7 @@ myTest = async function(){
 
 myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
-  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
+  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://23keras-digital');
   if (myFileName != null){  
     model = await tf.loadModel(myFileName); 
     document.getElementById('myDivSummary').innerHTML = ''     
@@ -433,7 +433,7 @@ myLoadLocal = async function(){
 
 
  mySaveLocal = async function(){
-  const myFileName = prompt('Enter filename to store this model','localstorage://myModel01');
+  const myFileName = prompt('Enter filename to store this model','localstorage://23keras-digital');
   const saveResults = await model.save(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
@@ -441,7 +441,7 @@ myLoadLocal = async function(){
 
  mySaveDisk = async function(){
   alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
-  const myFileName = prompt('Enter filename to store this model','downloads://myModel01');
+  const myFileName = prompt('Enter filename to store this model','downloads://23keras-digital');
   const saveResults = await model.save(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
