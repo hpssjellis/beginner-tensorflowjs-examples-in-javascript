@@ -35,7 +35,12 @@
 
 <!--   *******************************Stop: What source js file to use? ****************************************************   -->
 
-<body onload="document.getElementById('myButton124').click()">
+
+ 
+ 
+ 
+ 
+ 
     
     
 <h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
@@ -177,7 +182,17 @@ Now lets try the above in a full Machine Learning Web App
  <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
  
  
-<input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<!-- weird little trick I made to allow easy loading of script tags by changing it to a style tag 
+<style id="myButton124"  onload="document.getElementById('myButton124').click()"  onclick="{
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
@@ -363,6 +378,10 @@ myLoadData = async function(){
   model.summary()
 }
 
+
+
+// END REALLY LON STYLE TAG. if converting back to a script tag put the ending tag here like this
+// </script>
 }">
 
                                                                  
