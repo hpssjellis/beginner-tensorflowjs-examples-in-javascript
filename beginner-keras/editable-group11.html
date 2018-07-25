@@ -180,7 +180,7 @@ Now lets try the above in a full Machine Learning Web App
 
 <style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
                                                                                              
-      document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+      document.getElementById('myDiv124-A').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
  
@@ -193,8 +193,8 @@ Now lets try the above in a full Machine Learning Web App
          if (document.stopRequested) {                                                                  
             this.model.stopTraining = true;                                                                                                                                             
         }
-        document.getElementById('myDiv124').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
-        document.getElementById('myDiv124').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+        document.getElementById('myDiv124-A').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+        document.getElementById('myDiv124-A').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
         await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
      }
    } 
@@ -318,7 +318,7 @@ myLoadData = async function(){
 
       //document.getElementById('myButtonTest').style.backgroundColor = 'red'  
       const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
-      document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
+      document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
       //document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
       console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())
@@ -374,10 +374,12 @@ myLoadData = async function(){
 <br><br>
 
 </div>
-<div id='myDiv124'>...</div><br>
+
+<div id='myDiv124-A'>...</div><br>
 
 <div id="myDivSummary">...</div><br><br><br>
 
+<div id='myDiv124'>...</div><br>
 
 <input id="myUpdate124" type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
