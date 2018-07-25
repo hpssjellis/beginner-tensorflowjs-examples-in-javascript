@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"></script>
 
 
 
@@ -12,13 +12,13 @@
 
 <!-- the newest version script tag is below but by using it all the examples may not work 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
 
 -->
 
 
 
-<!-- Or you could download the newest version using the link above and work completely offline using a tag similar to
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
 
 
 <script src="myNewDownloadedTensorflow.js"></script>
@@ -27,7 +27,7 @@
 
  <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.2/dist/tf.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3/dist/tf.js"></script>
 
 --> 
 
@@ -35,10 +35,10 @@
 
 <!--   *******************************Stop: What source js file to use? ****************************************************   -->
 
-<body onload="document.getElementById('myButton124').click()">
+
     
     
-<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
+<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples using an xOr style Neural Network</h2>
 
 
 
@@ -48,15 +48,62 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+One of the easiest Keras Layers is xOR. It has 4 fixed inputs 2 digit and 4 fixed one digit outputs.<br><br>
+This is a very simple xOr Neural Network using Tensorflowjs Layers<br>
+Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network<br> 
+ The Original by Matt Cameron was written for NodeJS, his code is at <a href="https://github.com/mattcam/tfjs_xor_example">Code</a><br>
+The expected output for xOr input is<br>
+[0,0] = ~ 0<br>
+[1,0] = ~ 1<br>
+[0,1] = ~ 1<br>
+[1,1] = ~ 0<br>
+ 
+ 
+ 
+ 
+ 
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
-<input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+ 
+<input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
+                                                                                     
+  (async function myGo() {
+    document.getElementById('myButton123').style.backgroundColor = 'red'  
+    const model = tf.sequential();
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+    const myOptimizer = tf.train.sgd(0.5); 
+                                                                                               
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
+    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
+    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
+                                                                                 
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : 4,
+        epochs    : 3000,                                                                      
+        callbacks:  { 
+          onEpochEnd: async (epoch, logs) => {                                                                                         
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/3000, Loss: ' + logs.loss + '<br><br>'
+            await tf.nextFrame();  // This improves UI responsiveness during training.  
+          }    // end onEpochEnd callback 
+        }      // end all callbacks                                                              
+      })       // end model.fit                                                                                      
+                                                                                
+    const myPredictArray = await model.predict(xTrainingData).data()   // just throw all the training data back in
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
+                                                                              
+  } )() // end Async function
+                                                                                                                                                                                                                                        
 }"><br><br>
+
 
 </div>
 <div id='myDiv123'>...</div><br>
@@ -107,7 +154,7 @@ Now lets try the above in a full Machine Learning Web App
 </div><br>
 
 <div id="myDiv124Code"> 
- <!-- Web page elements here  -->
+ <!-- ********************************************   Web page elements here *********************************** -->
  
  
 
@@ -116,9 +163,9 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Pre-Set Values:</h3>
 <table border=1 >
-  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.01"></td></tr>
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.5 title="From about 0.5 to 0.0001" placeholder="0.5"></td></tr>
   <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
-  <tr><td>Epochs (# of batches to run) :</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=3000 placeholder="3000"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
@@ -126,10 +173,10 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Data:</h3>
 <table border=1>
-  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="1.20, 2.10, 3.40, 4.20">1.20, 2.10, 3.40, 4.20</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="0,0, 0,1, 1,0, 1,1">0,0, 0,1, 1,0, 1,1</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }">  </td></tr>
-  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="5.40, 7.20, 9.80, 11.40">5.40, 7.20, 9.80, 11.40</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="0, 1, 1, 0">0, 1, 1, 0</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table>
@@ -166,22 +213,25 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="0,0">0,0</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,2" placeHolder="1,1"></td><tr>
 </table><br>
 
+<div id='myDiv124-A'>...</div><br>
 
+<div id="myDivSummary">...</div><br><br>
 
 
  
 
- <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
  
- 
-<input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+                                                                                             
+  document.getElementById('myDiv124-A').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
- 
  class EarlyStoppingCallback extends tf.Callback {
       async onEpochEnd(epoch, logs) {     
          document.getElementById('myLastEpoch').value = epoch + 1      
@@ -191,18 +241,22 @@ Now lets try the above in a full Machine Learning Web App
          if (document.stopRequested) {                                                                  
             this.model.stopTraining = true;                                                                                                                                             
         }
-        document.getElementById('myDiv124').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
-        document.getElementById('myDiv124').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+        document.getElementById('myDiv124-A').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+        document.getElementById('myDiv124-A').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
         await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
      }
    } 
 
 
 myResetButtons = function(){ 
+     tf.disposeVariables()                                                                       
      document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
+     document.getElementById('myDiv124-A').innerHTML = ''
+     document.getElementById('myDivSummary').innerHTML = ''
+                                                                                             
 }
 
 myLoadData = async function(){
@@ -238,11 +292,16 @@ myLoadData = async function(){
 }
 
  myCompile = async function(){
-    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch                                                                       
+    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
+                                                                                             
+
+     /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                             
+                                                                                             
     model = tf.sequential(); // no const so that it is a global variable 
-    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
-    model.add(tf.layers.dense({ units: 20 }) );  
-    model.add(tf.layers.dense({ units:  1 }) );  
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer        
+ 
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
     const myOptimizer = tf.train.sgd(myLearningRate);               
@@ -253,72 +312,66 @@ myLoadData = async function(){
     document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
 }
 
- myTrain = async function(){                                                                                                                                                       
+ myTrain = async function(){  
+   if (document.getElementById('myLastEpoch').value == document.getElementById('myEpoch').value) {
+      alert('Already completed all epochs. To continue training, increase \'Epochs: (# of batches to run)\' and re-click this button')                                                                        
+   }                                                                         
    if(document.getElementById('myButtonTrain').style.backgroundColor == 'red'){
        document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'
+       document.getElementById('myButtonTrain').value = 'Continue Training'
        document.stopRequested = true     
         // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                
    }    else {     
          document.stopRequested = false
-         document.getElementById('myButtonTrain').style.backgroundColor = 'red'  
+         document.getElementById('myButtonTrain').style.backgroundColor = 'red'                                                                           
+         document.getElementById('myButtonTrain').value = 'Pause Training'
   }
                                                                
      /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/2, 2]);
    const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
-  // console.log(xTrainingData)
-  // console.log(yTrainingTarget) 
-                                                                      
-                                                                      
-    /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
-    
-                                                                      
-  //  (async function() {
-                                                                      
-                                                                      
-    //xTrainingData.print()    // have a look at the training tensor in the console                                                                             
-    //yTrainingTarget.print()
-                                  
-       //document.getElementById('myDivError').innerHTML =  'Last Epoch:'+  document.lastEpoch +' '                                                                     
-    console.log('Starting Training')               
-    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+   // console.log(xTrainingData)
+   // console.log(yTrainingTarget) 
+                                                                                                                                         
+   /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+                                                                    
+   // xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+   // yTrainingTarget.print()
+                                                                                                 
+   console.log('Starting Training')               
+   var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                             epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
         validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value),   // for seperating percent of data for testing  0.15 = 15% for testin  
-        initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),        // for restarting training                                                                       
+        initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),             // for restarting training                                                                       
         callbacks:  new EarlyStoppingCallback(),  
           onBatchEnd: async (batch, logs) => {                                                               
                await tf.nextFrame();  // This improves UI responsiveness during training.  
           }      // end all callbacks                                                              
       })          // end model.fit              
      console.log(myFit.history)                                                                          
-     document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'              
-                                                                         
- // })()   // End large inline async function                                                                  
-                                                                      
-    
+     document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'                                                                              
+     document.getElementById('myButtonTrain').value = 'Continue Training'
+                                                                           
 }
 
- myTest = async function(){
+myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-
-      //document.getElementById('myButtonTest').style.backgroundColor = 'red'  
-      const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
-      document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
+  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+  document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
-      //document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
-      console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())
-  
-    document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+                                                                                             
+  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) 
+  document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
 
 
- myLoadLocal = async function(){
+myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   if (myFileName != null){  
@@ -356,17 +409,13 @@ myLoadData = async function(){
   model.summary()
 }
 
-}">
 
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
                                                                  
-                                                                            
-<br><br>
 
 </div>
 <div id='myDiv124'>...</div><br>
-
-<div id="myDivSummary">...</div><br><br><br>
-
 
 <input id="myUpdate124" type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
@@ -449,7 +498,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.2"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
@@ -466,3 +515,4 @@ function myTextGrow(myT, myB){
 </script>  
  
  
+</body>
