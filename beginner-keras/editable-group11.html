@@ -176,8 +176,10 @@ Now lets try the above in a full Machine Learning Web App
 
  <!-- Next we define the Javascript inside a web element so that they can be refreshed when changed -->
  
- 
+ <!--   The entire next line can be replaced with the <script> tag for a more conventional approch. This method allowed dynamic scripts -->
+
 <style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+                                                                                             
       document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
@@ -363,8 +365,10 @@ myLoadData = async function(){
   model.summary()
 }
 
+
 }"></style>
 
+<!-- If you replaced the style with a script tag don't forget to change the above line to just </script>  --
                                                                  
                                                                             
 <br><br>
