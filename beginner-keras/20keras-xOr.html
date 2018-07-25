@@ -38,7 +38,7 @@
 
     
     
-<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
+<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples using an xOr style Neural Network</h2>
 
 
 
@@ -48,15 +48,62 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+One of the easiest Keras Layers is xOR. It has 4 fixed inputs 2 digit and 4 fixed one digit outputs.<br><br>
+This is a very simple xOr Neural Network using Tensorflowjs Layers<br>
+Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network<br> 
+ The Original by Matt Cameron was written for NodeJS, his code is at <a href="https://github.com/mattcam/tfjs_xor_example">Code</a><br>
+The expected output for xOr input is<br>
+[0,0] = ~ 0<br>
+[1,0] = ~ 1<br>
+[0,1] = ~ 1<br>
+[1,1] = ~ 0<br>
+ 
+ 
+ 
+ 
+ 
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
-<input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+ 
+<input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
+                                                                                     
+  (async function myGo() {
+    document.getElementById('myButton123').style.backgroundColor = 'red'  
+    const model = tf.sequential();
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+    const myOptimizer = tf.train.sgd(0.5); 
+                                                                                               
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
+    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
+    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
+                                                                                 
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : 4,
+        epochs    : 3000,                                                                      
+        callbacks:  { 
+          onEpochEnd: async (epoch, logs) => {                                                                                         
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/3000, Loss: ' + logs.loss + '<br><br>'
+            await tf.nextFrame();  // This improves UI responsiveness during training.  
+          }    // end onEpochEnd callback 
+        }      // end all callbacks                                                              
+      })       // end model.fit                                                                                      
+                                                                                
+    const myPredictArray = await model.predict(xTrainingData).data()   // just throw all the training data back in
+                                                                                    
+    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
+    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
+    document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
+                                                                              
+  } )() // end Async function
+                                                                                                                                                                                                                                        
 }"><br><br>
+
 
 </div>
 <div id='myDiv123'>...</div><br>
