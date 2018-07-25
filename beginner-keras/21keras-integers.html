@@ -230,7 +230,7 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5">5</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
 </table><br>
 
 <div id='myDiv124-A'>...</div><br>
@@ -381,9 +381,9 @@ myTest = async function(){
   
   const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
   document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
-        ', Output = ' + await myPredictArray.data() +'<br>'
+        ', Output = ' + await Math.round(await myPredictArray.data()) +'<br>'   // NOTE: rounded output
                                                                                              
-  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) 
+  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) // true output to console
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
 
