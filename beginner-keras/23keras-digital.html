@@ -95,8 +95,8 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   0,0,1,1,0,0,1,0], shape=[6,8]);      
-    const yTrainingTarget = tf.tensor2d([1,0,0,0,   0,0,1,0,   1,0,1,0,   0,1,0,1,   0,1,0,0,   1,0,1,1], shape=[6,4]);          
+    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   1,0,1,0,0,1,1,0], shape=[6,8]);      
+    const yTrainingTarget = tf.tensor2d([0,0,1,1,           1,0,0,0,           0,1,0,0,           0,1,1,0,           1,1,0,0,           1,0,1,1        ], shape=[6,4]);          
 
     console.log('xTrainingData')
     xTrainingData.print()
