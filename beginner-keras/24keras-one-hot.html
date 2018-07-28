@@ -60,7 +60,7 @@
  We will train this information:
  <table border=1>
   <tr><th>Species</th><th>Class</th><th>One-Hot-Species </th><th>One-Hot-Class</th></tr>
- <tr><td> Elephant:</td><td> Mammal       </td><td>    1,0,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
+ <tr><td> Elephant:</td><td> Mammal        </td><td>    1,0,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
 <tr><td> Fox: </td><td>Mammal              </td><td>    0,1,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
 <tr><td> Crow: </td><td>Bird (Aves)        </td><td>    0,0,1,0,0,0,0,0 </td><td> 0,1,0,0 </td></tr>
 <tr><td> Aligator: </td><td>Reptile        </td><td>    0,0,0,1,0,0,0,0 </td><td> 0,0,1,0 </td></tr>
@@ -91,8 +91,8 @@
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,], shape=[8,8]);      
-    const yTrainingTarget = tf.tensor2d([0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,  ], shape=[8,4]);          
+    const xTrainingData   = tf.tensor2d([1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ], shape=[8,8]);      
+    const yTrainingTarget = tf.tensor2d([1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ], shape=[8,4]);          
 
     console.log('xTrainingData')
     xTrainingData.print()
@@ -125,7 +125,7 @@
     document.getElementById('myDiv123').innerHTML += '<b>Reptile : '+ myPredictArray[2] +'</b><br>'
     document.getElementById('myDiv123').innerHTML += '<b>Amphibians : '+ myPredictArray[3] +'</b><br><br>'
 
-    document.getElementById('myDiv123').innerHTML += '<b>Note: You would actually train on hundreds of examples not just these 8</b><br>'
+    document.getElementById('myDiv123').innerHTML += 'Note: You would actually train on hundreds of examples not just these 8<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
   } )() // end Async function
