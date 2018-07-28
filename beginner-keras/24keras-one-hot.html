@@ -422,7 +422,7 @@ myTest = async function(){
 
 myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
-  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://23keras-digital');
+  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://24keras-one-hot');
   if (myFileName != null){  
     model = await tf.loadModel(myFileName); 
     document.getElementById('myDivSummary').innerHTML = ''     
@@ -433,7 +433,7 @@ myLoadLocal = async function(){
 
  myLoadUrl = async function(){
   alert('The test function will need to be changed if other models are loaded')
-  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
+  const myFileName = prompt('Enter URL of stored model', '');
   if (myFileName != null){  
     model = await tf.loadModel(myFileName);
     document.getElementById('myDivSummary').innerHTML = ''      
@@ -444,7 +444,7 @@ myLoadLocal = async function(){
 
 
  mySaveLocal = async function(){
-  const myFileName = prompt('Enter filename to store this model','localstorage://23keras-digital');
+  const myFileName = prompt('Enter filename to store this model','localstorage://24keras-one-hot');
   const saveResults = await model.save(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
@@ -452,7 +452,7 @@ myLoadLocal = async function(){
 
  mySaveDisk = async function(){
   alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
-  const myFileName = prompt('Enter filename to store this model','downloads://23keras-digital');
+  const myFileName = prompt('Enter filename to store this model','downloads://24keras-one-hot');
   const saveResults = await model.save(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
