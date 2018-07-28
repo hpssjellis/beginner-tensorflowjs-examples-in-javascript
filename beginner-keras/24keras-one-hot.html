@@ -214,10 +214,10 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Data:</h3>
 <table border=1>
-  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   1,0,1,0,0,1,1,0">0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   1,0,1,0,0,1,1,0</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% WRAP=false placeholder="1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ">1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 </textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }">  </td></tr>
-  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="0,0,1,1,           1,0,0,0,           0,1,0,0,           0,1,1,0,           1,1,0,0,           1,0,1,1        ">0,0,1,1,           1,0,0,0,           0,1,0,0,           0,1,1,0,           1,1,0,0,           1,0,1,1        </textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% WRAP=false  placeHolder="1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ">1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  </textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table>
@@ -254,7 +254,7 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="0,0,1,1,0,0,0,1">0,0,1,1,0,0,0,1</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,8" placeHolder="1,8"></td><tr>
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="0,0,1,0,0,0,0,0">0,0,1,0,0,0,0,0</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,8" placeHolder="1,8"></td><tr>
 </table><br>
 
 <div id='myDiv124-A'>...</div><br>
@@ -411,10 +411,10 @@ myTest = async function(){
   document.getElementById('myDiv124-A').innerHTML = 'Sensors: light, rangefinder, air, soil, CO2 x2, Temp x2<br>'+
        'Input: '+document.getElementById('myAsk').value + '<br><br>'+
        'Output:  0 = Off, 1 = On<br>'
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Text: '  + Math.round(myPredictArray[0]) + '</b><br>'
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Fan:  '  + Math.round(myPredictArray[1]) + '</b><br>' 
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Heat:  ' + Math.round(myPredictArray[2]) + '</b><br>' 
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Water: ' + Math.round(myPredictArray[3]) + '</b><br>' 
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Text: '  + Math.round(myPredictArray[0]*100) + '%</b><br>'
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Fan:  '  + Math.round(myPredictArray[1]*100) + '%</b><br>' 
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Heat:  ' + Math.round(myPredictArray[2]*100) + '%</b><br>' 
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Water: ' + Math.round(myPredictArray[3]*100) + '%</b><br>' 
   console.log('Output: '+myPredictArray)                                                                                           
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
