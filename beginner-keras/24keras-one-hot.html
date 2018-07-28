@@ -111,7 +111,7 @@ We will train the following information:
     yTrainingTarget.print()
                                                                                   
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
-        batchSize : 48,
+        batchSize : 64,
         epochs    : 500,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
@@ -206,8 +206,8 @@ Now lets try the above in a full Machine Learning Web App
 <h3>Pre-Set Values:</h3>
 <table border=1 >
   <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.5 title="From about 0.5 to 0.0001" placeholder="0.5"></td></tr>
-  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=48  title="Batch = Number of samples to run together" placeholder="48"></td></tr>
-  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=1000 placeholder="1000"></td></tr>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=64  title="Batch = Number of samples to run together" placeholder="64"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=2000 placeholder="1000"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
