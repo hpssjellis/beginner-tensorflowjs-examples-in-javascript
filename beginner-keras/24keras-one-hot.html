@@ -110,7 +110,7 @@
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
     
-    const xTestArray = [0,0,0,1,0,0,0,0]
+    const xTestArray = [0,0,1,0,0,0,0,0]
     const xTestData  = tf.tensor2d(xTestArray, shape=[1,8])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
@@ -120,10 +120,10 @@
                                                                                   
 
                                                                                   
-    document.getElementById('myDiv123').innerHTML += '<b>Mammal '+ myPredictArray[0] +'</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Bird (Aves) '+ myPredictArray[1] +'</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Reptile '+ myPredictArray[2] +'</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Amphibians '+ myPredictArray[3] +'</b><br><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Mammal : '+ myPredictArray[0] +'</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Bird (Aves) : '+ myPredictArray[1] +'</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Reptile : '+ myPredictArray[2] +'</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Amphibians : '+ myPredictArray[3] +'</b><br><br>'
 
     document.getElementById('myDiv123').innerHTML += '<b>Note: You would actually train on hundreds of examples not just these 8</b><br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
