@@ -57,16 +57,18 @@
  With one-hot encoding fish and mammal can be two seperate outcomes. The neural network can then list the percent identification 
  of each class.<br><br>
  
- <ul>We will train this information:
- <li> Elephant: Mammal
- <li> Fox: Mammal
- <li> Crow: Bird (Aves)
- <li> Aligator: Reptile
- <li> Dolphin: Mammal
- <li> Sparrow: Bird (Aves)
- <li> Turtle: Reptile
- <li> Dear: Mammal
-
+ We will train this information:
+ <table border=1>
+  
+  <tr><td> Elephant:</td><td> Mammal       </td><td>    1,0,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
+<tr><td> Fox: </td><td>Mammal              </td><td>    0,1,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
+<tr><td> Crow: </td><td>Bird (Aves)        </td><td>    0,0,1,0,0,0,0,0 </td><td> 0,1,0,0 </td></tr>
+<tr><td> Aligator: </td><td>Reptile        </td><td>    0,0,0,1,0,0,0,0 </td><td> 0,0,1,0 </td></tr>
+<tr><td> Dolphin: </td><td>Mammal          </td><td>    0,0,0,0,1,0,0,0 </td><td> 1,0,0,0 </td></tr>
+<tr><td> Sparrow: </td><td>Bird (Aves)     </td><td>    0,0,0,0,0,1,0,0 </td><td> 0,1,0,0 </td></tr>
+<tr><td> Turtle: </td><td>Reptile          </td><td>    0,0,0,0,0,0,1,0 </td><td> 0,0,1,0 </td></tr>
+<tr><td> Toad: </td><td>Amphibians         </td><td>    0,0,0,0,0,0,0,1 </td><td> 0,0,0,1 </td></tr>
+<table> 
  
  
  
@@ -79,7 +81,7 @@
 
 
  
-<input id="myButton123" type="button" value="Train a Smart Garden and test once" onclick="{
+<input id="myButton123" type="button" value="Train and test a Crow" onclick="{
                                                                                      
   (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
@@ -89,8 +91,8 @@
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   1,0,1,0,0,1,1,0], shape=[6,8]);      
-    const yTrainingTarget = tf.tensor2d([0,0,1,1,           1,0,0,0,           0,1,0,0,           0,1,1,0,           1,1,0,0,           1,0,1,1        ], shape=[6,4]);          
+    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,   0,0,0,0,0,0,0,0,], shape=[8,8]);      
+    const yTrainingTarget = tf.tensor2d([0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,           0,0,0,0,  ], shape=[8,4]);          
 
     console.log('xTrainingData')
     xTrainingData.print()
@@ -108,28 +110,22 @@
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
     
-    const xTestArray = [0,0,1,1,0,0,0,1]
+    const xTestArray = [0,0,0,1,0,0,0,0]
     const xTestData  = tf.tensor2d(xTestArray, shape=[1,8])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
     console.log('myPredictArray')       
     console.log(myPredictArray)                                                                           
-    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray +'<br>'
+    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray +' Which is a crow for this fixed example<br><br>'
                                                                                   
-    document.getElementById('myDiv123').innerHTML += ' <ul>Sensors for this fixed demo'+
-    '<li>light : 0 = Off<li>Rangefinder: 0 = No object detected'+
-    '<li>Air Moisture: 1 = Ok level <li>Soil Moisture:  1 = Ok Level'+
-    '<li>CO2: 0,0 = Too low'+
-    '<li>Temperature:  0,1 = Low but OK'+
-    '</ul><br>'
+
                                                                                   
-    document.getElementById('myDiv123').innerHTML += 'Note: For the output: 0 means off and 1 = on<br><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Send a text '+ Math.round(myPredictArray[0]) +'</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Fan '+ Math.round(myPredictArray[1]) +'</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Heat lamp '+ Math.round(myPredictArray[2]) +'</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Water '+ Math.round(myPredictArray[3]) +'</b><br><br>'
-    document.getElementById('myDiv123').innerHTML += 'In practice this test would happen continuously turning devices on and off as needed<br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Note: You would actually train on hundreds of examples not just these 6, do not look too close at the results :)</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Mammal '+ myPredictArray[0] +'</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Bird (Aves) '+ myPredictArray[1] +'</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Reptile '+ myPredictArray[2] +'</b><br>'
+    document.getElementById('myDiv123').innerHTML += '<b>Amphibians '+ myPredictArray[3] +'</b><br><br>'
+
+    document.getElementById('myDiv123').innerHTML += '<b>Note: You would actually train on hundreds of examples not just these 8</b><br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
   } )() // end Async function
