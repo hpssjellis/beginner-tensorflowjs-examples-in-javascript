@@ -112,10 +112,10 @@ We will train the following information:
                                                                                   
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : 48,
-        epochs    : 1000,                                                                      
+        epochs    : 500,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/1000, Loss: ' + logs.loss + '<br><br>'
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/500, Loss: ' + logs.loss + '<br><br>'
             await tf.nextFrame();  // This improves UI responsiveness during training.  
           }    // end onEpochEnd callback 
         }      // end all callbacks                                                              
@@ -136,7 +136,9 @@ We will train the following information:
     document.getElementById('myDiv123').innerHTML += '<b>Reptile : '+ Math.round(myPredictArray[2]*100) + '%</b><br>'
     document.getElementById('myDiv123').innerHTML += '<b>Amphibians : '+ Math.round(myPredictArray[3]*100) + '%</b><br><br>'
 
-    document.getElementById('myDiv123').innerHTML += 'Note: You would actually train on hundreds of examples not just these 8<br>'
+    document.getElementById('myDiv123').innerHTML += 'Note: You would actually train on hundreds of examples not just these 8<br><br>'
+    document.getElementById('myDiv123').innerHTML += 'Now click the black box below and change  epochs : 500, to a larger number and see if you can improve your neural network<br>'
+                                                                                                                              
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
   } )() // end Async function
