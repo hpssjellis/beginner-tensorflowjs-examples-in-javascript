@@ -38,7 +38,7 @@
 
     
     
-<h2 align=center>DRAFT Neural Network</h2>
+<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
 
 
 
@@ -48,62 +48,15 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-One of the easiest Keras Layers is xOR. It has 4 fixed inputs 2 digit and 4 fixed one digit outputs.<br><br>
-This is a very simple xOr Neural Network using Tensorflowjs Layers<br>
-Have a look at the code. It would be very easy to add extra hidden layers to this Neural Network<br> 
- The Original by Matt Cameron was written for NodeJS, his code is at <a href="https://github.com/mattcam/tfjs_xor_example">Code</a><br>
-The expected output for xOr input is<br>
-[0,0] = ~ 0<br>
-[1,0] = ~ 1<br>
-[0,1] = ~ 1<br>
-[1,1] = ~ 0<br>
- 
- 
- 
- 
- 
+Blah Blah Blah Blah 
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
- 
-<input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
-                                                                                     
-  (async function myGo() {
-    document.getElementById('myButton123').style.backgroundColor = 'red'  
-    const model = tf.sequential();
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
-    const myOptimizer = tf.train.sgd(0.5); 
-                                                                                               
-    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
-    const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
-                                                                                 
-    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
-        batchSize : 4,
-        epochs    : 3000,                                                                      
-        callbacks:  { 
-          onEpochEnd: async (epoch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/3000, Loss: ' + logs.loss + '<br><br>'
-            await tf.nextFrame();  // This improves UI responsiveness during training.  
-          }    // end onEpochEnd callback 
-        }      // end all callbacks                                                              
-      })       // end model.fit                                                                                      
-                                                                                
-    const myPredictArray = await model.predict(xTrainingData).data()   // just throw all the training data back in
-                                                                                    
-    document.getElementById('myDiv123').innerHTML += '[0,0] = ' + myPredictArray[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,0] = ' + myPredictArray[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[0,1] = ' + myPredictArray[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv123').innerHTML += '[1,1] = ' + myPredictArray[3].toFixed(4) +'<br>'
-    document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
-                                                                              
-  } )() // end Async function
-                                                                                                                                                                                                                                        
+<input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
+      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
 }"><br><br>
-
 
 </div>
 <div id='myDiv123'>...</div><br>
@@ -163,9 +116,9 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Pre-Set Values:</h3>
 <table border=1 >
-  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.5 title="From about 0.5 to 0.0001" placeholder="0.5"></td></tr>
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.01"></td></tr>
   <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
-  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=3000 placeholder="3000"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
@@ -173,10 +126,10 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Data:</h3>
 <table border=1>
-  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="0,0, 0,1, 1,0, 1,1">0,0, 0,1, 1,0, 1,1</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=2 cols=100% NOWRAP placeholder="1.20, 2.10, 3.40, 4.20">1.20, 2.10, 3.40, 4.20</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }">  </td></tr>
-  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="0, 1, 1, 0">0, 1, 1, 0</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=2 cols=100% NOWRAP  placeHolder="5.40, 7.20, 9.80, 11.40">5.40, 7.20, 9.80, 11.40</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table>
@@ -213,7 +166,7 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="0,0">0,0</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,2" placeHolder="1,1"></td><tr>
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
 </table><br>
 
 <div id='myDiv124-A'>...</div><br>
@@ -299,9 +252,9 @@ myLoadData = async function(){
                                                                                              
                                                                                              
     model = tf.sequential(); // no const so that it is a global variable 
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer        
- 
+    model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
+    model.add(tf.layers.dense({ units: 20 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );  
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
     const myOptimizer = tf.train.sgd(myLearningRate);               
@@ -331,7 +284,7 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/2, 2]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
    const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
    // console.log(xTrainingData)
