@@ -412,10 +412,10 @@ myTest = async function(){
   document.getElementById('myDiv124-A').innerHTML = 'Sensors: light, rangefinder, air, soil, CO2 x2, Temp x2<br>'+
        'Input: '+document.getElementById('myAsk').value + '<br><br>'+
        'Output:  0 = Off, 1 = On<br>'
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Text: '  + Math.round(myPredictArray[0]*100) + '%</b><br>'
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Fan:  '  + Math.round(myPredictArray[1]*100) + '%</b><br>' 
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Heat:  ' + Math.round(myPredictArray[2]*100) + '%</b><br>' 
-  document.getElementById('myDiv124-A').innerHTML +=  '<b>Water: ' + Math.round(myPredictArray[3]*100) + '%</b><br>' 
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Mammal: '  + Math.round(myPredictArray[0]*100) + '%</b><br>'
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Bird (Aves):  '  + Math.round(myPredictArray[1]*100) + '%</b><br>' 
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Reptile:  ' + Math.round(myPredictArray[2]*100) + '%</b><br>' 
+  document.getElementById('myDiv124-A').innerHTML +=  '<b>Amphibians: ' + Math.round(myPredictArray[3]*100) + '%</b><br>' 
   console.log('Output: '+myPredictArray)                                                                                           
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
