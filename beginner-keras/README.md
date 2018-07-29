@@ -1,6 +1,10 @@
 The beginner-examples folder was getting a bit large and had a few too many examples that were not getting on the main webpage.
 This folder is for Keras only demos that will be on the webpage.
 
+July 28th
+
+25-keras-layers-generator.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/25-keras-layers-generator.html
 
 
 
