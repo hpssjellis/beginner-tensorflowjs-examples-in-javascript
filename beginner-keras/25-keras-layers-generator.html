@@ -5,6 +5,17 @@
   myFrontEnd = ''
   
   
+  
+  myOption = []
+  
+  myOption[0] = 'units : 4,'
+  myOption[1] = "activation: 'elu'"
+  myOption[2] = 'useBias: true'
+  myOption[3] = "kernelInitializer: 'constant'"
+  myOption[4] = 'Output shape:'
+  myOption[5] = 'Output shape:'
+  
+  
   mySelectArray = new Array(2)
   mySelectArray[0] = []     // for HTML data
   mySelectArray[1] = []     // for textarea data
@@ -42,12 +53,12 @@ Select a Keras Layer to add<br>
 
 Select options to add to the layer<br>
 <select id="myTryOne" onChange="{
-   myFrontEnd +=    'Cool'           
+   myFrontEnd +=    myOption[this.value]           
    document.getElementById('myArea').value =  myFrontEnd + myBackend
 }">
   
- <option value=0>aaa
- <option value=1>1
+ <option value=0>bbb
+ <option value=1> 1
  <option value=2> 2
  <option value=3> 3
 </select>  <br><br>
