@@ -1,7 +1,8 @@
 <script>
   
   
-  myBackend = ''
+  myBackend = '));'
+  myFrontEnd = ''
   
   
   mySelectArray = new Array(2)
@@ -26,8 +27,9 @@ Tensorflowjs docs <a href="https://js.tensorflow.org/api/0.12.0/#layers.dense">h
 
 Select a Keras Layer to add<br>
 <select id="myAdd" onChange="{
-   document.getElementById('myHelp').innerHTML = mySelectArray[0][this.value]     
-   document.getElementById('myArea').value = mySelectArray[1][this.value]  + '));'                    
+   document.getElementById('myHelp').innerHTML = mySelectArray[0][this.value] 
+   myFrontEnd =   mySelectArray[1][this.value]                        
+   document.getElementById('myArea').value =  myFrontEnd + myBackend                    
                              
 }">
   
@@ -40,11 +42,11 @@ Select a Keras Layer to add<br>
 
 Select a Keras Layer to add
 <select id="myTryOne" onChange="{
-        document.getElementById('myArea').value.replace("));", "");                        
-   document.getElementById('myArea').value += 'cool' + '));'
+   myFrontEnd +=    'Cool'           
+   document.getElementById('myArea').value +=  myFrontEnd + myBackend
 }">
   
- <option value=0>zabzasfcb 
+ <option value=0>zzzz
  <option value=1>1
  <option value=2> 2
  <option value=3> 3
