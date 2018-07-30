@@ -116,7 +116,7 @@ const xs = tf.tensor4d([
 ], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([0, 1, 1, 2, 2, 3, 0, 2], shape=[8, 1]);        // 8 images 1 dimension                                                                                                                  
+const ys = tf.tensor2d([1,0,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,0,1,0,0,0,0,0,      0,0,1,0,0,0,0,0,,      0,0,0,1,0,0,0,0,       0,0,0,0,0,0,0,0,       0,0,2,0,0,0,0,0,], shape=[8, 8]);        // 8 images 1 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -133,8 +133,9 @@ kernelInitializer: 'varianceScaling'
 model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
                                                                                                                                                                         
 model.add(tf.layers.flatten());                                                                                                                                         
-model.add(tf.layers.dense({ units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
-model.add(tf.layers.dense({ units: 1, activation: 'linear' }) ); model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                           
+model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 8, activation: 'linear' }) ); 
+                                          
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
@@ -143,7 +144,7 @@ async function myGo() { // inline async so we can use promises and await
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'<br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'/300 <br><br>'                                          
     }                                                                                                                                                                   
   }                                                                                                                                                                     
   const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                              
