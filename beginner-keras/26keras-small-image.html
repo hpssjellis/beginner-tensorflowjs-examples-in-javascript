@@ -464,8 +464,8 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 4, 4, 1]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/8, 8]);
                                            
    // console.log(xTrainingData)
    // console.log(yTrainingTarget) 
