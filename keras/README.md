@@ -1,6 +1,19 @@
 This is to store any keras information that I might use in the examples
 
 
+July 29, 2018
+
+
+keras-example-code.html  
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-example-code.html  
+
+
+
+
+
+
+
 absolute minimum model
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-rpi3.html
 
