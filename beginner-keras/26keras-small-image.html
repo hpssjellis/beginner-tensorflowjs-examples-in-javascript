@@ -156,10 +156,10 @@ async function myGo() { // inline async so we can use promises and await
 }" > 
  
 <input  type="button" value="Re-Test" onclick="{  
-  async function () { // inline async so we can use promises and await                                                                                                                                                                                                                                                                                                                                                                                                                                         
+  (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
- }
+ })()   // end the inline async funciton
 }" >  
 </div>
 <div id='myDiv7979'>...</div><br>
