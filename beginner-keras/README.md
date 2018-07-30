@@ -4,6 +4,11 @@ This folder is for Keras only demos that will be on the webpage.
 July 28th
 
 
+editable-group12.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/editable-group12.html
+
+
+
 26keras-small-image.html
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/26keras-small-image.html
 
