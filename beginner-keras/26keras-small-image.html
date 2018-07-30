@@ -313,7 +313,9 @@ Now lets try the above in a full Machine Learning Web App
    
 0,0,2,0,0,0,0,0 </textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
-}">  </td></tr>
+}"> <input id="myButtonLabel" type="button" value="Add Target as an Image" onclick="{ 
+   myLoadImage()                                                                             
+}"> </td></tr>
   </table>
 <br><br><br>
 
@@ -418,10 +420,10 @@ myLoadData = async function(){
 }
 
  myLoadImage = async function(){ // not working yet
-  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/jj06-dog02.jpg');
+  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4.bpm');
   if (myFileName != null){  
     const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
-    document.getElementById('myDivForImage').innerHTML = await myTarget.blob()  
+    document.getElementById('myDivForImage').innerHTML += await myTarget.blob()  
   }                                                                          
 }
 
@@ -535,7 +537,7 @@ myTest = async function(){
 
 myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
-  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
+  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://26keras-small-image');
   if (myFileName != null){  
     model = await tf.loadModel(myFileName); 
     document.getElementById('myDivSummary').innerHTML = ''     
@@ -546,7 +548,7 @@ myLoadLocal = async function(){
 
  myLoadUrl = async function(){
   alert('The test function will need to be changed if other models are loaded')
-  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
+  const myFileName = prompt('Enter URL of stored model', '');
   if (myFileName != null){  
     model = await tf.loadModel(myFileName);
     document.getElementById('myDivSummary').innerHTML = ''      
@@ -557,7 +559,7 @@ myLoadLocal = async function(){
 
 
  mySaveLocal = async function(){
-  const myFileName = prompt('Enter filename to store this model','localstorage://myModel01');
+  const myFileName = prompt('Enter filename to store this model','localstorage://26keras-small-image');
   const saveResults = await model.save(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
@@ -565,7 +567,7 @@ myLoadLocal = async function(){
 
  mySaveDisk = async function(){
   alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
-  const myFileName = prompt('Enter filename to store this model','downloads://myModel01');
+  const myFileName = prompt('Enter filename to store this model','downloads://26keras-small-image');
   const saveResults = await model.save(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''    
   model.summary()
