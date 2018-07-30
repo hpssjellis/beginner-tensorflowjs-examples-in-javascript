@@ -29,15 +29,10 @@ https://www.programcreek.com/python/example/89658/keras.layers.Conv2D
 
 
 model = Sequential([
-
     Dense(32, input_shape=(784,)),
-
     Activation('relu'),
-
     Dense(10),
-
     Activation('softmax'),
-
 ])
 
 
@@ -45,9 +40,7 @@ model = Sequential([
 
 
 model = Sequential()
-
 model.add(Dense(32, input_dim=784))
-
 model.add(Activation('relu'))
 
 
@@ -56,18 +49,14 @@ model.add(Activation('relu'))
 # For a multi-class classification problem
 
 model.compile(optimizer='rmsprop',
-
-              loss='categorical_crossentropy',
-
+             loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 
 # For a binary classification problem
 
 model.compile(optimizer='rmsprop',
-
               loss='binary_crossentropy',
-
               metrics=['accuracy'])
 
 
@@ -78,11 +67,16 @@ model.compile(optimizer='rmsprop',
 model.compile(optimizer='rmsprop',
               loss='mse')
 
+
+
+
 # For custom metrics
 import keras.backend as K
 
 def mean_pred(y_true, y_pred):
     return K.mean(y_pred)
+
+
 
 model.compile(optimizer='rmsprop',
               loss='binary_crossentropy',
@@ -90,7 +84,9 @@ model.compile(optimizer='rmsprop',
               
               
               
-              
+  
+  
+  
 model.add(Dense(32, activation='relu', input_dim=100))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(optimizer='rmsprop',
@@ -113,9 +109,11 @@ model.compile(loss='categorical_crossentropy',
               optimizer=sgd,
               metrics=['accuracy'])
               
+   
+   
+   
               
-              
-  model = Sequential()
+model = Sequential()
 model.add(Dense(64, input_dim=20, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(64, activation='relu'))
