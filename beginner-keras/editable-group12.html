@@ -169,7 +169,8 @@ Now lets try the above in a full Machine Learning Web App
     }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
 </table><br>
 
-<div id='myDiv124-A'>...</div><br>
+<div id='myDivLoss'>...</div><br>
+<div id='myDivTest'>...</div><br>
 
 <div id="myDivSummary">...</div><br><br>
 
@@ -194,8 +195,8 @@ Now lets try the above in a full Machine Learning Web App
          if (document.stopRequested) {                                                                  
             this.model.stopTraining = true;                                                                                                                                             
         }
-        document.getElementById('myDiv124-A').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
-        document.getElementById('myDiv124-A').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+        document.getElementById('myDivLoss').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+        document.getElementById('myDivLoss').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
         await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
      }
    } 
@@ -207,7 +208,8 @@ myResetButtons = function(){
      document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
-     document.getElementById('myDiv124-A').innerHTML = ''
+     document.getElementById('myDivLoss').innerHTML = ''
+     document.getElementById('myDivTest').innerHTML = ''
      document.getElementById('myDivSummary').innerHTML = ''
                                                                                              
 }
@@ -316,7 +318,7 @@ myTest = async function(){
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
   const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
-  document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
+  document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
                                                                                              
   console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) 
