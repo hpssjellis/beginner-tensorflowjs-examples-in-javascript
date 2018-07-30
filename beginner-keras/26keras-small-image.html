@@ -119,7 +119,7 @@ const xs = tf.tensor4d([
 const ys = tf.tensor2d([0, 1, 1, 2, 2, 3, 0, 2], shape=[8, 1]);        // 8 images 1 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
-const model = tf.sequential();                                                                                                                                          
+model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
 inputShape: [4, 4, 1],                                                                                                                                                  
