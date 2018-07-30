@@ -62,7 +62,7 @@ Thanks for your help Stan Bileschi Twitter @xtan<br>
 <div id="myDiv7979Code"> 
 
 Test or change this data <br>
-<textarea id="myAsk" rows=7 cols=20 wrap=false>
+<textarea id="myAsk2" rows=7 cols=20 wrap=false>
 1,1,1,1,
 1,0,0,0,
 1,0,0,0,
@@ -156,8 +156,8 @@ async function myGo() { // inline async so we can use promises and await
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1])).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1])).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
     document.getElementById('myDiv7979').innerHTML += '<b>2 lines ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
@@ -495,7 +495,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1])).data()    
                                                                                              
   document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
