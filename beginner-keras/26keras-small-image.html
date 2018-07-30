@@ -144,19 +144,20 @@ async function myGo() { // inline async so we can use promises and await
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +'/300 <br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = '/300, Loss after Batch ' + myLoop + ' : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
-  }                                                                                                                                                                     
-  const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                              
-  document.getElementById('myButton7979').style.backgroundColor = 'lightgray'                                                                                            
-  document.getElementById('myDiv7979').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
+  }    
+  await   document.getElementById('myButtonTest').click()                                                                                
+ // const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                              
+//  document.getElementById('myButton7979').style.backgroundColor = 'lightgray'                                                                                            
+ // document.getElementById('myDiv7979').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
 }
                                                                                                                                                                       
  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
                                                                                                                                                                        
 }" > 
  
-<input  type="button" value="Re-Test" onclick="{  
+<input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
