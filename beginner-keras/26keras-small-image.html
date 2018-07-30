@@ -151,6 +151,13 @@ async function myGo() { // inline async so we can use promises and await
  setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update the button red color      
                                                                                                                                                                        
 }" > 
+ 
+<input  type="button" value="Re-Test" onclick="{  
+ async function () { // inline async so we can use promises and await                                                                                                                                                                                                                                                                                                                                                                                                                                         
+  const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                                                                                                                      
+  document.getElementById('myDiv7979').innerHTML += 'Input '+document.getElementById('myAsk').value+', Output = ' + await myPredictArray.data() +'<br>'                  
+}
+ 
 </div>
 <div id='myDiv7979'>...</div><br>
 
