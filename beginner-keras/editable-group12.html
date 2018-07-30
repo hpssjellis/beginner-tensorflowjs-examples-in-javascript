@@ -36,6 +36,7 @@
 <!--   *******************************Stop: What source js file to use? ****************************************************   -->
 
 
+
     
     
 <h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
@@ -169,8 +170,8 @@ Now lets try the above in a full Machine Learning Web App
     }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
 </table><br>
 
-<div id='myDivLoss'>...</div><br>
-<div id='myDivTest'>...</div><br>
+<div id="myDivLoss">...</div><br>
+<div id="myDivTest">...</div><br>
 
 <div id="myDivSummary">...</div><br><br>
 
@@ -183,7 +184,7 @@ Now lets try the above in a full Machine Learning Web App
 
 <style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
                                                                                              
-  document.getElementById('myDiv124-A').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+  document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
  class EarlyStoppingCallback extends tf.Callback {
