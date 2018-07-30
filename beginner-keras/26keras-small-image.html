@@ -158,9 +158,9 @@ async function myGo() { // inline async so we can use promises and await
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), [1, 4, 4, 1]))                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML = '<b>0 lines' + await Math.round(myPredictArray.data()[0]*100) +'</b><br>'          
-    document.getElementById('myDiv7979').innerHTML = '<b>1 lines' + await Math.round(myPredictArray.data()[1]*100) +'</b><br>'        
-    document.getElementById('myDiv7979').innerHTML = '<b>2 lines' + await Math.round(myPredictArray.data()[2]*100) +'</b><br>'                
+    document.getElementById('myDiv7979').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray.data()[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray.data()[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>2 lines ' + await Math.round(myPredictArray.data()[2]*100) +'%</b><br>'                
 
                                                                  
  })()   // end the inline async function
