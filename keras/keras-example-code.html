@@ -1,6 +1,33 @@
 keras-example-code.html
 
 
+
+
+
+
+
+https://www.programcreek.com/python/example/89658/keras.layers.Conv2D
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 model = Sequential([
     Dense(32, input_shape=(784,)),
     Activation('relu'),
@@ -147,7 +174,16 @@ model.compile(loss='categorical_crossentropy',
               
               
  
- 
+model = Sequential()
+model.add(LSTM(32, return_sequences=True, stateful=True,
+               batch_input_shape=(batch_size, timesteps, data_dim)))
+model.add(LSTM(32, return_sequences=True, stateful=True))
+model.add(LSTM(32, stateful=True))
+model.add(Dense(10, activation='softmax'))
+
+model.compile(loss='categorical_crossentropy',
+              optimizer='rmsprop',
+              metrics=['accuracy']) 
  
  
  
