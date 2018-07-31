@@ -444,21 +444,28 @@ myLoadData = async function(){
   var imageData = ctx.getImageData(0, 0, 4, 4);
   var data = imageData.data;
     
-//  var grayscale = function() {
+   
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
       data[i]     = avg; // red
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
-    }
-    console.log(data)                                                                                         
-    ctx.putImageData(imageData, 0, 0);
-//  };                                                                                        
+      if (avg > 100) {
+        document.getElementById('myX').value  += '1'                                                                                     
+         } else {
+        document.getElementById('myX').value  += '0'                                                                                           
+      } 
+    }  // end for loop
+    console.log(data) 
+                                                                                        
+    
+  //  ctx.putImageData(imageData, 0, 0);
+                                                                                      
                                                                                              
                                                                                              
   
   // ctx.drawImage(img, 0, 0);
- // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
 };
