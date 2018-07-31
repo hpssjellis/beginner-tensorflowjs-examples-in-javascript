@@ -441,13 +441,13 @@ myLoadData = async function(){
       data[i]     = avg; // red
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
-      if (i % 4 == 0){       // every 4th pixel add a new line 
+      if (i % 16 == 0){       // every 4th pixel (16th data) add a new line 
          document.getElementById('myX').value  += '\n'                                                                                     
       }                                                                                       
       if (avg > 100) {
-        document.getElementById('myX').value  += '1,'                                                                                     
+        document.getElementById('myX').value  += ',1'                                                                                     
          } else {
-        document.getElementById('myX').value  += '0,'                                                                                           
+        document.getElementById('myX').value  += ',0'                                                                                           
       } 
     }  // end for loop
     console.log(data) 
