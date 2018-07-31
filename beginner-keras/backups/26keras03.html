@@ -46,7 +46,7 @@
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 Keras Small Image using a Convolutional Layer<br><br>
 Trying to simplify Convolutional Keras Layers, which is fairly hard to do since Convolutional Layers tend to be made for
-images with tons of pixels. For this demo I used a 5x5 black and white "image" that you can just enter as the number 1 and 0<br>
+images with tons of pixels. For this demo I used a 4x4 black and white "image" that you can just enter as the number 1 and 0<br>
 The program then sets up a convolutional layer and trys to match the number of rows of 1's<br><br>
  
 This program estimates how many lines can be drawn in any direction in the image. Full white = 0 lines, full black = 1 line, etc 
@@ -283,10 +283,7 @@ Now lets try the above in a full Machine Learning Web App
 0,0,1,0,                                                                                                                                                                
 0,0,1,0,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
-0,0,1,0 
-   
-
-   </textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+0,0,1,0</textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }"> <input id="myButtonLabel" type="button" value="Add Data as an Image" onclick="{ 
    myLoadImage()                                                                             
@@ -313,11 +310,11 @@ Now lets try the above in a full Machine Learning Web App
 0,0,0,0,0,0,0,0, 
    
    
-0,0,2,0,0,0,0,0 </textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+0,0,2,0,0,0,0,0</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table><br>
-<canvas id="myCanvas" width="300" height="227" ></canvas> 
+<canvas id="myCanvas" width="100" height="100" ></canvas> 
 <br><br><br>
 
 
@@ -423,62 +420,79 @@ myLoadData = async function(){
   }                                                                          
 }
 
- myLoadImage = async function(){ // not working yet
-  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png');
- // const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/jj06-dog02.jpg');
+                                                                                             
+////////////////////////////////////////// START LOAD IMAGE ///////////////////////////////////////////////////////////      
+                                                                                             
+///////////////////// As soon as you start using real images the coding gets much more complex
+///////////////////// Mainly becuase each pixel of colour is 4 data points Red, Green, Blue and Alpha  
+///////////////////// Where Alpha is the amount of transparency                                                                                             
+                                                                                             
+ myLoadImage = async function(){ 
+ document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png');
+ if (myFileName.split(',').length >= 2 ){alert('Not ready to load multiple images')} else {
+                                                                                             
  if (myFileName != null){  
                                                                                              
   var img = new Image();
-  //img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
   img.src = myFileName
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
   img.onload = function() {
-                                                                                             
-                                                                                             
+                                                                                                                                                                                          
   ctx.drawImage(img, 0, 0, 4, 4);                                      
-  //ctx.drawImage(img, 0, 0, canvas.width, canvas.height);                                                                                            
-                                                                                             
-                                                                                             
-  //var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);                   
+                 
   var imageData = ctx.getImageData(0, 0, 4, 4);
   var data = imageData.data;
-    
-   
+      
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
       data[i]     = avg; // red
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
+      if (i % 16 == 0){       // every 4th pixel (16th data) add a new line 
+         document.getElementById('myX').value  += '\n'                                                                                     
+      }                                                                                       
       if (avg > 100) {
-        document.getElementById('myX').value  += '1'                                                                                     
+        document.getElementById('myX').value  += ',1'                                                                                     
          } else {
-        document.getElementById('myX').value  += '0'                                                                                           
+        document.getElementById('myX').value  += ',0'                                                                                           
       } 
     }  // end for loop
-    console.log(data) 
-                                                                                        
-    
-  //  ctx.putImageData(imageData, 0, 0);
-                                                                                      
-                                                                                             
-                                                                                             
-  
-  // ctx.drawImage(img, 0, 0);
+   // console.log(data) 
+
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
-};
-                                                                                       
+  
+  setTimeout(function(){                                                                                         
+      const numLines = prompt('y=Target for this image. How many Lines?', 2);                                                                                             
+      document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target 
+      if  (numLines == 0 ){ document.getElementById('myY').value  += ',1,0,0,0,0,0,0,0'  }    
+      if  (numLines == 1 ){ document.getElementById('myY').value  += ',0,1,0,0,0,0,0,0'  }   
+      if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0,0,0,0,0'  }   
+      if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1,0,0,0,0'  }   
+      if  (numLines == 4 ){ document.getElementById('myY').value  += ',0,0,0,0,1,0,0,0'  }   
+      if  (numLines == 5 ){ document.getElementById('myY').value  += ',0,0,0,0,0,1,0,0'  }   
+      if  (numLines == 6 ){ document.getElementById('myY').value  += ',0,0,0,0,0,0,1,0'  }   
+      if  (numLines == 7 ){ document.getElementById('myY').value  += ',0,0,0,0,0,0,0,1'  }  
+   }, 50);    // give the image some time to load. Should use Async, but was lazy today                                                                                           
                                                                                              
                                                                                              
                                                                                              
-   // const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
-  //  document.getElementById('myDivForImage').innerHTML += await myTarget.blob()  
-  }                                                                          
+                                                                                             
+  }
+                                                                                             
+   } // end if  array                                                                                  
+  } // end if  null                                                                       
 }
 
 
+////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////  
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
  myRunAll = async function(){
   document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
   await myCompile()
