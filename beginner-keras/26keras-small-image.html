@@ -444,19 +444,20 @@ myLoadData = async function(){
   var imageData = ctx.getImageData(0, 0, 4, 4);
   var data = imageData.data;
     
-
+   
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
       data[i]     = avg; // red
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
-    }
-    console.log(data) 
-    if avg > 100 {
+      if avg > 100 {
         document.getElementById('myX').value  += '1'                                                                                     
-    } else {
+         } else {
         document.getElementById('myX').value  += '0'                                                                                           
-    }                                                                                         
+      } 
+    }  // end for loop
+    console.log(data) 
+                                                                                        
     
   //  ctx.putImageData(imageData, 0, 0);
                                                                                       
