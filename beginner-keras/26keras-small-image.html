@@ -434,9 +434,10 @@ myLoadData = async function(){
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
   img.onload = function() {
-  ctx.drawImage(img, 0, 0);
-  img.style.display = 'none';
-  //img.style.display = 'inline';
+ // ctx.drawImage(img, 0, 0);
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+ // img.style.display = 'none';
+  img.style.display = 'inline';
 };
                                                                                        
                                                                                              
