@@ -437,7 +437,17 @@ myLoadData = async function(){
   var img = new Image();
   img.src = myFileName
   var canvas = document.getElementById('myCanvas');
-  var ctx = canvas.getContext('2d');
+                                                     
+  var ctx = canvas.getContext('2d');                                                                                                                                    
+
+                                                                                             
+  ctx.imageSmoothingEnabled       = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled    = false;
+  ctx.msImageSmoothingEnabled     = false;
+  ctx.oImageSmoothingEnabled      = false;                                                                                            
+                                                                                             
+                                                                                             
   img.onload = function() {
                                                                                                                                                                                           
   ctx.drawImage(img, 0, 0, 4, 4);                                      
@@ -460,7 +470,6 @@ myLoadData = async function(){
       } 
     }  // end for loop
    // console.log(data) 
-
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
