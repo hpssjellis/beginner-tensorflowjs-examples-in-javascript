@@ -455,6 +455,15 @@ myLoadData = async function(){
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
+  const numLines = prompt('y=Target for this image. How many Lines?', 2);
+  if  (numLines == 0 ){ document.getElementById('myY').value  += ',1,0,0,0,0,0,0,0'  }    
+  if  (numLines == 1 ){ document.getElementById('myY').value  += ',0,1,0,0,0,0,0,0'  }   
+  if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0,0,0,0,0'  }   
+  if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1,0,0,0,0'  }   
+  if  (numLines == 4 ){ document.getElementById('myY').value  += ',0,0,0,0,1,0,0,0'  }   
+  if  (numLines == 5 ){ document.getElementById('myY').value  += ',0,0,0,0,0,1,0,0'  }   
+  if  (numLines == 6 ){ document.getElementById('myY').value  += ',0,0,0,0,0,0,1,0'  }   
+  if  (numLines == 7 ){ document.getElementById('myY').value  += ',0,0,0,0,0,0,0,1'  }                                                                                       
 };
                                                                                        
                                                                                              
