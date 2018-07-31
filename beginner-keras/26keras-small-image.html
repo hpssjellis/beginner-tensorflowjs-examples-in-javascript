@@ -428,12 +428,14 @@ myLoadData = async function(){
   if (myFileName != null){  
                                                                                              
   var img = new Image();
-  img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+  //img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+  img.src = myFileName
   var canvas = document.getElementById('myCanvas');
   var ctx = canvas.getContext('2d');
   img.onload = function() {
   ctx.drawImage(img, 0, 0);
-  img.style.display = 'none';
+  //img.style.display = 'none';
+  img.style.display = 'inline';
 };
                                                                                        
                                                                                              
