@@ -440,7 +440,7 @@ myLoadData = async function(){
                                                      
   var ctx = canvas.getContext('2d');                                                                                                                                    
 
-                                                                                             
+////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////                                                                                             
   ctx.imageSmoothingEnabled       = false;
   ctx.webkitImageSmoothingEnabled = false;
   ctx.mozImageSmoothingEnabled    = false;
@@ -470,6 +470,12 @@ myLoadData = async function(){
       } 
     }  // end for loop
    // console.log(data) 
+                                                                                             
+   ctx.rect(20,20,150,100);
+   ctx.stroke();                                                                                          
+                                                                                             
+                                                                                             
+                                                                                             
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
