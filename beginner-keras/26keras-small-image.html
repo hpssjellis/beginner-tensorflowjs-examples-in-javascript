@@ -358,6 +358,9 @@ Now lets try the above in a full Machine Learning Web App
 </textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 4, 4, 1" placeHolder="1, 4, 4, 1"></td><tr>
 </table><br>
 
+<canvas id="myCanvas"></canvas>
+
+
 <div id="myDivLoss">...</div><br>
 <div id="myDivTest">...</div><br>
 
@@ -422,8 +425,21 @@ myLoadData = async function(){
  myLoadImage = async function(){ // not working yet
   const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4.bpm');
   if (myFileName != null){  
-    const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
-    document.getElementById('myDivForImage').innerHTML += await myTarget.blob()  
+                                                                                             
+  var img = new Image();
+  img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+  var canvas = document.getElementById('myCanvas');
+  var ctx = canvas.getContext('2d');
+  img.onload = function() {
+  ctx.drawImage(img, 0, 0);
+  img.style.display = 'none';
+};
+                                                                                       
+                                                                                             
+                                                                                             
+                                                                                             
+   // const myTarget = await fetch(myFileName, {mode: 'no-cors'}) 
+  //  document.getElementById('myDivForImage').innerHTML += await myTarget.blob()  
   }                                                                          
 }
 
