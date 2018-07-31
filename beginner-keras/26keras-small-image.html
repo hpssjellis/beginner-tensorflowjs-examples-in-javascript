@@ -310,7 +310,7 @@ Now lets try the above in a full Machine Learning Web App
 0,0,0,0,0,0,0,0, 
    
    
-0,0,2,0,0,0,0,0 </textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+0,0,2,0,0,0,0,0</textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table><br>
@@ -421,7 +421,7 @@ myLoadData = async function(){
 }
 
  myLoadImage = async function(){ 
- document.getElementById('myX').value  += '\n\n'    // move down 2 lines                                                                                             
+ document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png');
  if (myFileName != null){  
                                                                                              
@@ -455,7 +455,9 @@ myLoadData = async function(){
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
-  const numLines = prompt('y=Target for this image. How many Lines?', 2);
+                                                                                             
+  const numLines = prompt('y=Target for this image. How many Lines?', 2);                                                                                             
+  document.getElementById('myY').value  += '\n\n'    // move down 2 lines   
   if  (numLines == 0 ){ document.getElementById('myY').value  += ',1,0,0,0,0,0,0,0'  }    
   if  (numLines == 1 ){ document.getElementById('myY').value  += ',0,1,0,0,0,0,0,0'  }   
   if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0,0,0,0,0'  }   
