@@ -442,7 +442,7 @@ myLoadData = async function(){
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   var data = imageData.data;
     
-  var grayscale = function() {
+//  var grayscale = function() {
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
       data[i]     = avg; // red
@@ -450,7 +450,7 @@ myLoadData = async function(){
       data[i + 2] = avg; // blue
     }
     ctx.putImageData(imageData, 0, 0, canvas.width, canvas.height);
-  };                                                                                        
+//  };                                                                                        
                                                                                              
                                                                                              
   
