@@ -314,9 +314,6 @@ Now lets try the above in a full Machine Learning Web App
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table><br>
- 
-Note: Canvas images are stored with the first pixel at the bottom Left, I have converted the information so that the first 
- pixel seems to be top left as the image looks. Confusing but easier to understand.<br>
 <canvas id="myCanvas" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> 
 <br><br><br>
 
@@ -463,34 +460,31 @@ myLoadData = async function(){
   var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
 
 
-  console.log('data.length  ' + data.length)
-  console.log('myNumCols ' + myNumCols)
-  console.log('myNumRows ' + myNumRows)
-  console.log('myMonoChromePixels  ' + myMonoChromePixels)
+console.log('data.length  ' + data.length)
+console.log('myNumCols ' + myNumCols)
+console.log('myNumRows ' + myNumRows)
+console.log('myMonoChromePixels  ' + myMonoChromePixels)
 
 
-
-    for (var i = (data.length-4); i >= 0; i -= 4) {  // weird trick to flip the writing since images saved bottom left (0,0)
+    for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
       data[i]     = avg; // red
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
-                                                                                    
+      if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
+         document.getElementById('myX').value  += '\n'                                                                                     
+      }                                                                                       
       if (avg > 100) {
         document.getElementById('myX').value  += ',1'                                                                                     
          } else {
         document.getElementById('myX').value  += ',0'                                                                                           
       } 
-
-      if ((i % myMonoChromePixels == 0) && (i != data.length)){       // finds the end of each line for monochrome picture adding 
-         document.getElementById('myX').value  += '\n'                                                                                     
-      }   
     }  // end for loop
    // console.log(data) 
                                                                                              
    //ctx.rect(20,20,150,100);
    //ctx.stroke();                                                                                          
-                                                                                                                        
+                                                                                                                              
                                                                                              
                                                                                              
                                                                                              
