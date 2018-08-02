@@ -479,7 +479,7 @@ myLoadData = async function(){
 
   var myNumCols =  data.length / (img.width * 4)        
   var myNumRows =  data.length / (img.height * 4)             
-  var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
+  var myMonoChromePixels = (myNumRows) * 4   // for a 4 x 4 image, new data row every 16 bits of data
 
 
 console.log('data.length  ' + data.length)
