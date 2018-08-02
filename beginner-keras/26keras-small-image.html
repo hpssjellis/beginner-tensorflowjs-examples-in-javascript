@@ -314,8 +314,15 @@ Now lets try the above in a full Machine Learning Web App
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table><br>
+ 
+ 
 <canvas id="myCanvas" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> 
-<br><br><br>
+Flipped to match text input --> 
+<canvas id="myCanvasFlipped" width="100" height="100" style="border: 1px solid #ddd; "></canvas> 
+
+ 
+ 
+ <br><br><br>
 
 
 
@@ -437,8 +444,10 @@ myLoadData = async function(){
   var img = new Image();
   img.src = myFileName
   var canvas = document.getElementById('myCanvas');
+  var canvasFlipped = document.getElementById('myCanvasFlipped');
                                                      
-  var ctx = canvas.getContext('2d');                                                                                                                                    
+  var ctx = canvas.getContext('2d');                
+  var ctxFlipped = canvasFlipped.getContext('2d');                                                                                                                                    
 
 ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////                                                                                             
   ctx.imageSmoothingEnabled       = false;
@@ -487,8 +496,11 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
                                                                                                                               
                                                                                              
                                                                                              
+                                                                                                                                                                                                                              
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);                                                                                                                                                                     
+  ctxFlipped.drawImage(img, 0, 0, canvasFlipped.width, canvasFlipped.height);
                                                                                              
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                                                                                             
   // img.style.display = 'none';
   img.style.display = 'inline';
   
