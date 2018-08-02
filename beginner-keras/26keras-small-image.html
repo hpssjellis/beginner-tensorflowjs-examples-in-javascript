@@ -490,16 +490,16 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
 
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      data[i]     = avg; // red
-      data[i + 1] = avg; // green
-      data[i + 2] = avg; // blue
+     // data[i]     = avg; // red
+     // data[i + 1] = avg; // green
+     // data[i + 2] = avg; // blue
       if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
          document.getElementById('myX').value  += '\n'                                                                                     
       }                                                                                       
-      if (avg > 100) {
-        document.getElementById('myX').value  += ',1'                                                                                     
+      if (avg > 200) {    
+        document.getElementById('myX').value  += ',1'      // almost fully lit with color almost white                                                                               
          } else {
-        document.getElementById('myX').value  += ',0'                                                                                           
+        document.getElementById('myX').value  += ',0'      //not much color, closer to black                                                                                     
       } 
     }  // end for loop
    // console.log(data) 
