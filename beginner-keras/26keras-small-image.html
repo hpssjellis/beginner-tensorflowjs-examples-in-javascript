@@ -448,19 +448,30 @@ myLoadData = async function(){
   ctx.oImageSmoothingEnabled      = false;                                                                                            
                                                                                              
                                                                                              
-  img.onload = function() {
+ img.onload = function() {
                                                                                                                                                                                           
-  ctx.drawImage(img, 0, 0, 4, 4);                                      
+  ctx.drawImage(img, 0, 0, img.width, img.height);                                      
                  
-  var imageData = ctx.getImageData(0, 0, 4, 4);
-  var data = imageData.data;
-      
+  var imageData = ctx.getImageData(0, 0, img.width, img.height);
+  var data = imageData.data;  
+
+  var myNumCols =  data.length / (img.width * 4)        
+  var myNumRows =  data.length / (img.height * 4)             
+  var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
+
+
+console.log('data.length  ' + data.length)
+console.log('myNumCols ' + myNumCols)
+console.log('myNumRows ' + myNumRows)
+console.log('myMonoChromePixels  ' + myMonoChromePixels)
+
+
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
       data[i]     = avg; // red
       data[i + 1] = avg; // green
       data[i + 2] = avg; // blue
-      if (i % 16 == 0){       // every 4th pixel (16th data) add a new line 
+      if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
          document.getElementById('myX').value  += '\n'                                                                                     
       }                                                                                       
       if (avg > 100) {
@@ -471,8 +482,9 @@ myLoadData = async function(){
     }  // end for loop
    // console.log(data) 
                                                                                              
-   ctx.rect(20,20,150,100);
-   ctx.stroke();                                                                                          
+   //ctx.rect(20,20,150,100);
+   //ctx.stroke();                                                                                          
+                                                                                                                              
                                                                                              
                                                                                              
                                                                                              
