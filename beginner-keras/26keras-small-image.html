@@ -314,23 +314,8 @@ Now lets try the above in a full Machine Learning Web App
    myLoadTarget()                                                                             
 }">  </td></tr>
   </table><br>
- 
-Normal Images data starts at the bottom left location, but our data above starts images at the top left location, so look at the flipped image<br> 
-Normal Image: <canvas id="myCanvas" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> 
-Image flipped vertically to match text input --> 
-<canvas id="myCanvasFlipped" width="100" height="100" style="
-border: 1px solid #ddd; 
-image-rendering: pixelated;  
-interpolation-mode: nearest-neighbor;
--moz-transform: scale(1, -1);
--webkit-transform: scale(1, -1);
--o-transform: scale(1, -1);
-transform: scale(1, -1);
-filter: FlipV; 
-"></canvas> 
- 
- 
- <br><br><br>
+<canvas id="myCanvas" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> 
+<br><br><br>
 
 
 
@@ -452,23 +437,16 @@ myLoadData = async function(){
   var img = new Image();
   img.src = myFileName
   var canvas = document.getElementById('myCanvas');
-  var canvasFlipped = document.getElementById('myCanvasFlipped');
                                                      
-  var ctx = canvas.getContext('2d');                
-  var ctxFlipped = canvasFlipped.getContext('2d');                                                                                                                                    
+  var ctx = canvas.getContext('2d');                                                                                                                                    
 
 ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////                                                                                             
   ctx.imageSmoothingEnabled       = false;
   ctx.webkitImageSmoothingEnabled = false;
   ctx.mozImageSmoothingEnabled    = false;
   ctx.msImageSmoothingEnabled     = false;
-  ctx.oImageSmoothingEnabled      = false; 
+  ctx.oImageSmoothingEnabled      = false;                                                                                            
                                                                                              
-  ctxFlipped.imageSmoothingEnabled       = false;
-  ctxFlipped.webkitImageSmoothingEnabled = false;
-  ctxFlipped.mozImageSmoothingEnabled    = false;
-  ctxFlipped.msImageSmoothingEnabled     = false;
-  ctxFlipped.oImageSmoothingEnabled      = false;                                                                                                  
                                                                                              
  img.onload = function() {
                                                                                                                                                                                           
@@ -479,7 +457,7 @@ myLoadData = async function(){
 
   var myNumCols =  data.length / (img.width * 4)        
   var myNumRows =  data.length / (img.height * 4)             
-  var myMonoChromePixels = (myNumRows) * 4   // for a 4 x 4 image, new data row every 16 bits of data
+  var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
 
 
 console.log('data.length  ' + data.length)
@@ -490,16 +468,16 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
 
     for (var i = 0; i < data.length; i += 4) {
       var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-     // data[i]     = avg; // red
-     // data[i + 1] = avg; // green
-     // data[i + 2] = avg; // blue
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+      data[i + 2] = avg; // blue
       if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
          document.getElementById('myX').value  += '\n'                                                                                     
       }                                                                                       
-      if (avg > 200) {    
-        document.getElementById('myX').value  += ',1'      // almost fully lit with color almost white                                                                               
+      if (avg > 100) {
+        document.getElementById('myX').value  += ',1'                                                                                     
          } else {
-        document.getElementById('myX').value  += ',0'      //not much color, closer to black                                                                                     
+        document.getElementById('myX').value  += ',0'                                                                                           
       } 
     }  // end for loop
    // console.log(data) 
@@ -509,11 +487,8 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
                                                                                                                               
                                                                                              
                                                                                              
-                                                                                                                                                                                                                              
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);                                                                                                                                                                     
-  ctxFlipped.drawImage(img, 0, 0, canvasFlipped.width, canvasFlipped.height);
                                                                                              
-                                                                                             
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   // img.style.display = 'none';
   img.style.display = 'inline';
   
