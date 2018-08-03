@@ -1,5 +1,31 @@
 keras-example-code.html
 
+ultimate everything cheat sheet
+
+https://becominghuman.ai/cheat-sheets-for-ai-neural-networks-machine-learning-deep-learning-big-data-678c51b4b463
+
+
+
+
+
+A few good links
+
+frequenctyl asked questions  
+https://keras.rstudio.com/articles/faq.html
+
+https://www.datacamp.com/community/blog/keras-cheat-sheet
+
+
+https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Keras_Cheat_Sheet_Python.pdf
+
+
+https://www.kdnuggets.com/2017/09/datacamp-keras-cheat-sheet-deep-learning-python.html
+
+
+https://tanthiamhuat.files.wordpress.com/2018/04/deeplearningwithkeras.pdf
+
+
+
 
 
 
