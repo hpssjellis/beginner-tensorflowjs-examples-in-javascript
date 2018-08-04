@@ -1,6 +1,7 @@
+sdfbxdfsdfg<br>
 
+<div id="my10Color2" style="  display: inline-block; width:200px; height:50px; background-color:#000000;" ></div><br>
 
-<div id="myOriginal" style="  display: inline-block; width:200px; height:50px; background-color:#000000;"></div><br>
 Red: <input type=number value=50 id="myRed" onchange="{
   if (this.value <= -1){ this.value = 0}  
   if (this.value >= 255){ this.value = 255}
@@ -18,8 +19,9 @@ Blue: <input type=number min="0" max="255" value=250  id="myBlue" onchange="{
 }"><br><br>
 
 
-<input type=number  readonly   id="myColorNumber" > <input type=text  readonly   id="myColorName" ><br><br>
-<div id="my10Color" style="  display: inline-block; width:200px; height:50px; background-color:#000000;"></div><br>
+Converted Color #<input type=number  readonly   id="myColorNumber">, Color name: <input type=text  readonly   id="myColorName" ><br><br>
+
+<div id="my10Color" style="  display: inline-block; width:200px; height:50px; background-color:#000000;" ></div><br>
 
 <script>
 
@@ -39,8 +41,14 @@ var ColorTable = [
 
 myColor2 = function(){
 
+document.getElementById('my10Color2').style.backgroundColor = '#FF0000'
+
+
    [document.getElementById('myColorName').value, document.getElementById('myColorNumber').value] = findClosestColorRGB(document.getElementById('myRed').value, document.getElementById('myGreen').value, document.getElementById('myBlue').value, ColorTable)
    //  awesome example code at https://stackoverflow.com/questions/44217275/convert-rgb-color-to-closest-valid-css3-color-name 
+
+document.getElementById('my10Color').style.backgroundColor = ColorTable[document.getElementById('myColorNumber').value].hex
+
 }
 
 
