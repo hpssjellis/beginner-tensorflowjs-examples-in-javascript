@@ -1,5 +1,24 @@
 RGB to single digit converter.<br>
 
+Change RGB colors to 10 set colors labelled 0 - 9<br><br>
+0: black<br>
+1: red<br>
+2: orange<br>
+3: yellow<br>
+4: green<br>
+5: blue<br>
+6: indigo<br>
+7: violet<br>
+8: brown<br>
+9: white<br><br>
+
+
+
+
+
+
+
+
 
 <div id="my10Color3" style="  display: inline-block; width:200px; height:50px; background-color:#0F0000;" ></div><br>
 
@@ -79,7 +98,7 @@ myColor2 = function(){
   
 document.getElementById('my10Color').style.backgroundColor = ColorTable[document.getElementById('myColorNumber').value].hex
 
-  document.getElementById('my10Color3').style.backgroundColor =  rgbToHex(document.getElementById('myRed').value, document.getElementById('myGreen').value, document.getElementById('myBlue').value)
+  document.getElementById('my10Color3').style.backgroundColor =  rgbToHex(parseInt(document.getElementById('myRed').value),parseInt(document.getElementById('myGreen').value), parseInt(document.getElementById('myBlue').value))
 
   
   
