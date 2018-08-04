@@ -55,6 +55,16 @@ var ColorTable = [
 {name:'white', hex: '#FFFFFF'}     // 9 white
 ];
 
+  
+  
+  
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+  
+  
+  
+  
 
 myColor2 = function(){
 
@@ -65,7 +75,7 @@ myColor2 = function(){
    //  awesome example code at https://stackoverflow.com/questions/44217275/convert-rgb-color-to-closest-valid-css3-color-name 
 
   
-  //alert(rgb(45,78,90))
+  alert(rgbToHex(45,78,90))
   
 document.getElementById('my10Color').style.backgroundColor = ColorTable[document.getElementById('myColorNumber').value].hex
 
