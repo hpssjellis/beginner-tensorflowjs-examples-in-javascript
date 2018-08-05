@@ -1,32 +1,32 @@
-RGB to single digit converter.<br>
+<h2 align=center>RGB to single digit converter.</h2>
 
-Change RGB colors to 10 set colors labelled 0 - 9<br><br>
-0: black<br>
-1: red<br>
-2: orange<br>
-3: yellow<br>
-4: green<br>
-5: blue<br>
-6: indigo<br>
-7: violet<br>
-8: brown<br>
-9: white<br><br>
-
-
+Changing RGB-alpha data from: (50, 150, 250, 255) data input to single digit entry of 10 colours labelled 0 - 9 for easier Machine Learning Tutorials at: <a href="http://rocksetta.com/tensorflowjs">http://rocksetta.com/tensorflowjs</a><br><br>
+0: white<br>
+1: black<br>
+2: red<br>
+3: orange<br>
+4: yellow<br>
+5: green<br>
+6: blue<br>
+7: indigo<br>
+8: violet<br>
+9: brown<br><br>
 
 
-
+Remember: white, black, ROY-G-BIV, brown<br><br>
 
 
 
 
+
+Original RGB:<br>
 <div id="my10Color3" style="  display: inline-block; width:200px; height:50px; background-color:#3296FA ;" ></div><br>
 
 
 
 
 
-
+Make large changes in the foloowing text boxes:<br><br>
 Red: <input type=number value=50 id="myRed" onchange="{
   if (this.value <= -1){ this.value = 0}  
   if (this.value >= 255){ this.value = 255}
@@ -52,7 +52,7 @@ Converted Color #<input type=number  readonly   id="myColorNumber">, Color name:
 
 
 
-<div id="my10Color" style="  display: inline-block; width:200px; height:50px; background-color:#000000;" ></div><br>
+<br><div id="my10Color" style="  display: inline-block; width:200px; height:50px; background-color:#000000;" ></div><br>
 
 
 
@@ -61,18 +61,21 @@ Converted Color #<input type=number  readonly   id="myColorNumber">, Color name:
 
 <script>
 
+
 var ColorTable = [
-{name:'black', hex: '#000000'},    // 0 black
-{name:'red', hex: '#FF0000'},      // 1 red
-{name:'orange', hex: '#FFA500'},   // 2 orange
-{name:'yellow', hex: '#FFFF00'},   // 3 yellow
-{name:'green', hex: '#008000'},    // 4 green
-{name:'blue', hex: '#0000FF'},     // 5 blue
-{name:'indigo', hex: '#4B0082'},   // 6 indigo
-{name:'violet', hex: '#008080'},   // 7 violet
-{name:'brown', hex: '#00FFFF'},    // 8 brown
-{name:'white', hex: '#FFFFFF'}     // 9 white
+{name:'white', hex: '#FFFFFF'},    // 0 white
+{name:'black', hex: '#000000'},    // 1 black
+{name:'red', hex: '#FF0000'},      // 2 red
+{name:'orange', hex: '#FFA500'},   // 3 orange
+{name:'yellow', hex: '#FFFF00'},   // 4 yellow
+{name:'green', hex: '#008000'},    // 5 green
+{name:'blue', hex: '#0000FF'},     // 6 blue
+{name:'indigo', hex: '#4B0082'},   // 7 indigo
+{name:'violet', hex: '#008080'},   // 8 violet
+{name:'brown', hex: '#00FFFF'}     // 9 brown
 ];
+
+ 
 
   
   
