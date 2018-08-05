@@ -1,0 +1,148 @@
+RGB to single digit converter.<br>
+
+Change RGB colors to 10 set colors labelled 0 - 9<br><br>
+0: black<br>
+1: red<br>
+2: orange<br>
+3: yellow<br>
+4: green<br>
+5: blue<br>
+6: indigo<br>
+7: violet<br>
+8: brown<br>
+9: white<br><br>
+
+
+
+
+
+
+
+
+
+<div id="my10Color3" style="  display: inline-block; width:200px; height:50px; background-color:#3296FA ;" ></div><br>
+
+
+
+
+
+
+Red: <input type=number value=50 id="myRed" onchange="{
+  if (this.value <= -1){ this.value = 0}  
+  if (this.value >= 255){ this.value = 255}
+  myColor2()
+}">
+Green: <input type=number min="0" max="255" value=150  id="myGreen" onchange="{
+  if (this.value <= -1){ this.value = 0}  
+  if (this.value >= 255){ this.value = 255}
+  myColor2()
+}">
+Blue: <input type=number min="0" max="255" value=250  id="myBlue" onchange="{
+  if (this.value <= -1){ this.value = 0}  
+  if (this.value >= 255){ this.value = 255}
+  myColor2()
+}"><br><br>
+
+
+Converted Color #<input type=number  readonly   id="myColorNumber">, Color name: <input type=text  readonly   id="myColorName" ><br><br>
+
+
+
+
+
+
+
+<div id="my10Color" style="  display: inline-block; width:200px; height:50px; background-color:#000000;" ></div><br>
+
+
+
+
+
+
+<script>
+
+var ColorTable = [
+{name:'black', hex: '#000000'},    // 0 black
+{name:'red', hex: '#FF0000'},      // 1 red
+{name:'orange', hex: '#FFA500'},   // 2 orange
+{name:'yellow', hex: '#FFFF00'},   // 3 yellow
+{name:'green', hex: '#008000'},    // 4 green
+{name:'blue', hex: '#0000FF'},     // 5 blue
+{name:'indigo', hex: '#4B0082'},   // 6 indigo
+{name:'violet', hex: '#008080'},   // 7 violet
+{name:'brown', hex: '#00FFFF'},    // 8 brown
+{name:'white', hex: '#FFFFFF'}     // 9 white
+];
+
+  
+  
+  
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+  
+  
+  
+  
+
+myColor2 = function(){
+
+//document.getElementById('my10Color2').style.backgroundColor = '#FF0000'
+
+
+   [document.getElementById('myColorName').value, document.getElementById('myColorNumber').value] = findClosestColorRGB(document.getElementById('myRed').value, document.getElementById('myGreen').value, document.getElementById('myBlue').value, ColorTable)
+   //  awesome example code at https://stackoverflow.com/questions/44217275/convert-rgb-color-to-closest-valid-css3-color-name 
+
+  
+ // alert(rgbToHex(45,78,90))
+  
+document.getElementById('my10Color').style.backgroundColor = ColorTable[document.getElementById('myColorNumber').value].hex
+
+  document.getElementById('my10Color3').style.backgroundColor =  rgbToHex(parseInt(document.getElementById('myRed').value),parseInt(document.getElementById('myGreen').value), parseInt(document.getElementById('myBlue').value))
+
+  
+  
+  
+}
+
+
+
+Hex2RGB = function(hex) {
+    if (hex.lastIndexOf('#') > -1) {
+        hex = hex.replace(/#/, '0x');
+    } else {
+        hex = '0x' + hex;
+    }
+    var r = hex >> 16;
+    var g = (hex & 0x00FF00) >> 8;
+    var b = hex & 0x0000FF;
+    return {r:r, g:g, b:b};
+};
+
+
+function findClosestColorRGB(r, g, b, table)
+{
+  var rgb = {r:r, g:g, b:b};
+  var delta = 3 * 256*256;
+  var temp = {r:0, g:0, b:0};
+  var nameFound = 'black';
+  
+  for(i=0; i<table.length; i++)
+  {
+  	temp = Hex2RGB(table[i].hex);
+    if(Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2) < delta)
+    {
+    	delta = Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2);
+      nameFound = [table[i].name, i]; //  fancy array return
+    }
+  }
+  return nameFound;
+}
+
+//alert(findClosestColor('#884455', ColorTable));
+
+
+
+
+
+</script>
