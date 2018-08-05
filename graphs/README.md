@@ -1,3 +1,8 @@
+Havn't yet decided on a graph package I like yet. See the folders for more information
+
+
+
+
 colour-pick04.html
 
 
