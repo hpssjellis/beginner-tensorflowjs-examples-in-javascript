@@ -5,7 +5,7 @@ August 3rd
 
 27kears-medium-image.html
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/27kears-medium-image.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/27keras-medium-image.html
 
 
 
