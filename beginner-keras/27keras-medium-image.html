@@ -375,7 +375,7 @@ Pixels closer to black = 1 line, etc <br><br>
 1,0,0,0,
 1,0,0,0,
 1,0,0,0
-</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 4, 4, 1" placeHolder="1, 4, 4, 1"></td><tr>
+</textarea></td><td><input type=button value="Draw Above" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 4, 4, 1" placeHolder="1, 4, 4, 1"></td><tr>
 </table><br>
 
 
@@ -497,7 +497,9 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
       if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
          document.getElementById('myX').value  += '\n'                                                                                     
       }     
-       document.getElementById('myX').value  += ',' + findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)                                                                                     
+       const myImageNumber = findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)  
+                                                                                             
+       document.getElementById('myX').value  += ',' + myImageNumber                                                                                    
                                                                                              
     /*                                                                                         
       if (avg >= 150) {
@@ -545,6 +547,14 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
 }
 
 
+                                                                                             
+                                                                                             
+myDrawTestImage = async function(){
+ alert(     document.getElementById('myAsk').value)
+}                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
 ////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////  
                                                                                              
                                                                                              
