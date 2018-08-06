@@ -688,6 +688,100 @@ myLoadLocal = async function(){
   model.summary()
 }
 
+                                                                                             
+                                                                                             
+                                                                                             
+
+/////////////////////////////////////////// START REDUCING RGB CODES TO SINGLE DIGIT ////////////////////////////////////
+                                                                                             
+                                                                                             
+                                                                                             
+  
+
+var ColorTable = [
+{name:'white', hex: '#FFFFFF'},    // 0 white
+{name:'black', hex: '#000000'},    // 1 black
+{name:'red', hex: '#FF0000'},      // 2 red
+{name:'orange', hex: '#FFA500'},   // 3 orange
+{name:'yellow', hex: '#FFFF00'},   // 4 yellow
+{name:'green', hex: '#008000'},    // 5 green
+{name:'blue', hex: '#0000FF'},     // 6 blue
+{name:'indigo', hex: '#4B0082'},   // 7 indigo
+{name:'violet', hex: '#008080'},   // 8 violet
+{name:'brown', hex: '#8B4513'}     // 9 brown
+];
+
+ 
+
+  
+  
+  
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+  
+  
+  
+  
+
+
+
+
+Hex2RGB = function(hex) {
+    if (hex.lastIndexOf('#') > -1) {
+        hex = hex.replace(/#/, '0x');
+    } else {
+        hex = '0x' + hex;
+    }
+    var r = hex >> 16;
+    var g = (hex & 0x00FF00) >> 8;
+    var b = hex & 0x0000FF;
+    return {r:r, g:g, b:b};
+};
+
+
+function findClosestColorRGB(r, g, b, table)
+{
+  var rgb = {r:r, g:g, b:b};
+  var delta = 3 * 256*256;
+  var temp = {r:0, g:0, b:0};
+  var nameFound = 'black';
+  
+  for(i=0; i<table.length; i++)
+  {
+  	temp = Hex2RGB(table[i].hex);
+    if(Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2) < delta)
+    {
+    	delta = Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2);
+     // nameFound = [table[i].name, i]; //  fancy array return
+      nameFound =  i; //  now just return the actual number to use
+    }
+  }
+  return nameFound;
+}
+
+//alert(findClosestColor('#884455', ColorTable));
+
+                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+/////////////////////////////////////////// END REDUCING RGB CODES TO SINGLE DIGIT ////////////////////////////////////                                                                                               
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
 
 }"></style>
 <!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
