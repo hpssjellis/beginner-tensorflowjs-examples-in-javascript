@@ -39,6 +39,11 @@
 
     
     
+<h2 align=center>Convolutional Keras Layers Black and White Image Example</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 <h2 align=center>Convolutional Keras Layers Single Digits Image Example</h2>
 
 
@@ -65,6 +70,9 @@ In this Convolutional Neural Network we will train the basic shapes:<br>
  no-shape, triangle, rectangle, complex shape. With only 4 outputs we can use one-hot vector encoding.<br><br>  
 </div><br>
 
+ 
+ 
+ 
 
 
 <div id="myDiv7979Code"> 
@@ -75,7 +83,7 @@ Test or change this data <br>
 1,0,0,0,
 1,0,0,0,
 1,0,0,0</textarea><br>
-<input id="myButton7979" type="button" value="NOT YET READY" onclick="{ 
+<input id="myButton7979" type="button" value="Not yet ready" onclick="{ 
   
  document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
@@ -436,84 +444,6 @@ myLoadData = async function(){
   }                                                                          
 }
 
-/////////////////////////////////////////// START REDUCING RGB CODES TO SINGLE DIGIT ////////////////////////////////////
-                                                                                             
-                                                                                             
-                                                                                             
-  
-
-var ColorTable = [
-{name:'white', hex: '#FFFFFF'},    // 0 white
-{name:'black', hex: '#000000'},    // 1 black
-{name:'red', hex: '#FF0000'},      // 2 red
-{name:'orange', hex: '#FFA500'},   // 3 orange
-{name:'yellow', hex: '#FFFF00'},   // 4 yellow
-{name:'green', hex: '#008000'},    // 5 green
-{name:'blue', hex: '#0000FF'},     // 6 blue
-{name:'indigo', hex: '#4B0082'},   // 7 indigo
-{name:'violet', hex: '#008080'},   // 8 violet
-{name:'brown', hex: '#8B4513'}     // 9 brown
-];
-
- 
-
-  
-  
-  
-function rgbToHex(r, g, b) {
-    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
-  
-  
-  
-  
-
-
-
-
-Hex2RGB = function(hex) {
-    if (hex.lastIndexOf('#') > -1) {
-        hex = hex.replace(/#/, '0x');
-    } else {
-        hex = '0x' + hex;
-    }
-    var r = hex >> 16;
-    var g = (hex & 0x00FF00) >> 8;
-    var b = hex & 0x0000FF;
-    return {r:r, g:g, b:b};
-};
-
-
-function findClosestColorRGB(r, g, b, table)
-{
-  var rgb = {r:r, g:g, b:b};
-  var delta = 3 * 256*256;
-  var temp = {r:0, g:0, b:0};
-  var nameFound = 'black';
-  
-  for(i=0; i<table.length; i++)
-  {
-  	temp = Hex2RGB(table[i].hex);
-    if(Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2) < delta)
-    {
-    	delta = Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2);
-     // nameFound = [table[i].name, i]; //  fancy array return
-      nameFound =  i; //  now just return the actual number to use
-    }
-  }
-  return nameFound;
-}
-
-//alert(findClosestColor('#884455', ColorTable));
-
-                                                                                           
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-
-/////////////////////////////////////////// END REDUCING RGB CODES TO SINGLE DIGIT ////////////////////////////////////  
                                                                                              
 ////////////////////////////////////////// START LOAD IMAGE ///////////////////////////////////////////////////////////      
                                                                                              
@@ -523,7 +453,7 @@ function findClosestColorRGB(r, g, b, table)
                                                                                              
  myLoadImage = async function(){ 
  document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
- const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball04squat.png');
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png');
  if (myFileName.split(',').length >= 2 ){alert('Not ready to load multiple images')} else {
                                                                                              
  if (myFileName != null){  
@@ -609,7 +539,9 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
 }
 
 
-////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////                                                                                              
+////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////  
+                                                                                             
+                                                                                             
                                                                                              
                                                                                              
  myRunAll = async function(){
