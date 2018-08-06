@@ -563,10 +563,10 @@ function findClosestColorRGB(r, g, b, table)
                                                                                              
  img.onload = function() {
                                                                                                                                                                                           
- // ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value );                                                              
-  ctx.drawImage(img, 0, 0, 32, 32 );                                      
+                                                                                                                                                                                          
+  ctx.drawImage(img, 0, 0, img.width, img.height);                                      
                  
-  var imageData = ctx.getImageData(0, 0, 32, 32);
+  var imageData = ctx.getImageData(0, 0, img.width, img.height);
   var data = imageData.data;  
 
   var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
