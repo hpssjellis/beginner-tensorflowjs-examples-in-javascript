@@ -496,12 +496,19 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
       data[i + 2] = avg; // blue
       if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
          document.getElementById('myX').value  += '\n'                                                                                     
-      }                                                                                       
+      }     
+       document.getElementById('myX').value  += ',' + findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)                                                                                     
+                                                                                             
+    /*                                                                                         
       if (avg >= 150) {
         document.getElementById('myX').value  += ',0'    // white randomly set for any average value over or equal to 150                                                                                  
          } else {
         document.getElementById('myX').value  += ',1'    // black randomly set for any average value under 150                                                                                      
       } 
+                                                                                             
+    */                                                                                         
+                                                                                             
+                                                                                             
     }  // end for loop
    // console.log(data) 
                                                                                              
