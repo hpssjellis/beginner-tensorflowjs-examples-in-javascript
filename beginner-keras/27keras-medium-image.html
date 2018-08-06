@@ -480,7 +480,7 @@ myLoadData = async function(){
   var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
   var myNumRows =  data.length / (document.getElementById('myModelHeight').value * 4)             
  // var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
-  var myMonoChromePixels = (myNumCols) * 4   // gets the actual number of simplified pixels per row
+  var myMonoChromePixels = (myNumRows) * 4   // gets the actual number of simplified pixels per row
 
 
 console.log('data.length  ' + data.length)
