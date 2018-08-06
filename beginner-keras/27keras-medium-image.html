@@ -563,9 +563,9 @@ function findClosestColorRGB(r, g, b, table)
                                                                                              
  img.onload = function() {
                                                                                                                                                                                           
-  ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value,document.getElementById('myModelHeight').value );                                      
+  ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value );                                      
                  
-  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value,document.getElementById('myModelHeight').value );
+  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value );
   var data = imageData.data;  
 
   var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
@@ -586,14 +586,19 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
       data[i + 2] = avg; // blue
       if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
          document.getElementById('myX').value  += '\n'                                                                                     
-      }                                                                                       
+      }      
+              
+              
+              
      // if (avg >= 150) {
-        document.getElementById('myX').value  += ',' +  findClosestColorRGB(data[i], data[i+1], data[i+2], ColorTable)                                                                                   
+//   document.getElementById('myX').value  += ',' +  findClosestColorRGB(data[i], data[i+1], data[i+2], ColorTable)                                                                                   
        //  } else {
        // document.getElementById('myX').value  += ',1'    // black randomly set for any average value under 150                                                                                      
      // } 
     }  // end for loop
    // console.log(data) 
+              
+              
                                                                                              
    //ctx.rect(20,20,150,100);
    //ctx.stroke();                                                                                          
