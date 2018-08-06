@@ -61,7 +61,8 @@ Keras Single Digit Image using a Convolutional Layer<br><br>
 8: violet<br>
 9: brown<br><br>
  
-In this Convolutional Neural Network we will train the basic shapes: no shape, triangle, rectangle, complex shape. With only 4 outputs we can use one-hot vector encoding.<br><br>  
+In this Convolutional Neural Network we will train the basic shapes:<br>
+ no-shape, triangle, rectangle, complex shape. With only 4 outputs we can use one-hot vector encoding.<br><br>  
 </div><br>
 
 
@@ -74,7 +75,7 @@ Test or change this data <br>
 1,0,0,0,
 1,0,0,0,
 1,0,0,0</textarea><br>
-<input id="myButton7979" type="button" value="Convolutional Train and Test" onclick="{ 
+<input id="myButton7979" type="button" value="NOT YET READY" onclick="{ 
   
  document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
@@ -240,6 +241,8 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Pre-Set Values:</h3>
 <table border=1 >
+  <tr><td>Model Width: </td><td><input id="myModelWidth" type=text value=32 title="Change before Compiling Model" placeholder="32"></td></tr>
+  <tr><td>Model Height: </td><td><input id="myModelHeight" type=text value=32 title="Change before Compiling Model" placeholder="32"></td></tr>
   <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.5 title="From about 0.5 to 0.0001" placeholder="0.5"></td></tr>
   <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=128  title="Batch = Number of samples to run together" placeholder="128"></td></tr>
   <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=700 placeholder="700"></td></tr>
