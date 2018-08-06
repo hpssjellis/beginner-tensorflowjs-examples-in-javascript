@@ -474,13 +474,13 @@ myLoadData = async function(){
                                                                                              
  img.onload = function() {
                                                                                                                                                                                           
-  ctx.drawImage(img, 0, 0, img.width, img.height);                                      
+  ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);                                      
                  
-  var imageData = ctx.getImageData(0, 0, img.width, img.height);
+  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
   var data = imageData.data;  
 
-  var myNumCols =  data.length / (img.width * 4)        
-  var myNumRows =  data.length / (img.height * 4)             
+  var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
+  var myNumRows =  data.length / (document.getElementById('myModelHeight').value * 4)             
   var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
 
 
