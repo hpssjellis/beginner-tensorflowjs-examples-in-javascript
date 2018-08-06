@@ -725,25 +725,7 @@ function rgbToHex(r, g, b) {
   
   
 
-myColor2 = function(){
 
-//document.getElementById('my10Color2').style.backgroundColor = '#FF0000'
-
-
-   [document.getElementById('myColorName').value, document.getElementById('myColorNumber').value] = findClosestColorRGB(document.getElementById('myRed').value, document.getElementById('myGreen').value, document.getElementById('myBlue').value, ColorTable)
-   //  awesome example code at https://stackoverflow.com/questions/44217275/convert-rgb-color-to-closest-valid-css3-color-name 
-
-  
- // alert(rgbToHex(45,78,90))
-  
-document.getElementById('my10Color').style.backgroundColor = ColorTable[document.getElementById('myColorNumber').value].hex
-
-  document.getElementById('my10Color3').style.backgroundColor =  rgbToHex(parseInt(document.getElementById('myRed').value),parseInt(document.getElementById('myGreen').value), parseInt(document.getElementById('myBlue').value))
-
-  
-  
-  
-}
 
 
 
@@ -773,7 +755,8 @@ function findClosestColorRGB(r, g, b, table)
     if(Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2) < delta)
     {
     	delta = Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2);
-      nameFound = [table[i].name, i]; //  fancy array return
+     // nameFound = [table[i].name, i]; //  fancy array return
+      nameFound =  i;                  // just return the number
     }
   }
   return nameFound;
