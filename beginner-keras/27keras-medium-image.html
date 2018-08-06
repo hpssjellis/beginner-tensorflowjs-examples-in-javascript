@@ -550,7 +550,13 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
                                                                                              
                                                                                              
 myDrawTestImage = async function(){
- alert(     document.getElementById('myAsk').value)
+  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
+  var data = imageData.data;  
+ alert(  ColorTable[document.getElementById('myAsk').value.split(',')[0]].hex   )
+// alert(     document.getElementById('myAsk').value)
+                                                                                             
+                                                                                             
+                                                                                             
 }                                                                                             
                                                                                              
                                                                                              
