@@ -563,7 +563,8 @@ myDrawTestImage = async function(){
   document.getElementById('myDivDataImage').innerHTML =''                                                                                            
  const myIncomingArray =  document.getElementById('myAsk').value.split(',')                                                                                           
  for (var myWow=0; myWow <= myIncomingArray.length-1 ; myWow++){
-    if (myWow % document.getElementById('myModelWidth').value == 0){
+                                                                                             alert(ColorTable[myIncomingArray[myWow]].hex)
+    if (myWow % parseInt(document.getElementById('myModelWidth').value) == 0){
       document.getElementById('myDivDataImage').innerHTML += '<br>'                                                                                       
    } 
     document.getElementById('myDivDataImage').innerHTML +=  '<font color='+ColorTable[myIncomingArray[myWow]].hex+'>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
