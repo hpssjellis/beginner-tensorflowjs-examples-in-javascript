@@ -956,10 +956,14 @@ myDrawTestImage = async function(){
 
 myTest = async function(){
  
-  const myShape = document.getElementById('myShape').value.split(',').map(Number);
+    const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
+    // draw the input shape
+    myDrawTestImage()
+    
+    // show the results                                                                                         
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
-    document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
+    document.getElementById('myDivTest').innerHTML = 'Input :<br>'+document.getElementById('myAsk').value+'<br><br> Output = <br>'
     document.getElementById('myDivTest').innerHTML += '<b>0 No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDivTest').innerHTML += '<b>1 Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
     document.getElementById('myDivTest').innerHTML += '<b>2 Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
