@@ -375,7 +375,7 @@ Pixels closer to black = 1 line, etc <br><br>
 1,0,0,0,
 1,0,0,0,
 1,0,0,0
-</textarea></td><td><input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 4, 4, 1" placeHolder="1, 4, 4, 1"></td><tr>
+</textarea></td><td><input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 32, 32, 1" placeHolder="1, 32, 32, 1"></td><tr>
 </table><br>
 
 <div id="myDivDataImage" style="border: 1px solid; display: inline-block;">...</div><br>
@@ -453,7 +453,7 @@ myLoadData = async function(){
                                                                                              
  myLoadImage = async function(){ 
  document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
- const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball04squat.png');
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
  if (myFileName.split(',').length >= 2 ){alert('Not ready to load multiple images')} else {
                                                                                              
  if (myFileName != null){  
@@ -608,7 +608,7 @@ myDrawTestImage = async function(){
     model = tf.sequential(); // no const so that it is a global variable 
                                                                                                                                                                         
     model.add(tf.layers.conv2d({                                                                                                                                            
-        inputShape: [4, 4, 1],                                                                                                                                                  
+        inputShape: [32, 32, 1],                                                                                                                                                  
         kernelSize: 2,                                                                                                                                                          
         filters: 4,                                                                                                                                                             
         strides: 1,                                                                                                                                                             
@@ -651,7 +651,7 @@ myDrawTestImage = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 4, 4, 1]);
+   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 32, 32, 1]);
    const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/8, 8]);
                                            
    // console.log(xTrainingData)
