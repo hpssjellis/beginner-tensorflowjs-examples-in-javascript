@@ -65,7 +65,7 @@ Keras Single Digit Image using a Convolutional Layer<br><br>
 9: brown<br><br>
  
 In this Convolutional Neural Network we will train the basic shapes:<br>
- no-shape, triangle, rectangle, complex shape. With only 4 outputs we can use one-hot vector encoding.<br><br>  
+ no-shape, circles, triangles, rectangles. With only 4 outputs we can use one-hot vector encoding.<br><br>  
 </div><br>
 
  
@@ -960,14 +960,10 @@ myTest = async function(){
   
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
     document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
-    document.getElementById('myDivTest').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDivTest').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>2 lines ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>3 lines ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>4 lines ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>5 lines ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>6 lines ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>7 lines ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'  
+    document.getElementById('myDivTest').innerHTML += '<b>0 No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>1 Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>2 Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>3 Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
                                                                                              
   console.log(document.getElementById('myAsk2').value + ': ' + await myPredictArray) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
