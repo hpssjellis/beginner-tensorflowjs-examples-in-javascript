@@ -378,7 +378,8 @@ Pixels closer to black = 1 line, etc <br><br>
 </textarea></td><td><input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 4, 4, 1" placeHolder="1, 4, 4, 1"></td><tr>
 </table><br>
 
-<div id="myDivDataImage" style="border: 1px solid;">...</div><br>
+<div id="myDivDataImage" style="border: 1px solid; margin: 3em;">...</div><br>
+<div id="myDivDataImage2" style="border: 1px solid; margin: 3em;">...</div><br>
 
 
 
@@ -569,6 +570,7 @@ myDrawTestImage = async function(){
       document.getElementById('myDivDataImage').innerHTML += '<br>'                                                                                       
    } 
    document.getElementById('myDivDataImage').innerHTML +=  '<font color='+ColorTable[parseInt(myIncomingArray[myWow])].hex+'>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
+    document.getElementById('myDivDataImage2').innerHTML +=  '<font color='+ColorTable[parseInt(myIncomingArray[myWow])].hex+'>█</font>'                                                                                     
                                                                                         
                                                                                              
  }                                                                                            
