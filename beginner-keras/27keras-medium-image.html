@@ -551,10 +551,10 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
                                                                                              
                                                                                              
 myDrawTestImage = async function(){
-  var canvas5 = document.getElementById('myCanvas');                                                
-  var ctx5 = canvas5.getContext('2d');  
-  var imageData5 = ctx5.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
-  var data = imageData5.data;  
+ // var canvas5 = document.getElementById('myCanvas');                                                
+ // var ctx5 = canvas5.getContext('2d');  
+ // var imageData5 = ctx5.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
+  //var data = imageData5.data;  
  //alert(  ColorTable[document.getElementById('myAsk').value.split(',')[0]].hex   )
 // alert(     document.getElementById('myAsk').value)
   
@@ -563,11 +563,11 @@ myDrawTestImage = async function(){
   document.getElementById('myDivDataImage').innerHTML =''                                                                                            
  const myIncomingArray =  document.getElementById('myAsk').value.split(',')                                                                                           
  for (var myWow=0; myWow <= myIncomingArray.length-1 ; myWow++){
-                                                                                             alert(ColorTable[myIncomingArray[myWow]].hex)
-    if (myWow % parseInt(document.getElementById('myModelWidth').value) == 0){
-      document.getElementById('myDivDataImage').innerHTML += '<br>'                                                                                       
-   } 
-    document.getElementById('myDivDataImage').innerHTML +=  '<font color='+ColorTable[myIncomingArray[myWow]].hex+'>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
+    alert(ColorTable[myIncomingArray[myWow]].hex)
+   // if (myWow % parseInt(document.getElementById('myModelWidth').value) == 0){
+   //   document.getElementById('myDivDataImage').innerHTML += '<br>'                                                                                       
+  // } 
+   document.getElementById('myDivDataImage').innerHTML +=  '<font color='+ColorTable[myIncomingArray[myWow]].hex+'>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
                                                                                         
                                                                                              
  }                                                                                            
