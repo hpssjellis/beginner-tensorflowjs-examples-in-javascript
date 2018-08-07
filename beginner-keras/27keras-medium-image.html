@@ -555,24 +555,22 @@ myDrawTestImage = async function(){
   var ctx5 = canvas5.getContext('2d');  
   var imageData5 = ctx5.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
   var data = imageData5.data;  
-// alert(  ColorTable[document.getElementById('myAsk').value.split(',')[0]].hex   )
+ alert(  ColorTable[document.getElementById('myAsk').value.split(',')[0]].hex   )
 // alert(     document.getElementById('myAsk').value)
   
- /*                                                                                            
+                                                                                           
     
                                                                                              
  const myIncomingArray =  document.getElementById('myAsk').value.split(',')                                                                                           
  for (var myWow=0; myWow <= myIncomingArray.length ; myWow++){
-   // for (var i = 0; i < data.length; i += 4) {   
-                                                                                             
-  //  } 
- document.getElementById('myDivDataImage').innerHTML =  '<font color=#555555>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
+
+    document.getElementById('myDivDataImage').innerHTML =  '<font color=#555555>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
                                                                                              
                                                                                              
  }                                                                                            
       
                                                                                              
-*/                                                                                             
+                                                                                           
                                                                                              
                                                                                              
  }                                                                                             
