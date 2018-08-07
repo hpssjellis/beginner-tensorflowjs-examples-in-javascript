@@ -401,7 +401,7 @@ const xs = tf.tensor4d([
 ,1,9,1,9,1,1,9,1,9,9,1,1,9,1,9,9,1,9,9,1,9,1,1,1,1,1,1,1,9,1,1,1
 
                                                                                     
-], shape=[8, 4, 4, 1] );    // 8 input images that are 32 x 32 with  10 colors 0-9)                                                                                                                                                     
+], shape=[8, 32, 32, 1] );    // 8 input images that are 32 x 32 with  10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
 const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4]);        // 8 images 4 dimension                                                                                                                  
