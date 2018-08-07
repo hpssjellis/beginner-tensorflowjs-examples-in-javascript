@@ -445,11 +445,12 @@ async function myGo() { // inline async so we can use promises and await
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 1])).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDivTest').innerHTML += '<b>No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDivTest').innerHTML += '<b>Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
+   // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
+    document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
+    document.getElementById('myDiv7979').innerHTML += '<b>No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
               
                                                              
  })()   // end the inline async function
