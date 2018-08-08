@@ -551,7 +551,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg
 </textarea></td><td>
   
-  <select id="multiTarget" onChange="{alert()}">
+  <select id="mySelectMultiTarget" onChange="{alert()}">
    <option value="1,0,0,0"> No Shape
    <option value="0,1,0,0"> Circle
    <option value="0,0,1,0"> Triangle
@@ -1038,7 +1038,7 @@ myLoadData = async function(){
                                                                                              
                                                                                              
  myMultiLoadImage = async function(){                                                                                           
-    alert('multi')                                                                                         
+    alert(mySelectMultiTarget)                                                                                         
  }                                                                                             
  myLoadImage = async function(myFileName){ 
 // document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
