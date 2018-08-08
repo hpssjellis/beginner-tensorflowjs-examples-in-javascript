@@ -438,7 +438,7 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
                                                                               
           onBatchEnd: async (batch, logs) => {                                                               
               await tf.nextFrame();  // This improves UI responsiveness during training.  
-          }       
+          },       
                                                                               
          onEpochEnd: async (epoch, logs) => {                                            
               document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss[0] +' <br><br>'                                                               
@@ -448,7 +448,7 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
     });                                                                                                                
     
   await document.getElementById('myButtonTest').click() 
-  await document.getElementById('myButton7979').style.backgroundColor = 'gray'                                                                               
+  //await document.getElementById('myButton7979').style.backgroundColor = 'gray'                                                                               
 })()
                                                                                                                                                                       
 
