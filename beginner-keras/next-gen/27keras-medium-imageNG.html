@@ -440,9 +440,9 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                await tf.nextFrame();  // This improves UI responsiveness during training.  
              }                                                                             
           }      // end all callbacks                                                                                                                                                                                                                                            
-       }        // end model.fit 
+       })        // end model.fit 
   await   document.getElementById('myButtonTest').click()                                                                                
-}){}   // end inline async
+})()   // end inline async
                                                                                                                                                                       
 
                                                                                                                                                                        
