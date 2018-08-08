@@ -431,10 +431,10 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                                                                                                         
   //for ( let myLoop = 1; myLoop <= 700; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { batchSize: 8192, epochs : 700 });                                                                                                                
-    if (myLoop % 20 == 0){                                                                                                                                              
-      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/700 : ' + myFit.history.loss[0] +' <br><br>'                                          
-    }                                                                                                                                                                   
+   // if (myLoop % 20 == 0){                                                                                                                                              
+   //   await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
+    //  document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/700 : ' + myFit.history.loss[0] +' <br><br>'                                          
+   // }                                                                                                                                                                   
  // }    
   await   document.getElementById('myButtonTest').click()                                                                                
 })()
