@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"></script>
 
 
 
@@ -27,7 +27,7 @@
 
  <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3/dist/tf.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4/dist/tf.js"></script>
 
 --> 
 
@@ -47,7 +47,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Keras Single Digit Image using a Convolutional Layer<br><br>
+Keras Single Digit Image using a Convolutional Layer.<br><br>
 
  Working with black (1) and white (0) images is not much fun, so in this example RGB(50,150,250), 
  by the way that is the color blue, will be converted into single digit colors, losing some information but
@@ -65,7 +65,8 @@ Keras Single Digit Image using a Convolutional Layer<br><br>
 9: brown<br><br>
  
 In this Convolutional Neural Network we will train the basic shapes:<br>
- no-shape, circles, triangles, rectangles. With only 4 outputs we can use one-hot vector encoding.<br><br>  
+ no-shape, circles, triangles, rectangles. With only 4 outputs we can use one-hot vector encoding.<br><br> 
+ Note: So far only no shape and circles have been minimally trained.<br>
 </div><br>
 
  
@@ -111,8 +112,7 @@ Test or change this data <br>
 ,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 </textarea><br>
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
-  
- document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
+                                                                                    
                                                                                                                                                                         
 const xs = tf.tensor4d([                                                                                                                                                
                                                                                                                                                                         
@@ -424,21 +424,34 @@ model.add(tf.layers.flatten());
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
                                           
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   
+                                                                              
+//document.getElementById('myButton7979').style.backgroundColor = 'red'   
+                                                                              
+(async function() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-async function myGo() { // inline async so we can use promises and await                                                                                                   
-                                                                                                                                                                        
-  for ( let myLoop = 1; myLoop <= 700; myLoop++ ) {                                                                                                                     
-    var myFit = await model.fit(xs, ys, { batchSize: 8192 });                                                                                                                
-    if (myLoop % 20 == 0){                                                                                                                                              
-      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/700 : ' + myFit.history.loss[0] +' <br><br>'                                          
-    }                                                                                                                                                                   
-  }    
-  await   document.getElementById('myButtonTest').click()                                                                                
-}
+                                                                                                                   
+    var myFit = await model.fit(xs, ys, { 
+      batchSize: 8192, 
+      epochs : 700, 
+      callbacks :  {  
+                                                                              
+          onBatchEnd: async (batch, logs) => {                                                               
+              await tf.nextFrame();  // This improves UI responsiveness during training.  
+          },       
+                                                                              
+         onEpochEnd: async (epoch, logs) => {                                            
+              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss +' <br><br>'                                                               
+         }   
+                                                                              
+      }  // end all callbacks                                                                        
+    });  // end model.fit                                                                                                              
+    
+  await document.getElementById('myButtonTest').click() 
+  //await document.getElementById('myButton7979').style.backgroundColor = 'gray'                                                                               
+})()
                                                                                                                                                                       
- myGo() // call the main async function 
+
                                                                                                                                                                        
 }" > 
  
@@ -447,10 +460,10 @@ async function myGo() { // inline async so we can use promises and await
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 1])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
+    document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
               
                                                              
  })()   // end the inline async function
@@ -1333,10 +1346,10 @@ myTest = async function(){
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
    // document.getElementById('myDivTest').innerHTML = 'Input :<br>'+document.getElementById('myAsk').value+'<br><br> Output = <br>'                                                                                                                               
     document.getElementById('myDivTest').innerHTML = ' Output = <br>'
-    document.getElementById('myDivTest').innerHTML += '<b>0 No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDivTest').innerHTML += '<b>1 Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>2 Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>3 Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>0 No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>1 Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>2 Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>3 Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
                                                                                              
   console.log(document.getElementById('myAsk2').value + ': ' + await myPredictArray) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
@@ -1561,7 +1574,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                               
