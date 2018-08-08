@@ -1038,8 +1038,21 @@ myLoadData = async function(){
                                                                                              
                                                                                              
  myMultiLoadImage = async function(){                                                                                           
-    alert(document.getElementById('mySelectMultiTarget').value + ', '+ document.getElementById('myMultiURL').value)                                                                                         
- }                                                                                             
+   // alert(document.getElementById('mySelectMultiTarget').value + ', '+ document.getElementById('myMultiURL').value)
+   document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target 
+   document.getElementById('myY').value  += document.getElementById('mySelectMultiTarget').value
+                                                                                                                                                                                         
+   const mySplit =  document.getElementById('myMultiURL').value.split(',')                                                                                         
+   for (var myCount=0; myCount <= mySplit.length; myCount++ ){
+         alert(myCount+', '+mySplit[myCount] )                                                                                     
+   }                                                                                          
+                                                                                             
+                                                                                             
+ }   // edn myMultiLoadImage async function 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
  myLoadImage = async function(myFileName){ 
 // document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
                                                                                             
