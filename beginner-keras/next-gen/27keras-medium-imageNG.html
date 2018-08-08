@@ -112,8 +112,7 @@ Test or change this data <br>
 ,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 </textarea><br>
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
-  
- document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
+                                                                                    
                                                                                                                                                                         
 const xs = tf.tensor4d([                                                                                                                                                
                                                                                                                                                                         
@@ -425,23 +424,31 @@ model.add(tf.layers.flatten());
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
                                           
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
-                                                                                                                                                                        
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   
+                                                                              
+document.getElementById('myButton7979').style.backgroundColor = 'red'   
+                                                                              
 (async function() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
                                                                                                                    
     var myFit = await model.fit(xs, ys, { 
       batchSize: 8192, 
       epochs : 700, 
-      callbacks :  {                                                                                                                                                                                                                                   
+      callbacks :  {  
+                                                                              
+          onBatchEnd: async (batch, logs) => {                                                               
+              await tf.nextFrame();  // This improves UI responsiveness during training.  
+          }       
+                                                                              
          onEpochEnd: async (epoch, logs) => {                                            
-              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + myFit.history.loss[0] +' <br><br>' 
-              await tf.nextFrame();                                                                 
-         }                                                                           
+              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss[0] +' <br><br>'                                                               
+         }   
+                                                                              
       }  // end all callbacks                                                                        
     });                                                                                                                
     
-  await   document.getElementById('myButtonTest').click()                                                                                
+  await document.getElementById('myButtonTest').click() 
+  await document.getElementById('myButton7979').style.backgroundColor = 'gray'                                                                               
 })()
                                                                                                                                                                       
 
