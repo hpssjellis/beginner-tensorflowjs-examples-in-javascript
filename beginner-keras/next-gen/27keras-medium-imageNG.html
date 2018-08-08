@@ -1055,7 +1055,7 @@ myLoadData = async function(){
    }                                                                                          
                                                                                              
                                                                                              
- }   // edn myMultiLoadImage async function 
+ }   // end myMultiLoadImage async function 
                                                                                              
                                                                                              
                                                                                              
@@ -1064,7 +1064,7 @@ myLoadData = async function(){
 // document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
                                                                                             
  if (myFileName != null){  
-  document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                                 
+ // document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                                 
   var img = new Image();
   img.src = myFileName
   var canvas = document.getElementById('myCanvas');
@@ -1080,7 +1080,8 @@ myLoadData = async function(){
                                                                                              
                                                                                              
  img.onload = function() {
-                                                                                                                                                                                          
+  
+  document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                                                                                                                               
   ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);                                      
                  
   var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
