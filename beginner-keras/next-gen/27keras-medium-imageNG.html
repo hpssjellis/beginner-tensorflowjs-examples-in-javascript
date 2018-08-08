@@ -1143,8 +1143,11 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
          document.getElementById('myAsk').value  += '\n'                                                                                     
       }     
        const myImageNumber = findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)  
-                                                                                             
-       document.getElementById('myAsk').value  += ',' + myImageNumber                                                                                    
+       if (i==0){
+         document.getElementById('myAsk').value  += myImageNumber 
+        }  else {                                                                                    
+          document.getElementById('myAsk').value  += ',' + myImageNumber 
+       }                                                                                      
                                                                                              
     /*                                                                                         
       if (avg >= 150) {
