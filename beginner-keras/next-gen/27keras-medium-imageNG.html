@@ -426,19 +426,26 @@ model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );
                                           
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
-async function myGo() { // inline async so we can use promises and await                                                                                                   
+(async function () { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
   for ( let myLoop = 1; myLoop <= 700; myLoop++ ) {                                                                                                                     
-    var myFit = await model.fit(xs, ys, { batchSize: 8192 });                                                                                                                
-    if (myLoop % 20 == 0){                                                                                                                                              
-      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/700 : ' + myFit.history.loss[0] +' <br><br>'                                          
-    }                                                                                                                                                                   
-  }    
+    var myFit = await model.fit(xs, ys, { 
+           batchSize: 8192, 
+           epochs : 700,  
+           callbacks:  { 
+              onEpochEnd: async (batch, logs) => {                                            
+                 document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/700 : ' + myFit.history.loss[0] +' <br><br>'                                                                                                  
+                 await tf.nextFrame();  // This improves UI responsiveness during training.                                                              
+              }           
+              onBatchEnd: async (batch, logs) => {                                                               
+               await tf.nextFrame();  // This improves UI responsiveness during training.  
+             }                                                                             
+          }      // end all callbacks                                                                                                                                                                                                                                            
+       }        // end model.fit 
   await   document.getElementById('myButtonTest').click()                                                                                
-}
+}){}   // end inline async
                                                                                                                                                                       
- myGo() // call the main async function 
+
                                                                                                                                                                        
 }" > 
  
