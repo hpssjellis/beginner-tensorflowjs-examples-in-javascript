@@ -426,7 +426,7 @@ model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );
                                           
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
-async function myGo() { // inline async so we can use promises and await                                                                                                   
+(async function() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
   for ( let myLoop = 1; myLoop <= 700; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { batchSize: 8192 });                                                                                                                
@@ -436,9 +436,9 @@ async function myGo() { // inline async so we can use promises and await
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
-}
+})()
                                                                                                                                                                       
- myGo() // call the main async function 
+
                                                                                                                                                                        
 }" > 
  
