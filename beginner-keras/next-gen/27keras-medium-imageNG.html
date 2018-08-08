@@ -427,8 +427,7 @@ model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
 (async function () { // inline async so we can use promises and await                                                                                                   
-                                                                                                                                                                        
-  for ( let myLoop = 1; myLoop <= 700; myLoop++ ) {                                                                                                                     
+                                                                                                                                                                                                                                                                                         
     var myFit = await model.fit(xs, ys, { 
            batchSize: 8192, 
            epochs : 700,  
