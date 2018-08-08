@@ -921,7 +921,9 @@ Remember:<br>
 ,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,7,7,7,7,7,7
 ,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7,7,7,7,7,7,7,7
 ,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
-</textarea></td><td><input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 32, 32, 1" placeHolder="1, 32, 32, 1"></td><tr>
+</textarea></td><td> <input id="myButtonLabel" type="button" value="Add Data as an Image" onclick="{ 
+   myLoadTestImage()                                                                             
+}">  <input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 32, 32, 1" placeHolder="1, 32, 32, 1"></td><tr>
 </table><br>
 
 <div id="myDivDataImage" style="border: 1px solid; display: inline-block;">...</div><br>
@@ -1080,6 +1082,93 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
       if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0'  }   
       if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1'  }   
    }, 50);    // give the image some time to load. Should use Async, but was lazy today                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+  }
+                                                                                             
+   } // end if  array                                                                                  
+  } // end if  null                                                                       
+}
+
+ myLoadTestImage = async function(){ 
+                                                                                             
+                                                                                             
+ document.getElementById('myAsk').value  = ''    // blank the old test                                                                                          
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
+ if (myFileName.split(',').length >= 2 ){alert('Not ready to load multiple images')} else {
+                                                                                             
+ if (myFileName != null){  
+                                                                                             
+  var img = new Image();
+  img.src = myFileName
+  var canvas = document.getElementById('myCanvas');
+                                                     
+  var ctx = canvas.getContext('2d');                                                                                                                                    
+
+////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////                                                                                             
+  ctx.imageSmoothingEnabled       = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled    = false;
+  ctx.msImageSmoothingEnabled     = false;
+  ctx.oImageSmoothingEnabled      = false;                                                                                            
+                                                                                             
+                                                                                             
+ img.onload = function() {
+                                                                                                                                                                                          
+  ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);                                      
+                 
+  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
+  var data = imageData.data;  
+
+  var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
+  var myNumRows =  data.length / (document.getElementById('myModelHeight').value * 4)             
+ // var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
+  var myMonoChromePixels = (myNumRows) * 4   // gets the actual number of simplified pixels per row
+
+
+console.log('data.length  ' + data.length)
+console.log('myNumCols ' + myNumCols)
+console.log('myNumRows ' + myNumRows)
+console.log('myMonoChromePixels  ' + myMonoChromePixels)
+
+
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+      data[i + 2] = avg; // blue
+      if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
+         document.getElementById('myAsk').value  += '\n'                                                                                     
+      }     
+       const myImageNumber = findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)  
+                                                                                             
+       document.getElementById('myAsk').value  += ',' + myImageNumber                                                                                    
+                                                                                             
+    /*                                                                                         
+      if (avg >= 150) {
+        document.getElementById('myAsk').value  += ',0'    // white randomly set for any average value over or equal to 150                                                                                  
+         } else {
+        document.getElementById('myAsk').value  += ',1'    // black randomly set for any average value under 150                                                                                      
+      } 
+                                                                                             
+    */                                                                                         
+                                                                                             
+                                                                                             
+    }  // end for loop
+   // console.log(data) 
+                                                                                             
+   //ctx.rect(20,20,150,100);
+   //ctx.stroke();                                                                                          
+                                                                                                                              
+                                                                                             
+                                                                                             
+                                                                                             
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  // img.style.display = 'none';
+  img.style.display = 'inline';
+                                                                                       
                                                                                              
                                                                                              
                                                                                              
@@ -1462,7 +1551,7 @@ function myTextGrow(myT, myB){
    document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
-      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                               
           document.getElementById(myT).rows += 3; 
       } 
    }, 100)
