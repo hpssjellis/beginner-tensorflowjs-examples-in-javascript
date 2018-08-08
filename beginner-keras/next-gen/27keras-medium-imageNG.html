@@ -460,10 +460,10 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 1])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
+    document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
               
                                                              
  })()   // end the inline async function
@@ -1346,10 +1346,10 @@ myTest = async function(){
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
    // document.getElementById('myDivTest').innerHTML = 'Input :<br>'+document.getElementById('myAsk').value+'<br><br> Output = <br>'                                                                                                                               
     document.getElementById('myDivTest').innerHTML = ' Output = <br>'
-    document.getElementById('myDivTest').innerHTML += '<b>0 No Shapes ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDivTest').innerHTML += '<b>1 Circles ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>2 Triangles ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>3 Rectangles ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>0 No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>1 Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>2 Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>3 Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
                                                                                              
   console.log(document.getElementById('myAsk2').value + ': ' + await myPredictArray) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
