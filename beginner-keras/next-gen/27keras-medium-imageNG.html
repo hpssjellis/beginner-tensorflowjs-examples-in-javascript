@@ -1043,8 +1043,9 @@ myLoadData = async function(){
    document.getElementById('myY').value  += document.getElementById('mySelectMultiTarget').value
                                                                                                                                                                                          
    const mySplit =  document.getElementById('myMultiURL').value.split(',')                                                                                         
-   for (var myCount=0; myCount <= mySplit.length; myCount++ ){
-         alert(myCount+', '+mySplit[myCount] )                                                                                     
+   for (var myCount = 0; myCount <= mySplit.length-1 ; myCount++ ){
+         //alert(myCount + ', ' + mySplit[myCount] )
+       myLoadImage(mySplit[myCount])                                                                                      
    }                                                                                          
                                                                                              
                                                                                              
