@@ -113,7 +113,8 @@ Test or change this data <br>
 </textarea><br>
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
-                                                                                                                                                                        
+document.getElementById('myButton7979').style.backgroundColor = 'red' 
+                                                                              
 const xs = tf.tensor4d([                                                                                                                                                
                                                                                                                                                                         
  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -448,7 +449,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     });  // end model.fit                                                                                                              
     
   await document.getElementById('myButtonTest').click() 
-  await document.getElementById('myButton7979').style.backgroundColor = 'yellow'                                                                               
+  document.getElementById('myButton7979').style.backgroundColor = 'yellow'                                                                               
 })()
                                                                                                                                                                       
 
