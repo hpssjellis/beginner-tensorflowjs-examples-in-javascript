@@ -843,7 +843,12 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
    </textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
    myLoadData()                                                                             
     }"> <input id="myButtonLabel" type="button" value="Add Data as an Image" onclick="{ 
-   myLoadImage()                                                                             
+    
+    
+     const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
+     if (myFileName.split(',').length >= 2 ){alert('Use multi-image load above')} else {
+         myLoadImage(myFileName) 
+     }
 }"> </td></tr>
   <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=20 cols=100% NOWRAP  placeHolder="">
 0,1,0,0,
@@ -1021,15 +1026,17 @@ myLoadData = async function(){
                                                                                              
 ///////////////////// As soon as you start using real images the coding gets much more complex
 ///////////////////// Mainly becuase each pixel of colour is 4 data points Red, Green, Blue and Alpha  
-///////////////////// Where Alpha is the amount of transparency                                                                                             
+///////////////////// Where Alpha is the amount of transparency  
                                                                                              
- myLoadImage = async function(){ 
- document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
- const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
- if (myFileName.split(',').length >= 2 ){alert('Not ready to load multiple images')} else {
                                                                                              
+ myMultiLoadImage() = async function(){                                                                                           
+    alert('multi')                                                                                         
+ }                                                                                             
+ myLoadImage = async function(myFileName){ 
+// document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
+                                                                                            
  if (myFileName != null){  
-                                                                                             
+  document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                                 
   var img = new Image();
   img.src = myFileName
   var canvas = document.getElementById('myCanvas');
@@ -1113,7 +1120,7 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
   }
                                                                                              
    } // end if  array                                                                                  
-  } // end if  null                                                                       
+ // } // end if  null                                                                       
 }
 
  myLoadTestImage = async function(){ 
