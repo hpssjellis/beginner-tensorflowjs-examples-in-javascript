@@ -852,6 +852,12 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
    myLoadData()                                                                             
     }"> <input id="myButtonLabel" type="button" value="Add Data as an Image" onclick="{ 
     
+       const numLines = prompt('y=Target for this image. 0 = No Defined Shape, 1 = Circles, 2 = Triangles, 3 = Rectangles', 1);                                                                                             
+      document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target 
+      if  (numLines == 0 ){ document.getElementById('myY').value  += ',1,0,0,0'  }    
+      if  (numLines == 1 ){ document.getElementById('myY').value  += ',0,1,0,0'  }   
+      if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0'  }   
+      if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1'  } 
     
      const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
      if (myFileName.split(',').length >= 2 ){alert('Use multi-image load above')} else {
@@ -1127,6 +1133,8 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
   // img.style.display = 'none';
   img.style.display = 'inline';
   
+                                                                                             
+  /*                                                                                           
   setTimeout(function(){                                                                                         
       const numLines = prompt('y=Target for this image. 0 = No Defined Shape, 1 = Circles, 2 = Triangles, 3 = Rectangles', 1);                                                                                             
       document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target 
@@ -1136,7 +1144,7 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
       if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1'  }   
    }, 50);    // give the image some time to load. Should use Async, but was lazy today                                                                                           
                                                                                              
-                                                                                             
+    */                                                                                         
                                                                                              
                                                                                              
   }
