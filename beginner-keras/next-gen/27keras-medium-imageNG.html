@@ -923,7 +923,7 @@ Remember:<br>
 ,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
 </textarea></td><td> <input id="myButtonLabel" type="button" value="Add Image to test" onclick="{ 
    myLoadTestImage()  
-   myDrawTestImage()                                                                           
+                                                                        
 }">  <input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 32, 32, 1" placeHolder="1, 32, 32, 1"></td><tr>
 </table><br>
 
@@ -1180,7 +1180,8 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
   }
                                                                                              
    } // end if  array                                                                                  
-  } // end if  null                                                                       
+  } // end if  null  
+ await   myDrawTestImage()    // might as well show the image on the page.                                                                                          
 }
 
 
