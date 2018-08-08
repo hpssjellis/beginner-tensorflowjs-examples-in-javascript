@@ -549,7 +549,15 @@ Now lets try the above in a full Machine Learning Web App
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg
-</textarea></td><td><input id="myButtonMultiLoad" type="button" value="Multi Add Image and Labels" onclick="{ 
+</textarea></td><td>
+  
+  <select id="multiTarget" onChange="{alert()}">
+   <option value="1,0,0,0"> No Shape
+   <option value="0,1,0,0"> Circle
+   <option value="0,0,1,0"> Triangle
+   <option value="0,0,0,1"> Rectangle
+  </select>
+  <input id="myButtonMultiLoad" type="button" value="Multi Add Image and Labels" onclick="{ 
    myMultiLoadImage()                                                                             
 }"></td></tr>
  
