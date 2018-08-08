@@ -1145,7 +1145,7 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
       }     
        const myImageNumber = findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)  
        if (i==0){
-         document.getElementById('myAsk').value  += myImageNumber 
+          document.getElementById('myAsk').value  += ' ' + myImageNumber 
         }  else {                                                                                    
           document.getElementById('myAsk').value  += ',' + myImageNumber 
        }                                                                                      
@@ -1181,7 +1181,11 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
                                                                                              
    } // end if  array                                                                                  
   } // end if  null  
- await   myDrawTestImage()    // might as well show the image on the page.                                                                                          
+                                                                                             
+   setTimeout(function(){                                                                                         
+       myDrawTestImage()    // might as well show the image on the page.    
+   }, 500);                 // give the image some time to load. Should use Async, but was lazy today                                                                                               
+                                                                                                                                                                                     
 }
 
 
