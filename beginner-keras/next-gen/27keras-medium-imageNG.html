@@ -958,7 +958,7 @@ Remember:<br>
          if (document.stopRequested) {                                                                  
             this.model.stopTraining = true;                                                                                                                                             
         }
-        document.getElementById('myDivLoss').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
+        document.getElementById('myDivLoss').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '/'+document.getElementById('myEpoch').value + '<br>'
         document.getElementById('myDivLoss').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
         await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
      }
