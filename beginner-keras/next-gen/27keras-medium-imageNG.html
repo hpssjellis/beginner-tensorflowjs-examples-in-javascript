@@ -545,15 +545,15 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Data:</h3>
 <table border=1>
- <tr><td>Multi-image load data and labels</td><td><textarea id="myMulti" rows=10 cols=120 NOWRAP placeholder="">
+ <tr><td>Multi-image load data and labels</td><td><textarea id="myMultiURL" rows=10 cols=120 NOWRAP placeholder="">
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg
 </textarea></td><td>
   
-  <select id="mySelectMultiTarget" onChange="{alert()}">
+  <select id="mySelectMultiTarget" onChange="{'selecting ['+this.value+'] for all the images to load'}">
    <option value="1,0,0,0"> No Shape
-   <option value="0,1,0,0"> Circle
+   <option value="0,1,0,0" selected="selected"> Circle
    <option value="0,0,1,0"> Triangle
    <option value="0,0,0,1"> Rectangle
   </select>
@@ -1038,7 +1038,7 @@ myLoadData = async function(){
                                                                                              
                                                                                              
  myMultiLoadImage = async function(){                                                                                           
-    alert(mySelectMultiTarget)                                                                                         
+    alert(document.getElementById('mySelectMultiTarget').value + ', '+ document.getElementById('myMultiURL').value)                                                                                         
  }                                                                                             
  myLoadImage = async function(myFileName){ 
 // document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
