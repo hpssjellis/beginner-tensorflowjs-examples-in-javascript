@@ -441,11 +441,11 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
           },       
                                                                               
          onEpochEnd: async (epoch, logs) => {                                            
-              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss[0] +' <br><br>'                                                               
+              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss +' <br><br>'                                                               
          }   
                                                                               
       }  // end all callbacks                                                                        
-    });                                                                                                                
+    });  // end model.fit                                                                                                              
     
   await document.getElementById('myButtonTest').click() 
   //await document.getElementById('myButton7979').style.backgroundColor = 'gray'                                                                               
