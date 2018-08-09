@@ -95,7 +95,7 @@ const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,
 model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
-    inputShape: [32, 32, 1],                                                                                                                                                  
+    inputShape: [32, 32, 4],                                                                                                                                                  
     kernelSize: 2,                                                                                                                                                          
     filters: 4,                                                                                                                                                             
     strides: 8,                                                                                                                                                             
