@@ -63,6 +63,38 @@ So I tried real simple text based image analysis, but the reality is that images
 
 
 <div id="myDiv7979Code"> 
+ 
+ 
+ Test page for loading multiple images of different sizes, force them to 32 x 32, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
+
+<textarea id="myURLs" rows=16 cols=140>
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg,
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg,
+
+
+  
+  
+  
+  
+</textarea>
+<br>
+
+<input type=button value="load Images" onclick="myLoadImage()">
+
+<input type=button value="Data to Tensor (Check console) " onclick="{
+  myFinalMakeTensor()
+}"> Reshaped image --> <canvas id="myReshapeCanvas" width="32" height="32" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
+ 
+ 
+ 
+ 
 
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>
@@ -82,7 +114,7 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
  myCircleURLArray[4] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg'                                                                             
  myCircleURLArray[5] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg'                                                                              
                                                                                                                                                
- alert(myCircleURLArray)                                                                               
+// alert(myCircleURLArray)                                                                               
                                                                               
                                                                               
                                                                               
@@ -158,40 +190,6 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
  
  
- Test page for loading multiple images of different sizes, force them to 32 x 32, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
-
-<textarea id="myURLs" rows=16 cols=140>
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg,
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg,
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-10.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball01.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball03long.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball04squat.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran1.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran2.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran3.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg
-  
-  
-  
-  
-</textarea>
-<br>
-
-<input type=button value="load Images" onclick="myLoadImage()">
-
-<input type=button value="Data to Tensor (Check console) " onclick="{
-  myFinalMakeTensor()
-}"> Reshaped image --> <canvas id="myReshapeCanvas" width="32" height="32" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
 
 <canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
