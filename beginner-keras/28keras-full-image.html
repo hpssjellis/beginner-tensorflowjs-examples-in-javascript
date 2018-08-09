@@ -92,7 +92,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
   myFinalMakeTensor()
 }"><input type=button value="Load Image to test" onclick="{ 
  (async function(){
-  myTestTensor = await myTestLoad(document.getElementById('myAsk2').value) 
+  myTestArray = await myTestLoad(document.getElementById('myAsk2').value) 
  })()
 }"><br>
  
@@ -169,8 +169,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
   //mySingleLoad = async function(myFileName2, newX, newY, loop) {                                                               
                                                                  
     
-     // alert(myTestTensor.dataSync())                                                           
-    const myPredictArray = await model.predict(tf.tensor4d(myTestTensor.dataSync(), shape=[1, 32, 32, 3])).data()       
+      alert(myTestArray)                                                           
+    const myPredictArray = await model.predict(tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
@@ -385,26 +385,11 @@ myLoadImage = async function() {
      // myMainData[loop] = data;
 
       latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
-      // not sure how to drop the alpha channel so I just included it
 
-      // tf.stack([myMainTensor, latestTensor]);
-      // wow = tf.concat3d([myMainTensor , latestTensor])
-      // myMainTensor.concat3d(latestTensor)
-
-     // latestTensor.print(true);
-     // document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
-     // const myShape = latestTensor.shape;
-    //  console.log('myShape: ' + myShape);
-
-
-
-    //  ctx.drawImage(img, newX, newY, 100, 100);
-      // img.style.display = 'none';
-      // img.style.display = 'inline';
     };
   }
                                                                                           
- return latestTensor2                                                                                            
+ return latestTensor2.dataSync()                                                                                            
                                                                                              
 };                                                                                            
                                                                                              
