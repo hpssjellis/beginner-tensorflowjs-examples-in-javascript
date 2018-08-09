@@ -312,7 +312,7 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
       // myMainTensor.concat3d(latestTensor)
 
       latestTensor.print(true);
-      document.getElementById('myDiv7979').innerHTML = await latestTensor.dataSync()                                                                                       
+      document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
       myShape = latestTensor.shape;
       console.log('myShape: ' + myShape);
 
