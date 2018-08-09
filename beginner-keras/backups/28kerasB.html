@@ -1,0 +1,1567 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center>Convolutional Keras Layers Full Image Neural Network.</h2>
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Keras Image and Video Convolutional Layer Neural Network.<br><br>
+So I tried real simple text based image analysis, but the reality is that images are 24 bit rgb style and Tensorflowjs
+ with it's floating point math can handle the larger amount of data. <br><br>
+
+ So lets try to do something similar to the last page and train the model with full images loaded from this web domain
+ 
+ DRAFT MODE
+</div><br>
+
+
+ 
+ 
+ 
+
+
+<div id="myDiv7979Code"> 
+ 
+ 
+ Test page for loading multiple images of different sizes, force them to 32 x 32, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
+
+<textarea id="myURLs" rows=16 cols=140>
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg,
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg,
+
+
+  
+  
+  
+  
+</textarea>
+<br>
+
+<input type=button value="load Images" onclick="myLoadImage()">
+
+<input type=button value="Data to Tensor (Check console) " onclick="{
+  myFinalMakeTensor()
+}"> Reshaped image --> <canvas id="myReshapeCanvas" width="32" height="32" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
+ 
+ 
+ 
+ 
+
+Test or change this data <br>
+<textarea id="myAsk2" rows=4 cols=100 wrap=false>
+254,254,254,255,255,255,255,255,248,250,251,255,174,183,194,255,146,129,130,255,132,113,107,255,148,141,136,255,65,98,78,255,132,161,150,255,79,109,87,255,43,76,51,255,113,139,121,255,155,158,161,255,162,155,166,255,174,167,179,255,183,185,184,255,111,131,73,255,97,111,46,255,128,138,89,255,117,132,82,255,46,82,44,255,56,82,53,255,59,88,52,255,50,85,49,255,76,99,65,255,64,96,61,255,75,99,63,255,40,79,47,255,36,70,40,255,38,75,36,255,33,70,34,255,31,71,35,255,245,246,230,255,254,254,253,255,240,243,245,255,165,167,177,255,143,128,128,255,133,118,114,255,124,134,117,255,70,106,66,255,81,112,85,255,48,79,53,255,23,58,33,255,42,77,50,255,141,148,143,255,162,159,167,255,172,168,179,255,188,187,196,255,85,107,80,255,57,89,47,255,93,110,64,255,58,93,59,255,37,75,42,255,39,74,42,255,47,78,43,255,57,85,50,255,69,95,63,255,41,81,43,255,50,83,48,255,32,69,36,255,44,75,46,255,33,75,33,255,41,77,36,255,30,65,30,255,200,204,139,255,237,242,227,255,218,227,230,255,163,162,170,255,143,131,129,255,134,125,121,255,74,101,82,255,52,94,47,255,43,85,46,255,28,59,38,255,23,58,38,255,22,57,35,255,111,126,110,255,164,165,171,255,166,167,177,255,153,155,166,255,116,132,121,255,38,77,52,255,81,106,97,255,46,76,75,255,41,72,58,255,25,63,32,255,31,64,33,255,51,78,45,255,110,130,101,255,40,71,36,255,28,67,32,255,28,69,32,255,23,56,26,255,31,72,32,255,37,74,34,255,25,61,26,255,141,150,64,255,140,160,111,255,172,190,194,255,159,156,164,255,145,134,133,255,139,134,130,255,41,73,61,255,48,89,49,255,26,69,32,255,36,75,43,255,20,55,34,255,15,45,28,255,71,93,67,255,164,168,171,255,148,154,162,255,160,189,201,255,85,112,123,255,117,162,162,255,103,134,145,255,9,19,28,255,13,28,27,255,16,49,27,255,17,53,27,255,29,63,29,255,181,189,158,255,77,98,49,255,30,60,25,255,18,59,28,255,17,45,21,255,23,61,28,255,25,61,28,255,15,49,21,255,153,155,52,255,131,139,62,255,175,184,173,255,156,153,161,255,143,134,134,255,147,145,142,255,41,73,47,255,65,100,69,255,30,73,36,255,23,60,31,255,6,30,19,255,6,31,18,255,53,88,48,255,161,171,172,255,164,194,205,255,105,155,176,255,43,75,102,255,76,110,120,255,14,26,29,255,16,38,31,255,18,48,26,255,17,50,24,255,22,56,26,255,25,64,29,255,181,191,164,255,109,123,63,255,52,83,30,255,17,52,22,255,13,40,18,255,18,45,20,255,18,43,18,255,10,38,16,255,106,122,40,255,71,95,45,255,162,173,169,255,153,151,157,255,140,135,136,255,147,147,143,255,33,66,38,255,31,72,35,255,21,65,30,255,20,51,26,255,9,29,18,255,8,33,19,255,35,76,35,255,145,176,182,255,160,216,236,255,72,121,152,255,28,54,76,255,12,30,49,255,15,27,35,255,26,49,45,255,21,47,33,255,27,58,25,255,66,88,34,255,25,61,32,255,70,96,58,255,91,108,43,255,89,104,38,255,21,44,18,255,12,31,16,255,17,37,26,255,11,31,16,255,10,27,15,255,51,82,28,255,34,68,39,255,147,158,163,255,143,140,145,255,137,133,133,255,139,141,133,255,20,57,31,255,12,51,21,255,16,58,27,255,13,40,24,255,15,25,17,255,2,14,11,255,26,60,31,255,133,186,206,255,104,159,187,255,48,89,122,255,74,111,129,255,92,132,151,255,43,67,86,255,21,45,68,255,34,68,93,255,72,104,115,255,101,132,134,255,71,103,98,255,48,72,50,255,79,92,46,255,81,91,57,255,30,52,38,255,15,30,27,255,21,51,42,255,12,39,35,255,13,33,30,255,45,73,22,255,32,56,34,255,134,142,146,255,136,135,138,255,138,133,134,255,131,132,122,255,22,51,34,255,7,32,16,255,11,29,21,255,11,27,20,255,21,24,21,255,5,15,16,255,28,63,50,255,119,163,177,255,47,90,121,255,65,102,130,255,102,145,167,255,125,171,188,255,92,135,155,255,17,54,89,255,28,73,112,255,33,77,116,255,37,78,114,255,79,123,155,255,69,85,88,255,190,175,93,255,159,137,71,255,56,75,46,255,28,47,39,255,19,42,36,255,19,47,45,255,17,40,39,255,40,46,30,255,41,44,42,255,129,132,136,255,138,137,143,255,135,130,130,255,121,121,114,255,43,51,46,255,15,36,34,255,21,32,33,255,20,37,37,255,22,46,43,255,6,22,24,255,27,63,59,255,60,99,126,255,50,92,124,255,57,89,113,255,121,164,183,255,120,166,185,255,34,76,111,255,23,61,93,255,28,64,93,255,44,77,100,255,78,112,125,255,128,168,173,255,143,144,104,255,208,184,101,255,149,136,63,255,75,84,50,255,33,52,49,255,22,46,48,255,20,57,53,255,24,51,50,255,18,32,41,255,31,43,49,255,127,131,138,255,142,142,149,255,132,128,127,255,96,102,98,255,30,46,46,255,22,48,45,255,22,38,38,255,15,46,45,255,14,44,39,255,7,24,26,255,30,65,64,255,65,104,131,255,30,63,87,255,28,49,64,255,55,87,104,255,58,91,110,255,33,67,92,255,60,96,117,255,77,116,133,255,94,131,139,255,112,151,150,255,116,156,143,255,157,170,127,255,159,169,116,255,132,155,105,255,105,136,100,255,70,118,99,255,62,115,99,255,57,119,100,255,61,119,101,255,17,50,53,255,29,48,48,255,134,143,151,255,139,139,146,255,136,133,134,255,69,83,79,255,29,52,54,255,37,66,62,255,37,71,66,255,31,76,69,255,35,80,73,255,38,85,76,255,50,99,92,255,22,50,67,255,16,38,52,255,20,37,47,255,48,78,94,255,77,116,132,255,108,152,165,255,92,126,127,255,44,71,77,255,94,122,114,255,94,153,130,255,86,158,126,255,91,164,128,255,91,165,128,255,89,163,126,255,87,160,122,255,83,158,119,255,81,155,115,255,79,153,115,255,80,150,112,255,35,82,77,255,53,94,82,255,144,156,161,255,139,138,144,255,135,137,137,255,86,145,121,255,80,146,120,255,87,156,126,255,90,162,129,255,89,164,129,255,89,166,130,255,87,168,131,255,82,161,127,255,74,119,125,255,88,133,140,255,77,112,110,255,85,130,119,255,101,149,143,255,113,156,154,255,109,139,143,255,53,77,77,255,86,137,116,255,88,163,124,255,84,160,118,255,83,157,117,255,83,157,115,255,83,156,114,255,81,153,112,255,80,151,110,255,78,150,108,255,78,148,108,255,77,145,105,255,76,148,117,255,81,154,122,255,148,164,168,255,135,134,140,255,142,146,144,255,123,181,127,255,129,184,128,255,124,182,129,255,105,173,126,255,96,167,122,255,91,165,121,255,87,164,120,255,84,162,120,255,67,126,104,255,65,124,101,255,66,125,101,255,89,143,132,255,163,207,215,255,192,235,244,255,194,238,247,255,129,162,174,255,132,173,181,255,145,193,174,255,83,156,112,255,83,156,115,255,81,153,108,255,81,151,109,255,80,150,109,255,80,149,110,255,78,146,107,255,75,145,104,255,73,139,100,255,85,151,109,255,93,156,112,255,150,163,166,255,139,137,144,255,146,154,148,255,109,170,115,255,111,170,118,255,105,166,114,255,101,165,112,255,99,163,113,255,92,162,115,255,87,160,115,255,83,159,114,255,79,153,113,255,81,156,115,255,97,161,141,255,139,185,200,255,162,205,218,255,200,243,249,255,201,246,250,255,184,224,235,255,124,163,185,255,186,218,224,255,116,170,140,255,77,148,107,255,76,146,104,255,75,143,104,255,74,141,99,255,75,142,102,255,73,139,98,255,69,136,91,255,68,133,92,255,84,148,106,255,87,150,109,255,150,161,165,255,142,142,149,255,149,161,149,255,121,174,111,255,120,172,107,255,114,168,112,255,96,161,113,255,87,157,112,255,79,151,107,255,80,149,105,255,77,148,100,255,70,142,99,255,79,151,111,255,151,197,204,255,148,194,213,255,165,209,222,255,200,246,249,255,188,233,241,255,182,224,237,255,153,193,211,255,153,194,218,255,214,237,236,255,76,143,104,255,74,142,103,255,73,142,99,255,69,135,94,255,69,134,96,255,70,134,95,255,67,132,90,255,71,135,94,255,93,149,99,255,105,157,107,255,149,156,162,255,144,146,154,255,151,163,150,255,103,158,100,255,87,147,100,255,83,150,109,255,79,146,106,255,81,150,107,255,75,144,99,255,75,144,99,255,68,138,95,255,70,142,97,255,113,174,145,255,181,221,232,255,136,182,203,255,170,212,224,255,194,240,246,255,167,209,221,255,182,225,233,255,188,227,236,255,142,187,213,255,225,252,252,255,99,158,127,255,70,136,97,255,67,132,92,255,64,126,91,255,64,128,92,255,66,129,91,255,63,126,87,255,59,121,83,255,113,159,99,255,112,158,104,255,149,156,163,255,151,162,176,255,115,148,156,255,73,127,102,255,80,143,105,255,72,141,99,255,70,139,98,255,69,138,96,255,66,135,93,255,67,135,95,255,63,132,90,255,66,135,95,255,148,197,187,255,181,223,233,255,121,165,188,255,168,214,228,255,190,235,243,255,184,231,239,255,150,191,205,255,197,239,244,255,147,189,212,255,212,248,249,255,142,184,173,255,61,125,90,255,58,123,84,255,56,119,80,255,56,119,82,255,52,115,76,255,55,118,78,255,54,115,77,255,79,135,88,255,88,145,119,255,150,184,201,255,148,204,231,255,67,116,143,255,43,69,80,255,142,195,189,255,76,144,109,255,61,132,88,255,63,134,87,255,66,133,89,255,63,131,89,255,60,128,85,255,66,135,95,255,169,215,215,255,183,226,237,255,113,157,178,255,169,216,229,255,192,236,242,255,182,223,231,255,137,169,180,255,198,239,245,255,157,198,217,255,191,231,239,255,169,205,206,255,65,130,96,255,59,124,86,255,52,115,74,255,57,118,84,255,55,116,85,255,58,119,87,255,60,121,84,255,63,125,88,255,83,145,142,255,132,204,236,255,93,151,181,255,12,39,64,255,37,69,89,255,66,100,112,255,59,114,107,255,63,130,97,255,61,126,92,255,59,125,87,255,55,123,83,255,57,123,90,255,60,127,88,255,170,213,216,255,185,225,236,255,106,146,163,255,166,209,219,255,190,232,239,255,185,226,236,255,117,142,151,255,192,228,236,255,168,201,214,255,177,212,220,255,172,208,214,255,53,118,80,255,51,113,71,255,48,111,70,255,50,112,74,255,54,114,81,255,53,112,85,255,49,100,81,255,50,114,79,255,59,111,111,255,72,119,139,255,14,37,55,255,41,74,95,255,77,122,144,255,95,148,166,255,23,61,91,255,61,109,129,255,76,126,138,255,58,123,89,255,58,125,89,255,56,123,89,255,57,123,88,255,163,206,208,255,166,207,217,255,109,144,154,255,151,188,196,255,181,221,230,255,180,218,228,255,105,126,131,255,176,207,213,255,172,205,211,255,159,191,197,255,162,197,202,255,54,116,84,255,53,114,76,255,56,119,77,255,57,120,80,255,61,122,83,255,58,119,81,255,64,121,92,255,44,109,73,255,23,64,64,255,10,31,46,255,2,10,18,255,47,79,97,255,51,84,99,255,61,101,116,255,6,30,48,255,13,40,55,255,51,100,109,255,57,119,87,255,51,114,83,255,53,119,84,255,57,122,95,255,141,187,190,255,152,194,202,255,116,148,151,255,117,147,152,255,171,211,220,255,167,204,213,255,89,109,111,255,136,163,166,255,173,206,210,255,133,161,159,255,148,184,186,255,58,122,86,255,57,117,80,255,54,115,76,255,56,119,80,255,58,119,79,255,55,116,76,255,59,119,79,255,45,107,72,255,15,53,38,255,3,19,15,255,3,21,15,255,4,29,22,255,7,41,28,255,14,57,41,255,21,74,56,255,37,102,80,255,44,111,76,255,58,124,89,255,62,127,94,255,66,133,96,255,65,133,99,255,117,165,164,255,147,187,189,255,120,154,155,255,101,129,129,255,157,199,204,255,154,193,198,255,68,88,88,255,99,121,120,255,160,196,198,255,123,154,152,255,123,159,157,255,82,139,118,255,120,174,159,255,116,169,154,255,128,180,166,255,134,187,175,255,147,194,186,255,137,184,178,255,49,114,83,255,30,93,68,255,20,82,54,255,26,89,64,255,36,100,77,255,48,112,85,255,58,122,96,255,60,123,93,255,76,139,111,255,92,152,126,255,98,157,133,255,86,149,122,255,114,173,152,255,105,165,143,255,119,167,163,255,125,163,163,255,135,175,175,255,89,116,116,255,141,180,181,255,135,175,176,255,56,75,73,255,66,85,82,255,141,177,173,255,124,158,152,255,145,183,185,255,183,224,230,255,193,234,242,255,175,220,231,255,183,226,234,255,185,229,237,255,173,219,223,255,170,214,221,255,115,175,167,255,107,166,160,255,95,153,143,255,109,167,162,255,122,180,173,255,147,198,194,255,149,199,197,255,156,204,201,255,170,215,214,255,178,224,227,255,188,230,232,255,169,215,215,255,189,231,235,255,185,228,232,255,165,208,213,255,114,154,151,255,127,170,167,255,80,107,105,255,126,164,160,255,120,158,155,255,60,80,78,255,62,81,81,255,125,158,149,255,126,159,152,255,116,163,157,255,121,172,169,255,124,177,174,255,107,160,148,255,103,156,142,255,99,155,145,255,77,133,113,255,82,135,116,255,171,223,238,255,175,227,239,255,174,224,237,255,179,228,238,255,178,226,238,255,176,226,235,255,177,229,241,255,169,216,225,255,149,199,202,255,145,198,204,255,154,205,211,255,144,197,203,255,132,188,195,255,135,189,191,255,115,169,165,255,98,140,128,255,114,154,147,255,97,130,126,255,108,144,138,255,109,142,138,255,56,76,74,255,48,63,60,255,114,142,131,255,99,129,120,255,38,82,58,255,45,94,70,255,45,95,67,255,44,99,63,255,45,103,61,255,46,104,72,255,53,111,76,255,48,99,67,255,116,172,188,255,112,170,182,255,100,156,155,255,97,156,148,255,90,147,133,255,75,134,117,255,83,139,129,255,61,119,92,255,48,109,73,255,50,109,75,255,47,102,73,255,50,108,76,255,47,101,69,255,46,98,64,255,37,88,52,255,49,97,63,255,100,137,132,255,99,133,126,255,96,128,120,255,77,101,94,255,55,77,71,255,48,63,55,255,93,120,107,255,40,80,54,255,37,79,56,255,49,98,71,255,36,79,54,255,46,100,67,255,40,93,59,255,50,105,73,255,48,102,72,255,43,94,59,255,40,97,66,255,40,99,70,255,37,94,57,255,37,96,58,255,37,95,61,255,26,76,43,255,38,91,57,255,24,74,38,255,28,77,43,255,39,92,57,255,32,81,46,255,35,87,52,255,34,83,49,255,34,84,50,255,31,79,46,255,22,64,32,255,42,72,60,255,68,97,90,255,67,91,82,255,35,50,44,255,46,66,59,255,50,68,55,255,34,55,41,255,20,62,30,255,33,80,49,255,34,88,48,255,39,92,57,255,39,88,58,255,37,95,58,255,38,92,58,255,44,98,65,255,41,91,57,255,33,86,51,255,34,93,52,255,36,93,54,255,38,95,59,255,37,91,62,255,31,80,49,255,34,84,53,255,26,73,45,255,27,74,43,255,35,85,53,255,35,84,53,255,33,85,50,255,31,82,42,255,24,70,41,255,32,80,53,255,22,63,40,255,20,55,41,255,18,43,32,255,18,37,28,255,14,32,25,255,16,39,29,255,17,45,28,255,10,42,23,255,19,60,32,255,27,75,45,255,30,82,46,255,34,85,50,255,36,88,52,255,42,99,65,255,35,90,47,255,36,92,53,255,43,96,65,255,26,79,45,255,25,79,39,255,31,88,53,255,36,92,56,255,40,89,61,255,36,82,59,255,31,76,56,255,28,71,47,255,29,71,50,255,29,76,47,255,28,75,50,255,27,78,46,255,26,75,37,255,24,68,43,255,23,68,43,255,19,64,41,255,22,67,52,255,12,47,32,255,12,47,33,255,8,46,27,255,11,50,31,255,12,51,30,255,16,62,40,255,21,61,40,255,34,82,54,255,27,77,44,255,27,80,42,255,32,87,48,255,37,96,55,255,23,76,36,255,27,83,41,255,43,98,58,255,21,72,41,255,22,72,47,255,25,80,51,255,27,77,50,255,39,87,68,255,41,89,66,255,34,84,61,255,30,76,54,255,34,90,57,255,30,81,47,255,31,84,50,255,30,87,49,255,29,80,44,255,25,74,49,255,19,69,39,255,13,58,30,255,13,58,35,255,9,49,28,255,13,54,37,255,10,56,32,255,11,58,33,255,18,72,46,255,19,74,48,255,24,80,50,255,21,76,43,255,23,76,43,255,27,82,44,255,20,71,33,255,28,81,46,255,31,83,52,255,21,70,38,255,29,81,50,255,29,82,50,255,32,87,66,255,34,91,64,255,34,87,59,255,42,99,80,255,41,94,70,255,44,97,67,255,37,92,62,255,31,86,51,255,24,79,44,255,29,79,53,255,20,73,42,255,22,74,41,255,19,68,44,255,17,69,45,255,14,62,38,255,11,57,37,255,12,60,37,255,16,63,47,255,11,56,36,255,12,64,41,255,18,76,54,255,15,69,43,255,16,72,43,255,18,72,40,255,25,79,55,255,22,78,44,255,23,74,41,255,22,70,41,255,30,85,51,255,21,74,39,255,28,82,48,255,25,76,44,255,31,82,57,255,37,92,68,255,37,93,63,255,34,91,61,255,36,91,61,255,43,95,62,255,45,105,71,255,37,97,68,255,24,77,50,255,26,78,53,255,25,77,56,255,25,78,59,255,25,80,57,255,23,75,59,255,23,75,54,255,19,71,49,255,16,67,43,255,22,77,61,255,17,65,49,255,15,71,49,255,18,73,53,255,14,63,37,255,19,74,52,255,18,69,43,255,25,78,57,255,17,66,41,255,17,64,35,255,29,75,55,255,26,77,48,255,21,75,39,255,24,80,37,255
+</textarea><br>
+<input id="myButton7979" type="button" value="Train images and test" onclick="{ 
+                                                                                    
+document.getElementById('myButton7979').style.backgroundColor = 'red' 
+
+                                                                              
+  // six image URL's to load that have circles in them
+      myCircleURLArray = []                                                                         
+ myCircleURLArray[0] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg'
+ myCircleURLArray[1] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg'
+ myCircleURLArray[2] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg'                                                                            
+ myCircleURLArray[3] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg'                                                                            
+ myCircleURLArray[4] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg'                                                                             
+ myCircleURLArray[5] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg'                                                                              
+                                                                                                                                               
+// alert(myCircleURLArray)                                                                               
+                                                                              
+                                                                              
+                                                                              
+//const xs = tf.tensor4d([ ], shape=[8, 32, 32, 1] );    // 8 input images that are 32 x 32 with  10 colors 0-9)                                                                                                                                                     
+                                                                                                                                                                        
+// Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
+const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4]);        // 8 images 4 dimension                                                                                                                  
+                                                                                                                                                                        
+                                                                                                                                                                        
+model = tf.sequential();                                                                                                                                          
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({                                                                                                                                            
+    inputShape: [32, 32, 4],                                                                                                                                                  
+    kernelSize: 2,                                                                                                                                                          
+    filters: 4,                                                                                                                                                             
+    strides: 8,                                                                                                                                                             
+    activation: 'relu',                                                                                                                                                     
+    kernelInitializer: 'varianceScaling'                                                                                                                                    
+}));                                                                                                                                                                    
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
+                                                                                                                                                                        
+model.add(tf.layers.flatten());                                                                                                                                         
+model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
+                                          
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   
+                                                                              
+//document.getElementById('myButton7979').style.backgroundColor = 'red'   
+                                                                              
+(async function() { // inline async so we can use promises and await                                                                                                   
+                                                                                                                                                                        
+                                                                                                                   
+    var myFit = await model.fit(xs, ys, { 
+      batchSize: 8192, 
+      epochs : 700, 
+      callbacks :  {  
+                                                                              
+          onBatchEnd: async (batch, logs) => {                                                               
+              await tf.nextFrame();  // This improves UI responsiveness during training.  
+          },       
+                                                                              
+         onEpochEnd: async (epoch, logs) => {                                            
+              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss +' <br><br>'                                                               
+         }   
+                                                                              
+      }  // end all callbacks                                                                        
+    });  // end model.fit                                                                                                              
+    
+  await document.getElementById('myButtonTest').click() 
+  document.getElementById('myButton7979').style.backgroundColor = 'yellow'                                                                               
+})()
+                                                                                                                                                                      
+
+                                                                                                                                                                       
+}" > 
+ 
+<input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
+  (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 4])).data()                                                                                                                                      
+   // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
+    document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
+    document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
+              
+                                                             
+ })()   // end the inline async function
+}" >
+ 
+ 
+ 
+ 
+ 
+
+<canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+
+
+
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+   
+                                                                                             
+                                                                                             
+                                                                                             
+  ////////////////////////////////////////// START LOAD IMAGE ///////////////////////////////////////////////////////////
+
+///////////////////// As soon as you start using real images the coding gets much more complex
+///////////////////// Mainly becuase each pixel of colour is 4 data points Red, Green, Blue and Alpha
+///////////////////// Where Alpha is the amount of transparency
+
+myMainData = []; // stores imageData as an array
+//mySpecial = 0; // count loops for when a new row is needed
+myShape = [];
+
+myFinalMakeTensor = async function() {
+  //console.log(myMainData)
+  // var energy = myMainData.join();
+  var myNewArray4 = myMainData.join().split(','); // trick to flatten the array
+  // console.log(myNewArray4);
+
+  var canvasReshape = document.getElementById('myReshapeCanvas');
+
+ // myMainTensor = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
+  xs = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
+
+  // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
+
+  //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
+  //myMainTensor.print(true);
+
+  myMainData.length = 0;
+  myMainData = [];
+};
+
+myMultiLoad = async function(myImageArray) {
+  let newX2 = 0;
+  let newY2 = 0;
+  let myRows = 0;
+  let myLoopStore = 0;
+  for (var myLoop = 0; myLoop <= myImageArray.length - 1; myLoop++) {
+    if (myLoop % 10 == 0 && myLoop != 0) {
+      myRows += 101;
+      myLoopStore = myLoop;
+      newY2 = myRows;
+    }
+    //console.log(myImageArray[myLoop])
+    //newX2 = ((myLoop - myLoopStore)*100) + myLoop
+    newX2 = (myLoop - myLoopStore) * 101;
+    //console.log(newX2+ ', '+ newY2)
+    mySingleLoad(myImageArray[myLoop], newX2, newY2, myLoop);
+  }
+};
+mySingleLoad = async function(myFileName2, newX, newY, loop) {
+  if (myFileName2 != null) {
+    var img = new Image();
+    img.src = myFileName2;
+    img.crossOrigin = 'Anonymous';
+
+    var canvasReshape = document.getElementById('myReshapeCanvas'); // 32 x 32
+    var ctxReshape = canvasReshape.getContext('2d');
+
+    var canvas = document.getElementById('myCanvas'); // 1000 x 1000
+    var ctx = canvas.getContext('2d');
+
+    ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////
+    ctx.imageSmoothingEnabled = false;
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.msImageSmoothingEnabled = false;
+    ctx.oImageSmoothingEnabled = false;
+
+    img.onload = function() {
+      //document.getElementById('myX').value  += '\n\n'
+      ctxReshape.drawImage(
+        img,
+        0,
+        0,
+        img.width,
+        img.height,
+        0,
+        0,
+        canvasReshape.width,
+        canvasReshape.height
+      );
+
+      //console.log('canvasReshape.width: '+canvasReshape.width)
+
+      var imageData = ctxReshape.getImageData(
+        0,
+        0,
+        canvasReshape.width,
+        canvasReshape.height
+      );
+
+      //myMainData[loop] =  imageData;
+      console.log(imageData);
+      var data = imageData.data;
+      myMainData[loop] = data;
+
+      const latestTensor = tf.fromPixels(imageData, 4);
+      // not sure how to drop the alpha channel so I just included it
+
+      // tf.stack([myMainTensor, latestTensor]);
+      // wow = tf.concat3d([myMainTensor , latestTensor])
+      // myMainTensor.concat3d(latestTensor)
+
+      latestTensor.print(true);
+      document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
+      myShape = latestTensor.shape;
+      console.log('myShape: ' + myShape);
+
+      /*
+    
+    // to force black and white images
+    
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+     data[i + 2] = avg; // blue
+     
+    }  // end for loop
+   // console.log(data) 
+     */
+
+      // ctx.rect(newX,newY,newX+100,newY+100);
+      // ctx.stroke();
+
+      // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, newX, newY, 100, 100);
+      // img.style.display = 'none';
+      // img.style.display = 'inline';
+    };
+  }
+};
+
+myLoadImage = async function() {
+  // const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t5png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t6png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t7png.png');
+  //const myFileNameArray =   myFileName.split(',')
+  const myFileNameArray = document.getElementById('myURLs').value.split(',');
+
+  //if (myFileNameArray.length >= 2 ){
+
+  myMultiLoad(myFileNameArray);
+
+  //} else {
+  // mySingleLoad(myFileName, 0, 0, mySpecial)
+  //         mySpecial += 1
+
+  //} // end if  null
+};
+
+////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////
+                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+                                                                 
+
+
+
+                                                                                             
+                                                                                             
+                                                                                             
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</div>
+<div id='myDiv7979'>...</div><br>
+
+
+
+<input id="myUpdate7979" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea7979').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv7979Code').innerHTML =    myJoe 
+  document.getElementById('myButton7979').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea7979"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce7979){
+     myTextGrow('myTextarea7979', 'myDiv7979Code')
+     document.getElementById('myUpdate7979').style.visibility = 'visible'
+     myOnce7979 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Now lets try the above in a full Machine Learning Web App
+ 
+</div><br>
+
+<div id="myDiv124Code"> 
+ <!-- ********************************************   Web page elements here *********************************** -->
+ 
+ 
+
+<h2 align=center> Tensorflowjs Machine Learning Web App Template</h2>
+<h5 align=center>As simple as possible template. Note that for simplicity this has minimal CSS</h5>
+
+<h3>Pre-Set Values:</h3>
+<table border=1 >
+  <tr><td>Model Width: </td><td><input id="myModelWidth" type=text value=32 title="Change before Compiling Model" placeholder="32"></td></tr>
+  <tr><td>Model Height: </td><td><input id="myModelHeight" type=text value=32 title="Change before Compiling Model" placeholder="32"></td></tr>
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.2 title="From about 0.5 to 0.0001" placeholder="0.2"></td></tr>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=8192  title="Batch = Number of samples to run together" placeholder="8192"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=1400 placeholder="1400"></td></tr>
+ <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
+
+
+
+
+<h3>Data: Data cannot begin or end with a comma!</h3>
+<table border=1>
+ <tr><td>Multi-image load data and labels</td><td><textarea id="myMultiURL" rows=10 cols=120 NOWRAP placeholder="">
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg
+</textarea></td><td>
+  All images must be CORS (Cross-Origin Resource Sharing) compatible. Easiest solution is to put the images on the 
+  same website as this webpage.<br>
+  <select id="mySelectMultiTarget" onChange="{'selecting ['+this.value+'] for all the images to load'}">
+   <option value=",1,0,0,0"> No Shape
+   <option value=",0,1,0,0" selected="selected"> Circle
+   <option value=",0,0,1,0"> Triangle
+   <option value=",0,0,0,1"> Rectangle
+  </select>
+  <input id="myButtonMultiLoad" type="button" value="Multi Add Image and Labels" onclick="{ 
+   myMultiLoadImage()                                                                             
+}"></td></tr>
+ 
+ 
+  <tr><td>xTrainingData:</td><td><textarea id="myX" rows=100 cols=120 NOWRAP placeholder="">
+                                                                                                                                                                           
+ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0
+,0,0,0,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,0,0,0,0,0,0
+,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0
+,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0
+,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0
+,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0
+,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0
+,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0
+,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0
+,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0
+,0,0,0,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,0,0,0,0,0,0
+,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0
+,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0                                                                                                                                                              
+
+   
+   
+   
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,9,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,9,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,9,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,9,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0                                                                                                                                                                
+
+   
+   
+   
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0
+,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0
+,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0
+,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,0
+,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0
+,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0
+,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0
+,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0
+,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0
+,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,0
+,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0
+,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0
+,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0    
+
+   
+   
+   
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,8,8,9,9,8,8,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,0,0,0,0,8,9,8,8,0,0,0,0,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,0,0,0,0,9,0,9,9,0,9,0,9,9,0,9,0,0,0,9,9,9,9,9,9,9
+,9,9,9,9,9,9,0,0,9,0,0,0,0,9,9,9,0,9,9,9,0,9,9,0,0,0,0,9,9,9,9,9
+,9,9,9,9,9,0,0,0,9,0,9,0,0,9,9,0,0,9,9,9,0,0,9,9,9,0,0,9,9,9,9,9
+,9,9,9,9,9,0,0,9,9,0,8,0,0,9,0,0,0,0,0,0,9,8,9,9,0,0,0,9,9,9,9,9
+,9,9,9,9,9,0,0,1,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,9,9,9,9,9
+,9,9,9,9,9,0,0,9,9,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9
+,9,9,9,9,9,0,0,9,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,9,9,1,9,9
+,9,9,9,9,8,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,9,9,9,9,9
+,9,9,9,9,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,9,9,9,9,1,9
+,9,9,9,0,9,1,9,9,0,0,9,9,9,9,0,0,9,9,9,9,9,9,0,9,9,1,1,1,0,9,1,9
+,9,0,9,0,1,1,9,9,9,0,0,9,9,9,9,0,0,9,9,1,9,9,0,9,1,1,1,1,1,9,9,9
+,9,9,8,9,1,1,1,1,9,9,0,9,9,9,9,9,9,9,9,9,9,9,0,9,1,1,1,1,9,9,1,9
+,9,9,0,9,9,9,1,1,9,9,0,9,9,9,9,9,9,9,9,9,9,0,9,9,1,1,9,9,9,9,1,9
+,9,9,0,9,9,9,9,9,1,9,0,0,9,9,1,9,9,9,9,9,9,0,9,9,9,9,9,9,9,0,1,9
+,9,9,9,9,9,9,9,9,9,9,8,0,1,9,1,9,9,1,1,9,9,0,9,9,9,9,9,9,9,8,1,9
+,9,9,9,0,0,9,9,9,9,9,9,0,9,1,9,9,9,1,1,1,0,9,9,9,9,9,9,8,9,1,1,9
+,9,9,9,9,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,8,9,9,1,1,9
+,9,9,9,9,8,9,8,0,0,0,0,0,0,9,1,9,1,1,1,1,0,0,1,0,8,0,8,9,9,1,9,9
+,9,9,9,9,9,1,9,0,0,9,0,0,9,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,9,9
+,9,9,9,9,9,1,1,0,9,0,0,9,1,1,1,1,1,1,1,1,1,9,0,0,0,9,1,1,1,9,9,9
+,9,9,9,9,9,9,1,1,1,1,0,9,9,9,9,9,9,9,9,9,9,9,1,9,9,1,9,1,1,9,9,9
+,9,9,9,9,9,9,9,1,1,1,0,9,9,9,9,9,9,9,9,9,9,9,9,9,1,9,1,1,9,9,9,9
+,9,9,9,9,9,9,9,1,1,1,1,0,0,8,9,9,9,9,8,8,0,8,1,1,9,1,1,9,9,9,9,9
+,9,9,9,9,9,9,9,9,1,9,1,1,0,9,9,9,9,9,9,9,9,1,1,1,1,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,1,1,9,0,0,0,0,0,0,9,9,9,1,1,1,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,1,1,1,1,1,1,1,1,1,1,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9  
+ 
+   
+   
+   
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,8,9,8,9,9,9,9,9,9,9,9,9,9,9,9,1
+,9,9,9,9,9,9,9,9,9,8,9,9,9,9,9,0,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,9,9,8,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,9,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,1,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,0,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8
+,9,9,9,9,9,9,9,9,9,9,9,9,9,1,1,1,9,9,9,1,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,0,0,1,1,1,9,9,9,9,9,9,9,9,9,9,9,9,9,9,1
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,8,1,1,1,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,9,1,1,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,8,0,0,9,1,9,9,9,9,1,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,9,0,0,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,0,0,0,0,8,0,0,0,0,0,0,9,9,9,9,9,1,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,0,0,0,0,8,8,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,8,0,0,9,0,0,0,0,0,8,8,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,8,9,0,0,0,9,9,9,9,9,1,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,8,8,0,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,1,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+ 
+   
+   
+   
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,0,0,0,0,0
+,0,0,0,0,8,0,0,0,0,0,0,0,9,9,0,1,0,0,0,0,0,0,0,0,9,9,9,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,0,9,0,0,0,0,0,0,9,9,9,0,0,0,9,9,0,0,0,0,0
+,0,0,0,0,0,0,9,0,0,9,0,0,9,9,9,0,9,1,9,9,0,0,0,0,0,0,1,9,9,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,9,0,0,9,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,9,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,8,0,0
+,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0
+,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,9,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,9,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,1,0,8,9,0,0,0,0,0,0,0,0,0,0,0
+,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0
+,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,9,0,0,9,8,8,0,0,0,0,0,0,9,9,0,0
+,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,9,9,0,0,0,0
+,0,0,0,0,9,9,0,0,0,0,0,1,0,0,0,0,9,9,9,9,9,9,9,9,9,0,0,0,9,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,9,9,9,9,9,9,9,9,0,0,0,9,9,0,0,0
+,0,0,0,0,0,0,0,0,0,8,0,0,8,0,0,0,0,9,9,9,9,9,9,1,0,0,8,9,0,0,0,0
+,0,0,0,0,0,0,0,9,9,0,9,9,9,0,0,9,0,0,9,9,9,1,0,0,9,9,9,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,9,0,0,0,0,0,8,0,0,0,0,8,1,9,9,0,0,0,0,0
+,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,8,9,9,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,0,8,8,9,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,8,8,0,0,0,0,8,0,8,8,8,8,8,9,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,9,9,9,8,9,9,8,8,8,8,9,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  
+ 
+   
+   
+   
+,0,0,9,0,1,0,0,0,0,9,1,9,9,0,9,9,9,8,9,9,8,9,0,9,9,9,1,1,0,0,0,9
+,1,9,0,0,0,8,0,9,9,0,8,1,9,9,9,9,9,9,9,9,9,8,0,0,9,9,8,8,9,9,9,0
+,9,9,0,9,0,0,9,9,9,1,1,9,1,9,0,0,9,9,9,9,9,1,0,9,9,9,0,0,0,9,0,0
+,8,9,0,0,9,0,0,9,0,1,8,0,1,9,9,1,9,9,9,9,0,9,9,9,9,9,9,8,9,0,9,9
+,0,9,8,8,8,0,9,0,9,0,9,9,0,9,0,0,8,9,8,0,9,0,0,0,9,9,0,1,0,9,9,9
+,0,0,9,0,8,1,0,0,9,9,0,9,1,9,0,0,1,9,0,0,1,1,0,9,9,9,0,9,1,9,0,9
+,9,9,1,1,9,8,9,9,1,1,9,0,0,0,9,1,9,9,9,1,9,1,9,9,9,9,0,9,1,1,0,0
+,1,9,1,8,0,0,9,9,9,8,0,9,0,0,9,9,9,9,9,0,0,1,9,1,9,0,0,1,9,0,0,0
+,9,9,9,0,0,0,9,0,9,9,9,9,0,0,8,0,0,1,0,9,1,9,0,9,9,0,1,8,9,0,9,0
+,9,9,1,9,0,0,0,9,9,9,9,9,0,0,9,9,9,0,9,9,0,9,0,0,9,0,1,0,1,0,9,9
+,0,9,0,9,9,1,9,1,0,0,0,0,9,0,9,9,0,1,9,0,9,9,1,0,9,0,1,9,1,9,9,9
+,9,9,0,1,9,9,9,9,9,0,9,9,1,9,9,1,9,1,9,0,1,9,9,9,9,0,9,1,0,9,9,9
+,8,0,9,1,0,1,9,1,9,0,9,9,1,0,0,0,9,1,0,9,9,0,9,0,0,9,0,9,9,9,9,0
+,0,0,0,1,9,9,9,9,9,9,9,9,9,9,9,8,9,9,9,9,9,1,0,9,9,9,0,9,0,0,0,0
+,0,9,1,0,8,9,9,9,9,9,9,8,0,9,9,1,9,0,9,0,1,9,9,9,9,9,9,9,0,9,9,9
+,9,9,9,1,8,9,9,9,9,9,0,0,9,8,1,0,0,0,9,9,0,9,9,0,9,9,9,9,9,0,0,1
+,9,9,9,9,9,8,0,0,9,9,9,8,9,0,1,0,0,9,9,9,1,1,9,9,9,9,1,9,9,1,9,0
+,1,9,9,9,1,1,1,9,0,9,9,9,8,9,9,9,0,0,0,0,9,9,1,9,9,9,9,0,1,9,0,9
+,0,0,0,9,9,1,9,1,0,0,9,1,0,0,8,9,9,9,0,0,1,9,9,8,9,9,1,0,1,9,0,9
+,0,0,9,9,9,0,0,9,8,9,9,0,0,9,1,9,9,0,1,9,9,9,9,0,8,9,9,0,0,1,1,0
+,0,0,0,1,9,0,0,0,9,0,0,0,8,9,9,8,0,0,9,8,0,0,9,0,9,0,0,9,9,0,0,0
+,1,1,9,9,9,9,9,9,9,9,0,9,9,0,9,9,9,0,0,9,0,0,8,0,1,0,0,8,0,0,0,0
+,1,9,0,9,9,9,0,1,9,9,9,9,0,9,9,9,9,1,8,0,9,8,9,9,9,0,0,9,9,9,0,0
+,0,9,0,9,9,0,0,0,9,1,9,9,0,0,9,9,0,9,9,9,0,1,9,0,8,9,1,1,0,1,0,0
+,9,0,0,9,9,0,9,9,9,9,9,0,9,0,8,8,9,0,8,0,9,0,0,9,9,8,9,9,9,0,9,9
+,9,1,9,9,9,9,0,0,9,9,9,0,0,9,0,0,9,9,9,0,9,0,0,9,9,9,9,9,9,1,9,9
+,9,9,0,0,1,9,9,9,9,9,9,9,9,0,0,8,9,9,9,9,9,9,8,9,9,0,0,9,9,1,9,1
+,9,9,1,9,9,9,9,9,9,1,0,9,9,8,9,9,9,9,9,1,1,9,9,1,9,9,9,1,9,9,9,8
+,0,9,9,0,9,9,9,9,9,9,1,9,0,0,9,9,9,1,9,9,9,1,9,9,0,9,0,1,9,9,9,1
+,9,9,0,9,9,8,9,9,9,9,9,9,9,0,9,0,9,9,9,0,9,9,9,9,8,1,0,9,9,9,9,9
+,0,9,9,9,0,9,1,0,0,1,9,1,8,0,1,9,9,1,9,1,9,0,9,8,9,9,0,9,0,9,8,9
+,0,9,9,9,9,9,9,0,0,9,0,0,8,9,9,9,9,9,8,9,9,9,9,9,9,9,9,0,8,9,0,9 
+
+   
+   
+,1,1,1,1,1,9,9,1,1,1,9,1,1,9,9,9,9,1,9,1,9,1,1,1,9,9,9,1,9,9,1,1
+,1,1,1,1,1,9,1,9,1,1,9,1,9,1,9,9,1,9,9,1,1,1,1,9,9,1,9,1,1,1,9,1
+,1,9,1,1,1,9,1,1,1,9,1,1,9,9,1,1,1,9,9,9,9,9,9,9,9,1,1,1,1,9,1,9
+,9,1,9,1,1,1,9,9,9,9,9,1,9,1,9,1,9,9,1,9,9,9,1,9,9,9,9,9,9,9,1,1
+,9,9,9,9,1,9,9,1,1,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,1,9,9,1,1
+,9,9,1,1,9,9,9,9,1,9,1,1,9,9,9,9,9,9,9,9,9,9,9,9,9,9,1,9,9,9,9,9
+,9,9,1,9,9,9,9,9,9,9,9,1,9,1,1,9,1,1,9,9,9,9,1,9,1,9,9,9,9,9,1,1
+,9,9,1,1,0,8,9,8,1,9,1,9,1,9,1,9,9,9,1,9,9,9,9,9,9,9,9,9,9,9,9,8
+,9,9,1,1,9,1,9,9,0,9,9,1,8,9,9,9,1,8,9,9,1,9,9,1,9,9,9,1,9,1,9,9
+,9,9,9,1,0,9,9,9,9,9,9,1,9,9,1,8,9,9,9,9,1,1,9,9,1,9,8,9,9,1,9,9
+,1,1,1,9,9,1,9,9,9,1,1,9,9,9,9,9,1,1,1,1,9,9,1,1,9,9,1,9,9,1,1,9
+,9,1,1,9,1,9,1,9,1,1,9,9,9,9,1,9,9,9,1,9,9,9,9,9,9,9,9,9,9,9,9,1
+,9,1,9,1,9,9,9,1,9,1,1,1,1,9,9,9,9,9,9,9,1,1,1,9,1,9,1,9,9,9,1,9
+,1,9,1,9,9,1,9,9,1,9,1,9,1,1,1,1,1,9,1,9,9,9,1,1,9,9,1,9,9,1,9,1
+,9,1,1,1,9,1,1,9,1,1,9,9,1,1,1,1,9,9,9,9,1,9,9,1,1,9,9,9,9,1,1,1
+,1,1,1,9,1,9,1,1,1,9,1,1,1,9,9,9,1,9,1,9,1,1,1,9,9,9,1,1,1,1,9,9
+,1,1,1,1,9,9,1,1,1,1,1,9,1,1,9,1,1,1,9,1,9,1,9,1,1,1,1,1,1,9,9,1
+,1,1,1,9,1,1,9,9,1,1,9,1,1,9,9,1,9,9,9,9,1,1,1,9,1,9,9,9,1,9,1,1
+,9,1,1,9,9,1,1,1,9,1,1,9,9,9,1,9,1,1,9,1,1,9,1,1,9,9,9,1,9,1,1,1
+,9,9,1,9,1,9,1,9,1,9,9,9,1,9,9,1,9,1,1,1,1,1,1,9,9,9,9,9,9,9,9,9
+,9,9,1,8,9,1,1,1,1,9,9,1,1,9,1,1,8,9,9,9,1,1,9,1,9,9,9,1,8,9,9,1
+,8,1,1,1,9,9,9,9,1,9,1,8,1,9,1,9,1,1,9,9,9,9,1,8,9,1,1,9,1,1,9,9
+,9,9,9,1,9,0,9,9,9,1,9,9,1,1,1,0,1,9,9,1,9,9,9,9,9,9,9,1,9,1,1,0
+,9,0,1,8,1,9,1,1,1,9,9,9,9,1,0,9,9,1,1,1,8,9,9,9,1,8,9,9,9,1,9,1
+,1,9,9,1,1,9,1,9,9,9,9,9,9,0,8,9,9,1,9,9,9,9,9,9,8,9,9,9,1,9,1,9
+,0,9,9,1,9,9,9,9,8,1,9,9,9,1,8,1,9,1,9,1,9,9,9,9,9,9,9,9,9,9,9,9
+,9,9,8,1,1,9,9,9,9,1,9,1,1,9,1,1,1,8,1,9,1,9,9,1,9,9,0,9,9,9,1,1
+,1,1,9,9,1,1,9,8,9,1,1,1,9,9,9,1,9,9,9,9,9,1,9,9,9,9,9,9,9,9,9,9
+,9,9,9,9,1,1,9,9,9,9,1,1,1,9,1,1,1,1,1,9,9,9,1,9,9,9,9,9,9,9,1,1
+,9,9,9,1,9,1,9,9,9,1,9,9,1,9,9,1,9,9,9,9,1,9,1,9,9,1,1,1,1,1,9,9
+,1,9,1,1,1,1,1,1,1,9,1,9,1,1,9,1,9,9,1,9,9,1,9,1,9,9,1,9,9,9,9,9
+,1,9,1,9,1,1,9,1,9,9,1,1,9,1,9,9,1,9,9,1,9,1,1,1,1,1,1,1,9,1,1,1
+   
+   </textarea></td><td><input id="myButtonData" type="button" value="Load Data" onclick="{ 
+   myLoadData()                                                                             
+    }"> <input id="myButtonLabel" type="button" value="Add Data as an Image" onclick="{ 
+    
+       const numLines = prompt('y=Target for this image. 0 = No Defined Shape, 1 = Circles, 2 = Triangles, 3 = Rectangles', 1);                                                                                             
+      document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target 
+      if  (numLines == 0 ){ document.getElementById('myY').value  += ',1,0,0,0'  }    
+      if  (numLines == 1 ){ document.getElementById('myY').value  += ',0,1,0,0'  }   
+      if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0'  }   
+      if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1'  } 
+    
+     const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
+     if (myFileName.split(',').length >= 2 ){alert('Use multi-image load above')} else {
+         myLoadImage(myFileName) 
+     }
+}"> </td></tr>
+  <tr><td>yTrainingTarget:</td><td><textarea id="myY" rows=20 cols=100% NOWRAP  placeHolder="">
+0,1,0,0,
+   
+   
+0,1,0,0,
+   
+   
+0,1,0,0,
+   
+   
+0,1,0,0, 
+   
+   
+0,1,0,0, 
+   
+   
+0,1,0,0,
+   
+   
+1,0,0,0,
+   
+   
+1,0,0,0
+   
+ </textarea></td><td><input id="myButtonLabel" type="button" value="Load Target" onclick="{ 
+   myLoadTarget()                                                                             
+}">  </td></tr>
+  </table><br>
+Remember:<br>
+  
+0=white, 1=black, 2-->8 = ROY-G-BIV, 9=brown <br><br>
+ 
+<canvas id="myCanvas" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> 
+<br><br><br>
+
+
+
+<h3>Compile or Load Model:</h3>
+<table border=1>
+  <tr><td>Compile, Train, Test: </td><td><input id="myButtonAll" type="button" value="Run All" onclick="{
+     myRunAll()
+  }"></td><td><input id="myButtonReset" type="button" value="Reset Buttons" onclick="{
+     myResetButtons()
+  }"></td><td colSpan=2>Import / Export</td><tr>
+  <tr><td>Compile Model: </td><td><input id="myButtonCompile" type="button" value="Compile" onclick="{
+     myCompile()
+  
+  }"><td></td></td><td>
+<input id="myButtonLoad" type="button" value="Load From Localstorage" onclick="{ 
+   myLoadLocal()                                                                             
+}"> </td><td> <input id="myButtonLoad" type="button" value="Load From URL" onclick="{ 
+   myLoadUrl()                                                                             
+}"> </td><tr>
+  
+  
+  <tr><td>Train Model: </td><td>
+<input id="myButtonTrain" type="button" value="Train" title="toggle: start/stop" onclick="{ 
+   myTrain()                                                                             
+}"> </td><td>Epochs run: <input type=text id="myLastEpoch" size=6 readonly value=0> </td><td>
+<input id="myButtonSave" type="button" value="Save to Localstorage" onclick="{ 
+   mySaveLocal()                                                                             
+}"></td><td> <input id="myButtonSave" type="button" value="Save to Disk" onclick="{ 
+   mySaveDisk()                                                                             
+}">  </td><tr>
+  <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
+   myTest()
+    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=40 cols=100% NOWRAP placeholder="">
+ 7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,7,7,7,7,2,2,2,2,2,2,2,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7
+,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7
+,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7
+,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7
+,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7
+,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7
+,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7,7,7,7,7,7,7,2,2,2,2,2,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,7,7,7,7,2,2,2,2,2,2,2,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,2,2,2,2,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,2,2,2,2,2,2,7,7,7,7,7,7,7,7
+,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7
+</textarea></td><td> <input id="myButtonLabel" type="button" value="Add Image to test" onclick="{ 
+   myLoadTestImage()  
+                                                                        
+}">  <input type=button value="Show Data" onclick="myDrawTestImage()"><br>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 32, 32, 1" placeHolder="1, 32, 32, 1"></td><tr>
+</table><br>
+
+<div id="myDivDataImage" style="border: 1px solid; display: inline-block;background-color: Gainsboro;">...</div><br>
+<div id="myDivDataImage2" style="border: 1px solid; display: inline-block;">...</div><br>
+
+
+
+<div id="myDivLoss">...</div><br>
+<div id="myDivTest">...</div><br>
+
+<div id="myDivSummary">...</div><br><br>
+
+
+ 
+
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+                                                                                             
+  document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+                                                                      
+
+ class EarlyStoppingCallback extends tf.Callback {
+      async onEpochEnd(epoch, logs) {     
+         document.getElementById('myLastEpoch').value = epoch + 1      
+         if (epoch % 20 == 0){
+            // console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
+         }  
+         if (document.stopRequested) {                                                                  
+            this.model.stopTraining = true;                                                                                                                                             
+        }
+        document.getElementById('myDivLoss').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '/'+document.getElementById('myEpoch').value + '<br>'
+        document.getElementById('myDivLoss').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
+        await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
+     }
+   } 
+
+
+myResetButtons = function(){ 
+     tf.disposeVariables()                                                                       
+     document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
+     document.getElementById('myDivLoss').innerHTML = ''
+     document.getElementById('myDivTest').innerHTML = ''
+     document.getElementById('myDivSummary').innerHTML = ''
+                                                                                             
+}
+
+myLoadData = async function(){
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
+ if (myFileName != null){  
+   const myData = await fetch(myFileName)
+   document.getElementById('myX').value = await myData.text() 
+ }                                                                           
+}
+
+ myLoadTarget = async function(){
+  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01target.txt');
+  if (myFileName != null){                                                                            
+    const myTarget = await fetch(myFileName) 
+    document.getElementById('myY').value = await myTarget.text() 
+  }                                                                          
+}
+
+                                                                                             
+////////////////////////////////////////// START LOAD IMAGE ///////////////////////////////////////////////////////////      
+                                                                                             
+///////////////////// As soon as you start using real images the coding gets much more complex
+///////////////////// Mainly because each pixel of colour is 4 data points Red, Green, Blue and Alpha  
+///////////////////// Where Alpha is the amount of transparency  
+                                                                                             
+                                                                                             
+ myMultiLoadImage = async function(){                                                                                           
+   // alert(document.getElementById('mySelectMultiTarget').value + ', '+ document.getElementById('myMultiURL').value)
+
+                                                                                                                                                                                         
+   const mySplit =  document.getElementById('myMultiURL').value.split(',')                                                                                         
+   for (var myCount = 0; myCount <= mySplit.length-1 ; myCount++ ){                                                                                         
+      document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target                                                                                              
+      document.getElementById('myY').value  += document.getElementById('mySelectMultiTarget').value                                                                                                                                                                                
+         //alert(myCount + ', ' + mySplit[myCount] )
+      myLoadImage(mySplit[myCount])                                                                                      
+   }                                                                                          
+                                                                                             
+                                                                                             
+ }   // end myMultiLoadImage async function 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+ myLoadImage = async function(myFileName){ 
+// document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                             
+                                                                                            
+ if (myFileName != null){  
+ // document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                                 
+  var img = new Image();
+  img.src = myFileName
+  var canvas = document.getElementById('myCanvas');
+                                                     
+  var ctx = canvas.getContext('2d');                                                                                                                                    
+
+////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////                                                                                             
+  ctx.imageSmoothingEnabled       = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled    = false;
+  ctx.msImageSmoothingEnabled     = false;
+  ctx.oImageSmoothingEnabled      = false;                                                                                            
+                                                                                             
+                                                                                             
+ img.onload = function() {
+  
+  document.getElementById('myX').value  += '\n\n'    // move down 2 lines for x data                                                                                                                                                                                               
+  ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);                                      
+                 
+  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
+  var data = imageData.data;  
+
+  var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
+  var myNumRows =  data.length / (document.getElementById('myModelHeight').value * 4)             
+ // var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
+  var myMonoChromePixels = (myNumRows) * 4   // gets the actual number of simplified pixels per row
+
+
+console.log('data.length  ' + data.length)
+console.log('myNumCols ' + myNumCols)
+console.log('myNumRows ' + myNumRows)
+console.log('myMonoChromePixels  ' + myMonoChromePixels)
+
+
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+      data[i + 2] = avg; // blue
+      if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
+         document.getElementById('myX').value  += '\n'                                                                                     
+      }     
+       const myImageNumber = findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)  
+                                                                                             
+       document.getElementById('myX').value  += ',' + myImageNumber                                                                                    
+                                                                                             
+    /*                                                                                         
+      if (avg >= 150) {
+        document.getElementById('myX').value  += ',0'    // white randomly set for any average value over or equal to 150                                                                                  
+         } else {
+        document.getElementById('myX').value  += ',1'    // black randomly set for any average value under 150                                                                                      
+      } 
+                                                                                             
+    */                                                                                         
+                                                                                             
+                                                                                             
+    }  // end for loop
+   // console.log(data) 
+                                                                                             
+   //ctx.rect(20,20,150,100);
+   //ctx.stroke();                                                                                          
+                                                                                                                              
+                                                                                             
+                                                                                             
+                                                                                             
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  // img.style.display = 'none';
+  img.style.display = 'inline';
+  
+                                                                                             
+  /*                                                                                           
+  setTimeout(function(){                                                                                         
+      const numLines = prompt('y=Target for this image. 0 = No Defined Shape, 1 = Circles, 2 = Triangles, 3 = Rectangles', 1);                                                                                             
+      document.getElementById('myY').value  += '\n\n\n'    // move down 3 lines for y target 
+      if  (numLines == 0 ){ document.getElementById('myY').value  += ',1,0,0,0'  }    
+      if  (numLines == 1 ){ document.getElementById('myY').value  += ',0,1,0,0'  }   
+      if  (numLines == 2 ){ document.getElementById('myY').value  += ',0,0,1,0'  }   
+      if  (numLines == 3 ){ document.getElementById('myY').value  += ',0,0,0,1'  }   
+   }, 50);    // give the image some time to load. Should use Async, but was lazy today                                                                                           
+                                                                                             
+    */                                                                                         
+                                                                                             
+                                                                                             
+  }
+                                                                                             
+   } // end if  array                                                                                  
+ // } // end if  null                                                                       
+}
+
+ myLoadTestImage = async function(){ 
+                                                                                             
+                                                                                             
+ document.getElementById('myAsk').value  = ''    // blank the old test                                                                                          
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg');
+ if (myFileName.split(',').length >= 2 ){alert('Not ready to load multiple images')} else {
+                                                                                             
+ if (myFileName != null){  
+                                                                                             
+  var img = new Image();
+  img.src = myFileName
+  var canvas = document.getElementById('myCanvas');
+                                                     
+  var ctx = canvas.getContext('2d');                                                                                                                                    
+
+////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////                                                                                             
+  ctx.imageSmoothingEnabled       = false;
+  ctx.webkitImageSmoothingEnabled = false;
+  ctx.mozImageSmoothingEnabled    = false;
+  ctx.msImageSmoothingEnabled     = false;
+  ctx.oImageSmoothingEnabled      = false;                                                                                            
+                                                                                             
+                                                                                             
+ img.onload = function() {
+                                                                                                                                                                                          
+  ctx.drawImage(img, 0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);                                      
+                 
+  var imageData = ctx.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
+  var data = imageData.data;  
+
+  var myNumCols =  data.length / (document.getElementById('myModelWidth').value * 4)        
+  var myNumRows =  data.length / (document.getElementById('myModelHeight').value * 4)             
+ // var myMonoChromePixels = (myNumCols + myNumRows) * 2   // for a 4 x 4 image, new data row every 16 bits of data
+  var myMonoChromePixels = (myNumRows) * 4   // gets the actual number of simplified pixels per row
+
+
+console.log('data.length  ' + data.length)
+console.log('myNumCols ' + myNumCols)
+console.log('myNumRows ' + myNumRows)
+console.log('myMonoChromePixels  ' + myMonoChromePixels)
+
+
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+      data[i + 2] = avg; // blue
+      if (i % myMonoChromePixels == 0){       // finds the end of each line for monochrome picture adding 
+         document.getElementById('myAsk').value  += '\n'                                                                                     
+      }     
+       const myImageNumber = findClosestColorRGB(data[i + 0], data[i + 1], data[i + 2], ColorTable)  
+       if (i==0){
+          document.getElementById('myAsk').value  += ' ' + myImageNumber 
+        }  else {                                                                                    
+          document.getElementById('myAsk').value  += ',' + myImageNumber 
+       }                                                                                      
+                                                                                             
+    /*                                                                                         
+      if (avg >= 150) {
+        document.getElementById('myAsk').value  += ',0'    // white randomly set for any average value over or equal to 150                                                                                  
+         } else {
+        document.getElementById('myAsk').value  += ',1'    // black randomly set for any average value under 150                                                                                      
+      } 
+                                                                                             
+    */                                                                                         
+                                                                                             
+                                                                                             
+    }  // end for loop
+   // console.log(data) 
+                                                                                             
+   //ctx.rect(20,20,150,100);
+   //ctx.stroke();                                                                                          
+                                                                                                                              
+                                                                                             
+                                                                                             
+                                                                                             
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  // img.style.display = 'none';
+  img.style.display = 'inline';
+                                                                                       
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+  }
+                                                                                             
+   } // end if  array                                                                                  
+  } // end if  null  
+                                                                                             
+   setTimeout(function(){                                                                                         
+       myDrawTestImage()    // might as well show the image on the page.    
+   }, 500);                 // give the image some time to load. Should use Async, but was lazy today 
+                                                                                             
+setTimeout(function(){                                                                                         
+       myTest()              // While we are at it we should probably test the data    
+   }, 500);                 // give the image some time to load. Should use Async, but was lazy today  
+                                                                                                                                                                                    
+}
+
+
+                                                                                             
+                                                                                             
+myDrawTestImage = async function(){
+ // var canvas5 = document.getElementById('myCanvas');                                                
+ // var ctx5 = canvas5.getContext('2d');  
+ // var imageData5 = ctx5.getImageData(0, 0, document.getElementById('myModelWidth').value, document.getElementById('myModelHeight').value);
+  //var data = imageData5.data;  
+ //alert(  ColorTable[document.getElementById('myAsk').value.split(',')[0]].hex   )
+// alert(     document.getElementById('myAsk').value)
+  
+                                                                                           
+    
+  document.getElementById('myDivDataImage').innerHTML =''   
+  document.getElementById('myDivDataImage2').innerHTML =''     
+                                                                                             
+ const myIncomingArray =  document.getElementById('myAsk').value.split(',')                                                                                           
+ for (var myWow=0; myWow <= myIncomingArray.length-1 ; myWow++){
+   // alert(ColorTable[myIncomingArray[myWow]].hex)
+    //  alert(parseInt(myIncomingArray[myWow]))
+    if ((myWow >= 1) && (myWow % parseInt(document.getElementById('myModelWidth').value) == 0)){
+      document.getElementById('myDivDataImage').innerHTML += '<br>'                 
+      document.getElementById('myDivDataImage2').innerHTML += '<br>'                                                                                       
+   } 
+   document.getElementById('myDivDataImage').innerHTML +=  '<font color='+ColorTable[parseInt(myIncomingArray[myWow])].hex+'>'+  myIncomingArray[myWow]    + '</font>'                                                                                     
+   document.getElementById('myDivDataImage2').innerHTML +=  '<font color='+ColorTable[parseInt(myIncomingArray[myWow])].hex+'>█</font>'                                                                                     
+                                                                                        
+                                                                                             
+ }                                                                                            
+      
+                                                                                             
+                                                                                           
+                                                                                             
+                                                                                             
+ }                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////  
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+ myRunAll = async function(){
+  document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
+  await myCompile()
+  await myTrain()
+  await myTest()
+}
+
+ myCompile = async function(){
+    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
+                                                                                             
+
+     /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                             
+                                                                                             
+    model = tf.sequential(); // no const so that it is a global variable 
+                                                                                                                                                                        
+    model.add(tf.layers.conv2d({                                                                                                                                            
+        inputShape: [32, 32, 1],                                                                                                                                                  
+        kernelSize: 2,                                                                                                                                                          
+        filters: 4,                                                                                                                                                             
+        strides: 8,                                                                                                                                                             
+        activation: 'relu',                                                                                                                                                     
+        kernelInitializer: 'varianceScaling'                                                                                                                                    
+    }));                                                                                                                                                                    
+                                                                                                                                                                        
+    model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                               
+    model.add(tf.layers.flatten());                                                                                                                                         
+    model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+    model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
+                                          
+
+
+    const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
+    const myOptimizer = tf.train.sgd(myLearningRate);               
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                 
+    console.log(model)
+    document.getElementById('myDivSummary').innerHTML = ''                                                                        
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
+}
+
+ myTrain = async function(){  
+   if (document.getElementById('myLastEpoch').value == document.getElementById('myEpoch').value) {
+      alert('Already completed all epochs. To continue training, increase \'Epochs: (# of batches to run)\' and re-click this button')                                                                        
+   }                                                                         
+   if(document.getElementById('myButtonTrain').style.backgroundColor == 'red'){
+       document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'
+       document.getElementById('myButtonTrain').value = 'Continue Training'
+       document.stopRequested = true     
+        // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                
+   }    else {     
+         document.stopRequested = false
+         document.getElementById('myButtonTrain').style.backgroundColor = 'red'                                                                           
+         document.getElementById('myButtonTrain').value = 'Pause Training'
+  }
+                                                               
+     /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
+   let xArray = document.getElementById('myX').value.split(',')
+   let yArray = document.getElementById('myY').value.split(',')   
+                                                                                   
+   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/1024, 32, 32, 1]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/4, 4]);
+                                           
+   // console.log(xTrainingData)
+   // console.log(yTrainingTarget) 
+                                                                                                                                         
+   /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+                                                                    
+   // xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+   // yTrainingTarget.print()
+                                                                                                 
+   console.log('Starting Training')               
+   var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+        batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                             epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
+        validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value),   // for seperating percent of data for testing  0.15 = 15% for testin  
+        initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),             // for restarting training                                                                       
+        callbacks:  new EarlyStoppingCallback(),  
+          onBatchEnd: async (batch, logs) => {                                                               
+               await tf.nextFrame();  // This improves UI responsiveness during training.  
+          }      // end all callbacks                                                              
+      })          // end model.fit              
+     console.log(myFit.history)                                                                          
+     document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'                                                                              
+     document.getElementById('myButtonTrain').value = 'Continue Training'
+                                                                           
+}
+
+myTest = async function(){
+ 
+    const myShape = document.getElementById('myShape').value.split(',').map(Number);
+  
+    // draw the input shape
+    myDrawTestImage()
+    
+    // show the results                                                                                         
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
+   // document.getElementById('myDivTest').innerHTML = 'Input :<br>'+document.getElementById('myAsk').value+'<br><br> Output = <br>'                                                                                                                               
+    document.getElementById('myDivTest').innerHTML = ' Output = <br>'
+    document.getElementById('myDivTest').innerHTML += '<b>0 No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>1 Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>2 Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>3 Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
+                                                                                             
+  console.log(document.getElementById('myAsk2').value + ': ' + await myPredictArray) 
+  document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+}
+
+
+myLoadLocal = async function(){
+  alert('The test function will need to be changed if other models are loaded')
+  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://26keras-small-image');
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName); 
+    document.getElementById('myDivSummary').innerHTML = ''     
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                          
+}
+
+ myLoadUrl = async function(){
+  alert('The test function will need to be changed if other models are loaded')
+  const myFileName = prompt('Enter URL of stored model', '');
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                           
+}
+
+
+ mySaveLocal = async function(){
+  const myFileName = prompt('Enter filename to store this model','localstorage://26keras-small-image');
+  const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+
+ mySaveDisk = async function(){
+  alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
+  const myFileName = prompt('Enter filename to store this model','downloads://26keras-small-image');
+  const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+
+                                                                                             
+                                                                                             
+                                                                                             
+
+/////////////////////////////////////////// START REDUCING RGB CODES TO SINGLE DIGIT ////////////////////////////////////
+                                                                                             
+
+
+                                                                                           
+                                                                                             
+
+var ColorTable = [
+{name:'white', hex: '#FFFFFF'},    // 0 white
+{name:'black', hex: '#000000'},    // 1 black
+{name:'red', hex: '#FF0000'},      // 2 red
+{name:'orange', hex: '#FFA500'},   // 3 orange
+{name:'yellow', hex: '#FFFF00'},   // 4 yellow
+{name:'green', hex: '#008000'},    // 5 green
+{name:'blue', hex: '#0000FF'},     // 6 blue
+{name:'indigo', hex: '#4B0082'},   // 7 indigo
+{name:'violet', hex: '#008080'},   // 8 violet
+{name:'brown', hex: '#8B4513'}     // 9 brown
+];
+
+ 
+
+  
+  
+  
+function rgbToHex(r, g, b) {
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+  
+  
+  
+  
+
+
+
+
+
+Hex2RGB = function(hex) {
+    if (hex.lastIndexOf('#') > -1) {
+        hex = hex.replace(/#/, '0x');
+    } else {
+        hex = '0x' + hex;
+    }
+    var r = hex >> 16;
+    var g = (hex & 0x00FF00) >> 8;
+    var b = hex & 0x0000FF;
+    return {r:r, g:g, b:b};
+};
+
+
+function findClosestColorRGB(r, g, b, table)
+{
+  var rgb = {r:r, g:g, b:b};
+  var delta = 3 * 256*256;
+  var temp = {r:0, g:0, b:0};
+  var nameFound = 'black';
+  
+  for(i=0; i<table.length; i++)
+  {
+  	temp = Hex2RGB(table[i].hex);
+    if(Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2) < delta)
+    {
+    	delta = Math.pow(temp.r-rgb.r,2) + Math.pow(temp.g-rgb.g,2) + Math.pow(temp.b-rgb.b,2);
+     // nameFound = [table[i].name, i]; //  fancy array return
+      nameFound =  i;                  // just return the number
+    }
+  }
+  return nameFound;
+}
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+/////////////////////////////////////////// END REDUCING RGB CODES TO SINGLE DIGIT ////////////////////////////////////                                                                                               
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+                                                                 
+
+</div>
+<div id='myDiv124'>...</div><br>
+
+<input id="myUpdate124" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea124').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv124Code').innerHTML =    myJoe 
+  document.getElementById('myButton124').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea124"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce124){
+     myTextGrow('myTextarea124', 'myDiv124Code')
+     document.getElementById('myUpdate124').style.visibility = 'visible'
+     myOnce124 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce7979 = true    // so textareas are only clicked once
+myOnce124 = true  
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                               
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
