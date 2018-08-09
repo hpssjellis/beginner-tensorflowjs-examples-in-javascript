@@ -75,14 +75,7 @@ So I tried real simple text based image analysis, but the reality is that images
 document.getElementById('myButton7979').style.backgroundColor = 'red' 
 
   // six image URL's to load that have circles in them
- myCircleURLArray = [
-'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg',
-'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg',
-'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg',
-'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg',  
-'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg',
-'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg' 
-]                                                                             
+ myCircleURLArray = ['https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg','https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg','https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg','https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg',  'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg','https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg' ]                                                                             
                                                                               
 myMainData = []; // stores imageData as an array
 //mySpecial = 0; // count loops for when a new row is needed
@@ -220,7 +213,7 @@ alert('hi')
 
   //if (myFileNameArray.length >= 2 ){
 
-  myMultiLoad(myFileNameArray);
+  myMultiLoad(myCircleURLArray);
 
   //} else {
   // mySingleLoad(myFileName, 0, 0, mySpecial)
