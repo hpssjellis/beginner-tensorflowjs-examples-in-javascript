@@ -191,7 +191,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 <br> All images below fixed 100 x 100 and pixelated if low resolution<br>
  
-<br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
 
 
@@ -218,6 +218,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 myMainData = []; // stores imageData as an array
 //mySpecial = 0; // count loops for when a new row is needed
 myShape = [];
+myNewCanvasHeight = 101
 
 myFinalMakeTensor = async function() {
   //console.log(myMainData)
@@ -249,6 +250,7 @@ myMultiLoad = async function(myImageArray) {
       myRows += 101;
       myLoopStore = myLoop;
       newY2 = myRows;
+      myNewCanvasHeight = myRows                                                                                       
     }
     //console.log(myImageArray[myLoop])
     //newX2 = ((myLoop - myLoopStore)*100) + myLoop
@@ -268,7 +270,7 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
 
     var canvas = document.getElementById('myCanvas'); // 1000 x 1000
     var ctx = canvas.getContext('2d');
-
+    canvas.height = myNewCanvasHeight
     ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////
     ctx.imageSmoothingEnabled = false;
     ctx.webkitImageSmoothingEnabled = false;
