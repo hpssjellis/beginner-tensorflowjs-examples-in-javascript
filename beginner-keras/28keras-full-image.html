@@ -75,7 +75,6 @@ So I tried real simple text based image analysis, but the reality is that images
   myFinalMakeTensor()
 }"> Reshaped image --> <canvas id="myReshapeCanvas" width="160" height="120" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
 
-<canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd;"></canvas> <br>
 
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
@@ -163,7 +162,13 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
               
                                                              
  })()   // end the inline async function
-}" >  
+}" >    // end the button
+ 
+ 
+<canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd;"></canvas> <br>
+ 
+ 
+ 
 </div>
 <div id='myDiv7979'>...</div><br>
 
