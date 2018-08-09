@@ -98,7 +98,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>
-
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg
 </textarea><br>
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
@@ -174,7 +174,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 1])).data()                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 4])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -312,6 +312,7 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
       // myMainTensor.concat3d(latestTensor)
 
       latestTensor.print(true);
+      document.getElementById('myDiv7979').innerHTML = await latestTensor.dataSync()                                                                                       
       myShape = latestTensor.shape;
       console.log('myShape: ' + myShape);
 
