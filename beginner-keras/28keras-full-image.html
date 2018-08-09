@@ -386,11 +386,11 @@ myLoadImage = async function() {
      // myMainData[loop] = data;
 
       latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
-
+      return latestTensor2.dataSync() 
     };
   }
                                                                                           
- return latestTensor2.dataSync()                                                                                            
+                                                                                           
                                                                                              
 };                                                                                            
                                                                                              
