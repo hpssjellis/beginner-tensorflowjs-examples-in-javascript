@@ -90,8 +90,10 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
-}"><input type=button value="Load Image to test" onclick="{
+}"><input type=button value="Load Image to test" onclick="{ 
+ (async function(){
   myTestTensor = await myTestLoad(document.getElementById('myAsk2').value) 
+ })()
 }"><br>
  
  
