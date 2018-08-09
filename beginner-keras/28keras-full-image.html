@@ -91,15 +91,15 @@ myShape = [];
 myFinalMakeTensor = async function() {
   //console.log(myMainData)
   // var energy = myMainData.join();
-  var myNewArray4 = myMainData.join().split(","); // trick to flatten the array
+  var myNewArray4 = myMainData.join().split(','); // trick to flatten the array
   // console.log(myNewArray4);
 
-  var canvasReshape = document.getElementById("myReshapeCanvas");
+  var canvasReshape = document.getElementById('myReshapeCanvas');
 
   myMainTensor = tf.tensor4d(
     myNewArray4,
     (shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),
-    "int32"
+    'int32'
   );
 
   // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
@@ -133,13 +133,13 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
   if (myFileName2 != null) {
     var img = new Image();
     img.src = myFileName2;
-    img.crossOrigin = "Anonymous";
+    img.crossOrigin = 'Anonymous';
 
-    var canvasReshape = document.getElementById("myReshapeCanvas"); // 32 x 32
-    var ctxReshape = canvasReshape.getContext("2d");
+    var canvasReshape = document.getElementById('myReshapeCanvas'); // 32 x 32
+    var ctxReshape = canvasReshape.getContext('2d');
 
-    var canvas = document.getElementById("myCanvas"); // 1000 x 1000
-    var ctx = canvas.getContext("2d");
+    var canvas = document.getElementById('myCanvas'); // 1000 x 1000
+    var ctx = canvas.getContext('2d');
 
     ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////
     ctx.imageSmoothingEnabled = false;
@@ -185,7 +185,7 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
 
       latestTensor.print(true);
       myShape = latestTensor.shape;
-      console.log("myShape: " + myShape);
+      console.log'myShape: ' + myShape);
 
       /*
     
