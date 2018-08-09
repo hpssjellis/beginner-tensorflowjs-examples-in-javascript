@@ -101,17 +101,7 @@ Test or change this data <br>
                                                                                     
 document.getElementById('myButton7979').style.backgroundColor = 'red' 
 
-                                                                              
-  // six image URL's to load that have circles in them
-      myCircleURLArray = []                                                                         
- myCircleURLArray[0] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg'
- myCircleURLArray[1] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg'
- myCircleURLArray[2] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg'                                                                            
- myCircleURLArray[3] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg'                                                                            
- myCircleURLArray[4] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg'                                                                             
- myCircleURLArray[5] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg'                                                                              
-                                                                                                                                               
-// alert(myCircleURLArray)                                                                               
+                                                                             
                                                                               
                                                                               
                                                                               
@@ -176,7 +166,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                  
     const myTestTensor = await myTestLoad(document.getElementById('myAsk2').value) 
                                                                  
-    const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
+    const myPredictArray = await model.predict(myTestTensor).data()       
+    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -396,10 +387,10 @@ myLoadImage = async function() {
       // wow = tf.concat3d([myMainTensor , latestTensor])
       // myMainTensor.concat3d(latestTensor)
 
-      latestTensor.print(true);
-      document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
-      const myShape = latestTensor.shape;
-      console.log('myShape: ' + myShape);
+     // latestTensor.print(true);
+     // document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
+     // const myShape = latestTensor.shape;
+    //  console.log('myShape: ' + myShape);
 
 
 
@@ -408,7 +399,7 @@ myLoadImage = async function() {
       // img.style.display = 'inline';
     };
   }
-                                                                                             
+                                                                                          
  return latestTensor                                                                                            
                                                                                              
 };                                                                                            
