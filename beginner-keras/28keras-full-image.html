@@ -270,7 +270,9 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
 
     var canvas = document.getElementById('myCanvas'); // 1000 x 1000
     var ctx = canvas.getContext('2d');
-    canvas.height = myNewCanvasHeight
+    canvas.height = myNewCanvasHeight + 101
+                                                                                             
+                                                                                             
     ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////
     ctx.imageSmoothingEnabled = false;
     ctx.webkitImageSmoothingEnabled = false;
@@ -280,26 +282,11 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
 
     img.onload = function() {
       //document.getElementById('myX').value  += '\n\n'
-      ctxReshape.drawImage(
-        img,
-        0,
-        0,
-        img.width,
-        img.height,
-        0,
-        0,
-        canvasReshape.width,
-        canvasReshape.height
-      );
+      ctxReshape.drawImage(img,0,0,img.width,img.height,0,0,canvasReshape.width,canvasReshape.height);
 
       //console.log('canvasReshape.width: '+canvasReshape.width)
 
-      var imageData = ctxReshape.getImageData(
-        0,
-        0,
-        canvasReshape.width,
-        canvasReshape.height
-      );
+      var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
 
       //myMainData[loop] =  imageData;
       console.log(imageData);
