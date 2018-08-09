@@ -56,30 +56,23 @@ So I tried real simple text based image analysis, but the reality is that images
  DRAFT MODE
 </div><br>
 
+
  
-
-
-
-
-
-
-
-
+ 
  
 
 
 <div id="myDiv7979Code"> 
-<input type=button value="load Images" onclick="myLoadImage()">
 
-<input type=button value="Data to Tensor (Check console) " onclick="{
-  myFinalMakeTensor()
-}"> Reshaped image --> <canvas id="myReshapeCanvas" width="160" height="120" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
+Test or change this data <br>
+<textarea id="myAsk2" rows=40 cols=100 wrap=false>
 
-
+</textarea><br>
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
 document.getElementById('myButton7979').style.backgroundColor = 'red' 
 
+                                                                              
   // six image URL's to load that have circles in them
       myCircleURLArray = []                                                                         
  myCircleURLArray[0] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg'
@@ -89,14 +82,11 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
  myCircleURLArray[4] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg'                                                                             
  myCircleURLArray[5] = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg'                                                                              
                                                                                                                                                
- alert(myCircleURLArray) 
-                                                                              
-                                                                             
-                                                                              
-                                                                     
+ alert(myCircleURLArray)                                                                               
                                                                               
                                                                               
-const xs = tf.tensor4d([ ], shape=[8, 32, 32, 1] );    // 8 input images that are 32 x 32 with  10 colors 0-9)                                                                                                                                                     
+                                                                              
+//const xs = tf.tensor4d([ ], shape=[8, 32, 32, 1] );    // 8 input images that are 32 x 32 with  10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
 const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4]);        // 8 images 4 dimension                                                                                                                  
@@ -162,10 +152,247 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
               
                                                              
  })()   // end the inline async function
-}" >    // end the button
+}" >
  
  
-<canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd;"></canvas> <br>
+ 
+ 
+ 
+ Test page for loading multiple images of different sizes, force them to 32 x 32, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
+
+<textarea id="myURLs" rows=16 cols=140>
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-4.jpg,
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-5.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg,
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-10.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball01.png,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball03long.png,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball04squat.png,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran1.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran2.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran3.png,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg
+  
+  
+  
+  
+</textarea>
+<br>
+
+<input type=button value="load Images" onclick="myLoadImage()">
+
+<input type=button value="Data to Tensor (Check console) " onclick="{
+  myFinalMakeTensor()
+}"> Reshaped image --> <canvas id="myReshapeCanvas" width="32" height="32" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
+
+<canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+
+
+
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+   
+                                                                                             
+                                                                                             
+                                                                                             
+  ////////////////////////////////////////// START LOAD IMAGE ///////////////////////////////////////////////////////////
+
+///////////////////// As soon as you start using real images the coding gets much more complex
+///////////////////// Mainly becuase each pixel of colour is 4 data points Red, Green, Blue and Alpha
+///////////////////// Where Alpha is the amount of transparency
+
+myMainData = []; // stores imageData as an array
+//mySpecial = 0; // count loops for when a new row is needed
+myShape = [];
+
+myFinalMakeTensor = async function() {
+  //console.log(myMainData)
+  // var energy = myMainData.join();
+  var myNewArray4 = myMainData.join().split(','); // trick to flatten the array
+  // console.log(myNewArray4);
+
+  var canvasReshape = document.getElementById('myReshapeCanvas');
+
+  myMainTensor = tf.tensor4d(
+    myNewArray4,
+    (shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),
+    'int32'
+  );
+
+  // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
+
+  //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
+  myMainTensor.print(true);
+
+  myMainData.length = 0;
+  myMainData = [];
+};
+
+myMultiLoad = async function(myImageArray) {
+  let newX2 = 0;
+  let newY2 = 0;
+  let myRows = 0;
+  let myLoopStore = 0;
+  for (var myLoop = 0; myLoop <= myImageArray.length - 1; myLoop++) {
+    if (myLoop % 10 == 0 && myLoop != 0) {
+      myRows += 101;
+      myLoopStore = myLoop;
+      newY2 = myRows;
+    }
+    //console.log(myImageArray[myLoop])
+    //newX2 = ((myLoop - myLoopStore)*100) + myLoop
+    newX2 = (myLoop - myLoopStore) * 101;
+    //console.log(newX2+ ', '+ newY2)
+    mySingleLoad(myImageArray[myLoop], newX2, newY2, myLoop);
+  }
+};
+mySingleLoad = async function(myFileName2, newX, newY, loop) {
+  if (myFileName2 != null) {
+    var img = new Image();
+    img.src = myFileName2;
+    img.crossOrigin = 'Anonymous';
+
+    var canvasReshape = document.getElementById('myReshapeCanvas'); // 32 x 32
+    var ctxReshape = canvasReshape.getContext('2d');
+
+    var canvas = document.getElementById('myCanvas'); // 1000 x 1000
+    var ctx = canvas.getContext('2d');
+
+    ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////
+    ctx.imageSmoothingEnabled = false;
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.msImageSmoothingEnabled = false;
+    ctx.oImageSmoothingEnabled = false;
+
+    img.onload = function() {
+      //document.getElementById('myX').value  += '\n\n'
+      ctxReshape.drawImage(
+        img,
+        0,
+        0,
+        img.width,
+        img.height,
+        0,
+        0,
+        canvasReshape.width,
+        canvasReshape.height
+      );
+
+      //console.log('canvasReshape.width: '+canvasReshape.width)
+
+      var imageData = ctxReshape.getImageData(
+        0,
+        0,
+        canvasReshape.width,
+        canvasReshape.height
+      );
+
+      //myMainData[loop] =  imageData;
+      console.log(imageData);
+      var data = imageData.data;
+      myMainData[loop] = data;
+
+      const latestTensor = tf.fromPixels(imageData, 4);
+      // not sure how to drop the alpha channel so I just included it
+
+      // tf.stack([myMainTensor, latestTensor]);
+      // wow = tf.concat3d([myMainTensor , latestTensor])
+      // myMainTensor.concat3d(latestTensor)
+
+      latestTensor.print(true);
+      myShape = latestTensor.shape;
+      console.log('myShape: ' + myShape);
+
+      /*
+    
+    // to force black and white images
+    
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+     data[i + 2] = avg; // blue
+     
+    }  // end for loop
+   // console.log(data) 
+     */
+
+      // ctx.rect(newX,newY,newX+100,newY+100);
+      // ctx.stroke();
+
+      // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, newX, newY, 100, 100);
+      // img.style.display = 'none';
+      // img.style.display = 'inline';
+    };
+  }
+};
+
+myLoadImage = async function() {
+  // const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t5png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t6png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t7png.png');
+  //const myFileNameArray =   myFileName.split(',')
+  const myFileNameArray = document.getElementById('myURLs').value.split(',');
+
+  //if (myFileNameArray.length >= 2 ){
+
+  myMultiLoad(myFileNameArray);
+
+  //} else {
+  // mySingleLoad(myFileName, 0, 0, mySpecial)
+  //         mySpecial += 1
+
+  //} // end if  null
+};
+
+////////////////////////////////////////// END LOAD IMAGE ///////////////////////////////////////////////////////////
+                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+                                                                 
+
+
+
+                                                                                             
+                                                                                             
+                                                                                             
+
+
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
@@ -1230,156 +1457,7 @@ function findClosestColorRGB(r, g, b, table)
                                                                                              
                                                                                              
                                                                                              
-                                                                               
-myMainData = []; // stores imageData as an array
-//mySpecial = 0; // count loops for when a new row is needed
-myShape = [];
-
-myFinalMakeTensor = async function() {
-  //console.log(myMainData)
-  // var energy = myMainData.join();
-  var myNewArray4 = myMainData.join().split(','); // trick to flatten the array
-  // console.log(myNewArray4);
-
-  var canvasReshape = document.getElementById('myReshapeCanvas');
-
-  myMainTensor = tf.tensor4d(
-    myNewArray4,
-    (shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),
-    'int32'
-  );
-
-  // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
-
-  //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
-  myMainTensor.print(true);
-
-  myMainData.length = 0;
-  myMainData = [];
-};
-
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-myMultiLoad = async function(myImageArray) {
-  let newX2 = 0;
-  let newY2 = 0;
-  let myRows = 0;
-  let myLoopStore = 0;
-  for (var myLoop = 0; myLoop <= myImageArray.length - 1; myLoop++) {
-    if (myLoop % 10 == 0 && myLoop != 0) {
-      myRows += 101;
-      myLoopStore = myLoop;
-      newY2 = myRows;
-    }
-    //console.log(myImageArray[myLoop])
-    //newX2 = ((myLoop - myLoopStore)*100) + myLoop
-    newX2 = (myLoop - myLoopStore) * 101;
-    //console.log(newX2+ ', '+ newY2)
-    mySingleLoad(myImageArray[myLoop], newX2, newY2, myLoop);
-  }
-};
-mySingleLoad = async function(myFileName2, newX, newY, loop) {
-  if (myFileName2 != null) {
-    var img = new Image();
-    img.src = myFileName2;
-    img.crossOrigin = 'Anonymous';
-
-    var canvasReshape = document.getElementById('myReshapeCanvas'); // 32 x 32
-    var ctxReshape = canvasReshape.getContext('2d');
-
-    var canvas = document.getElementById('myCanvas'); // 1000 x 1000
-    var ctx = canvas.getContext('2d');
-
-    ////////////////////////////////////////  trick to make the image pixelated when scaled   //////////////////////////////////
-    ctx.imageSmoothingEnabled = false;
-    ctx.webkitImageSmoothingEnabled = false;
-    ctx.mozImageSmoothingEnabled = false;
-    ctx.msImageSmoothingEnabled = false;
-    ctx.oImageSmoothingEnabled = false;
-
-    img.onload = function() {
-      //document.getElementById('myX').value  += '\n\n'
-      ctxReshape.drawImage(
-        img,
-        0,
-        0,
-        img.width,
-        img.height,
-        0,
-        0,
-        canvasReshape.width,
-        canvasReshape.height
-      );
-
-      //console.log('canvasReshape.width: '+canvasReshape.width)
-
-      var imageData = ctxReshape.getImageData(
-        0,
-        0,
-        canvasReshape.width,
-        canvasReshape.height
-      );
-
-      //myMainData[loop] =  imageData;
-      console.log(imageData);
-      var data = imageData.data;
-      myMainData[loop] = data;
-
-      const latestTensor = tf.fromPixels(imageData, 4);
-      // not sure how to drop the alpha channel so I just included it
-
-      // tf.stack([myMainTensor, latestTensor]);
-      // wow = tf.concat3d([myMainTensor , latestTensor])
-      // myMainTensor.concat3d(latestTensor)
-
-      latestTensor.print(true);
-      myShape = latestTensor.shape;
-      console.log'myShape: ' + myShape);
-
-      /*
-    
-    // to force black and white images
-    
-    for (var i = 0; i < data.length; i += 4) {
-      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      data[i]     = avg; // red
-      data[i + 1] = avg; // green
-     data[i + 2] = avg; // blue
-     
-    }  // end for loop
-   // console.log(data) 
-     */
-
-      // ctx.rect(newX,newY,newX+100,newY+100);
-      // ctx.stroke();
-
-      // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, newX, newY, 100, 100);
-      // img.style.display = 'none';
-      // img.style.display = 'inline';
-    };
-  }
-};
-
-myLoadImage = async function() {
-
-  // const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t4png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t5png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t6png.png, https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/t7png.png');
-  //const myFileNameArray =   myFileName.split(',')
-  //const myFileNameArray = myCircleURLArray
-
-  //if (myFileNameArray.length >= 2 ){
-
-  myMultiLoad(myCircleURLArray);
-
-  //} else {
-  // mySingleLoad(myFileName, 0, 0, mySpecial)
-  //         mySpecial += 1
-
-  //} // end if  null
-};                                                                          
-                                                                                                     
+                                                                                             
                                                                                              
                                                                                              
                                                                                              
