@@ -389,7 +389,7 @@ myLoadImage = async function() {
       var data = imageData.data;
      // myMainData[loop] = data;
 
-      const latestTensor = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+      latestTensor = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
       // not sure how to drop the alpha channel so I just included it
 
       // tf.stack([myMainTensor, latestTensor]);
@@ -403,7 +403,7 @@ myLoadImage = async function() {
 
 
 
-      ctx.drawImage(img, newX, newY, 100, 100);
+    //  ctx.drawImage(img, newX, newY, 100, 100);
       // img.style.display = 'none';
       // img.style.display = 'inline';
     };
