@@ -228,14 +228,22 @@ myFinalMakeTensor = async function() {
 
   var canvasReshape = document.getElementById('myReshapeCanvas');
 
- // myMainTensor = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
-  xs = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
+  const myMainTensor = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
+ // xs = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
 
   // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
 
   //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
-  //myMainTensor.print(true);
-
+  console.log('Before Change')                                                                                           
+  myMainTensor.print(true);
+                                                                                             
+  const xs = myMainTensor.slice([0, 0, 0, 0], [-1, -1, -1, 3]);                                                                                           
+  
+  myMainTensor.dispose()
+  console.log('After Change')  
+                                                                                             
+  xs.print(true);                                                                                           
+                                                                                             
   myMainData.length = 0;
   myMainData = [];
 };
