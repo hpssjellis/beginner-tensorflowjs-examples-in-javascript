@@ -174,7 +174,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     
   //mySingleLoad = async function(myFileName2, newX, newY, loop) {                                                               
                                                                  
-    await myTestLoad(document.getElementById('myAsk2').value) 
+    const myTestTensor = await myTestLoad(document.getElementById('myAsk2').value) 
                                                                  
     const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
@@ -401,29 +401,16 @@ myLoadImage = async function() {
       const myShape = latestTensor.shape;
       console.log('myShape: ' + myShape);
 
-      /*
-    
-    // to force black and white images
-    
-    for (var i = 0; i < data.length; i += 4) {
-      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      data[i]     = avg; // red
-      data[i + 1] = avg; // green
-     data[i + 2] = avg; // blue
-     
-    }  // end for loop
-   // console.log(data) 
-     */
 
-      // ctx.rect(newX,newY,newX+100,newY+100);
-      // ctx.stroke();
 
-      // ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, newX, newY, 100, 100);
       // img.style.display = 'none';
       // img.style.display = 'inline';
     };
   }
+                                                                                             
+ return latestTensor                                                                                            
+                                                                                             
 };                                                                                            
                                                                                              
                                                                                              
