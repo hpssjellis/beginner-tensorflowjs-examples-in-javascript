@@ -62,7 +62,13 @@ So I tried real simple text based image analysis, but the reality is that images
 
 
 <div id="myDiv7979Code"> 
+<input type=button value="load Images" onclick="myLoadImage()">
 
+<input type=button value="Data to Tensor (Check console) " onclick="{
+  myFinalMakeTensor()
+}"> Reshaped image --> <canvas id="myReshapeCanvas" width="160" height="120" style="border: 1px solid #ddd; "></canvas> <br><br> All images below fixed 100 x 100 and pixelated if low resolution<br>
+
+<canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="1000" style="border: 1px solid #ddd;"></canvas> <br>
 
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
