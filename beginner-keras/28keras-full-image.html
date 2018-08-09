@@ -126,7 +126,7 @@ const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,
 model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
-    inputShape: [32, 32, 4],                                                                                                                                                  
+    inputShape: [32, 32, 3],                                                                                                                                                  
     kernelSize: 2,                                                                                                                                                          
     filters: 4,                                                                                                                                                             
     strides: 8,                                                                                                                                                             
@@ -173,7 +173,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 4])).data()                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -234,15 +234,15 @@ myFinalMakeTensor = async function() {
   // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
 
   //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
-  console.log('Before Change')                                                                                           
-  myMainTensor.print(true);
+ // console.log('Before Change')                                                                                           
+ // myMainTensor.print(true);
                                                                                              
   const xs = myMainTensor.slice([0, 0, 0, 0], [-1, -1, -1, 3]);                                                                                           
   
   myMainTensor.dispose()
-  console.log('After Change')  
+ // console.log('After Change')  
                                                                                              
-  xs.print(true);                                                                                           
+ // xs.print(true);                                                                                           
                                                                                              
   myMainData.length = 0;
   myMainData = [];
