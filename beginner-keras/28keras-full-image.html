@@ -65,7 +65,7 @@ So I tried real simple text based image analysis, but the reality is that images
 <div id="myDiv7979Code"> 
 
 Test or change this data <br>
-<textarea id="myAsk2" rows=40 cols=100 wrap=false>
+<textarea id="myAsk2" rows=4 cols=100 wrap=false>
 
 </textarea><br>
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
@@ -229,16 +229,13 @@ myFinalMakeTensor = async function() {
 
   var canvasReshape = document.getElementById('myReshapeCanvas');
 
-  myMainTensor = tf.tensor4d(
-    myNewArray4,
-    (shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),
-    'int32'
-  );
+ // myMainTensor = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
+  xs = tf.tensor4d(myNewArray4,(shape = [myMainData.length, canvasReshape.width, canvasReshape.height, 4]),'int32');
 
   // document.getElementById('myTensorArea').value =   JSON.stringify(myMainTensor.dataSync() , null, 3)
 
   //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
-  myMainTensor.print(true);
+  //myMainTensor.print(true);
 
   myMainData.length = 0;
   myMainData = [];
