@@ -90,6 +90,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
+}"><input type=button value="Load Image to test" onclick="{
+  myTestTensor = await myTestLoad(document.getElementById('myAsk2').value) 
 }"><br>
  
  
@@ -164,8 +166,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     
   //mySingleLoad = async function(myFileName2, newX, newY, loop) {                                                               
                                                                  
-    const myTestTensor = await myTestLoad(document.getElementById('myAsk2').value) 
-      alert(myTestTensor.dataSync())                                                           
+    
+     // alert(myTestTensor.dataSync())                                                           
     const myPredictArray = await model.predict(tf.tensor4d(myTestTensor.dataSync(), shape=[1, 32, 32, 3])).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
@@ -380,7 +382,7 @@ myLoadImage = async function() {
       var data = imageData.data;
      // myMainData[loop] = data;
 
-      latestTensor = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+      latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
       // not sure how to drop the alpha channel so I just included it
 
       // tf.stack([myMainTensor, latestTensor]);
@@ -400,7 +402,7 @@ myLoadImage = async function() {
     };
   }
                                                                                           
- return latestTensor                                                                                            
+ return latestTensor2                                                                                            
                                                                                              
 };                                                                                            
                                                                                              
