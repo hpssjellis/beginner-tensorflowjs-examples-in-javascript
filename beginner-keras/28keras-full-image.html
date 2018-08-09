@@ -169,7 +169,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
   //mySingleLoad = async function(myFileName2, newX, newY, loop) {                                                               
                                                                  
     
-      alert(myTestArray)                                                           
+      alert(myTestArray) 
+     if (myTestArray != null){                                                            
     const myPredictArray = await model.predict(tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
@@ -178,7 +179,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     document.getElementById('myDiv7979').innerHTML += '<b>Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
     document.getElementById('myDiv7979').innerHTML += '<b>Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
     document.getElementById('myDiv7979').innerHTML += '<b>Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
-              
+    }          
                                                              
  })()   // end the inline async function
 }" >
