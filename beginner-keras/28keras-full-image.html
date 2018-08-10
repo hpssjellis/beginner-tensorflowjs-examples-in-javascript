@@ -105,6 +105,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png</textarea><br>
+
+<input type=number value="700" id="myEpochs"> 
+ 
 <input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
 document.getElementById('myButton7979').style.backgroundColor = 'red' 
@@ -149,7 +152,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                                                    
     var myFit = await model.fit(xs, ys, { 
       batchSize: 8192, 
-      epochs : 700, 
+      epochs : parseInt(document.getElementById('myEpochs').value), 
       callbacks :  {  
                                                                               
           onBatchEnd: async (batch, logs) => {                                                               
@@ -157,7 +160,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
           },       
                                                                               
          onEpochEnd: async (epoch, logs) => {                                            
-              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/700 : ' + logs.loss +' <br><br>'                                                               
+              document.getElementById('myDiv7979').innerHTML = 'Loss after Epoch ' + epoch + '/'+document.getElementById('myEpochs').value+' : ' + logs.loss +' <br><br>'                                                               
          }   
                                                                               
       }  // end all callbacks                                                                        
