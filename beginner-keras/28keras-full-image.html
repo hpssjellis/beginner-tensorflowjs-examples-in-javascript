@@ -172,8 +172,10 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     
 
      if (myTestArray != null){ 
-     //alert(myTestArray) 
-    const myPredictArray = await model.predict(tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])).data()       
+     //alert(myTestArray)
+    const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
+    xsTesting.print(true)                                                             
+    const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output = <br>'
