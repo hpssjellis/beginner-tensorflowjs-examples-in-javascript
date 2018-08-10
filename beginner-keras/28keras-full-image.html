@@ -84,8 +84,11 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
   
   
 </textarea>
+<br>Labels are one hot encoded no shape, circle, triangle, rectangle<br>
+<textarea id="myLabels" rows=3 cols=120>
+0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0                                         
+</textarea>
 <br>
-
 <input type=button value="load Images" onclick="myLoadImage()">
 
 <input type=button value="Data to Tensor (Check console) " onclick="{
@@ -112,9 +115,13 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
                                                                               
 //const xs = tf.tensor4d([ ], shape=[8, 32, 32, 1] );    // 8 input images that are 32 x 32 with  10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
-// Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4]);        // 8 images 4 dimension                                                                                                                  
-                                                                                                                                                                        
+// Labels of how many lines in each image. I can make much more images just few here for simplicity 
+
+const ysArray =  document.getElementById('myLabels').value.split(',')                                                                             
+                                                                              
+//const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4]);        // 8 images 4 dimension                                                                                                                  
+const ys = tf.tensor2d(ysArray, shape=[ysArray.length/4, 4]);        // 8 images 4 dimension                                                                                                                  
+                                                                                                                                                                       
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
