@@ -94,6 +94,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
 }"><input type=button value="Load Image to test" onclick="{ 
+ myTestArray = null
  (async function(){
    myTestLoad(document.getElementById('myAsk2').value) 
  //alert(await myTestArray)
@@ -227,7 +228,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 ///////////////////// As soon as you start using real images the coding gets much more complex
 ///////////////////// Mainly becuase each pixel of colour is 4 data points Red, Green, Blue and Alpha
 ///////////////////// Where Alpha is the amount of transparency
-myTestArray = []
+myTestArray = null
 myTestDataArray = []                                                                                             
                                                                                              
 myMainData = []; // stores imageData as an array
