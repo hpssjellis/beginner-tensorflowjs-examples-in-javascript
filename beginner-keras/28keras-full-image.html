@@ -92,8 +92,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
   myFinalMakeTensor()
 }"><input type=button value="Load Image to test" onclick="{ 
  (async function(){
-  myTestArray = await myTestLoad(document.getElementById('myAsk2').value) 
- alert(myTestArray)
+   myTestLoad(document.getElementById('myAsk2').value) 
+ alert(await myTestArray)
  })()
 }"><br>
  
@@ -388,7 +388,7 @@ myLoadImage = async function() {
      // myMainData[loop] = data;
 
       latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
-      return latestTensor2.dataSync() 
+     myTestArray = latestTensor2.dataSync() 
     };
   }
                                                                                           
