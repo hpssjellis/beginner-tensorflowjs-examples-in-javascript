@@ -93,7 +93,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 }"><input type=button value="Load Image to test" onclick="{ 
  (async function(){
    myTestLoad(document.getElementById('myAsk2').value) 
- alert(await myTestArray)
+ //alert(await myTestArray)
  })()
 }"><br>
  
@@ -172,7 +172,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     
 
      if (myTestArray != null){ 
-     alert(myTestArray) 
+     //alert(myTestArray) 
     const myPredictArray = await model.predict(tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
