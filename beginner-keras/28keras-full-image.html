@@ -94,7 +94,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
 }"><input type=button value="Load Image to test" onclick="{ 
- myTestArray = null
+ myTestArray.length = 0   // attempt to reset the array
  (async function(){
    myTestLoad(document.getElementById('myAsk2').value) 
  //alert(await myTestArray)
@@ -182,8 +182,8 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                  
     
 
-     if (myTestArray != null){ 
-     //alert(myTestArray)
+
+    console.log('myTestArray'+myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 160, 120, 3])                                              
     xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
@@ -194,7 +194,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     document.getElementById('myDiv7979').innerHTML += '<b>Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
     document.getElementById('myDiv7979').innerHTML += '<b>Triangle ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
     document.getElementById('myDiv7979').innerHTML += '<b>Rectangle ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'    
-    }   else {alert('Issue with the test image')}       
+    
                                                              
  })()   // end the inline async function
 }" >
