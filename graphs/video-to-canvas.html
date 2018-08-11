@@ -1,0 +1,101 @@
+<style>
+
+body {
+	background: #222;
+}
+
+#video {
+	border: 1px solid green;
+}
+
+#clone {
+	border: 1px solid blue;
+}
+
+canvas {
+	border: 1px solid red;
+	xx-display: none;
+}
+
+</style>
+
+
+
+<video autoplay id="video" width="400" height="300"></video>
+<video autoplay id="clone" width="400" height="300"></video>
+
+<canvas id="canvas" width="400" height="300" />	
+
+
+
+<script>
+
+var $canvas = document.getElementById('canvas')
+var $video = document.createElement('video')
+
+initCamera($video).then(start).catch(function(err) {
+  alert(err.message);
+})
+
+function start() {
+  $canvas.width = $video.videoWidth;
+  $canvas.height = $video.videoHeight;
+  
+  // Start the cycle
+  drawFrame();
+}
+
+function drawFrame() {
+  var ctx = $canvas.getContext('2d');
+  ctx.drawImage($video, 0, 0);
+  
+  // Draw something just to show we can
+  ctx.fillStyle = '#0f0';
+  const timeStr = new Date().toString();
+  ctx.fillText(timeStr, 20, 20);
+  
+  // Continue the cycle
+  requestAnimationFrame(drawFrame);
+}
+
+
+function initCamera($video) {
+  return new Promise(function(resolve, reject) {
+    
+    // create constraints for back camera from devices list
+    function getBackCamConstraints(devices) {
+      devices = devices.filter(function(d) {
+        return d.kind === 'videoinput';
+      });
+      var back = devices.find(function(d) {
+        return d.label.toLowerCase().indexOf('back') !== -1;
+      }) || (devices.length && devices[devices.length - 1]);
+      var constraints = {video: true}
+      if (back) {
+        constraints.video = {deviceId: back.deviceId};
+        // constraints.video = {mandatory: {deviceId: back.deviceId}};
+      }
+      return constraints;
+    }
+
+    // initialize back camera
+    navigator.mediaDevices.enumerateDevices()
+    .then(function(devices) {
+        var constraints = getBackCamConstraints(devices);
+        return navigator.mediaDevices.getUserMedia(constraints);
+    })
+    .then(function(mediaStream) {
+      $video.srcObject = mediaStream;
+      $video.onloadedmetadata = function(e) {
+        $video.play();
+        resolve();
+      };
+    })
+    .catch(function(err) { 
+      console.log(err.name + ": " + err.message); 
+      reject(err);
+    })
+  })
+}
+
+</script>
