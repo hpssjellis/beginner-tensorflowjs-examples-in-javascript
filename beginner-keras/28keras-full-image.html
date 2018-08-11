@@ -96,9 +96,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 }"><input type=button value="Load Image to test" onclick="{ 
  //myTestArray.length = 0   // attempt to reset the array
  (async function(){
-   myTestLoad(document.getElementById('myAsk2').value) 
+   await myTestLoad(document.getElementById('myAsk2').value) 
  
-    console.log('myTestArray 1'+myTestArray[0])
+    console.log('myTestArray 1'+ await myTestArray[0])
  //alert(await myTestArray)
  })()
 }"><br>
@@ -185,9 +185,9 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     
 
 
-    console.log('myTestArray 2'+myTestArray[0])
+    console.log('myTestArray 2'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 160, 120, 3])                                              
-    xsTesting.print(true)                                                             
+    //xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 160, 120, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
