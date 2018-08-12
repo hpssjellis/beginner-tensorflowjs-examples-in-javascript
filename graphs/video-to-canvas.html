@@ -4,19 +4,14 @@
 <canvas id="myCanvas" width="160" height="140" style="border: 1px solid #ddd;"></canvas><br>
 
 <input type=button value="get Video" onclick="{getVideo()}">
-<input type=button value="get Pic" onclick="{takeSnapshot()}">
+<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+<input type=number id="myInterval"  value="2000">
+<input type=button value="Auto" onclick="{takeAuto()}">
 
 <script>
   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
-  
-    function takeSnapshot() {
-      var myCanvasElement = document.getElementById('myCanvas');
-      var myCTX = myCanvasElement.getContext('2d');
-      myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
-    }
 
-  function getVideo(){
-
+function getVideo(){
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: true, audio: false},
                      
@@ -29,5 +24,20 @@
      alert('webcam not working');
   });
 }
-
+  
+function takeSnapshot() {
+   var myCanvasElement = document.getElementById('myCanvas');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+}
+  
+function takeAuto() {
+    setInterval(function(){                                                                                         
+       takeSnapshot()
+   }, document.getElementById('myInterval').value);        
+}
+  
+  
+  
+  
 </script>
