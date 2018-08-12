@@ -1,6 +1,6 @@
 <h2 align=center>Video stream to still image</h2>
 
-<video  id="video"    width="400" height="300" style="border: 1px solid #ddd;"></video>
+<video  id="myVideo" width="400" height="300" style="border: 1px solid #ddd;"></video>
 <canvas id="myCanvas" width="160" height="140" style="border: 1px solid #ddd;"></canvas><br>
 
 <input type=button value="get Video" onclick="{getVideo()}">
@@ -9,19 +9,19 @@
 <script>
 
     function takeSnapshot() {
-      var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      var myCanvasElement = document.getElementById('myCanvas');
+      var myCTX = myCanvasElement.getContext('2d');
+      myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
     }
 
   function getVideo(){
-  var video = document.getElementById('video') 
+  var myVideoStream = document.getElementById('myVideo') 
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: true, audio: false},
                      
     function(stream) {
-      video.srcObject = stream   
-      video.play();
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
   }, 
                      
    function(error) {
