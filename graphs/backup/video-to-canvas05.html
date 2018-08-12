@@ -1,0 +1,56 @@
+<h2 align=center>Video stream to still image</h2>
+
+<video id="video" width="400" height="300" style="border: 1px solid #ddd;" ></video>
+<canvas id="myCanvas" width="160" height="140" style="border: 1px solid #ddd;"></canvas><br>
+
+<input type=button value="get Video" onclick="{getVideo()}">
+<input type=button value="get Pic" onclick="{takeSnapshot()}">
+
+
+<script>
+
+    /**
+     *  generates a still frame image from the stream in the <video>
+     *  appends the image to the <body>
+     */
+    function takeSnapshot() {
+      var img = document.querySelector('img') || document.createElement('img');
+      var context;
+      var width = video.offsetWidth
+        , height = video.offsetHeight;
+
+      canvas = document.getElementById('myCanvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, width, height);
+
+     // img.src = canvas.toDataURL('image/png');
+     // document.body.appendChild(img);
+    }
+
+ 
+
+  function getVideo(){
+  var video = document.getElementById('video'),
+   vendorUrl = window.URL || window.webkitURL;
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.
+mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({
+   video: true,
+   audio: false
+  }, function(stream) {
+   //video.src = vendorUrl.createObjectURL(stream);
+   video.srcObject = stream   
+   video.play();
+  }, function(error) {
+   alert('webcam not working');
+  });
+}
+
+</script>
+
+
+
+
