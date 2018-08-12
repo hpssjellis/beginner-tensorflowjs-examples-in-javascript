@@ -10,7 +10,8 @@ Take snapshot every <input type=number id="myInterval"  value="3000"> millisecon
 
 <script>
   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
-
+  var myStoredInterval = 0
+  
 function getVideo(){
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: true, audio: false},
@@ -33,7 +34,8 @@ function takeSnapshot() {
   
 function takeAuto() {
     takeSnapshot() // get snapshot right away then wait and repeat
-    setInterval(function(){                                                                                         
+    clear(myStoredInterval)
+    myStoredInterval = setInterval(function(){                                                                                         
        takeSnapshot()
    }, document.getElementById('myInterval').value);        
 }
