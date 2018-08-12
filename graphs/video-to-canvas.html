@@ -7,8 +7,9 @@
 
 
 <script>
+    myVideo = document.getElement('myVideo'); 
 
-
+  //  ctx = myVideo.getContext('2d');
     /**
      *  generates a still frame image from the stream in the <video>
      *  appends the image to the <body>
@@ -16,15 +17,15 @@
     function takeSnapshot() {
       var img = document.querySelector('img') || document.createElement('img');
       var context;
-      var width = video.offsetWidth
-        , height = video.offsetHeight;
+      var width = myVideo.offsetWidth
+        , height = myVideo.offsetHeight;
 
       canvas = document.getElement('myCanvas');
       canvas.width = width;
       canvas.height = height;
 
       context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, width, height);
+      context.drawImage(myVideo, 0, 0, width, height);
 
      // img.src = canvas.toDataURL('image/png');
      // document.body.appendChild(img);
@@ -36,7 +37,7 @@
     // use MediaDevices API
     // docs: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
      
-    myVideo = document.getElement('myVideo'); 
+
     if (navigator.mediaDevices) {
       // access the web cam
       navigator.mediaDevices.getUserMedia({video: true})
