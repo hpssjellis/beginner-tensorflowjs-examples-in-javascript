@@ -9,17 +9,13 @@
 
 <script>
 
-    /**
-     *  generates a still frame image from the stream in the <video>
-     *  appends the image to the <body>
-     */
     function takeSnapshot() {
-      var img = document.querySelector('img') || document.createElement('img');
-      var context;
+    //  var img = document.querySelector('img') || document.createElement('img');
+     // var context;
 
-      canvas = document.getElementById('myCanvas');
+      var canvas = document.getElementById('myCanvas');
 
-      context = canvas.getContext('2d');
+      var context = canvas.getContext('2d');
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     }
@@ -27,10 +23,10 @@
  
 
   function getVideo(){
-  var video = document.getElementById('video'), 
-  vendorUrl = window.URL || window.webkitURL;
+  var video = document.getElementById('video') 
+ // var vendorUrl = window.URL || window.webkitURL;
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({video: true,audio: false}, 
+  navigator.getMedia({video: true, audio: false}, 
     function(stream) {
       video.srcObject = stream   
       video.play();
