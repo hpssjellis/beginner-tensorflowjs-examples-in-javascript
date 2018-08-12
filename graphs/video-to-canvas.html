@@ -1,8 +1,9 @@
 <video id="video" width="400" height="300"></video>
 <canvas id="myCanvas"></canvas>
 
-<input type=button value=getVideo onclick="{alert()}">
-<input type=button value=getPic onclick="{alert()}">
+<input type=button value=getVideo onclick="{GetVideo()}">
+<input type=button value=getPic onclick="{takeSnapshot()}">
+
 
 
 <script>
@@ -18,15 +19,15 @@
       var width = video.offsetWidth
         , height = video.offsetHeight;
 
-      canvas = canvas || document.createElement('canvas');
+      canvas = document.getElement('myCanvas');
       canvas.width = width;
       canvas.height = height;
 
       context = canvas.getContext('2d');
       context.drawImage(video, 0, 0, width, height);
 
-      img.src = canvas.toDataURL('image/png');
-      document.body.appendChild(img);
+     // img.src = canvas.toDataURL('image/png');
+     // document.body.appendChild(img);
     }
 
  
@@ -44,7 +45,8 @@
         })
         // permission denied:
         .catch(function(error) {
-          document.body.textContent = 'Could not access the camera. Error: ' + error.name;
+         // document.body.textContent = 'Could not access the camera. Error: ' + error.name;
+          alert'Could not access the camera. Error: ' + error.name)
         });
     }
   }
