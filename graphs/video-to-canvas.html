@@ -34,7 +34,7 @@ function takeSnapshot() {
   
 function takeAuto() {
     takeSnapshot() // get snapshot right away then wait and repeat
-    clear(myStoredInterval)
+    clearInterval(myStoredInterval)
     myStoredInterval = setInterval(function(){                                                                                         
        takeSnapshot()
    }, document.getElementById('myInterval').value);        
