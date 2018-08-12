@@ -1,20 +1,14 @@
+<h2 align=center>Video stream to still image</h2>
 
-   <video id="video" width="400" height="300" style="border: 1px solid #ddd;" ></video>
-
-
-
-<!-- <video id="myVideo" style="border: 1px solid #ddd;" width="400" height="300"></video> -->
-<canvas id="myCanvas" style="border: 1px solid #ddd;"></canvas>
+<video id="video" width="400" height="300" style="border: 1px solid #ddd;" ></video>
+<canvas id="myCanvas" width="160" height="140" style="border: 1px solid #ddd;"></canvas><br>
 
 <input type=button value="get Video" onclick="{getVideo()}">
 <input type=button value="get Pic" onclick="{takeSnapshot()}">
 
 
-
 <script>
-   // myVideo = document.getElementById('myVideo'); 
 
-  //  ctx = myVideo.getContext('2d');
     /**
      *  generates a still frame image from the stream in the <video>
      *  appends the image to the <body>
@@ -37,39 +31,6 @@
     }
 
  
-    
-    
-    /*
-    
- function GetVideo(){
- 
-    // use MediaDevices API
-    // docs: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
-     
-
-    if (navigator.mediaDevices) {
-      // access the web cam
-      navigator.mediaDevices.getUserMedia({video: true})
-      // permission granted:
-        .then(function(stream) {
-         // myVideo.srcObject = stream
-           myVideo.src = vendorUrl.createObjectURL(stream);
-           myVideo.play();          
-        })
-        // permission denied:
-        .catch(function(error) {
-         // document.body.textContent = 'Could not access the camera. Error: ' + error.name;
-          alert('Could not access the camera. Error: ' + error.name)
-        });
-    }
-  }
- 
- 
- 
-*/
-
-
-
 
   function getVideo(){
   var video = document.getElementById('video'),
