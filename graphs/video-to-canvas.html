@@ -16,42 +16,28 @@
     function takeSnapshot() {
       var img = document.querySelector('img') || document.createElement('img');
       var context;
-      var width = video.offsetWidth
-        , height = video.offsetHeight;
 
       canvas = document.getElementById('myCanvas');
-      canvas.width = width;
-      canvas.height = height;
 
       context = canvas.getContext('2d');
-      context.drawImage(video, 0, 0, width, height);
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-     // img.src = canvas.toDataURL('image/png');
-     // document.body.appendChild(img);
     }
 
  
 
   function getVideo(){
-  var video = document.getElementById('video'),
-   vendorUrl = window.URL || window.webkitURL;
-  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.
-mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({
-   video: true,
-   audio: false
-  }, function(stream) {
-   //video.src = vendorUrl.createObjectURL(stream);
-   video.srcObject = stream   
-   video.play();
-  }, function(error) {
-   alert('webcam not working');
+  var video = document.getElementById('video'), 
+  vendorUrl = window.URL || window.webkitURL;
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: true,audio: false}, 
+    function(stream) {
+      video.srcObject = stream   
+      video.play();
+  }, 
+   function(error) {
+     alert('webcam not working');
   });
 }
 
 </script>
-
-
-
-
-
