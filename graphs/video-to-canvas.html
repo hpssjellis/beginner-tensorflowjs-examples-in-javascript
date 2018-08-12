@@ -43,7 +43,9 @@
       navigator.mediaDevices.getUserMedia({video: true})
       // permission granted:
         .then(function(stream) {
-          myVideo.srcObject = stream
+         // myVideo.srcObject = stream
+           myVideo.src = vendorUrl.createObjectURL(stream);
+           myVideo.play();          
         })
         // permission denied:
         .catch(function(error) {
