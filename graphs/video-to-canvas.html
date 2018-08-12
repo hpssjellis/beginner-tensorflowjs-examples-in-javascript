@@ -12,7 +12,7 @@
 
 
 <script>
-    myVideo = document.getElementById('myVideo'); 
+   // myVideo = document.getElementById('myVideo'); 
 
   //  ctx = myVideo.getContext('2d');
     /**
@@ -22,15 +22,15 @@
     function takeSnapshot() {
       var img = document.querySelector('img') || document.createElement('img');
       var context;
-      var width = myVideo.offsetWidth
-        , height = myVideo.offsetHeight;
+      var width = video.offsetWidth
+        , height = video.offsetHeight;
 
       canvas = document.getElementById('myCanvas');
       canvas.width = width;
       canvas.height = height;
 
       context = canvas.getContext('2d');
-      context.drawImage(myVideo, 0, 0, width, height);
+      context.drawImage(video, 0, 0, width, height);
 
      // img.src = canvas.toDataURL('image/png');
      // document.body.appendChild(img);
