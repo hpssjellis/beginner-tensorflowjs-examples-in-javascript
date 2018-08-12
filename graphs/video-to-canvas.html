@@ -5,7 +5,7 @@
 
 <input type=button value="get Video" onclick="{getVideo()}">
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
-<input type=number id="myInterval"  value="2000">
+Take snapshot every <input type=number id="myInterval"  value="3000"> milliseconds
 <input type=button value="Auto" onclick="{takeAuto()}">
 
 <script>
@@ -32,6 +32,7 @@ function takeSnapshot() {
 }
   
 function takeAuto() {
+    takeSnapshot() // get snapshot right away then wait and repeat
     setInterval(function(){                                                                                         
        takeSnapshot()
    }, document.getElementById('myInterval').value);        
