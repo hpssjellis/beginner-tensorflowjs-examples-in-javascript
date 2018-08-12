@@ -1,4 +1,4 @@
-<video id="video" style="border: 1px solid #ddd;" width="400" height="300"></video>
+<video id="myVideo" style="border: 1px solid #ddd;" width="400" height="300"></video>
 <canvas id="myCanvas" style="border: 1px solid #ddd;"></canvas>
 
 <input type=button value="get Video" onclick="{GetVideo()}">
@@ -35,13 +35,14 @@
  
     // use MediaDevices API
     // docs: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+     
+    myVideo = document.getElement('myVideo'); 
     if (navigator.mediaDevices) {
       // access the web cam
       navigator.mediaDevices.getUserMedia({video: true})
       // permission granted:
         .then(function(stream) {
-          video.srcObject = stream
-         // video.addEventListener('click', takeSnapshot);
+          myVideo.srcObject = stream
         })
         // permission denied:
         .catch(function(error) {
