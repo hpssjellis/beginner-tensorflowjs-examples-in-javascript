@@ -1,3 +1,8 @@
+ <div class="booth">
+   <video id="video" width="400" height="300" ></video>
+  </div>
+
+
 <video id="myVideo" style="border: 1px solid #ddd;" width="400" height="300"></video>
 <canvas id="myCanvas" style="border: 1px solid #ddd;"></canvas>
 
@@ -32,6 +37,10 @@
     }
 
  
+    
+    
+    /*
+    
  function GetVideo(){
  
     // use MediaDevices API
@@ -57,7 +66,30 @@
  
  
  
+*/
+
+
+
+
+  function getVideo()
+  var video = document.getElementById('video'),
+   vendorUrl = window.URL || window.webkitURL;
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.
+mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({
+   video: true,
+   audio: false
+  }, function(stream) {
+   video.src = vendorUrl.createObjectURL(stream);
+   video.play();
+  }, function(error) {
+   alert('webcam not working');
+  });
+}
 
 </script>
-</body>
-</html>
+
+
+
+
+
