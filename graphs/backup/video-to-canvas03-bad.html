@@ -1,0 +1,63 @@
+<video id="myVideo" style="border: 1px solid #ddd;" width="400" height="300"></video>
+<canvas id="myCanvas" style="border: 1px solid #ddd;"></canvas>
+
+<input type=button value="get Video" onclick="{GetVideo()}">
+<input type=button value="get Pic" onclick="{takeSnapshot()}">
+
+
+
+<script>
+    myVideo = document.getElementById('myVideo'); 
+
+  //  ctx = myVideo.getContext('2d');
+    /**
+     *  generates a still frame image from the stream in the <video>
+     *  appends the image to the <body>
+     */
+    function takeSnapshot() {
+      var img = document.querySelector('img') || document.createElement('img');
+      var context;
+      var width = myVideo.offsetWidth
+        , height = myVideo.offsetHeight;
+
+      canvas = document.getElementById('myCanvas');
+      canvas.width = width;
+      canvas.height = height;
+
+      context = canvas.getContext('2d');
+      context.drawImage(myVideo, 0, 0, width, height);
+
+     // img.src = canvas.toDataURL('image/png');
+     // document.body.appendChild(img);
+    }
+
+ 
+ function GetVideo(){
+ 
+    // use MediaDevices API
+    // docs: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+     
+
+    if (navigator.mediaDevices) {
+      // access the web cam
+      navigator.mediaDevices.getUserMedia({video: true})
+      // permission granted:
+        .then(function(stream) {
+         // myVideo.srcObject = stream
+           myVideo.src = vendorUrl.createObjectURL(stream);
+           myVideo.play();          
+        })
+        // permission denied:
+        .catch(function(error) {
+         // document.body.textContent = 'Could not access the camera. Error: ' + error.name;
+          alert('Could not access the camera. Error: ' + error.name)
+        });
+    }
+  }
+ 
+ 
+ 
+
+</script>
+</body>
+</html>
