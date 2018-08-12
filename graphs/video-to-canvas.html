@@ -1,0 +1,33 @@
+ <div class="booth">
+   <video id="video" width="400" height="300" autoplay></video>
+  </div>
+  
+  
+  <style>
+  
+  .booth {
+  width: 400px;
+  background: #ccc;
+  border: 10px solid #ddd;
+  margin: 0 auto;
+}
+  </style>
+  
+  
+  <script>
+  (function() {
+  var video = document.getElementById('video'),
+   vendorUrl = window.URL || window.webkitURL;
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.
+mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({
+   video: true,
+   audio: false
+  }, function(stream) {
+   video.src = vendorUrl.createObjectURL(stream);
+   video.play();
+  }, function(error) {
+   alert('webcam not working');
+  });
+})();
+  </script>
