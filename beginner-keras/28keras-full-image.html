@@ -98,7 +98,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
  (async function(){
    await myTestLoad(document.getElementById('myAsk2').value) 
  
-    console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
+   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
  //alert(await myTestArray)
  })()
 }"><br>
@@ -189,7 +189,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
-    console.log('myTestArray 2'+await myTestArray[0])
+    console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 64, 48, 3])                                              
     //xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
