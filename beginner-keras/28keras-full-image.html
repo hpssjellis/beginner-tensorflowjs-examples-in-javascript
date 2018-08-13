@@ -435,8 +435,10 @@ myLoadImage = async function() {
                                                                                              
   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
   var myStoredInterval = 0
-  
-function getVideo(){
+ //myTestLoad = async function(myFileName3) {  
+//function getVideo(){
+  getVideo = async function() {                                                                                           
+                                                                                             
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: true, audio: false},
                      
@@ -449,14 +451,16 @@ function getVideo(){
      alert('webcam not working');
   });
 }
-  
-function takeSnapshot() {
+// myTestLoad = async function(myFileName3) {  
+//function takeSnapshot() {
+  takeSnapshot = async function(){                                                                                           
    var myCanvasElement = document.getElementById('myCanvas');
    var myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
 }
-  
-function takeAuto() {
+ //myTestLoad = async function(myFileName3) {  
+//function takeAuto() {
+  takeAuto = async function(){                                                                                           
     takeSnapshot() // get snapshot right away then wait and repeat
     clearInterval(myStoredInterval)
     myStoredInterval = setInterval(function(){                                                                                         
