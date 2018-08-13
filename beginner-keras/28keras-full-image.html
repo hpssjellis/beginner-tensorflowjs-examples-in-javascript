@@ -65,7 +65,7 @@ So I tried real simple text based image analysis, but the reality is that images
 <div id="myDiv7979Code"> 
  
  
- Test page for loading multiple images of different sizes, force them to 160 x 120, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
+ Test page for loading multiple images of different sizes, force them to 64 x 48, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
 
 <textarea id="myURLs" rows=16 cols=140>
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
@@ -98,7 +98,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
  (async function(){
    await myTestLoad(document.getElementById('myAsk2').value) 
  
-    console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this rogram to work. Go figure?
+    console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
  //alert(await myTestArray)
  })()
 }"><br>
@@ -119,7 +119,7 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
                                                                               
                                                                               
                                                                               
-//const xs = tf.tensor4d([ ], shape=[8, 160, 120, 1] );    // 8 input images that are 160 x 120 with RGB colors)                                                                                                                                                     
+//const xs = tf.tensor4d([ ], shape=[8, 64, 48, 1] );    // 8 input images that are 64 x 48 with RGB colors)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity 
 
@@ -132,7 +132,7 @@ const ys = tf.tensor2d(ysArray, shape=[ysArray.length/4, 4]);        // 8 images
 model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
-    inputShape: [160, 120, 3],                                                                                                                                                  
+    inputShape: [64, 48, 3],                                                                                                                                                  
     kernelSize: 2,                                                                                                                                                          
     filters: 4,                                                                                                                                                             
     strides: 8,                                                                                                                                                             
@@ -186,10 +186,10 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 
 
     //console.log('myTestArray 2'+await myTestArray[0])
-    const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 160, 120, 3])                                              
+    const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 64, 48, 3])                                              
     //xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
-    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 160, 120, 3])).data()                                                                                                                                      
+    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 64, 48, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output for image URL: ' + document.getElementById('myAsk2').value + ' <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -202,7 +202,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
 }" >
  
  
- Reshaped image --> <canvas id="myReshapeCanvas" width="160" height="120" style="border: 1px solid #ddd; "></canvas> <br> 
+ Reshaped image --> <canvas id="myReshapeCanvas" width="64" height="48" style="border: 1px solid #ddd; "></canvas> <br> 
  
  
 <br> All images below fixed 100 x 100 and pixelated if low resolution<br>
@@ -292,7 +292,7 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
     img.src = myFileName2;
     img.crossOrigin = 'Anonymous';
 
-    var canvasReshape = document.getElementById('myReshapeCanvas'); // 160 x 120
+    var canvasReshape = document.getElementById('myReshapeCanvas'); // 64 x 48
     var ctxReshape = canvasReshape.getContext('2d');
 
     var canvas = document.getElementById('myCanvas'); // 1000 x 1000
@@ -382,7 +382,7 @@ myLoadImage = async function() {
     img.src = myFileName3;
     img.crossOrigin = 'Anonymous';
 
-    var canvasReshape = document.getElementById('myReshapeCanvas'); // 160 x 120
+    var canvasReshape = document.getElementById('myReshapeCanvas'); // 64 x 48
     var ctxReshape = canvasReshape.getContext('2d');
 
 
