@@ -204,6 +204,22 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
  Reshaped image --> <canvas id="myReshapeCanvas" width="64" height="48" style="border: 1px solid #ddd; "></canvas> <br> 
  
+ <video  id="myVideo" width="400" height="300" style="border: 1px solid #ddd;"></video>
+
+ 
+ 
+ 
+ 
+
+<input type=button value="get Video" onclick="{getVideo()}">
+<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+Take snapshot every <input type=number id="myInterval"  value="3000"> milliseconds
+<input type=button value="Auto" onclick="{takeAuto()}">
+
+ 
+ 
+ 
+ 
  
 <br> All images below fixed 100 x 100 and pixelated if low resolution<br>
  
@@ -411,6 +427,81 @@ myLoadImage = async function() {
                                                                                            
                                                                                              
 };                                                                                            
+                                                                                             
+
+                                                                                             
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
+                                                                                             
+                                                                                             
+   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+  var myStoredInterval = 0
+  
+function getVideo(){
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: true, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+  
+function takeSnapshot() {
+   var myCanvasElement = document.getElementById(' var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+  var myStoredInterval = 0
+  
+function getVideo(){
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: true, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+  
+function takeSnapshot() {
+   var myCanvasElement = document.getElementById('myReshapeCanvas');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+}
+  
+function takeAuto() {
+    takeSnapshot() // get snapshot right away then wait and repeat
+    clearInterval(myStoredInterval)
+    myStoredInterval = setInterval(function(){                                                                                         
+       takeSnapshot()
+   }, document.getElementById('myInterval').value);        
+}
+  
+  ');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+}
+  
+function takeAuto() {
+    takeSnapshot() // get snapshot right away then wait and repeat
+    clearInterval(myStoredInterval)
+    myStoredInterval = setInterval(function(){                                                                                         
+       takeSnapshot()
+   }, document.getElementById('myInterval').value);        
+}
+  
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
                                                                                              
                                                                                              
                                                                                              
