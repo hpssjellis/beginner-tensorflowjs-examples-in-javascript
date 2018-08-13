@@ -109,9 +109,10 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png</textarea><br>
 
-<input type=number value="700" id="myEpochs"> 
+Learning Rate: <input type=text value="0.5" id="myLearningRate"> <br>
+Epochs: <input type=number value="700" id="myEpochs"> <br>
  
-<input id="myButton7979" type="button" value="Train images and test" onclick="{ 
+<input id="myButton7979" type="button" value="Train Images and Test" onclick="{ 
                                                                                     
 document.getElementById('myButton7979').style.backgroundColor = 'red' 
 
@@ -145,8 +146,9 @@ model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 
 model.add(tf.layers.flatten());                                                                                                                                         
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
-                                          
-model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   
+  
+const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('myLearningRate').value);               
+model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
                                                                               
 //document.getElementById('myButton7979').style.backgroundColor = 'red'   
                                                                               
@@ -208,7 +210,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
  
  Reshaped image --> <canvas id="myReshapeCanvas" width="64" height="48" style="border: 1px solid #ddd; "></canvas> <br> 
  
- <video  id="myVideo" width="400" height="300" style="border: 1px solid #ddd;"></video><br>
+ <video  id="myVideo" width="160" height="120" style="border: 1px solid #ddd;"></video><br>
 
  
  
