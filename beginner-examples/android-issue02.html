@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"></script>
 
 
 
@@ -53,31 +53,35 @@ In it's simplist form this is the issue I am having using Tensorflowjs on my And
     
 <div id="myDiv123Code"> 
 
-
+Batches <input id="myInNumber" type=number value=50> 
  
-
-
-
+<input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified"  onclick="{
+  document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'
  
-<input id="myButton123" type="button" value="Android Issue Tensorflowjs Simplified update 02" onclick="{
-                                                                                                      
-    document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'                                                                                                      
-    const yTrue = tf.tensor2d([4,3], [2,1])                                                                
-    const yPred = tf.tensor1d([7])  
-    const MAX_VALUE = 9000   
-    const EPSILON   =  1.1920928955078125e-7;                                                                                        
-                                                                                                      
-    //var diff = tf.subtract(yTrue, yPred);                                                        
-    var diff = tf.sub(yTrue, yPred);
-   // var clippedTrue = tf.clip(tf.abs(yTrue), tf.epsilon(), MAX_VALUE);
-    var clippedTrue = tf.clipByValue(tf.abs(yTrue), EPSILON , MAX_VALUE);
-    var absResult = tf.abs(tf.div(diff, clippedTrue));
-    const myReturn = tf.mul(tf.scalar(100.0), tf.mean(absResult, -1));
-                                                                                                                                                                                                                  
-    document.getElementById('myDiv123').innerHTML += myReturn.dataSync()[0].toFixed(4) +'<br>'
-                                                                                    
+                                                                                                                                                       
+  async function myGo() {
+    const model = tf.sequential();
+    model.add(tf.layers.dense({inputShape: [2],  units: 1, activation: 'sigmoid',}) );  
+ 
+                                                                                                                                                                          
+    model.compile({loss: 'meanSquaredError', optimizer: 'rmsprop'});
+                                                                                            
+                                                                                 
+                                                                                            
+    const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
+    const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
+    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+                                                                                                                                                                                 
+    const myPredictArray = await model.predict(training_data).data()                                                                                    
+    document.getElementById('myDiv123').innerHTML += myPredictArray[0].toFixed(4) +'<br>'
+                                                                      
+  }
+                                                                                            
+                                                                                            
+  for (myCount=0;  myCount<=10; myCount++){                                                                                          
+     setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+  }                                                                                          
 }"><br><br>
-
 
 </div>
 <div id='myDiv123'>...</div><br>
@@ -167,7 +171,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
