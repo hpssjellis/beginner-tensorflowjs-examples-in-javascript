@@ -62,7 +62,7 @@ Epochs <input id="myEpochs" type="number" value="50"> <br>
   document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'
  
                                                                                                                                                        
-  async function myGo() {
+  (async function() {
     const model = tf.sequential();
     model.add(tf.layers.dense({inputShape: [2],  units: 1, activation: 'sigmoid',}) );  
  
@@ -73,17 +73,21 @@ Epochs <input id="myEpochs" type="number" value="50"> <br>
                                                                                             
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpochs').value});
+    var h = await model.fit(training_data, target_data, {
+       epochs: document.getElementById('myEpochs').value,
+       onEpochEnd: async (epoch, logs) => {                                            
+             document.getElementById('myDiv123').innerHTML += logs.loss +'<br>';  
+             await tf.nextFrame();                                                                                
+         }                                                                                      
+       }); // end of fit
                                                                                                                                                                                  
     const myPredictArray = await model.predict(training_data).data()                                                                                    
     document.getElementById('myDiv123').innerHTML += myPredictArray[0].toFixed(4) +'<br>'
                                                                       
-  }
+  })()
                                                                                             
                                                                                             
-  for (myCount=0;  myCount<=10; myCount++){                                                                                          
-     setTimeout(function(){  myGo() }, 300);   // wait a bit for the GUI to update
-  }                                                                                          
+                                                                                        
 }"><br><br>
 
 </div>
