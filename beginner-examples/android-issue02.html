@@ -73,7 +73,7 @@ Epochs <input id="myEpochs" type="number" value="50"> <br>
                                                                                             
     const training_data = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const target_data = tf.tensor2d([0,1,1,0], [4,1]);              
-    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myInNumber').value});
+    var h = await model.fit(training_data, target_data, {epochs: document.getElementById('myEpochs').value});
                                                                                                                                                                                  
     const myPredictArray = await model.predict(training_data).data()                                                                                    
     document.getElementById('myDiv123').innerHTML += myPredictArray[0].toFixed(4) +'<br>'
@@ -82,7 +82,7 @@ Epochs <input id="myEpochs" type="number" value="50"> <br>
                                                                                             
                                                                                             
   for (myCount=0;  myCount<=10; myCount++){                                                                                          
-     setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
+     setTimeout(function(){  myGo() }, 300);   // wait a bit for the GUI to update
   }                                                                                          
 }"><br><br>
 
