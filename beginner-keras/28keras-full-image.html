@@ -276,7 +276,7 @@ myFinalMakeTensor = async function() {
 
   //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
  // console.log('Before Change')                                                                                           
- // myMainTensor.print(true);
+   myMainTensor.print(true);
                                                                                              
 xs = myMainTensor.slice([0, 0, 0, 0], [-1, -1, -1, 3]);                                                                                           
   
@@ -349,8 +349,8 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
       // wow = tf.concat3d([myMainTensor , latestTensor])
       // myMainTensor.concat3d(latestTensor)
 
-     // latestTensor.print(true);
-      document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
+      latestTensor.print(true);
+    //  document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
       myShape = latestTensor.shape;
      // console.log('myShape: ' + myShape);
 
