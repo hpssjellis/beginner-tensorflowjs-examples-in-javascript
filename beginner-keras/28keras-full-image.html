@@ -109,8 +109,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png</textarea><br>
 
-Learning Rate: <input type=text value="0.5" id="myLearningRate"> <br>
-Epochs: <input type=number value="700" id="myEpochs"> <br>
+Learning Rate: <input type=text value="0.5" id="myLearningRate" size="10"> <br>
+Epochs: <input type=number value="700" id="myEpochs" size="10"> <br>
  
 <input id="myButton7979" type="button" value="Train Images and Test" onclick="{ 
                                                                                     
@@ -147,7 +147,7 @@ model.add(tf.layers.flatten());
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
 model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
   
-const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('myLearningRate').value);               
+const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('myLearningRate').value));               
 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
                                                                               
 //document.getElementById('myButton7979').style.backgroundColor = 'red'   
