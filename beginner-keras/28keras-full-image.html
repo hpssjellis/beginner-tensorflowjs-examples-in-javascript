@@ -196,7 +196,7 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
 
     console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 64, 48, 3])                                              
-    //xsTesting.print(true)                                                             
+    xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 64, 48, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
