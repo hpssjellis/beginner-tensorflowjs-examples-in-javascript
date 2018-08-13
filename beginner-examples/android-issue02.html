@@ -46,14 +46,17 @@
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 In it's simplist form this is the issue I am having using Tensorflowjs on my Android 8.0.0 Phone<br>
  
- If I replace the loss : 'meanSquaredError' with 'hinge' I don't get NaN
+
 </div><br>
 
 
     
 <div id="myDiv123Code"> 
 
-Batches <input id="myInNumber" type=number value=50> 
+ 
+LearningRate <input id="myRate" type="number" value="0.5"> <br>
+Epochs <input id="myEpochs" type="number" value="50"> <br> 
+
  
 <input id="myButton123" type=button value="Android Issue Tensorflowjs Simplified"  onclick="{
   document.getElementById('myDiv123').innerHTML = 'Expecting several numbers not NaN, but getting:  <br>'
