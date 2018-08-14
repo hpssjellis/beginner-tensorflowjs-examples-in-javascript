@@ -234,6 +234,9 @@ function createAndCompileModel(
   model.add(tf.layers.timeDistributed(
       {layer: tf.layers.dense({units: vocabularySize})}));
   model.add(tf.layers.activation({activation: 'softmax'}));
+      
+ const myLearningRate = document.getElementById('learningRate').value     
+      
   model.compile({
     loss: 'categoricalCrossentropy',
     optimizer: 'adam',
