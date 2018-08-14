@@ -235,13 +235,13 @@ function createAndCompileModel(
       {layer: tf.layers.dense({units: vocabularySize})}));
   model.add(tf.layers.activation({activation: 'softmax'}));
       
- const myLearningRate = document.getElementById('learningRate').value     
+// const myLearningRate = document.getElementById('learningRate').value    
+ 
+ const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('learningRate').value) );               
+//model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});   
       
-  model.compile({
-    loss: 'categoricalCrossentropy',
-    optimizer: 'adam',
-    metrics: ['accuracy']
-  });
+ // model.compile({loss: 'categoricalCrossentropy',  optimizer: 'adam',  metrics: ['accuracy'] });
+  model.compile({loss: 'categoricalCrossentropy',  optimizer: myOptimizer,  metrics: ['accuracy'] });
   return model;
 }
 
