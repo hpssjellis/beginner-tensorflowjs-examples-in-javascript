@@ -107,7 +107,19 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
-}"><input type=button value="Load Image to test" onclick="{ 
+}">
+Learning Rate: <input type=text value="0.2" id="myLearningRate" size="7"> <br>
+ 
+BatchSize: <input type=number value="18" id="myBatchSize" size="7"> <br>
+ 
+Epochs: <input type=number value="70" id="myEpochs" size="7"> <br>
+ 
+ 
+<br> All images below fixed 100 x 100 and pixelated if low resolution<br>
+ 
+<br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+ <br>
+ <input type=button value="Load Image to test" onclick="{ 
  //myTestArray.length = 0   // attempt to reset the array
  (async function(){
    await myTestLoad(document.getElementById('myAsk2').value) 
@@ -122,19 +134,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png</textarea><br>
-
-Learning Rate: <input type=text value="0.2" id="myLearningRate" size="7"> <br>
- 
-BatchSize: <input type=number value="18" id="myBatchSize" size="7"> <br>
- 
-Epochs: <input type=number value="70" id="myEpochs" size="7"> <br>
- 
- 
-<br> All images below fixed 100 x 100 and pixelated if low resolution<br>
- 
-<br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
- 
- 
+<br>
  
  
 <input id="myButton7979" type="button" value="Train Images and Test" onclick="{ 
@@ -250,15 +250,6 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size="7"> m
 <input type=button value="Auto" onclick="{takeAuto()}">
 
  
- 
- 
- 
- 
-<br> All images below fixed 100 x 100 and pixelated if low resolution<br>
- 
-<br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
-
-
 
 
  <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
