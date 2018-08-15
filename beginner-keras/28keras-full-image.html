@@ -69,10 +69,6 @@ So I tried real simple text based image analysis, but the reality is that images
 
 <textarea id="myURLs" rows=22 cols=140>
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg, 
  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran3.png,
@@ -100,7 +96,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 </textarea>
 <br>Labels are one hot encoded no shape, circle, triangle, rectangle<br>
 <textarea id="myLabels" rows=4 cols=120>
-0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0,
+0,1,0,0,     0,1,0,0,   1,0,0,0,   1,0,0,0,
 0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0, 
 0,0,0,1,    0,0,0,1,    0,0,0,1,    0,0,0,1,    0,1,0,0,    0,1,0,1
  
@@ -129,7 +125,7 @@ Test or change this data <br>
 
 Learning Rate: <input type=text value="0.2" id="myLearningRate" size="7"> <br>
  
-BatchSize: <input type=number value="22" id="myBatchSize" size="7"> <br>
+BatchSize: <input type=number value="18" id="myBatchSize" size="7"> <br>
  
 Epochs: <input type=number value="70" id="myEpochs" size="7"> <br>
  
@@ -169,9 +165,9 @@ model.add(tf.layers.conv2d({
     activation: 'relu',                                                                                                                                                     
     kernelInitializer: 'varianceScaling'                                                                                                                                    
 }));                                                                                                                                                                    
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
+//model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
 model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
+//model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
 model.add(tf.layers.flatten());                                                                                                                                         
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                               
 model.add(tf.layers.dense({ units: 100, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                
@@ -566,7 +562,7 @@ myLoadImage = async function() {
   myJoe = myFred.join('\n')
 
   document.getElementById('myDiv7979Code').innerHTML =    myJoe 
-  document.getElementById('myButton7979').click()
+ // document.getElementById('myButton7979').click()
                                              
 }"><br>
 
