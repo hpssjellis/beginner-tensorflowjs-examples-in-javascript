@@ -165,7 +165,8 @@ model.add(tf.layers.conv2d({
     activation: 'relu',                                                                                                                                                     
     kernelInitializer: 'varianceScaling'                                                                                                                                    
 }));                                                                                                                                                                    
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));   
+model.add(tf.layers.dropout({rate: 0.4}))                                                                              
 model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
 //model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
 model.add(tf.layers.flatten());                                                                                                                                         
