@@ -248,8 +248,8 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
   //  }                                                             
                                                                  
                                                                  
-                                                                 
-    var myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
+    var   myTestArray = []                                                           
+    myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
     console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
