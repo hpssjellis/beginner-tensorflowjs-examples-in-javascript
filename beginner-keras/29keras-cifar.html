@@ -249,15 +249,14 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                  
                                                                  
     var   myTestArray = []    
-    console.log(myTestArray)                                                              
+   // console.log(myTestArray)                                                              
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
-    console.log(myTestArray) 
+    //console.log(myTestArray) 
     console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
-    xsTesting.print(true)                                                             
+    //xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
-    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
-   // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
+    console.log(myPredictArray)                                                                                                                             
     document.getElementById('myDiv7979').innerHTML  = 'Output for image URL: ' + document.getElementById('myAsk2').value + ' <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>Circle ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
