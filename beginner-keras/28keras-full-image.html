@@ -67,26 +67,44 @@ So I tried real simple text based image analysis, but the reality is that images
  
  Test page for loading multiple images of different sizes, force them to 64 x 48, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
 
-<textarea id="myURLs" rows=16 cols=140>
+<textarea id="myURLs" rows=22 cols=140>
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,
-
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg, 
+ 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran3.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg,
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle01.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle02.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle03.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle04.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle5.jpg, 
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/orange.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/white.jpg, 
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle01.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle02.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle03.jpg, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle04.jpg,
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle-rectangle.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran1.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran2.jpg 
 
-
-  
-  
-  
-  
+   
 </textarea>
 <br>Labels are one hot encoded no shape, circle, triangle, rectangle<br>
-<textarea id="myLabels" rows=3 cols=120>
-0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0                                         
+<textarea id="myLabels" rows=4 cols=120>
+0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0,
+0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0, 
+0,0,0,1,    0,0,0,1,    0,0,0,1,    0,0,0,1,    0,1,0,0,    0,1,0,1,   1,0,0,0,   1,0,0,0 
+ 
+ 
 </textarea>
 <br>
 <input type=button value="load Images" onclick="myLoadImage()">
