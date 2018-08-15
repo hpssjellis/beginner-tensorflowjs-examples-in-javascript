@@ -3,6 +3,9 @@ This folder is for Keras only demos that will be on the webpage.
 
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/29keras-cifar.html
+
+
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/editable-group14.html
 
 
