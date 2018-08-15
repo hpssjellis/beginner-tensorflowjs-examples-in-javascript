@@ -163,22 +163,42 @@ model = tf.sequential();
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
     inputShape: [32, 32, 3],                                                                                                                                                  
-    kernelSize: 2,                                                                                                                                                          
-    filters: 4,                                                                                                                                                             
-    strides: 8,                                                                                                                                                             
-    activation: 'relu',                                                                                                                                                     
-    kernelInitializer: 'varianceScaling'                                                                                                                                    
+    kernelSize: 3,                                                                                                                                                          
+    filters: 32,                                                                                                                                                             
+    padding: 'same',                                                                                                                                                             
+    activation: 'relu'                                                                                                                                                                                                                                                                                        
 }));                                                                                                                                                                    
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));   
-model.add(tf.layers.dropout({rate: 0.4}))                                                                              
-model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
-//model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
-model.add(tf.layers.flatten());                                                                                                                                         
-model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                               
-model.add(tf.layers.dense({ units: 100, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                
-model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                  
-//model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );                                                  
-model.add(tf.layers.dense({ units: 4, activation: 'softmax' }) ); 
+  
+                                                                          
+model.add(tf.layers.conv2d({ kernelSize: 3, filters: 32,  activation: 'relu' }));                                       
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2]})); 
+model.add(tf.layers.dropout({ rate: 0.25 }))                                                                              
+model.add(tf.layers.conv2d({ kernelSize: 3, filters: 64,  activation: 'relu',padding: 'same' }));                                                                               
+
+                                                                              
+                                                                              
+model.add(tf.layers.conv2d({
+  kernelSize: 3,
+  filters: 64,
+  activation: 'relu'
+}))
+model.add(tf.layers.maxPooling2d({poolSize: [2, 2]}))
+model.add(tf.layers.dropout({ rate: 0.25 }))
+
+model.add(tf.layers.flatten())
+model.add(tf.layers.dense({
+  units: 512,
+  activation: 'relu'
+}))
+model.add(tf.layers.dropout({ rate: 0.5 }))
+model.add(tf.layers.dense({
+  units: 4,
+  activation: 'softmax'
+}))             
+                                                                              
+                                                                              
+                                                                              
+//model.add(tf.layers.dense({ units: 4, activation: 'softmax' }) ); 
   
 const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('myLearningRate').value));               
 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
