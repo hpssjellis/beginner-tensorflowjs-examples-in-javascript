@@ -242,6 +242,13 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
     var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
     var data = imageData.data;
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+                                                                 
+    for (var i=0; i<=myTestArray.length-1; i++ ){
+       myTestArray[i] = null                                                          
+    }                                                             
+                                                                 
+                                                                 
+                                                                 
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
     console.log('myTestArray two'+await myTestArray[0])
