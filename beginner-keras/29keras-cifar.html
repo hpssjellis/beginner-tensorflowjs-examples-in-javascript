@@ -243,13 +243,13 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
     var data = imageData.data;
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
                                                                  
-    for (var i=0; i<=myTestArray.length-1; i++ ){
-       myTestArray[i] = null                                                          
-    }                                                             
+   // for (var i=0; i<=myTestArray.length-1; i++ ){
+  //     myTestArray[i] = null                                                          
+  //  }                                                             
                                                                  
                                                                  
                                                                  
-    myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
+    var myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
     console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
@@ -303,8 +303,8 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size="7"> m
 ///////////////////// As soon as you start using real images the coding gets much more complex
 ///////////////////// Mainly becuase each pixel of colour is 4 data points Red, Green, Blue and Alpha
 ///////////////////// Where Alpha is the amount of transparency
-myTestArray = []
-myTestArray[0] = 0
+//myTestArray = []
+//myTestArray[0] = 0
 myTestDataArray = []                                                                                             
                                                                                              
 myMainData = []; // stores imageData as an array
