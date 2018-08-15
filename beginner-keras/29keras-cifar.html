@@ -225,7 +225,8 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
     });  // end model.fit                                                                                                              
     
   await document.getElementById('myButtonTest').click() 
-  document.getElementById('myButton7979').style.backgroundColor = 'yellow'                                                                               
+  document.getElementById('myButton7979').style.backgroundColor = 'yellow' 
+ await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                             
 })()
                                                                                                                                                                       
 
@@ -574,6 +575,7 @@ myLoadImage = async function() {
 
 
 
+<div id='myDivSummary'>...</div><br>
 <div id='myDiv7979'>...</div><br>
 
 
