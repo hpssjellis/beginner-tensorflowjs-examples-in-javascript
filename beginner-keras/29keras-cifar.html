@@ -253,7 +253,12 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
  
  
 
-<input type=checkbox id="myCheck"> front if mobile <input type=button value="Activate WebCam" onclick="{getVideo()}"> <br>
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='computer'>Computer
+ <option value='user'>Front Mobile Camera
+</select>
+<input type=button value="Activate WebCam" onclick="{getVideo()}"> <br>
 <input type=button value="get Pic" onclick="{takeSnapshot()}">
 Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
 <input type=button value="Auto" onclick="{takeAuto()}">
@@ -480,13 +485,14 @@ myLoadImage = async function() {
    //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
                                                                                              
   getVideo = async function() {  
-  const myCheckElement = document.getElementById('myCheck').checked
+  //const myCheckElement = document.getElementById('myCheck').checked
 
-  const myCamera = 'environment'  // rear facing only if mobile
-  if (myCheckElement){  
+  //const myCamera = 'environment'  // rear facing only if mobile
+  const myCamera = await document.getElementById('myCheck').value
+  //if (myCheckElement){  
    // alert('worked inside if statment ')                                                                                           
-    myCamera = 'user'  // forward facing
-  }
+   // myCamera = 'user'  // forward facing
+  //}
                                                                                         
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
