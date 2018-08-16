@@ -69,14 +69,28 @@ So I tried real simple text based image analysis, but the reality is that images
 
 <textarea id="myURLs" rows=16 cols=140>
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-1.jpg,  
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-3.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-6.jpg,
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-8.jpg,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg,  
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg, 
+ 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran3.png,
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg,
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle01.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle02.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle03.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle04.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle05.png, 
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/orange.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/white.png, 
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle01.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle02.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle03.png, 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle04.png,
+ 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle-rectangle.png,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran1.jpg,
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran2.jpg 
 
 
   
@@ -86,7 +100,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 </textarea>
 <br>Labels are one hot encoded no shape, circle, triangle, rectangle<br>
 <textarea id="myLabels" rows=3 cols=120>
-0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0                                         
+0,1,0,0,     0,1,0,0,   1,0,0,0,   1,0,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,  
+0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0,    0,0,0,1,    0,0,0,1,  
+0,0,0,1,    0,0,0,1,    0,1,0,0,    0,1,0,1                                       
 </textarea>
 <br>
 <input type=button value="load Images" onclick="myLoadImage()">
