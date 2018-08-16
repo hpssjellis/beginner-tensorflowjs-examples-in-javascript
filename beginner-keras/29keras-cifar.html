@@ -116,16 +116,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
  
 <br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
- 
- <input type=button value="Load Image to test" onclick="{ 
- //myTestArray.length = 0   // attempt to reset the array
- (async function(){
-   await myTestLoad(document.getElementById('myAsk2').value) 
- 
-   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
- //alert(await myTestArray)
- })()
-}"><br>
+<br>
  
  
 
@@ -211,6 +202,18 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   // this worked we
 
                                                                                                                                                                        
 }" > 
+ 
+ 
+ <input type=button value="Load Image to test" onclick="{ 
+ //myTestArray.length = 0   // attempt to reset the array
+ (async function(){
+   await myTestLoad(document.getElementById('myAsk2').value) 
+ 
+   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
+ //alert(await myTestArray)
+ })()
+}"> 
+ 
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {  
