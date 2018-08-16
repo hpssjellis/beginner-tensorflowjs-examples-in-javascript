@@ -476,11 +476,12 @@ myLoadImage = async function() {
   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
   var myStoredInterval = 0
 
+   // navigator.getMedia({video: true, audio: false},
                                                                                              
   getVideo = async function() {                                                                                           
                                                                                              
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({video: { facingMode: "environment" }, audio: false},
+  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
                      
     function(stream) {
       myVideoStream.srcObject = stream   
