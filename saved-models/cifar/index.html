@@ -26,7 +26,12 @@ myLoadCifar10 = async function(){
        
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
         
-        
+        var data = imageData.data;
+        const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+        myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
+
+        console.log('myTestArray two'+await myTestArray[0])
+        const xsTesting =   tf.tensor4d(myTestArray, shape=[10000, 32, 32, 3])   
         
        // for (let j = 0, i = 0; j < imageData.data.length; j++) {
         //  if ((j + 1) % 4 === 0) continue
