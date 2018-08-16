@@ -1,0 +1,36 @@
+
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}">
+
+<br><canvas id="myCanvas" style="background-color:lightgray;" width="32" height="10000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+
+<script>
+myLoadCifar10 = async function(){
+   const img = new Image();
+    var canvas = document.getElementById('myCanvas'); 
+    var ctx = canvas.getContext('2d');
+    // img.crossOrigin = "Anonymous"; // now not needed
+   // img.src = await fetch('data_batch_1.png')
+    img.src = 'data_batch_1.png'
+  
+    img.onload = () => {
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+
+        const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)
+        const datasetBytesView = new Float32Array(datasetBytesBuffer)
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width,canvas.height)
+       // const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+       // for (let j = 0, i = 0; j < imageData.data.length; j++) {
+        //  if ((j + 1) % 4 === 0) continue
+        //  datasetBytesView[i++] = imageData.data[j] / 255
+       // }
+
+       // resolve(datasetBytesView)
+      }
+     // img.onerror = reject;
+    }
+
+
+</script>
