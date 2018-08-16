@@ -41,7 +41,7 @@ console.log('fetching')
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG
         my32ctxA.drawImage(img, 0, 0, canvas.width, 1,        0, 0, 32,32)  // what is this going to do??
-        my32ctxB.drawImage(img, 0, 1, canvas.width, 2,        0, 0, 32,32)  // what is this going to do??
+       // my32ctxB.drawImage(img, 0, 1, canvas.width, 2,        0, 0, 32,32)  // what is this going to do??
        
        
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
@@ -52,7 +52,7 @@ console.log('fetching')
        // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
        // console.log('myTestArray two'+await myTestArray[0])
-        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 32, 32, 3])  
+        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 92, 32])  
         tf.toPixels(xsTesting, my32B)
        // xsTesting.print(true)
 
