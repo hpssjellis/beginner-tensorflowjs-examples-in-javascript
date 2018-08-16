@@ -246,7 +246,7 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
  
  Reshaped image --> <canvas id="myReshapeCanvas" width="64" height="48" style="border: 1px solid #ddd; "></canvas> <br> 
  
- <video  id="myVideo" width="400" height="300" style="border: 1px solid #ddd;"></video><br>
+ <video  id="myVideo" width="160" height="120" style="border: 1px solid #ddd;"></video><br>
 
  
  
@@ -257,6 +257,9 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
 Take snapshot every <input type=number id="myInterval"  value="3000"> milliseconds
 <input type=button value="Auto" onclick="{takeAuto()}">
+<input type=button value="Stop Auto" onclick="{clearInterval(myStoredInterval)}">
+ 
+
 
  
  
@@ -498,7 +501,8 @@ myLoadImage = async function() {
 
                                                                                              
   takeAuto = async function(){                                                                                           
-    takeSnapshot() // get snapshot right away then wait and repeat
+     await takeSnapshot() // get snapshot right away then wait and repeat
+     await document.getElementById('myButtonTest').click()      
     clearInterval(myStoredInterval)
     myStoredInterval = setInterval(async function(){                                                                                         
        await takeSnapshot()
