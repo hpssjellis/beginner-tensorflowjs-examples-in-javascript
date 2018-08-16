@@ -1,0 +1,59 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
+
+
+
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}">
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+<textarea id="myArea" rows=40 cols=40></textarea>
+
+<script>
+myLoadCifar10  = async function () {	
+	console.log('fetching')
+     const myBinaryFile = await	fetch('data_batch_1.bin')    
+     const myBuffer = await myBinaryFile.arrayBuffer() 
+     
+     const dv = new DataView(myBuffer);
+     
+     //var f32 = new Int8Array(myBuffer.byteLength);
+     var f32 = new Uint8ClampedArray(myBuffer.byteLength);
+     
+ 
+     
+     
+     const littleEndian = false;
+	  
+     for (let i = 0; i < f32.length; i++) {
+        f32[i] = dv.getInt8(i, littleEndian);
+       // f32[i] = dv.getInt8(i);
+     }  
+    
+   //  myLabels = []
+   // var myBig = 0
+  //  for (let k=0; k <= 1000; k+3073){
+   //     myLabels[k] = f32[k*3073]
+   // }
+    
+  // console.log(myLabels) 
+   // for (let j=0; j <= 10000; j++){
+
+
+   // }
+    
+    
+     //const myWeightsJSON = JSON.stringify(f32, null, 4)  	 
+     //document.getElementById('myArea').value = JSON.stringify(f32[0], null, 4) 
+     document.getElementById('myArea').value = '[0]: '+f32[0] + ', 3072: '+ f32[3072] + ', 3073: '+
+     f32[3073] + ', 3074:'+ f32[3074] + ', 3073*2:'+ f32[3073*2]
+     
+     for (let h = 0;  h<= 200; h++){
+        document.getElementById('myArea').value += h +' : '+ f32[3073*h]+'\n'
+     }
+     
+     
+       document.getElementById('myArea').value += '\nlength: '+f32.length
+     //console.log(myWeightsJSON) 
+     }
+
+</script>
