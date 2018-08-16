@@ -39,7 +39,7 @@
 
     
     
-<h2 align=center>Convolutional Keras Layers Full Image Neural Network!</h2>
+<h2 align=center>Convolutional Keras Layers Full Image Neural Network.</h2>
 
 
 
@@ -48,15 +48,12 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 Keras Image and Video Convolutional Layer Neural Network.<br><br>
- 
-NOT REALLY WORKING WELL YET.<br><br>
- 
 So I tried real simple text based image analysis, but the reality is that images are 24 bit rgb style and Tensorflowjs
  with it's floating point math can handle the larger amount of data. <br><br>
 
  So lets try to do something similar to the last page and train the model with full images loaded from this web domain
  
- <a href="https://thekevinscott.com/download-image-datasets-for-image-classification/">online CORS free image set uploading by the Kevin Scott .com</a>
+ DRAFT MODE
 </div><br>
 
 
@@ -73,7 +70,6 @@ So I tried real simple text based image analysis, but the reality is that images
 <textarea id="myURLs" rows=22 cols=140>
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg, 
- 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran3.png,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran4.jpg,
  
@@ -90,20 +86,22 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle02.png, 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle03.png, 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/rectangle04.png,
- 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/circle-rectangle.png,
+ 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran1.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random/ran2.jpg 
 
-   
+
+  
+  
+  
+  
 </textarea>
 <br>Labels are one hot encoded no shape, circle, triangle, rectangle<br>
-<textarea id="myLabels" rows=4 cols=120>
-0,1,0,0,     0,1,0,0,   1,0,0,0,   1,0,0,0,
-0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0, 
-0,0,0,1,    0,0,0,1,    0,0,0,1,    0,0,0,1,    0,1,0,0,    0,1,0,1
- 
- 
+<textarea id="myLabels" rows=5 cols=120>
+0,1,0,0,     0,1,0,0,   1,0,0,0,   1,0,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,  
+0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0,    0,0,0,1,    0,0,0,1,  
+0,0,0,1,    0,0,0,1,    0,1,0,0,    0,1,0,1                                       
 </textarea>
 <br>
 <input type=button value="load Images" onclick="myLoadImage()">
@@ -111,37 +109,30 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
 }">
- <br>
-Learning Rate: <input type=text value="0.02" id="myLearningRate" size="7"> <br>
  
-BatchSize: <input type=number value="18" id="myBatchSize" size="7"> <br>
- 
-Epochs: <input type=number value="1000" id="myEpochs" size="7"> <br>
  
  
 <br> All images below fixed 100 x 100 and pixelated if low resolution<br>
  
 <br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
- <br>
- <input type=button value="Load Image to test" onclick="{ 
- //myTestArray.length = 0   // attempt to reset the array
- (async function(){
-   await myTestLoad(document.getElementById('myAsk2').value) 
- 
-   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
- //alert(await myTestArray)
- })()
-}"><br>
- 
+
+<br>
  
  
 
 Test or change this data <br>
 <textarea id="myAsk2" rows=4 cols=100 wrap=false>https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/ball02.png</textarea><br>
-<br>
+
+ 
+  <br>
+Learning Rate: <input type=text value="0.02" id="myLearningRate" size="7"> <br>
+ 
+BatchSize: <input type=number value="18" id="myBatchSize" size="7"> <br>
  
  
-<input id="myButton7979" type="button" value="Train Images and Test" onclick="{ 
+Epochs: <input type=number value="1400" id="myEpochs"> <br>
+ 
+<input id="myButton7979" type="button" value="Train images and test" onclick="{ 
                                                                                     
 document.getElementById('myButton7979').style.backgroundColor = 'red' 
 
@@ -169,19 +160,19 @@ model.add(tf.layers.conv2d({
     activation: 'relu',                                                                                                                                                     
     kernelInitializer: 'varianceScaling'                                                                                                                                    
 }));                                                                                                                                                                    
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));   
-model.add(tf.layers.dropout({rate: 0.4}))                                                                              
+                                                                                                                                                                        
 model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
-//model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));                                                                                                                                                                        
+                                                                                                                                                                        
 model.add(tf.layers.flatten());                                                                                                                                         
-model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                               
-model.add(tf.layers.dense({ units: 100, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                
-model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                  
-//model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );                                                  
-model.add(tf.layers.dense({ units: 4, activation: 'softmax' }) ); 
-  
+model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
+ 
+                                                                              
+                                                                              
 const myOptimizer = tf.train.sgd(parseFloat(document.getElementById('myLearningRate').value));               
-model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
+model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
+                                                                              
+//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   // this worked well. What is it's default learning rate???
                                                                               
 //document.getElementById('myButton7979').style.backgroundColor = 'red'   
                                                                               
@@ -212,6 +203,18 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                                                                                                                        
 }" > 
  
+ 
+ <input type=button value="Load Image to test" onclick="{ 
+ //myTestArray.length = 0   // attempt to reset the array
+ (async function(){
+   await myTestLoad(document.getElementById('myAsk2').value) 
+ 
+   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
+ //alert(await myTestArray)
+ })()
+}"> 
+ 
+ 
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {  
     
@@ -226,7 +229,7 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
 
     console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 64, 48, 3])                                              
-    xsTesting.print(true)                                                             
+    //xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 64, 48, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
@@ -250,10 +253,21 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
  
  
 
-<input type=button value="get Webcam Video" onclick="{getVideo()}">
-<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
-Take snapshot every <input type=number id="myInterval"  value="3000" size="7"> milliseconds
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='user'>Front Mobile Camera
+</select>
+<input type=button value="Activate WebCam" onclick="{getVideo()}"> <br>
+<input type=button value="get Pic" onclick="{takeSnapshot()}">
+Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
 <input type=button value="Auto" onclick="{takeAuto()}">
+<input type=button value="Stop Auto" onclick="{clearInterval(myStoredInterval)}">
+ 
+
+
+ 
+ 
+ 
 
  
 
@@ -300,7 +314,7 @@ myFinalMakeTensor = async function() {
 
   //document.getElementById('myTensorArea').value =   myMainTensor.dataSync()
  // console.log('Before Change')                                                                                           
-   myMainTensor.print(true);
+ // myMainTensor.print(true);
                                                                                              
 xs = myMainTensor.slice([0, 0, 0, 0], [-1, -1, -1, 3]);                                                                                           
   
@@ -373,8 +387,8 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
       // wow = tf.concat3d([myMainTensor , latestTensor])
       // myMainTensor.concat3d(latestTensor)
 
-      latestTensor.print(true);
-    //  document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
+     // latestTensor.print(true);
+      document.getElementById('myDiv7979').innerHTML = latestTensor.dataSync()                                                                                       
       myShape = latestTensor.shape;
      // console.log('myShape: ' + myShape);
 
@@ -466,11 +480,21 @@ myLoadImage = async function() {
   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
   var myStoredInterval = 0
 
+   // navigator.getMedia({video: true, audio: false},
+   //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
                                                                                              
-  getVideo = async function() {                                                                                           
-                                                                                             
+  getVideo = async function() {  
+  //const myCheckElement = document.getElementById('myCheck').checked
+
+  //const myCamera = 'environment'  // rear facing only if mobile
+  const myCamera = await document.getElementById('myCheck').value
+  //if (myCheckElement){  
+   // alert('worked inside if statment ')                                                                                           
+   // myCamera = 'user'  // forward facing
+  //}
+                                                                                        
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({video: true, audio: false},
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
     function(stream) {
       myVideoStream.srcObject = stream   
@@ -487,15 +511,16 @@ myLoadImage = async function() {
    var myCanvasElement = document.getElementById('myReshapeCanvas');
    var myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
-   document.getElementById('myAsk2').value   = 'Image from webcam.'                                                                                         
 }
 
                                                                                              
   takeAuto = async function(){                                                                                           
-    takeSnapshot() // get snapshot right away then wait and repeat
+     await takeSnapshot() // get snapshot right away then wait and repeat
+     await document.getElementById('myButtonTest').click()      
     clearInterval(myStoredInterval)
-    myStoredInterval = setInterval(function(){                                                                                         
-       takeSnapshot()
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await takeSnapshot()
+       await document.getElementById('myButtonTest').click()                                                                                       
    }, document.getElementById('myInterval').value);        
 }
   
@@ -539,14 +564,11 @@ myLoadImage = async function() {
  
  
  
-
+ 
+ 
+ 
  
 </div>
-
-
-
-
-
 <div id='myDiv7979'>...</div><br>
 
 
@@ -562,7 +584,7 @@ myLoadImage = async function() {
   myJoe = myFred.join('\n')
 
   document.getElementById('myDiv7979Code').innerHTML =    myJoe 
- // document.getElementById('myButton7979').click()
+  document.getElementById('myButton7979').click()
                                              
 }"><br>
 
@@ -584,6 +606,15 @@ Click here to see the working HTML code.
 
 
 <br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -622,7 +653,7 @@ Use at your own risk!
 <script>
 
 myOnce7979 = true    // so textareas are only clicked once
-//myOnce124 = true  
+myOnce124 = true  
 
 function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
