@@ -480,13 +480,14 @@ myLoadImage = async function() {
    //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
                                                                                              
   getVideo = async function() {  
-//alert(document.getElementById('myCheck').checked)  
+  const myCheckElement = document.getElementById('myCheck').checked
+
   const myCamera = 'environment'  // rear facing only if mobile
-  if (document.getElementById('myCheck').checked == 'true'){  
-   // alert(worked inside )                                                                                           
+  if (myCheckElement == 'true'){  
+    alert('worked inside if statment ')                                                                                           
     myCamera = 'user'  // forward facing
   }
-  //alert(document.getElementById('myCheck').checked)                                                                                           
+                                                                                        
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
