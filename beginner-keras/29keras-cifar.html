@@ -481,10 +481,10 @@ myLoadImage = async function() {
                                                                                              
   getVideo = async function() {  
   const myCamera = 'environment'  // rear facing only if mobile
-  if (document.getElementById('myCheck').value == 'checked'){                                                                                           
+  if (document.getElementById('myCheck').checked == true){                                                                                           
     myCamera = 'user'  // forward facing
   }
-  alert(document.getElementById('myCheck').value)                                                                                           
+  alert(document.getElementById('myCheck').checked)                                                                                           
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
