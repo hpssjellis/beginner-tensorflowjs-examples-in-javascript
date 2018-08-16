@@ -484,7 +484,8 @@ myLoadImage = async function() {
     takeSnapshot() // get snapshot right away then wait and repeat
     clearInterval(myStoredInterval)
     myStoredInterval = setInterval(function(){                                                                                         
-       takeSnapshot()
+       await takeSnapshot()
+       await document.getElementById('myButtonTest').click()                                                                                       
    }, document.getElementById('myInterval').value);        
 }
   
