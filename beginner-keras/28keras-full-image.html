@@ -116,7 +116,7 @@ Learning Rate: <input type=text value="0.02" id="myLearningRate" size="7"> <br>
  
 BatchSize: <input type=number value="18" id="myBatchSize" size="7"> <br>
  
-Epochs: <input type=number value="70" id="myEpochs" size="7"> <br>
+Epochs: <input type=number value="1000" id="myEpochs" size="7"> <br>
  
  
 <br> All images below fixed 100 x 100 and pixelated if low resolution<br>
@@ -180,7 +180,7 @@ model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', act
 //model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );                                                  
 model.add(tf.layers.dense({ units: 4, activation: 'softmax' }) ); 
   
-const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('myLearningRate').value));               
+const myOptimizer = tf.train.sgd(parseFloat(document.getElementById('myLearningRate').value));               
 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                               
                                                                               
 //document.getElementById('myButton7979').style.backgroundColor = 'red'   
