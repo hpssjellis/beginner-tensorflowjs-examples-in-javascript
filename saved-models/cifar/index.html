@@ -29,7 +29,7 @@ myLoadCifar10 = async function(){
           if ((j + 1) % 4 === 0) continue
           datasetBytesView[i++] = imageData.data[j] / 255
         }
-
+        console.log(datasetBytesView)
        // resolve(datasetBytesView)
       }
      // img.onerror = reject;
