@@ -170,7 +170,7 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                                                                                                         
                                                                                                                    
     var myFit = await model.fit(xs, ys, { 
-      batchSize: 8192, 
+      batchSize: 22, 
       epochs : parseInt(document.getElementById('myEpochs').value), 
       callbacks :  {  
                                                                               
