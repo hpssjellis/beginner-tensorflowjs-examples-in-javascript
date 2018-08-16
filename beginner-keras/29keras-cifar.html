@@ -483,7 +483,7 @@ myLoadImage = async function() {
   const myCheckElement = document.getElementById('myCheck').checked
 
   const myCamera = 'environment'  // rear facing only if mobile
-  if (myCheckElement == 'true'){  
+  if (myCheckElement){  
     alert('worked inside if statment ')                                                                                           
     myCamera = 'user'  // forward facing
   }
