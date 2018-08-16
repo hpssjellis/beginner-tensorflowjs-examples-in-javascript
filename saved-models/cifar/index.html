@@ -52,7 +52,8 @@ myLoadCifar10 = async function(){
        // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
        // console.log('myTestArray two'+await myTestArray[0])
-        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 32, 32, 3])   
+        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 32, 32, 3])  
+        tf.toPixels(xsTesting, my32B)
        // xsTesting.print(true)
 
       }
