@@ -67,7 +67,7 @@ So I tried real simple text based image analysis, but the reality is that images
  
  Test page for loading multiple images of different sizes, force them to 64 x 48, and then load the data into a tensor as the xTrainingData for a Neural Network.<br> (Labels would have to be dealt with using a coordinated text file!)<br><br>
 
-<textarea id="myURLs" rows=16 cols=140>
+<textarea id="myURLs" rows=22 cols=140>
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-0.jpg,
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/soccer/soccer-ball-9.jpg, 
  
@@ -99,7 +99,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
   
 </textarea>
 <br>Labels are one hot encoded no shape, circle, triangle, rectangle<br>
-<textarea id="myLabels" rows=3 cols=120>
+<textarea id="myLabels" rows=5 cols=120>
 0,1,0,0,     0,1,0,0,   1,0,0,0,   1,0,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,  
 0,1,0,0,    0,1,0,0,    0,1,0,0,   1,0,0,0,   1,0,0,0,    0,0,0,1,    0,0,0,1,  
 0,0,0,1,    0,0,0,1,    0,1,0,0,    0,1,0,1                                       
@@ -109,16 +109,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 <input type=button value="Data to Tensor (Check console) " onclick="{
   myFinalMakeTensor()
-}"><input type=button value="Load Image to test" onclick="{ 
- //myTestArray.length = 0   // attempt to reset the array
- (async function(){
-   await myTestLoad(document.getElementById('myAsk2').value) 
+}">
  
-   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
- //alert(await myTestArray)
- })()
-}"><br>
- 
+
  
  
 
@@ -245,7 +238,17 @@ Take snapshot every <input type=number id="myInterval"  value="3000"> millisecon
  
 <br><canvas id="myCanvas" style="background-color:lightgray;" width="1000" height="101" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
-
+ 
+ <input type=button value="Load Image to test" onclick="{ 
+ //myTestArray.length = 0   // attempt to reset the array
+ (async function(){
+   await myTestLoad(document.getElementById('myAsk2').value) 
+ 
+   // console.log('Checking myTestArray:'+ await myTestArray[0])   // strangely needed for this program to work. Go figure?
+ //alert(await myTestArray)
+ })()
+}"><br>
+ 
 
 
  <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
