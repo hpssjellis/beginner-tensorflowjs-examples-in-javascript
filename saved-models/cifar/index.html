@@ -20,12 +20,15 @@ myLoadCifar10 = async function(){
         const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)
         const datasetBytesView = new Float32Array(datasetBytesBuffer)
 
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width,canvas.height)
-       // const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-       // for (let j = 0, i = 0; j < imageData.data.length; j++) {
-        //  if ((j + 1) % 4 === 0) continue
-        //  datasetBytesView[i++] = imageData.data[j] / 255
-       // }
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width,canvas.height)  // draws the original PNG
+       
+       
+       
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        for (let j = 0, i = 0; j < imageData.data.length; j++) {
+          if ((j + 1) % 4 === 0) continue
+          datasetBytesView[i++] = imageData.data[j] / 255
+        }
 
        // resolve(datasetBytesView)
       }
