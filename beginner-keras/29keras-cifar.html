@@ -480,7 +480,7 @@ myLoadImage = async function() {
   getVideo = async function() {                                                                                           
                                                                                              
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({video: true, audio: false},
+  navigator.getMedia({video: { facingMode: "environment" }, audio: false},
                      
     function(stream) {
       myVideoStream.srcObject = stream   
