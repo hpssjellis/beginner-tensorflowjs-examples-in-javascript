@@ -11,6 +11,11 @@
 
 <script>
 myLoadCifar10 = async function(){
+   
+   
+   const dataset = new Cifar10({batchNum: 32});
+   
+   
    const img = new Image();
     var canvas = document.getElementById('myCanvas'); 
     var ctx = canvas.getContext('2d');
