@@ -477,11 +477,13 @@ myLoadImage = async function() {
   var myStoredInterval = 0
 
    // navigator.getMedia({video: true, audio: false},
+   //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
                                                                                              
-  getVideo = async function() {                                                                                           
+  getVideo = async function() {  
                                                                                              
+  const myCamera = 'user'                                                                                           
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
     function(stream) {
       myVideoStream.srcObject = stream   
