@@ -178,10 +178,10 @@ model.add(tf.layers.dense({ units: 4, activation: 'linear' }) );
  
                                                                               
                                                                               
-const myOptimizer = tf.train.sgd(Number.parseFloat(document.getElementById('myLearningRate').value));               
-model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
+//const myOptimizer = tf.train.sgd(parseFloat(document.getElementById('myLearningRate').value));               
+//model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
                                                                               
-//model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   // this worked well
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});   // this worked well
                                                                               
 //document.getElementById('myButton7979').style.backgroundColor = 'red'   
                                                                               
