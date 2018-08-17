@@ -1,7 +1,9 @@
 <textarea id="myArea01" rows=3 cols=80>
 A1,R11,R12,R13,G11,G12,G13,B11,B12,B13,A2,R21,R22,R23,G21,G22,G23,B21,B22,B23</textarea><br>
 
-<textarea id="myArea02" rows=25 cols=20></textarea><textarea id="myArea03" rows=25 cols=20></textarea><br>
+<textarea id="myArea02" rows=25 cols=20></textarea>
+<textarea id="myArea03" rows=25 cols=20></textarea>
+<textarea id="myArea03" rows=25 cols=20></textarea><br>
 
 <input type=button value="map Array" onclick="{
      myAr = []
@@ -10,7 +12,7 @@ A1,R11,R12,R13,G11,G12,G13,B11,B12,B13,A2,R21,R22,R23,G21,G22,G23,B21,B22,B23</t
                                               
                                               
      // set all A values to null                                         
-     let myNewArr = myAr.map((myValue, myIndex, myOriginalArray) => {
+     let myNewArr2 = myAr.map((myValue, myIndex, myOriginalArray) => {
        if (myIndex % 10 === 0){
                return null                                                                                        
          } else {
@@ -21,24 +23,25 @@ A1,R11,R12,R13,G11,G12,G13,B11,B12,B13,A2,R21,R22,R23,G21,G22,G23,B21,B22,B23</t
      
                                               
     // now delete all null values from array                                          
-    myNewArr = myNewArr.filter(function( element ) {
+    myNewArr3 = myNewArr.filter(function( element ) {
        return element !== null;
    })
        
-                                          
-     myNewArr3 = []                                         
-     for (let j=0; j <= parseInt(myNewArr.length / 9)-1; j+9 ){           
+   /*                                       
+     myNewArr4 = []                                         
+     for (let j=0; j <= parseInt(myNewArr3.length / 9)-1; j+9 ){           
         for (let x=0; x <= 9; x++ ){                                        
-          myNewArr3[j+x]    =  myNewArr[j+x]                                              
-          myNewArr3[j+x+1]  =  myNewArr[j+x+1]                                                   
-          myNewArr3[j+x+2] =  myNewArr[j+x+2]                                              
+          myNewArr4[j+x]    =  myNewArr[j+x]                                              
+          myNewArr4[j+x+1]  =  myNewArr[j+x+1]                                                   
+          myNewArr4[j+x+2] =  myNewArr[j+x+2]                                              
         }
     }
                                            
-         
+   */      
                                           
                                               
                                               
-    document.getElementById('myArea02').value = JSON.stringify(myNewArr, null, 3)     
-    document.getElementById('myArea03').value = JSON.stringify(myNewArr3, null, 3)                                             
+    document.getElementById('myArea02').value = JSON.stringify(myNewArr2, null, 3)     
+    document.getElementById('myArea03').value = JSON.stringify(myNewArr3, null, 3)   
+   // document.getElementById('myArea04').value = JSON.stringify(myNewArr4, null, 3)                                            
 }">
