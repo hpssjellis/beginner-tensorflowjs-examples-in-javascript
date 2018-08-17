@@ -1,0 +1,41 @@
+<textarea id="myArea01" rows=3 cols=80>
+A1,R11,R12,R13,G11,G12,G13,B11,B12,B13,A2,R21,R22,R23,G21,G22,G23,B21,B22,B23</textarea><br>
+
+<textarea id="myArea02" rows=25 cols=20></textarea><br>
+
+<input type=button value="map Array" onclick="{
+     myAr = []
+     myAr = document.getElementById('myArea01').value.split(',')   
+     
+                                              
+                                              
+     // set all A values to null                                         
+     let myNewArr = myAr.map((myValue, myIndex, myOriginalArray) => {
+       if (myIndex % 10 === 0){
+               return null                                                                                        
+         } else {
+            return myValue                                   
+       }
+    
+    })                                         
+     
+                                              
+    // now delete all null values from array                                          
+    myNewArr = myNewArr.filter(function( element ) {
+       return element !== null;
+   })
+       
+                                          
+                                              
+                                              
+    let myNewArr2 = myNewArr.map((myValue, myIndex, myOriginalArray) => {                                                           
+        
+    
+    })                                            
+         
+                                          
+                                              
+                                              
+    document.getElementById('myArea02').value = JSON.stringify(myNewArr, null, 4)     
+   // document.getElementById('myArea01').value = JSON.stringify(myAr, null, 4)                                             
+}">
