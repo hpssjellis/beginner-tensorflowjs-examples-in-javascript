@@ -8,11 +8,19 @@ A1,B11,C11,D11,B12,C12,D12,B13,C13,D13,A2,B21,C21,D21,B22,C22,D22,B23,C23,D23</t
      myAr = document.getElementById('myArea01').value.split(',')   
      
      let myNewArr = myAr.map((myValue, myIndex, myOriginalArray) => {
-        return myIndex % 10 === 0 ? null : value; 
+       if (myIndex % 10 === 0){
+               const index = myOriginalArray.indexOf(element);
+               if (index !== -1) {
+                  myOriginalArray.splice(index, 1);
+                  //return myOriginalArray                            
+          }                                                              
+         } else {
+            return myValue                                   
+       }
     
     })                                         
                                               
-                                              
+
                                               
                                               
                                               
