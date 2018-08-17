@@ -9,7 +9,7 @@ A1,B11,C11,D11,B12,C12,D12,B13,C13,D13,A2,B21,C21,D21,B22,C22,D22,B23,C23,D23</t
      
      let myNewArr = myAr.map((myValue, myIndex, myOriginalArray) => {
         if (myIndex % 10 === 0){
-           return null   // or undefined
+           return undefined
         } else {
         return myValue
     }
