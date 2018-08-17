@@ -1,5 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
 
+<script>
+
+  myNewArr4 = []
+
+</script>
 
 for CIFAR-10 conversion to tensors<br>
 copy and paste below when testing
@@ -42,7 +47,7 @@ A1,R11,R12,R13,R14,G11,G12,G13,G14,B11,B12,B13,B14,A2,R21,R22,R23,R24,G21,G22,G2
    })
        
                                        
-     myNewArr4 = []
+   
       let y = 0 
       let myCount = -1;                                
      for (let j=0; j <= 1; j++ ){   
@@ -88,9 +93,33 @@ A1,R11,R12,R13,R14,G11,G12,G13,G14,B11,B12,B13,B14,A2,R21,R22,R23,R24,G21,G22,G2
   myCifar.print(true)
 
 
+
+
+
                                       
 }">
 
+<input type=button value="Save Byte Array" onclick="{
 
+//var sampleBytes = new Int8Array(4096);
+
+var saveByteArray = (function () {
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    return function (data, name) {
+        var blob = new Blob(data, {type: 'octet/stream'}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
+
+
+saveByteArray([myNewArr4], 'tensorStuff.tfgs');
+
+}">
 
 
