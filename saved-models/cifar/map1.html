@@ -1,5 +1,5 @@
 <textarea id="myArea01" rows=3 cols=80>
-A1,B11,C11,D11,B12,C12,D12,B13,C13,D13,A2,B21,C21,D21,B22,C22,D22,B23,C23,D23</textarea><br>
+A1,R11,R12,R13,G11,G12,G13,B11,B12,B13,A2,R21,R22,R23,G21,G22,G23,B21,B22,B23</textarea><br>
 
 <textarea id="myArea02" rows=25 cols=20></textarea><br>
 
@@ -25,18 +25,15 @@ A1,B11,C11,D11,B12,C12,D12,B13,C13,D13,A2,B21,C21,D21,B22,C22,D22,B23,C23,D23</t
        return element !== null;
    })
        
-    /*                                          
+                                          
                                               
                                               
-        let myNewArr2 = myNewArr.map((myValue, myIndex, myOriginalArray) => {
-       if (myIndex % 4 === 0){
-               return  myOriginalArray[myIndex+4]                         
-          }                                                              
-
+    let myNewArr2 = myNewArr.map((myValue, myIndex, myOriginalArray) => {                                                           
+        
     
     })                                            
          
-    */                                          
+                                          
                                               
                                               
     document.getElementById('myArea02').value = JSON.stringify(myNewArr, null, 4)     
