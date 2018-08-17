@@ -7,12 +7,12 @@ A1,B11,C11,D11,B12,C12,D12,B13,C13,D13,A2,B21,C21,D21,B22,C22,D22,B23,C23,D23</t
      myAr = []
      myAr = document.getElementById('myArea01').value.split(',')   
      
+                                              
+                                              
+                                              
      let myNewArr = myAr.map((myValue, myIndex, myOriginalArray) => {
        if (myIndex % 10 === 0){
-               const index = myOriginalArray.indexOf(myIndex);
-               if (index !== -1) {
-                  myOriginalArray.splice(index, 1);
-                  //return myOriginalArray                            
+               return null                          
           }                                                              
          } else {
             return myValue                                   
@@ -20,10 +20,12 @@ A1,B11,C11,D11,B12,C12,D12,B13,C13,D13,A2,B21,C21,D21,B22,C22,D22,B23,C23,D23</t
     
     })                                         
                                               
-
+    myNewArr = myNewArr.filter(function( element ) {
+       return element !== undefined;
+   });
                                               
                                               
                                               
     document.getElementById('myArea02').value = JSON.stringify(myNewArr, null, 4)     
-    document.getElementById('myArea01').value = JSON.stringify(myAr, null, 4)                                             
+   // document.getElementById('myArea01').value = JSON.stringify(myAr, null, 4)                                             
 }">
