@@ -1,11 +1,12 @@
 <textarea id="myArea01">
 A,B,C,D,A,B,C,D
 
-</textarea>
+</textarea><br>
 
-<textarea id="myArea02"></textarea>
+<textarea id="myArea02"></textarea><br>
+
 <input type=button value="map Array" onclick="{
      myAr = []
-     myAr = document.getElementById('myArea').value.split(',')                                         
-    document.getElementById('myArea02').value= JSON.stringify(myAr, null, 4)                                           
+     myAr = document.getElementById('myArea01').value.split(',')                                         
+    document.getElementById('myArea02').value = JSON.stringify(myAr, null, 4)                                           
 }">
