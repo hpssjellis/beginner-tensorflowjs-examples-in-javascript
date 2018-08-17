@@ -1,3 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
+
+
+for CIFAR-10 conversion to tensors<br>
+copy and paste below when testing
+<textarea id="myNumberArea01" rows=3 cols=100>
+-9,1,2,3,4,5,6,7,8,9,10,11,12,-3,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</textarea><br>
+
+or try this one<br>
+<textarea id="myNumberArea01" rows=3 cols=100>
+-4,1,4,7,10,2,5,8,11,3,6,9,12,-6,21,24,27,210,22,25,28,211,23,26,29,212</textarea><br><br><br>
+
+
+<b>This is the set to use</b><br>
 <textarea id="myArea01" rows=3 cols=100>
 A1,R11,R12,R13,R14,G11,G12,G13,G14,B11,B12,B13,B14,A2,R21,R22,R23,R24,G21,G22,G23,G24,B21,B22,B23,B24</textarea><br>
 
@@ -27,36 +41,56 @@ A1,R11,R12,R13,R14,G11,G12,G13,G14,B11,B12,B13,B14,A2,R21,R22,R23,R24,G21,G22,G2
        return element !== null;
    })
        
-                                          
+                                       
      myNewArr4 = []
       let y = 0 
-                               
+      let myCount = -1;                                
      for (let j=0; j <= 1; j++ ){   
-        myNewArr4[j] = [] 
-      let myCount = -1;                                       
+       // myNewArr4[j] = []                               
         for (let x=0; x <= 3; x++){
-          y = j*12   
+          y = j*12  
+          if (myCount == 11){ 
+                // just to show one image
+              //alert()
+              const myCifar3d = tf.tensor3d(myNewArr4, shape=[2,2,3], 'int32')
+              console.log(myNewArr4)
+              myCifar3d.print(true)
+         }
+ 
           myCount += 1                 
-             myNewArr4[j][myCount]    =  myNewArr3[y+x] 
+          myNewArr4[myCount]    =  myNewArr3[y+x] 
 
           myCount += 1                                                 
-             myNewArr4[j][myCount]  =  myNewArr3[y+x+4]   
+          myNewArr4[myCount]  =  myNewArr3[y+x+4]   
 
           myCount += 1                                                    
-             myNewArr4[j][myCount]  =  myNewArr3[y+x+8]
-             console.log('j: '+j    +', y: '+y     +', x: '+x     +', myCount: '+myCount      +',myNewArr3[y+x]: '+myNewArr3[y+x])    
-             console.log(', myNewArr3[y+x+4]: '+myNewArr3[y+x+4]+', myNewArr3[y+x+8]: '+myNewArr3[y+x+8])     
-             console.log('-------------------')
+          myNewArr4[myCount]  =  myNewArr3[y+x+8]
+        
+
+          //  console.log('j: '+j    +', y: '+y     +', x: '+x     +', myCount: '+myCount      +',myNewArr3[y+x]: '+myNewArr3[y+x])    
+          //  console.log(', myNewArr3[y+x+4]: '+myNewArr3[y+x+4]+', myNewArr3[y+x+8]: '+myNewArr3[y+x+8])     
+          console.log('myCount: '+myCount)
                                 
         }
-      console.log(myNewArr4)  
+     // console.log(myNewArr4)  
     }
                                            
-         
+    console.log(myNewArr4)        
                                           
                                               
                                               
     document.getElementById('myArea02').value = JSON.stringify(myNewArr2, null, 3)     
     document.getElementById('myArea03').value = JSON.stringify(myNewArr3, null, 3)   
-    document.getElementById('myArea04').value = JSON.stringify(myNewArr4, null, 3)                                            
+    document.getElementById('myArea04').value = JSON.stringify(myNewArr4, null, 3)      
+
+
+  const myCifar = tf.tensor4d(myNewArr4, shape=[2,2,2,3], 'int32')
+  myCifar.print(true)
+
+
+                                      
 }">
+
+
+
+
