@@ -1,0 +1,381 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
+
+
+
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}">
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+<textarea id="myArea" rows=2 cols=2></textarea>
+
+<script>
+
+
+
+ //var myNewArr4 = []
+  var myNewArr4 = new Uint8ClampedArray(30720000);  // length of cifar-10 binary file
+   var myOnlyOne = new Uint8ClampedArray(3072);
+
+
+var saveByteArray = (function () {
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    return function (data, name) {
+        var blob = new Blob(data, {type: 'octet/stream'}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}());
+
+//saveByteArray([f8rgb], 'tensorStuff.tfgs');
+
+
+
+myLoadCifar10  = async function () {	
+   	 console.log('fetching')
+
+     const myBinaryFile = await	fetch('data_batch_1.bin')    
+     const myBuffer = await myBinaryFile.arrayBuffer() 
+    
+     const dv = new DataView(myBuffer);
+
+     var f8   = new Uint8ClampedArray(myBuffer.byteLength);
+    // f8rgb   = new Uint8ClampedArray(myBuffer.byteLength);   // make global
+
+     var myLabels = new Array(10000);
+ 
+ 
+     for (let i = 0; i < f8.length; i++) { // get the data into f8
+        f8[i] = dv.getInt8(i);
+     }  
+    
+
+     document.getElementById('myArea').value = '[0]: '+f8[0] + ', 3072: '+ 
+     f8[3072] + ', 3000: '+ f8[3000] + ', 3073: '+
+     f8[3073] + ', 3074: '+ f8[3074] + ', 3073*2: '+ f8[3073*2]
+
+
+     console.log('getting labels')
+    
+     //for (let h = 0;  h<= 10000-1; h++){
+     for (let h = 0;  h <= 10000-1; h++){
+        myLabels[h] = f8[3073*h]
+     }
+     
+    console.log('saving labels') 
+    // this works fine, don't need it every run
+   // saveByteArray([myLabels], 'cifar-1-Lables.txt'); 
+     
+    console.log('labels saved') 
+       // let myCount = 0
+      //  let myRGB = []
+      //  for (let x = 1; x <= 1024; x++){
+       //    myCount += 1
+       //    let i = 3073*h + x     //  actual location of data
+         //  myRGB[myCount] = f8[i]
+
+           //myRGB[h][x]= f8[3073*h+x]	
+       // }
+       // console.log('myRGB[5]'+myRGB[5])
+    // }
+     
+     console.log('Deleting labels')
+                                                
+     // set all A values to null  
+     let myNewArr2 = new Uint8ClampedArray(myBuffer.byteLength);
+     myNewArr2 = f8.map((myValue, myIndex) => {
+       if (myIndex % 3073 === 0){
+               return null                                                                                        
+         } else {
+            return myValue                                   
+       }
+    
+    })                                         
+     
+                                              
+    // now delete all null values from array   
+    let   myNewArr3 = new Uint8ClampedArray(myBuffer.byteLength);
+    myNewArr3 = myNewArr2.filter(function( element ) {
+       return element !== null;
+   }) 
+     
+    
+     console.log('Labels deleted') 
+     console.log('myNewArr3[0]: ' + myNewArr3[0]) 
+     
+     
+   
+  ///////////////////////////////////////////////////// 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  //to grab one image 
+      
+   let y2 = 0 
+      let myCount2 = -1;                                
+     for (let j2=0; j2 <= 1; j2++ ){   // loop through one image
+        for (let x2=0; x2 <= 1024-1; x2++){ //loop through each pixel reds then greens then blues then 
+          y2 = j2*3072  
+
+          myCount2 += 1                 
+          myOnlyOne[myCount2]    =  myNewArr3[y2+x2] 
+
+          myCount2 += 1                                                 
+          myOnlyOne[myCount2]  =  myNewArr3[y2+x2+1024]   
+
+          myCount2 += 1                                                    
+          myOnlyOne[myCount2]  =  myNewArr3[y2+x2+2048]
+                        
+        }
+
+    }
+         
+                  // just to show one image
+             
+     
+     let myFlat2 = []
+     for (let i = 0; i < myOnlyOne.length; i++) { // why no -1 after length
+        myFlat2[i] = parseInt(myOnlyOne[i]);
+     }  
+    const myCifar3d = tf.tensor3d(myFlat2, shape=[32,32,3], 'int32')
+   // myCifar3d.print(true)   
+    console.log(myFlat2)
+              
+   saveByteArray([myOnlyOne], 'cifar-1st-image.bin');       
+   
+   
+   let y = 0 
+      let myCount = -1;                                
+     for (let j=0; j <= 10000-1; j++ ){   // loop through each image in dataset
+       // myNewArr4[j] = []                               
+        for (let x=0; x <= 1024-1; x++){ //loop through each pixel reds then greens then blues then 
+          y = j*3072  
+          if (myCount == 3072-1){ 
+              console.log('printing one tensor')
+                // just to show one image
+             // const myCifar3d = tf.tensor3d(myNewArr4, shape=[32,32,3], 'int32')
+              //console.log(myNewArr4)
+              //myCifar3d.print(true)
+              //  saveByteArray([myNewArr4], 'small-cifar.txt'); 
+         }
+ 
+          myCount += 1                 
+          myNewArr4[myCount]    =  myNewArr3[y+x] 
+
+          myCount += 1                                                 
+          myNewArr4[myCount]  =  myNewArr3[y+x+1024]   
+
+          myCount += 1                                                    
+          myNewArr4[myCount]  =  myNewArr3[y+x+2048]
+        
+
+          //  console.log('j: '+j    +', y: '+y     +', x: '+x     +', myCount: '+myCount      +',myNewArr3[y+x]: '+myNewArr3[y+x])    
+          //  console.log(', myNewArr3[y+x+4]: '+myNewArr3[y+x+4]+', myNewArr3[y+x+8]: '+myNewArr3[y+x+8])     
+         // console.log('myCount: '+myCount)
+                                
+        }
+     // console.log(myNewArr4)  
+    }
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+                                           
+    //console.log(myNewArr4)        
+                                          
+                                              
+                                              
+   // document.getElementById('myArea02').value = JSON.stringify(myNewArr2, null, 3)     
+   // document.getElementById('myArea03').value = JSON.stringify(myNewArr3, null, 3)   
+   // document.getElementById('myArea04').value = JSON.stringify(myNewArr4, null, 3)      
+
+
+  console.log('full tensor start')
+   // not yet ready for this
+  // let myFlat = Array.from(myNewArr4)
+  
+  // let myFlat = myNewArr4.map(Number)
+  // let myFlat = myNewArr4.toString()
+  // let myFlat = myNewArr4.values()
+  
+  
+  
+  
+     let myFlat = []
+     for (let i = 0; i < (myNewArr4.length); i++) { // why no -1 after length
+        myFlat[i] = parseInt(myNewArr4[i]);
+     }  
+  
+  
+  
+  
+  
+   //console.log(myFlat)
+  const myCifar = tf.tensor4d(myFlat, shape=[10000,32,32,3], 'int32')
+  //myCifar.print(true)
+  //saveByteArray(myNewArr4.map], 'myCifar-01-bin-mapped.tfjs'); 
+  console.log('full tensor saved!') 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+     
+     
+  /////////////////////////////////////////////////////////////   
+     
+  // console.log('myLabel 9998: '+myLabels[9998]+', myLabel 9998: '+myLabels[9999])
+   
+   
+   document.getElementById('myArea').value += '\nlength: '+f8.length
+
+}
+
+
+     
+
+
+
+
+</script>
+
+
+
+
+
+
+<br>
+for CIFAR-10 conversion to tensors<br>
+copy and paste below when testing<br>
+<textarea id="myNumberArea01" rows=3 cols=100>
+-9,1,2,3,4,5,6,7,8,9,10,11,12,-3,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</textarea><br>
+
+or try this one<br>
+<textarea id="myNumberArea01" rows=3 cols=100>
+-4,1,4,7,10,2,5,8,11,3,6,9,12,-6,21,24,27,210,22,25,28,211,23,26,29,212</textarea><br><br><br>
+
+
+<b>This is the set to use</b><br>
+<textarea id="myArea01" rows=3 cols=100>
+A1,R11,R12,R13,R14,G11,G12,G13,G14,B11,B12,B13,B14,A2,R21,R22,R23,R24,G21,G22,G23,G24,B21,B22,B23,B24</textarea><br>
+
+<textarea id="myArea02" rows=30 cols=20></textarea>
+<textarea id="myArea03" rows=30 cols=20></textarea>
+<textarea id="myArea04" rows=30 cols=20></textarea><br>
+
+<input type=button value="map Array" onclick="{
+
+     myAr = []
+     myAr = document.getElementById('myArea01').value.split(',')   
+     
+                                              
+                                              
+     // set all A values to null                                         
+     let myNewArr2 = myAr.map((myValue, myIndex, myOriginalArray) => {
+       if (myIndex % 13 === 0){
+               return null                                                                                        
+         } else {
+            return myValue                                   
+       }
+    
+    })                                         
+     
+                                              
+    // now delete all null values from array                                          
+    myNewArr3 = myNewArr2.filter(function( element ) {
+       return element !== null;
+   })
+       
+                                       
+   
+      let y = 0 
+      let myCount = -1;                                
+     for (let j=0; j <= 1; j++ ){   
+       // myNewArr4[j] = []                               
+        for (let x=0; x <= 3; x++){
+          y = j*12  
+          if (myCount == 11){ 
+                // just to show one image
+              //alert()
+              const myCifar3d = tf.tensor3d(myNewArr4, shape=[2,2,3], 'int32')
+              console.log(myNewArr4)
+              myCifar3d.print(true)
+              
+         }
+ 
+          myCount += 1                 
+          myNewArr4[myCount]    =  myNewArr3[y+x] 
+
+          myCount += 1                                                 
+          myNewArr4[myCount]  =  myNewArr3[y+x+4]   
+
+          myCount += 1                                                    
+          myNewArr4[myCount]  =  myNewArr3[y+x+8]
+        
+
+          //  console.log('j: '+j    +', y: '+y     +', x: '+x     +', myCount: '+myCount      +',myNewArr3[y+x]: '+myNewArr3[y+x])    
+          //  console.log(', myNewArr3[y+x+4]: '+myNewArr3[y+x+4]+', myNewArr3[y+x+8]: '+myNewArr3[y+x+8])     
+          console.log('myCount: '+myCount)
+                                
+        }
+     // console.log(myNewArr4)  
+    }
+                                           
+    console.log(myNewArr4)        
+                                          
+                                              
+                                              
+    document.getElementById('myArea02').value = JSON.stringify(myNewArr2, null, 3)     
+    document.getElementById('myArea03').value = JSON.stringify(myNewArr3, null, 3)   
+    document.getElementById('myArea04').value = JSON.stringify(myNewArr4, null, 3)      
+
+
+  const myCifar = tf.tensor4d(myNewArr4, shape=[2,2,2,3], 'int32')
+  myCifar.print(true)
+
+
+
+
+
+                                      
+}">
+
+<input type=button value="Save Byte Array" onclick="{
+
+//var sampleBytes = new Int8Array(4096);
+
+
+
+
+saveByteArray([myNewArr4], 'cifar-mapped01.tfgs');
+
+}">
+
+
