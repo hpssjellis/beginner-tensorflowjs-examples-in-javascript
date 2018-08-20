@@ -1,0 +1,64 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
+
+
+
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}">
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+<br><canvas id="myCanvas" style="background-color:lightgray;" width="32" height="10000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+
+<script>
+myLoadCifar10 = async function(){
+   
+   
+console.log('fetching')
+   
+   
+   const img = new Image();
+    var canvas = document.getElementById('myCanvas'); 
+    var ctx = canvas.getContext('2d');
+   
+    var my32A = document.getElementById('my32x32CanvasA'); 
+    var my32ctxA = my32A.getContext('2d');
+   
+   
+    var my32B = document.getElementById('my32x32CanvasB'); 
+    var my32ctxB = my32B.getContext('2d');
+   
+   
+    // img.crossOrigin = "Anonymous"; // now not needed
+   // img.src = await fetch('data_batch_1.png')
+    img.src = 'data_batch_1.png'
+  
+    img.onload = () => {
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+
+        const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)
+        const datasetBytesView = new Float32Array(datasetBytesBuffer)
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG
+        my32ctxA.drawImage(img, 0, 0, canvas.width, 1,        0, 0, 32,32)  // what is this going to do??
+       // my32ctxB.drawImage(img, 0, 1, canvas.width, 2,        0, 0, 32,32)  // what is this going to do??
+       
+       
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        
+        var data = imageData.data;
+        const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+       // var myTestArray = []
+       // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
+
+       // console.log('myTestArray two'+await myTestArray[0])
+        const xsTesting =   tf.tensor3d(latestTensor2.dataSync(), shape=[10000, 96, 32])  
+        tf.toPixels(xsTesting, my32B)
+       // xsTesting.print(true)
+
+      }
+     // img.onerror = reject;
+    }
+
+
+</script>
