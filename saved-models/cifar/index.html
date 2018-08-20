@@ -78,14 +78,15 @@ console.log('fetching')
        
        console.log('Loading tensor')
       // const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')         
-       const xsTesting =   tf.tensor4d(datasetBytesView, shape=[10000, 3, 32, 32], 'int32')         
+      // const xsTesting =   tf.tensor4d(datasetBytesView, shape=[10000, 3, 32, 32], 'int32')          
+       const myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'int32')         
        console.log('Tensor loaded')
        
        
        
        
         console.log('transpose')     
-        myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
+       // myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
         console.log('transpose done')   
        
        
