@@ -2,7 +2,10 @@
 
 
 
-<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}">
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}"><br>
+<input type=number value=0 id="myNumToLoad" size=4>
+<input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
+
 <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 <br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
@@ -10,6 +13,29 @@
 
 
 <script>
+   
+var myLoadImage = function () {
+    
+   // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
+
+    const myImageTensor =  myBetterCifar.slice([document.getElementById('myNumToLoad').value, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+  
+    console.log('myImageTensor.shape(): '+myImageTensor.shape)
+    tf.toPixels(myImageTensor, my32x32CanvasA) 
+  
+    console.log('tensor to canvas')  
+     
+    
+}
+
+   
+   
+   
+   
+   
+   
+   
+   
 myLoadCifar10 = async function(){
    
    
@@ -80,7 +106,7 @@ console.log('fetching')
       // const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')         
       // const xsTesting =   tf.tensor4d(datasetBytesView, shape=[10000, 3, 32, 32], 'int32')          
      //  const myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'int32')       
-       const myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3])        
+       myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3])        
        console.log('Tensor loaded')
        
        
