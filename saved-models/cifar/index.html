@@ -1,12 +1,21 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
 
+<h2 align=center>Trying to get CIFAR-10 dataset into a tensor</h2>
+Main site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.cs.toronto.edu/~kriz/cifar.html</a>
 
+<br><br>Best explanation<br><a href="https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c">https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c</a><br>
+<br>
 
 <input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}"><br>
 <input type=number value=0 id="myNumToLoad" size=4>
 <input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
 
-<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+
+<div id="myDiv01">...</div><br>
+
+
+
 <br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 The following canvas is just for a pre-processing data dump <br>
 <br><canvas id="myCanvas" style="background-color:lightgray;" width="32" height="10000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
@@ -14,12 +23,14 @@ The following canvas is just for a pre-processing data dump <br>
 
 <script>
    
+var  myLabelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
+   
 var myLoadImage = function () {
     
    // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
 
     const myImageTensor =  myBetterCifar.slice([document.getElementById('myNumToLoad').value, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
-  
+  // document.getElementById('myDiv01').innerHTML = 'Label: '+myLabelNames[document.getElementById('myNumToLoad').value]
     console.log('myImageTensor.shape(): '+myImageTensor.shape)
     tf.toPixels(myImageTensor, my32x32CanvasA) 
   
