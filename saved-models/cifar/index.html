@@ -58,7 +58,7 @@ console.log('fetching')
        
        
        console.log('Loading tensor')
-       const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32])          
+       const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')          
        console.log('Tensor loaded')
        
         console.log('transpose')     
@@ -68,10 +68,12 @@ console.log('fetching')
        
         console.log('Slice')  
         const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
-        console.log('slice done')  
-
-
-        console.log('to pixels')  
+        console.log('slice done now printing tensor to console')  
+       
+        myImageTensor.print(true)
+        console.log('tensor print done')  
+       
+        console.log('to pixels') 
         tf.toPixels(myImageTensor, my32B)
         console.log('to pixels done')         
 
