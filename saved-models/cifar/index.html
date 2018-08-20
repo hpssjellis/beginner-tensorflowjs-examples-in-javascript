@@ -36,7 +36,7 @@ console.log('fetching')
         canvas.width = img.naturalWidth
         canvas.height = img.naturalHeight
 
-        const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)
+        const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)   // 3 colors, 4 RGB and alpha
         const datasetBytesView = new Float32Array(datasetBytesBuffer)
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG
@@ -45,6 +45,17 @@ console.log('fetching')
        
        
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        
+        for (let j = 0, i = 0; j < imageData.data.length; j++) {
+          if ((j + 1) % 4 === 0) continue
+          datasetBytesView[i++] = imageData.data[j] / 255
+        }
+        
+       console.log(datasetBytesView) 
+        
+        
+        
+        
         
         var data = imageData.data;
         const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
@@ -61,6 +72,9 @@ console.log('fetching')
        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')          
        console.log('Tensor loaded')
        
+       
+       
+       
         console.log('transpose')     
         myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
         console.log('transpose done')   
@@ -71,8 +85,8 @@ console.log('fetching')
         const myImageTensor = myBetterCifar.slice([0, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
         console.log('slice done now printing tensor to console')  
        
-        myImageTensor.print(true)
-        console.log('tensor print done')  
+       // myImageTensor.print(true)
+        console.log('tensor print commented')  
        
         console.log('to pixels') 
         tf.toPixels(myImageTensor, my32B)
