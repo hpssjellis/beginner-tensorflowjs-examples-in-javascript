@@ -130,8 +130,9 @@ console.log('fetching')
         console.log('to pixels done')         
 
        // xsTesting.print(true)
-
-       ctx.drawImage(img, 0, 0, 300,300)  // draws the original PNG but much smaller
+        canvas.width = 100
+        canvas.height = 100
+       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG but much smaller
        
        
       }
