@@ -8,7 +8,7 @@
 
 <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 <br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
-
+The following canvas is just for a pre-processing data dump <br>
 <br><canvas id="myCanvas" style="background-color:lightgray;" width="32" height="10000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
 
@@ -131,6 +131,9 @@ console.log('fetching')
 
        // xsTesting.print(true)
 
+       ctx.drawImage(img, 0, 0, 300,300)  // draws the original PNG but much smaller
+       
+       
       }
      // img.onerror = reject;
     }
