@@ -52,8 +52,23 @@ console.log('fetching')
        // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
        // console.log('myTestArray two'+await myTestArray[0])
-        const xsTesting =   tf.tensor3d(latestTensor2.dataSync(), shape=[10000, 96, 32])  
-        tf.toPixels(xsTesting, my32B)
+       // const xsTesting =   tf.tensor3d(latestTensor2.dataSync(), shape=[10000, 96, 32])  
+       // tf.toPixels(xsTesting, my32B)
+       
+       
+       
+       
+        const xsTesting =   tf.tensor3d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32])  
+        
+        myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
+ 
+        const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+
+
+
+        tf.toPixels(myImageTensor, my32B)
+        
+
        // xsTesting.print(true)
 
       }
