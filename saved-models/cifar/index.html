@@ -67,7 +67,8 @@ console.log('fetching')
        
        
         console.log('Slice')  
-        const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+       // const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze()  // second image truck?
+        const myImageTensor = myBetterCifar.slice([0, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
         console.log('slice done now printing tensor to console')  
        
         myImageTensor.print(true)
