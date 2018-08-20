@@ -51,14 +51,17 @@ console.log('fetching')
           datasetBytesView[i++] = imageData.data[j] / 255
         }
         
-       console.log('drawing datasetBytesView')     
-        my32ctxA.drawImage(datasetBytesView, 0, 0, canvas.width, canvas.height) 
+     //  console.log('drawing datasetBytesView')     
+     //   my32ctxA.drawImage(datasetBytesView, 0, 0, canvas.width, canvas.height) 
     
-       console.log('Done drawing datasetBytesView')        
+      // console.log('Done drawing datasetBytesView')        
         
         
-        var data = imageData.data;
-        const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+     //   var data = imageData.data;
+      //  const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+        
+       // var data = imageData.data;
+        const latestTensor2 = tf.fromPixels(datasetBytesView, 3);     // this time get rid of the alpha component
        // var myTestArray = []
        // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
