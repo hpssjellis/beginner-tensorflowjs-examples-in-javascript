@@ -61,7 +61,12 @@ console.log('fetching')
       //  const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
         
        // var data = imageData.data;
-        const latestTensor2 = tf.fromPixels(imageData.data, 3);     // this time get rid of the alpha component
+       
+       
+     //   const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+       
+       
+       
        // var myTestArray = []
        // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
@@ -72,7 +77,8 @@ console.log('fetching')
        
        
        console.log('Loading tensor')
-       const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')          
+      // const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')         
+       const xsTesting =   tf.tensor4d(datasetBytesView, shape=[10000, 3, 32, 32], 'int32')         
        console.log('Tensor loaded')
        
        
