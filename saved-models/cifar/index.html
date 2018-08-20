@@ -57,17 +57,23 @@ console.log('fetching')
        
        
        
+       console.log('Loading tensor')
+       const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32])          
+       console.log('Tensor loaded')
        
-        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32])  
-        
+        console.log('transpose')     
         myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
- 
+        console.log('transpose done')   
+       
+       
+        console.log('Slice')  
         const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+        console.log('slice done')  
 
 
-
+        console.log('to pixels')  
         tf.toPixels(myImageTensor, my32B)
-        
+        console.log('to pixels done')         
 
        // xsTesting.print(true)
 
