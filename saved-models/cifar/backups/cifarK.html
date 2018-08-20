@@ -1,0 +1,189 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
+
+<h2 align=center>Trying to get CIFAR-10 dataset into a tensor</h2>
+Main site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.cs.toronto.edu/~kriz/cifar.html</a>
+
+<br><br>Best explanation<br><a href="https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c">https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c</a><br>
+<br>
+
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}"><br>
+<input type=number value=0 id="myNumToLoad" size=4>
+<input type=button value="Load Image number" onclick="{myLoadImage()}">
+
+
+
+
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+airplane : 0<br> 
+automobile : 1<br> 
+bird : 2<br> 
+cat : 3<br> 
+deer : 4<br>  
+dog : 5<br> 
+frog : 6<br> 
+horse : 7<br>  
+ship : 8<br>  
+truck : 9<br>  
+
+
+<textarea id="myArea" rows=4 cols=30></textarea><br>
+<textarea id="mySetLabels" rows=30 cols=30></textarea>
+
+<script>
+
+
+// loads each image onto canvas
+var myLoadImage = function () {
+    
+    console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
+
+    const myImageTensor =  myBetterCifar.slice([document.getElementById('myNumToLoad').value, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+  
+    console.log('myImageTensor.shape(): '+myImageTensor.shape)
+    tf.toPixels(myImageTensor, my32x32CanvasA) 
+  
+    console.log('tensor to canvas')  
+     
+    
+}
+
+
+
+
+var saveByteArray = function () {
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    return function (data, name) {
+        var blob = new Blob(data, {type: 'octet/stream'}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+}
+
+
+
+
+
+myLoadCifar10  = async function () {	
+   	 console.log('fetching')
+
+     const myBinaryFile = await	fetch('data_batch_1.bin')    
+     const myBuffer = await myBinaryFile.arrayBuffer() 
+    
+     const dv = new DataView(myBuffer);
+
+     var f8   = new Uint8ClampedArray(myBuffer.byteLength);
+
+
+     var myLabels = new Array(10000);
+ 
+ 
+     for (let i = 0; i < f8.length; i++) { // get the data into f8
+        f8[i] = dv.getInt8(i);
+     } 
+     
+     
+    
+     document.getElementById('myArea').value = '[0]: '+f8[0] + ', 3072: '+ 
+     f8[3072] + ', 3000: '+ f8[3000] + ', 3073: '+
+     f8[3073] + ', 3074: '+ f8[3074] + ', 3073*2: '+ f8[3073*2]
+
+
+     console.log('getting labels')
+    
+    let myLabelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+
+     //for (let h = 0;  h<= 10000-1; h++){
+     for (let h = 0;  h <= 10000-1; h++){
+        myLabels[h] = f8[3073*h]
+        
+    document.getElementById('mySetLabels').value += h+': '+myLabels[h] + ' = '+myLabelNames[myLabels[h]]+'\n'
+     }
+     
+    console.log('saving labels') 
+    
+    
+    // this works fine, don't need it every run
+   // saveByteArray([myLabels], 'cifar-1-Lables.txt'); 
+     
+    console.log('labels saved')  
+      console.log('Deleting labels from f8')
+                                                
+     // set all A values to null  
+     let myNewArr2 = new Uint8ClampedArray(myBuffer.byteLength);
+     myNewArr2 = f8.map((myValue, myIndex) => {
+       if (myIndex % 3073 === 0){
+               return null                                                                                        
+         } else {
+            return myValue                                   
+       }
+    
+    })                                         
+     
+                                              
+    // now delete all null values from array   
+    let   myNewArr3 = new Uint8ClampedArray(myBuffer.byteLength);
+    myNewArr3 = myNewArr2.filter(function( element ) {
+       return element !== null;
+   }) 
+     
+    
+     console.log('Labels deleted') 
+     console.log('myNewArr3[0]: ' + myNewArr3[0]) 
+      
+    
+     // lets try to put f8 into a tensor to manipulate it
+    
+ 
+      
+      
+     document.getElementById('myArea').value += '\nlength: '+f8.length    
+
+    
+    
+     console.log('f8 to tensor')
+
+     let myFlat = [30720000]
+     for (let i = 0; i < 30720000; i++) { // why no -1 after length
+        myFlat[i] = parseInt(myNewArr3[i]);
+     }  
+  
+
+   //console.log(myFlat)
+   // hopefully this tensor is global
+   const myCifar = tf.tensor4d(myFlat, shape=[10000,3,32,32], 'int32')   // weird tensor 3,32,32
+   //myCifar.print(true)
+   console.log('full tensor saved!  shape=[10000,3,32,32]') 
+    
+   
+   myBetterCifar =  myCifar.transpose([0,2,3,1])
+   console.log('myCifar.transpose([0,2,3,1])'+ myBetterCifar.shape)  
+ 
+
+   const myImageTensor =  myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+   
+   // const myImageTensor =  ddf.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze() //2nd image
+   // const myImageTensor =  ddf.slice([2, 0, 0, 0], [1, -1, -1, -1]).squeeze() //3rd image
+    
+   
+    console.log('myImageTensor.shape()'+myImageTensor.shape)
+    
+   
+    tf.toPixels(myImageTensor, my32x32CanvasA) 
+  
+    console.log('tensor to canvas')  
+    
+ // saveByteArray([myNewArr4.map], 'myCifar-01-bin-mapped.tfjs'); 
+ 
+
+}
+
+
+
+</script>
