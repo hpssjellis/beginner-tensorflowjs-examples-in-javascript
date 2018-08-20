@@ -135,7 +135,7 @@ myLoadCifar10  = async function () {
     
     
   
-    myCifar.transpose([0,2,3,1])
+   const ddf =  myCifar.transpose([0,2,3,1])
     console.log('myCifar.transpose([0,2,3,1])')   
     
    
@@ -148,17 +148,20 @@ myLoadCifar10  = async function () {
    
 
   //x.slice([1], [2]).print(); 
- const x =  myCifar.slice([9999,0,0,0])
+ const x =  ddf.slice([9999,0,0,0])
    
    //[a, b] = tf.split(myCifar, 2, 0);
    // a.print(true)
-    x.print(true)
-    console.log('x.print(true)')  
-  //  tf.toPixels(a, my32x32CanvasA) 
+   const cc = x.squeeze()
+       console.log('x.squeeze()') 
+       
+    cc.print(true)
+    console.log('cc.print(true)')  
+    tf.toPixels(cc, my32x32CanvasA) 
   
-  //  console.log('tensor to canvas')  
+    console.log('tensor to canvas')  
     
-  //saveByteArray(myNewArr4.map], 'myCifar-01-bin-mapped.tfjs'); 
+ // saveByteArray([myNewArr4.map], 'myCifar-01-bin-mapped.tfjs'); 
  
     
     // get rid of global myflat
