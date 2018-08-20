@@ -51,10 +51,10 @@ console.log('fetching')
           datasetBytesView[i++] = imageData.data[j] / 255
         }
         
-       console.log(datasetBytesView) 
-        
-        
-        
+       console.log('drawing datasetBytesView')     
+        my32ctxA.drawImage(datasetBytesView, 0, 0, canvas.width, canvas.height) 
+    
+       console.log('Done drawing datasetBytesView')        
         
         
         var data = imageData.data;
