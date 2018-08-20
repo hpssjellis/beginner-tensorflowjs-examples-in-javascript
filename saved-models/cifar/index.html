@@ -58,7 +58,7 @@ console.log('fetching')
        
        
        
-        const xsTesting =   tf.tensor3d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32])  
+        const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32])  
         
         myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
  
