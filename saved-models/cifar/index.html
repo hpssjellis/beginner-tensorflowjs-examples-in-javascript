@@ -39,7 +39,7 @@ myLoadData = async function(){
    const myData = await fetch(myFileName)
    document.getElementById('myX').value = await myData.text() 
    myLabelArray =  document.getElementById('myX').value.split(',')
-   myLabelTensor =   tf.tensor1d(myLabelArray, shape=[10000], 'int32')   
+   //myLabelTensor =   tf.tensor1d(myLabelArray, shape=[10000], 'int32')   
    myLabelTensor.print(true) 
 
  } 
