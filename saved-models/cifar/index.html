@@ -53,7 +53,7 @@ var myLoadImage = function () {
     
    // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
 
-    const myImageTensor =  myBetterCifar.slice([document.getElementById('myNumToLoad').value, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+    const myImageTensor =  myBetterCifar.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
     const myLab = myLabelArray[document.getElementById('myNumToLoad').value] 
     document.getElementById('myDiv01').innerHTML = 'Label: '+myLab+ ', converts to: ' +myLabelNames[myLab]
     console.log('myImageTensor.shape(): '+myImageTensor.shape)
