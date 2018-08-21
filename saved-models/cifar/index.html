@@ -12,10 +12,17 @@ Main site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.
 <input type=number value=0 id="myNumToLoad" size=4>
 <input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
 
+
+<!--
+<input type=button value="Save Model to disk" onclick="{mySaveDisk()}"><br>
+<input type=button value="Load Model for URL" onclick="{myLoadUrl()}"><br>
+
+-->
+
 <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
 
 <div id="myDiv01">...</div><br>
-
+<div id="myDivSummary">...</div><br>
 
 
 <br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
@@ -167,6 +174,37 @@ console.log('fetching')
       }
      // img.onerror = reject;
     }
+
+
+
+
+
+
+ myLoadUrl = async function(){
+  alert('The test function will need to be changed if other models are loaded')
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/CIFAR-model01');
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                           
+}
+
+
+ mySaveDisk = async function(){
+  alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
+  const myFileName = prompt('Enter filename to store this model','downloads://CIFAR-model01');
+  const saveResults = await model.save(myFileName);
+ // document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+
+
+
+
+
+
 
 
 </script>
