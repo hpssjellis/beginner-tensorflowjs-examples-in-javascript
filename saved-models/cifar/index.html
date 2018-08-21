@@ -7,6 +7,8 @@ Main site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.
 <br>
 
 <input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}"><br>
+<input type=button value="load CIFAR-10" onclick="{myLoadCifar10()}"><br>
+<textarea id='myX' rows=3 cols=70></textarea>
 <input type=number value=0 id="myNumToLoad" size=4>
 <input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
 
@@ -22,6 +24,21 @@ The following canvas is just for a pre-processing data dump <br>
 
 
 <script>
+
+
+myLoadData = async function(){
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/cifar-1-Lables.txt');
+ if (myFileName != null){  
+   const myData = await fetch(myFileName)
+   document.getElementById('myX').value = await myData.text() 
+   myLabelArray =  document.getElementById('myX').value.split(',')
+   myLabelTensor =   tf.tensor1d(myLabelArray, shape=[10000], 'int32')   
+   myLabelTensor.print(true) 
+
+ } 
+   
+}   
+   
    
 var  myLabelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
    
@@ -30,7 +47,8 @@ var myLoadImage = function () {
    // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
 
     const myImageTensor =  myBetterCifar.slice([document.getElementById('myNumToLoad').value, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
-  // document.getElementById('myDiv01').innerHTML = 'Label: '+myLabelNames[document.getElementById('myNumToLoad').value]
+    const myLab = myLabelArray[document.getElementById('myNumToLoad').value] 
+    document.getElementById('myDiv01').innerHTML = 'Label: '+myLab+ ', converts to: ' +myLabelNames[myLab]
     console.log('myImageTensor.shape(): '+myImageTensor.shape)
     tf.toPixels(myImageTensor, my32x32CanvasA) 
   
