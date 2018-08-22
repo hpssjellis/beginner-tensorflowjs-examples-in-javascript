@@ -1,5 +1,14 @@
 This is to store any keras information that I might use in the examples
 
+wow. look at these examples
+https://github.com/keras-team/keras/tree/master/examples
+
+
+
+
+
+
+
 
 July 29, 2018
 
