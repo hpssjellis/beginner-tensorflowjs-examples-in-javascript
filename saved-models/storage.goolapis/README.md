@@ -27,6 +27,15 @@ Normal size again
 https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json
 
 
+https://storage.googleapis.com/tfjs-models/tfjs/sentiment_lstm_v1/model.json
 
+
+
+really big
+
+https://storage.googleapis.com/tfjs-models/tfjs/squeezenet_v1.1/model.json
+
+
+https://storage.googleapis.com/tfjs-models/tfjs/translation_en_fr_v1/model.json
 
 
