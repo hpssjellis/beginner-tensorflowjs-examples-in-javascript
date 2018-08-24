@@ -1,0 +1,210 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> </script> 
+
+<h2 align=center>Trying to get CIFAR-10 dataset into a tensor</h2>
+Main site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.cs.toronto.edu/~kriz/cifar.html</a>
+
+<br><br>Best explanation<br><a href="https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c">https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c</a><br>
+<br>
+
+<input type=button value="load CIFAR-10-first-set" onclick="{myLoadCifar10()}"><br>
+<input type=button value="load-Labels-first-set" onclick="{myLoadData()}"><br>
+<textarea id='myX' rows=3 cols=70></textarea>
+<input type=number value=0 id="myNumToLoad" size=4>
+<input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
+
+
+<!--
+<input type=button value="Save Model to disk" onclick="{mySaveDisk()}"><br>
+<input type=button value="Load Model for URL" onclick="{myLoadUrl()}"><br>
+
+-->
+
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+
+<div id="myDiv01">...</div><br>
+<div id="myDivSummary">...</div><br>
+
+
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+The following canvas is just for a pre-processing data dump <br>
+<br><canvas id="myCanvas" style="background-color:lightgray;" width="32" height="10000" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+
+<script>
+
+
+myLoadData = async function(){
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/cifar-1-Lables.txt');
+ if (myFileName != null){  
+   const myData = await fetch(myFileName)
+   document.getElementById('myX').value = await myData.text() 
+   myLabelArray =  document.getElementById('myX').value.split(',').map(Number)
+   myLabelTensor =   tf.tensor1d(myLabelArray, 'int32')   
+   myLabelTensor.print(true) 
+
+ } 
+   
+}   
+   
+   
+var  myLabelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
+   
+var myLoadImage = function () {
+    
+   // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
+
+    const myImageTensor =  myBetterCifar.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+    const myLab = myLabelArray[document.getElementById('myNumToLoad').value] 
+    document.getElementById('myDiv01').innerHTML = 'Label: '+myLab+ ', converts to: ' +myLabelNames[myLab]
+    console.log('myImageTensor.shape(): '+myImageTensor.shape)
+    tf.toPixels(myImageTensor, my32x32CanvasA) 
+  
+    console.log('tensor to canvas')  
+     
+    
+}
+
+   
+   
+   
+   
+   
+   
+   
+   
+myLoadCifar10 = async function(){
+   
+   
+console.log('fetching')
+   
+   
+   const img = new Image();
+    var canvas = document.getElementById('myCanvas'); 
+    var ctx = canvas.getContext('2d');
+   
+    var my32A = document.getElementById('my32x32CanvasA'); 
+    var my32ctxA = my32A.getContext('2d');
+   
+   
+    var my32B = document.getElementById('my32x32CanvasB'); 
+    var my32ctxB = my32B.getContext('2d');
+   
+   
+    // img.crossOrigin = "Anonymous"; // now not needed
+   // img.src = await fetch('data_batch_1.png')
+    img.src = 'data_batch_1.png'
+  
+    img.onload = () => {
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+
+        const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)   // 3 colors, 4 RGB and alpha
+        const datasetBytesView = new Float32Array(datasetBytesBuffer)
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG
+       // my32ctxA.drawImage(img, 0, 0, canvas.width, 1,        0, 0, 32,32)  // what is this going to do??
+       // my32ctxB.drawImage(img, 0, 1, canvas.width, 2,        0, 0, 32,32)  // what is this going to do??
+       
+       
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        
+        for (let j = 0, i = 0; j < imageData.data.length; j++) {
+          if ((j + 1) % 4 === 0) continue
+          datasetBytesView[i++] = imageData.data[j] / 255
+        }
+        
+     //  console.log('drawing datasetBytesView')     
+     //   my32ctxA.drawImage(datasetBytesView, 0, 0, canvas.width, canvas.height) 
+    
+      // console.log('Done drawing datasetBytesView')        
+        
+        
+     //   var data = imageData.data;
+      //  const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+        
+       // var data = imageData.data;
+       
+       
+     //   const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+       
+       
+       
+       // var myTestArray = []
+       // myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
+
+       // console.log('myTestArray two'+await myTestArray[0])
+       // const xsTesting =   tf.tensor3d(latestTensor2.dataSync(), shape=[10000, 96, 32])  
+       // tf.toPixels(xsTesting, my32B)
+       
+       
+       
+       console.log('Loading tensor')
+      // const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')         
+      // const xsTesting =   tf.tensor4d(datasetBytesView, shape=[10000, 3, 32, 32], 'int32')          
+     //  const myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'int32')       
+       myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3])        
+       console.log('Tensor loaded')
+       
+       
+       
+       
+       // console.log('transpose')     
+       // myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
+       // console.log('transpose done')   
+       
+       
+        console.log('Slice')  
+       // const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze()  // second image truck?
+        const myImageTensor = myBetterCifar.slice([4, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+        console.log('slice done now printing tensor to console')  
+       
+       // myImageTensor.print(true)
+        console.log('tensor print commented')  
+       
+        console.log('to pixels') 
+        tf.toPixels(myImageTensor, my32B)
+        console.log('to pixels done')         
+
+       // xsTesting.print(true)
+        canvas.width = 100
+        canvas.height = 100
+       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG but much smaller
+       
+       
+      }
+     // img.onerror = reject;
+    }
+
+
+
+
+
+
+ myLoadUrl = async function(){
+  alert('The test function will need to be changed if other models are loaded')
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/CIFAR-model01');
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                           
+}
+
+
+ mySaveDisk = async function(){
+  alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
+  const myFileName = prompt('Enter filename to store this model','downloads://CIFAR-model01');
+  const saveResults = await model.save(myFileName);
+ // document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+
+
+
+
+
+
+
+
+</script>
