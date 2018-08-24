@@ -379,7 +379,8 @@ var myLoadImage = function () {
 }                                                                                           
                                                                                              
  
- myMakeLabelTensor  = async function() {    
+ myMakeLabelTensor  = async function() {   
+   ys.delete()                                                                                          
    myLabelArray =  document.getElementById('myX').value.split(',').map(Number)
    ys =   tf.oneHot(tf.tensor1d(myLabelArray, 'int32'), 10)      // global variable ys is the tensor for the labels !!!                                                                                     
    ys.print(true)                                                                                              
