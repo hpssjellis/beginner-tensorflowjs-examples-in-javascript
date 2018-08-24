@@ -350,7 +350,7 @@ myLoadData = async function(){
    document.getElementById('myX').value = await myData.text() 
    myLabelArray =  document.getElementById('myX').value.split(',').map(Number)
    ys =   tf.oneHot(tf.tensor1d(myLabelArray, 'int32'), 10)      // global variable ys is the tensor for the labels !!!                                                                                     
-                                                                                             
+   ys.print(true)                                                                                          
                                                                                              
    //myLabelTensor =   tf.tensor1d(myLabelArray, 'int32')   // not correct since needs to be one hot encoded !!!!!!!!!!!!
   // myLabelTensor.print(true) 
