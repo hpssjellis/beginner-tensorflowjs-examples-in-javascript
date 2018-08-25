@@ -147,9 +147,10 @@ Now lets try the above in a full Machine Learning Web App
   }"> <input id="myButtonReset" type="button" value="Reset Buttons" onclick="{
      myResetButtons()
   }"></td><td colSpan=2>Import / Export</td><tr>
-  <tr><td>Compile Model: </td><td><input id="myButtonCompile" type="button" value="Compile" onclick="{
-     myCompile()
-  
+  <tr><td>Compile Model: </td><td><input id="myButtonDefine" type="button" value="Define Model" onclick="{
+     myDefine()
+  }"><input id="myButtonCompile" type="button" value="Compile" onclick="{
+     myCompile() 
   }"><td></td></td><td>
 <input id="myButtonLoad" type="button" value="Load From Localstorage" onclick="{ 
    myLoadLocal()                                                                             
@@ -205,6 +206,7 @@ myResetButtons = function(){
      tf.disposeVariables()                                                                       
      document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'            
      document.getElementById('myButtonPrep').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonDefine').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
@@ -242,6 +244,7 @@ myLoadData = async function(){
  myRunAll = async function(){
   document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
   await myPrepData()
+  await myDefine()
   await myCompile()
   await myTrain()
   await myTest()
@@ -267,23 +270,28 @@ myLoadData = async function(){
 }
                                                                                              
                                                                                              
-                                                                                             
-                                                                                             
- myCompile = async function(){
-    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
-                                                                                             
-
-     /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
-                                                                                             
-                                                                                             
+ myDefineModel = async function(){   
+    document.getElementById('myButtonDefine').style.backgroundColor = 'red'                                                                                                
+ /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                                
     model = tf.sequential(); // no const so that it is a global variable 
     model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
     model.add(tf.layers.dense({ units: 20 }) );  
-    model.add(tf.layers.dense({ units:  1 }) );  
+    model.add(tf.layers.dense({ units:  1 }) );                                        
+    document.getElementById('myButtonDefine').style.backgroundColor = 'yellow'                                                                                                
+ }                                                                                            
+                                                                                             
+                                                                                             
+ myCompile = async function(){                                                                                       
+    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
-    const myOptimizer = tf.train.sgd(myLearningRate);               
-    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                 
+    const myOptimizer = tf.train.sgd(myLearningRate);           
+                                                                                             
+   /////////////////////////////////// COMPILE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                          
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});  
+                                                                                             
     console.log(model)
     document.getElementById('myDivSummary').innerHTML = ''                                                                        
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
