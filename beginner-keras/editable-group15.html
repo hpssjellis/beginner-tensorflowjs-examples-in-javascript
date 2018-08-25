@@ -354,7 +354,7 @@ myTest = async function(){
   document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
                                                                                              
-  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data()) 
+  console.log('Asking: '+document.getElementById('myAsk').value + ', result: ' + await myPredictArray.data()) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
 
