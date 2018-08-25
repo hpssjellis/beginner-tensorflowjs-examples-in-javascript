@@ -255,14 +255,15 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = await tf.tensor2d(xArray, shape=[xArray.length, 1]);
-   const yTrainingTarget = await tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
-    console.log(xTrainingData)
-    console.log(yTrainingTarget)                                                                                     
+    //console.log(xTrainingData)
+    //console.log(yTrainingTarget) 
+     xTrainingData.print(true)                                                                                        
     } 
      
-    document.getElementById('myButtonPrep').style.backgroundColor = 'red'                                                                                         
+    document.getElementById('myButtonPrep').style.backgroundColor = 'yellow'                                                                                         
 }
                                                                                              
                                                                                              
