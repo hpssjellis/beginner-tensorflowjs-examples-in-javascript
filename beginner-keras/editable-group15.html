@@ -398,7 +398,8 @@ myTest = async function(){
                                                                                              
 
 myLoadLocal = async function(){
-  alert('The test function will need to be changed if other models are loaded')
+  //alert('The test function will need to be changed if other models are loaded')
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'                                                                                            
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   if (myFileName != null){  
     myButtonsForLoadedModel()                                                                                         
@@ -410,7 +411,8 @@ myLoadLocal = async function(){
 }
 
  myLoadUrl = async function(){
-  alert('The test function will need to be changed if other models are loaded')
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
   if (myFileName != null){  
     myButtonsForLoadedModel()
