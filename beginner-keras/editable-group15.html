@@ -140,9 +140,11 @@ Now lets try the above in a full Machine Learning Web App
 
 <h3>Compile or Load Model:</h3>
 <table border=1>
-  <tr><td>Compile, Train, Test: </td><td><input id="myButtonAll" type="button" value="Run All" onclick="{
+  <tr><td>Compile, Train, Test: </td><td><input id="myButtonPrep" type="button" value="PrepData" onclick="{
+      myPrepData()
+  }"></td><td><input id="myButtonAll" type="button" value="Run All" onclick="{
      myRunAll()
-  }"></td><td><input id="myButtonReset" type="button" value="Reset Buttons" onclick="{
+  }"> <input id="myButtonReset" type="button" value="Reset Buttons" onclick="{
      myResetButtons()
   }"></td><td colSpan=2>Import / Export</td><tr>
   <tr><td>Compile Model: </td><td><input id="myButtonCompile" type="button" value="Compile" onclick="{
@@ -187,20 +189,6 @@ Now lets try the above in a full Machine Learning Web App
   document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
                                                                       
 
- class EarlyStoppingCallback extends tf.Callback {
-      async onEpochEnd(epoch, logs) {     
-         document.getElementById('myLastEpoch').value = epoch + 1      
-         if (epoch % 20 == 0){
-            // console.log('Epoch:' + epoch + ', loss:' + logs.loss)                                                                      
-         }  
-         if (document.stopRequested) {                                                                  
-            this.model.stopTraining = true;                                                                                                                                             
-        }
-        document.getElementById('myDivLoss').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1)  + '/'+document.getElementById('myEpoch').value + '<br>'
-        document.getElementById('myDivLoss').innerHTML += 'Training loss: ' + logs.loss + '<br>'  //logs.acc, logs.val_loss, logs.val_acc
-        await tf.nextFrame();  // This improves UI responsiveness during training.                                                                                                                                                                      
-     }
-   } 
 
 
 myResetButtons = function(){ 
@@ -242,12 +230,17 @@ myLoadData = async function(){
 
  myRunAll = async function(){
   document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
+  await myPrepData()
   await myCompile()
   await myTrain()
   await myTest()
 }
 
-                                                                                             
+ myPrepData = async function(){
+    if (myNoDataYet){
+        alert()                                                                                       
+    }                                                                                         
+}
                                                                                              
                                                                                              
                                                                                              
