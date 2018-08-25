@@ -190,9 +190,10 @@ Now lets try the above in a full Machine Learning Web App
                                                                                              
                                                                                              
                                                                                              
- var myNoDataYet = true                                                                                            
- var model                                                                                            
-                                                                                             
+var myNoDataYet = true                                                                                            
+var model                                                                                            
+var xTrainingData
+var yTrainingTarget                                                                                              
                                                                                              
                                                                                                 
 document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
@@ -249,8 +250,19 @@ myLoadData = async function(){
  myPrepData = async function(){
     document.getElementById('myButtonPrep').style.backgroundColor = 'red' 
     if (myNoDataYet){
-        alert()                                                                                       
-    }                                                                                         
+                                                               
+     /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
+   let xArray = document.getElementById('myX').value.split(',')
+   let yArray = document.getElementById('myY').value.split(',')   
+                                                                                   
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+                                           
+   // console.log(xTrainingData)
+   // console.log(yTrainingTarget)                                                                                     
+    } 
+     
+    await document.getElementById('myButtonPrep').style.backgroundColor = 'red'                                                                                         
 }
                                                                                              
                                                                                              
@@ -291,16 +303,7 @@ myLoadData = async function(){
          document.getElementById('myButtonTrain').style.backgroundColor = 'red'                                                                           
          document.getElementById('myButtonTrain').value = 'Pause Training'
   }
-                                                               
-     /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
-   let xArray = document.getElementById('myX').value.split(',')
-   let yArray = document.getElementById('myY').value.split(',')   
-                                                                                   
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
-                                           
-   // console.log(xTrainingData)
-   // console.log(yTrainingTarget) 
+
                                                                                                                                          
    /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
                                                                     
