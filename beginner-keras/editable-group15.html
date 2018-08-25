@@ -266,6 +266,7 @@ myLoadData = async function(){
 }
 
  myPrepData = async function(){
+    console.log('Prepping Data')                                                                                         
     document.getElementById('myButtonPrep').style.backgroundColor = 'red' 
     if (myNoDataYet){
                                                                
@@ -278,7 +279,7 @@ myLoadData = async function(){
                                            
     //console.log(xTrainingData)
     //console.log(yTrainingTarget) 
-     xTrainingData.print(true)                                                                                        
+    // xTrainingData.print(true)                                                                                        
     } 
      
     document.getElementById('myButtonPrep').style.backgroundColor = 'yellow'                                                                                         
@@ -286,6 +287,7 @@ myLoadData = async function(){
                                                                                              
                                                                                              
  myDefineModel = async function(){   
+    console.log('Defining Model')  
     document.getElementById('myButtonDefine').style.backgroundColor = 'red'                                                                                                
  /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
                                                                                                 
@@ -297,7 +299,8 @@ myLoadData = async function(){
  }                                                                                            
                                                                                              
                                                                                              
- myCompile = async function(){                                                                                       
+ myCompile = async function(){  
+    console.log('Model Compile')   
     document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
@@ -307,7 +310,7 @@ myLoadData = async function(){
                                                                                           
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});  
                                                                                              
-    console.log(model)
+    // console.log(model)
     document.getElementById('myDivSummary').innerHTML = ''                                                                        
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
@@ -318,7 +321,7 @@ myLoadData = async function(){
                                                                                              
                                                                                              
  myTrain = async function(){  
-   
+    console.log('Should Model Train?')     
    document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'   // just to reset it if it was yellow  
    document.getElementById('myDivTest').innerHTML += ' <font color=red>old value, click Test/Predict button</font>'                                                                                          
                                                                                              
@@ -339,12 +342,12 @@ myLoadData = async function(){
                                                                                                                                          
    /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
                                                                     
-    xTrainingData.print()    // have a look at the training tensor in the console                                                                             
+   // xTrainingData.print()    // have a look at the training tensor in the console                                                                             
    // yTrainingTarget.print()
      
-   console.log('Starting Training');
   
-  if (!document.stopRequested){
+  if (!document.stopRequested){  
+    console.log('Training Model');                                                                                          
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
@@ -379,7 +382,7 @@ myLoadData = async function(){
                                                                                              
 
 myTest = async function(){
- 
+  console.log('Model Predict')
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
   const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
