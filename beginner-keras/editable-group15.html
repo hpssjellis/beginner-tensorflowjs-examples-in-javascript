@@ -202,7 +202,8 @@ document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = 
 
 myResetButtons = function(){ 
      tf.disposeVariables()                                                                       
-     document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'            
+     document.getElementById('myButtonPrep').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
      document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
@@ -246,6 +247,7 @@ myLoadData = async function(){
 }
 
  myPrepData = async function(){
+    document.getElementById('myButtonPrep').style.backgroundColor = 'red' 
     if (myNoDataYet){
         alert()                                                                                       
     }                                                                                         
