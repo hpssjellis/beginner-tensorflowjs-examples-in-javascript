@@ -258,8 +258,8 @@ myLoadData = async function(){
    const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
    const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
-   // console.log(xTrainingData)
-   // console.log(yTrainingTarget)                                                                                     
+    console.log(xTrainingData)
+    console.log(yTrainingTarget)                                                                                     
     } 
      
     document.getElementById('myButtonPrep').style.backgroundColor = 'red'                                                                                         
@@ -289,6 +289,10 @@ myLoadData = async function(){
     document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
 }
 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
  myTrain = async function(){  
    if (document.getElementById('myLastEpoch').value == document.getElementById('myEpoch').value) {
       alert('Already completed all epochs. To continue training, increase \'Epochs: (# of batches to run)\' and re-click this button')                                                                        
