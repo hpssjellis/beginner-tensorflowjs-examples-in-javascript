@@ -216,6 +216,19 @@ myResetButtons = function(){
                                                                                              
 }
 
+
+myButtonsForLoadedModel = function(){ 
+     tf.disposeVariables()                                                                       
+     document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'            
+     document.getElementById('myButtonPrep').style.backgroundColor = 'green'
+     document.getElementById('myButtonDefine').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonCompile').style.backgroundColor = 'green'
+     document.getElementById('myButtonTrain').style.backgroundColor = 'green'
+     document.getElementById('myButtonTest').style.backgroundColor = 'green'
+                                                                                             
+}                                                                                             
+                                                                                             
+                                                                                             
 myLoadData = async function(){
  const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/random01data.txt');
  if (myFileName != null){  
@@ -371,11 +384,18 @@ myTest = async function(){
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
 
 myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   if (myFileName != null){  
+    myButtonsForLoadedModel()                                                                                         
     model = await tf.loadModel(myFileName); 
     document.getElementById('myDivSummary').innerHTML = ''     
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
@@ -387,6 +407,7 @@ myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
   if (myFileName != null){  
+    myButtonsForLoadedModel()
     model = await tf.loadModel(myFileName);
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
