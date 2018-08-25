@@ -115,14 +115,6 @@ Now lets try the above in a full Machine Learning Web App
 <h2 align=center> Tensorflowjs Machine Learning Web App Template</h2>
 <h5 align=center>As simple as possible template. Note that for simplicity this has minimal CSS</h5>
 
-<h3>Pre-Set Values:</h3>
-<table border=1 >
-  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.01"></td></tr>
-  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
-  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
- <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
-
-
 
 
 <h3>Data:</h3>
@@ -135,6 +127,14 @@ Now lets try the above in a full Machine Learning Web App
 }">  </td></tr>
   </table>
 <br><br><br>
+
+
+<h3>Pre-Set Values to Train Data:</h3>
+<table border=1 >
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.01 title="From about 0.5 to 0.0001" placeholder="0.01"></td></tr>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
+ <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
 
@@ -168,9 +168,9 @@ Now lets try the above in a full Machine Learning Web App
 }"></td><td> <input id="myButtonSave" type="button" value="Save to Disk" onclick="{ 
    mySaveDisk()                                                                             
 }">  </td><tr>
-  <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test" onclick="{
+  <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test/Predict" onclick="{
    myTest()
-    }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
+    }"><br> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,1" placeHolder="1,1"></td><tr>
 </table><br>
 
 <div id="myDivLoss">...</div><br>
@@ -318,7 +318,7 @@ myLoadData = async function(){
  myTrain = async function(){  
    
    document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'   // just to reset it if it was yellow  
-   document.getElementById('myDivTest').innerHTML += ' <font color=red> OLD VALUE</font>'                                                                                          
+   document.getElementById('myDivTest').innerHTML += ' <font color=red>old value, click Test/Predict button</font>'                                                                                          
                                                                                              
    if (document.getElementById('myLastEpoch').value == document.getElementById('myEpoch').value) {
       alert('Already completed all epochs. To continue training, increase \'Epochs: (# of batches to run)\' and re-click this button')                                                                        
@@ -382,7 +382,7 @@ myTest = async function(){
   
   const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
   document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
-        ', Output = ' + await myPredictArray.data() +'<br>'
+        ', Output = ' + await myPredictArray.data()
                                                                                              
   console.log('Asking: '+document.getElementById('myAsk').value + ', result: ' + await myPredictArray.data()) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
