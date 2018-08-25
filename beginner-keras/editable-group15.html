@@ -247,6 +247,11 @@ myLoadData = async function(){
   await myTest()
 }
 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
  myCompile = async function(){
     document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
                                                                                              
@@ -301,33 +306,30 @@ myLoadData = async function(){
    console.log('Starting Training');
   
   if (!document.stopRequested){
-  
-  var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
     validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value), // for seperating percent of data for testing  0.15 = 15% for testing
     initialEpoch: Number.parseInt(document.getElementById('myLastEpoch').value), // for restarting training
     callbacks : {
-     onEpochEnd: async (epoch, logs) => {
+      onEpochEnd: async (epoch, logs) => {
          document.getElementById('myLastEpoch').value = epoch + 1;
          if (epoch % 20 == 0) {
             console.log('Epoch:' + epoch  + '/' +document.getElementById('myEpoch').value +
                ', loss:' + logs.loss)
-        }
- 
-       document.getElementById('myDivLoss').innerHTML = 'Epoch: ' +(parseInt(epoch) + 1) +'/' +
-       document.getElementById('myEpoch').value + '<br>';
-       document.getElementById('myDivLoss').innerHTML +='Training loss: ' + logs.loss + '<br>';     
-       // fancier data from logs.acc, logs.val_loss, logs.val_acc   
-       // await tf.nextFrame();  // This improves UI responsiveness during training.
-         if (document.stopRequested) {
+         }
+         document.getElementById('myDivLoss').innerHTML = 'Epoch: ' +(parseInt(epoch) + 1) +'/' +
+         document.getElementById('myEpoch').value + '<br>';
+         document.getElementById('myDivLoss').innerHTML +='Training loss: ' + logs.loss + '<br>';     
+         // fancier data from logs.acc, logs.val_loss, logs.val_acc   
+         if (document.stopRequested) {   // allows exiting from training.
            model.stopTraining = true;
-       }        
-      // await tf.nextFrame();  // This improves UI responsiveness during training.
+         }        
+         // await tf.nextFrame();  // Not needed anymore but used to improve UI responsiveness during training.
      }   // end onEpochEnd                     
-    } // end callbacks
-  }); // end model.fit
-  console.log(myFit.history);
+   } // end callbacks
+})   // end model.fit
+  // console.log(myFit.history);  // useful to show all loss in console
   document.getElementById('myButtonTrain').style.backgroundColor = 'yellow';
   document.getElementById('myButtonTrain').value = 'Continue Training';
 
@@ -336,28 +338,7 @@ myLoadData = async function(){
 
 };                                                                                           
                                                                                              
-  /*                                                                                           
-                                                                                             
-   console.log('Starting Training')               
-   var myFit = await model.fit(xTrainingData, yTrainingTarget, {
-        batchSize : Number.parseInt(document.getElementById('myBatch').value),                                                             epochs    : Number.parseInt(document.getElementById('myEpoch').value),  
-        validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value),   // for seperating percent of data for testing  0.15 = 15% for testin  
-        initialEpoch : Number.parseInt(document.getElementById('myLastEpoch').value),             // for restarting training                                                                       
-        callbacks:  new EarlyStoppingCallback(),  
-          onBatchEnd: async (batch, logs) => {                                                               
-               await tf.nextFrame();  // This improves UI responsiveness during training.  
-          }      // end all callbacks                                                              
-      })          // end model.fit              
-     console.log(myFit.history)                                                                          
-     document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'                                                                              
-     document.getElementById('myButtonTrain').value = 'Continue Training'
-                                                                           
-}
 
-                                                                                             
-                                                                                             
-                                                                                             
-*/
 myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
