@@ -317,7 +317,8 @@ myLoadData = async function(){
                                                                                              
  myTrain = async function(){  
    
-   document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'   // just to reset it if it was yellow                                                                                         
+   document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'   // just to reset it if it was yellow  
+   document.getElementById('myDivTest').innerHTML += ' <font color=red> OLD VALUE</font>'                                                                                          
                                                                                              
    if (document.getElementById('myLastEpoch').value == document.getElementById('myEpoch').value) {
       alert('Already completed all epochs. To continue training, increase \'Epochs: (# of batches to run)\' and re-click this button')                                                                        
