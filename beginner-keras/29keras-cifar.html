@@ -139,6 +139,31 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
    </td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,32,32,3" placeHolder="1,1"></td><tr>
 </table><br>
 
+
+
+
+ 
+ <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br>
+
+ 
+ 
+ 
+ 
+
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='user'>Front Mobile Camera
+</select>
+<input type=button value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
+<input type=button value="Auto" onclick="{takeAuto()}">
+<input type=button value="Stop Auto" onclick="{myStopAuto()}">
+
+
+
+
+
 <div id="myDivLoss">...</div><br>
 <div id="myDivTest">...</div><br>
 
@@ -576,9 +601,95 @@ myLoadLocal = async function(){
 }
 
 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                               
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
+                                                                                             
+  var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+  var myStoredInterval = 0
+
+   // navigator.getMedia({video: true, audio: false},
+   //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
+                                                                                             
+  getVideo = async function() {  
+  //const myCheckElement = document.getElementById('myCheck').checked
+
+  //const myCamera = 'environment'  // rear facing only if mobile
+  const myCamera = await document.getElementById('myCheck').value
+  //if (myCheckElement){  
+   // alert('worked inside if statment ')                                                                                           
+   // myCamera = 'user'  // forward facing
+  //}
+                                                                                        
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+
+                                                                                             
+  takeSnapshot = async function(){                                                                                           
+   var myCanvasElement = document.getElementById('myReshapeCanvas');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+}
+
+                                                                                             
+  takeAuto = async function(){                                                                                           
+     await takeSnapshot() // get snapshot right away then wait and repeat
+     await document.getElementById('myButtonTest').click()      
+    clearInterval(myStoredInterval)
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await takeSnapshot()
+       await document.getElementById('myButtonTest').click()                                                                                       
+   }, document.getElementById('myInterval').value);        
+}
+  
+                                                                   
+                                                                                             
+                                                                                              
+  myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+                                                                                             
+                                                                                                
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+/////////////////////////////////// END ALL FUNCITONS ///////////////////////////////////////                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+//////////////////////////////////   WEIRD STYLE TAG THAT IS ACTUALLY A DYNAMIC SCRIPT TAG ///////////////////                                                                                          
+                                                                                             
+                                                                                             
 }"></style>
 <!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
-                                                                 
+ 
+
+
+
 
 </div>
 <div id='myDiv124'>...</div><br>
