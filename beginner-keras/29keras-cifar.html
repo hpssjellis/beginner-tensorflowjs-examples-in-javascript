@@ -72,8 +72,9 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
  
  
  
-<input type=button value="load-Labels-first-set" onclick="{myLoadData()}"><br>
-<input type=button value="load CIFAR-10-first-set" onclick="{myLoadCifar10()}"><br>
+<input type=button value="load CIFAR-10 Labels-first-10000 to textarea" onclick="{myLoadData()}"><br>
+<input type=button value="load Labels to Tensors" onclick="{myLabelsToTensors()}"><br>
+<input type=button value="load CIFAR-10 Images to Tensors" onclick="{myLoadCifar10()}"><br>
 
 <textarea id='myX' rows=3 cols=70></textarea><br>
 <input type=number value=0 id="myNumToLoad" size=4>
@@ -155,7 +156,9 @@ The following canvas is just for a pre-processing data dump <br>
                                                                                              
                                                                                              
                                                                                              
-var myNoDataYet = true                                                                                            
+var myNoDataYet = true 
+var myLabelArray                                                                                             
+                                                                                             
 var model                                                                                            
 var xTrainingData
 var yTrainingTarget                                                                                              
@@ -178,7 +181,26 @@ myLoadData = async function(){
    
 }   
    
-   
+  
+myLabelsToTensors  = async function(){
+const myMax = 10000;
+const myDepth = 10;
+                                                                                             
+console.log('myLabelArray first and last three values');  
+console.log(myLabelArray[0]+','+myLabelArray[1]+','+myLabelArray[2]+'...'+myLabelArray[myMax-3]+','+myLabelArray[myMax-2]+','+myLabelArray[myMax-1]);  
+
+myOneHotArray = Array(myMax * myDepth);
+myOneHotArray.fill(0);
+
+for (let k=0; k <= myMax-1; k++){
+    myOneHotArray[k*myDepth+myArray[k]] = 1;
+  }
+
+yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'int32');
+yTrainingTarget.print(true);                                                                                             
+}                                                                                             
+                                                                                             
+                                                                                             
    
 myLoadImage = function () {
     
