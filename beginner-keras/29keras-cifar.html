@@ -412,13 +412,10 @@ myButtonsForLoadedModel = function(){
                                                                                                 
     model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
-    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 8, filters: 4, strides: 2, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 8, filters: 4, strides: 2, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
     model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))    
-                                                                                             
-    model.add(tf.layers.conv2d({ kernelSize: 8, filters: 4, strides: 2, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
-    model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                              
+                                                                                            
                                                                                              
     model.add(tf.layers.flatten());                                                                                                                                         
     model.add(tf.layers.dense({ units: 1024, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
