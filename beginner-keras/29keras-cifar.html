@@ -95,7 +95,7 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
 <h3>Pre-Set Values to Train Data:</h3>
 <table border=1 >
   <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.02 title="From about 0.5 to 0.0001" placeholder="0.02"></td></tr>
-  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=4  title="Batch = Number of samples to run together" placeholder="4"></td></tr>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=32  title="Batch = Number of samples to run together" placeholder="32"></td></tr>
   <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
@@ -447,8 +447,8 @@ myButtonsForLoadedModel = function(){
     
    // check dtypes                                                                                          
                                                                                              
-    xTrainingData.print(true)                                                               
-    yTrainingTarget.print(true)                                                                                         
+    //xTrainingData.print(true)                                                               
+    //yTrainingTarget.print(true)                                                                                         
                                                                                              
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
