@@ -81,7 +81,9 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
 
 
 
-<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+When Image load complete should show a siver automobile<br> 
+ 
 
  
  
@@ -154,10 +156,10 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
  <option value='environment'>Rear Mobile Camera
  <option value='user'>Front Mobile Camera
 </select>
-<input type=button value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
 Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
-<input type=button value="Auto" onclick="{takeAuto()}">
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
 <input type=button value="Stop Auto" onclick="{myStopAuto()}">
 
 
@@ -361,6 +363,10 @@ myButtonsForLoadedModel = function(){
      document.getElementById('myButtonCompile').style.backgroundColor = 'green'
      document.getElementById('myButtonTrain').style.backgroundColor = 'green'
      document.getElementById('myButtonTest').style.backgroundColor = 'green'
+                                                                                             
+     document.getElementById('myButtonActivateWebCam').style.backgroundColor = 'green'
+     document.getElementById('myButtonAuto').style.backgroundColor = 'green'
+                                                                                                                                                                                     
      document.getElementById('myButtonTrain').value = 'Train'      
                                                                                              
 }                                                                                             
