@@ -94,7 +94,7 @@ When Image load complete should show a siver automobile<br>
 <table border=1 >
   <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.02 title="From about 0.5 to 0.0001" placeholder="0.02"></td></tr>
   <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=32  title="Batch = Number of samples to run together" placeholder="32"></td></tr>
-  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=2000 placeholder="2000"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
 
 
@@ -413,18 +413,13 @@ myButtonsForLoadedModel = function(){
     model = tf.sequential();                                                                                                                                          
     
     // inputShape only on the first layer                                                                                         
-    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 4, filters: 4, strides: 1, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2], strides: [2, 2] })) 
+    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 8, filters: 4, strides: 2, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))    
                                                                                                                                                                           
-    model.add(tf.layers.conv2d({ kernelSize: 8, filters: 2, strides: 2, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2], strides: [2, 2] })) 
+    model.add(tf.layers.conv2d({ kernelSize: 16, filters: 6, strides: 4, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                             
-  
-    model.add(tf.layers.conv2d({ kernelSize: 16, filters: 8, strides: 4, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2], strides: [2, 2] })) 
-    model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                             
-  
                                                                                              
     model.add(tf.layers.flatten());                                                                                                                                         
     model.add(tf.layers.dense({ units: 1024, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
