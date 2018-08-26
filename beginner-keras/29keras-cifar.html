@@ -491,6 +491,9 @@ myTest = async function(){
     var ctxReshape = canvasReshape.getContext('2d');   /// assume image has already been loaded
     var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
     var data = imageData.data;
+                                                                                             
+    // tf.fromPixels(cat).toFloat()                                                                                         
+                                                                                             
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
     console.log('myTestArray three: '+await myTestArray[0])
