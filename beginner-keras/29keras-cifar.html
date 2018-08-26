@@ -446,7 +446,13 @@ myButtonsForLoadedModel = function(){
      
   
   if (!document.stopRequested){  
-    console.log('Training Model');                                                                                          
+    console.log('Training Model');  
+    
+   // check dtypes                                                                                          
+                                                                                             
+    xTrainingData.print(true)                                                               
+    yTrainingTarget.print(true)                                                                                         
+                                                                                             
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
