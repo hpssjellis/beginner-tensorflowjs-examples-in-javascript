@@ -264,7 +264,7 @@ console.log('fetching')
        console.log('Loading tensor')
                                                                                    
                                                                                              
-       xTrainingData =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3])        
+       xTrainingData =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'int32')        
        console.log('Tensor loaded')
        
        
@@ -440,10 +440,7 @@ myButtonsForLoadedModel = function(){
 
                                                                                                                                          
    /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
-                                                                    
-   // xTrainingData.print()    // have a look at the training tensor in the console                                                                             
-   // yTrainingTarget.print()
-     
+
   
   if (!document.stopRequested){  
     console.log('Training Model');  
