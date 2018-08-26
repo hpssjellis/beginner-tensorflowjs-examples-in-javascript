@@ -495,7 +495,8 @@ myTest = async function(){
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
     console.log('myTestArray two'+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
-    //xsTesting.print(true)                                                             
+    xsTesting.print(true)   
+                                                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
