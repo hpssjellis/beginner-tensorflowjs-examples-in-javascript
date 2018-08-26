@@ -77,11 +77,7 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
 <input id="myButtonLoadImages"  type=button value="load CIFAR-10 Images to Tensors" onclick="{myLoadCifar10()}"><br>
 
 <textarea id='myX' rows=3 cols=70></textarea><br>
-<input type=number value=0 id="myNumToLoad" size=4>
-<input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
- <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
 
-<div id="myDiv01">...</div><br>
 
 
 
@@ -133,7 +129,14 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
 }">  </td><tr>
   <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test/Predict" onclick="{
    myTest()
-    }"><br> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=2 cols=100% NOWRAP placeholder="5.32">5.32</textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,32,32,3" placeHolder="1,1"></td><tr>
+    }"><br> New Data:</td><td  colSpan=2>
+   
+ <input type=number value=0 id="myNumToLoad" size=4>
+<input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+<div id="myDiv01">...</div><br>
+   
+   </td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,32,32,3" placeHolder="1,1"></td><tr>
 </table><br>
 
 <div id="myDivLoss">...</div><br>
