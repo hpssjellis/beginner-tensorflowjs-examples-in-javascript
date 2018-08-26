@@ -179,7 +179,7 @@ myLoadData = async function(){
    
    
    
-var myLoadImage = function () {
+myLoadImage = function () {
     
    // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
     const myImageTensor =  myBetterCifar.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
