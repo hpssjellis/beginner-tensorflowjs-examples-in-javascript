@@ -204,8 +204,8 @@ yTrainingTarget.print(true);
    
 myLoadImage = function () {
     
-   // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
-    const myImageTensor =  myBetterCifar.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+   // console.log('myCifar.transpose([0,2,3,1]): '+ xTrainingData.shape)  
+    const myImageTensor =  xTrainingData.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
     const myLab = myLabelArray[parseInt(document.getElementById('myNumToLoad').value)] 
     document.getElementById('myDiv01').innerHTML = 'Label: '+myLab+ ', converts to: ' +myLabelNames[myLab]
     console.log('myImageTensor.shape(): '+myImageTensor.shape)
@@ -284,21 +284,25 @@ console.log('fetching')
        console.log('Loading tensor')
       // const xsTesting =   tf.tensor4d(latestTensor2.dataSync(), shape=[10000, 3, 32, 32], 'int32')         
       // const xsTesting =   tf.tensor4d(datasetBytesView, shape=[10000, 3, 32, 32], 'int32')          
-     //  const myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'int32')       
-       myBetterCifar =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3])        
+     //  const xTrainingData =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'int32')    
+        
+                                                                                             
+      //xTrainingData                                                                                       
+                                                                                             
+       xTrainingData =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3])        
        console.log('Tensor loaded')
        
        
        
        
        // console.log('transpose')     
-       // myBetterCifar = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
+       // xTrainingData = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
        // console.log('transpose done')   
        
        
         console.log('Slice')  
-       // const myImageTensor = myBetterCifar.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze()  // second image truck?
-        const myImageTensor = myBetterCifar.slice([4, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+       // const myImageTensor = xTrainingData.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze()  // second image truck?
+        const myImageTensor = xTrainingData.slice([4, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
         console.log('slice done now printing tensor to console')  
        
        // myImageTensor.print(true)
