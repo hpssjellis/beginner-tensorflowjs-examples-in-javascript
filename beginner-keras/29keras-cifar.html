@@ -493,7 +493,7 @@ myTest = async function(){
     var data = imageData.data;
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
-    console.log('myTestArray two'+await myTestArray[0])
+    console.log('myTestArray three: '+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
     xsTesting.print(true)   
                                                                                              
