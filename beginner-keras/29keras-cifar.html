@@ -418,7 +418,7 @@ myButtonsForLoadedModel = function(){
     model.add(tf.layers.dropout({ rate : 0.20 }))       
                                                                                               
     model.add(tf.layers.conv2d({ kernelSize: 4, strides: 2, filters: 4, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
+    //model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))    
                                                                                              
                                                                                              
