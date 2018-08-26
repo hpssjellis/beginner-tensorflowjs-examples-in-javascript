@@ -145,7 +145,7 @@ When Image load complete should show a siver automobile<br>
 
 
  
- <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br>
+
 
  
  
@@ -161,7 +161,7 @@ When Image load complete should show a siver automobile<br>
 Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
 <input type=button value="Stop Auto" onclick="{myStopAuto()}">
-
+ <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br><br>
 
 
 
@@ -424,7 +424,7 @@ myButtonsForLoadedModel = function(){
     model.add(tf.layers.dropout(0.25))         
                                                                                              
     model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                               
-   // model.add(tf.layers.maxPooling2d(pool_size=[2, 2]))                                                                                          
+    model.add(tf.layers.maxPooling2d({pool_size: [2, 2] }))                                                                                          
     model.add(tf.layers.dropout(0.25))  
                                                                                              
     model.add(tf.layers.flatten());                                                                                                                                         
