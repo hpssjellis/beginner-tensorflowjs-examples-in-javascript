@@ -502,18 +502,18 @@ myTest = async function(){
                                                                                              
     const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
-   // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
-    document.getElementById('myDiv7979').innerHTML  = 'Output for image URL: ' + document.getElementById('myAsk2').value + ' <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>airplane ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>automobile ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>bird ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>cat ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
-    document.getElementById('myDiv7979').innerHTML += '<b>deer ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'      
-    document.getElementById('myDiv7979').innerHTML += '<b>dog ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'      
-    document.getElementById('myDiv7979').innerHTML += '<b>frog ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'      
-    document.getElementById('myDiv7979').innerHTML += '<b>horse ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'      
-    document.getElementById('myDiv7979').innerHTML += '<b>ship ' + await Math.round(myPredictArray[8]*100) +'%</b><br>'      
-    document.getElementById('myDiv7979').innerHTML += '<b>truck ' + await Math.round(myPredictArray[9]*100) +'%</b><br>'     
+   // document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
+    document.getElementById('myDivTest').innerHTML  = 'Output for image URL: ' + document.getElementById('myAsk2').value + ' <br>'
+    document.getElementById('myDivTest').innerHTML += '<b>airplane ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>automobile ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>bird ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>cat ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>deer ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>dog ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>frog ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>horse ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>ship ' + await Math.round(myPredictArray[8]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>truck ' + await Math.round(myPredictArray[9]*100) +'%</b><br>'     
 //['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
