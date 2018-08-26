@@ -175,8 +175,8 @@ myLoadData = async function(){
    const myData = await fetch(myFileName)
    document.getElementById('myX').value = await myData.text() 
    myLabelArray =  document.getElementById('myX').value.split(',').map(Number)
-   myLabelTensor =   tf.tensor1d(myLabelArray, 'int32')   
-   myLabelTensor.print(true) 
+  // myLabelTensor =   tf.tensor1d(myLabelArray, 'int32')   
+ //  myLabelTensor.print(true) 
  } 
    
 }   
@@ -193,7 +193,7 @@ myOneHotArray = Array(myMax * myDepth);
 myOneHotArray.fill(0);
 
 for (let k=0; k <= myMax-1; k++){
-    myOneHotArray[k*myDepth+myArray[k]] = 1;
+    myOneHotArray[k*myDepth+myLabelArray[k]] = 1;
   }
 
 yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'int32');
@@ -206,7 +206,7 @@ myLoadImage = function () {
     
    // console.log('myCifar.transpose([0,2,3,1]): '+ myBetterCifar.shape)  
     const myImageTensor =  myBetterCifar.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
-    const myLab = myLabelArray[document.getElementById('myNumToLoad').value] 
+    const myLab = myLabelArray[parseInt(document.getElementById('myNumToLoad').value)] 
     document.getElementById('myDiv01').innerHTML = 'Label: '+myLab+ ', converts to: ' +myLabelNames[myLab]
     console.log('myImageTensor.shape(): '+myImageTensor.shape)
     tf.toPixels(myImageTensor, my32x32CanvasA) 
