@@ -1,0 +1,800 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+On this page we will try to load 32x32pixel 10,000 images from the CIFAR-10 dataset, train our convolution Neural Network and then use the 
+computers webcam to spot items.<br><br>
+ 
+ This dataset works well with one-hot encoded information so we will load a label tensor for each image:<br>
+ 0=airplane, 1=automobile, 2=bird, 3=cat, 4=deer, 5=dog, 6=frog, 7=horse, 8=ship, 9=truck<br>
+ Example: for a cat image we would load the label: [0,0,0,1,0,0,0,0,0,0]<br>
+  
+Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.cs.toronto.edu/~kriz/cifar.html</a>
+
+<br><br>Best explanation of the data<br><a href="https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c">
+ https://towardsdatascience.com/cifar-10-image-classification-in-tensorflow-5b501f7dc77c</a><br>
+ 
+</div><br>
+
+<div id="myDiv124Code"> 
+ <!-- ********************************************   Web page elements here *********************************** -->
+ 
+ 
+
+
+
+
+<h3>Data:</h3>
+ 
+ 
+ 
+ 
+ 
+ 
+<input type=button value="load CIFAR-10 Labels-first-10000 to textarea" onclick="{myLoadData()}"><br>
+<input type=button value="load Labels to Tensors" onclick="{myLabelsToTensors()}"><br>
+<input id="myButtonLoadImages"  type=button value="load CIFAR-10 Images to Tensors" onclick="{myLoadCifar10()}"><br>
+
+<textarea id='myX' rows=3 cols=70></textarea><br>
+
+
+
+
+<br><canvas id="my32x32CanvasB" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+When Image load complete should show a siver automobile<br> 
+ 
+
+ 
+ 
+<br><br><br>
+
+
+<h3>Pre-Set Values to Train Data:</h3>
+<table border=1 >
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.02 title="From about 0.5 to 0.0001" placeholder="0.02"></td></tr>
+  <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=32  title="Batch = Number of samples to run together" placeholder="32"></td></tr>
+  <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=200 placeholder="200"></td></tr>
+ <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
+
+
+
+<h3>Compile or Load Model:</h3>
+<table border=1>
+  <tr><td>Prep Data </td><td><input id="myButtonPrep" type="button" value="PrepData" onclick="{
+      myPrepData()
+  }"></td><td><input id="myButtonAll" type="button" value="RUN ALL" style="background-color:green" onclick="{
+     myRunAll()
+  }"> <input id="myButtonReset" type="button" value="Reset Buttons" onclick="{
+     myResetButtons()
+  }"></td><td colSpan=2>Import / Export</td><tr>
+  <tr><td>Compile Model: </td><td><input id="myButtonDefine" type="button" value="Define Model" onclick="{
+     myDefineModel()
+  }"><br><input id="myButtonCompile" type="button" value="Compile" onclick="{
+     myCompile() 
+  }"><td></td></td><td>
+<input id="myButtonLoad" type="button" value="Load From Localstorage" onclick="{ 
+   myLoadLocal()                                                                             
+}"> </td><td> <input id="myButtonLoad" type="button" value="Load From URL" onclick="{ 
+   myLoadUrl()                                                                             
+}"> </td><tr>
+  
+  
+  <tr><td>Train Model: </td><td>
+<input id="myButtonTrain" type="button" value="Train" title="toggle: start/stop" onclick="{ 
+   myTrain()                                                                             
+}"> </td><td>Epochs run: <input type=text id="myLastEpoch" size=6 readonly value=0> </td><td>
+<input id="myButtonSave" type="button" value="Save to Localstorage" onclick="{ 
+   mySaveLocal()                                                                             
+}"></td><td> <input id="myButtonSave" type="button" value="Save to Disk" onclick="{ 
+   mySaveDisk()                                                                             
+}">  </td><tr>
+  <tr><td>Test Trained Model with New Data: </td><td><input id="myButtonTest" type="button" value="Test/Predict" onclick="{
+   myTest()
+    }"><br> New Data:</td><td  colSpan=2>
+   
+ <input type=number value=0 id="myNumToLoad" size=4>
+<input type=button value="Load Image number" onclick="{myLoadImage()}"><br>
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+<div id="myDiv01">...</div><br>
+   
+   </td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1,32,32,3" placeHolder="1,1"></td><tr>
+</table><br>
+
+
+
+
+ 
+
+
+ 
+ 
+ 
+ 
+
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='user'>Front Mobile Camera
+</select>
+<input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
+<input type=button value="Stop Auto" onclick="{myStopAuto()}">
+ <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br><br>
+
+
+
+
+<div id="myDivLoss">...</div><br>
+<div id="myDivTest">...</div><br>
+
+<div id="myDivSummary">...</div><br><br>
+
+The following canvas is just for a pre-processing data dump <br>
+<br><canvas id="myCanvas" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
+
+ 
+
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+
+ ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
+                                                                                             
+                                                                                             
+                                                                                             
+var myNoDataYet = true 
+var myLabelArray                                                                                             
+                                                                                             
+var model                                                                                            
+var xTrainingData
+var yTrainingTarget                                                                                              
+
+var  myLabelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']    
+
+                                                                                             
+                                                                                             
+ ///////////////////////////////////// CIFAR FUNCTIONS start ////////////////////////////////    
+                                                                                             
+myLoadData = async function(){
+ const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/cifar-1-Lables.txt');
+ if (myFileName != null){  
+   const myData = await fetch(myFileName)
+   document.getElementById('myX').value = await myData.text() 
+   myLabelArray =  document.getElementById('myX').value.split(',').map(Number)
+  // myLabelTensor =   tf.tensor1d(myLabelArray, 'int32')   
+ //  myLabelTensor.print(true) 
+ } 
+   
+}   
+   
+  
+myLabelsToTensors  = async function(){
+myNoDataYet = false   // actually need to load the images and the labels                                                                                             
+const myMax = 10000;
+const myDepth = 10;
+                                                                                             
+console.log('myLabelArray first and last three values');  
+console.log(myLabelArray[0]+','+myLabelArray[1]+','+myLabelArray[2]+'...'+myLabelArray[myMax-3]+','+myLabelArray[myMax-2]+','+myLabelArray[myMax-1]);  
+
+myOneHotArray = Array(myMax * myDepth);
+myOneHotArray.fill(0);
+
+for (let k=0; k <= myMax-1; k++){
+    myOneHotArray[k*myDepth+myLabelArray[k]] = 1;
+  }
+
+yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'float32');
+yTrainingTarget.print(true);                                                                                             
+}                                                                                             
+                                                                                             
+                                                                                             
+   
+myLoadImage = function () {
+    
+   // console.log('myCifar.transpose([0,2,3,1]): '+ xTrainingData.shape)  
+    const myImageTensor =  xTrainingData.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+    const myLab = myLabelArray[parseInt(document.getElementById('myNumToLoad').value)] 
+    document.getElementById('myDiv01').innerHTML = 'Label: '+myLab+ ', converts to: ' +myLabelNames[myLab]
+    console.log('myImageTensor.shape(): '+myImageTensor.shape)
+    tf.toPixels(myImageTensor, my32x32CanvasA) 
+  
+    console.log('tensor to canvas')  
+     
+    
+}
+                                                                                             
+                                                                                             
+                                                                                             
+ myLoadCifar10 = async function(){
+   
+document.getElementById('myButtonLoadImages').style.backgroundColor = 'red'     
+console.log('fetching')
+   
+   
+   const img = new Image();
+    var canvas = document.getElementById('myCanvas'); 
+    var ctx = canvas.getContext('2d');
+   
+    var my32A = document.getElementById('my32x32CanvasA'); 
+    var my32ctxA = my32A.getContext('2d');
+   
+   
+    var my32B = document.getElementById('my32x32CanvasB'); 
+    var my32ctxB = my32B.getContext('2d');
+   
+   
+    // img.crossOrigin = 'Anonymous'; // now not needed
+   // img.src = await fetch('data_batch_1.png')
+    img.src = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/data_batch_1.png'
+  
+    img.onload = () => {
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+        const datasetBytesBuffer = new ArrayBuffer(canvas.width * canvas.height * 3 * 4)   // 3 colors, 4 RGB and alpha
+        const datasetBytesView = new Float32Array(datasetBytesBuffer)
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG
+       // my32ctxA.drawImage(img, 0, 0, canvas.width, 1,        0, 0, 32,32)  // what is this going to do??
+       // my32ctxB.drawImage(img, 0, 1, canvas.width, 2,        0, 0, 32,32)  // what is this going to do??
+       
+       
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        
+        for (let j = 0, i = 0; j < imageData.data.length; j++) {
+          if ((j + 1) % 4 === 0) continue
+          datasetBytesView[i++] = imageData.data[j]  / 255    // this is why it is a float32 Ouch
+        }
+        
+
+       
+       
+       console.log('Loading tensor')
+                                                                                   
+                                                                                             
+       xTrainingData =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'float32')        
+       console.log('Tensor loaded')
+       
+       
+       
+       
+       // console.log('transpose')     
+       // xTrainingData = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
+       // console.log('transpose done')   
+       
+       
+        console.log('Slice')  
+       // const myImageTensor = xTrainingData.slice([1, 0, 0, 0], [1, -1, -1, -1]).squeeze()  // second image truck?
+        const myImageTensor = xTrainingData.slice([4, 0, 0, 0], [1, -1, -1, -1]).squeeze() 
+        console.log('slice done now printing tensor to console')  
+       
+       // myImageTensor.print(true)
+        console.log('tensor print commented')  
+       
+        console.log('to pixels') 
+        tf.toPixels(myImageTensor, my32B)
+        console.log('to pixels done')         
+       // xsTesting.print(true)
+        canvas.width = 100
+        canvas.height = 100
+       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG but much smaller
+       
+       
+      }
+     // img.onerror = reject;
+    
+    document.getElementById('myButtonLoadImages').style.backgroundColor = 'yellow'                                                                                              
+    }
+                                                                                            
+                                                                                             
+                                                                                             
+
+ ///////////////////////////////////// CIFAR FUNCTIONS end ////////////////////////////////                                                                                               
+                                                                                             
+                                                                                                
+document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs   
+                                                                      
+
+ ///////////////////////////////////// All Functions ////////////////////////////////       
+
+myResetButtons = function(){ 
+     tf.disposeVariables()                                                                       
+     document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'            
+     document.getElementById('myButtonPrep').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonDefine').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonCompile').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonTrain').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonTrain').value = 'Train'                                                                                       
+     document.getElementById('myDivLoss').innerHTML = ''
+     document.getElementById('myDivTest').innerHTML = ''
+     document.getElementById('myDivSummary').innerHTML = ''
+                                                                                             
+}
+
+
+myButtonsForLoadedModel = function(){ 
+     tf.disposeVariables()                                                                       
+     document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'            
+     document.getElementById('myButtonPrep').style.backgroundColor = 'green'
+     document.getElementById('myButtonDefine').style.backgroundColor = 'lightGray'
+     document.getElementById('myButtonCompile').style.backgroundColor = 'green'
+     document.getElementById('myButtonTrain').style.backgroundColor = 'green'
+     document.getElementById('myButtonTest').style.backgroundColor = 'green'
+                                                                                             
+     document.getElementById('myButtonActivateWebCam').style.backgroundColor = 'green'
+     document.getElementById('myButtonAuto').style.backgroundColor = 'green'
+                                                                                                                                                                                     
+     document.getElementById('myButtonTrain').value = 'Train'      
+                                                                                             
+}                                                                                             
+                                                                                             
+                                                                                             
+
+
+
+ myRunAll = async function(){
+  document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
+  await myPrepData()
+  await myDefineModel()
+  await myCompile()
+  await myTrain()
+  await myTest()
+}
+
+ myPrepData = async function(){
+                                                                                       
+    document.getElementById('myButtonPrep').style.backgroundColor = 'red' 
+    if (myNoDataYet){
+     console.log('Prepping Data')                                                                
+     /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
+   let xArray = document.getElementById('myX').value.split(',')
+   let yArray = document.getElementById('myY').value.split(',')   
+                                                                                   
+   xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+   yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+                                           
+    //console.log(xTrainingData)
+    //console.log(yTrainingTarget) 
+    // xTrainingData.print(true)                                                                                        
+    } else {console.log('Data was already prepped')}  // end if myNoDataYet statement
+     
+    document.getElementById('myButtonPrep').style.backgroundColor = 'yellow'                                                                                         
+}
+                                                                                             
+                                                                                             
+ myDefineModel = async function(){   
+    console.log('Defining Model')  
+    document.getElementById('myButtonDefine').style.backgroundColor = 'red'                                                                                                
+ /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                                
+    model = tf.sequential();                                                                                                                                          
+    
+    // inputShape only on the first layer                                                                                         
+    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 8, filters: 4, strides: 2, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
+    model.add(tf.layers.dropout({ rate : 0.20 }))    
+                                                                                                                                                                          
+    model.add(tf.layers.conv2d({ kernelSize: 16, filters: 6, strides: 4, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
+    model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                             
+                                                                                             
+    model.add(tf.layers.flatten());                                                                                                                                         
+    model.add(tf.layers.dense({ units: 1024, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+    model.add(tf.layers.dense({ units: 10, activation: 'linear' }) ); 
+                                                                                             
+                                                                                             
+                                                                                             
+    document.getElementById('myButtonDefine').style.backgroundColor = 'yellow'                                                                                                
+ }                                                                                            
+                                                                                             
+                                                                                             
+ myCompile = async function(){  
+    console.log('Model Compile')   
+    document.getElementById('myLastEpoch').value = 0   // reset initialEpoch   
+
+    const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
+    const myOptimizer = tf.train.sgd(myLearningRate);           
+                                                                                             
+   /////////////////////////////////// COMPILE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+                                                                                          
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});  
+                                                                                             
+    // console.log(model)
+    document.getElementById('myDivSummary').innerHTML = ''                                                                        
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    document.getElementById('myButtonCompile').style.backgroundColor = 'yellow'
+}
+
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+ myTrain = async function(){  
+    console.log('Should Model Train?')     
+   document.getElementById('myButtonTest').style.backgroundColor = 'lightGray'   // just to reset it if it was yellow  
+   document.getElementById('myDivTest').innerHTML += ' <font color=red>old value, click Test/Predict button</font>'                                                                                          
+                                                                                             
+   if (document.getElementById('myLastEpoch').value == document.getElementById('myEpoch').value) {
+      alert('Already completed all epochs. To continue training, increase \'Epochs: (# of batches to run)\' and re-click this button')                                                                        
+   }                                                                         
+   if(document.getElementById('myButtonTrain').style.backgroundColor == 'red'){
+       document.getElementById('myButtonTrain').style.backgroundColor = 'yellow'
+       document.getElementById('myButtonTrain').value = 'Continue Training'
+       document.stopRequested = true     
+        // document.getElementById('myArea').value  +=   JSON.stringify(model, null, 4)                                                
+   }    else {     
+         document.stopRequested = false
+         document.getElementById('myButtonTrain').style.backgroundColor = 'red'                                                                           
+         document.getElementById('myButtonTrain').value = 'Pause Training'
+  }
+
+                                                                                                                                         
+   /////////////////////////////////// TRAIN MODEL /////////////////////////////////////////////////////////  
+
+  
+  if (!document.stopRequested){  
+    console.log('Training Model');  
+    
+   // check dtypes                                                                                          
+                                                                                             
+    //xTrainingData.print(true)                                                               
+    //yTrainingTarget.print(true)                                                                                         
+                                                                                             
+    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+    batchSize: Number.parseInt(document.getElementById('myBatch').value),
+    epochs: Number.parseInt(document.getElementById('myEpoch').value),
+    validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value), // for seperating percent of data for testing  0.15 = 15% for testing
+    initialEpoch: Number.parseInt(document.getElementById('myLastEpoch').value), // for restarting training
+    callbacks : {
+      onEpochEnd: async (epoch, logs) => {
+         document.getElementById('myLastEpoch').value = epoch + 1;
+         if (epoch % 20 == 0) {
+            console.log('Epoch:' + epoch  + '/' +document.getElementById('myEpoch').value +
+               ', loss:' + logs.loss)
+         }
+         document.getElementById('myDivLoss').innerHTML = 'Epoch: ' +(parseInt(epoch) + 1) +'/' +
+         document.getElementById('myEpoch').value + '<br>';
+         document.getElementById('myDivLoss').innerHTML +='Training loss: ' + logs.loss + '<br>';     
+         // fancier data from logs.acc, logs.val_loss, logs.val_acc   
+         if (document.stopRequested) {   // allows exiting from training.
+           model.stopTraining = true;
+         }        
+         // await tf.nextFrame();  // Not needed anymore but used to improve UI responsiveness during training.
+     }   // end onEpochEnd                     
+   } // end callbacks
+})   // end model.fit
+  // console.log(myFit.history);  // useful to show all loss in console
+  document.getElementById('myButtonTrain').style.backgroundColor = 'yellow';
+  document.getElementById('myButtonTrain').value = 'Continue Training';
+
+ }  // end stopRequested if
+
+
+};                                                                                           
+                                                                                             
+
+myTest = async function(){
+    document.getElementById('myButtonTest').style.backgroundColor = 'red'
+    console.log('Model Predict')
+                                                                 
+    var canvasReshape = document.getElementById('my32x32CanvasA'); // 32 x 32
+    var ctxReshape = canvasReshape.getContext('2d');   /// assume image has already been loaded
+    var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
+    var data = imageData.data;
+                                                                                             
+    // tf.fromPixels(cat).toFloat()                                                                                         
+                                                                                             
+    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+    myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
+    console.log('myTestArray three: '+await myTestArray[0])
+    const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
+    //xsTesting.print(true)   
+                                                                                             
+    const myPredictArray = await model.predict(xsTesting).data()       
+    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
+   // document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
+    document.getElementById('myDivTest').innerHTML  = 'Output for image URL: <br>'          // + document.getElementById('myAsk2').value + ' <br>'
+   
+                                                                                        
+    document.getElementById('myDivTest').innerHTML += '<b>0: airplane ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>1: automobile ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>2: bird ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>3: cat ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>4: deer ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>5: dog ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>6: frog ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>7: horse ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>8: ship ' + await Math.round(myPredictArray[8]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>9: truck ' + await Math.round(myPredictArray[9]*100) +'%</b><br>'     
+                                                                                             
+                                                                                      
+                                                                                             
+//['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
+  document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+}
+
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+myLoadLocal = async function(){
+  //alert('The test function will need to be changed if other models are loaded')
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'                                                                                            
+  const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myCifar01');
+  if (myFileName != null){  
+    myButtonsForLoadedModel()                                                                                         
+    model = await tf.loadModel(myFileName); 
+    document.getElementById('myDivSummary').innerHTML = ''     
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                          
+}
+
+ myLoadUrl = async function(){
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar02.json');
+  if (myFileName != null){  
+    myButtonsForLoadedModel()
+    model = await tf.loadModel(myFileName);
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                           
+}
+
+
+ mySaveLocal = async function(){
+  const myFileName = prompt('Enter filename to store this model','localstorage://myCifar01');
+  const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+
+ mySaveDisk = async function(){
+  alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
+  const myFileName = prompt('Enter filename to store this model','downloads://myCifar01');
+  const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+
+
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                               
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
+                                                                                             
+  var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+  var myStoredInterval = 0
+
+   // navigator.getMedia({video: true, audio: false},
+   //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
+                                                                                             
+  getVideo = async function() {  
+  //const myCheckElement = document.getElementById('myCheck').checked
+
+  //const myCamera = 'environment'  // rear facing only if mobile
+  const myCamera = await document.getElementById('myCheck').value
+  //if (myCheckElement){  
+   // alert('worked inside if statment ')                                                                                           
+   // myCamera = 'user'  // forward facing
+  //}
+                                                                                        
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+
+                                                                                             
+  takeSnapshot = async function(){                                                                                           
+   var myCanvasElement = document.getElementById('my32x32CanvasA');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+}
+
+                                                                                             
+  takeAuto = async function(){                                                                                           
+     await takeSnapshot() // get snapshot right away then wait and repeat
+     await document.getElementById('myButtonTest').click()      
+    clearInterval(myStoredInterval)
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await takeSnapshot()
+       await document.getElementById('myButtonTest').click()                                                                                       
+   }, document.getElementById('myInterval').value);        
+}
+  
+                                                                   
+                                                                                             
+                                                                                              
+  myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+                                                                                             
+                                                                                                
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+/////////////////////////////////// END ALL FUNCITONS ///////////////////////////////////////                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+//////////////////////////////////   WEIRD STYLE TAG THAT IS ACTUALLY A DYNAMIC SCRIPT TAG ///////////////////                                                                                          
+                                                                                             
+                                                                                             
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+ 
+
+
+
+
+</div>
+<div id='myDiv124'>...</div><br>
+
+<input id="myUpdate124" type=button value="Update, wait to run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea124').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv124Code').innerHTML =    myJoe 
+  document.getElementById('myButton124').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea124"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce124){
+     myTextGrow('myTextarea124', 'myDiv124Code')
+     document.getElementById('myUpdate124').style.visibility = 'visible'
+     myOnce124 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+//myOnce123 = true    // so textareas are only clicked once
+myOnce124 = true  
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
