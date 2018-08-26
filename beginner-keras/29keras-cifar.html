@@ -74,7 +74,7 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
  
 <input type=button value="load CIFAR-10 Labels-first-10000 to textarea" onclick="{myLoadData()}"><br>
 <input type=button value="load Labels to Tensors" onclick="{myLabelsToTensors()}"><br>
-<input type=button value="load CIFAR-10 Images to Tensors" onclick="{myLoadCifar10()}"><br>
+<input id="myButtonLoadImages"  type=button value="load CIFAR-10 Images to Tensors" onclick="{myLoadCifar10()}"><br>
 
 <textarea id='myX' rows=3 cols=70></textarea><br>
 <input type=number value=0 id="myNumToLoad" size=4>
@@ -221,7 +221,7 @@ myLoadImage = function () {
                                                                                              
  myLoadCifar10 = async function(){
    
-   
+document.getElementById('myButtonLoadImages').style.backgroundColor = 'red'     
 console.log('fetching')
    
    
@@ -294,6 +294,8 @@ console.log('fetching')
        
       }
      // img.onerror = reject;
+    
+    document.getElementById('myButtonLoadImages').style.backgroundColor = 'yellow'                                                                                              
     }
                                                                                             
                                                                                              
