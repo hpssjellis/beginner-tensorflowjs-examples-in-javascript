@@ -414,12 +414,12 @@ myButtonsForLoadedModel = function(){
       activation: 'relu',                                                                                                                                                     
       kernelInitializer: 'varianceScaling'                                                                                                                                    
     }));                                                                                                                                                                    
-    model.add(tf.layers.MaxPooling2D(pool_size=(2,2)))
-    model.add(tf.layers.Dropout(0.25))         
+    model.add(tf.layers.maxPooling2d(pool_size=(2,2)))
+    model.add(tf.layers.dropout(0.25))         
                                                                                              
     model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 8, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                               
-    model.add(tf.layers.MaxPooling2D(pool_size=(2,2)))                                                                                          
-    model.add(tf.layers.Dropout(0.25))  
+    model.add(tf.layers.maxPooling2d(pool_size=(2,2)))                                                                                          
+    model.add(tf.layers.dropout(0.25))  
                                                                                              
     model.add(tf.layers.flatten());                                                                                                                                         
     model.add(tf.layers.dense({ units: 1024, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
