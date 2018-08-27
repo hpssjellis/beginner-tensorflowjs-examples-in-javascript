@@ -446,11 +446,12 @@ myButtonsForLoadedModel = function(){
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value)     
     const myOptimizer = tf.train.sgd(myLearningRate);           
-                                                                                             
+   // const myOptimizer = tf.train.rmsprop(myLearningRate);           
+   // tf.train.rmsprop (learningRate, decay?, momentum?, epsilon?, centered?)                                                                                         
    /////////////////////////////////// COMPILE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
                                                                                           
     //model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                    
-    model.compile({optimizer: myOptimizer, loss: 'categorical_crossentropy'});  
+    model.compile({optimizer: myOptimizer, loss: 'categoricalCrossentropy'});  
                                                                                              
                                                                                              
                                                                                              
