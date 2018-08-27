@@ -436,8 +436,8 @@ myButtonsForLoadedModel = function(){
     model.add(tf.layers.dropout({ rate : 0.20 }))         
                                                                                              
     model.add(tf.layers.flatten());                                                                                                                                         
-    model.add(tf.layers.dense({ units: 512, kernelInitializer: 'varianceScaling', activation: 'softmax' }));
-    model.add(tf.layers.dropout({ rate : 0.20 }))    
+   // model.add(tf.layers.dense({ units: 512, kernelInitializer: 'varianceScaling', activation: 'softmax' }));
+   // model.add(tf.layers.dropout({ rate : 0.20 }))    
     model.add(tf.layers.dense({ units: 10, activation: 'linear' }) ); 
                                                                                              
                                                                                              
