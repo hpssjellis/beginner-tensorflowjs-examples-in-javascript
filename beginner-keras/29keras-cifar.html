@@ -72,7 +72,8 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
  
  
  
-<input type=button value="load CIFAR-10 Labels-first-10000 to textarea" onclick="{myLoadData()}"><br>
+<input type=button value="load CIFAR-10 Labels-first-10000 to textarea" onclick="{myLoadData()}">
+ <input type=text id="myCifarLabels" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/cifar-1-Lables.txt"><br>
 <input type=button value="load Labels to Tensors" onclick="{myLabelsToTensors()}"><br>
 <input id="myButtonLoadImages"  type=button value="load CIFAR-10 Images to Tensors" onclick="{myLoadCifar10()}"><br>
 
@@ -200,7 +201,8 @@ var  myLabelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'fr
  ///////////////////////////////////// CIFAR FUNCTIONS start ////////////////////////////////    
                                                                                              
 myLoadData = async function(){
- const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/cifar-1-Lables.txt');
+ //const myFileName = prompt('Enter the URL of your stored data', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/cifar-1-Lables.txt');
+ const myFileName = document.getElementById('myCifarLabels').value
  if (myFileName != null){  
    const myData = await fetch(myFileName)
    document.getElementById('myX').value = await myData.text() 
@@ -228,13 +230,15 @@ for (let k=0; k <= myMax-1; k++){
   }
 
 yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'float32');
-yTrainingTarget.print(true);                                                                                             
+yTrainingTarget.print(true); 
+
+ document.getElementById('myCifarLabels').style.backgroundColor = 'yellow'                                                                                              
 }                                                                                             
                                                                                              
                                                                                              
    
 myLoadImage = function () {
-    
+
    // console.log('myCifar.transpose([0,2,3,1]): '+ xTrainingData.shape)  
     const myImageTensor =  xTrainingData.slice([parseInt(document.getElementById('myNumToLoad').value), 0, 0, 0], [1, -1, -1, -1]).squeeze() 
     const myLab = myLabelArray[parseInt(document.getElementById('myNumToLoad').value)] 
@@ -319,13 +323,13 @@ console.log('fetching')
        // xsTesting.print(true)
         canvas.width = 100
         canvas.height = 100
-       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG but much smaller
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)  // draws the original PNG but much smaller
        
-       
+        document.getElementById('myButtonLoadImages').style.backgroundColor = 'yellow'  
       }
      // img.onerror = reject;
     
-    document.getElementById('myButtonLoadImages').style.backgroundColor = 'yellow'                                                                                              
+                                                                                              
     }
                                                                                             
                                                                                              
