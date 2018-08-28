@@ -426,8 +426,8 @@ myButtonsForLoadedModel = function(){
     model.add(tf.layers.dropout({ rate : 0.20 }))    
                                                                                              
                                                                                              
-    model.add(tf.layers.conv2d({ kernelSize: 4, strides: 2, filters: 64,  padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
+    model.add(tf.layers.conv2d({ kernelSize: 4, strides: 2, filters: 32,  padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+   // model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                             
                                                                                               
                                                                                              
@@ -436,7 +436,7 @@ myButtonsForLoadedModel = function(){
    // model.add(tf.layers.dropout({ rate : 0.20 }))         
                                                                                              
     model.add(tf.layers.flatten());                                                                                                                                         
-   // model.add(tf.layers.dense({ units: 512, kernelInitializer: 'varianceScaling', activation: 'softmax' }));
+    model.add(tf.layers.dense({ units: 64, kernelInitializer: 'varianceScaling', activation: 'softmax' }));
    // model.add(tf.layers.dropout({ rate : 0.20 }))    
     model.add(tf.layers.dense({ units: 10, activation: 'linear' }) ); 
                                                                                              
