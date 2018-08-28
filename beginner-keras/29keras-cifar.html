@@ -93,7 +93,7 @@ When Image load complete should show a siver automobile<br>
 
 <h3>Pre-Set Values to Train Data:</h3>
 <table border=1 >
-  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.002 title="From about 0.5 to 0.0001" placeholder="0.002"></td></tr>
+  <tr><td>Learning Rate: </td><td><input id="myLearn" type=text value=0.0001 title="From about 0.5 to 0.0001" placeholder="0.0001"></td></tr>
   <tr><td>Samples per batch:</td><td><input id="myBatch" type=number value=64  title="Batch = Number of samples to run together" placeholder="64"></td></tr>
   <tr><td>Epochs: (# of batches to run)</td><td><input id="myEpoch" type=number  title="Epoch = number of batches to train" value=2000 placeholder="2000"></td></tr>
  <tr><td>Validation Split :</td><td><input id="myValidationSplit" type=text  title="Validation Split = percent of data to test in decimal form 0.15 = use 15% to test" value=0.00 placeholder="200"></td></tr></table><br><br><br>
@@ -479,12 +479,12 @@ model.add(tf.layers.dense({ units: 10, activation: 'linear' }) );
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value) 
                                                                                              
-    const myOptimizer = tf.train.sgd(myLearningRate);             
+   // const myOptimizer = tf.train.sgd(myLearningRate);             
                                                                                              
    // const myOptimizer = tf.train.rmsprop(learningRate=myLearningRate, momentum=0.9, decay=0.0004, nesterov=true) 
   //  const myOptimizer = tf.train.sgd(learningRate=myLearningRate, decay=0.0004,  momentum=0.9,  nesterov=true) 
    // const myOptimizer = tf.train.sgd(myLearningRate) 
-  //  const myOptimizer = tf.train.adam(myLearningRate) 
+    const myOptimizer = tf.train.adam(myLearningRate) 
                                                                                                                                                                                     
    /////////////////////////////////// COMPILE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
                                                                                           
