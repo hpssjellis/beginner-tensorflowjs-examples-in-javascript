@@ -417,18 +417,18 @@ myButtonsForLoadedModel = function(){
     model = tf.sequential();                                                                                                                                          
     
     // inputShape only on the first layer                                                                                         
-    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 8, strides: 1, filters: 64,  padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+    model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 8, strides: 1, filters: 16,  padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
     model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))       
                                                                                               
-    model.add(tf.layers.conv2d({ kernelSize: 8, strides: 2, filters: 8, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
-    model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
-    model.add(tf.layers.dropout({ rate : 0.20 }))    
-                                                                                             
-                                                                                             
-    model.add(tf.layers.conv2d({ kernelSize: 4, strides: 2, filters: 32,  padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+   // model.add(tf.layers.conv2d({ kernelSize: 8, strides: 2, filters: 8, padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
    // model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
-    model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                             
+   // model.add(tf.layers.dropout({ rate : 0.20 }))    
+                                                                                             
+                                                                                             
+   // model.add(tf.layers.conv2d({ kernelSize: 4, strides: 2, filters: 32,  padding: 'same', activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                    
+   // model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
+   // model.add(tf.layers.dropout({ rate : 0.20 }))                                                                                             
                                                                                               
       
                                                                                              
@@ -452,18 +452,18 @@ myButtonsForLoadedModel = function(){
 
     const myLearningRate = Number.parseFloat(document.getElementById('myLearn').value) 
                                                                                              
-   // const myOptimizer = tf.train.sgd(myLearningRate);             
+    const myOptimizer = tf.train.sgd(myLearningRate);             
                                                                                              
    // const myOptimizer = tf.train.rmsprop(learningRate=myLearningRate, momentum=0.9, decay=0.0004, nesterov=true) 
   //  const myOptimizer = tf.train.sgd(learningRate=myLearningRate, decay=0.0004,  momentum=0.9,  nesterov=true) 
    // const myOptimizer = tf.train.sgd(myLearningRate) 
-    const myOptimizer = tf.train.adam() 
+  //  const myOptimizer = tf.train.adam() 
                                                                                                                                                                                     
    /////////////////////////////////// COMPILE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
                                                                                           
-    //model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                    
+    model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                    
     //model.compile({optimizer: myOptimizer, loss: 'categoricalCrossentropy'});           
-    model.compile({optimizer: myOptimizer, loss: 'categoricalCrossentropy'});        
+    // model.compile({optimizer: myOptimizer, loss: 'categoricalCrossentropy'});        
                                                                                              
                                                                                              
                                                                                              
