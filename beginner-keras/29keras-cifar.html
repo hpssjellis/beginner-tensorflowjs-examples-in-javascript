@@ -425,7 +425,7 @@ model.add(tf.layers.conv2d({ kernelSize: 8, strides: 2, filters: 10,  activation
                                                                                              
 model.add(tf.layers.flatten());                                                                                                                                         
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
-model.add(tf.layers.dense({ units: 4, activation: 'linear' }) ); 
+model.add(tf.layers.dense({ units: 10, activation: 'linear' }) ); 
                                                                                            
                                                                                              
                                                                                              
