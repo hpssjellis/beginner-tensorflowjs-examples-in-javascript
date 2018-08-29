@@ -538,6 +538,7 @@ model.add(tf.layers.dense({ units: 10, activation: 'linear' }) );
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
+    shuffle : false,    // justto choise learning rate                                                                                         
     validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value), // for seperating percent of data for testing  0.15 = 15% for testing
     initialEpoch: Number.parseInt(document.getElementById('myLastEpoch').value), // for restarting training
     callbacks : {
