@@ -483,8 +483,8 @@ model.add(tf.layers.dense({ units: 10, activation: 'linear' }) );
                                                                                              
    // const myOptimizer = tf.train.rmsprop(learningRate=myLearningRate, momentum=0.9, decay=0.0004, nesterov=true) 
   //  const myOptimizer = tf.train.sgd(learningRate=myLearningRate, decay=0.0004,  momentum=0.9,  nesterov=true) 
-    const myOptimizer = tf.train.sgd(myLearningRate) 
-  //  const myOptimizer = tf.train.adam(myLearningRate) 
+   // const myOptimizer = tf.train.sgd(myLearningRate) 
+    const myOptimizer = tf.train.adam(myLearningRate) 
                                                                                                                                                                                     
    /////////////////////////////////// COMPILE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
                                                                                           
@@ -632,7 +632,7 @@ myLoadLocal = async function(){
  myLoadUrl = async function(){
   //alert('The test function will need to be changed if other models are loaded')                                                                                             
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
-  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar02.json');
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json');
   if (myFileName != null){  
     myButtonsForLoadedModel()
     model = await tf.loadModel(myFileName);
