@@ -474,7 +474,7 @@ myButtonsForLoadedModel = function(){
                                                                                              
     // inputShape only on the first layer                                                                                         
     model.add(tf.layers.conv2d({ inputShape: [32, 32, 3], kernelSize: 2, strides: 1, filters: 64,  padding: 'same', activation: 'elu', kernelInitializer: 'varianceScaling' }));
-   // model.add(tf.layers.batchNormalization())                                                                                           
+    model.add(tf.layers.batchNormalization({}))                                                                                           
     model.add(tf.layers.maxPooling2d({ poolSize: [2, 2] })) 
     model.add(tf.layers.dropout({ rate : 0.20 }))       
                                                                                               
