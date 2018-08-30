@@ -289,7 +289,7 @@ console.log('fetching')
         
         for (let j = 0, i = 0; j < imageData.data.length; j++) {
           if ((j + 1) % 4 === 0) continue
-          datasetBytesView[i++] = imageData.data[j]  / 255    // this is why it is a float32 Ouch
+          datasetBytesView[i++] = imageData.data[j]  / 255    // normalize the data between 0 and 1
         }
         
 
@@ -583,7 +583,8 @@ myTest = async function(){
                                                                                              
     // tf.fromPixels(cat).toFloat()                                                                                         
                                                                                              
-    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+   // const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+    const latestTensor2 = tf.fromPixels(imageData, 3).toFloat()     // this time get rid of the alpha component
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
     console.log('myTestArray three: '+await myTestArray[0])
     const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 32, 32, 3])                                              
