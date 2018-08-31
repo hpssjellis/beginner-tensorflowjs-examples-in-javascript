@@ -623,7 +623,15 @@ myTest = async function(){
                                                                                              
     // tf.fromPixels(cat).toFloat()                                                                                         
                                                                                              
-    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+    
+                                                                                             
+                                                                                             
+    /*                                                                                         
+                                                                                             
+    
+    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component                                                                                         
+                                                                                             
+   /////////////////////////////////////////////////////                                                                                          
                                                                                              
                                                                                      
   //  const latestTensor2 = tf.fromPixels(imageData, 3).toFloat()     // this suppossedly normalizes the data. better check it 
@@ -639,13 +647,45 @@ myTest = async function(){
         myTestArray2[i++] = myTestArray[j]  / 255    // normalize the data between 0 and 1 Could have just used the map funciton
     }
                                                                                                    
+     
+                                                                                             
+                                                                                             
                                                                                              
        console.log('myTestArray RGB as float: '+await myTestArray2[0])                                                                                          
                                                                                              
     //   end converting.                                                                                         
                                                                                              
-    const xsTesting =   tf.tensor4d(myTestArray2, shape=[1, 32, 32, 3], 'float32')                                              
-    //xsTesting.print(true)   
+    const xsTesting =   tf.tensor4d(myTestArray2, shape=[1, 32, 32, 3], 'float32')     
+                                                                                             
+                                                                                             
+    // const a = tf.tensor1d([2, 4, 6, 8]);
+    // const b = tf.scalar(255);              // possible to normalize the tensor                                                                           
+    // a.div(b).print();  // or tf.div(a, b)                                                                                         
+                                                                                             
+                                                                                             
+    xsTesting.print(true)   
+                                                                                             
+                                                                                             
+   /////////////////////////////////////////////////////////                                                                                          
+                                                                                             
+    */                                                                                         
+                                                                                             
+                                                                                             
+    
+                                                                                             
+                                                                                             
+   
+    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component 
+    xsTesting.print(true)     
+    const b = tf.scalar(255);                                                                                          
+                                                                                             
+    xsTesting =  a.div(b)            // hopefully normalize between 0-1                                                                            
+    xsTesting.print(true)            
+                                                                                             
+                                                                                             
+                                                                                             
+   ///////////////////////////////////////////////////                                                                                          
+                                                                                             
                                                                                              
     const myPredictArray = await model.predict(xsTesting).data()       
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
