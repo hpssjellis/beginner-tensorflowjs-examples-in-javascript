@@ -291,7 +291,7 @@ console.log('fetching')
                                                                                              
                                                                                              
                                                                                              
-     /*                                                                                        
+/*                                                                                        
                                                                                              
    ////////////////////////////////////////////////////////////////////////////                                                                                          
                                                                                              
@@ -327,15 +327,17 @@ console.log('fetching')
                                                                                              
                                                                                              
                                                                                              
-        */
+*/
                                                                                              
        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)                                                                               
        const myNormalizeZeroToOne = tf.scalar(255)
        
                                                                                              
-       const temp2 = tf.tensor1d(imageData);                                                                                      
+       const temp2 = tf.tensor1d(imageData.data);                                                                                      
        temp2.print(true)
-       xTrainingData = temp2.reshape([10000, 3, 32, 32]).transpose([0,2,3,1])                                                                                       
+       const temp3 = temp2.reshape([10000, 3, 32, 32])
+       temp3.print(true)                                                                                      
+       xTrainingData = temp3.transpose([0,2,3,1])                                                                                     
                                                                                              
        //const temp1 = tf.fromPixels(imageData, 3)                                                                                      
        //temp1.print(true)
