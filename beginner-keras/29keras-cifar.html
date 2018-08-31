@@ -238,7 +238,7 @@ for (let k=0; k <= myMax-1; k++){
     //   temp6.print(true)                                                                                            
                                                                                              
                                                                                              
-yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'float32').slice([0, 0, 0, 0], [8191, -1, -1, -1])
+yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'float32').slice([0, 0], [8191, -1])
 yTrainingTarget.print(true); 
 
  document.getElementById('myCifarLabels').style.backgroundColor = 'yellow'                                                                                              
