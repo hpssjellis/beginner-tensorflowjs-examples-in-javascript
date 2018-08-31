@@ -287,11 +287,17 @@ console.log('fetching')
        // my32ctxA.drawImage(img, 0, 0, canvas.width, 1,        0, 0, 32,32)  // what is this going to do??
        // my32ctxB.drawImage(img, 0, 1, canvas.width, 2,        0, 0, 32,32)  // what is this going to do??
        
-       
+       console.log('datasetBytesBuffer.length')
+       console.log(datasetBytesBuffer.length)
+       console.log('datasetBytesView.length')
+       console.log(datasetBytesView.length)
+                                                                                             
+                                                                                             
+                                                                                             
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
         
         for (let j = 0, i = 0; j < imageData.data.length; j++) {
-          if ((j + 1) % 4 === 0) continue
+          if ((j + 1) % 4 === 0) continue             // Is this removing the Alpha. Is this the best method
           datasetBytesView[i++] = imageData.data[j]  / 255    // normalize the data between 0 and 1
         }
         
