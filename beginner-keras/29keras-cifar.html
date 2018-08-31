@@ -223,8 +223,8 @@ myNoDataYet = false   // actually need to load the images and the labels
 const myMax = 10000;
 const myDepth = 10;
                                                                                              
-console.log('myLabelArray first and last three values');  
-console.log(myLabelArray[0]+','+myLabelArray[1]+','+myLabelArray[2]+'...'+myLabelArray[myMax-3]+','+myLabelArray[myMax-2]+','+myLabelArray[myMax-1]);  
+//console.log('myLabelArray first and last three values');  
+//console.log(myLabelArray[0]+','+myLabelArray[1]+','+myLabelArray[2]+'...'+myLabelArray[myMax-3]+','+myLabelArray[myMax-2]+','+myLabelArray[myMax-1]);  
 
 myOneHotArray = Array(myMax * myDepth);
 myOneHotArray.fill(0);
@@ -234,7 +234,7 @@ for (let k=0; k <= myMax-1; k++){
   }
 
                                                                                              
-     //  const temp6 = temp5.slice([0, 0, 0, 0], [8191, -1, -1, -1])      // grap the first 8192 images                                                                                 
+     //  const temp6 = temp5.slice([0, 0, 0, 0], [8191, -1, -1, -1])      // grab the first 8192 images                                                                                 
     //   temp6.print(true)                                                                                            
                                                                                              
                                                                                              
@@ -345,28 +345,18 @@ console.log('fetching')
        
                                                                                              
        const temp1 =  tf.fromPixels(imageData, 3)                                                                                      
-       temp1.print(true)
+      // temp1.print(true)
                                                                                              
-       //const temp2 = tf.tensor1d(imageData.data);                                                                                      
-       //temp2.print(true)
-       //const temp3 = temp2.reshape([10000, 3, 32, 32])
-       //temp3.print(true)                                                                                      
-       //xTrainingData = temp3.transpose([0,2,3,1])                                                                                     
-                                                                                             
-       //const temp1 = tf.fromPixels(imageData, 3)                                                                                      
-       //temp1.print(true)
-       //temp1.dispose()
-                                                                                             
-      // const temp5 =  temp1.reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)          
+     
        const temp5 =  temp1.reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                
                                                                                              
-       temp5.print(true)   
+    //   temp5.print(true)   
                                                                                              
        const temp6 = temp5.slice([0, 0, 0, 0], [8191, -1, -1, -1])      // grap the first 8192 images                                                                                 
-       temp6.print(true)
+    //   temp6.print(true)
                                                                                              
        xTrainingData = temp6.toFloat().div(myNormalizeZeroToOne)
-       xTrainingData.print(true)
+     //  xTrainingData.print(true)
                                                                                              
                                                                                              
                                                                                              
@@ -374,6 +364,7 @@ console.log('fetching')
                                                                                              
       temp1.dispose()
       temp5.dispose()
+      temp6.dispose()
                                                                                              
                                                                                              
       
