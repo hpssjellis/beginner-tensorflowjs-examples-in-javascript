@@ -58,6 +58,11 @@ Main CIFAR-10 site<br> <a href="https://www.cs.toronto.edu/~kriz/cifar.html">htt
  Running a scaled down version of <a href="https://appliedmachinelearning.blog/2018/03/24/achieving-90-accuracy-in-object-recognition-task-on-cifar-10-dataset-with-keras-convolutional-neural-networks/">https://appliedmachinelearning.blog/2018/03/24/achieving-90-accuracy-in-object-recognition-task-on-cifar-10-dataset-with-keras-convolutional-neural-networks/</a>
  
  PRESENTLY THIS IS NOT TRAINING WELL AT ALL.
+ 
+ 
+ Weird issue on my computer and I can only load 8,192 of the 10,000 images. Hopefully that explains the problem I was having.
+ 
+ 
 </div><br>
 
 <div id="myDiv124Code"> 
@@ -228,7 +233,12 @@ for (let k=0; k <= myMax-1; k++){
     myOneHotArray[k*myDepth+myLabelArray[k]] = 1;
   }
 
-yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'float32');
+                                                                                             
+     //  const temp6 = temp5.slice([0, 0, 0, 0], [8191, -1, -1, -1])      // grap the first 8192 images                                                                                 
+    //   temp6.print(true)                                                                                            
+                                                                                             
+                                                                                             
+yTrainingTarget = tf.tensor2d(myOneHotArray, shape=[myMax, myDepth], 'float32').slice([0, 0, 0, 0], [8191, -1, -1, -1])
 yTrainingTarget.print(true); 
 
  document.getElementById('myCifarLabels').style.backgroundColor = 'yellow'                                                                                              
@@ -347,14 +357,28 @@ console.log('fetching')
        //temp1.print(true)
        //temp1.dispose()
                                                                                              
-       const temp5 =  temp1.reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
+      // const temp5 =  temp1.reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)          
+       const temp5 =  temp1.reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                
                                                                                              
-       temp5.print(true)                                                                                     
-       xTrainingData = temp5.toFloat().div(myNormalizeZeroToOne)
+       temp5.print(true)   
+                                                                                             
+       const temp6 = temp5.slice([0, 0, 0, 0], [8191, -1, -1, -1])      // grap the first 8192 images                                                                                 
+       temp6.print(true)
+                                                                                             
+       xTrainingData = temp6.toFloat().div(myNormalizeZeroToOne)
        xTrainingData.print(true)
                                                                                              
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
       temp1.dispose()
-      temp5.dispose
+      temp5.dispose()
+                                                                                             
+                                                                                             
+      
+                                                                                       
+                                                                                             
                                                                                              
                                                                                              
                                                                                              
