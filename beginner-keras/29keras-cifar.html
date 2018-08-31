@@ -676,7 +676,7 @@ myTest = async function(){
                                                                                              
    
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component 
-    xsTesting.print(true)     
+    latestTensor2.print(true)     
     const b = tf.scalar(255);                                                                                          
                                                                                              
     xsTesting =  a.div(b)            // hopefully normalize between 0-1                                                                            
