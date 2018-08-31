@@ -347,7 +347,7 @@ console.log('fetching')
        //temp1.print(true)
        //temp1.dispose()
                                                                                              
-       constt temp5 =  tf.fromPixels(imageData, 3).reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
+       const temp5 =  temp1.reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
                                                                                              
        temp5.print(true)                                                                                     
        xTrainingData = temp5.toFloat().div(myNormalizeZeroToOne)
