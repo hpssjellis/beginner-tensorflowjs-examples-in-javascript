@@ -331,12 +331,17 @@ console.log('fetching')
                                                                                              
        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)                                                                               
        const myNormalizeZeroToOne = tf.scalar(255)
+       
                                                                                              
-       const temp1 = tf.fromPixels(imageData, 3)                                                                                      
-       temp1.print(true)
-       temp1.dispose()
+       const temp2 = tf.tensor1d(imageData);                                                                                      
+       temp2.print(true)
+       xTrainingData = temp2.reshape([10000, 3, 32, 32]).transpose([0,2,3,1])                                                                                       
                                                                                              
-       xTrainingData =  tf.fromPixels(imageData, 3).reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
+       //const temp1 = tf.fromPixels(imageData, 3)                                                                                      
+       //temp1.print(true)
+       //temp1.dispose()
+                                                                                             
+      // xTrainingData =  tf.fromPixels(imageData, 3).reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
                                                                                              
        xTrainingData.print(true)                                                                                     
       
