@@ -332,22 +332,33 @@ console.log('fetching')
        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)                                                                               
        const myNormalizeZeroToOne = tf.scalar(255)
        
+       
                                                                                              
-       const temp2 = tf.tensor1d(imageData.data);                                                                                      
-       temp2.print(true)
-       const temp3 = temp2.reshape([10000, 3, 32, 32])
-       temp3.print(true)                                                                                      
-       xTrainingData = temp3.transpose([0,2,3,1])                                                                                     
+       const temp1 =  tf.fromPixels(imageData, 3)                                                                                      
+       temp1.print(true)
+                                                                                             
+       //const temp2 = tf.tensor1d(imageData.data);                                                                                      
+       //temp2.print(true)
+       //const temp3 = temp2.reshape([10000, 3, 32, 32])
+       //temp3.print(true)                                                                                      
+       //xTrainingData = temp3.transpose([0,2,3,1])                                                                                     
                                                                                              
        //const temp1 = tf.fromPixels(imageData, 3)                                                                                      
        //temp1.print(true)
        //temp1.dispose()
                                                                                              
-      // xTrainingData =  tf.fromPixels(imageData, 3).reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
+       constt temp5 =  tf.fromPixels(imageData, 3).reshape([10000, 32, 32, 3])      //.toFloat().div(myNormalizeZeroToOne)                                                                                  
                                                                                              
-       xTrainingData.print(true)                                                                                     
-      
-       
+       temp5.print(true)                                                                                     
+       xTrainingData = temp5.toFloat().div(myNormalizeZeroToOne)
+       xTrainingData.print(true)
+                                                                                             
+      temp1.dispose()
+      temp5.dispose
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
        // console.log('transpose')     
        // xTrainingData = xsTesting.transpose([0,2,3,1])    // made this a global variable so I could use it elsewhere
        // console.log('transpose done')   
