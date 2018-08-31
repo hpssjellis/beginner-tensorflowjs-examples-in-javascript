@@ -628,10 +628,12 @@ myTest = async function(){
                                                                                              
     /*                                                                                         
                                                                                              
-    
+     /////////////////////////////////////////////////////     
+                                                                                             
+                                                                                             
     const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component                                                                                         
                                                                                              
-   /////////////////////////////////////////////////////                                                                                          
+                                                                                     
                                                                                              
                                                                                      
   //  const latestTensor2 = tf.fromPixels(imageData, 3).toFloat()     // this suppossedly normalizes the data. better check it 
@@ -675,9 +677,9 @@ myTest = async function(){
                                                                                              
                                                                                              
    
-    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component 
+    const latestTensor2 = tf.fromPixels(imageData, 3).toFloat()     // this time get rid of the alpha component 
     latestTensor2.print(true)     
-    const b = tf.scalar(255);                                                                                          
+    const b = tf.scalar(255)                                                                                          
                                                                                              
     xsTesting =  latestTensor2.div(b)            // hopefully normalize between 0-1                                                                            
     xsTesting.print(true)            
