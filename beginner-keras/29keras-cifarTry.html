@@ -309,7 +309,7 @@ console.log('fetching')
                                                                                              
        xTrainingData =   tf.tensor4d(datasetBytesView, shape=[10000,  32, 32, 3], 'float32')        
        console.log('Tensor loaded')
-       xTrainingData.print(true)
+      // xTrainingData.print(true)
        
        
        
@@ -581,7 +581,7 @@ myButtonsForLoadedModel = function(){
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
-    shuffle : false,    // justto choise learning rate                                                                                         
+  //  shuffle : false,    // testing learning rate                                                                                         
     validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value), // for seperating percent of data for testing  0.15 = 15% for testing
     initialEpoch: Number.parseInt(document.getElementById('myLastEpoch').value), // for restarting training
     callbacks : {
