@@ -13,14 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-let rawdata1 = fs.readFileSync('a2layer-1.json', 'utf8');  
-let layer01 = JSON.parse(rawdata1); 
-//console.log(layer01); 
-
-let rawdata2 = fs.readFileSync('a3output.json', 'utf8' );  
-//let layer02 = rawdata2; 
-let layer02 = JSON.parse(rawdata2); 
-//console.log(layer02); 
+let rawdata1 = fs.readFileSync('tfjs-layer-1.txt', 'utf8');  
+let rawdata2 = fs.readFileSync('tfjs-layer-2.txt', 'utf8');  
+//let layer01 = JSON.parse(rawdata1); 
 
 
 
@@ -29,7 +24,8 @@ let layer02 = JSON.parse(rawdata2);
 
 
 
-const myHTML = `  
+
+var myHTML = `  
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.6"> </script> 
 
  
@@ -53,8 +49,34 @@ const myHTML = `
    
    
    // here we load all the layers
-    model.layers[0].setWeights(JSON.parse(document.getElementById('name1').value))
-    model.layers[1].setWeights(JSON.parse(document.getElementById('name2').value))
+   
+   let myLayerArray1 = document.getElementById('name1').value.split('!...!')
+   let myLayerWeights1 = myLayerArray1[0].split(',') 
+   let myLayerBias1 = myLayerArray1[1].split(',') 
+
+   model.layers[0].setWeights([tf.tensor2d(myLayerWeights1, shape=[2,3]), tf.tensor1d(myLayerBias1)])
+   
+      
+   let myLayerArray2 = document.getElementById('name2').value.split('!...!')
+   let myLayerWeights2 = myLayerArray2[0].split(',') 
+   let myLayerBias2 = myLayerArray2[1].split(',') 
+
+   model.layers[1].setWeights([tf.tensor2d(myLayerWeights2, shape=[3,1]), tf.tensor1d(myLayerBias2)])
+   
+   
+   
+   
+   // model.layers[0].setWeights(JSON.parse(document.getElementById('name1').value))
+   // model.layers[1].setWeights(JSON.parse(document.getElementById('name2').value))
+   
+  //  model.layers[0].setWeights(document.getElementById('name1').value)
+  //  model.layers[1].setWeights(document.getElementById('name2').value)
+    
+   // console.log(document.getElementById('name1').value)
+   // model.layers[1].setWeights(document.getElementById('name2').value)
+    
+    
+    
 
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray2 = await model.predict(training_data2).data()
@@ -104,9 +126,37 @@ const myHTML = `
     document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray2[3].toFixed(4) +'<br>' 
     
-    document.getElementById('myWeightsToSend').value = JSON.stringify(model.layers[0].getWeights(), null, 4)
+    //document.getElementById('myWeightsToSend').value = JSON.stringify(model.layers[0].getWeights(), null, 4)
+   //  document.getElementById('myWeightsToSend').value = model.layers[0].getWeights()
+   //  document.getElementById('myWeightsToSend').value += model.layers[1].getWeights()
+   
+ 
+  //  console.log(model.layers[0].getWeights()[0].dataSync())
+  //  console.log(model.layers[0].getWeights()[1].dataSync())
+  //  console.log(model.layers[1].getWeights()[0].dataSync())
+  //  console.log(model.layers[1].getWeights()[1].dataSync())
+
+   
+   
+   // for first layer
+   document.getElementById('myWeightsToSend').value = 
+                  model.layers[0].getWeights()[0].dataSync() + '!...!'+
+                  model.layers[0].getWeights()[1].dataSync() 
+   
+   
+   // for second layer   
+ //  document.getElementById('myWeightsToSend').value = 
+ //                 model.layers[1].getWeights()[0].dataSync() + '!...!'+
+  //                model.layers[1].getWeights()[1].dataSync() 
+   
+   
+   
+   // document.getElementById('myWeightsToSend').value = new TextDecoder().decode(myDataView)
+    //document.getElementById('myWeightsToSend').value = myDataView
     
     
+
+
     
     
     })()    
@@ -121,18 +171,19 @@ const myHTML = `
 
 <h3>Read from file All json weights</h3>
    <label for="name">Jason Weights:</label><br>
+   
+
    <textarea id="name1" name="name1"  rows=10 cols=70 placeholder="Enter the JSON Weights" >`+
-   JSON.stringify(layer01, null, 4)+
+   rawdata1+
    `</textarea><br><br>
     <textarea id="name2" name="name2"  rows=10 cols=70 placeholder="Enter the JSON Weights" >`+
-   JSON.stringify(layer02, null, 4)+
-   `</textarea><br><br>  
-   
+   rawdata2+
+   `</textarea><br><br>
 <h3>Write to file a single set of json weights</h3>
 <form action="https://blank-node-rocksetta.c9users.io/myaction" method="post">
    <input type="submit" value="Send Data" /><br>
    <label for="name">Jason Weights:</label><br>
-   <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=10 cols=70 placeholder="Enter the JSON Weights" ></textarea><br>
+   <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=10 cols=70 placeholder="Enter the JSON Weights" ></textarea><br> 
 
    <input type=number id="myLevel" name="myLevel" value=1>
    <input type="submit" value="Send Data" />
@@ -165,9 +216,11 @@ app.get('/', (req, res) => res.send(myHTML));
 app.post('/myaction', function(req, res) {
   //res.send(req.body.myWeightsToSend + ', <br>level:'+req.body.myLevel); // replies to submit
   let data = req.body.myWeightsToSend; 
-  let myFileName = 'student-'+ req.body.myLevel + '.json'
+  let myFileName = 'tfjs-layer-'+ req.body.myLevel + '.txt'
   fs.writeFileSync(myFileName, data);  
-
+  
+  //Send the updated page
+  res.send(myHTML);
   //console.log(req.body.name);
 });
 
