@@ -1,0 +1,15 @@
+{
+  "name": "beginner-tensorflowjs-examples-in-javascript/nodejs",
+  "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript.git"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^0.12.7",
+    "@tensorflow/tfjs-node": "^0.1.14",
+    "express": "^4.16.3",
+    "fs": "0.0.1",
+    "body-parser": "^2.3.3" 
+  }
+}
