@@ -10,11 +10,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // write a webpage here
 
 
+function myMake(){
 
 
-
-let rawdata1 = fs.readFileSync('tfjs-layer-1.txt', 'utf8');  
-let rawdata2 = fs.readFileSync('tfjs-layer-2.txt', 'utf8');  
+let rawdata1 = fs.readFileSync('tfjs-layer-0.txt', 'utf8');  
+let rawdata2 = fs.readFileSync('tfjs-layer-1.txt', 'utf8');  
 //let layer01 = JSON.parse(rawdata1); 
 
 
@@ -108,10 +108,10 @@ var myHTML = `
     (async function () {                                                                             
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : 4,
-        epochs    : 500,                                                                      
+        epochs    : 400,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
-            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/500, Loss: ' + logs.loss + '<br><br>'
+            document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/400, Loss: ' + logs.loss + '<br><br>'
 
           }    // end onEpochEnd callback 
         }      // end all callbacks                                                              
@@ -137,11 +137,15 @@ var myHTML = `
   //  console.log(model.layers[1].getWeights()[1].dataSync())
 
    
+   document.getElementById('myWeightsToSend').value = 
+                  model.layers[parseInt(document.getElementById('myLevel').value)].getWeights()[0].dataSync() + '!...!'+
+                  model.layers[parseInt(document.getElementById('myLevel').value)].getWeights()[1].dataSync() 
+   
    
    // for first layer
-   document.getElementById('myWeightsToSend').value = 
-                  model.layers[0].getWeights()[0].dataSync() + '!...!'+
-                  model.layers[0].getWeights()[1].dataSync() 
+ //  document.getElementById('myWeightsToSend').value = 
+  //                model.layers[0].getWeights()[0].dataSync() + '!...!'+
+   //               model.layers[0].getWeights()[1].dataSync() 
    
    
    // for second layer   
@@ -173,19 +177,23 @@ var myHTML = `
    <label for="name">Jason Weights:</label><br>
    
 
-   <textarea id="name1" name="name1"  rows=10 cols=70 placeholder="Enter the JSON Weights" >`+
+   <textarea id="name1" name="name1"  rows=3 cols=130 placeholder="Enter the JSON Weights" >`+
    rawdata1+
    `</textarea><br><br>
-    <textarea id="name2" name="name2"  rows=10 cols=70 placeholder="Enter the JSON Weights" >`+
+    <textarea id="name2" name="name2"  rows=3 cols=130 placeholder="Enter the JSON Weights" >`+
    rawdata2+
    `</textarea><br><br>
 <h3>Write to file a single set of json weights</h3>
 <form action="https://blank-node-rocksetta.c9users.io/myaction" method="post">
    <input type="submit" value="Send Data" /><br>
    <label for="name">Jason Weights:</label><br>
-   <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=10 cols=70 placeholder="Enter the JSON Weights" ></textarea><br> 
-
-   <input type=number id="myLevel" name="myLevel" value=1>
+   <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=3 cols=130 placeholder="Enter the JSON Weights" ></textarea><br> 
+ Choose a layer to save, before training
+  <select id="myLevel" name="myLevel">
+    <option value=0>0
+    <option value=1>1
+  </select>
+   Password (needs localstorage here) <input type=password id="myPass" name="myPass">
    <input type="submit" value="Send Data" />
 </form>
 
@@ -201,6 +209,16 @@ var myHTML = `
 
 
 `;
+
+return myHTML;
+
+
+}
+
+
+
+
+
 // rest of the webpage needs to go above
 
 
@@ -208,7 +226,11 @@ var myHTML = `
 
 
 // send the main webpage
-app.get('/', (req, res) => res.send(myHTML));
+app.get('/', (req, res) => {
+  
+    res.send(myMake())
+    
+});
 
 
 
@@ -217,10 +239,14 @@ app.post('/myaction', function(req, res) {
   //res.send(req.body.myWeightsToSend + ', <br>level:'+req.body.myLevel); // replies to submit
   let data = req.body.myWeightsToSend; 
   let myFileName = 'tfjs-layer-'+ req.body.myLevel + '.txt'
-  fs.writeFileSync(myFileName, data);  
+  
+  if (req.body.myPass == 'secret set of words'){
+     fs.writeFileSync(myFileName, data);  
+  }
+  
   
   //Send the updated page
-  res.send(myHTML);
+  res.send(`<body onload="{location.replace(document.referrer);}"></body>`);
   //console.log(req.body.name);
 });
 
@@ -228,5 +254,5 @@ app.post('/myaction', function(req, res) {
 
 // generic webpage listening
 app.listen(process.env.PORT, function() {
-  console.log('Server running at: https://blank-node-rocksetta.c9users.io.');
+  console.log('Server running');
 });
