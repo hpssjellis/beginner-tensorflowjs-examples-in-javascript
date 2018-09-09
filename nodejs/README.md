@@ -7,4 +7,16 @@ I made this on cloud 9 so not sure how it will work on your server.
 
 
 
+On cloud nine use these steps
+
+1. cd nodejs
+1. nvm install 8 
+1. npm install
+1. chmod 666 tfjs-layer-0.txt 
+1. chmod 666 tfjs-layer-1.txt 
+1. node server.js
+
+1. (Load the webpage however that happens on your server. Hopefully you can click a link in the output from server.js)
+
+
 
