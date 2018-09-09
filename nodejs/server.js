@@ -118,11 +118,11 @@ document.myPresentLayer = 0
     const myPredictArray2 = await model.predict(training_data2).data()
     
     document.getElementById('myDiv5858').innerHTML = ''   // to clear it
-    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray2[3].toFixed(4) +'<br>'
-
+    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +' aim for ~ 0.0<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +' aim for ~ 1.0<br>'
+    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +' aim for ~ 1.0<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray2[3].toFixed(4) +' aim for ~ 0.0<br>' 
+ 
     const endTime = performance.now();
     document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
     document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'   
@@ -166,10 +166,10 @@ document.myPresentLayer = 0
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray2 = await model.predict(training_data2).data()
  
-    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +'<br>'
-    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray2[3].toFixed(4) +'<br>' 
+    document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +' aim = 0.0<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +' aim = 1.0<br>'
+    document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +' aim = 1.0<br>'
+    document.getElementById('myDiv5858').innerHTML += '[1,1] = ' + myPredictArray2[3].toFixed(4) +' aim = 0.0<br>' 
     
     //document.getElementById('myWeightsToSend').value = JSON.stringify(model.layers[0].getWeights(), null, 4)
    //  document.getElementById('myWeightsToSend').value = model.layers[0].getWeights()
@@ -181,11 +181,14 @@ document.myPresentLayer = 0
   //  console.log(model.layers[1].getWeights()[0].dataSync())
   //  console.log(model.layers[1].getWeights()[1].dataSync())
 
-   
-   document.getElementById('myWeightsToSend').value = 
+   if (parseInt(document.getElementById('myLevel').value) < 0){
+       document.getElementById('myLevel').value = 0 // just in case
+   }
+     document.getElementById('myWeightsToSend').value = 
                   model.layers[parseInt(document.getElementById('myLevel').value)].getWeights()[0].dataSync() + '!...!'+
                   model.layers[parseInt(document.getElementById('myLevel').value)].getWeights()[1].dataSync() 
    
+   //}
    
    // for first layer
  //  document.getElementById('myWeightsToSend').value = 
