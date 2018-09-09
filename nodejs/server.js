@@ -26,11 +26,42 @@ let rawdata2 = fs.readFileSync('tfjs-layer-1.txt', 'utf8');
 
 
 var myHTML = `  
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.6"> </script> 
 
- 
+<script>
+document.stopRequested = false
 
-<input id="myButton5858" type="button" value="Load pre-saved weights from textarea 10,000 batches" onclick="{
+</script>
+
+
+
+<body onload="{
+   myStoragePass = localStorage.getItem('myStoredPass')
+   if(myStoragePass  != null){      
+      document.getElementById('myPass').value = myStoragePass 
+    }
+    
+    myStorageLayer = localStorage.getItem('myStoredLayer')
+    if(myStorageLayer  != null){
+       document.getElementById('myLevel').value = myStorageLayer 
+      
+    }
+    if (!document.stopRequested){
+   document.getElementById('myButton5858').click()
+    }
+}">
+
+
+
+
+
+
+
+
+<h2 align=center>Parallel browser tensorflowjs Keras individual layer saving using NodeJS to store weights and biases</h2> 
+
+<input id="myButton5858" type="button"  value="Load Dynamic Layered Model" onclick="{
 
   //const weightsJSON =   JSON.parse(document.getElementById('myJsonArea').value)
   const startTime = performance.now();
@@ -88,14 +119,18 @@ var myHTML = `
 
     const endTime = performance.now();
     document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
-    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'                    
+    document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'   
+    
+    if (!document.stopRequested){ 
+       document.getElementById('myTrainButton').click()   
+    }
   }
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
 }"><br><br><br>
 
-<input type=button value="train" onclick="{
+<input id="myTrainButton" type=button value="train" onclick="{
     
     const myOptimizer = tf.train.sgd(0.5); 
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
@@ -112,6 +147,10 @@ var myHTML = `
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
             document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/400, Loss: ' + logs.loss + '<br><br>'
+          //  if (document.stopRequested) {   // allows exiting from training.
+          //     model.stopTraining = true;
+         //   }    
+
 
           }    // end onEpochEnd callback 
         }      // end all callbacks                                                              
@@ -161,9 +200,21 @@ var myHTML = `
     
 
 
-    
-    
+    if (!document.stopRequested){
+       document.getElementById('mySendButton').click()    
+    }
     })()    
+    
+}">
+
+
+<input id="myStopButton" type=button value="Stop" onclick="{
+    document.stopRequested = true
+    
+}">
+
+<input id="myStopButton" type=button value="restart" onclick="{
+    document.stopRequested = false
     
 }">
 
@@ -193,8 +244,17 @@ var myHTML = `
     <option value=0>0
     <option value=1>1
   </select>
-   Password (needs localstorage here) <input type=password id="myPass" name="myPass">
-   <input type="submit" value="Send Data" />
+  <!-- I would use a password box and local storage to reload the password on browser refresh -->
+   Password: <input type=password id="myPass" name="myPass">
+   
+   <input type="button" value="Store Page Info" onClick="{
+   localStorage.setItem('myStoredPass', document.all.myPass.value)   
+   localStorage.setItem('myStoredLayer', document.all.myLevel.value)
+   //alert( document.all.myPass.value + ' ' +document.all.myLevel.value + 'Has been stored')
+}">
+
+
+   <input id="mySendButton" type="submit" value="Send Data" />
 </form>
 
 
