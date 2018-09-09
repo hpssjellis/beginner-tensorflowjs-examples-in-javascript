@@ -18,5 +18,10 @@ On cloud nine use these steps
 
 1. (Load the webpage however that happens on your server. Hopefully you can click a link in the output from server.js)
 
+Notes: 
+1.Look at the server.js code, near the bottom of the page and change the password. Enter that password in the browser box and click "store info"
+
+1. Look at the server code and change the URL (also near the bottom of the page). This must be your server URL for this file.
+1. Presently the page is set to suto reload. Click stop or deselect auto so that you can have a look at how it works.
 
 
