@@ -7,7 +7,7 @@ I made this on cloud 9 ( http:c9.io now absorbed by AWS) so not sure how it will
 
 
 
-On cloud nine use these steps
+On cloud nine use these steps. (On your machine you may have to place "sudo" infront of each step)
 
 1. cd nodejs
 1. nvm install 8 (Only needed on cloud9 to insure using nodejs version 8 or above)
