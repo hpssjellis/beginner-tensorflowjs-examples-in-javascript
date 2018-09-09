@@ -12,8 +12,8 @@ On cloud nine use these steps
 1. cd nodejs
 1. nvm install 8 (Only needed on cloud9 to insure using nodejs version 8 or above)
 1. npm install
-1. chmod 666 tfjs-layer-0.txt 
-1. chmod 666 tfjs-layer-1.txt 
+1. chmod 766 tfjs-layer-0.txt    (Set permissions on the data files so web users can write to the files)
+1. chmod 766 tfjs-layer-1.txt 
 1. node server.js
 
 1. (Load the webpage however that happens on your server. Hopefully you can click a link in the output from server.js)
