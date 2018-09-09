@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // write a webpage here
 
 
+
+
 function myMake(){
 
 
@@ -111,7 +113,8 @@ document.stopRequested = false
 
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray2 = await model.predict(training_data2).data()
-
+    
+    document.getElementById('myDiv5858').innerHTML = ''   // to clear it
     document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +'<br>'
     document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +'<br>'
@@ -147,9 +150,9 @@ document.stopRequested = false
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
             document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/400, Loss: ' + logs.loss + '<br><br>'
-          //  if (document.stopRequested) {   // allows exiting from training.
-          //     model.stopTraining = true;
-         //   }    
+            if (document.stopRequested) {   // allows exiting from training.
+               model.stopTraining = true;
+            }    
 
 
           }    // end onEpochEnd callback 
@@ -235,7 +238,22 @@ document.stopRequested = false
    rawdata2+
    `</textarea><br><br>
 <h3>Write to file a single set of json weights</h3>
-<form action="https://blank-node-rocksetta.c9users.io/myaction" method="post">
+
+
+
+<!--   ///////////////////////////  next line needs the correct URL for your server    ////////////////////////
+
+
+<form action="http://YOUR-URL-IN-LOWERCASE.com/myaction" method="post">
+
+
+My URL is fancier since I use cloud9 http://c9.io
+
+///////////////////////////
+-->
+
+
+<form action="https://`+process.env.C9_HOSTNAME+`/myaction" method="post">
    <input type="submit" value="Send Data" /><br>
    <label for="name">Jason Weights:</label><br>
    <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=3 cols=130 placeholder="Enter the JSON Weights" ></textarea><br> 
@@ -299,7 +317,11 @@ app.post('/myaction', function(req, res) {
   //res.send(req.body.myWeightsToSend + ', <br>level:'+req.body.myLevel); // replies to submit
   let data = req.body.myWeightsToSend; 
   let myFileName = 'tfjs-layer-'+ req.body.myLevel + '.txt'
+  console.log(myFileName)
   
+  
+ ////////////////////////  NOTHING WORKS WITHOUT YOU KNOWING THE PASSWORD THAT YOU SET BELOW    ///////////////////////////////////////////////////////// 
+
   if (req.body.myPass == 'secret set of words'){
      fs.writeFileSync(myFileName, data);  
   }
@@ -314,5 +336,6 @@ app.post('/myaction', function(req, res) {
 
 // generic webpage listening
 app.listen(process.env.PORT, function() {
-  console.log('Server running');
+  console.log('Server running at');
+  console.log('https://'+process.env.C9_HOSTNAME);
 });
