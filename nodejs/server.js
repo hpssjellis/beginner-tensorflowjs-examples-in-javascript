@@ -33,7 +33,7 @@ var myHTML = `
 
 <script>
 document.stopRequested = false
-
+document.myPresentLayer = 0
 </script>
 
 
@@ -46,8 +46,11 @@ document.stopRequested = false
     
     myStorageLayer = localStorage.getItem('myStoredLayer')
     if(myStorageLayer  != null){
+       if (myStorageLayer < 0){
+          myStorageLayer = Math.round(Math.random()*document.getElementById('myLevel').value.length)
+          console.log(myStorageLayer)
+       }
        document.getElementById('myLevel').value = myStorageLayer 
-      
     }
     if (!document.stopRequested){
    document.getElementById('myButton5858').click()
@@ -254,14 +257,17 @@ My URL is fancier since I use cloud9 http://c9.io
 
 
 <form action="https://`+process.env.C9_HOSTNAME+`/myaction" method="post">
-   <input type="submit" value="Send Data" /><br>
-   <label for="name">Jason Weights:</label><br>
+
+   <label for="name">Showing Jason Weights for the layer to send to the server:</label><br>
    <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=3 cols=130 placeholder="Enter the JSON Weights" ></textarea><br> 
  Choose a layer to save, before training
   <select id="myLevel" name="myLevel">
-    <option value=0>0
-    <option value=1>1
+    <option value = "0"> 0
+    <option value = "1"> 1
+    <option value = "-1"> -1 for random Layers
   </select>
+
+  
   <!-- I would use a password box and local storage to reload the password on browser refresh -->
    Password: <input type=password id="myPass" name="myPass">
    
@@ -269,7 +275,7 @@ My URL is fancier since I use cloud9 http://c9.io
    localStorage.setItem('myStoredPass', document.all.myPass.value)   
    localStorage.setItem('myStoredLayer', document.all.myLevel.value)
    //alert( document.all.myPass.value + ' ' +document.all.myLevel.value + 'Has been stored')
-}">
+}"><br>
 
 
    <input id="mySendButton" type="submit" value="Send Data" />
@@ -316,10 +322,11 @@ app.get('/', (req, res) => {
 app.post('/myaction', function(req, res) {
   //res.send(req.body.myWeightsToSend + ', <br>level:'+req.body.myLevel); // replies to submit
   let data = req.body.myWeightsToSend; 
-  let myFileName = 'tfjs-layer-'+ req.body.myLevel + '.txt'
+  let myFileName = 'tfjs-layer-0.txt'
+  if (parseInt(req.body.myLevel) >= 0){
+     myFileName = 'tfjs-layer-'+ req.body.myLevel + '.txt'
+  }
   console.log(myFileName)
-  
-  
  ////////////////////////  NOTHING WORKS WITHOUT YOU KNOWING THE PASSWORD THAT YOU SET BELOW    ///////////////////////////////////////////////////////// 
 
   if (req.body.myPass == 'secret set of words'){
