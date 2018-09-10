@@ -36,6 +36,7 @@ var myHTML = `
 
 <script>
 document.stopRequested = false
+document.manualMode = false
 document.myMessage = '` + mySaveSuccess + `'
 </script>
 
@@ -136,7 +137,7 @@ document.myMessage = '` + mySaveSuccess + `'
     document.getElementById('myDiv5858').innerHTML += 'Duration ' + (endTime-startTime).toFixed(4) +'ms <br>'												  
     document.getElementById('myButton5858').style.backgroundColor = 'lightgrey'   
     
-    if (!document.stopRequested){ 
+    if (!document.manualMode){ 
        document.getElementById('myTrainButton').click()   
     }
   }
@@ -175,7 +176,8 @@ document.myMessage = '` + mySaveSuccess + `'
     
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray2 = await model.predict(training_data2).data()
- 
+    
+    document.getElementById('myDiv5858').innerHTML = '' // clear the div
     document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +' aim = 0.0<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +' aim = 1.0<br>'
     document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +' aim = 1.0<br>'
@@ -219,7 +221,7 @@ document.myMessage = '` + mySaveSuccess + `'
     
 
 
-    if (!document.stopRequested){
+    if (!document.manualMode){
        document.getElementById('mySendButton').click()    
     }
     })()    
@@ -231,15 +233,17 @@ document.myMessage = '` + mySaveSuccess + `'
 
 <input id="myStopButton" style="background-color:lime;" type=button value="Pause" onclick="{
     document.stopRequested = true
+    document.manualMode = true
     document.getElementById('myResetButton').style.backgroundColor = 'lime'  
     document.getElementById('myStopButton').style.backgroundColor = 'lightgray'  
 }">
 
-<input id="myResetButton" type=button value="reset" onclick="{
+<input id="myResetButton" type=button value="unPause to Manual Mode. Note: refresh page for automatic mode" onclick="{
     document.stopRequested = false
+    document.manualMode = true
     document.getElementById('myStopButton').style.backgroundColor = 'lime'  
     document.getElementById('myResetButton').style.backgroundColor = 'lightgray'  
-    document.getElementById('myTrainButton').click()
+   // document.getElementById('myTrainButton').click()
 }"><br><br>
 
 <div id='myDiv123'>...</div>
