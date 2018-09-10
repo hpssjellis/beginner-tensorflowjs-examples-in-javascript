@@ -1,9 +1,12 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app     = express();
+
+var mySaveSuccess = "<font color=red>First Loop</font> ";
+
 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
@@ -33,7 +36,7 @@ var myHTML = `
 
 <script>
 document.stopRequested = false
-document.myPresentLayer = 0
+document.myMessage = '` + mySaveSuccess + `'
 </script>
 
 
@@ -43,14 +46,20 @@ document.myPresentLayer = 0
    if(myStoragePass  != null){      
       document.getElementById('myPass').value = myStoragePass 
     }
+   myStorageLR = localStorage.getItem('myStoredLR')
+   if(myStorageLR  != null){      
+      document.getElementById('myLearningRate').value = myStorageLR 
+    }
     
     myStorageLayer = localStorage.getItem('myStoredLayer')
     if(myStorageLayer  != null){
        if (myStorageLayer < 0){
           myStorageLayer = Math.round(Math.random()*document.getElementById('myLevel').value.length)
-          console.log(myStorageLayer)
+          //console.log(myStorageLayer)
+          document.myMessage += ', Generating Random ' 
        }
        document.getElementById('myLevel').value = myStorageLayer 
+       document.myMessage += ' Presently Training Level: '+ myStorageLayer +', '
     }
     if (!document.stopRequested){
    document.getElementById('myButton5858').click()
@@ -117,7 +126,7 @@ document.myPresentLayer = 0
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray2 = await model.predict(training_data2).data()
     
-    document.getElementById('myDiv5858').innerHTML = ''   // to clear it
+    document.getElementById('myDiv5858').innerHTML = document.myMessage + '<br>'
     document.getElementById('myDiv5858').innerHTML += '[0,0] = ' + myPredictArray2[0].toFixed(4) +' aim for ~ 0.0<br>'
     document.getElementById('myDiv5858').innerHTML += '[1,0] = ' + myPredictArray2[1].toFixed(4) +' aim for ~ 1.0<br>'
     document.getElementById('myDiv5858').innerHTML += '[0,1] = ' + myPredictArray2[2].toFixed(4) +' aim for ~ 1.0<br>'
@@ -134,11 +143,12 @@ document.myPresentLayer = 0
 
   setTimeout(function(){  myGo() }, 10);   // wait a bit for the GUI to update
 
-}"><br><br><br>
+}">
 
 <input id="myTrainButton" type=button value="train" onclick="{
     
-    const myOptimizer = tf.train.sgd(0.5); 
+    //const myOptimizer = tf.train.sgd(0.5); 
+    const myOptimizer = tf.train.sgd(parseInt(document.getElementById('myLearningRate').value)); 
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'}); 
     
     const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
@@ -217,32 +227,37 @@ document.myPresentLayer = 0
 }">
 
 
-<input id="myStopButton" type=button value="Stop" onclick="{
+
+
+<input id="myStopButton" style="background-color:lime;" type=button value="Pause" onclick="{
     document.stopRequested = true
-    
+    document.getElementById('myResetButton').style.backgroundColor = 'lime'  
+    document.getElementById('myStopButton').style.backgroundColor = 'lightgray'  
 }">
 
-<input id="myStopButton" type=button value="restart" onclick="{
+<input id="myResetButton" type=button value="reset" onclick="{
     document.stopRequested = false
-    
-}">
+    document.getElementById('myStopButton').style.backgroundColor = 'lime'  
+    document.getElementById('myResetButton').style.backgroundColor = 'lightgray'  
+    document.getElementById('myTrainButton').click()
+}"><br><br>
 
-<div id='myDiv123'>...</div><br>
-<div id='myDiv5858'>...</div><br>
+<div id='myDiv123'>...</div>
+<div id='myDiv5858'>...</div>
 
 
 
 
-<h3>Read from file All json weights</h3>
-   <label for="name">Jason Weights:</label><br>
+<h3>Read from file all of the JSON weights</h3>
    
-
-   <textarea id="name1" name="name1"  rows=3 cols=130 placeholder="Enter the JSON Weights" >`+
+   Layer0<br>
+   <textarea id="name1" name="name1"  rows=3  style="width:100%;"   placeholder="Enter the JSON Weights" >`+
    rawdata1+
    `</textarea><br><br>
-    <textarea id="name2" name="name2"  rows=3 cols=130 placeholder="Enter the JSON Weights" >`+
+   Layer1<br>
+    <textarea id="name2" name="name2"  rows=1  style="width:100%;"   placeholder="Enter the JSON Weights" >`+
    rawdata2+
-   `</textarea><br><br>
+   `</textarea><br>
 <h3>Write to file a single set of json weights</h3>
 
 
@@ -260,10 +275,10 @@ My URL is fancier since I use cloud9 http://c9.io
 
 
 <form action="https://`+process.env.C9_HOSTNAME+`/myaction" method="post">
-
-   <label for="name">Showing Jason Weights for the layer to send to the server:</label><br>
-   <textarea id="myWeightsToSend" name="myWeightsToSend"  rows=3 cols=130 placeholder="Enter the JSON Weights" ></textarea><br> 
- Choose a layer to save, before training
+<textarea id="myWeightsToSend" name="myWeightsToSend"  rows=3 style="width:100%;"  placeholder="The program will enter the JSON weights and then send them automatically to the server." ></textarea><br> 
+ Training Learning Rate: 
+<input type=text id="myLearningRate"  name="myLearningRate" size=6 value="0.5">
+ Latest Layer: 
   <select id="myLevel" name="myLevel">
     <option value = "0"> 0
     <option value = "1"> 1
@@ -271,14 +286,14 @@ My URL is fancier since I use cloud9 http://c9.io
   </select>
 
   
-  <!-- I would use a password box and local storage to reload the password on browser refresh -->
    Password: <input type=password id="myPass" name="myPass">
    
-   <input type="button" value="Store Page Info" onClick="{
+   <input type="button"  style="background-color:lime;"  value="Locally Store: Learning Rate, Layer, Password " onClick="{
    localStorage.setItem('myStoredPass', document.all.myPass.value)   
+   localStorage.setItem('myStoredLR', document.all.myLearningRate.value)   
    localStorage.setItem('myStoredLayer', document.all.myLevel.value)
    //alert( document.all.myPass.value + ' ' +document.all.myLevel.value + 'Has been stored')
-}"><br>
+}">
 
 
    <input id="mySendButton" type="submit" value="Send Data" />
@@ -329,11 +344,15 @@ app.post('/myaction', function(req, res) {
   if (parseInt(req.body.myLevel) >= 0){
      myFileName = 'tfjs-layer-'+ req.body.myLevel + '.txt'
   }
-  console.log(myFileName)
  ////////////////////////  NOTHING WORKS WITHOUT YOU KNOWING THE PASSWORD THAT YOU SET BELOW    ///////////////////////////////////////////////////////// 
 
-  if (req.body.myPass == 'secret set of words'){
-     fs.writeFileSync(myFileName, data);  
+  if (req.body.myPass == 'strongpass'){
+     fs.writeFileSync(myFileName, data);
+     console.log(myFileName)
+     mySaveSuccess = "File Saved as: <font color=lime>" + myFileName + "</font> ";
+  } else {
+      console.log('bad password')
+      mySaveSuccess = "<font color=red>Password Incorrect</font> ";  
   }
   
   
