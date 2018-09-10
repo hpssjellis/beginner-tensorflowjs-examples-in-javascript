@@ -55,7 +55,7 @@ document.myMessage = '` + mySaveSuccess + `'
     myStorageLayer = localStorage.getItem('myStoredLayer')
     if(myStorageLayer  != null){
        if (myStorageLayer < 0){
-          myStorageLayer = Math.round(Math.random()*document.getElementById('myLevel').value.length)
+          myStorageLayer = Math.round(Math.random()*parseInt(document.getElementById('myLevel').length-2))
           //console.log(myStorageLayer)
           document.myMessage += ', Generating Random ' 
        }
@@ -110,18 +110,10 @@ document.myMessage = '` + mySaveSuccess + `'
    model.layers[1].setWeights([tf.tensor2d(myLayerWeights2, shape=[3,1]), tf.tensor1d(myLayerBias2)])
    
    
-   
-   
-   // model.layers[0].setWeights(JSON.parse(document.getElementById('name1').value))
-   // model.layers[1].setWeights(JSON.parse(document.getElementById('name2').value))
-   
-  //  model.layers[0].setWeights(document.getElementById('name1').value)
-  //  model.layers[1].setWeights(document.getElementById('name2').value)
-    
-   // console.log(document.getElementById('name1').value)
-   // model.layers[1].setWeights(document.getElementById('name2').value)
-    
-    
+   // Note a layer must be trainable so it is set in the train function
+   model.getLayer(null, 0).trainable = false    
+   model.getLayer(null, 1).trainable = false   
+  
     
 
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
@@ -147,6 +139,19 @@ document.myMessage = '` + mySaveSuccess + `'
 }">
 
 <input id="myTrainButton" type=button value="train" onclick="{
+    
+          
+    if (parseInt(document.getElementById('myLevel').value) < 0){
+       document.getElementById('myLevel').value = 0 // just in case
+   } 
+   
+   
+   /////////////////// Need to set one layer as trainable    /////////////////////////////// 
+   
+   model.getLayer(null, parseInt(document.getElementById('myLevel').value)).trainable = true   
+     
+    
+    
     
     //const myOptimizer = tf.train.sgd(0.5); 
     const myOptimizer = tf.train.sgd(parseInt(document.getElementById('myLearningRate').value)); 
@@ -193,9 +198,7 @@ document.myMessage = '` + mySaveSuccess + `'
   //  console.log(model.layers[1].getWeights()[0].dataSync())
   //  console.log(model.layers[1].getWeights()[1].dataSync())
 
-   if (parseInt(document.getElementById('myLevel').value) < 0){
-       document.getElementById('myLevel').value = 0 // just in case
-   }
+
      document.getElementById('myWeightsToSend').value = 
                   model.layers[parseInt(document.getElementById('myLevel').value)].getWeights()[0].dataSync() + '!...!'+
                   model.layers[parseInt(document.getElementById('myLevel').value)].getWeights()[1].dataSync() 
