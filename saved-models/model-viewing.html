@@ -15,22 +15,7 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
                                                                                                                                                         
   async function myGo6() {
 										    
-										    
 									    
-										    
-										    
-										    
-     var buffer = new ArrayBuffer(1024);    // some raw byte buffer									    
-     buffer = await fetch(document.getElementById('myBinaryFile').value)
-     //console.log(await buffer.json)	
-										    
-     //var view = new DataView(buffer);        // flexible view supporting endianness
-     var f32 = new Float32Array(buffer, 0);     // or use a size	
-     var myView = new DataView( f32.buffer);   // from byte 8 for the next 4 bytes
-    // var msbVal = view.getFloat32(0)  									    
-										    
-     // document.getElementById('myBinary').value = await  myView.length										    
-										    
      const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
 												     
      myIncoming =  await fetch(document.getElementById('myInFile').value)
