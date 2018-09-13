@@ -5,7 +5,6 @@
 Should extract the binary files using the json file
 
 LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.json"><br><br>
-Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/batches-20000-done.weights.bin"><br>  
 
 
 
@@ -57,7 +56,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
      myIncoming =  await fetch(document.getElementById('myInFile').value)
      myJ = await myIncoming.json()
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
-												     
+     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});											     
 															
     for (let x=0; x <= 100; x++){
        try  {
@@ -71,7 +70,7 @@ Load Binary  URL <input id="myBinaryFile" type="text" size="120" value="https://
 										    
             }
 								    
-	    document.getElementById('myLayers').value = loadedModel6.getWeights()
+	   // document.getElementById('myLayers').value = loadedModel6.getWeights()
 								    
 									    
 										    
@@ -116,9 +115,8 @@ console.log(weightMap)
 
 <div id='myDiv4950'>...</div><br><br>
 <textarea id="myJSON" rows=20 cols="100%"></textarea>
-<textarea id="myLayers" rows=20 cols="100%"></textarea>
-<textarea id="myBinary" rows=20 cols="100%"></textarea>
-
+                                       
+<div id="myDivSummary">...</div><br><br>
 
 
 
@@ -230,8 +228,7 @@ Extract weights for consistent float32 Tensorflowjs saved model binary url <br>
 Shape: <input type="text" id="myShape" title="Define the shape of your testing data" value="1,1" placeholder="1,1"><br><br>
                                                                                                                            
 <div id="myDiv124">...</div><br><br>
-                                                                                    
-<div id="myDivSummary">...</div><br><br>
+                                             
 
 
 
