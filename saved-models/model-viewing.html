@@ -29,7 +29,7 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
      var myView = new DataView( f32.buffer);   // from byte 8 for the next 4 bytes
     // var msbVal = view.getFloat32(0)  									    
 										    
-      document.getElementById('myBinary').value = await  myView										    
+      document.getElementById('myBinary').value = await  myView.length										    
 										    
      const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
 												     
@@ -96,6 +96,7 @@ console.log(weightMap)
 <div id='myDiv4950'>...</div><br><br>
 <textarea id="myJSON" rows=20 cols="100%"></textarea>
 <textarea id="myBinary" rows=20 cols="100%"></textarea>
+<textarea id="myError" rows=20 cols="100%"></textarea>
                                        
 <div id="myDivSummary">...</div><br><br>
 
@@ -118,8 +119,8 @@ Load any Tensorflowjs saved model JSON file by url<br>
         const loadedModel6 = await tf.loadModel(document.getElementById('myInFile').value)
         document.getElementById('myWeights').value = loadedModel6.getWeights() 
      } catch(myError) {
-        document.getElementById('myWeights').value = 'The data may be invalid!\n Check console for any extra information\n'
-        document.getElementById('myWeights').value += 'File Load Error : ' + myError
+        document.getElementById('myError').value = 'The data may be invalid!\n Check console for any extra information\n'
+        document.getElementById('myError').value += 'File Load Error : ' + myError
    })()
 }"><br>
 
