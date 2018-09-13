@@ -23,6 +23,7 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
 										    
      const entries = Object.entries(myJ)
+     console.log('entries')
      console.log(entries)
 
 
@@ -36,31 +37,12 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
 										    
      await loadedModel6.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});											     
 															
-    for (let x=0; x <= 100; x++){
-       try  {
-										    
-	   var output = '';
-           for (var key in loadedModel6.getLayer('fred', x)._trainableWeights) {
-								    
-                 output += loadedModel6.getLayer('fred', x)[key] + '\n\n'
-										    
-								    
-										    
-            }
-								    
-	   // document.getElementById('myLayers').value = loadedModel6.getWeights()
-								    
-									    
-										    
-       } catch(err) {
-             break     // exit the for loop when no more layers
-       }
-   }
+
 for (let myW=0; myW <= loadedModel6.getWeights().length-1;  myW++){
 		 document.getElementById('myDiv4950').innerHTML += loadedModel6.getWeights()[myW] + '<br><br>'											    
 }										     
 												     
-	
+/*	
 										    
 const weightManifestUrl = document.getElementById('myInFile').value;
 const manifest = await fetch(weightManifestUrl);
@@ -77,7 +59,7 @@ console.log(weightManifest.weightsManifest[0].paths[0])
 const weightMap = await tf.io.loadWeights( weightManifest);										    
 console.log(weightMap)								    
 										    
-			     
+*/			     
     const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
     const myPredictArray6 = await loadedModel6.predict(training_data6).data()
     const endTime = performance.now();
