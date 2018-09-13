@@ -56,7 +56,7 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
      myIncoming =  await fetch(document.getElementById('myInFile').value)
      myJ = await myIncoming.json()
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
-     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});											     
+     await loadedModel6.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});											     
 															
     for (let x=0; x <= 100; x++){
        try  {
