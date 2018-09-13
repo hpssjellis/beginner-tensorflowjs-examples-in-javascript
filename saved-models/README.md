@@ -3,7 +3,7 @@ A few small saved models here. Each one has at least two files a json and a weig
 
 Model viewing file
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/model-view.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/model-viewing.html
 
 
 
