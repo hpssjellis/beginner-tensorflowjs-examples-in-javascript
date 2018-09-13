@@ -21,7 +21,7 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
      myIncoming =  await fetch(document.getElementById('myInFile').value)
      myJ = await myIncoming.json()
      document.getElementById('myJSON').value = await JSON.stringify(myJ, null, 3)
-	
+	     console.log('starting...............')
 	/*									    
 										    
 										    
@@ -37,11 +37,12 @@ LOAD JSON URL <input id="myInFile" type="text" size="120" value="https://hpssjel
 	*/									    
 	
 for (let [key, value] of Object.entries(myJ)) {
-    console.log(key + ' : ' + value); // This is the key;
-    //console.log(value); // This is the value;
+    console.log(key); // This is the key;
+    console.log(value); // This is the value;
 }									    
 										    
-										    
+	
+	     console.log('...............Done')									    
      await loadedModel6.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});											     
 															
 
