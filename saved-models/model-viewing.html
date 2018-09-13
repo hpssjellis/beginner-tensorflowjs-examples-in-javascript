@@ -21,3 +21,72 @@ Extract weights for consistent float32 Tensorflowjs saved model binary url <br>
      })()
 }"><br>
 <textarea id="myWeights" rows=15 cols="50"></textarea><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+ myTest = async function(){
+ 
+  const myShape = document.getElementById('myShape').value.split(',').map(Number);
+  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+  document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
+        ', Output = ' + await myPredictArray.data() +'<br><br>'+
+   'Note: tf.getBackend() = '+ tf.getBackend() + ', tf.ENV.get(\'WEBGL_VERSION\') = '+ tf.ENV.get('WEBGL_VERSION')
+
+  console.log(document.getElementById('myAsk').value + ': ' + await myPredictArray.data())  
+  document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+}
+
+ myLoadUrl = async function(){
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
+   if (myFileName != null){      
+      model = await tf.loadModel(myFileName);
+      document.getElementById('myDivSummary').innerHTML = '' 
+      await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+      await myTest()
+  }                                                                          
+}
+
+ </script>
+<!-- **************************************** Following is all the web page stuff ********************************* -->
+
+<h3 align=center>Testing the simplist Tensorflowjs model for RPI3<br>
+This is a badly trained Model on Y = 2X + 3 so an input of 5.32 should output about 13.64</h3>
+
+ <input id="myButtonLoad" type="button" value="Load From URL" onclick="{ 
+   myLoadUrl()                                                                             
+}"> 
+
+ <input id="myButtonTest" type="button" value="Test again" onclick="{ 
+   myTest()                                                                             
+}"> <br><br>
+
+<textarea id="myAsk" rows="2" cols="70" nowrap placeholder="5.32">5.32</textarea><br>
+
+Shape: <input type="text" id="myShape" title="Define the shape of your testing data" value="1,1" placeholder="1,1"><br><br>
+                                                                                                                           
+<div id="myDiv124">...</div><br><br>
+                                                                                    
+<div id="myDivSummary">...</div><br><br>
+
+
+
+By Jeremy Ellis <br>
+Tensorflowjs Tutorials <a href="http://rocksetta.com/tensorflowjs/">http://rocksetta.com/tensorflowjs/</a><br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+
