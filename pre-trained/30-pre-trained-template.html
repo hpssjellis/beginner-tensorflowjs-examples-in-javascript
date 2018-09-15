@@ -192,7 +192,10 @@ myPredict = async function(){
     //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 227, 227, 3])).data()                                                                                                                                      
    // document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDivTest').innerHTML  = 'Output for image URL: <br>'          // + document.getElementById('myAsk2').value + ' <br>'
-   
+   for (x=0; x<1000; x++){
+                                                                                             
+      document.getElementById('myDivTest').innerHTML += '<b>'+x +', '+ await Math.round(myPredictArray[x]*100) +'%</b><br>'                                                                                           
+                                                                                             }
                                                                                         
     document.getElementById('myDivTest').innerHTML += '<b>0: airplane ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDivTest').innerHTML += '<b>1: automobile ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
