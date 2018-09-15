@@ -175,7 +175,7 @@ myPredict = async function(){
     var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
     var data = imageData.data;
                                                                                              
-    const latestTensor2 = tf.fromPixels(imageData, 3).toFloat().reshape([1, 32, 32, 3])     // this time get rid of the alpha component 
+    const latestTensor2 = tf.fromPixels(imageData, 3).toFloat().reshape([1, 227, 227, 3])     // this time get rid of the alpha component 
     //latestTensor2.print(true)     
     const myNormalizeZeroToOne = tf.scalar(255)     // for dividing everything by 255                                                                                      
                                                                                              
@@ -189,7 +189,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
     const myPredictArray = await model.predict(xsTesting).data()       
-    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
+    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 227, 227, 3])).data()                                                                                                                                      
    // document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDivTest').innerHTML  = 'Output for image URL: <br>'          // + document.getElementById('myAsk2').value + ' <br>'
    
