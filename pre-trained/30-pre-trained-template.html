@@ -62,6 +62,7 @@ Draft mode
  <option value='user'>Front Mobile Camera
 </select>
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{stopVideo()}"> 
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
 Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
@@ -101,6 +102,10 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 
    // navigator.getMedia({video: true, audio: false},
    //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
+ 
+   getVideo = async function() { 
+     stream.getTracks().forEach(track => track.stop())                                                                                        
+  }                                                                                            
                                                                                              
   getVideo = async function() {  
   //const myCheckElement = document.getElementById('myCheck').checked
