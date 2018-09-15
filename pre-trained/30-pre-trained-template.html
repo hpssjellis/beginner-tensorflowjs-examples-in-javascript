@@ -123,16 +123,14 @@ stopVideo = async function() {
  
                                                                                              
 */
-  getVideo = async function() {  
-  //const myCheckElement = document.getElementById('myCheck').checked
-
-  //const myCamera = 'environment'  // rear facing only if mobile
+                                                                                             
+ 
+                                                                                             
+                                                                                             
+                                                                                             
+getVideo = async function() {  
   const myCamera = await document.getElementById('myCheck').value
-  //if (myCheckElement){  
-   // alert('worked inside if statment ')                                                                                           
-   // myCamera = 'user'  // forward facing
-  //}
-                                                                                        
+                                                                                     
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
@@ -145,6 +143,10 @@ stopVideo = async function() {
      alert('webcam not working');
   });
 }
+   
+                                                                                             
+                                                                                             
+                                                                                             
                                                                                              
   takeSnapshot = async function(){                                                                                           
    var myCanvasElement = document.getElementById('my32x32CanvasA');
