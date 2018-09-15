@@ -66,7 +66,7 @@ Draft mode
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
 Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
-<input type=button value="Stop Auto" onclick="{myStopAuto()}">
+<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br>
  <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br><br>
 <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="224" height="224" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
 
@@ -92,7 +92,7 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
                                                                                             
-                                                                                            
+ document.stopVideo = false                                                                                           
                                                                                                
 ///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
  
@@ -104,7 +104,8 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
    //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
  
    stopVideo = async function() { 
-     myVideoStream.getTracks().forEach(track => track.stop())                                                                                        
+    // myVideoStream.getTracks().forEach(track => track.stop())     
+   document.stopVideo = true                                                                                          
   }                                                                                            
                                                                                              
   getVideo = async function() {  
@@ -121,8 +122,12 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
     function(stream) {
-      myVideoStream.srcObject = stream   
-      myVideoStream.play();
+      myVideoStream.srcObject = stream  
+      if (document.stopVideo == true){
+          myVideoStream.getTracks().forEach(track => track.stop())                                                                                     
+       } else {                                                                                       
+         myVideoStream.play();
+      }
   }, 
                      
    function(error) {
