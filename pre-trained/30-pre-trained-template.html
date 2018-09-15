@@ -99,15 +99,9 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
                                                                                              
   var myVideoStream = document.getElementById('myVideo')     // make it a global variable
   var myStoredInterval = 0
-
-   // navigator.getMedia({video: true, audio: false},
-   //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
                                                                                              
 stopVideo = async function() {  
+  clearInterval(myStoredInterval)   // god idea to stop the auto snapshot taking                                                                                         
   const myCamera = await document.getElementById('myCheck').value
                                                                                      
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -123,12 +117,7 @@ stopVideo = async function() {
   });
 }
    
-         
-                                                                                             
- 
-                                                                                             
-                                                                                             
-                                                                                             
+                                                                                          
 getVideo = async function() {  
   const myCamera = await document.getElementById('myCheck').value
                                                                                      
