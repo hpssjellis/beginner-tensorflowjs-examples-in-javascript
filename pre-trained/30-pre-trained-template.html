@@ -103,7 +103,7 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
    // navigator.getMedia({video: true, audio: false},
    //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
  
-   getVideo = async function() { 
+   stopVideo = async function() { 
      stream.getTracks().forEach(track => track.stop())                                                                                        
   }                                                                                            
                                                                                              
