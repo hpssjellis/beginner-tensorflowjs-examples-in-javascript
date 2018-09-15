@@ -49,16 +49,143 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+Draft mode
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
+ 
+
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='user'>Front Mobile Camera
+</select>
+<input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
+<input type=button value="Stop Auto" onclick="{myStopAuto()}">
+ <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br><br>
+
+
+
+
+<div id="myDivLoss">...</div><br>
+<div id="myDivTest">...</div><br>
+
+<div id="myDivSummary">...</div><br><br>
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
       document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
 }"><br><br>
 
+ 
+ 
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+
+ ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
+                                                                                            
+                                                                                            
+                                                                                               
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
+                                                                                             
+  var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+  var myStoredInterval = 0
+
+   // navigator.getMedia({video: true, audio: false},
+   //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
+                                                                                             
+  getVideo = async function() {  
+  //const myCheckElement = document.getElementById('myCheck').checked
+
+  //const myCamera = 'environment'  // rear facing only if mobile
+  const myCamera = await document.getElementById('myCheck').value
+  //if (myCheckElement){  
+   // alert('worked inside if statment ')                                                                                           
+   // myCamera = 'user'  // forward facing
+  //}
+                                                                                        
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+
+                                                                                             
+  takeSnapshot = async function(){                                                                                           
+   var myCanvasElement = document.getElementById('my32x32CanvasA');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+}
+
+                                                                                             
+  takeAuto = async function(){                                                                                           
+     await takeSnapshot() // get snapshot right away then wait and repeat
+     await document.getElementById('myButtonTest').click()      
+    clearInterval(myStoredInterval)
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await takeSnapshot()
+       await document.getElementById('myButtonTest').click()                                                                                       
+   }, document.getElementById('myInterval').value);        
+}
+  
+                                                                   
+                                                                                             
+                                                                                              
+  myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+                                                                                             
+                                                                                                
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+/////////////////////////////////// END ALL FUNCITONS ///////////////////////////////////////                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+//////////////////////////////////   WEIRD STYLE TAG THAT IS ACTUALLY A DYNAMIC SCRIPT TAG ///////////////////                                                                                          
+                                                                                             
+                                                                                             
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 </div>
 <div id='myDiv123'>...</div><br>
 
