@@ -56,7 +56,7 @@ Draft mode
 <div id="myDiv123Code"> 
 
 <input id="myInFile" size=120 type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json"><br>
-<input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button value="Predict" onclick="{myPredict()}"><br><br>
+<input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br><br>
   
 
 <select size=1 id="myCheck">
@@ -137,11 +137,11 @@ getVideo = async function() {
                                                                                              
   takeAuto = async function(){                                                                                           
      await takeSnapshot() // get snapshot right away then wait and repeat
-     await document.getElementById('myButtonTest').click()      
+     await document.getElementById('myButtonPredict').click()      
     clearInterval(myStoredInterval)
     myStoredInterval = setInterval(async function(){                                                                                         
        await takeSnapshot()
-       await document.getElementById('myButtonTest').click()                                                                                       
+       await document.getElementById('myButtonPredict').click()                                                                                       
    }, document.getElementById('myInterval').value);        
 }
   
@@ -160,13 +160,13 @@ getVideo = async function() {
     model = await tf.loadModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-    await myTest()
+   // await myPredict()
   }                                                                           
 }                                                                                             
                                                                                              
                                                                                              
 
-myTest = async function(){
+myPredict = async function(){
    // document.getElementById('myButtonTest').style.backgroundColor = 'red'
     console.log('Model Predict')
                                                                  
