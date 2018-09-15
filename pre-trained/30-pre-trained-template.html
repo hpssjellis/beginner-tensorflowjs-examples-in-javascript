@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"></script>
 
 
 
@@ -55,7 +55,7 @@ Draft mode
 
 <div id="myDiv123Code"> 
 
-<input id="myInFile" size=120 type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json"><br>
+<input id="myInFile" size=120 type=text value="https://storage.googleapis.com/tfjs-models/tfjs/squeezenet_v1.1/model.json"><br>
 <input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br><br>
   
 
@@ -71,7 +71,7 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br>
-<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="32" height="32" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+<br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="227" height="227" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
 
 
 <div id="myDivLoss">...</div><br>
@@ -714,7 +714,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
