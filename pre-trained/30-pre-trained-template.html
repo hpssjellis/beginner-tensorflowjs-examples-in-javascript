@@ -105,24 +105,25 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
                                                                                              
                                                                                              
                                                                                              
-  /*                                                                                           
-stopVideo = async function() { 
+                                                                                             
+                                                                                             
+stopVideo = async function() {  
   const myCamera = await document.getElementById('myCheck').value
-                                                                                    
+                                                                                     
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
     function(stream) {
-      myVideoStream.srcObject = stream  
-      myVideoStream.getTracks().forEach(track => track.stop())                                                                                     
-  },                    
+      myVideoStream.srcObject = stream   
+      myVideoStream.getTracks().forEach(track => track.stop())  
+  }, 
+                     
    function(error) {
      alert('webcam not working');
   });
-}                                                                                            
- 
-                                                                                             
-*/
+}
+   
+         
                                                                                              
  
                                                                                              
