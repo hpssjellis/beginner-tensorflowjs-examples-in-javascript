@@ -108,8 +108,7 @@ stopVideo = async function() {
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
     function(stream) {
-      myVideoStream.srcObject = stream   
-      myVideoStream.getTracks().forEach(track => track.stop())  
+      stream.getTracks().forEach(track => track.stop())  
   }, 
                      
    function(error) {
