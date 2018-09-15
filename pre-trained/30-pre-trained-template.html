@@ -69,7 +69,7 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br>
 <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="224" height="224" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
-
+<input id="myInFile" type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json">
 
 
 <div id="myDivLoss">...</div><br>
@@ -92,7 +92,7 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
                                                                                             
- document.stopVideo = false                                                                                           
+                                                                                       
                                                                                                
 ///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
  
@@ -143,14 +143,71 @@ getVideo = async function() {
    }, document.getElementById('myInterval').value);        
 }
   
-                                                                   
-                                                                                             
-                                                                                              
+                                                                                           
   myStopAuto  = async function(){                                                                                             
     clearInterval(myStoredInterval)    
 }                                                                                            
                                                                                              
-                                                                                                
+ ///////////////////////////////////////////// Done Webcam functions ////////////////////////////////////////                                                                                               
+                                                                                             
+ myLoadUrl = async function(){
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
+  const myFileName = document.getElementById('myInFile').value
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);     // should make the model a global variable
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    await myTest()
+  }                                                                           
+}                                                                                             
+                                                                                             
+                                                                                             
+
+myTest = async function(){
+    document.getElementById('myButtonTest').style.backgroundColor = 'red'
+    console.log('Model Predict')
+                                                                 
+    var canvasReshape = document.getElementById('my32x32CanvasA'); // 32 x 32
+    var ctxReshape = canvasReshape.getContext('2d');   /// assume image has already been loaded
+    var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
+    var data = imageData.data;
+                                                                                             
+    const latestTensor2 = tf.fromPixels(imageData, 3).toFloat().reshape([1, 32, 32, 3])     // this time get rid of the alpha component 
+    //latestTensor2.print(true)     
+    const myNormalizeZeroToOne = tf.scalar(255)     // for dividing everything by 255                                                                                      
+                                                                                             
+    xsTesting =  latestTensor2.div(myNormalizeZeroToOne)            // hopefully normalize between 0-1                                                                            
+   // xsTesting.print(true) 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+   ///////////////////////////////////////////////////                                                                                          
+                                                                                             
+                                                                                             
+    const myPredictArray = await model.predict(xsTesting).data()       
+    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 32, 32, 3])).data()                                                                                                                                      
+   // document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
+    document.getElementById('myDivTest').innerHTML  = 'Output for image URL: <br>'          // + document.getElementById('myAsk2').value + ' <br>'
+   
+                                                                                        
+    document.getElementById('myDivTest').innerHTML += '<b>0: airplane ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>1: automobile ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>2: bird ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>3: cat ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>4: deer ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>5: dog ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>6: frog ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>7: horse ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>8: ship ' + await Math.round(myPredictArray[8]*100) +'%</b><br>'      
+    document.getElementById('myDivTest').innerHTML += '<b>9: truck ' + await Math.round(myPredictArray[9]*100) +'%</b><br>'     
+                                                                                             
+                                                                                      
+                                                                                             
+//['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
+  document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+}                                                                                             
                                                                                              
                                                                                              
                                                                                              
@@ -159,12 +216,7 @@ getVideo = async function() {
                                                                                              
                                                                                              
                                                                                              
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-/////////////////////////////////// END ALL FUNCITONS ///////////////////////////////////////                                                                                             
+/////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
                                                                                              
                                                                                              
                                                                                              
