@@ -55,12 +55,15 @@ Draft mode
 
 <div id="myDiv123Code"> 
 
- 
+<input id="myInFile" type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json">
+<input type=button value="Load Model" onclick="{myLoadUrl()}"><br>
+  
 
 <select size=1 id="myCheck">
  <option value='environment'>Rear Mobile Camera
  <option value='user'>Front Mobile Camera
 </select>
+
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> 
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
@@ -69,7 +72,6 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br>
 <br><canvas id="my32x32CanvasA" style="background-color:lightgray;" width="224" height="224" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
-<input id="myInFile" type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json">
 
 
 <div id="myDivLoss">...</div><br>
