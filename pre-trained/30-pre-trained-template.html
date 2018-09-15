@@ -62,7 +62,7 @@ Draft mode
  <option value='user'>Front Mobile Camera
 </select>
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
-<input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ document.stopVideo = true   }"> 
+<input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> 
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
 Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
@@ -102,31 +102,33 @@ Take snapshot every <input type=number id="myInterval"  value="3000" size=5> mil
 
    // navigator.getMedia({video: true, audio: false},
    //  navigator.getMedia({video: { facingMode: 'environment' }, audio: false},
- 
-  // stopVideo = async function() { 
-    // myVideoStream.getTracks().forEach(track => track.stop())     
- //  document.stopVideo = true                                                                                          
- // }                                                                                            
                                                                                              
-  getVideo = async function() { 
-// document.stopVideo = false 
-  //const myCheckElement = document.getElementById('myCheck').checked
-
-  //const myCamera = 'environment'  // rear facing only if mobile
+                                                                                             
+                                                                                             
+                                                                                             
+stopVideo = async function() { 
   const myCamera = await document.getElementById('myCheck').value
-  //if (myCheckElement){  
-   // alert('worked inside if statment ')                                                                                           
-   // myCamera = 'user'  // forward facing
-  //}
-                                                                                        
+                                                                                    
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   navigator.getMedia({video: { facingMode: myCamera }, audio: false},
                      
     function(stream) {
       myVideoStream.srcObject = stream  
-      if (document.stopVideo == true){
-          myVideoStream.getTracks().forEach(track => track.stop())                                                                                     
-       } else {                                                                                       
+      myVideoStream.getTracks().forEach(track => track.stop())                                                                                     
+  },                    
+   function(error) {
+     alert('webcam not working');
+  });
+}                                                                                            
+                                                                                             
+getVideo = async function() { 
+  const myCamera = await document.getElementById('myCheck').value
+                                                                                    
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream                                                                                     
          myVideoStream.play();
       }
   }, 
