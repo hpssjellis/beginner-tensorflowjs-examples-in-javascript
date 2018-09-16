@@ -67,7 +67,7 @@ Draft mode
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> 
 <input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
-Take snapshot every <input type=number id="myInterval"  value="3000" size=5> milliseconds
+Take snapshot every <input type=number id="myInterval"  value="7000" size=5> milliseconds
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  <video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video><br>
@@ -1199,7 +1199,7 @@ myPredict = async function(){
   const inferenceResult = await model.predict(image);
   //console.log('await model.predict(image);')   
                                                                                              
-  const {values, indices} = await tf.topk(inferenceResult, 10);
+  const {values, indices} = await tf.topk(inferenceResult, 7);     // grab the top 7 outputs
 
 
 //values.print();
@@ -1207,55 +1207,12 @@ myPredict = async function(){
   myValues = values.dataSync()                                                                              
   myIndices = indices.dataSync()                                                                                           
                                                                                              
-                                                                                             
-
-                                                                                             
+                                                                                         
   document.getElementById('myDivTest').innerHTML = ''   // clear the div    
   for (let x=0; x< myIndices.length; x++){                                                                                           
       document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+IMAGENET_CLASSES[myIndices[x]] + '<br>'                                                                                         
    }                                                                                          
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-    /*                                                                                         
-                                                                                             
-    var canvasReshape = document.getElementById('my32x32CanvasA'); // 32 x 32
-    var ctxReshape = canvasReshape.getContext('2d');   /// assume image has already been loaded
-    var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
-    var data = imageData.data;
-                                                                                             
-    const latestTensor2 = tf.fromPixels(imageData, 3).toFloat().reshape([1, 227, 227, 3])     // this time get rid of the alpha component 
-    //latestTensor2.print(true)     
-    const myNormalizeZeroToOne = tf.scalar(255)     // for dividing everything by 255                                                                                      
-                                                                                             
-    xsTesting =  latestTensor2.div(myNormalizeZeroToOne)            // hopefully normalize between 0-1                                                                            
-   // xsTesting.print(true) 
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-   ///////////////////////////////////////////////////                                                                                          
-                                                                                             
-                                                                                             
-    const myPredictArray = await model.predict(xsTesting).data()       
-    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 227, 227, 3])).data()                                                                                                                                      
-   // document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
-    document.getElementById('myDivTest').innerHTML  = 'Output for image URL: <br>'          // + document.getElementById('myAsk2').value + ' <br>'
-   for (x=0; x<1000; x++){
-     if (myPredictArray[x]*100 > 5){  
-         myPrintClass =  IMAGENET_CLASSES[x]
-         console.log(myPrintClass)                                                                                    
-         document.getElementById('myDivTest').innerHTML += myPrintClass + ' <b>'+x +', '+ await Math.round(myPredictArray[x]*100) +'%</b><br>'  
-      }
-   }
-                                                                                        
-   */
-                                                                                             
-                                                                                      
-                                                                                             
-//['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']  
- // document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
+
 }                                                                                             
                                                                                              
                                                                                              
