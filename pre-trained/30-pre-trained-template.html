@@ -1194,7 +1194,8 @@ myPredict = async function(){
     console.log('Model Predict')
     
                                                                                              
-  const image = tf.fromPixels(document.getElementById('my32x32CanvasA'));
+  const image = tf.fromPixels(document.getElementById('my32x32CanvasA')).reshape([1, 227, 227, 3]) ;
+                                                                                             
   const inferenceResult = await model.predict(image);
   const topClassesToProbs = await tf.topk(inferenceResult.logits, 10);
 
