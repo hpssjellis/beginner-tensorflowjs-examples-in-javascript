@@ -1196,7 +1196,7 @@ myPredict = async function(){
                                                                                              
   const image = tf.fromPixels(document.getElementById('my32x32CanvasA'));
   const inferenceResult = await model.predict(image);
-  const topClassesToProbs = await model.getTopKClasses(inferenceResult.logits, 10);
+  const topClassesToProbs = await tf.topk(inferenceResult.logits, 10);
 
   document.getElementById('myDivTest').innerHTML = ''   // clear the div
   for (const className in topClassesToProbs) {  
