@@ -1192,7 +1192,23 @@ getVideo = async function() {
 myPredict = async function(){
    // document.getElementById('myButtonTest').style.backgroundColor = 'red'
     console.log('Model Predict')
-                                                                 
+    
+                                                                                             
+  const image = tf.Array3D.fromPixels(document.getElementById('my32x32CanvasA'));
+  const inferenceResult = await model.predict(image);
+  const topClassesToProbs = await model.getTopKClasses(inferenceResult.logits, 10);
+
+  document.getElementById('myDivTest').innerHTML = ''   // clear the div
+  for (const className in topClassesToProbs) {  
+    document.getElementById('myDivTest').innerHTML += topClassesToProbs[className].toFixed(5) + ' : '+ className + '<br>'
+  }                                                                                          
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+    /*                                                                                         
+                                                                                             
     var canvasReshape = document.getElementById('my32x32CanvasA'); // 32 x 32
     var ctxReshape = canvasReshape.getContext('2d');   /// assume image has already been loaded
     var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
@@ -1223,7 +1239,7 @@ myPredict = async function(){
       }
    }
                                                                                         
-   
+   */
                                                                                              
                                                                                       
                                                                                              
