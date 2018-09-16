@@ -1210,9 +1210,10 @@ myPredict = async function(){
                                                                                              
 
                                                                                              
-  document.getElementById('myDivTest').innerHTML = ''   // clear the div                                                                                    
-  document.getElementById('myDivTest').innerHTML += IMAGENET_CLASSES[myIndices[0]] + ' : '+ myValues[0] + '<br>'                                                                                         
-                                                                                             
+  document.getElementById('myDivTest').innerHTML = ''   // clear the div    
+  for (let x=0; x< myIndices.length; x++){                                                                                           
+      document.getElementById('myDivTest').innerHTML += IMAGENET_CLASSES[myIndices[x]] + ' : '+ Math.round(myValues[x]*100) + '%<br>'                                                                                         
+   }                                                                                          
                                                                                              
                                                                                              
                                                                                              
