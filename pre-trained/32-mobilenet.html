@@ -55,8 +55,7 @@ Draft mode
 
 <div id="myDiv123Code"> 
 
-<input id="myInFile" size=120 type=text value="https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json"><br>
-<input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br><br>
+<input id="myInFile" size=120 type=text value="https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_1.0_224/model.json"><br><br>
   
 
 <select size=1 id="myCheck">
@@ -66,7 +65,8 @@ Draft mode
 
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}">  
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }">  
-<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+<input type=button value="get Pic" onclick="{takeSnapshot()}">
+ <input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br>
 Take snapshot every <input type=number id="myInterval"  value="7000" size=5> milliseconds<br>
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
