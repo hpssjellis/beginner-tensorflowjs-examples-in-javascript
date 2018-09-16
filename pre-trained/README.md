@@ -5,3 +5,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-tr
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/31-squeezenet.html
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/32-imagenet.html
+
+
+
