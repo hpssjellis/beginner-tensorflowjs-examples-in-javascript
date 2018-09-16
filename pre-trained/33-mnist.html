@@ -190,7 +190,7 @@ myPredict = async function(){
   const inferenceResult = await model.predict(image);
   //console.log('await model.predict(image);')   
                                                                                              
-  const {values, indices} = await tf.topk(inferenceResult, 7);     // grab the top 7 outputs
+  const {values, indices} = await tf.topk(inferenceResult);     
 
 
 //values.print();
