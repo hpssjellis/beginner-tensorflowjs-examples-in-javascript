@@ -10,4 +10,8 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-tr
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/32-mobilenet.html
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/33-mnist.html
+
+
+
 
