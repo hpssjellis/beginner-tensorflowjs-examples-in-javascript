@@ -1217,7 +1217,7 @@ myPredict = async function(){
     document.getElementById('myDivTest').innerHTML  = 'Output for image URL: <br>'          // + document.getElementById('myAsk2').value + ' <br>'
    for (x=0; x<1000; x++){
      if (myPredictArray[x]*100 > 5){  
-         myPrintClass =  IMAGENET_CLASSES.x
+         myPrintClass =  IMAGENET_CLASSES[x]
          console.log(myPrintClass)                                                                                    
          document.getElementById('myDivTest').innerHTML += myPrintClass + ' <b>'+x +', '+ await Math.round(myPredictArray[x]*100) +'%</b><br>'  
       }
