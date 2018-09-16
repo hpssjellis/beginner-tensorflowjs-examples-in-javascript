@@ -1202,18 +1202,16 @@ myPredict = async function(){
   const {values, indices} = await tf.topk(inferenceResult, 10);
 
 
-values.print();
-indices.print();                                                                                           
-                                                                                             
+//values.print();
+//indices.print();                                                                                           
+  myValues = values.dataSync()                                                                              
+  myIndices = indices.dataSync()                                                                                           
                                                                                              
                                                                                              
 
                                                                                              
-  document.getElementById('myDivTest').innerHTML = ''   // clear the div
-  for (const className in topClassesToProbs) {  
-    console.log('topClassesToProbs'+ className)                                                                                          
-    document.getElementById('myDivTest').innerHTML += topClassesToProbs[className] + ' : '+ className + '<br>'
-  }                                                                                          
+  document.getElementById('myDivTest').innerHTML = ''   // clear the div                                                                                    
+  document.getElementById('myDivTest').innerHTML += IMAGENET_CLASSES[myIndices[0]] + ' : '+ myValues[0] + '<br>'                                                                                         
                                                                                              
                                                                                              
                                                                                              
