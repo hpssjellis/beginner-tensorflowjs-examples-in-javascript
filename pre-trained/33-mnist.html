@@ -189,6 +189,7 @@ myPredict = async function(){
    //   console.log('frompixels')                                                                                           
   const inferenceResult = await model.predict(image);
   //console.log('await model.predict(image);')   
+    inferenceResult.print(true)      
                                                                                              
   const {values, indices} = await tf.topk(inferenceResult, 5);    // top 5 results?? 
 
