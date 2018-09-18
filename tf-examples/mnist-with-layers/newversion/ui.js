@@ -54,7 +54,7 @@ ui.showTestResults = function(batch, predictions, labels) {
 
     const canvas = document.createElement('canvas');
     canvas.className = 'prediction-canvas';
-    draw(image.flatten(), canvas);
+    ui.draw(image.flatten(), canvas);
 
     const pred = document.createElement('div');
 
