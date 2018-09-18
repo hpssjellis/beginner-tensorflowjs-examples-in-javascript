@@ -160,4 +160,4 @@ class MnistData {
     return {xs, labels};
   }
 }
-© 2018 GitHub, Inc.
+
