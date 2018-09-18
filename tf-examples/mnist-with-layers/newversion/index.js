@@ -238,8 +238,9 @@ async function showPredictions(model) {
 
     ui.showTestResults(examples, predictions, labels);
     
-    const saveResults = await model.save('downloads://my-mnist01');
   });
+  
+    const saveResults = await model.save('downloads://my-mnist01');
 }
 
 function createModel() {
