@@ -26,16 +26,19 @@ const statusElement = document.getElementById('status');
 const messageElement = document.getElementById('message');
 const imagesElement = document.getElementById('images');
 
-function logStatus(message) {
+ui.isTraining = function() {
+
+
+ui.logStatus = function(message) {
   statusElement.innerText = message;
 }
 
-function trainingLog(message) {
+ui.trainingLog = function(message) {
   messageElement.innerText = `${message}\n`;
   console.log(message);
 }
 
-function showTestResults(batch, predictions, labels) {
+ui.showTestResults = function(batch, predictions, labels) {
   const testExamples = batch.xs.shape[0];
   let totalCorrect = 0;
   for (let i = 0; i < testExamples; i++) {
@@ -83,7 +86,7 @@ const lossValues = {
     line: {width: 3}
   }
 };
-function plotLoss(batch, loss, set) {
+ui.plotLoss= function(batch, loss, set) {
   lossValues[set].x.push(batch);
   lossValues[set].y.push(loss);
   Plotly.newPlot('loss-canvas', [lossValues.train, lossValues.validation], {
@@ -111,7 +114,7 @@ const accuracyValues = {
     line: {width: 3}
   }
 };
-function plotAccuracy(batch, accuracy, set) {
+ui.plotAccuracy= function(batch, accuracy, set) {
   accuracyValues[set].x.push(batch);
   accuracyValues[set].y.push(accuracy);
   Plotly.newPlot(
@@ -129,7 +132,7 @@ function plotAccuracy(batch, accuracy, set) {
       `last accuracy: ${(accuracy * 100).toFixed(1)}%`;
 }
 
-function draw(image, canvas) {
+ui.draw = function(image, canvas) {
   const [width, height] = [28, 28];
   canvas.width = width;
   canvas.height = height;
@@ -154,7 +157,7 @@ function getTrainEpochs() {
   return Number.parseInt(document.getElementById('train-epochs').value);
 }
 
-function setTrainButtonCallback(callback) {
+ui.setTrainButtonCallback= function(callback) {
   const trainButton = document.getElementById('train');
   const modelType = document.getElementById('model-type');
   trainButton.addEventListener('click', () => {
