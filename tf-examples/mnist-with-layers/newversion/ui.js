@@ -26,18 +26,26 @@ const statusElement = document.getElementById('status');
 const messageElement = document.getElementById('message');
 const imagesElement = document.getElementById('images');
 
+
+
+
 ui.isTraining = function() {
-
-
 ui.logStatus = function(message) {
   statusElement.innerText = message;
 }
 
+  
+  
+  
+  
 ui.trainingLog = function(message) {
   messageElement.innerText = `${message}\n`;
   console.log(message);
 }
 
+  
+  
+  
 ui.showTestResults = function(batch, predictions, labels) {
   const testExamples = batch.xs.shape[0];
   let totalCorrect = 0;
@@ -67,6 +75,10 @@ ui.showTestResults = function(batch, predictions, labels) {
   }
 }
 
+  
+  
+  
+  
 const lossLabelElement = document.getElementById('loss-label');
 const accuracyLabelElement = document.getElementById('accuracy-label');
 
@@ -86,6 +98,10 @@ const lossValues = {
     line: {width: 3}
   }
 };
+  
+  
+  
+  
 ui.plotLoss= function(batch, loss, set) {
   lossValues[set].x.push(batch);
   lossValues[set].y.push(loss);
@@ -98,6 +114,10 @@ ui.plotLoss= function(batch, loss, set) {
   lossLabelElement.innerText = `last loss: ${loss.toFixed(3)}`;
 }
 
+  
+  
+  
+  
 const accuracyValues = {
   train: {
     x: [],
@@ -114,6 +134,10 @@ const accuracyValues = {
     line: {width: 3}
   }
 };
+  
+  
+  
+  
 ui.plotAccuracy= function(batch, accuracy, set) {
   accuracyValues[set].x.push(batch);
   accuracyValues[set].y.push(accuracy);
@@ -132,6 +156,11 @@ ui.plotAccuracy= function(batch, accuracy, set) {
       `last accuracy: ${(accuracy * 100).toFixed(1)}%`;
 }
 
+  
+  
+  
+  
+  
 ui.draw = function(image, canvas) {
   const [width, height] = [28, 28];
   canvas.width = width;
@@ -149,14 +178,20 @@ ui.draw = function(image, canvas) {
   ctx.putImageData(imageData, 0, 0);
 }
 
-function getModelTypeId() {
+  
+  
+  
+ui.getModelTypeId = function() {
   return document.getElementById('model-type').value;
 }
 
-function getTrainEpochs() {
+ui.getTrainEpochs = function() {
   return Number.parseInt(document.getElementById('train-epochs').value);
 }
 
+  
+  
+  
 ui.setTrainButtonCallback= function(callback) {
   const trainButton = document.getElementById('train');
   const modelType = document.getElementById('model-type');
