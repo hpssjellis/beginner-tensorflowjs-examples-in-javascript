@@ -237,6 +237,8 @@ async function showPredictions(model) {
     const predictions = Array.from(output.argMax(axis).dataSync());
 
     ui.showTestResults(examples, predictions, labels);
+    
+    const saveResults = await model.save('downloads://my-mnist01');
   });
 }
 
