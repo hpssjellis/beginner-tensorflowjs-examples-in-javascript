@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/hyperparameters@latest/dist/hyperparameters.min.js"> </script>
+  </head>
+  <body>
+    <button onclick="trainFunction()">click to run tf model</button>
+    <div id='bestOptimizer'> </div>
+    <div id='bestEpochs'></div>
+    <div id='prediction'></div>
+  </body>
+
+  <script>
+    const optFunction = async ({ optimizer, epochs }, { xs, ys }) => {
+      // Create a simple model.
+      const model = tf.sequential();
+      model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+      // Prepare the model for training: Specify the loss and the optimizer.
+      model.compile({
+        loss: 'meanSquaredError',
+        optimizer
+      });
+      // train the model using the data.
+      const h = await model.fit(xs, ys, { epochs });
+      
+      // print out each optimizer and its loss
+      console.log(optimizer, h.history.loss[h.history.loss.length - 1]);
+      
+      // return the model, loss, and status
+      return { model, loss: h.history.loss[h.history.loss.length - 1],
+        status: hpjs.STATUS_OK };      
+    };
+    async function trainFunction() {
+      // hyperparameters search space
+      // optimizer is a choice field
+      // epochs ia an integer value from 10 to 250 with a step of 5
+      const space = {
+        optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
+        epochs: hpjs.quniform(50, 250, 50),
+      };
+      // Generate some synthetic data for training. (y = 2x - 1)
+      // data will be passed as parameters to fmin
+      const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
+      const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+      const trials = await hpjs.fmin(
+        optFunction, space, hpjs.search.randomSearch, 6,
+        { rng: new hpjs.RandomState(654321), xs, ys }
+      );
+      const opt = trials.argmin;
+      
+      // displaying data for best optimizer and epochs, as well as a prediction
+      document.getElementById('bestOptimizer').innerText = 
+          `Best Optimizer: ${opt.optimizer}`;
+      document.getElementById('bestEpochs').innerText = 
+          `Best Epochs: ${opt.epochs}`;
+      const { model } = await optFunction(opt, { xs, ys });
+      const prediction = model.predict(tf.tensor2d([20], [1, 1]));
+      document.getElementById('prediction').innerText = 
+          `Prediction: ${prediction.dataSync()}`;
+      }
+  </script>
+</html>
