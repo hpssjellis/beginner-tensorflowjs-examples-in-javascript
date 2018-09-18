@@ -27,9 +27,6 @@ const messageElement = document.getElementById('message');
 const imagesElement = document.getElementById('images');
 
 
-
-
-ui.isTraining = function() {
 ui.logStatus = function(message) {
   statusElement.innerText = message;
 }
