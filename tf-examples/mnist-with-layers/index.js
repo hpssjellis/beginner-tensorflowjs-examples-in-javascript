@@ -112,7 +112,7 @@ async function train() {
 }
 
 async function showPredictions() {
-  model.summary()
+  //model.summary()
   
   
   
