@@ -112,6 +112,10 @@ async function train() {
 }
 
 async function showPredictions() {
+  model.summary()
+  
+  
+  
   const testExamples = 100;
   const batch = data.nextTestBatch(testExamples);
 
