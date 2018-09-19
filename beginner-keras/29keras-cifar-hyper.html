@@ -401,15 +401,18 @@ myButtonsForLoadedModel = function(){
                                                                                              
                                                                                              
                                                                                              
-  const optFunction = async ({ optimizer, epochs }, { xTrainingData, yTrainingTarget }) => {     //new                                                                                                                                                                                        
+  const optFunction = async ({ optimizer, epochs }, { xTrainingData, yTrainingTarget }) => {     //new   
+     console.log('')
      await myDefineModel()
+     console.log('defining')
     // await myCompile()
-     model.compile({loss: 'meanSquaredError', optimizer });                                                                                          
+     model.compile({loss: 'meanSquaredError', optimizer });
+     console.log('compiled')                                                                                            
      const h = await model.fit(xTrainingData, yTrainingTarget, { epochs });
-      
+
+     console.log('trained')                                            
       // print out each optimizer and its loss
-      console.log(optimizer, h.history.loss[h.history.loss.length - 1]);                                                                                       
-                                                                                             
+      console.log(optimizer, h.history.loss[h.history.loss.length - 1]);                                                                                                                                                                    
                                                                                              
     // await myTrain()  sorry. not going to train here, using the hyper train. May break my pause ability
      return { model, loss: h.history.loss[h.history.loss.length - 1], status: hpjs.STATUS_OK };        //new  
@@ -421,11 +424,14 @@ async function trainFunction() {
       // hyperparameters search space
       // optimizer is a choice field
       // epochs ia an integer value from 10 to 250 with a step of 5
+   
+     console.log('train funciton')                                                                                                                                
       const space = {                                                           //new  
         optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),          //new   
         epochs: hpjs.quniform(50, 250, 50),                                     //new  
       };                                                                        //new
       
+     console.log('space')                                      
       
       // Generate some synthetic data for training. (y = 2x - 1)
       // data will be passed as parameters to fmin
@@ -435,6 +441,8 @@ async function trainFunction() {
      //  yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]); 
       
       const trials = await hpjs.fmin(optFunction, space, hpjs.search.randomSearch, 6,  { rng: new hpjs.RandomState(654321), xTrainingData, yTrainingTarget });        //new
+      
+     console.log('trials')                                      
       const opt = trials.argmin;                                                                                                              //new
       
       // displaying data for best optimizer and epochs, as well as a prediction
