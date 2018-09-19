@@ -192,7 +192,7 @@ myPredict = async function(){
   //console.log('await model.predict(image);')   
    // inferenceResult.print(true)      
                                                                                              
-  const {values, indices} = await tf.topk(inferenceResult, 5);    // top 5 results?? 
+  const {values, indices} = await tf.topk(inferenceResult, 10);    // top 10 results 
 
 
 //values.print();
