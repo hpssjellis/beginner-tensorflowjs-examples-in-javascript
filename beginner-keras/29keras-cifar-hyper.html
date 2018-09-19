@@ -404,7 +404,7 @@ myButtonsForLoadedModel = function(){
   const optFunction = async ({ optimizer, epochs }, { xs, ys }) => {     //new                                                                                                                                                                                        
      await myDefineModel()
      await myCompile()
-     await myTrain()
+    // await myTrain()  sorry. not going to train here, using the hyper train. may break my pause ability
      return { model, loss: h.history.loss[h.history.loss.length - 1], status: hpjs.STATUS_OK };        //new  
 };                                                                                           
                                                                                                 
