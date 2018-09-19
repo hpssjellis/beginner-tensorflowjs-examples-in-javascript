@@ -439,7 +439,7 @@ async function trainFunction() {
      console.log('train funciton')                                                                                                                                
       const space = {                                                           //new  
         optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),          //new   
-        epochs: hpjs.quniform(50, 250, 50),                                     //new  
+        epochs: hpjs.quniform(10, 20, 5),                                     //new  
       };                                                                        //new
       
      console.log('space')                                      
@@ -451,7 +451,7 @@ async function trainFunction() {
       //  xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
      //  yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]); 
       
-      const trials = await hpjs.fmin(optFunction, space, hpjs.search.randomSearch, 6,  { rng: new hpjs.RandomState(654321), xTrainingData, yTrainingTarget });        //new
+      const trials = await hpjs.fmin(optFunction, space, hpjs.search.randomSearch, 9,  { rng: new hpjs.RandomState(654321), xTrainingData, yTrainingTarget });        //new
       
      console.log('trials')                                      
       const opt = trials.argmin;                                                                                                              //new
