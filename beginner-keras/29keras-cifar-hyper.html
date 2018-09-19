@@ -410,13 +410,14 @@ myButtonsForLoadedModel = function(){
      console.log('compiled')                                                                                            
      const h = await model.fit(xTrainingData, yTrainingTarget, { epochs,
                                                                                              
-         callbacks : {
+      callbacks : {
       onEpochEnd: async (epoch, logs) => {
          document.getElementById('myLastEpoch').value = epoch + 1;
          if (epoch % 20 == 0) {
             console.log('Epoch:' + epoch  + '/' +document.getElementById('myEpoch').value +
                ', loss:' + logs.loss)
          }
+        }                                                                                     
      }
    });
 
