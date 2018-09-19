@@ -6,6 +6,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.6"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/hyperparameters@latest/dist/hyperparameters.min.js"> </script>
 
 
 
@@ -390,12 +391,72 @@ myButtonsForLoadedModel = function(){
 
  myRunAll = async function(){
   document.getElementById('myButtonAll').style.backgroundColor = 'yellow'
-  await myPrepData()
-  await myDefineModel()
-  await myCompile()
-  await myTrain()
+  await myPrepData() '
+                                                                                             
+  await trainFunction()                                                                                        
+                                                                                             
   await myTest()
 }
+     
+                                                                                             
+                                                                                             
+                                                                                             
+  const optFunction = async ({ optimizer, epochs }, { xs, ys }) => {     //new                                                                                                                                                                                        
+     await myDefineModel()
+     await myCompile()
+     await myTrain()
+     return { model, loss: h.history.loss[h.history.loss.length - 1], status: hpjs.STATUS_OK };        //new  
+};                                                                                           
+                                                                                                
+                                                                                             
+ 
+async function trainFunction() {
+      // hyperparameters search space
+      // optimizer is a choice field
+      // epochs ia an integer value from 10 to 250 with a step of 5
+      const space = {                                                           //new  
+        optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),          //new   
+        epochs: hpjs.quniform(50, 250, 50),                                     //new  
+      };                                                                        //new
+      
+      
+      // Generate some synthetic data for training. (y = 2x - 1)
+      // data will be passed as parameters to fmin
+     // const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);   
+     // const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+      //  xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+     //  yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]); 
+      
+      const trials = await hpjs.fmin(optFunction, space, hpjs.search.randomSearch, 6,  { rng: new hpjs.RandomState(654321), xTrainingData, yTrainingTarget });        //new
+      const opt = trials.argmin;                                                                                                              //new
+      
+      // displaying data for best optimizer and epochs, as well as a prediction
+      document.getElementById('bestOptimizer').innerText = `Best Optimizer: ${opt.optimizer}`;
+      document.getElementById('bestEpochs').innerText = `Best Epochs: ${opt.epochs}`;
+      const { model } = await optFunction(opt, { xTrainingData, yTrainingTarget });                                               //new
+      
+      
+      
+     // const prediction = model.predict(tf.tensor2d([20], [1, 1]));
+      
+     // document.getElementById('prediction').innerText = `Prediction: ${prediction.dataSync()}`;
+}                                                                                            
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
 
  myPrepData = async function(){
                                                                                        
@@ -417,7 +478,7 @@ myButtonsForLoadedModel = function(){
     document.getElementById('myButtonPrep').style.backgroundColor = 'yellow'                                                                                         
 }
                                                                                              
-                                                                                             
+                                                                                       
  myDefineModel = async function(){   
     console.log('Defining Model')  
     document.getElementById('myButtonDefine').style.backgroundColor = 'red'                                                                                                
