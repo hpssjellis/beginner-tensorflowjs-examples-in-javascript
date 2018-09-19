@@ -404,7 +404,7 @@ myButtonsForLoadedModel = function(){
   const optFunction = async ({ optimizer, epochs }, { xTrainingData, yTrainingTarget }) => {     //new                                                                                                                                                                                        
      await myDefineModel()
     // await myCompile()
-                                                                                             
+     model.compile({loss: 'meanSquaredError', optimizer });                                                                                          
      const h = await model.fit(xTrainingData, yTrainingTarget, { epochs });
       
       // print out each optimizer and its loss
