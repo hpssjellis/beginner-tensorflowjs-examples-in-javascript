@@ -684,7 +684,7 @@ myLoadLocal = async function(){
  myLoadUrl = async function(){
   //alert('The test function will need to be changed if other models are loaded')                                                                                             
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
-  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar1000.json');
+  const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/myCifar01-2400epochs-075loss.json');
   if (myFileName != null){  
     myButtonsForLoadedModel()
     model = await tf.loadModel(myFileName);
