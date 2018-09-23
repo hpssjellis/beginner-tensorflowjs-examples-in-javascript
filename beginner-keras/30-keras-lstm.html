@@ -94,14 +94,14 @@ We will train the following information:
  
 <input id="myButton123" type="button" value="Train Model, then test a Crow" onclick="{
                                                                                      
-  (async function myGo() {
+    (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
-  const sequenceLength = 9;
+  const sequenceLength = 8;
   const stretchLengthThreshold = 4;
   
   const model = tf.sequential();
-  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 1]}));
-  model.add(tf.layers.dense({units: 1, activation: 'sigmoid'}));
+  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 8]}));
+  model.add(tf.layers.dense({units: 4, activation: 'sigmoid'}));
   
   // Compile model to prepare for training.
   const learningRate = 4e-3;
@@ -118,8 +118,9 @@ We will train the following information:
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ], shape=[8,8]);      
-    const yTrainingTarget = tf.tensor2d([1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ], shape=[8,4]);          
+    const xTrainingData   = tf.tensor3d([1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ], shape=[1,8,8]);      
+  //  const yTrainingTarget = tf.tensor2d([1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ], shape=[1,4]);             
+    const yTrainingTarget = tf.tensor2d([ 0,0,0,1 ], shape=[1,4]);         
 
     console.log('xTrainingData')
     xTrainingData.print()
@@ -128,7 +129,7 @@ We will train the following information:
                                                                                   
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
         batchSize : 64,
-        epochs    : 500,                                                                      
+        epochs    : 200,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
             document.getElementById('myDiv123').innerHTML = 'Epoch # ' + (epoch+1) + '/500, Loss: ' + logs.loss + '<br><br>'
@@ -137,8 +138,8 @@ We will train the following information:
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
     
-    const xTestArray = [0,0,1,0,0,0,0,0]
-    const xTestData  = tf.tensor2d(xTestArray, shape=[1,8])                                                                         
+    const xTestArray = [1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ]
+    const xTestData  = tf.tensor3d(xTestArray, shape=[1,8,8])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
     console.log('myPredictArray')       
