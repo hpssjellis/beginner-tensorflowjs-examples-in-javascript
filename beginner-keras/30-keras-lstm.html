@@ -96,9 +96,25 @@ We will train the following information:
                                                                                      
   (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
-    const model = tf.sequential();
-    model.add(tf.layers.dense({ units: 30, activation: 'sigmoid', inputShape: [8], }) );  // 8 inputs to 30 hidden layer nodes
-    model.add(tf.layers.dense({ units: 4,  activation: 'sigmoid', }) );  // from the 30 hidden layer nodes to 4 output layer                                                                                  
+  const sequenceLength = 9;
+  const stretchLengthThreshold = 4;
+  
+  const model = tf.sequential();
+  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 1]}));
+  model.add(tf.layers.dense({units: 1, activation: 'sigmoid'}));
+  
+  // Compile model to prepare for training.
+  const learningRate = 4e-3;
+  const optimizer = tf.train.rmsprop(learningRate);
+  model.compile({
+    loss: 'binaryCrossentropy',
+    optimizer: optimizer,
+    metrics: ['acc']
+  });                                                                                   
+    //model.add(tf.layers.dense({ units: 30, activation: 'sigmoid', inputShape: [8], }) );  // 8 inputs to 30 hidden layer nodes
+    //model.add(tf.layers.dense({ units: 4,  activation: 'sigmoid', }) );  // from the 30 hidden layer nodes to 4 output layer 
+                                                                                     
+                                                                                     
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
