@@ -49,9 +49,9 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-This webcam MNIST model works best with white lettes on a black background. A fairly small model that only took about 10 minutes to train.
-Almost useless with any colored letters. Check out the black textarea to see the entire code and possibly make changes.<br>
- Everything is on one webpage with embedded javascript.
+So here we are going to try to load 2 models and then switch back and forth from them. The idea would be the first model finds 
+ general categories, say cats or dogs and the second model then spots specific cats. etc. The only problem is I don't have well trained 
+ models so I am just vgoing to load 2 MNIST sets and try to switch between them.
 </div><br>
 
 
@@ -173,39 +173,34 @@ getVideo = async function() {
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
   if (myFileName != null){  
-    model = await tf.loadModel(myFileName);     // should make the model a global variable
-    document.getElementById('myDivSummary').innerHTML = ''      
-    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-   // await myPredict()
+    model1 = await tf.loadModel(myFileName);     // make a model1 and a model2. Both the same model but lets switch back and forth
+    model2 = await tf.loadModel(myFileName);     // make a model1 and a model2. Both the same model but lets switch back and forth
+    document.getElementById('myDivSummary').innerHTML = 'Here is the first model<br>'      
+    await model1.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    document.getElementById('myDivSummary').innerHTML +=  '<br><br><br> Here is the second model<br>'                                                                                       
+    await model2.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+
   }                                                                           
 }                                                                                             
                                                                                              
                                                                                              
 
 myPredict = async function(){
-   // document.getElementById('myButtonTest').style.backgroundColor = 'red'
-  //  console.log('Model Predict')
-    
-                                                                                             
-  const image = tf.fromPixels(document.getElementById('my32x32CanvasA'),1).reshape([1, 28, 28, 1]) ;
-   //   console.log('frompixels')                                                                                           
-  const inferenceResult = await model.predict(image);
-  //console.log('await model.predict(image);')   
-   // inferenceResult.print(true)      
+                                                                                                
+  const image = tf.fromPixels(document.getElementById('my32x32CanvasA'),1).reshape([1, 28, 28, 1]) ;                                                                                        
+  const inferenceResult = await model1.predict(image);  
                                                                                              
   const {values, indices} = await tf.topk(inferenceResult, 10);    // top 10 results 
-
-
-//values.print();
-//indices.print();                                                                                           
+                                                                                         
   myValues = values.dataSync()                                                                              
   myIndices = indices.dataSync()                                                                                           
-                                                                                             
-                                                                                         
+                                                                                      
   document.getElementById('myDivTest').innerHTML = ''   // clear the div    
-  for (let x=0; x< myIndices.length; x++){                                                                                           
-      document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+MNIST_CLASSES[myIndices[x]] + '<br>'                                                                                         
-   }                                                                                          
+ // for (let x=0; x< myIndices.length; x++){                                                                                           
+ //     document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+MNIST_CLASSES[myIndices[x]] + '<br>'                                                                                         
+//   }   
+                                                                                             
+                                                                                             
 
 }                                                                                             
                                                                                              
