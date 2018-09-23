@@ -3,6 +3,9 @@ Presently working on
 
 
 
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/30-keras-lstm.html
+
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-keras/29keras-cifar-hyper.html
 
 
