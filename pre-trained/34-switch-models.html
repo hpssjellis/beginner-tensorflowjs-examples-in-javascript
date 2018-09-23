@@ -199,11 +199,11 @@ myPredict = async function(){
      const inferenceResult = await model2.predict(image);                                                                                          
    }                                                                                          
                                                                                              
-  const {values, indices} = await tf.topk(inferenceResult, 10);    // top 10 results 
+  const {values, indices} = await tf.topk(inferenceResult, 1);    // top 10 results 
                                                                                          
   myValues = values.dataSync()                                                                              
   myIndices = indices.dataSync()                                                                                           
-  console.log(myIndices)                                                                                    
+ // console.log(myIndices)                                                                                    
   
  // for (let x=0; x< myIndices.length; x++){                                                                                           
  //     document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+MNIST_CLASSES[myIndices[x]] + '<br>'                                                                                         
