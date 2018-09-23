@@ -98,7 +98,7 @@ Take snapshot every <input type=number id="myInterval"  value="500" size=5> mill
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
  
-                                                                                             
+inferenceResult = []                                                                                            
 document.trueModelOne = true                                                                                            
                                                                                              
 const MNIST_CLASSES = {
@@ -194,9 +194,9 @@ myPredict = async function(){
  
   if (document.trueModelOne){  
     document.getElementById('myDivTest').innerHTML = ''   // clear the div only for model 1                                                                                          
-    const inferenceResult = await model1.predict(image);  
+    inferenceResult = await model1.predict(image);  
   } else {
-     const inferenceResult = await model2.predict(image);                                                                                          
+     inferenceResult = await model2.predict(image);                                                                                          
    }                                                                                          
                                                                                              
   const {values, indices} = await tf.topk(inferenceResult, 1);    // top 10 results 
