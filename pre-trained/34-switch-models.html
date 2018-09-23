@@ -58,7 +58,7 @@ So here we are going to try to load 2 models and then switch back and forth from
 <div id="myDiv123Code"> 
 
 <input id="myInFile" size=120 type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/mnist/convnet/my-mnist01.json"><br>
-<input type=button value="Load Model" onclick="{myLoadUrl()}"><br><br>
+<input type=button value="Load MNIST into 2 Models" onclick="{myLoadUrl()}"><br><br>
   
 <select size=1 id="myCheck">
  <option value='environment'>Rear Mobile Camera
@@ -74,13 +74,12 @@ So here we are going to try to load 2 models and then switch back and forth from
 Take snapshot every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
-<video  id="myVideo" width="64" height="64" style="border: 1px solid #ddd;"></video>
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; filter: grayscale(100%); background-color:lightgray;" width="28" height="28" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
-
-
-<div id="myDivLoss">...</div><br>
+<video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
+ 
 <div id="myDivTest">...</div><br>
-
+<div id="myDivLoss">...</div><br>
+ 
 <div id="myDivSummary">...</div><br><br>
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
       document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
@@ -199,7 +198,7 @@ myPredict = async function(){
      inferenceResult = await model2.predict(image);                                                                                          
    }                                                                                          
                                                                                              
-  const {values, indices} = await tf.topk(inferenceResult, 1);    // top 10 results 
+  const {values, indices} = await tf.topk(inferenceResult, 10);    // top 10 results 
                                                                                          
   myValues = values.dataSync()                                                                              
   myIndices = indices.dataSync()                                                                                           
@@ -209,7 +208,8 @@ myPredict = async function(){
  //     document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+MNIST_CLASSES[myIndices[x]] + '<br>'                                                                                         
 //   }   
   
-  if (document.trueModelOne){                                                                                           
+  if (document.trueModelOne){ 
+     document.getElementById('myDivTest').innerHTML += myIndices[0] + '<br>'
      if (myIndices[0] == '6' ){    
        document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... white 6 on black background switching to the 2nd model'
        document.trueModelOne = false                                                                                      
