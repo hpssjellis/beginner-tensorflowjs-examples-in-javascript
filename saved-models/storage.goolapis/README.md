@@ -1,3 +1,8 @@
+
+example frozen model .pb file (doesn't have the other files)
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/storage.goolapis/optimized_model.pb
+
+
 looking for models on the storage.googleapis site
 
 
