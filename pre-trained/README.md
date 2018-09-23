@@ -15,3 +15,4 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-tr
 
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/34-switch-models.html
