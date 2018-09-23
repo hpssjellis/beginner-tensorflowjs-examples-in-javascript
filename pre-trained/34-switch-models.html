@@ -50,8 +50,11 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 So here we are going to try to load 2 models and then switch back and forth from them. The idea would be the first model finds 
- general categories, say cats or dogs and the second model then spots specific cats. etc. The only problem is I don't have well trained 
- models so I am just vgoing to load 2 MNIST sets and try to switch between them.
+ general categories, say cats or dogs and the second model then spots specific types of cats. etc. The only problem is I don't have well trained 
+ models so I am just going to load 2 MNIST sets and try to switch between them.
+ 
+ Note: You will need a good set of mnist style numbers which are white numbers on a black background. See image below. Possibly use 
+ two cell phones.
 </div><br>
 
 
@@ -210,16 +213,16 @@ myPredict = async function(){
   
   if (document.trueModelOne){ 
      document.getElementById('myDivTest').innerHTML += myIndices[0] + '<br>'
-     if (myIndices[0] == '6' ){    
-       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... white 6 on black background switching to the 2nd model'
+     if (myIndices[0] == '9' ){    
+       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... white 8 on black background switching to the 2nd model'
        document.trueModelOne = false                                                                                      
      } else{                                                                                    
        document.getElementById('myDivTest').innerHTML += 'Using Model 1. Nothing interesting until you see a white 6 on black background' 
        document.trueModelOne = true
      }
    }  else {
-      document.getElementById('myDivTest').innerHTML += '<font color=red>    now on model 2, must find a white 2 on a black background to switch back</font><br>'                                                                                       
-      if (myIndices[0] == '2' ){    
+      document.getElementById('myDivTest').innerHTML += '<font color=red>    now on model 2, must find a white 8 on a black background to switch back</font><br>'                                                                                       
+      if (myIndices[0] == '8' ){    
          document.getElementById('myDivTest').innerHTML = '<font color=red> Going back, well done</font>'
          document.trueModelOne = true                                                                                      
      }                                                                                       
