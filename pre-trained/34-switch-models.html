@@ -200,9 +200,11 @@ myPredict = async function(){
  //     document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+MNIST_CLASSES[myIndices[x]] + '<br>'                                                                                         
 //   }   
   
-  if (myIndices[0] == '6' ){                                                                                           
-  document.getElementById('myDivTest').innerHTML += 'Using Model 1. Nothing interesting until you see a white 6 on black letters' 
-                                                                                             }
+     if (myIndices[0] == '6' ){    
+       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... switching to the 2nd model'                                                                                     
+     } else{                                                                                    
+       document.getElementById('myDivTest').innerHTML += 'Using Model 1. Nothing interesting until you see a white 6 on black letters' 
+    }
 
 }                                                                                             
                                                                                              
