@@ -97,7 +97,10 @@ Take snapshot every <input type=number id="myInterval"  value="500" size=5> mill
 <style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
-                                                                                            
+ 
+                                                                                             
+document.trueModelOne = true                                                                                            
+                                                                                             
 const MNIST_CLASSES = {
     0: 'The number 0',
     1: 'The number 1',
@@ -188,24 +191,37 @@ getVideo = async function() {
 myPredict = async function(){
                                                                                                 
   const image = tf.fromPixels(document.getElementById('my32x32CanvasA'),1).reshape([1, 28, 28, 1]) ;                                                                                        
-  const inferenceResult = await model1.predict(image);  
+ 
+  if (document.trueModelOne){  
+    document.getElementById('myDivTest').innerHTML = ''   // clear the div only for model 1                                                                                          
+    const inferenceResult = await model1.predict(image);  
+  } else {
+     const inferenceResult = await model2.predict(image);                                                                                          
+   }                                                                                          
                                                                                              
   const {values, indices} = await tf.topk(inferenceResult, 10);    // top 10 results 
                                                                                          
   myValues = values.dataSync()                                                                              
   myIndices = indices.dataSync()                                                                                           
   console.log(myIndices)                                                                                    
-  document.getElementById('myDivTest').innerHTML = ''   // clear the div    
+  
  // for (let x=0; x< myIndices.length; x++){                                                                                           
  //     document.getElementById('myDivTest').innerHTML += myIndices[x]+', <b>'+Math.round(myValues[x]*100)+'%</b>: '+MNIST_CLASSES[myIndices[x]] + '<br>'                                                                                         
 //   }   
   
+  if (document.trueModelOne){                                                                                           
      if (myIndices[0] == '6' ){    
-       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... switching to the 2nd model'                                                                                     
+       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... white 6 on black background switching to the 2nd model'
+       document.trueModelOne = false                                                                                      
      } else{                                                                                    
-       document.getElementById('myDivTest').innerHTML += 'Using Model 1. Nothing interesting until you see a white 6 on black letters' 
-    }
-
+       document.getElementById('myDivTest').innerHTML += 'Using Model 1. Nothing interesting until you see a white 6 on black background' 
+       document.trueModelOne = true
+     }
+   }  else {
+      document.getElementById('myDivTest').innerHTML += '<font color=red>    now on model 2</font>'                                                                                       
+                                                                                             
+  }
+                                                                                             
 }                                                                                             
                                                                                              
                                                                                              
