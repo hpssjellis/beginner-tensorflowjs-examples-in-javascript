@@ -218,8 +218,11 @@ myPredict = async function(){
        document.trueModelOne = true
      }
    }  else {
-      document.getElementById('myDivTest').innerHTML += '<font color=red>    now on model 2</font>'                                                                                       
-                                                                                             
+      document.getElementById('myDivTest').innerHTML += '<font color=red>    now on model 2, must find a white 2 on a black background to switch back</font><br>'                                                                                       
+      if (myIndices[0] == '2' ){    
+         document.getElementById('myDivTest').innerHTML = '<font color=red> Going back, well done</font>'
+         document.trueModelOne = true                                                                                      
+     }                                                                                       
   }
                                                                                              
 }                                                                                             
