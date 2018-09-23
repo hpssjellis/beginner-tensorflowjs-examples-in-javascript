@@ -51,8 +51,9 @@
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 So here we are going to try to load 2 models and then switch back and forth from them. The idea would be the first model finds 
  general categories, say cats or dogs and the second model then spots specific types of cats. etc. The only problem is I don't have well trained 
- models so I am just going to load 2 MNIST sets and try to switch between them.
+ models so I am just going to load 2 MNIST sets and try to switch between them.<br><br>
  
+ Look for a "4" to activate the second model, then need to find an 8 to get back to the first model<br><br>
  Note: You will need a good set of mnist style numbers which are white numbers on a black background. See image below. Possibly use 
  two cell phones.
 </div><br>
@@ -195,6 +196,13 @@ myPredict = async function(){
                                                                                                 
   const image = tf.fromPixels(document.getElementById('my32x32CanvasA'),1).reshape([1, 28, 28, 1]) ;                                                                                        
  
+                                                                                             
+                                                                                             
+                                                                                             
+  //////////////////////////////////////  HERE COMES THE MODEL SWITCHING  //////////////////////////////////                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
   if (document.trueModelOne){  
     document.getElementById('myDivTest').innerHTML = ''   // clear the div only for model 1                                                                                          
     inferenceResult = await model1.predict(image);  
@@ -214,29 +222,33 @@ myPredict = async function(){
   
   if (document.trueModelOne){ 
      document.getElementById('myDivTest').innerHTML += myIndices[0] + '<br>'
-     if (myIndices[0] == '9' ){    
-       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... white 8 on black background switching to the 2nd model'
+         
+                                                                                             
+     if (myIndices[0] == '4' ){    
+       document.getElementById('myDivTest').innerHTML += 'Wow, JACKPOT... white 4 on black background switching to the 2nd model'
        document.trueModelOne = false                                                                                      
      } else{                                                                                    
        document.getElementById('myDivTest').innerHTML += 'Using Model 1. Nothing interesting until you see a white 6 on black background' 
        document.trueModelOne = true
      }
+                                                                                             
+                                                                                             
    }  else {
-      document.getElementById('myDivTest').innerHTML += '<font color=red>    now on model 2, must find a white 8 on a black background to switch back</font><br>'                                                                                       
+      document.getElementById('myDivTest').innerHTML += '<font color=red> now on 2nd model, must find a white 8 on a black background to switch back</font><br>'                                                                                       
       if (myIndices[0] == '8' ){    
-         document.getElementById('myDivTest').innerHTML = '<font color=red> Going back, well done</font>'
+         document.getElementById('myDivTest').innerHTML = '<font color=lime> Going back, well done</font>'
          document.trueModelOne = true                                                                                      
      }                                                                                       
   }
+  
                                                                                              
+   //////////////////////////////////////  STOP MODEL SWITCHING  //////////////////////////////////                                                                                             
+                                                                                             
+                                                                                                                                                                                       
 }                                                                                             
                                                                                              
                                                                                              
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
+                                                                                           
                                                                                              
 /////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
                                                                                              
