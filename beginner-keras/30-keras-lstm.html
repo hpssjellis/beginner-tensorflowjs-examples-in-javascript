@@ -74,11 +74,11 @@ For each input letter should be an output for the next letter.
                                                                                      
     (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
-  const sequenceLength = 5;
+  const sequenceLength = 12;
   const stretchLengthThreshold = 4;
   
   const model = tf.sequential();
-  model.add(tf.layers.lstm({units: 32, inputShape: [sequenceLength, 1]}));
+  model.add(tf.layers.lstm({units: 32, inputShape: [sequenceLength, 5]}));
   model.add(tf.layers.dense({units: 5, activation: 'sigmoid'}));
   
   // Compile model to prepare for training.
