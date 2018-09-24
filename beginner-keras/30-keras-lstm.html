@@ -48,42 +48,11 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
- This page is about One-Hot-Encoding. One-Hot-Encoding can be used when you have sets of information either as inputs
- to a neural network or as outputs. 
- <h3> The Problem</h3> 
- 
- Tensorflowjs works with real numbers (called decimal or floating point numbers), so 
- if your Neural Network is outputing information that is about a defined group, the neural network should give a range from that 
- group to the next group. Say you defined your output as 1.00 = mammals, 2=reptiles, 3=birds, etc.<br>
- 
- Your neural network might identify an animal as 1.45. Meaning somewhere between Mammals and reptiles. So what does that mean?
-  <h3> The Solution</h3> 
- With One-Hot Encoding each output becomes an object to be rated by your neural network. So you might get results such as Mammal 75%, 
- reptile 25%, bird 15%<br>
- 
- This style of result becomes much more useful.
-  <h3> The Con</h3>  
- 
- One-hot encoding needs large sets of inputs of zeros with only one input set as 1! This can quickly become a very large set of input data. 
-   <h3> This Simple example</h3>  
 
+ So what I want is an LSTM like Karpathys at <a href="https://github.com/karpathy/char-rnn">https://github.com/karpathy/char-rnn</a><br> The ideal situtation is an LSTM that takes any string of any characters, 
+ letters, numbers and or other symbols and generates a similar string after being seeded.  
  
-We will train the following information:
-<table border=1>
-<tr><th>Species       </th><th>Class</th>        <th>One-Hot-Species </th><th>One-Hot-Class</th></tr>
-<tr><td> Elephant:</td><td> Mammal         </td><td>    1,0,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
-<tr><td> Fox: </td><td>Mammal              </td><td>    0,1,0,0,0,0,0,0 </td><td> 1,0,0,0 </td></tr>
-<tr><td> Crow: </td><td>Bird (Aves)        </td><td>    0,0,1,0,0,0,0,0 </td><td> 0,1,0,0 </td></tr>
-<tr><td> Aligator: </td><td>Reptile        </td><td>    0,0,0,1,0,0,0,0 </td><td> 0,0,1,0 </td></tr>
-<tr><td> Dolphin: </td><td>Mammal          </td><td>    0,0,0,0,1,0,0,0 </td><td> 1,0,0,0 </td></tr>
-<tr><td> Sparrow: </td><td>Bird (Aves)     </td><td>    0,0,0,0,0,1,0,0 </td><td> 0,1,0,0 </td></tr>
-<tr><td> Turtle: </td><td>Reptile          </td><td>    0,0,0,0,0,0,1,0 </td><td> 0,0,1,0 </td></tr>
-<tr><td> Toad: </td><td>Amphibians         </td><td>    0,0,0,0,0,0,0,1 </td><td> 0,0,0,1 </td></tr>
-</table> 
- 
- 
- 
- 
+ No idea where to start, so I have just tried to get an LSTM working using Tensorflowjs<br>
  
 </div><br>
 
