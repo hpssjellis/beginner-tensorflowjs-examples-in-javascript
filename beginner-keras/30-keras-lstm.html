@@ -100,7 +100,7 @@ We will train the following information:
   const stretchLengthThreshold = 4;
   
   const model = tf.sequential();
-  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 8]}));
+  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 1]}));
   model.add(tf.layers.dense({units: 4, activation: 'sigmoid'}));
   
   // Compile model to prepare for training.
@@ -111,8 +111,6 @@ We will train the following information:
     optimizer: optimizer,
     metrics: ['acc']
   });                                                                                   
-    //model.add(tf.layers.dense({ units: 30, activation: 'sigmoid', inputShape: [8], }) );  // 8 inputs to 30 hidden layer nodes
-    //model.add(tf.layers.dense({ units: 4,  activation: 'sigmoid', }) );  // from the 30 hidden layer nodes to 4 output layer 
                                                                                      
                                                                                      
     const myOptimizer = tf.train.sgd(0.5); 
@@ -138,8 +136,8 @@ We will train the following information:
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
     
-    const xTestArray = [1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ]
-    const xTestData  = tf.tensor3d(xTestArray, shape=[1,8,8])                                                                         
+    const xTestArray = [1,0,0,0,0,0,0,0  ]
+    const xTestData  = tf.tensor3d(xTestArray, shape=[1,8,1])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
     console.log('myPredictArray')       
