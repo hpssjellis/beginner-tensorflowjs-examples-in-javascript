@@ -94,7 +94,7 @@ For each input letter should be an output for the next letter.
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor3d([1,0,0,0,0,   0,1,0,0,0,   0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,  0,0,0,0,1,   1,0,0,0,0,    0,1,0,0,0,    0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,     0,0,0,0,1   ], shape=[12,1,5]);      
+    const xTrainingData   = tf.tensor3d([1,0,0,0,0,   0,1,0,0,0,   0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,  0,0,0,0,1,   1,0,0,0,0,    0,1,0,0,0,    0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,     0,0,0,0,1   ], shape=[1,12,5]);      
     // hello hello 
                                                                                      
     // ello hello h                                                                                 
