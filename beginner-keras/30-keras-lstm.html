@@ -106,7 +106,7 @@ For each input letter should be an output for the next letter.
     yTrainingTarget.print()
                                                                                   
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
-        batchSize : 64,
+        batchSize : 12,
         epochs    : 200,                                                                      
         callbacks:  { 
           onEpochEnd: async (epoch, logs) => {                                                                                         
