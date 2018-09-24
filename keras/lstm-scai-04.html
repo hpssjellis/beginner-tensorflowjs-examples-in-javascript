@@ -1,6 +1,6 @@
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"> </script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> </script>
 
 
 
@@ -139,9 +139,6 @@ async function train() {
         epochs: Number.parseInt(document.getElementById('epochs-to-train').value),
         validationSplit: 0.15,
         callbacks: {
-          onBatchEnd: async (batch, logs) => {
-            await tf.nextFrame();  // This improves UI responsiveness during training.
-          },
           onEpochEnd: async (epoch, logs) => {
             // Update the UI to display the current loss and accuracy values.
             document.getElementById('myDiv01').innerHTML  = 'Epoch: ' + (parseInt(epoch) + 1) + '<br>'
@@ -152,8 +149,6 @@ async function train() {
             document.getElementById('myDiv01').innerHTML += 'The following are one hot encoded. So value 0 = [1,0] and 1 = [0,1]  <br>'
             document.getElementById('myDiv01').innerHTML += 'Example Sequence: ' + trainSequences + '<br><br>'
             document.getElementById('myDiv01').innerHTML += 'Example Label for each group of ten above: ' + trainLabels + '<br>'
-
-            await tf.nextFrame();  // This improves UI responsiveness during training.
           },
         }
       });
