@@ -116,8 +116,10 @@ We will train the following information:
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor3d([1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ], shape=[1,8,8]);      
-  //  const yTrainingTarget = tf.tensor2d([1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ], shape=[1,4]);             
+    const xTrainingData   = tf.tensor3d([1,0,0,0,0,0,0,0 ], shape=[1,8,1]);      
+   //const xTrainingData   = tf.tensor3d([1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ], shape=[1,8,8]);      
+
+    //  const yTrainingTarget = tf.tensor2d([1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ], shape=[1,4]);             
     const yTrainingTarget = tf.tensor2d([ 0,0,0,1 ], shape=[1,4]);         
 
     console.log('xTrainingData')
