@@ -49,10 +49,19 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 
- So what I want is an LSTM like Karpathys at <a href="https://github.com/karpathy/char-rnn">https://github.com/karpathy/char-rnn</a><br> The ideal situtation is an LSTM that takes any string of any characters, 
+ So what I want is an LSTM like Karpathys at <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a><br> The ideal situtation is an LSTM that takes any string of any characters, 
  letters, numbers and or other symbols and generates a similar string after being seeded.  
  
- No idea where to start, so I have just tried to get an LSTM working using Tensorflowjs<br>
+So lets try Karpathy's suggestion of the HELLO lstm<br>
+
+Letts one hot encode the letters<br> 
+h   =  [1,0,0,0,0] <br>
+e   =  [0,1,0,0,0] <br>
+l   =  [0,0,1,0,0] <br>
+o   =  [0,0,0,1,0] <br>
+space   =  [0,0,0,0,1] <br>
+ 
+For each input letter should be an output for the next letter. 
  
 </div><br>
 
@@ -65,12 +74,12 @@
                                                                                      
     (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
-  const sequenceLength = 8;
+  const sequenceLength = 5;
   const stretchLengthThreshold = 4;
   
   const model = tf.sequential();
-  model.add(tf.layers.lstm({units: 8, inputShape: [sequenceLength, 1]}));
-  model.add(tf.layers.dense({units: 4, activation: 'sigmoid'}));
+  model.add(tf.layers.lstm({units: 32, inputShape: [sequenceLength, 1]}));
+  model.add(tf.layers.dense({units: 5, activation: 'sigmoid'}));
   
   // Compile model to prepare for training.
   const learningRate = 4e-3;
@@ -85,11 +94,11 @@
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor3d([1,0,0,0,0,0,0,0 ], shape=[1,8,1]);      
-   //const xTrainingData   = tf.tensor3d([1,0,0,0,0,0,0,0,   0,1,0,0,0,0,0,0,   0,0,1,0,0,0,0,0,   0,0,0,1,0,0,0,0,   0,0,0,0,1,0,0,0,   0,0,0,0,0,1,0,0,   0,0,0,0,0,0,1,0,   0,0,0,0,0,0,0,1 ], shape=[1,8,8]);      
-
-    //  const yTrainingTarget = tf.tensor2d([1,0,0,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           1,0,0,0,           0,1,0,0,           0,0,1,0,           0,0,0,1  ], shape=[1,4]);             
-    const yTrainingTarget = tf.tensor2d([ 0,0,0,1 ], shape=[1,4]);         
+    const xTrainingData   = tf.tensor3d([1,0,0,0,0,   0,1,0,0,0,   0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,  0,0,0,0,1,   1,0,0,0,0,    0,1,0,0,0,    0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,     0,0,0,0,1   ], shape=[1,12,5]);      
+    // hello hello 
+                                                                                     
+    // ello hello h                                                                                 
+    const yTrainingTarget = = tf.tensor3d([   0,1,0,0,0,   0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,  0,0,0,0,1,   1,0,0,0,0,    0,1,0,0,0,    0,0,1,0,0,    0,0,1,0,0,    0,0,0,1,0,    0,0,0,0,1,  1,0,0,0,0    ], shape=[1,12,5]);      
 
     console.log('xTrainingData')
     xTrainingData.print()
@@ -107,24 +116,17 @@
         }      // end all callbacks                                                              
       })       // end model.fit                                                                                      
     
-    const xTestArray = [1,0,0,0,0,0,0,0  ]
-    const xTestData  = tf.tensor3d(xTestArray, shape=[1,8,1])                                                                         
+    const xTestArray = [1,0,0,0,0 ]
+    const xTestData  = tf.tensor3d(xTestArray, shape=[1,1,5])                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
     console.log('myPredictArray')       
     console.log(myPredictArray)                                                                           
-    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray +' Which is a crow for this fixed example<br><br>'
+    document.getElementById('myDiv123').innerHTML += 'Using the input code ' + xTestArray + ','+myPredictArray+'<br><br>'
                                                                                   
 
                                                                                   
-    document.getElementById('myDiv123').innerHTML += '<b>Mammal : '+ Math.round(myPredictArray[0]*100) + '%</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Bird (Aves) : '+ Math.round(myPredictArray[1]*100) + '%</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Reptile : '+ Math.round(myPredictArray[2]*100) + '%</b><br>'
-    document.getElementById('myDiv123').innerHTML += '<b>Amphibians : '+ Math.round(myPredictArray[3]*100) + '%</b><br><br>'
-
-    document.getElementById('myDiv123').innerHTML += 'Note: You would actually train on hundreds of examples not just these 8<br><br>'
-    document.getElementById('myDiv123').innerHTML += 'Now click the black box below and change  epochs : 500, to a larger number and '+
-                                                'click Update and run to see if you can improve your neural network<br>'
+ 
                                                                                                                               
     document.getElementById('myButton123').style.backgroundColor = 'lightgray' 
                                                                               
