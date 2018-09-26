@@ -1196,7 +1196,7 @@ myPredict = async function(){
   //  console.log('Model Predict')
     
                                                                                              
-  const image = tf.fromPixels(document.getElementById('my32x32CanvasA')).sub(tf.scalar(127.5)).div(tf.scalar(127.5)).toFloat().reshape([1, 224, 224, 3]) ;
+  const image = tf.fromPixels(document.getElementById('my32x32CanvasA')).toFloat().sub(tf.scalar(127.5)).div(tf.scalar(127.5)).reshape([1, 224, 224, 3]) ;
                                                                                              
    /*
    //need to normalize between -1 and 1
