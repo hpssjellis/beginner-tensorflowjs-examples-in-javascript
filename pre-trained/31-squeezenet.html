@@ -56,7 +56,6 @@ Draft mode
 <div id="myDiv123Code"> 
 
 <input id="myInFile" size=120 type=text value="https://storage.googleapis.com/tfjs-models/tfjs/squeezenet_v1.1/model.json"><br>
-<input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br><br>
   
 
 <select size=1 id="myCheck">
@@ -66,12 +65,14 @@ Draft mode
 
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> 
-<input type=button value="get Pic" onclick="{takeSnapshot()}"><br>
+<input type=button value="get Pic" onclick="{takeSnapshot()}">
+ <input type=button value="Load Model" onclick="{myLoadUrl()}"><input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br><br>
+<br>
 Take snapshot every <input type=number id="myInterval"  value="1000" size=5> milliseconds
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}">
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  <video  id="myVideo" width="227" height="227" style="border: 1px solid #ddd;"></video>
-<br><canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="227" height="227" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+<canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="227" height="227" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
 
 
 <div id="myDivLoss">...</div><br>
