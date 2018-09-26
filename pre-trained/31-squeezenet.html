@@ -1193,8 +1193,8 @@ myPredict = async function(){
    // document.getElementById('myButtonTest').style.backgroundColor = 'red'
   //  console.log('Model Predict')
     
-                                                                                             
-  const image = tf.fromPixels(document.getElementById('my32x32CanvasA')).reshape([1, 227, 227, 3]) ;
+ //                                                                                             
+   const image = tf.fromPixels(document.getElementById('my32x32CanvasA')).toFloat().sub(tf.scalar(127.5)).div(tf.scalar(127.5)).reshape([1, 227, 227, 3]) ;
    //   console.log('frompixels')                                                                                           
   const inferenceResult = await model.predict(image);
   //console.log('await model.predict(image);')   
