@@ -4,7 +4,7 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
 
 
 
@@ -39,7 +39,7 @@
 
     
     
-<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples</h2>
+<h2 align=center> As easy as I can make Tensorflowjs Advanced Keras Layers Examples of a CHAR-LSTM</h2>
 
 
 
@@ -49,13 +49,88 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+
+ So what I want is an LSTM like Karpathy's at <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">http://karpathy.github.io/2015/05/21/rnn-effectiveness/</a> github at <a href="https://github.com/karpathy/char-rnn">https://github.com/karpathy/char-rnn</a><br><br> My ideal situtation is an LSTM that takes any string of any characters perferably millions of characters, such as: 
+ letters, numbers and or other symbols and generates a similar string after being seeded. <br><br> 
+ 
+So lets try Karpathy's suggestion of the HELLO lstm, monitoring only 3 characters at a time<br><br>
+
+Lets one hot encode the letters<br> 
+h   =  [1,0,0,0,0] <br>
+e   =  [0,1,0,0,0] <br>
+l   =  [0,0,1,0,0] <br>
+o   =  [0,0,0,1,0] <br>
+_   =  [0,0,0,0,1] (note: empty space not underscore)<br><br>
+ 
+For each input letter should be an output for the next letter. <br>
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
 
+<textarea id="myArea01" rows=30 cols=70 >Two roads diverged in a yellow wood,
+And sorry I could not travel both
+And be one traveler, long I stood
+And looked down one as far as I could
+To where it bent in the undergrowth;
+
+Then took the other, as just as fair,
+And having perhaps the better claim,
+Because it was grassy and wanted wear;
+Though as for that the passing there
+Had worn them really about the same,
+
+And both that morning equally lay
+In leaves no step had trodden black.
+Oh, I kept the first for another day!
+Yet knowing how way leads on to way,
+I doubted if I should ever come back.
+
+I shall be telling this with a sigh
+Somewhere ages and ages hence:
+Two roads diverged in a wood, and I—
+I took the one less traveled by,
+And that has made all the difference.</textarea><br>
+
+
+<input type=button id="myButtonRunAll" style="background-color:lime" value="Run All" onclick="{
+  myRunAll()                       }"><br><br>
+
+
+<input type=button value="Prep Data" onclick="{
+  myToOneHot()                       }"><br><br>
+
+
+
+
+LSTM Layer Units: <input type=text value=200 id="myLayerUnits" size=10><br>
+LSTM Sequence Length: <input type=text value=6 id="mySequenceLength" size=10>Program will pad the data file with that many stars "*"<br>
+
+<input type=button value="Define Model" onclick="{
+   myDefine()                                           
+}"><br><br>
+
+LSTM Learning Rate: <input type=text value=0.03 id="myLearningRate" size=10><br>
+<input type=button value="Compile Model" onclick="{
+   myCompile()                                           
+}"><br><br>
+
+
+Epochs: <input type=text value=60 id="myEpochs"><br> <input id="myButton123" type="button" value="Train LSTM" onclick="{
+   myTrain()      
+}" style="background-color: lightgray;"><br> <br>
+
+
+Number of characters generated: <input type=text value=200 id="myChars"><br>
+Character seed: <input type=text value="Two ro" id="mySeed" size = 10>Presently has to match sequence length<br>
+
+<input type=button value="Generate New Text" onclick="{
+   myGenerate()                                           
+}"><br><br>
+
+<div id='myDivLoss'>...</div><br>
+<div id='myDiv123'>...</div><br>
  
  
  
@@ -64,10 +139,249 @@ Blah Blah Blah Blah
  <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
 
 <style id="myButton123"  onload="{document.getElementById('myButton123').click()}"  onclick="{
-                                                                                             
- alert()                                                                                            
-                                                                                          
+                                                                                                                                                                                                                                                                        
  ///////////////////////////////////// Global Variables //////////////////////////////// 
+                                                                                             
+ 
+    console.clear();
+
+  // global variables
+
+var myOriginalOneHot = [];
+var myOldArray = []
+
+
+
+
+myToOneHot = async function() {
+     sequenceLength =  parseInt(document.getElementById('mySequenceLength').value)   // 3;  
+   for (let myStars = 0;  myStars < sequenceLength; myStars++){
+       myString = document.getElementById("myArea01").value + '*';    // the input string
+   }
+   myUnique = [...new Set(myString)];      // an array of each unique character
+
+   console.log('myUnique')
+   console.log(myUnique)
+
+   myLabelsOneHot = myUnique;  
+
+
+  let myStringArray = [];
+
+  for (let myLoop = 0; myLoop < myUnique.length; myLoop++) {
+    // myStringArray[myLoop] = myUnique.indexOf(myString[myLoop])
+    myOriginalOneHot[myLoop] = tf.oneHot(tf.tensor1d([myUnique.indexOf(myUnique[myLoop])], "int32"),myUnique.length).dataSync();
+  }
+
+  let myLSTM = sequenceLength // 3; // max 3 steps ahead of the current character
+  let myTrainArray = [];
+  let myTargetArray = [];
+  myStringLocation = -1;
+  for (let a = 0; a < myString.length - 2; a++) {
+    myStringLocation += 1;
+
+    for (let b = 0; b < myLSTM; b++) {
+      if (b == 0) {
+        myTrainArray[a] = myOriginalOneHot[myUnique.indexOf(myString[myStringLocation])];
+        myTargetArray[a] = myOriginalOneHot[myUnique.indexOf(myString[myStringLocation + myLSTM])];
+        // console.log(a+', '+ myTargetArray[a])
+      } else {
+        myTrainArray[a] =myTrainArray[a] +",     " + myOriginalOneHot[myUnique.indexOf(myString[myStringLocation + b])];
+      }
+    }
+  }
+
+  
+  //console.log('myOriginalOneHot')
+  // console.log(myOriginalOneHot)
+  
+  
+  // A little clean up here
+
+     for (let myStars = 0;  myStars < sequenceLength; myStars++){
+         myTrainArray.pop()
+         myTargetArray.pop()
+     }
+  
+  //console.log('myTrainArray')
+  //console.log(myTrainArray)
+  
+  //console.log('myTargetArray')
+  //console.log(myTargetArray)
+  
+  //console.log('myLSTM')
+  //console.log(myLSTM)
+  
+  
+  
+  const myTrainArrayFlattened = myTrainArray.join().split(",");
+  const myTargetArrayFlattened = myTargetArray.join().split(",");
+
+  xTrainingData = tf.tensor3d(myTrainArrayFlattened,(shape = [myString.length - myLSTM-2, myLSTM, myUnique.length]));
+  //xTrainingData.print(true);
+  
+  yTrainingTarget = tf.tensor2d(myTargetArrayFlattened,(shape = [myString.length - myLSTM-2, myUnique.length]));
+  //yTrainingTarget.print(true);
+};
+
+
+
+
+
+myDefine = async function() {
+
+  // define the LSTM model
+  model = tf.sequential();
+  model.add(tf.layers.lstm({units: parseInt(document.getElementById('myLayerUnits').value), inputShape: [sequenceLength, myUnique.length]}));
+  model.add(tf.layers.dense({units: myUnique.length, activation: 'sigmoid'}));
+
+} 
+  
+ myCompile = async function() { 
+  
+  // Compile model to prepare for training.
+  const learningRate = parseFloat(document.getElementById('myLearningRate').value)// 0.004     //4e-3;
+  const optimizer = tf.train.rmsprop(learningRate);
+  model.compile({ loss: "binaryCrossentropy", optimizer: optimizer, metrics: ["acc"] });
+  
+}
+
+
+
+
+
+myTrain = async function() {
+    document.getElementById("myButton123").style.backgroundColor = "red"; 
+ // train the model
+  var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+    batchSize: 32,
+    epochs: parseInt(document.getElementById('myEpochs').value),
+    callbacks: {
+      onEpochEnd: async (epoch, logs) => {
+        document.getElementById("myDivLoss").innerHTML =
+          "Epoch # " + (epoch + 1) + "/"+document.getElementById('myEpochs').value + ", Loss: " + 
+              logs.loss + "<br><br>";
+      } // end onEpochEnd callback
+    } // end all callbacks
+  }); // end model.fit
+ 
+   document.getElementById("myButton123").style.backgroundColor = "lightgray";
+ 
+}
+
+
+
+
+
+myGenerate = async function() {
+  document.getElementById("myDiv123").innerHTML = ''
+  var myOutput = ''
+  var myNext = 0
+
+  // extract the character seed 
+  const mySeedArray = [] 
+  const mySeeded = document.getElementById('mySeed').value
+  for (let x = 0; x < mySeeded.length; x++){
+    for (let y = 0; y < myUnique.length; y++){
+       if (mySeeded[x] == myLabelsOneHot[y]){
+           mySeedArray[x] = y 
+       }
+    }
+  }
+  //console.log('mySeedArray')
+  //console.log(mySeedArray)
+  
+  // this part could be done better for longer seeds using an array
+  
+  for (let myIt=0;  myIt < sequenceLength; myIt++){
+    myOldArray[myIt] = myOriginalOneHot[mySeedArray[myIt]]    
+  }
+  
+  //let old1 = myOriginalOneHot[mySeedArray[0]]    // l
+  //let old2 = myOriginalOneHot[mySeedArray[1]]    // o
+  //let old3 = myOriginalOneHot[mySeedArray[2]]    // _
+ 
+// Print out the starting information
+  
+  
+ // document.getElementById("myDiv123").innerHTML +='First input was: ' + old1+',   '+old2+',   '+old3 +' which should be lo_ so that the next letter will be h<br>'
+ 
+  
+  // Loop through a prediction for each character to be generated
+  for (let j=0; j<= parseInt(document.getElementById('myChars').value); j++){
+  
+   xTestArray = ''
+   for (let myIt=0;  myIt < sequenceLength-1; myIt++){
+     xTestArray +=  myOldArray[myIt]  + ',' 
+   }  
+   xTestArray +=  myOldArray[sequenceLength-1] // the last one 
+ 
+    // console.log('myOldArray')
+    //console.log(myOldArray)   
+    
+   // console.log('xTestArray')
+   // console.log(xTestArray)
+  //let xTestArray = old1 + ',' + old2 + ',' + old3     // lo_ so the next one should be h
+    
+    
+    
+    
+    
+  let xTestData  = tf.tensor3d(xTestArray.split(','), shape=[1, sequenceLength, myUnique.length])   
+   
+  let myPredict = await model.predict(xTestData);
+ 
+  let {values, indices} = await tf.topk(myPredict, 1);    // top 10 results 
+  //values.print();
+  //indices.print();                                                                                           
+  let myValues = values.dataSync()                                                                              
+  let myIndices = indices.dataSync() 
+  
+  // Re configure the three character to be sent to the next prediction
+  myNext = myIndices[0] 
+    
+    for (let myIt=0;  myIt < sequenceLength-1; myIt++){
+      myOldArray[myIt] = myOldArray[myIt+1]
+    }   
+    myOldArray[sequenceLength-1] = myOriginalOneHot[myNext]
+ // old1 = old2
+  //old2 = old3
+  //old3 = myOriginalOneHot[myNext]
+    
+    
+
+  myOutput += myLabelsOneHot[myNext]
+    
+  // Output information for each prediction  
+    
+ // document.getElementById("myDiv123").innerHTML +='For loop # '+j+'  = '+myLabelsOneHot[myNext] +', values[0]:'+ Math.round(myValues[0]*100)+'%, myIndices[0]: '+myIndices[0]+'<br>'
+
+    
+    
+    
+ }
+  // Output what we expect with the default run 
+ // document.getElementById("myDiv123").innerHTML +='The full output should be: <b>hello hello </b>and this model is getting: <br><br>'
+  
+  // Output the full set of generated characters
+  document.getElementById("myDiv123").innerHTML += document.getElementById('mySeed').value+'<b>' + myOutput +'</b><br><br>'
+  
+}
+
+
+
+
+
+
+
+myRunAll = async function() {
+   await myToOneHot() 
+   await myDefine() 
+   await myCompile() 
+   await myTrain()   
+   await myGenerate()   
+}                                                                                         
+                                                                                             
                                                                                              
                                                                                              
                                                                                              
