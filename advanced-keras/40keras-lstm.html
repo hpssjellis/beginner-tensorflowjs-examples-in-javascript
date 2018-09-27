@@ -156,7 +156,7 @@ var myOldArray = []
 myToOneHot = async function() {
      sequenceLength =  parseInt(document.getElementById('mySequenceLength').value)   // 3;  
    for (let myStars = 0;  myStars < sequenceLength; myStars++){
-       myString = document.getElementById("myArea01").value + '*';    // the input string
+       myString = document.getElementById('myArea01').value + '*';    // the input string
    }
    myUnique = [...new Set(myString)];      // an array of each unique character
 
@@ -170,7 +170,7 @@ myToOneHot = async function() {
 
   for (let myLoop = 0; myLoop < myUnique.length; myLoop++) {
     // myStringArray[myLoop] = myUnique.indexOf(myString[myLoop])
-    myOriginalOneHot[myLoop] = tf.oneHot(tf.tensor1d([myUnique.indexOf(myUnique[myLoop])], "int32"),myUnique.length).dataSync();
+    myOriginalOneHot[myLoop] = tf.oneHot(tf.tensor1d([myUnique.indexOf(myUnique[myLoop])], 'int32'),myUnique.length).dataSync();
   }
 
   let myLSTM = sequenceLength // 3; // max 3 steps ahead of the current character
@@ -186,7 +186,7 @@ myToOneHot = async function() {
         myTargetArray[a] = myOriginalOneHot[myUnique.indexOf(myString[myStringLocation + myLSTM])];
         // console.log(a+', '+ myTargetArray[a])
       } else {
-        myTrainArray[a] =myTrainArray[a] +",     " + myOriginalOneHot[myUnique.indexOf(myString[myStringLocation + b])];
+        myTrainArray[a] =myTrainArray[a] +',     ' + myOriginalOneHot[myUnique.indexOf(myString[myStringLocation + b])];
       }
     }
   }
@@ -214,8 +214,8 @@ myToOneHot = async function() {
   
   
   
-  const myTrainArrayFlattened = myTrainArray.join().split(",");
-  const myTargetArrayFlattened = myTargetArray.join().split(",");
+  const myTrainArrayFlattened = myTrainArray.join().split(',');
+  const myTargetArrayFlattened = myTargetArray.join().split(',');
 
   xTrainingData = tf.tensor3d(myTrainArrayFlattened,(shape = [myString.length - myLSTM-2, myLSTM, myUnique.length]));
   //xTrainingData.print(true);
@@ -242,7 +242,7 @@ myDefine = async function() {
   // Compile model to prepare for training.
   const learningRate = parseFloat(document.getElementById('myLearningRate').value)// 0.004     //4e-3;
   const optimizer = tf.train.rmsprop(learningRate);
-  model.compile({ loss: "binaryCrossentropy", optimizer: optimizer, metrics: ["acc"] });
+  model.compile({ loss: 'binaryCrossentropy', optimizer: optimizer, metrics: ['acc'] });
   
 }
 
@@ -251,21 +251,21 @@ myDefine = async function() {
 
 
 myTrain = async function() {
-    document.getElementById("myButton123").style.backgroundColor = "red"; 
+    document.getElementById('myButton123').style.backgroundColor = 'red'; 
  // train the model
   var myFit = await model.fit(xTrainingData, yTrainingTarget, {
     batchSize: 32,
     epochs: parseInt(document.getElementById('myEpochs').value),
     callbacks: {
       onEpochEnd: async (epoch, logs) => {
-        document.getElementById("myDivLoss").innerHTML =
-          "Epoch # " + (epoch + 1) + "/"+document.getElementById('myEpochs').value + ", Loss: " + 
-              logs.loss + "<br><br>";
+        document.getElementById('myDivLoss').innerHTML =
+          'Epoch # ' + (epoch + 1) + '/'+document.getElementById('myEpochs').value + ', Loss: ' + 
+              logs.loss + '<br><br>';
       } // end onEpochEnd callback
     } // end all callbacks
   }); // end model.fit
  
-   document.getElementById("myButton123").style.backgroundColor = "lightgray";
+   document.getElementById('myButton123').style.backgroundColor = 'lightgray';
  
 }
 
@@ -274,7 +274,7 @@ myTrain = async function() {
 
 
 myGenerate = async function() {
-  document.getElementById("myDiv123").innerHTML = ''
+  document.getElementById('myDiv123').innerHTML = ''
   var myOutput = ''
   var myNext = 0
 
@@ -304,7 +304,7 @@ myGenerate = async function() {
 // Print out the starting information
   
   
- // document.getElementById("myDiv123").innerHTML +='First input was: ' + old1+',   '+old2+',   '+old3 +' which should be lo_ so that the next letter will be h<br>'
+ // document.getElementById('myDiv123').innerHTML +='First input was: ' + old1+',   '+old2+',   '+old3 +' which should be lo_ so that the next letter will be h<br>'
  
   
   // Loop through a prediction for each character to be generated
@@ -354,17 +354,17 @@ myGenerate = async function() {
     
   // Output information for each prediction  
     
- // document.getElementById("myDiv123").innerHTML +='For loop # '+j+'  = '+myLabelsOneHot[myNext] +', values[0]:'+ Math.round(myValues[0]*100)+'%, myIndices[0]: '+myIndices[0]+'<br>'
+ // document.getElementById('myDiv123').innerHTML +='For loop # '+j+'  = '+myLabelsOneHot[myNext] +', values[0]:'+ Math.round(myValues[0]*100)+'%, myIndices[0]: '+myIndices[0]+'<br>'
 
     
     
     
  }
   // Output what we expect with the default run 
- // document.getElementById("myDiv123").innerHTML +='The full output should be: <b>hello hello </b>and this model is getting: <br><br>'
+ // document.getElementById('myDiv123').innerHTML +='The full output should be: <b>hello hello </b>and this model is getting: <br><br>'
   
   // Output the full set of generated characters
-  document.getElementById("myDiv123").innerHTML += document.getElementById('mySeed').value+'<b>' + myOutput +'</b><br><br>'
+  document.getElementById('myDiv123').innerHTML += document.getElementById('mySeed').value+'<b>' + myOutput +'</b><br><br>'
   
 }
 
@@ -475,7 +475,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.5"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
