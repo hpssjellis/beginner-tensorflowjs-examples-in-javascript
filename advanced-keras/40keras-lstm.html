@@ -105,29 +105,7 @@ And that has made all the difference.`
 <div id="myDiv123Code"> 
 
 
-<textarea id="myArea01" rows=30 cols=70 >Two roads diverged in a yellow wood,
-And sorry I could not travel both
-And be one traveler, long I stood
-And looked down one as far as I could
-To where it bent in the undergrowth;
-
-Then took the other, as just as fair,
-And having perhaps the better claim,
-Because it was grassy and wanted wear;
-Though as for that the passing there
-Had worn them really about the same,
-
-And both that morning equally lay
-In leaves no step had trodden black.
-Oh, I kept the first for another day!
-Yet knowing how way leads on to way,
-I doubted if I should ever come back.
-
-I shall be telling this with a sigh
-Somewhere ages and ages hence:
-Two roads diverged in a wood, and I—
-I took the one less traveled by,
-And that has made all the difference.</textarea><br>
+<textarea id="myArea01" rows=6 cols=70 >Hello Hello </textarea><br>
 
 
 <input type=button id="myButtonRunAll" style="background-color:lime" value="Run All" onclick="{
@@ -140,8 +118,8 @@ And that has made all the difference.</textarea><br>
 
 
 
-LSTM Layer Units: <input type=text value=200 id="myLayerUnits" size=10><br>
-LSTM Sequence Length: <input type=text value=6 id="mySequenceLength" size=10>Program will pad the data file with that many stars "*"<br>
+LSTM Layer Units: <input type=text value=60 id="myLayerUnits" size=10><br>
+LSTM Sequence Length: <input type=text value=3 id="mySequenceLength" size=10>Program will pad the data file with that many stars "*"<br>
 
 <input type=button value="Define Model" onclick="{
    myDefine()                                           
@@ -153,13 +131,13 @@ LSTM Learning Rate: <input type=text value=0.03 id="myLearningRate" size=10><br>
 }"><br><br>
 
 
-Epochs: <input type=text value=60 id="myEpochs"><br> <input id="myButton123bbb" type="button" value="Train LSTM" onclick="{
+Epochs: <input type=text value=140 id="myEpochs"><br> <input id="myButton123bbb" type="button" value="Train LSTM" onclick="{
    myTrain()      
 }" style="background-color: lightgray;"><br> <br>
 
 
-Number of characters generated: <input type=text value=200 id="myChars"><br>
-Character seed: <input type=text value="Two ro" id="mySeed" size = 10>Presently has to match sequence length<br>
+Number of characters generated: <input type=text value=10 id="myChars"><br>
+Character seed: <input type=text value="Hel" id="mySeed" size = 10>Presently has to match sequence length<br>
 
 <input type=button value="Generate New Text" onclick="{
    myGenerate()                                           
