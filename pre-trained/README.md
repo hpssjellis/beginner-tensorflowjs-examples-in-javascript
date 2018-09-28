@@ -18,5 +18,12 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-tr
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/34-switch-models.html
 
 
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/35-knn-classifier.html
+
+
+
+
 ![MNIST example](https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/pre-trained/mnist-big.png)
 
