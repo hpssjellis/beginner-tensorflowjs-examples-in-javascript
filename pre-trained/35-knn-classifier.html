@@ -193,6 +193,7 @@ getVideo = async function() {
    var myCanvasElement = document.getElementById('my32x32CanvasA');
    var myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+   myAddClassifier()                                                                                           
 }
 
                                                                                              
@@ -227,7 +228,7 @@ getVideo = async function() {
                                                                                              
                                                                                              
 
-myPredict = async function(){
+myAddClassifier = async function(){
 
 
      // const img1 = tf.fromPixels(document.getElementById('class1'));
@@ -238,7 +239,10 @@ myPredict = async function(){
 }                                                                                             
                                                                                              
                                                                                              
+ 
+myPredict = async function(){
                                                                                              
+}
                                                                                              
                                                                                              
                                                                                              
