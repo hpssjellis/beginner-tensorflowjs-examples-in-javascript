@@ -268,7 +268,7 @@ myTrain = async function() {
     document.getElementById('myButton123bbb').style.backgroundColor = 'red'; 
  // train the model
   var myFit = await model.fit(xTrainingData, yTrainingTarget, {
-    batchSize: 32,
+    batchSize: 1000,
     epochs: parseInt(document.getElementById('myEpochs').value),
     callbacks: {
       onEpochEnd: async (epoch, logs) => {
