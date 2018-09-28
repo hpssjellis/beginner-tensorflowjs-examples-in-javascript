@@ -230,18 +230,21 @@ getVideo = async function() {
 
 myAddClassifier = async function(){
 
-
-     // const img1 = tf.fromPixels(document.getElementById('class1'));
-      const img1 = tf.fromPixels(my32x32CanvasA);
-      const logits1 = mobilenetModule.infer(img1, 'conv_preds');
-      classifier.addExample(logits1, 1);
-    console.log('good')
+   const img1 = tf.fromPixels(my32x32CanvasA);
+   const logits1 = mobilenetModule.infer(img1, 'conv_preds');
+   classifier.addExample(logits1, 1);
+  console.log('Example Added')
 }                                                                                             
                                                                                              
                                                                                              
  
 myPredict = async function(){
-                                                                                             
+   // const x = tf.fromPixels(document.getElementById('test'));
+   const x = tf.fromPixels(my32x32CanvasA);                                                                                           
+   const xlogits = mobilenetModule.infer(x, 'conv_preds');
+   console.log('Predictions:');
+   const result = await classifier.predictClass(xlogits);
+   console.log(result);                                                                                          
 }
                                                                                              
                                                                                              
