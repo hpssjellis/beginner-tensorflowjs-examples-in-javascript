@@ -249,7 +249,7 @@ myAddClassifier = async function(myGroup){
  
 myPredict = async function(){
    // const x = tf.fromPixels(document.getElementById('test'));
-   const x = tf.fromPixels(my32x32CanvasA);                                                                                           
+   const x = tf.fromPixels(myVideo);                        // using live video                                                                      
    const xlogits = mobilenetModule.infer(x, 'conv_preds');
    console.log('Predictions:');
    const result = await classifier.predictClass(xlogits);
