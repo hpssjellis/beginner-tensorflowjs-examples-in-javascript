@@ -81,7 +81,16 @@ Draft mode
 
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> 
-<input type=button value="get Pic and Add to classifier" onclick="{takeSnapshot()}">
+ 
+ 
+ 
+ 
+<input type=button value="Add Group 1" onclick="{takeSnapshot(1)}">
+<input type=button value="Add Group 2" onclick="{takeSnapshot(2)}">
+<input type=button value="Add Group 3" onclick="{takeSnapshot(3)}">
+ 
+ 
+ 
 <input type=button id="myButtonPredict" value="Predict" onclick="{myPredict()}"><br><br>
 <br>
 Take snapshot every <input type=number id="myInterval"  value="1000" size=5> milliseconds
@@ -187,14 +196,7 @@ getVideo = async function() {
    
                                                                                              
                                                                                              
-                                                                                             
-                                                                                             
-  takeSnapshot = async function(){                                                                                           
-   var myCanvasElement = document.getElementById('my32x32CanvasA');
-   var myCTX = myCanvasElement.getContext('2d');
-   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
-   myAddClassifier()                                                                                           
-}
+
 
                                                                                              
   takeAuto = async function(){                                                                                           
@@ -227,12 +229,19 @@ getVideo = async function() {
 }                                                                                             
                                                                                              
                                                                                              
+                                                                                             
+  takeSnapshot = async function(myGroup){                                                                                           
+   var myCanvasElement = document.getElementById('my32x32CanvasA');
+   var myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
+   myAddClassifier(myGroup)                                                                                           
+}                                                                                             
 
-myAddClassifier = async function(){
+myAddClassifier = async function(myGroup){
 
    const img1 = tf.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds');
-   classifier.addExample(logits1, 1);
+   classifier.addExample(logits1, myGroup);
   console.log('Example Added')
 }                                                                                             
                                                                                              
