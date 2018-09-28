@@ -234,7 +234,7 @@ myPredict = async function(){
 
 
      // const img1 = tf.fromPixels(document.getElementById('class1'));
-      const img1 = tf.fromPixels(video);
+      const img1 = tf.fromPixels(my32x32CanvasA);
       const logits1 = mobilenetModule.infer(img1, 'conv_preds');
       classifier.addExample(logits1, 1);
     console.log('good')
