@@ -119,12 +119,9 @@ Take snapshot every <input type=number id="myInterval"  value="1000" size=5> mil
 
 
 myInit = async function() {
-      // Create the classifier.
-classifier = knnClassifier.create();
- 
-      // Load mobilenet.
-mobilenetModule = await mobilenet.load();
-
+   classifier = knnClassifier.create();
+   mobilenetModule = await mobilenet.load();
+   console.log('knn-classigfier and mobinet loaded')
 }
 
 
