@@ -231,8 +231,8 @@ getVideo = async function() {
                                                                                              
                                                                                              
   takeSnapshot = async function(myGroup){                                                                                           
-   var myCanvasElement = document.getElementById('my32x32CanvasA');
-   var myCTX = myCanvasElement.getContext('2d');
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
    myAddClassifier(myGroup)                                                                                           
 }                                                                                             
@@ -242,7 +242,7 @@ myAddClassifier = async function(myGroup){
    const img1 = tf.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds');
    classifier.addExample(logits1, myGroup);
-  console.log('Example Added')
+  console.log('Example Added  '+ myGroup)
 }                                                                                             
                                                                                              
                                                                                              
