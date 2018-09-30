@@ -159,7 +159,7 @@ myAddClassifier = async function(myGroup){
    console.log('logits1[0]')                                               
    console.log(logits1[0])                                                                                          
    classifier.addExample(logits1, myGroup);
-  console.log('Example Added  '+ myGroup)
+   console.log('Example Added  '+ myGroup)
 }                                                                                             
                                                                                              
 
@@ -193,7 +193,7 @@ myPredict = async function(){
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]
    console.log(result); 
-  } else {(Console.log('Need to train groups'))}
+  } else {(console.log('Need to train groups'))}
 }
                                                                                              
                                                                                              
