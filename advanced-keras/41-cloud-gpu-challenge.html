@@ -54,11 +54,12 @@
       <h3>Cloud GPU / TPU Challenge. </h3>
       Train and Save this Tensorflowjs Model on your Cloud service and tweet to @rocksetta the lowest training time (in seconds) and 
       the lowest cost (in pennies)<br>
+      Tweet something like:<br>
       
-      
-      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
-      Hey @rocksetta here is my #cloudTfjsChallenge results:    website as a URL,   train time (in seconds),  cost (in pennies)
-      </blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <textarea rows=3 cols=70>
+      Hey @rocksetta here is my #cloudTfjsChallenge results:    Cloud service website (as a URL),   train time (in seconds),  
+        cost (in pennies), Optional saved model (as a URL)
+      </textarea>
 
       
       
@@ -68,15 +69,15 @@
       
       
       <div>
-        <div>
-          <span class="hparam-label"style="display:none">Model Type:</span>
+        <div style="display:none">
+          <span class="hparam-label">Model Type:</span>
           <select id="model-type">
             <option value="ConvNet">ConvNet with Dropout</option>
           </select>
         </div>
 
-        <div>
-          <span class="hparam-label" style="display:none"># of training epochs:</span>
+        <div style="display:none">
+          <span class="hparam-label" ># of training epochs:</span>
           <input id="train-epochs" value="6">
         </div>
 
