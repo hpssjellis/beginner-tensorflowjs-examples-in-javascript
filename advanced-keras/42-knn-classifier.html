@@ -83,8 +83,8 @@ live "Train" objects from the model and get results at the same time!
  
  
 <input type=button value=Train onclick="{myNewTrain()}"> 
- <input type=number value=0 size=3 id="myClassNumber">
- <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br>
+<input type=number value=0 size=3 id="myClassNumber">
+<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br>
  
 <input type=button value="Add Group 1" onclick="{takeSnapshot(0)}">
 <input type=button value="Add Group 2" onclick="{takeSnapshot(1)}">
@@ -170,11 +170,11 @@ myNewTrain = async function(){
    const img1 = tf.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds'); 
    console.log('document.getElementById(myClassNumber).value')     
-   console.log(document.getElementById(myClassNumber).value)     
+   console.log(document.getElementById('myClassNumber').value)     
    console.log('document.getElementById(myClassText).value')    
-   console.log(document.getElementById(myClassText).value)                                                                                          
-   classifier.addExample(logits1, parseInt(document.getElementById(myClassNumber).value));
-   myGroups[document.getElementById(myClassNumber).value] = document.getElementById(myClassText).value
+   console.log(document.getElementById('myClassText').value)                                                                                          
+   classifier.addExample(logits1, parseInt(document.getElementById('myClassNumber').value));
+   myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
    console.log('Example Added  '+ myGroup)                                                                                          
 }
                                                                                              
