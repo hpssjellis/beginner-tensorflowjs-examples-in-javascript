@@ -97,6 +97,14 @@ live "Train" objects from the model and get results at the same time!
 <div id="myDivLoss">...</div><br>
 <div id="myDivTest">...</div><br>
 
+ 
+<input type=button value="show data" onclick="{
+  console.log('classifier.getNumClasses()')
+  console.log(classifier.getNumClasses())
+  classifier.getClassifierDataset().print(true)                                            
+}"><br><br>
+ 
+ 
 <div id="myDivSummary">...</div><br><br>
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
       document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
