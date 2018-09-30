@@ -122,7 +122,7 @@ live "Train" objects from the model and get results at the same time!
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
                                                                                             
-let document.myTimer = 0
+//let document.myTimer = 0
 
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
@@ -130,11 +130,11 @@ let document.myTimer = 0
 
 
 myInit = async function() {
-   clearInterval(document.myTimer)                                                                                          
+  // clearInterval(document.myTimer)                                                                                          
    classifier = knnClassifier.create();
    mobilenetModule = await mobilenet.load();
    console.log('knn-classigfier and mobinet loaded')
-   document.myTimer = setInterval('myPredict()', 1000)                                                                                           
+  // document.myTimer = setInterval('myPredict()', 1000)                                                                                           
 }
 
                                                                                             
