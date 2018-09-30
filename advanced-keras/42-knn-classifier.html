@@ -163,13 +163,14 @@ myAddClassifier = async function(myGroup){
 }                                                                                             
                                                                                              
 
-myNewTrain = async function(myGroup){                                                                                             
+myNewTrain = async function(){                                                                                             
    let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img1 = tf.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds');                                                                                       
-   classifier.addExample(logits1, myGroup);
+   classifier.addExample(logits1, parseInt(document.getElementById(myClassNumber).value));
+   myGroups[document.getElementById(myClassNumber).value] = document.getElementById(myClassText).value
    console.log('Example Added  '+ myGroup)                                                                                          
 }
                                                                                              
@@ -183,11 +184,6 @@ myPredict = async function(){
                                                                                              
    const x = tf.fromPixels(myVideo); // using live video                                                                      
    const xlogits = await mobilenetModule.infer(x, 'conv_preds');
-   console.log('xlogits')                                            
-   console.log(xlogits)                                            
-   console.log('xlogits[0]')                                            
-   console.log(xlogits[0])                                                                                          
-   console.log('Predictions:');
    const result = await classifier.predictClass(xlogits, 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
