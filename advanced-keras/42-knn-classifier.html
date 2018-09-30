@@ -147,7 +147,7 @@ myNewTrain = async function(){
    classifier.addExample(logits1, parseInt(document.getElementById('myClassNumber').value));
    myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
   // console.log('Example Added: #  '+ document.getElementById('myClassNumber').value +' : '+document.getElementById('myClassText').value)                                                                                          
-   
+   console.log(classifier.getClassExampleCount()[document.getElementById('myClassNumber').value])
 //  document.getElementById('myDivLoss').innerHTML = classifier.getClassExampleCount()[myClassNumber]+' times ,Example Added: #  '+ 
      //  document.getElementById(\'myClassNumber\').value +' : '+document.getElementById(\'myClassText\').value) 
 }
