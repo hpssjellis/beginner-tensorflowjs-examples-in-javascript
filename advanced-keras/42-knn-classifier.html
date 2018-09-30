@@ -84,7 +84,7 @@ live "Train" objects from the model and get results at the same time!
  Train a few items with a group number and a text label<br>
 <input type=button value=Train onclick="{myNewTrain()}"> 
 <input type=number value=0 size=3 id="myClassNumber" onchange = "{
-    document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value]                                                         
+   myTextChange()                                                       
 }">
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br><br>
 
@@ -137,8 +137,10 @@ myInit = async function() {
    document.myTimer = setInterval(myPredict, 1000)                                                                                           
 }
 
-                                                                                            
-                                                                                         
+
+myTextChange = async function(){                                                                                              
+    document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value]                                                                                                                                                                                           
+}                                                                                             
 
 myNewTrain = async function(){                                                                                             
    let myCanvasElement = document.getElementById('my32x32CanvasA');
