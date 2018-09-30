@@ -162,8 +162,20 @@ myAddClassifier = async function(myGroup){
   console.log('Example Added  '+ myGroup)
 }                                                                                             
                                                                                              
+
+myNewTrain = async function(myGroup){                                                                                             
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+   const img1 = tf.fromPixels(my32x32CanvasA);
+   const logits1 = mobilenetModule.infer(img1, 'conv_preds');                                                                                       
+   classifier.addExample(logits1, myGroup);
+   console.log('Example Added  '+ myGroup)                                                                                          
+}
                                                                                              
- 
+                                                                                             
+                                                                                             
+                                                                                             
 myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
