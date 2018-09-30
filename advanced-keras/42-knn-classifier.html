@@ -123,8 +123,11 @@ live "Train" objects from the model and get results at the same time!
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
                                                                                             
-//let document.myTimer = 0
-
+let document.myTimer = 0
+let myClassfiers = []
+myClassifiers[0] = 'Disk'      
+myClassifiers[1] = 'Vase'     
+myClassifiers[2] = 'Me'                                                                                           
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -174,7 +177,8 @@ myPredict = async function(){
    console.log('Predictions:');
    const result = await classifier.predictClass(xlogits, 3);   // number of groups
     
-   document.getElementById('myDivTest').innerHTML = 'group: ' + result.classIndex + ', '+ Math.round(result.confidences[result.classIndex]*100)+ '%'
+   document.getElementById('myDivTest').innerHTML = 'group: ' + result.classIndex + ', '+ 
+       Math.round(result.confidences[result.classIndex]*100)+ '% ' + myClassifiers[result.classIndex]
    console.log(result);                                                                                          
 }
                                                                                              
