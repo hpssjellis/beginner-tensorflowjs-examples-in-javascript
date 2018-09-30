@@ -163,7 +163,7 @@ myPredict = async function(){
    console.log('Predictions:');
    const result = await classifier.predictClass(xlogits, 3);   // number of groups
     
-   document.getElementById('myDivTest').innerHTML = result.confidences
+   document.getElementById('myDivTest').innerHTML = Math.round(result.confidences[0]*100) + '%'
    console.log(result);                                                                                          
 }
                                                                                              
