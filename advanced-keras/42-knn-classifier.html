@@ -167,9 +167,9 @@ myPredict = async function(){
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' +
-      'Group: ' + parsInt(result.classIndex)+1 + ', '+ 
+      'Group: ' + parseInt(result.classIndex)+1 + ', '+ 
        Math.round(result.confidences[result.classIndex+1]*100)+ '% ' + myGroups[result.classIndex+1]+ '<br>' +
-       'Group: ' + parsInt(result.classIndex)+2 + ', '+ 
+       'Group: ' + parseInt(result.classIndex)+2 + ', '+ 
        Math.round(result.confidences[result.classIndex+2]*100)+ '% ' + myGroups[result.classIndex+2]+ '<br>' 
                                                                                              
                                                                                              
