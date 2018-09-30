@@ -107,7 +107,9 @@
     const model = await tf.loadModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+    
    // await myPredict()
+    await load();
     showPredictions(model)
   }                                                                           
 }                                                                                             
