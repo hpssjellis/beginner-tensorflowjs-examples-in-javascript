@@ -251,6 +251,10 @@ myPredict = async function(){
    // const x = tf.fromPixels(document.getElementById('test'));
    const x = tf.fromPixels(myVideo);                        // using live video                                                                      
    const xlogits = await mobilenetModule.infer(x, 'conv_preds');
+   console.log('xlogits')                                            
+   console.log(xlogits)                                            
+   console.log('xlogits[0]')                                            
+   console.log(xlogits[0])                                                                                          
    console.log('Predictions:');
    const result = await classifier.predictClass(xlogits, 3);   // number of groups
    console.log(result);                                                                                          
