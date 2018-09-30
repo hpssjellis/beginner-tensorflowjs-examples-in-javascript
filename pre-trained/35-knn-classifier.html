@@ -241,7 +241,7 @@ myAddClassifier = async function(myGroup){
 
    const img1 = tf.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds');
-   logits.print(true)
+   logits1.print(true)
    console.log('logits1')                                               
    console.log(logits1)                                               
    console.log('logits1[0]')                                               
