@@ -101,7 +101,8 @@ live "Train" objects from the model and get results at the same time!
 <input type=button value="show data" onclick="{
   console.log('classifier.getNumClasses()')
   console.log(classifier.getNumClasses())
-  classifier.getClassifierDataset().print(true)                                            
+  console.log('classifier.getClassifierDataset().dataSync()')    
+  console.log(classifier.getClassifierDataset().dataSync())                                           
 }"><br><br>
  
  
@@ -130,11 +131,11 @@ live "Train" objects from the model and get results at the same time!
 
 
 myInit = async function() {
-  // clearInterval(document.myTimer)                                                                                          
+   clearInterval(document.myTimer)                                                                                          
    classifier = knnClassifier.create();
    mobilenetModule = await mobilenet.load();
    console.log('knn-classigfier and mobinet loaded')
-  // document.myTimer = setInterval('myPredict()', 1000)                                                                                           
+   document.myTimer = setInterval(myPredict, 1000)                                                                                           
 }
 
                                                                                             
