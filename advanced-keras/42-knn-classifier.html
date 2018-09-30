@@ -81,26 +81,27 @@ live "Train" objects from the model and get results at the same time!
 <input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> <br><br>
  
- Train a few items with a number and a text label<br>
+ Train a few items with a group number and a text label<br>
 <input type=button value=Train onclick="{myNewTrain()}"> 
 <input type=number value=0 size=3 id="myClassNumber">
-<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br>
+<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br><br>
 
  
 <video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
-<canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> 
+<canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br>
 
 
 <div id="myDivLoss">...</div><br>
 <div id="myDivTest">...</div><br>
 
  
-<input type=button value="show data" onclick="{
+<input type=button value="Show data for above Group" onclick="{
   console.log('classifier.getNumClasses()')
   console.log(classifier.getNumClasses())
   console.log('myOut[0]')    
   const myOut = classifier.getClassifierDataset()
-  myOut[0].print(true)                                             
+  
+  document.getElementById('myDivSummary').innerHTML =   myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)                                             
 }"><br><br>
  
  
