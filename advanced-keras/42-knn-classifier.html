@@ -168,14 +168,10 @@ myNewTrain = async function(){
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img1 = tf.fromPixels(my32x32CanvasA);
-   const logits1 = mobilenetModule.infer(img1, 'conv_preds'); 
-   console.log('document.getElementById(myClassNumber).value')     
-   console.log(document.getElementById('myClassNumber').value)     
-   console.log('document.getElementById(myClassText).value')    
-   console.log(document.getElementById('myClassText').value)                                                                                          
+   const logits1 = mobilenetModule.infer(img1, 'conv_preds');                                                                                           
    classifier.addExample(logits1, parseInt(document.getElementById('myClassNumber').value));
    myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
-   console.log('Example Added  '+ myGroup)                                                                                          
+   console.log('Example Added: #  '+ document.getElementById('myClassNumber').value +' : '+document.getElementById('myClassText').value)                                                                                          
 }
                                                                                              
                                                                                              
