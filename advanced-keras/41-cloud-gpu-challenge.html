@@ -51,16 +51,13 @@
     </style>
 
     <div id="content">
-      <h3>TensorFlow.js: Train MNIST with the Layers API</h3>
-
+      <h3>Cloud GPU / TPU Challenge. Train and Save the Tensorflowjs Model with the lowest training time (min) and lowest cost (USD).</h3>
+      
       <div>
         <div>
           <span class="hparam-label">Model Type:</span>
           <select id="model-type">
             <option value="ConvNet">ConvNet with Dropout</option>
-            <option value="">ConvNet without Dropout..........</option>
-            <option value="DenseNet">DenseNet with Dropout</option>
-            <option value="">DenseNet without Dropout..............</option>
           </select>
         </div>
 
@@ -89,8 +86,12 @@
       <div id="images"></div>
     </div>
 
-
-
+  Test loading your model<br>
+  <input id="myInFile" size=120 type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/mnist/convnet/my-mnist01.json"><br>
+<input type=button value="Load Model" onclick="{myLoadUrl()}"><br><br>  
+    
+    <div id="myDivTest">...</div>
+    <div id="myDivSummary">...</div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> </script> 
 
@@ -98,7 +99,19 @@
    
      <script>
   
- 
+ myLoadUrl = async function(){
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
+  const myFileName = document.getElementById('myInFile').value
+  if (myFileName != null){  
+    const model = await tf.loadModel(myFileName);     // should make the model a global variable
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+   // await myPredict()
+    showPredictions(model)
+  }                                                                           
+}                                                                                             
+        
  
 
 const IMAGE_H = 28;
