@@ -82,7 +82,9 @@ live "Train" objects from the model and get results at the same time!
 <input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> <br>
  
  
- 
+<input type=button value=Train onclick="{myNewTrain()}"> 
+ <input type=number value=0 id="myClassNumber">
+ <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone">
  
 <input type=button value="Add Group 1" onclick="{takeSnapshot(0)}">
 <input type=button value="Add Group 2" onclick="{takeSnapshot(1)}">
@@ -101,18 +103,14 @@ live "Train" objects from the model and get results at the same time!
 <input type=button value="show data" onclick="{
   console.log('classifier.getNumClasses()')
   console.log(classifier.getNumClasses())
-  console.log('classifier.getClassifierDataset().dataSync()')    
-  console.log(classifier.getClassifierDataset().dataSync())                                           
+  console.log('myOut[0]')    
+ const myOut = classifier.getClassifierDataset()
+ myOUt[0].print(true)                                             
 }"><br><br>
  
  
 <div id="myDivSummary">...</div><br><br>
-<input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
-<input id="myButtonTest" type=button value="Test"  onclick="{
-      document.getElementById('myDiv123').innerHTML += 'Added this stuff'                                                          
-}"><br><br>
+
  
  
  <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
