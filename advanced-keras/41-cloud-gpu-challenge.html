@@ -51,19 +51,33 @@
     </style>
 
     <div id="content">
-      <h3>Cloud GPU / TPU Challenge. Train and Save the Tensorflowjs Model with the lowest training time (min) and lowest cost (USD).</h3>
+      <h3>Cloud GPU / TPU Challenge. </h3>
+      Train and Save this Tensorflowjs Model on your Cloud service and tweet to @rocksetta the lowest training time (in seconds) and 
+      the lowest cost (in pennies)<br>
+      
+      
+      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+      Hey @rocksetta here is my #cloudTfjsChallenge results:    website as a URL,   train time (in seconds),  cost (in pennies)
+      </blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      
+      
+      
+      
+      
+      
       
       <div>
         <div>
-          <span class="hparam-label">Model Type:</span>
+          <span class="hparam-label"style="display:none">Model Type:</span>
           <select id="model-type">
             <option value="ConvNet">ConvNet with Dropout</option>
           </select>
         </div>
 
         <div>
-          <span class="hparam-label"># of training epochs:</span>
-          <input id="train-epochs" value="3">
+          <span class="hparam-label" style="display:none"># of training epochs:</span>
+          <input id="train-epochs" value="6">
         </div>
 
         <button id="train">Load Data and Train Model</button>
@@ -85,9 +99,10 @@
 
       <div id="images"></div>
     </div>
+    <hr>
 
   Test loading your model<br>
-  <input id="myInFile" size=120 type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/mnist/convnet/my-mnist01.json"><br>
+  Enter your online saved model here: <input id="myInFile" size=120 type=text value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/mnist/convnet/my-mnist01.json"><br>
 <input type=button value="Load Model" onclick="{myLoadUrl()}"><br><br>  
     
     <div id="myDivTest">...</div>
