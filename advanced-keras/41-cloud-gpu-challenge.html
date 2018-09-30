@@ -482,7 +482,7 @@ function createConvModel() {
   model.add(tf.layers.conv2d({
     inputShape: [IMAGE_H, IMAGE_W, 1],
     kernelSize: 3,
-    filters: 16,
+    filters: 64,      // was 16
     activation: 'relu'
   }));
 
@@ -493,19 +493,24 @@ function createConvModel() {
 
   // Our third layer is another convolution, this time with 32 filters.
   model.add(tf.layers.conv2d({kernelSize: 3, filters: 32, activation: 'relu'}));
-
+  
+  model.add(tf.layers.dropout({ rate : 0.20 }))    // added
+  
   // Max pooling again.
   model.add(tf.layers.maxPooling2d({poolSize: 2, strides: 2}));
 
   // Add another conv2d layer.
   model.add(tf.layers.conv2d({kernelSize: 3, filters: 32, activation: 'relu'}));
 
+ 
+   
+  
   // Now we flatten the output from the 2D filters into a 1D vector to prepare
   // it for input into our last layer. This is common practice when feeding
   // higher dimensional data to a final classification output layer.
   model.add(tf.layers.flatten({}));
 
-  model.add(tf.layers.dense({units: 64, activation: 'relu'}));
+  model.add(tf.layers.dense({units: 640, activation: 'relu'}));
 
   // Our last layer is a dense layer which has 10 output units, one for each
   // output class (i.e. 0, 1, 2, 3, 4, 5, 6, 7, 8, 9). Here the classes actually
