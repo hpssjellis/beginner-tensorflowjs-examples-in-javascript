@@ -39,7 +39,7 @@
 
     
     
-<h2 align=center> As easy as I can make Loading Tensorflowjs Keras Pre-Trained Models. </h2>
+<h2 align=center> As easy as I can make Loading Tensorflowjs KNN-Classifier Demo </h2>
 
 
 
@@ -49,7 +49,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Draft mode
+ Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository
 </div><br>
 
 
@@ -64,13 +64,7 @@ Draft mode
 
 <input type=button value="start knn-classifier" onclick="{
    myInit()
-}">
-
-
-
-
-
-
+}"><br>
 
 
 
@@ -133,112 +127,18 @@ myInit = async function() {
    console.log('knn-classigfier and mobinet loaded')
 }
 
-
-
-/*
-      // Add MobileNet activations to the model repeatedly for all classes.
-      const img0 = tf.fromPixels(document.getElementById('class0'));
-      const logits0 = mobilenetModule.infer(img0, 'conv_preds');
-      classifier.addExample(logits0, 0);
- 
-      const img1 = tf.fromPixels(document.getElementById('class1'));
-      const logits1 = mobilenetModule.infer(img1, 'conv_preds');
-      classifier.addExample(logits1, 1);
- 
-      // Make a prediction.
-      const x = tf.fromPixels(document.getElementById('test'));
-      const xlogits = mobilenetModule.infer(x, 'conv_preds');
-      console.log('Predictions:');
-      const result = await classifier.predictClass(xlogits);
-      console.log(result);
-    
-    
- */
-  
-
-
-
-
-
-
-
-
-
-
-                                                                                               
-///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
- 
-                                                                                             
-  var myVideoStream = document.getElementById('myVideo')     // make it a global variable
-  var myStoredInterval = 0
-                                                                                             
-stopVideo = async function() {  
-  clearInterval(myStoredInterval)   // god idea to stop the auto snapshot taking                                                                                         
-  myVideoStream.srcObject.getTracks().forEach(track => track.stop())  
-}
-   
-                                                                                          
-getVideo = async function() {  
-  const myCamera = await document.getElementById('myCheck').value
-                                                                                     
-  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
-                     
-    function(stream) {
-      myVideoStream.srcObject = stream   
-      myVideoStream.play();
-  }, 
-                     
-   function(error) {
-     alert('webcam not working');
-  });
-}
-   
-                                                                                             
-                                                                                             
-
-
-                                                                                             
-  takeAuto = async function(){                                                                                           
-     await takeSnapshot() // get snapshot right away then wait and repeat
-     await document.getElementById('myButtonPredict').click()      
-    clearInterval(myStoredInterval)
-    myStoredInterval = setInterval(async function(){                                                                                         
-       await takeSnapshot()
-       await document.getElementById('myButtonPredict').click()                                                                                       
-   }, document.getElementById('myInterval').value);        
-}
-  
-                                                                                           
-  myStopAuto  = async function(){                                                                                             
-    clearInterval(myStoredInterval)    
-}                                                                                            
-                                                                                             
- ///////////////////////////////////////////// Done Webcam functions ////////////////////////////////////////                                                                                               
-                                                                                             
- myLoadUrl = async function(){
-  //alert('The test function will need to be changed if other models are loaded')                                                                                             
-  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
-  const myFileName = document.getElementById('myInFile').value
-  if (myFileName != null){  
-    model = await tf.loadModel(myFileName);     // should make the model a global variable
-    document.getElementById('myDivSummary').innerHTML = ''      
-    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-   // await myPredict()
-  }                                                                           
-}                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-  takeSnapshot = async function(myGroup){                                                                                           
+                                                                                            
+takeSnapshot = async function(myGroup){                                                                                           
    let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);
    myAddClassifier(myGroup)                                                                                           
 }                                                                                             
 
+                                                                                             
+                                                                                             
+                                                                                             
 myAddClassifier = async function(myGroup){
-
    const img1 = tf.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds');
    logits1.print(true)
@@ -266,7 +166,83 @@ myPredict = async function(){
 }
                                                                                              
                                                                                              
+            
+///////////////////////////////////// End KNN- Classifier stuff /////////////////////////////////////                                                                                                
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
                                                                                              
+var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+var myStoredInterval = 0
+
+                                                                                             
+                                                                                             
+stopVideo = async function() {  
+  clearInterval(myStoredInterval)   // god idea to stop the auto snapshot taking                                                                                         
+  myVideoStream.srcObject.getTracks().forEach(track => track.stop())  
+}
+   
+   
+                                                                                             
+                                                                                             
+                                                                                             
+getVideo = async function() {  
+  const myCamera = await document.getElementById('myCheck').value
+                                                                                     
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+   
+                                                                                             
+                                                                                             
+
+
+                                                                                             
+takeAuto = async function(){                                                                                           
+     await takeSnapshot() // get snapshot right away then wait and repeat
+     await document.getElementById('myButtonPredict').click()      
+    clearInterval(myStoredInterval)
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await takeSnapshot()
+       await document.getElementById('myButtonPredict').click()                                                                                       
+   }, document.getElementById('myInterval').value);        
+}
+  
+   
+                                                                                             
+                                                                                             
+myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+  
+                                                                                             
+                                                                                             
+                                                                                             
+ ///////////////////////////////////////////// Done Webcam functions ////////////////////////////////////////                                                                                               
+                                                                                             
+ myLoadUrl = async function(){
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
+  const myFileName = document.getElementById('myInFile').value
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);     // should make the model a global variable
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+   // await myPredict()
+  }                                                                           
+}                                                                                             
+                                                                                             
+
+                                                                                             
+                                                                                  
                                                                                              
                                                                                              
 /////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
