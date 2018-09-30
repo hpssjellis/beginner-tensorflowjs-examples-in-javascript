@@ -98,10 +98,11 @@ live "Train" objects from the model and get results at the same time!
 <input type=button value="Show data for above Group" onclick="{
   console.log('classifier.getNumClasses()')
   console.log(classifier.getNumClasses())
-  console.log('myOut[0]')    
   const myOut = classifier.getClassifierDataset()
-  
-  document.getElementById('myDivSummary').innerHTML =   myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)                                             
+  console.log('myOut['+parseInt(document.getElementById('myClassNumber').value)+']') 
+  myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)                                                            
+                                                              
+  document.getElementById('myDivSummary').innerHTML =   myOut.dataSync()[parseInt(document.getElementById('myClassNumber').value)]                                             
 }"><br><br>
  
  
