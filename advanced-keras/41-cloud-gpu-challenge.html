@@ -2,7 +2,101 @@
   <head>
     <title>MNIST in TensorFlow.js Layers API</title>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css" />
-  <script>
+   
+  
+  
+  </head>
+  
+  
+  <body>
+    <style>
+      #content {
+        padding: 15px;
+      }
+      body, input, select, button {
+        font-family: monospace;
+      }
+      canvas {
+        width: 200px;
+      }
+      .prediction-canvas{
+        width: 100px;
+      }
+      .pred {
+        font-size: 20px;
+        line-height: 25px;
+        width: 100px;
+      }
+      .pred-correct {
+        background-color: #00cf00;
+      }
+      .pred-incorrect {
+        background-color: red;
+      }
+      .pred-container {
+        display: inline-block;
+        width: 100px;
+        margin: 10px;
+      }
+      #lossCanvas > div, #accuracyCanvas > div {
+        display: none;
+      }
+      .canvases {
+        display: inline-block;
+      }
+      .hparam-label {
+        display: inline-block;
+        width: 250px;
+      }
+    </style>
+
+    <div id="content">
+      <h3>TensorFlow.js: Train MNIST with the Layers API</h3>
+
+      <div>
+        <div>
+          <span class="hparam-label">Model Type:</span>
+          <select id="model-type">
+            <option value="ConvNet">ConvNet with Dropout</option>
+            <option value="">ConvNet without Dropout..........</option>
+            <option value="DenseNet">DenseNet with Dropout</option>
+            <option value="">DenseNet without Dropout..............</option>
+          </select>
+        </div>
+
+        <div>
+          <span class="hparam-label"># of training epochs:</span>
+          <input id="train-epochs" value="3">
+        </div>
+
+        <button id="train">Load Data and Train Model</button>
+      </div>
+
+      <div id="status"></div>
+      <div id="message"></div>
+
+      <div id="stats">
+        <div class="canvases">
+          <div class="label" id="loss-label"></div>
+          <div id="loss-canvas"></div>
+        </div>
+        <div class="canvases">
+          <div class="label" id="accuracy-label"></div>
+          <div id="accuracy-canvas"></div>
+        </div>
+      </div>
+
+      <div id="images"></div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> </script> 
+    <script src="https://cdn.plot.ly/plotly-1.41.1.min.js"></script>
+
+   
+     <script>
   
  
  
@@ -595,99 +689,17 @@ ui.setTrainButtonCallback(async () => {
   
   
   </script>
-  
-  
-  
-  </head>
-  
-  
-  <body>
-    <style>
-      #content {
-        padding: 15px;
-      }
-      body, input, select, button {
-        font-family: monospace;
-      }
-      canvas {
-        width: 200px;
-      }
-      .prediction-canvas{
-        width: 100px;
-      }
-      .pred {
-        font-size: 20px;
-        line-height: 25px;
-        width: 100px;
-      }
-      .pred-correct {
-        background-color: #00cf00;
-      }
-      .pred-incorrect {
-        background-color: red;
-      }
-      .pred-container {
-        display: inline-block;
-        width: 100px;
-        margin: 10px;
-      }
-      #lossCanvas > div, #accuracyCanvas > div {
-        display: none;
-      }
-      .canvases {
-        display: inline-block;
-      }
-      .hparam-label {
-        display: inline-block;
-        width: 250px;
-      }
-    </style>
 
-    <div id="content">
-      <h3>TensorFlow.js: Train MNIST with the Layers API</h3>
-
-      <div>
-        <div>
-          <span class="hparam-label">Model Type:</span>
-          <select id="model-type">
-            <option value="ConvNet">ConvNet with Dropout</option>
-            <option value="">ConvNet without Dropout..........</option>
-            <option value="DenseNet">DenseNet with Dropout</option>
-            <option value="">DenseNet without Dropout..............</option>
-          </select>
-        </div>
-
-        <div>
-          <span class="hparam-label"># of training epochs:</span>
-          <input id="train-epochs" value="3">
-        </div>
-
-        <button id="train">Load Data and Train Model</button>
-      </div>
-
-      <div id="status"></div>
-      <div id="message"></div>
-
-      <div id="stats">
-        <div class="canvases">
-          <div class="label" id="loss-label"></div>
-          <div id="loss-canvas"></div>
-        </div>
-        <div class="canvases">
-          <div class="label" id="accuracy-label"></div>
-          <div id="accuracy-canvas"></div>
-        </div>
-      </div>
-
-      <div id="images"></div>
-    </div>
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> </script> 
-    <script src="https://cdn.plot.ly/plotly-1.41.1.min.js"></script>
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <!--
     <script src="https://cdn.jsdelivr.net/npm/vega@3.2.1/build/vega.js"></script>
