@@ -83,7 +83,9 @@ live "Train" objects from the model and get results at the same time!
  
  Train a few items with a group number and a text label<br>
 <input type=button value=Train onclick="{myNewTrain()}"> 
-<input type=number value=0 size=3 id="myClassNumber">
+<input type=number value=0 size=3 id="myClassNumber" onchange = "{
+    document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value]                                                         
+}">
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br><br>
 
  
