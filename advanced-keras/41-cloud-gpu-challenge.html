@@ -667,7 +667,7 @@ async function showPredictions(model) {
     
   });
   
-    const saveResults = await model.save('downloads://my-mnist01');
+   
 }
 
 function createModel() {
@@ -703,6 +703,7 @@ ui.setTrainButtonCallback(async () => {
   await train(model);
 
   showPredictions(model);
+   const saveResults = await model.save('downloads://my-mnist01');
 });
   
   
