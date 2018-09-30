@@ -621,7 +621,7 @@ async function train(model) {
       onBatchEnd: async (batch, logs) => {
         trainBatchCount++;
         ui.logStatus(
-            `Training... ${trainBatchCount}  /  ${totalNumBatches} (` +
+            `Training... ${trainBatchCount} batches /  ${totalNumBatches} total (` +
             `${(trainBatchCount / totalNumBatches * 100).toFixed(1)}%` +
             ` complete). To stop training, refresh or close page.`);
         ui.plotLoss(trainBatchCount, logs.loss, 'train');
