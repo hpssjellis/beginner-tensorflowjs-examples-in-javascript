@@ -100,9 +100,10 @@ live "Train" objects from the model and get results at the same time!
   console.log(classifier.getNumClasses())
   const myOut = classifier.getClassifierDataset()
   console.log('myOut['+parseInt(document.getElementById('myClassNumber').value)+']') 
-  myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)                                                            
+  myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)      
                                                               
-  document.getElementById('myDivSummary').innerHTML =   myOut.dataSync()[parseInt(document.getElementById('myClassNumber').value)]                                             
+  document.getElementById('myDivSummary').innerHTML =  'See console, will print a lot of information'                                                                                                       
+  document.getElementById('myDivSummary').innerHTML =   myOut[parseInt(document.getElementById('myClassNumber').value)].dataSync()                                             
 }"><br><br>
  
  
