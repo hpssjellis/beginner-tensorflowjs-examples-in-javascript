@@ -113,6 +113,7 @@ Optional: saved model (as a URL)
      <script>
   
  myLoadUrl = async function(){
+     //const startTime = performance.now();
   //alert('The test function will need to be changed if other models are loaded')                                                                                             
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
@@ -120,7 +121,8 @@ Optional: saved model (as a URL)
     const model = await tf.loadModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-    
+    //const endTime = performance.now();
+   // document.getElementById('myDivSummary').innerHTML += '<hr>Train duration was:'+ ((endTime-startTime)*1000).toFixed(0) + ' seconds<br>'
    // await myPredict()
     await load();
     showPredictions(model)
@@ -718,7 +720,11 @@ ui.setTrainButtonCallback(async () => {
   model.summary();
 
   ui.logStatus('Starting model training...');
+  const startTime = performance.now();
   await train(model);
+  const endTime = performance.now();
+   document.getElementById('myDivSummary').innerHTML += '<hr>Train duration was:'+ ((endTime-startTime)*1000).toFixed(0) + ' seconds<br>'
+
 
   showPredictions(model);
    const saveResults = await model.save('downloads://my-mnist01');
