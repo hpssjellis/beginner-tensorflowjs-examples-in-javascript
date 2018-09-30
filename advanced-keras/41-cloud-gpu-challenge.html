@@ -93,7 +93,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> </script> 
-    <script src="https://cdn.plot.ly/plotly-1.41.1.min.js"></script>
+
 
    
      <script>
@@ -329,12 +329,13 @@ const lossValues = {
 ui.plotLoss= function(batch, loss, set) {
   lossValues[set].x.push(batch);
   lossValues[set].y.push(loss);
-  Plotly.newPlot('loss-canvas', [lossValues.train, lossValues.validation], {
+ /* Plotly.newPlot('loss-canvas', [lossValues.train, lossValues.validation], {
     width: 480,
     xaxis: {title: 'batch #'},
     yaxis: {title: 'loss'},
     font: {size: 18}
   });
+  */
   lossLabelElement.innerText = `last loss: ${loss.toFixed(3)}`;
 }
 
@@ -365,7 +366,7 @@ const accuracyValues = {
 ui.plotAccuracy= function(batch, accuracy, set) {
   accuracyValues[set].x.push(batch);
   accuracyValues[set].y.push(accuracy);
-  Plotly.newPlot(
+/*  Plotly.newPlot(
       'accuracy-canvas',
       [accuracyValues.train, accuracyValues.validation], {
         width: 480,
@@ -376,6 +377,8 @@ ui.plotAccuracy= function(batch, accuracy, set) {
         },
         font: {size: 18}
       });
+      
+      */
   accuracyLabelElement.innerText =
       `last accuracy: ${(accuracy * 100).toFixed(1)}%`;
 }
