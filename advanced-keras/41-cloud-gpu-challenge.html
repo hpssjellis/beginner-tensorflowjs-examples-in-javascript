@@ -722,7 +722,9 @@ ui.setTrainButtonCallback(async () => {
 
   ui.logStatus('Creating model...');
   const model = createModel();
-  model.summary();
+ // model.summary();
+  document.getElementById('myDivSummary').innerHTML = ''      
+  await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
 
   ui.logStatus('Starting model training...');
   const startTime = new Date();
