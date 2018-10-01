@@ -108,7 +108,8 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
  
  
  <input type=button value=load onclick="{
-    document.getElementById('myArea02').value = document.getElementById('myArea01').value
+    //document.getElementById('myArea02').value = document.getElementById('myArea01').value
+   myLoadClassifier()                                     
 }"><br>
  
  <textarea id="myArea02" rows=6 cols=70></textarea><br>
@@ -279,7 +280,12 @@ myStopAuto  = async function(){
  }                                                                                            
                                                                                              
                                                                                              
-                                                                                  
+  myLoadClassifier = async function(){
+    document.getElementById('myArea02').value = ''
+                              
+   }                                                                                             
+ }                                                                                            
+                                                                                       
                                                                                              
                                                                                              
 /////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
