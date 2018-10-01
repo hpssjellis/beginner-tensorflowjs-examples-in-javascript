@@ -156,10 +156,12 @@ myNewTrain = async function(){
 
   const wow = await net.detectLandmarks(img1)                                                                                           
   console.log('wow')                                                                                                                    
-  console.log(wow)                                                                                          
+  console.log(wow)                                                                                                                     
+  console.log('wow._faceLandmarks')                                                                                                      
+  console.log(wow._faceLandmarks)                                                                                         
                                                                                              
                                                                                              
-   classifier.addExample(wow, parseInt(document.getElementById('myClassNumber').value));                                                              
+   classifier.addExample(wow._faceLandmarks, parseInt(document.getElementById('myClassNumber').value));                                                              
    console.log('classifier added')                                                                                    
                                                                                              
                                                                                              
