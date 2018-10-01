@@ -281,9 +281,16 @@ myStopAuto  = async function(){
                                                                                              
                                                                                              
   myLoadClassifier = async function(){
-    document.getElementById('myArea02').value = ''
-                              
-   }                                                                                             
+    const myInArray = []                                                                                         
+     myInArray = document.getElementById('myArea02').value.split('**done**') 
+                                                                                             
+     for (let myIt=0; myIt< myInArray.length; myIt++){
+           myInputArray[myIt] =  myInArray[myIt].split('**label-knn**') 
+           for (let myIt2=0; myIt2< myInArray.length; myIt2++){
+                myInputArray[myIt][3] =  myInArray[myIt].split(',')                                                                                 
+           }                                                                                       
+       }   
+                                                                                        
  }                                                                                            
                                                                                        
                                                                                              
