@@ -634,10 +634,11 @@ async function train(model) {
       onBatchEnd: async (batch, logs) => {
         trainBatchCount++;
         let endTime = new Date();
+        const theDuration = ((endTime-startTime)/1000).toFixed(0)
         ui.logStatus(
             `Training... ${trainBatchCount} batches /  ${totalNumBatches} total (` +
             `${(trainBatchCount / totalNumBatches * 100).toFixed(1)}%` +
-            ` complete). To stop training, refresh or close page.  ${((endTime-startTime)/1000).toFixed(0)}`);
+            ` complete). To stop training, refresh or close page. Duration: ${theDuration} seconds`);
         ui.plotLoss(trainBatchCount, logs.loss, 'train');
         ui.plotAccuracy(trainBatchCount, logs.acc, 'train');
         await tf.nextFrame();
