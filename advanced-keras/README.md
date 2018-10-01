@@ -14,10 +14,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanc
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/42-knn-classifier.html
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/43-face-knn.html
 
-
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/face01.html
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/44-face-knn.html
 
 
