@@ -194,10 +194,28 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
+  let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
+
+  const wow = await net.detectLandmarks(img1)                                                                                           
+
+  
                                                                                              
-   const x = tf.fromPixels(myVideo); // using live video                                                                      
-   const xlogits = await mobilenetModule.infer(x, 'conv_preds');
-   const result = await classifier.predictClass(xlogits, 3);   // number of groups
+  newArray = []                                                                                           
+
+                                                                                             
+    
+  for (let j=0;  j < wow._faceLandmarks.length; j++ ){  
+     newArray[j] = []                                                                                        
+     newArray[j][0] = wow._faceLandmarks[j].x                                                                
+     newArray[j][1] = wow._faceLandmarks[j].y  
+   }                                                                                          
+    
+                                                                                                                                                                                    
+
+   const result = await classifier.predictClass(newArray, 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
