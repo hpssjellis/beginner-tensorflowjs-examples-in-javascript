@@ -155,7 +155,7 @@ myTextChange = async function(){
     if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
            document.getElementById('myClassNumber').value = 0                                                                                  
     }                         
-    if (myGroups[document.getElementById('myClassNumber').value] == 'undefined'){
+    if (myGroups[document.getElementById('myClassNumber').value] == undefined){
         document.getElementById('myClassText').value    = ''   // clear the box                                                                                     
       } else {                                                                                         
         document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value] 
