@@ -130,11 +130,7 @@ let myGroups = []
                                                                                           
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
-
-myStopAuto  = async function(){                                                                                             
-    clearInterval(myStoredInterval)    
-}                                                                                            
-                                                                                             
+                                                                                          
   takeAuto = async function(){                                                                                           
     myStoredInterval = setInterval(async function(){                                                                                         
        await myPredict()                                                                                       
@@ -231,16 +227,7 @@ getVideo = async function() {
                                                                                              
 
 
-                                                                                             
-takeAuto = async function(){                                                                                           
-     await takeSnapshot() // get snapshot right away then wait and repeat
-     await document.getElementById('myButtonPredict').click()      
-    clearInterval(myStoredInterval)
-    myStoredInterval = setInterval(async function(){                                                                                         
-       await takeSnapshot()
-       await document.getElementById('myButtonPredict').click()                                                                                       
-   }, document.getElementById('myInterval').value);        
-}
+
   
    
                                                                                              
