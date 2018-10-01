@@ -103,12 +103,7 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
  <textarea id="myArea01" rows=6 cols=70></textarea><br>
  
  <input type=button value=save onclick="{
-   document.getElementById('myArea01').value = ''
-   const myOut = classifier.getClassifierDataset()
-   for (let myLoop = 0;  myLoop < classifier.getNumClasses();  myLoop++){
-      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-knn**'                                  
-      document.getElementById('myArea01').value +=   myOut[myLoop].dataSync() + '**done**'                              
-   }                                     
+   mySaveClassifier()                                    
 }">
  
  
@@ -274,6 +269,15 @@ myStopAuto  = async function(){
 }                                                                                             
                                                                                              
 
+  mySaveClassifier = async function(){
+    document.getElementById('myArea01').value = ''
+   const myOut = classifier.getClassifierDataset()
+   for (let myLoop = 0;  myLoop < classifier.getNumClasses();  myLoop++){
+      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-knn**'                                  
+      document.getElementById('myArea01').value +=   myOut[myLoop].dataSync() + '**done**'                              
+   }                                                                                             
+ }                                                                                            
+                                                                                             
                                                                                              
                                                                                   
                                                                                              
