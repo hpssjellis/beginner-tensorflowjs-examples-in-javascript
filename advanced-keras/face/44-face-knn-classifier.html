@@ -158,12 +158,20 @@ myNewTrain = async function(){
   console.log('wow')                                                                                                                    
   console.log(wow)                                                                                                                     
   console.log('wow._faceLandmarks')                                                                                                      
-  console.log(wow._faceLandmarks)                                                                                         
-  const myObToArray = Object.keys(wow._faceLandmarks).map(function (key) {
-    return wow._faceLandmarks[key];
-   });                                                                                           
-   console.log('myObToArray')                                                                     
-   console.log(myObToArray)     
+  console.log(wow._faceLandmarks)  
+  
+                                                                                             
+  const newArray = []                                                                                           
+                                                                                             
+  for (let x=0;  x < wow._faceLandmarks.length; x++ ){  
+     const newArray[x] = []                                                                                        
+     newArray[x] = Object.keys(wow._faceLandmarks[x]).map(function (key) {
+       return wow._faceLandmarks[key];
+     });   
+   }                                                                                          
+                                                                                             
+   console.log('newArray')                                                                     
+   console.log(newArray)     
                                                                                              
                                                                                              
                                                                                              
