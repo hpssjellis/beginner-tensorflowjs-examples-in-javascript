@@ -141,7 +141,10 @@ myRunFace = async function() {
 }
 
 
-myTextChange = async function(){                                                                                              
+myTextChange = async function(){     
+    if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
+           document.getElementById('myClassNumber').value = 0                                                                                  
+    }                                                                                         
     document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value]                                                                                                                                                                                           
 }                                                                                             
 
