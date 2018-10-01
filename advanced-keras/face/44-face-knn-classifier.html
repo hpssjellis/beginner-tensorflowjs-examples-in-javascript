@@ -151,7 +151,7 @@ myNewTrain = async function(){
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
-   const { boxes, scores } = await net.forward('img1') 
+   const { boxes, scores } = await net.forward(img1) 
    console.log('boxes and scores done')                                                                                            
                                                                                              
                                                                                              
