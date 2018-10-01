@@ -153,7 +153,8 @@ myNewTrain = async function(){
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
    const { boxes, scores } = await net.forward(img1) 
    console.log('boxes and scores loaded')  
-                                                                                             
+   console.log('scores[0]')                      
+   console.log(scores[0])                                                                                          
                                                                                              
    classifier.addExample(scores, parseInt(document.getElementById('myClassNumber').value));                                                              
    console.log('classifier added')                                                                                    
