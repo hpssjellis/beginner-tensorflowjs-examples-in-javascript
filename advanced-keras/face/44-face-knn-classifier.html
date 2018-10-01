@@ -88,6 +88,9 @@ live "Train" objects from the model and get results at the same time!
 }">
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe Smith"><br><br>
 
+Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseconds<br>
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
+<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  
 <video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
@@ -197,7 +200,7 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
-   let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCanvasElement = document.getElementById('myVideo');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img2 = tf.fromPixels(myVideo);                                                                                            
@@ -263,12 +266,8 @@ getVideo = async function() {
 
                                                                                              
 takeAuto = async function(){                                                                                           
-     await takeSnapshot() // get snapshot right away then wait and repeat
-     await document.getElementById('myButtonPredict').click()      
-    clearInterval(myStoredInterval)
     myStoredInterval = setInterval(async function(){                                                                                         
-       await takeSnapshot()
-       await document.getElementById('myButtonPredict').click()                                                                                       
+       await myPredict()                                                                                   
    }, document.getElementById('myInterval').value);        
 }
   
