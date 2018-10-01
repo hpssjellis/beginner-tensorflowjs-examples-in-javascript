@@ -153,11 +153,10 @@ myNewTrain = async function(){
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
    const { boxes, scores } = await net.forward(img1) 
    console.log('boxes and scores loaded')  
-                                                                 
-   const fullFaceDescription0 = net.fullFaceDescriptions[0]
-console.log(fullFaceDescription0.detection) // bounding box & score
-console.log(fullFaceDescription0.landmarks) // face landmarks
-console.log(fullFaceDescription0.descriptor) // face descriptor                                                                                          
+                                                                                             
+                                                                                             
+   classifier.addExample(scores, parseInt(document.getElementById('myClassNumber').value));                                                              
+   console.log('classifier added')                                                                                    
                                                                                              
                                                                                              
   /*                                                                                           
