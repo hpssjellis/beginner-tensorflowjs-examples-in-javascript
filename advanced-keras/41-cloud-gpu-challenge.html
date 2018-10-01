@@ -729,7 +729,7 @@ ui.setTrainButtonCallback(async () => {
   await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
 
   ui.logStatus('Starting model training...');
-  const startTime = new Date();
+  startTime = new Date();      // make this global
   await train(model);
   const endTime = new Date();
    document.getElementById('myDurationOut').innerHTML += '<hr>Train duration was:'+ ((endTime-startTime)/1000).toFixed(0) + ' seconds<br>'
