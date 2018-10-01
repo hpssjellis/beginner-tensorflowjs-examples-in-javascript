@@ -93,6 +93,10 @@ Optional: saved model (as a URL)
         <div class="canvases">
           <div class="label" id="accuracy-label"></div>
           <div id="accuracy-canvas"></div>
+          <div id="myDurationOut"></div>
+          
+          
+          
         </div>
       </div>
 
@@ -721,10 +725,10 @@ ui.setTrainButtonCallback(async () => {
   model.summary();
 
   ui.logStatus('Starting model training...');
-  const startTime = performance.now();
+  const startTime = new Date();
   await train(model);
-  const endTime = performance.now();
-   document.getElementById('myDivTest').innerHTML += '<hr>Train duration was:'+ ((endTime-startTime)*1000).toFixed(0) + ' seconds<br>'
+  const endTime = new Date();
+   document.getElementById('myDurationOut').innerHTML += '<hr>Train duration was:'+ ((endTime-startTime)/1000).toFixed(0) + ' seconds<br>'
 
 
   showPredictions(model);
