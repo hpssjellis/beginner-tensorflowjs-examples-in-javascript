@@ -137,7 +137,7 @@ myRunFace = async function() {
    await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
                                                                                              
    console.log('knn-classigfier and face-api loaded')
-  // document.myTimer = setInterval(myPredict, 4000)                                                                                           
+   document.myTimer = setInterval(myPredict, 1000)                                                                                           
 }
 
 
@@ -181,24 +181,7 @@ myNewTrain = async function(){
    document.getElementById('myDivLoss').innerHTML = myAddCount + ' times, Example Added: to group #: '+ myGroupNumber 
                                                                                      
                                                                                              
-                                                                                             
-  /*                                                                                           
-                                                                                           
-   let myCanvasElement = document.getElementById('my32x32CanvasA');
-   let myCTX = myCanvasElement.getContext('2d');
-   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
-   const img1 = tf.fromPixels(my32x32CanvasA);
-   const logits1 = mobilenetModule.infer(img1, 'conv_preds');                                                                                           
-   classifier.addExample(logits1, parseInt(document.getElementById('myClassNumber').value));
-   myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
-  // console.log('Example Added: #  '+ document.getElementById('myClassNumber').value +' : '+document.getElementById('myClassText').value)                                                                                          
-   
-   const myAddCount = classifier.getClassExampleCount()[document.getElementById('myClassNumber').value]
-   const myGroupNumber =  document.getElementById('myClassNumber').value                                                                                         
-   document.getElementById('myDivLoss').innerHTML = myAddCount + ' times, Example Added: to group #: '+ myGroupNumber 
-                                                                                             
-                                                                                             
-   */                                                                                          
+                                                                                                                                                                                   
                                                                                              
                                                                                              
                                                                                              
@@ -218,13 +201,6 @@ myPredict = async function(){
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
-      //'Group: ' + parseInt(parseInt(result.classIndex)+1) + ', '+ 
-      // Math.round(result.confidences[result.classIndex+1]*100)+ '% ' + myGroups[result.classIndex+1]+ '<br>' +
-      // 'Group: ' + parseInt(parseInt(result.classIndex)+2) + ', '+ 
-     //  Math.round(result.confidences[result.classIndex+2]*100)+ '% ' + myGroups[result.classIndex+2]+ '<br>' 
-                                                                                             
-                                                                                             
-  // console.log(result); 
   } else {(console.log('Need to train groups'))}
 }
                                                                                              
