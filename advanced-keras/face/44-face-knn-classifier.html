@@ -68,7 +68,7 @@ live "Train" objects from the model and get results at the same time!
 
 
 <input type=button value="start knn-classifier" onclick="{
-   myInit()
+   myRunFace() 
 }"><br><br>
 
 
@@ -129,12 +129,15 @@ let myGroups = []
 
 
 
-myInit = async function() {
+myRunFace = async function() {
    clearInterval(document.myTimer)                                                                                          
    classifier = knnClassifier.create();
-   mobilenetModule = await mobilenet.load();
-   console.log('knn-classigfier and mobinet loaded')
-   document.myTimer = setInterval(myPredict, 1000)                                                                                           
+   // mobilenetModule = await mobilenet.load();
+   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
+                                                                                             
+   console.log('knn-classigfier and face-api loaded')
+  // document.myTimer = setInterval(myPredict, 4000)                                                                                           
 }
 
 
@@ -142,7 +145,19 @@ myTextChange = async function(){
     document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value]                                                                                                                                                                                           
 }                                                                                             
 
-myNewTrain = async function(){                                                                                             
+myNewTrain = async function(){   
+
+    let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
+   const { boxes, scores } = await net.forward('img1') 
+   console.log('boxes and scores done')                                                                                            
+                                                                                             
+                                                                                             
+                                                                                             
+  /*                                                                                           
+                                                                                           
    let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
@@ -155,6 +170,12 @@ myNewTrain = async function(){
    const myAddCount = classifier.getClassExampleCount()[document.getElementById('myClassNumber').value]
    const myGroupNumber =  document.getElementById('myClassNumber').value                                                                                         
    document.getElementById('myDivLoss').innerHTML = myAddCount + ' times, Example Added: to group #: '+ myGroupNumber 
+                                                                                             
+                                                                                             
+   */                                                                                          
+                                                                                             
+                                                                                             
+                                                                                             
 }
                                                                                              
                                                                                              
