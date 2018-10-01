@@ -157,8 +157,14 @@ myNewTrain = async function(){
   const wow = await net.detectLandmarks(img1)                                                                                           
   console.log('wow')                                                                                                                    
   console.log(wow)                                                                                                                     
-  console.log('wow._faceLandmarks')                                                                                                      
-  console.log(wow._faceLandmarks)                                                                                         
+  //console.log('wow._faceLandmarks')                                                                                                      
+ // console.log(wow._faceLandmarks)                                                                                         
+  const myObToArray = Object.keys(wow._faceLandmarks).map(function (key) {
+    return wow._faceLandmarks[key];
+   });                                                                                           
+   console.log('myObToArray')                                                                     
+   console.log(myObToArray)     
+                                                                                             
                                                                                              
                                                                                              
    classifier.addExample(tf.tensor2d(wow._faceLandmarks, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
