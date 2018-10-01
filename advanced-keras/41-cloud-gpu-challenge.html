@@ -489,7 +489,7 @@ function createConvModel() {
   model.add(tf.layers.conv2d({
     inputShape: [IMAGE_H, IMAGE_W, 1],
     kernelSize: 3,
-    filters: 64,      // was 16
+    filters: 128,      // was 16
     activation: 'relu'
   }));
 
@@ -517,7 +517,8 @@ function createConvModel() {
   // higher dimensional data to a final classification output layer.
   model.add(tf.layers.flatten({}));
 
-  model.add(tf.layers.dense({units: 640, activation: 'relu'}));
+  model.add(tf.layers.dense({units: 1000, activation: 'relu'}));
+  model.add(tf.layers.dense({units: 100, activation: 'relu'}));
 
   // Our last layer is a dense layer which has 10 output units, one for each
   // output class (i.e. 0, 1, 2, 3, 4, 5, 6, 7, 8, 9). Here the classes actually
