@@ -140,22 +140,26 @@ let myGroups = []
 
 
 myRunFace = async function() {
-   clearInterval(document.myTimer)                                                                                          
+  // clearInterval(document.myTimer)                                                                                          
    classifier = knnClassifier.create();
    // mobilenetModule = await mobilenet.load();
    net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
    await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
                                                                                              
    console.log('knn-classigfier and face-api loaded')
-   document.myTimer = setInterval(myPredict, 1000)                                                                                           
+  // document.myTimer = setInterval(myPredict, 1000)                                                                                           
 }
 
 
 myTextChange = async function(){     
     if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
            document.getElementById('myClassNumber').value = 0                                                                                  
-    }                                                                                         
-    document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value]                                                                                                                                                                                           
+    }                         
+    if (myGroups[document.getElementById('myClassNumber').value] == 'undefined'){
+        document.getElementById('myClassText').value    = ''   // clear the box                                                                                     
+      } else {                                                                                         
+        document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value] 
+    }
 }                                                                                             
 
 myNewTrain = async function(){   
