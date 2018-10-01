@@ -24,6 +24,15 @@
 // await net.load('/models/mtcnn_model-weights_manifest.json')
 // await net.load('/models/tiny_yolov2_separable_conv_model-weights_manifest.json')
 console.log('loaded')
+  
+// optional arguments
+const minConfidence = 0.8
+const maxResults = 10 
+  
+const { boxes, scores } = await net.forward('myImg') 
+console.log('boxes and scores done')  
+  
+  
  }
  
 myRunFace() 
