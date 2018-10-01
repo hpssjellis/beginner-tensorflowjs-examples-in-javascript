@@ -275,8 +275,8 @@ myStopAuto  = async function(){
    const myOut = classifier.getClassifierDataset()
    for (let myLoop = 0;  myLoop < classifier.getNumClasses();  myLoop++){
        const myStuff = classifier.getClassExampleCount()[myLoop]                                                                                      
-      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-knn**'    + classifier.getClassExampleCount()[myLoop] + '**stuff**'                              
-      document.getElementById('myArea01').value +=   myOut[myLoop].dataSync() + '**done**'                              
+      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-numberGroups**'    + classifier.getClassExampleCount()[myLoop] + '**done-order**'                              
+      document.getElementById('myArea01').value +=   myOut[myLoop].dataSync() + '**done-tensor**'                              
    }                                                                                             
  }                                                                                            
                                                                                              
