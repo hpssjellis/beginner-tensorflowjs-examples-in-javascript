@@ -6,6 +6,9 @@
 
 <script>
 
+ 
+ myRunFace = async function () {
+ 
 //const net = new faceapi.FaceDetectionNet()
 // accordingly for the other models:
 // const net = new faceapi.FaceLandmark68Net()
@@ -21,5 +24,8 @@
 // await net.load('/models/mtcnn_model-weights_manifest.json')
 // await net.load('/models/tiny_yolov2_separable_conv_model-weights_manifest.json')
 net.summary()
-
+ }
+ 
+myRunFace() 
+ 
 </script>
