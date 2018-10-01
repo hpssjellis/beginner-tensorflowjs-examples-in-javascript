@@ -87,16 +87,18 @@ live "Train" objects from the model and get results at the same time!
    myTextChange()                                                       
 }">
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe Smith"><br><br>
-
-Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseconds<br>
-<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
-<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
+ 
+<div id="myDivLoss">...</div><br>
+ 
  
 <video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
 
 
-<div id="myDivLoss">...</div><br>
+Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseconds<br>
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
+<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
+
 <div id="myDivTest">...</div><br>
 
  
