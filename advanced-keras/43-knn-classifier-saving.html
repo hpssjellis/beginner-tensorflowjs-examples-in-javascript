@@ -106,7 +106,8 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
    document.getElementById('myArea01').value = ''
    const myOut = classifier.getClassifierDataset()
    for (let myLoop = 0;  myLoop < classifier.getNumClasses();  myLoop++){
-      document.getElementById('myArea01').value +=   myOut[myLoop].dataSync()                              
+      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-knn**'                                  
+      document.getElementById('myArea01').value +=   myOut[myLoop].dataSync() + '**done**'                              
    }                                     
 }">
  
