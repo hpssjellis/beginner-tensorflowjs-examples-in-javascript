@@ -155,7 +155,10 @@ myNewTrain = async function(){
    console.log('boxes')  
    console.log(boxes)     
    console.log('scores')       
-   console.log(scores)                                                                                          
+   console.log(scores)  
+   const landmarks = await faceapi.detectLandmarks(img1)                                                                                          
+      console.log('landmarks')                                                                                                              
+      console.log(landmarks)                                                                        
                                                                                              
                                                                                              
                                                                                              
