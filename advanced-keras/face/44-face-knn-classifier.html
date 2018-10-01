@@ -200,9 +200,9 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
-   let myCanvasElement = document.getElementById('myVideo');
-   let myCTX = myCanvasElement.getContext('2d');
-   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+  // let myCanvasElement = document.getElementById('myVideo');
+  // let myCTX = myCanvasElement.getContext('2d');
+  // myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img2 = tf.fromPixels(myVideo);                                                                                            
    const wow2 = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
