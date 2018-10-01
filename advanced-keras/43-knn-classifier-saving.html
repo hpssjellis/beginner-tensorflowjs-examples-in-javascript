@@ -274,7 +274,8 @@ myStopAuto  = async function(){
     document.getElementById('myArea01').value = ''
    const myOut = classifier.getClassifierDataset()
    for (let myLoop = 0;  myLoop < classifier.getNumClasses();  myLoop++){
-      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-knn**'                                  
+       const myStuff = classifier.getClassExampleCount()[myLoop]                                                                                      
+      document.getElementById('myArea01').value += myGroups[myLoop] + '**label-knn**'    + classifier.getClassExampleCount()[myLoop] + '**stuff**'                              
       document.getElementById('myArea01').value +=   myOut[myLoop].dataSync() + '**done**'                              
    }                                                                                             
  }                                                                                            
@@ -287,7 +288,7 @@ myStopAuto  = async function(){
                                                                                       
      for (let myIt=0; myIt< myInArray.length; myIt++){
            myInputArray[myIt] =  myInArray[myIt].split('**label-knn**') 
-           for (let myIt2=0; myIt2< myInArray.length; myIt2++){
+           for (let myIt2=1; myIt2< myInArray.length; myIt2++){   // lose the first
                 myInputArray[myIt][3] =  myInArray[myIt].split(',')                                                                                 
            }                                                                                       
        }   
