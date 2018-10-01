@@ -76,7 +76,7 @@ Note: I have made this model a fair bit bigger than needed to drag out the train
 
         <div style="display:none">
           <span class="hparam-label" ># of training epochs:</span>
-          <input id="train-epochs" value="15">
+          <input id="train-epochs" value="1">
         </div>
 
         <button id="train">Load MNIST Data, Train Model and auto Save</button>
@@ -633,10 +633,11 @@ async function train(model) {
     callbacks: {
       onBatchEnd: async (batch, logs) => {
         trainBatchCount++;
+        let endTime = new Date();
         ui.logStatus(
             `Training... ${trainBatchCount} batches /  ${totalNumBatches} total (` +
             `${(trainBatchCount / totalNumBatches * 100).toFixed(1)}%` +
-            ` complete). To stop training, refresh or close page.`);
+            ` complete). To stop training, refresh or close page.  ${((endTime-startTime)/1000).toFixed(0)}`);
         ui.plotLoss(trainBatchCount, logs.loss, 'train');
         ui.plotAccuracy(trainBatchCount, logs.acc, 'train');
         await tf.nextFrame();
