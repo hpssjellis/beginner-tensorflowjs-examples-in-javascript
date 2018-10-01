@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> </script> 
+<script src="https://www.npmjs.com/package/@tensorflow-models/knn-classifier"> </script> 
+<script src="face-api.js"></script>
+
+
+
+<script>
+
+//const net = new faceapi.FaceDetectionNet()
+// accordingly for the other models:
+// const net = new faceapi.FaceLandmark68Net()
+ const net = new faceapi.FaceLandmark68TinyNet()
+// const net = new faceapi.FaceRecognitionNet()
+// const net = new faceapi.Mtcnn()
+// const net = new faceapi.TinyYolov2()
+
+//await net.load('/models/face_detection_model-weights_manifest.json')
+// await net.load('/models/face_landmark_68_model-weights_manifest.json')
+ await net.load('/models/face_landmark_68_tiny_model-weights_manifest.json')
+// await net.load('/models/face_recognition_model-weights_manifest.json')
+// await net.load('/models/mtcnn_model-weights_manifest.json')
+// await net.load('/models/tiny_yolov2_separable_conv_model-weights_manifest.json')
+net.summary()
+
+</script>
