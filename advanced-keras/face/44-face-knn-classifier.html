@@ -153,13 +153,16 @@ myNewTrain = async function(){
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
    const { boxes, scores } = await net.forward(img1) 
    console.log('boxes')  
-   console.log(boxes)     
+   boxes.print(true)    
    console.log('scores')       
-   console.log(scores)  
-   const landmarks = await faceapi.detectLandmarks(img1)                                                                                          
-      console.log('landmarks')                                                                                                              
-      console.log(landmarks)                                                                        
-                                                                                             
+   scores.print(true)
+  // const landmarks = await faceapi.detectLandmarks(img1)                                                                                          
+   //   console.log('landmarks')                                                                                                              
+  //    console.log(landmarks)                                                                        
+   const fullFaceDescription0 = fullFaceDescriptions[0]
+console.log(fullFaceDescription0.detection) // bounding box & score
+console.log(fullFaceDescription0.landmarks) // face landmarks
+console.log(fullFaceDescription0.descriptor) // face descriptor                                                                                          
                                                                                              
                                                                                              
   /*                                                                                           
