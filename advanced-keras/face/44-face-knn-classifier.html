@@ -167,7 +167,7 @@ myNewTrain = async function(){
                                                                                              
                                                                                              
                                                                                              
-   classifier.addExample(tf.tensor2d(wow._faceLandmarks, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
+   classifier.addExample(tf.tensor2d(myObToArray, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
    console.log('classifier added')                                                                                    
                                                                                              
                                                                                              
