@@ -88,6 +88,9 @@ live "Train" objects from the model and get results at the same time!
 }">
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Cup"><br><br>
 
+Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseconds<br>
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
+<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
  
 <video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
@@ -121,20 +124,27 @@ live "Train" objects from the model and get results at the same time!
 
  ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
                                                                                             
-
+let myStoredInterval = 0
 let myGroups = []
+
                                                                                           
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
+myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+                                                                                             
+  takeAuto = async function(){                                                                                           
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await myPredict()                                                                                       
+   }, document.getElementById('myInterval').value);        
+}  
 
-
-myInit = async function() {
-   clearInterval(document.myTimer)                                                                                          
+myInit = async function() {                                                                                            
    classifier = knnClassifier.create();
    mobilenetModule = await mobilenet.load();
-   console.log('knn-classigfier and mobinet loaded')
-   document.myTimer = setInterval(myPredict, 1000)                                                                                           
+   console.log('knn-classigfier and mobinet loaded')                                                                                        
 }
 
 
