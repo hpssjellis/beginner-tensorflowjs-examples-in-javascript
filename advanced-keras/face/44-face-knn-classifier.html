@@ -161,10 +161,10 @@ myNewTrain = async function(){
   console.log(wow._faceLandmarks)  
   
                                                                                              
-  const newArray = []                                                                                           
+  var newArray = []                                                                                           
                                                                                              
   for (let x=0;  x < wow._faceLandmarks.length; x++ ){  
-     const newArray[x] = []                                                                                        
+     var newArray[x] = []                                                                                        
      newArray[x] = Object.keys(wow._faceLandmarks[x]).map(function (key) {
        return wow._faceLandmarks[key];
      });   
