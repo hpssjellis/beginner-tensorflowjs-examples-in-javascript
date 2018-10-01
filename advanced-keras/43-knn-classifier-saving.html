@@ -100,16 +100,16 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
 <div id="myDivTest">...</div><br>
  
  
- <textarea id="myArea01" rows=6 cols=70></textarea>
+ <textarea id="myArea01" rows=6 cols=70></textarea><br>
  
  <input type=button value=save onclick="{
-    alert()
+    alert(document.getElementById('myArea01').value)
 }">
  <input type=button value=load onclick="{
-    alert()
-}">
+    document.getElementById('myArea02').value = document.getElementById('myArea01').value)
+}"><br>
  
- <textarea id="myArea01" rows=6 cols=70></textarea><br>
+ <textarea id="myArea02" rows=6 cols=70></textarea><br>
  
  
  
