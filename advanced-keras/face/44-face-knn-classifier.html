@@ -161,7 +161,7 @@ myNewTrain = async function(){
   console.log(wow._faceLandmarks)                                                                                         
                                                                                              
                                                                                              
-   classifier.addExample(wow._faceLandmarks, parseInt(document.getElementById('myClassNumber').value));                                                              
+   classifier.addExample(tf.tensor1d(wow._faceLandmarks), parseInt(document.getElementById('myClassNumber').value));                                                              
    console.log('classifier added')                                                                                    
                                                                                              
                                                                                              
