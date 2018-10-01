@@ -194,28 +194,24 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
-  let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
-   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
-
-  const wow = await net.detectLandmarks(img1)                                                                                           
-
-  
-                                                                                             
-  newArray = []                                                                                           
+   const img2 = tf.fromPixels(myVideo);                                                                                            
+   const wow2 = await net.detectLandmarks(img2)                                                                                                                                                                                       
+   newArray2 = []                                                                                           
 
                                                                                              
     
-  for (let j=0;  j < wow._faceLandmarks.length; j++ ){  
-     newArray[j] = []                                                                                        
-     newArray[j][0] = wow._faceLandmarks[j].x                                                                
-     newArray[j][1] = wow._faceLandmarks[j].y  
+  for (let j=0;  j < wow2._faceLandmarks.length; j++ ){  
+     newArray2[j] = []                                                                                        
+     newArray2[j][0] = wow2._faceLandmarks[j].x                                                                
+     newArray2[j][1] = wow2._faceLandmarks[j].y  
    }                                                                                          
     
                                                                                                                                                                                     
 
-   const result = await classifier.predictClass(newArray, 3);   // number of groups
+   const result = await classifier.predictClass(newArray2, 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
