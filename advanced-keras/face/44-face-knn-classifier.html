@@ -211,7 +211,7 @@ myPredict = async function(){
     
                                                                                                                                                                                     
 
-   const result = await classifier.predictClass(newArray2, 3);   // number of groups
+   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
