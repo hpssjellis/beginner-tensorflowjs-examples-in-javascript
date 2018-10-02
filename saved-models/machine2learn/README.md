@@ -21,3 +21,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/machine2learn/m2l.html
 
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/machine2learn/m2l01.json
+
+
