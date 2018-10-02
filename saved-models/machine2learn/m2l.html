@@ -382,7 +382,7 @@ myLoadLocal = async function(){
     model = await tf.loadModel(myFileName);
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
-    await myTest()
+   // await myTest()
   }                                                                           
 }
 
