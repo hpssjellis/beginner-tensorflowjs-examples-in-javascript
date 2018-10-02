@@ -102,7 +102,7 @@
 <table border=1>
   <tr><td>Prep Data </td><td><input id="myButtonPrep" type="button" value="PrepData" onclick="{
       myPrepData()
-  }"></td><td><input id="myButtonAll" type="button" value="RUN ALL" style="background-color:green" onclick="{
+  }"></td><td><input id="myButtonAll" type="button" value="RUN ALL"  onclick="{
      myRunAll()
   }"> <input id="myButtonReset" type="button" value="Reset Buttons" onclick="{
      myResetButtons()
@@ -114,7 +114,7 @@
   }"><td></td></td><td>
 <input id="myButtonLoad" type="button" value="Load From Localstorage" onclick="{ 
    myLoadLocal()                                                                             
-}"> </td><td> <input id="myButtonLoad" type="button" value="Load From URL" onclick="{ 
+}"> </td><td> <input id="myButtonLoad" type="button" value="Load From URL" style="background-color:lime" onclick="{ 
    myLoadUrl()                                                                             
 }"> </td><tr>
   
@@ -181,11 +181,11 @@ myResetButtons = function(){
 myButtonsForLoadedModel = function(){ 
      tf.disposeVariables()                                                                       
      document.getElementById('myButtonAll').style.backgroundColor = 'lightGray'            
-     document.getElementById('myButtonPrep').style.backgroundColor = 'green'
+     document.getElementById('myButtonPrep').style.backgroundColor = 'lime'
      document.getElementById('myButtonDefine').style.backgroundColor = 'lightGray'
-     document.getElementById('myButtonCompile').style.backgroundColor = 'green'
-     document.getElementById('myButtonTrain').style.backgroundColor = 'green'
-     document.getElementById('myButtonTest').style.backgroundColor = 'green'
+     document.getElementById('myButtonCompile').style.backgroundColor = 'lime'
+     document.getElementById('myButtonTrain').style.backgroundColor = 'lime'
+     document.getElementById('myButtonTest').style.backgroundColor = 'lime'
      document.getElementById('myButtonTrain').value = 'Train'      
                                                                                              
 }                                                                                             
