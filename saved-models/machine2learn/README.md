@@ -12,7 +12,6 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/
 
 First test model
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/save-models/machine2learn/mytest01.json
 
 
 
