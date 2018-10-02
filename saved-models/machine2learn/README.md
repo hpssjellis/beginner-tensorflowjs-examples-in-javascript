@@ -14,3 +14,7 @@ First test model
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/save-models/machine2learn/mytest01.json
 
+
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/machine2learn/mytest01.json
+
