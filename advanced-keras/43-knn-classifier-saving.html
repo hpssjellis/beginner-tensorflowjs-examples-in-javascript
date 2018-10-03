@@ -103,13 +103,24 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
  <textarea id="myArea01" rows=6 cols=70></textarea><br>
  
  <input type=button value=save onclick="{
-   mySaveClassifier()                                    
+   mySaveClassifier() 
+                                  
 }">
  
  
  <input type=button value=load onclick="{
-    //document.getElementById('myArea02').value = document.getElementById('myArea01').value
-   myLoadClassifier()                                     
+  document.getElementById('myArea02').value = document.getElementById('myArea01').value
+  myLoadClassifier() 
+                                      
+}"><br> <br>
+ 
+ <input type=button value="Save as model" onclick="{
+   mySaveClassifierAsModel()                                    
+}">
+ 
+ 
+ <input type=button value="Load as model" onclick="{
+  myLoadClassifierAsModel()                                      
 }"><br>
  
  <textarea id="myArea02" rows=6 cols=70></textarea><br>
@@ -295,6 +306,21 @@ myStopAuto  = async function(){
     console.log(myInputArray)                                                                                    
  }                                                                                            
                                                                                        
+myLoadClassifierAsModel = async function(){
+    myOutGoingModel = tf.sequential();  
+    //model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' })); 
+    //myOutGoingModel.add(tf.layers.dense({ units: 30, name: "Cool" }));                                                                                         
+                                                                                             
+    const myOut = classifier.getClassifierDataset()
+   for (let myLoop = 0;  myLoop < classifier.getNumClasses();  myLoop++){
+       const myNumberExamples = classifier.getClassExampleCount()[myLoop] 
+       myOutGoingModel.add(tf.layers.dense({ units: 30, name: 'Cool' }));                                                                   
+  }                                                                                           
+}     
+                                                                                             
+mySaveClassifierAsModel = async function(){
+                                                                                             
+}                                                                                               
                                                                                              
                                                                                              
 /////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
