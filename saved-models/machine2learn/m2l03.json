@@ -101,7 +101,7 @@
                     "class_name": "Dense",
                     "config": {
                         "units": 1,
-                        "activation": "relu",
+                        "activation": "linear",
                         "use_bias": true,
                         "kernel_initializer": {
                             "class_name": "VarianceScaling",
