@@ -297,12 +297,27 @@ myLoadData = async function(){
    // model.add(tf.layers.dense({ units:  1 }) );   
                                                                                              
                                                                                              
-   const input = tf.input({shape: [1]});
-   const denseLayer1 = tf.layers.dense({units: 20}).apply(input);
-   const denseLayer2 = tf.layers.dense({units: 20}).apply(denseLayer1);
-   const denseLayer3 = tf.layers.dense({units: 1}).apply(denseLayer2)
-   const model = tf.model({inputs: input, outputs: denseLayer3});                                                                                           
-                                                                                         
+   const myInput1 = tf.input({shape: [1]});
+   const myDenseLayer1 = tf.layers.dense({units: 20}).apply(myInput1);
+   const myDenseLayer2 = tf.layers.dense({units: 20}).apply(myDenseLayer1);
+   const myDenseLayer3 = tf.layers.dense({units: 1}).apply(myDenseLayer2)
+   model = tf.model({inputs: myInput1, outputs: myDenseLayer3});                                                                                           
+   
+                                                                                             
+     /*
+                                                                                             
+     const input1 = tf.input({shape: [5, 3]});
+     const input2 = tf.input({shape: [3, 3]});
+     const concatLayer = tf.layers.concatenate({axis : 1});
+     const output = concatLayer.apply([input1, input2]);                                                                                        
+                                                                                             
+   */
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
    document.getElementById('myButtonDefine').style.backgroundColor = 'yellow'                                                                                                
  }                                                                                            
                                                                                              
