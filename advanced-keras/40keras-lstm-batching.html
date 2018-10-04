@@ -108,7 +108,7 @@ And that has made all the difference.`
 <textarea id="myArea00" rows=6 cols=70 >Hello Hello </textarea><br>
  <input type=button id="myDump64"  value="Dump first 64 Characters" onclick="{
 
-    myInput = document.getElementById('myArea00').value.split()
+    myInput = document.getElementById('myArea00').value.split('')
     console.log(myInput) 
     let myDump = [] 
     let myMax = 64
