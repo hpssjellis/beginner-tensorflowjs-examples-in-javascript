@@ -75,7 +75,7 @@ Robert Frost, 1874 - 1963.
     document.getElementById('myChars').value = `200`
     document.getElementById('myEpochs').value = `140`
     document.getElementById('mySeed').value = `Two ro`
-    document.getElementById('myArea01').value = `Two roads diverged in a yellow wood,
+    document.getElementById('myArea00').value = `Two roads diverged in a yellow wood,
 And sorry I could not travel both
 And be one traveler, long I stood
 And looked down one as far as I could
@@ -110,7 +110,7 @@ And that has made all the difference.`
 
     myInput = document.getElementById('myArea00').value.split()
     let myDump = []                                                                         
-    for(let myX=0;  myX < 64; myX++){
+    for(let myX=0;  myX < myInput.length; myX++){
       myDump[myX] = myInput.shift()                                                                       
      }                                                                         
     document.getElementById('myArea01').value =   myDump.join()                    
