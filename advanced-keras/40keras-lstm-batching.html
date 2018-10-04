@@ -112,9 +112,10 @@ And that has made all the difference.`
     let myDump = [] 
     let myMax = 64
     if (myInput.length < myMax){myMax = myInput.length }                                                                         
-    for(let myX=0;  myX < 7; myX++){
+    for(let myX=0;  myX < myMax; myX++){
       myDump[myX] = myInput.shift()                                                                       
-     }                                                               
+     }     
+     console.log(myInput)                                                                        
     document.getElementById('myArea00').value = myInput.join()                           
     document.getElementById('myArea01').value = myDump.join()   
                                                                              
