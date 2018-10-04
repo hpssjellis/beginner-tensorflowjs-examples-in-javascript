@@ -105,7 +105,19 @@ And that has made all the difference.`
 <div id="myDiv123Code"> 
 
 
-<textarea id="myArea01" rows=6 cols=70 >Hello Hello </textarea><br>
+<textarea id="myArea00" rows=6 cols=70 >Hello Hello </textarea><br>
+ <input type=button id="myDump64"  value="Dump first 64 Characters" onclick="{
+    let myInput = []
+    myInput = document.getElementById('myArea00').value
+    let myDump = []                                                                         
+    for(let myX=0;  myX < 64; myX++){
+      myDump[myX] = myInput.shift()                                                                       
+     }                                                                         
+    document.getElementById('myArea01').value =   myDump                    
+    document.getElementById('myArea00').value =   myInput
+                                                                             
+}"><br><br>
+<textarea id="myArea01" rows=6 cols=70 ></textarea><br>
 
 
 <input type=button id="myButtonRunAll" style="background-color:lime" value="Run All" onclick="{
@@ -119,6 +131,9 @@ And that has made all the difference.`
 
 
 LSTM Layer Units: <input type=text value=60 id="myLayerUnits" size=10><br>
+ 
+ 
+ 
 LSTM Sequence Length: <input type=text value=3 id="mySequenceLength" size=10>Program will pad the data file with that many stars "*"<br>
 
 <input type=button value="Define Model" onclick="{
@@ -226,7 +241,8 @@ myToOneHot = async function() {
   //console.log('myLSTM')
   //console.log(myLSTM)
   
-  
+ 
+  // want these arrays to be much shorter in batches of ?????                                                                                           
   
   const myTrainArrayFlattened = myTrainArray.join().split(',');
   const myTargetArrayFlattened = myTargetArray.join().split(',');
@@ -240,6 +256,9 @@ myToOneHot = async function() {
 
 
 
+                                                                                             
+                                                                                             
+                                                                                             
 
 
 myDefine = async function() {
