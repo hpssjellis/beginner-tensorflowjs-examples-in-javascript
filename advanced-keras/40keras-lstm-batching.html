@@ -109,6 +109,7 @@ And that has made all the difference.`
  <input type=button id="myDump64"  value="Dump first 64 Characters" onclick="{
 
     myInput = document.getElementById('myArea00').value.split()
+    console.log(myInput) 
     let myDump = [] 
     let myMax = 64
     if (myInput.length < myMax){myMax = myInput.length }                                                                         
