@@ -108,13 +108,13 @@ And that has made all the difference.`
 <textarea id="myArea00" rows=6 cols=70 >Hello Hello </textarea><br>
  <input type=button id="myDump64"  value="Dump first 64 Characters" onclick="{
 
-    myInput = document.getElementById('myArea00').value
+    myInput = document.getElementById('myArea00').value.split()
     let myDump = []                                                                         
     for(let myX=0;  myX < 64; myX++){
       myDump[myX] = myInput.shift()                                                                       
      }                                                                         
-    document.getElementById('myArea01').value =   myDump                    
-    document.getElementById('myArea00').value =   myInput
+    document.getElementById('myArea01').value =   myDump.join()                    
+    document.getElementById('myArea00').value =   myInput.join()
                                                                              
 }"><br><br>
 <textarea id="myArea01" rows=6 cols=70 ></textarea><br>
