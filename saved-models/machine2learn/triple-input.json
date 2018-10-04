@@ -1,0 +1,265 @@
+{
+    "modelTopology": {
+        "class_name": "Model",
+        "config": {
+            "name": "model_1",
+            "layers": [
+                {
+                    "name": "input6",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_input_shape": [
+                            null,
+                            10
+                        ],
+                        "dtype": "float32",
+                        "sparse": false,
+                        "name": "input6"
+                    },
+                    "inbound_nodes": []
+                },
+                {
+                    "name": "input5",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_input_shape": [
+                            null,
+                            5
+                        ],
+                        "dtype": "float32",
+                        "sparse": false,
+                        "name": "input5"
+                    },
+                    "inbound_nodes": []
+                },
+                {
+                    "name": "input4",
+                    "class_name": "InputLayer",
+                    "config": {
+                        "batch_input_shape": [
+                            null,
+                            4
+                        ],
+                        "dtype": "float32",
+                        "sparse": false,
+                        "name": "input4"
+                    },
+                    "inbound_nodes": []
+                },
+                {
+                    "name": "dense_Dense7",
+                    "class_name": "Dense",
+                    "config": {
+                        "units": 136,
+                        "activation": "relu",
+                        "use_bias": true,
+                        "kernel_initializer": {
+                            "class_name": "VarianceScaling",
+                            "config": {
+                                "scale": 1,
+                                "mode": "fan_avg",
+                                "distribution": "uniform",
+                                "seed": null
+                            }
+                        },
+                        "bias_initializer": {
+                            "class_name": "Zeros",
+                            "config": {}
+                        },
+                        "kernel_regularizer": null,
+                        "bias_regularizer": null,
+                        "activity_regularizer": null,
+                        "kernel_constraint": null,
+                        "bias_constraint": null,
+                        "name": "dense_Dense7",
+                        "trainable": true
+                    },
+                    "inbound_nodes": [
+                        [
+                            [
+                                "input6",
+                                0,
+                                0,
+                                {}
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": "dense_Dense6",
+                    "class_name": "Dense",
+                    "config": {
+                        "units": 136,
+                        "activation": "relu",
+                        "use_bias": true,
+                        "kernel_initializer": {
+                            "class_name": "VarianceScaling",
+                            "config": {
+                                "scale": 1,
+                                "mode": "fan_avg",
+                                "distribution": "uniform",
+                                "seed": null
+                            }
+                        },
+                        "bias_initializer": {
+                            "class_name": "Zeros",
+                            "config": {}
+                        },
+                        "kernel_regularizer": null,
+                        "bias_regularizer": null,
+                        "activity_regularizer": null,
+                        "kernel_constraint": null,
+                        "bias_constraint": null,
+                        "name": "dense_Dense6",
+                        "trainable": true
+                    },
+                    "inbound_nodes": [
+                        [
+                            [
+                                "input5",
+                                0,
+                                0,
+                                {}
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": "dense_Dense5",
+                    "class_name": "Dense",
+                    "config": {
+                        "units": 136,
+                        "activation": "relu",
+                        "use_bias": true,
+                        "kernel_initializer": {
+                            "class_name": "VarianceScaling",
+                            "config": {
+                                "scale": 1,
+                                "mode": "fan_avg",
+                                "distribution": "uniform",
+                                "seed": null
+                            }
+                        },
+                        "bias_initializer": {
+                            "class_name": "Zeros",
+                            "config": {}
+                        },
+                        "kernel_regularizer": null,
+                        "bias_regularizer": null,
+                        "activity_regularizer": null,
+                        "kernel_constraint": null,
+                        "bias_constraint": null,
+                        "name": "dense_Dense5",
+                        "trainable": true
+                    },
+                    "inbound_nodes": [
+                        [
+                            [
+                                "input4",
+                                0,
+                                0,
+                                {}
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": "concatenate_Concatenate2",
+                    "class_name": "Concatenate",
+                    "config": {
+                        "axis": -1,
+                        "name": "concatenate_Concatenate2",
+                        "trainable": true
+                    },
+                    "inbound_nodes": [
+                        [
+                            [
+                                "dense_Dense7",
+                                0,
+                                0,
+                                {}
+                            ],
+                            [
+                                "dense_Dense6",
+                                0,
+                                0,
+                                {}
+                            ],
+                            [
+                                "dense_Dense5",
+                                0,
+                                0,
+                                {}
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": "dense_Dense8",
+                    "class_name": "Dense",
+                    "config": {
+                        "units": 1,
+                        "activation": "relu",
+                        "use_bias": true,
+                        "kernel_initializer": {
+                            "class_name": "VarianceScaling",
+                            "config": {
+                                "scale": 1,
+                                "mode": "fan_avg",
+                                "distribution": "uniform",
+                                "seed": null
+                            }
+                        },
+                        "bias_initializer": {
+                            "class_name": "Zeros",
+                            "config": {}
+                        },
+                        "kernel_regularizer": null,
+                        "bias_regularizer": null,
+                        "activity_regularizer": null,
+                        "kernel_constraint": null,
+                        "bias_constraint": null,
+                        "name": "dense_Dense8",
+                        "trainable": true
+                    },
+                    "inbound_nodes": [
+                        [
+                            [
+                                "concatenate_Concatenate2",
+                                0,
+                                0,
+                                {}
+                            ]
+                        ]
+                    ]
+                }
+            ],
+            "input_layers": [
+                [
+                    "input4",
+                    0,
+                    0
+                ],
+                [
+                    "input5",
+                    0,
+                    0
+                ],
+                [
+                    "input6",
+                    0,
+                    0
+                ]
+            ],
+            "output_layers": [
+                [
+                    "dense_Dense8",
+                    0,
+                    0
+                ]
+            ]
+        },
+        "keras_version": "tfjs-layers 0.7.4",
+        "backend": "tensor_flow.js"
+    }
+}
