@@ -297,13 +297,13 @@ myLoadData = async function(){
    // model.add(tf.layers.dense({ units:  1 }) );   
                                                                                              
                                                                                              
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-    document.getElementById('myButtonDefine').style.backgroundColor = 'yellow'                                                                                                
+   const input = tf.input({shape: [1]});
+   const denseLayer1 = tf.layers.dense({units: 20}).apply(input);
+   const denseLayer2 = tf.layers.dense({units: 20}).apply(denseLayer1);
+   const denseLayer3 = tf.layers.dense({units: 1}).apply(denseLayer2)
+   const model = tf.model({inputs: input, outputs: denseLayer3});                                                                                           
+                                                                                         
+   document.getElementById('myButtonDefine').style.backgroundColor = 'yellow'                                                                                                
  }                                                                                            
                                                                                              
                                                                                              
