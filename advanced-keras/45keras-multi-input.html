@@ -273,8 +273,14 @@ myLoadData = async function(){
      /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
-                                                                                   
-   xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
+                                                                   
+   let xArrayTrainingData  = []                                                                                        
+   xArrayTrainingData[0] =  tf.tensor2d(xArray, shape=[xArray.length, 1]);                                                                                         
+   xArrayTrainingData[1] =  tf.tensor2d(xArray, shape=[xArray.length, 1]);                                                                                         
+                                                                                             
+   //xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);    // old one input tensor
+                                                                                             
+                                                                                             
    yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
     //console.log(xTrainingData)
@@ -298,17 +304,33 @@ myLoadData = async function(){
                                                                                              
                                                                                              
    const myInput1 = tf.input({shape: [1]});
-   const myDenseLayer1 = tf.layers.dense({units: 20}).apply(myInput1);
-   const myDenseLayer2 = tf.layers.dense({units: 20}).apply(myDenseLayer1);
-   const myDenseLayer3 = tf.layers.dense({units: 1}).apply(myDenseLayer2)
-   model = tf.model({inputs: myInput1, outputs: myDenseLayer3});                                                                                           
+   const myInput1Dense1 = tf.layers.dense({units: 20}).apply(myInput1);
+   const myInput1Dense2 = tf.layers.dense({units: 20}).apply(myInput1Dense1);
+   const myInput1Dense3 = tf.layers.dense({units: 1}).apply(myInput1Dense2)
+                                                                                             
+                                                                                                
+   const myInput2 = tf.input({shape: [1]});
+   const myInput2Dense1 = tf.layers.dense({units: 20}).apply(myInput2);
+   const myInput2Dense2 = tf.layers.dense({units: 20}).apply(myInput2Dense1);
+   const myInput2Dense3 = tf.layers.dense({units: 1}).apply(myInput2Dense2)                                                                                          
+                                                                                             
+   const myConcatenate1 = tf.layers.concatenate({axis : 1}).apply([myInput1Dense3, myInput2Dense3]);                                                                                           
+    
+   const myConcatenate1Dense4 = tf.layers.dense({units: 1}).apply(myConcatenate1)                                                                                              
+                                                                                             
+   model = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
    
                                                                                              
      /*
                                                                                              
      const input1 = tf.input({shape: [5, 3]});
      const input2 = tf.input({shape: [3, 3]});
-     const concatLayer = tf.layers.concatenate({axis : 1});
+     const concatLayer = tf.layers.concatenate({axis : 1}).apply([input1, input2]);   
      const output = concatLayer.apply([input1, input2]);                                                                                        
                                                                                              
    */
@@ -371,7 +393,7 @@ myLoadData = async function(){
   
   if (!document.stopRequested){  
     console.log('Training Model');                                                                                          
-    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+    var myFit = await model.fit(xArrayTrainingData, yTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
     validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value), // for seperating percent of data for testing  0.15 = 15% for testing
@@ -407,8 +429,14 @@ myLoadData = async function(){
 myTest = async function(){
   console.log('Model Predict')
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
-  
-  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+                                                                                             
+                                                                                             
+  let myInArray = []
+  myInArray[0] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
+  myInArray[1] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
+                                                                                             
+                                                                                             
+  const myPredictArray = await   model.predict(myInArray) 
   document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data()
                                                                                              
