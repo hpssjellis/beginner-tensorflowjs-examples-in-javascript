@@ -56,6 +56,8 @@ So first lets just define a multi input keras model. The summary should output t
 
 <div id="myDiv123Code"> 
 
+<input id="myLocalFileName" type="text" value="tensorflowjs_models/myMultiModel01/model_topology">
+ 
 <input id="myButton123" type=button value="Define Multi Input Keras Model"  onclick="{
     (async function(){
     console.log('Defining Model')  
@@ -91,21 +93,13 @@ So first lets just define a multi input keras model. The summary should output t
    console.log('Saving Model to local storage')                                                                                    
    const saveResults = await model2.save('localstorage://myMultiModel01');                                                                                  
                                                                            
-   console.log('Loading myMultiModel01.json file from local storage')   
+   console.log('Loading model information from local storage')   
    console.log('Note: This is very different than loading the model!') 
-                                                                                     
-                                                                                     
-                                                                                     
- //  const myIncomingLocalFile = await localStorage.getItem('tensorflowjs_models/myMultiModel01/model_topology');
-//   const myIncomingLocalJsonFile = await JSON.parse(myIncomingLocalFile);                                                                                                                                                                  
- //  console.log(myIncomingLocalJsonFile)   
-    
-    const cool =      localStorage.getItem('tensorflowjs_models/myMultiModel01/model_topology')                                                                            
-    console.log(cool)                                                                                    
-                                                                                     
-                                                                                     
+   const myLocalIncomingFile = localStorage.getItem(document.getElementById('myLocalFileName').value)                                                                            
+   // console.log(cool)                                                                                    
+                                                                                
    console.log('Inserting model.json file into webpage textarea')                                                                                    
-   document.getElementById('myArea01').value   = cool                                                                                     
+   document.getElementById('myArea01').value   = myLocalIncomingFile                                                                                     
                                                                                              
                                                                              
   })()  // end inline async function                                                                          
