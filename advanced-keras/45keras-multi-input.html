@@ -49,14 +49,50 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+So first lets just define a multi input keras model.
 </div><br>
 
 
 <div id="myDiv123Code"> 
 
 <input id="myButton123" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+
+    console.log('Defining Model')  
+                                                                                             
+ /////////////////////////////////// DEFINE THE MODEL /////////////////////////////////////////////////////////                                                                                                 
+   
+   // example of a single input keras layers                                                                         
+   // model = tf.sequential(); // no const so that it is a global variable 
+   // model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
+   // model.add(tf.layers.dense({ units: 20 }) );  
+   // model.add(tf.layers.dense({ units:  1 }) );   
+                                                                                             
+   // Now a multi input keras layers with concatenation                                                                                          
+   const myInput1 = tf.input({shape: [1]});
+   const myInput1Dense1 = tf.layers.dense({units: 20}).apply(myInput1);
+   const myInput1Dense2 = tf.layers.dense({units: 20}).apply(myInput1Dense1);
+   const myInput1Dense3 = tf.layers.dense({units: 1}).apply(myInput1Dense2)
+                                                                                             
+                                                                                                
+   const myInput2 = tf.input({shape: [1]});
+   const myInput2Dense1 = tf.layers.dense({units: 20}).apply(myInput2);
+   const myInput2Dense2 = tf.layers.dense({units: 20}).apply(myInput2Dense1);
+   const myInput2Dense3 = tf.layers.dense({units: 1}).apply(myInput2Dense2)                                                                                          
+                                                                                             
+   const myConcatenate1 = tf.layers.concatenate({axis : 1}).apply([myInput1Dense3, myInput2Dense3]);                                                                                           
+    
+   const myConcatenate1Dense4 = tf.layers.dense({units: 1}).apply(myConcatenate1)                                                                                              
+                                                                                             
+   model2 = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});    // This would be a global model
+                                                                                             
+   model2.summary()                                                                                          
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                             
+                                                                            
+                                                                            
+                                                                            
 }"><br><br>
 
 </div>
