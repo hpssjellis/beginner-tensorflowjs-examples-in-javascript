@@ -274,7 +274,7 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                    
-   let xArrayTrainingData  = []                                                                                        
+   xArrayTrainingData  = []     // make it a global array                                                                                     
    xArrayTrainingData[0] =  tf.tensor2d(xArray, shape=[xArray.length, 1]);                                                                                         
    xArrayTrainingData[1] =  tf.tensor2d(xArray, shape=[xArray.length, 1]);                                                                                         
                                                                                              
