@@ -125,7 +125,7 @@ Hold the Press!
 
    
     
-<input id="myButton2233" type="button" value="Typical Async Function" onclick="{  
+<input id="myButton2233A" type="button" value="Typical Async Function" onclick="{  
 
   // define the function
                                                                                
@@ -135,7 +135,7 @@ Hold the Press!
       const vector = tf.tensor1d([0, 1, 2]);
       const myResult = tf.matrixTimesVector(matrix, vector);
                                                            
-      document.getElementById('myDiv2233').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+      document.getElementById('myDiv2233A').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
    }  
                                                                                
    // call the function
@@ -145,27 +145,27 @@ Hold the Press!
 }"><br><br>
 
 </div>
-<div id='myDiv2233'>...</div><br>
+<div id='myDiv2233A'>...</div><br>
 
-<input id="myUpdate2233" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+<input id="myUpdate2233A" type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
    // first remove first and last line since they are injected
-  myFred = document.getElementById('myTextarea2233').value.split('\n')
+  myFred = document.getElementById('myTextarea2233A').value.split('\n')
   myFred.pop()
   myFred.push('')
   myFred.shift()
   myFred.shift()
   myJoe = myFred.join('\n')
 
-  document.getElementById('myDiv2233Code').innerHTML =    myJoe 
-  document.getElementById('myButton2233').click()
+  document.getElementById('myDiv2233ACode').innerHTML =    myJoe 
+  document.getElementById('myButton2233A').click()
                                              
 }"><br>
 
-<textarea id="myTextarea2233"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+<textarea id="myTextarea2233A"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
   if (myOnce2233A){
-     myTextGrow('myTextarea2233', 'myDiv2233Code')
-     document.getElementById('myUpdate2233').style.visibility = 'visible'
+     myTextGrow('myTextarea2233A', 'myDiv2233ACode')
+     document.getElementById('myUpdate2233A').style.visibility = 'visible'
      myOnce2233A = false
   }
 }">
@@ -195,11 +195,11 @@ This function within the button is editable from this online webpage.
 </div><br>
   
 
-<div id="myDiv2233Code"> 
+<div id="myDiv2233BCode"> 
 
    
     
-<input id="myButton2233" type="button" value="Typical Async Function" onclick="{  
+<input id="myButton2233B" type="button" value="Typical Async Function" onclick="{  
 
   // define the function
                                                                                
@@ -209,7 +209,7 @@ This function within the button is editable from this online webpage.
       const vector = tf.tensor1d([0, 1, 2]);
       const myResult = tf.matrixTimesVector(matrix, vector);
                                                            
-      document.getElementById('myDiv2233').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+      document.getElementById('myDiv2233B').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
    }  
                                                                                
    // call the function
@@ -219,27 +219,27 @@ This function within the button is editable from this online webpage.
 }"><br><br>
 
 </div>
-<div id='myDiv2233'>...</div><br>
+<div id='myDiv2233B'>...</div><br>
 
-<input id="myUpdate2233" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+<input id="myUpdate2233B" type=button value="Update and Run" style="visibility:hidden;" onclick="{
 
    // first remove first and last line since they are injected
-  myFred = document.getElementById('myTextarea2233').value.split('\n')
+  myFred = document.getElementById('myTextarea2233B').value.split('\n')
   myFred.pop()
   myFred.push('')
   myFred.shift()
   myFred.shift()
   myJoe = myFred.join('\n')
 
-  document.getElementById('myDiv2233Code').innerHTML =    myJoe 
-  document.getElementById('myButton2233').click()
+  document.getElementById('myDiv2233BCode').innerHTML =    myJoe 
+  document.getElementById('myButton2233B').click()
                                              
 }"><br>
 
-<textarea id="myTextarea2233"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+<textarea id="myTextarea2233B"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
   if (myOnce2233B){
-     myTextGrow('myTextarea2233', 'myDiv2233Code')
-     document.getElementById('myUpdate2233').style.visibility = 'visible'
+     myTextGrow('myTextarea2233B', 'myDiv2233BCode')
+     document.getElementById('myUpdate2233B').style.visibility = 'visible'
      myOnce2233B = false
   }
 }">
