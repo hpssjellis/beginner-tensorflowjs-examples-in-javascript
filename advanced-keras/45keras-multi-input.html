@@ -99,7 +99,7 @@ So first lets just define a multi input keras model. The summary should output t
    // console.log(cool)                                                                                    
                                                                                 
    console.log('Inserting model.json file into webpage textarea')                                                                                    
-   document.getElementById('myArea01').value   = JSON.stringify(myLocalIncomingFile, null, 3)                                                                                     
+   document.getElementById('myArea01').value   = JSON.stringify(JSON.parse(myLocalIncomingFile), null, 3)                                                                                          
                                                                                              
                                                                              
   })()  // end inline async function                                                                          
