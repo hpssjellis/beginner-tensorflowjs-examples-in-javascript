@@ -50,7 +50,7 @@
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
 So first lets just define a multi input keras model. The summary should output to the screen. The model.json should save to local storage
- and then show up in the text area.
+ and then show up in the text area. Uses your local storage to save and then upload the "myMultiModel01.json" file
 </div><br>
 
 
@@ -80,14 +80,26 @@ So first lets just define a multi input keras model. The summary should output t
    const myInput2Dense2 = tf.layers.dense({units: 20, name: 'myInput2Dense2'}).apply(myInput2Dense1);
    const myInput2Dense3 = tf.layers.dense({units: 1, name: 'myInput2Dense3'}).apply(myInput2Dense2)                                                                                          
                                                                                              
-   const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense3, myInput2Dense3]);                                                                                           
-    
+   const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense3, myInput2Dense3]);                                                                                               
    const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)                                                                                              
                                                                                              
    model2 = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});    // This would be a global model
-                                                                                             
-   await model2.summary()                                                                                          
-   await model2.summary(null,null,x => {document.getElementById('myDiv123').innerHTML += x + '<br>'});                                                                                          
+                                                                                     
+   console.log('Printing Model to web page')                                                                                                                                                                                   
+   await model2.summary(null,null,x => {document.getElementById('myDiv123').innerHTML += x + '<br>'}); 
+                                                                                     
+   console.log('Saving Model to local storage')                                                                                    
+   const saveResults = await model.save('localstorage://myMultiModel01');                                                                                  
+                                                                           
+   console.log('Loading model from local storage to get model.json file')  
+   
+      const myIncomingLocalModel = await fetch('localstorage://myMultiModel01');
+      var myIncomingLocalModelJson = await myIncomingLocalModel.json();                                                                                  
+      console.log(myIncomingLocalModelJson)                                                                               
+                                                                                     
+   console.log('Inserting model.json file into webpage textarea')   
+                                                                                     
+                                                                                     
    document.getElementById('myArea01').value   = 'Cool'                                                                                       
                                                                                              
                                                                              
