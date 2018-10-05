@@ -75,7 +75,7 @@ So first lets just define a multi input keras model. The summary should output t
    const myInput1Dense3 = tf.layers.dense({units: 1, name: 'myInput1Dense3'}).apply(myInput1Dense2)
                                                                                              
                                                                                                 
-   const myInput2 = tf.input({shape: [1]});
+   const myInput2 = tf.input({shape: [1], name: 'myInput2'});
    const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
    const myInput2Dense2 = tf.layers.dense({units: 20, name: 'myInput2Dense2'}).apply(myInput2Dense1);
    const myInput2Dense3 = tf.layers.dense({units: 1, name: 'myInput2Dense3'}).apply(myInput2Dense2)                                                                                          
