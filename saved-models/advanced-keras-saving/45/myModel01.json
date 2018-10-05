@@ -1,1 +1,471 @@
-{"modelTopology":{"class_name":"Model","config":{"name":"model1","layers":[{"name":"myInput1","class_name":"InputLayer","config":{"batch_input_shape":[null,1],"dtype":"float32","sparse":false,"name":"myInput1"},"inbound_nodes":[]},{"name":"myInput2","class_name":"InputLayer","config":{"batch_input_shape":[null,1],"dtype":"float32","sparse":false,"name":"myInput2"},"inbound_nodes":[]},{"name":"myInput1Dense1","class_name":"Dense","config":{"units":20,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput1Dense1","trainable":true},"inbound_nodes":[[["myInput1",0,0,{}]]]},{"name":"myInput2Dense1","class_name":"Dense","config":{"units":20,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput2Dense1","trainable":true},"inbound_nodes":[[["myInput2",0,0,{}]]]},{"name":"myInput1Dense2","class_name":"Dense","config":{"units":20,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput1Dense2","trainable":true},"inbound_nodes":[[["myInput1Dense1",0,0,{}]]]},{"name":"myInput2Dense2","class_name":"Dense","config":{"units":20,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput2Dense2","trainable":true},"inbound_nodes":[[["myInput2Dense1",0,0,{}]]]},{"name":"myInput1Dense3","class_name":"Dense","config":{"units":1,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput1Dense3","trainable":true},"inbound_nodes":[[["myInput1Dense2",0,0,{}]]]},{"name":"myInput2Dense3","class_name":"Dense","config":{"units":1,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput2Dense3","trainable":true},"inbound_nodes":[[["myInput2Dense2",0,0,{}]]]},{"name":"myConcatenate1","class_name":"Concatenate","config":{"axis":1,"name":"myConcatenate1","trainable":true},"inbound_nodes":[[["myInput1Dense3",0,0,{}],["myInput2Dense3",0,0,{}]]]},{"name":"myConcatenate1Dense4","class_name":"Dense","config":{"units":1,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myConcatenate1Dense4","trainable":true},"inbound_nodes":[[["myConcatenate1",0,0,{}]]]}],"input_layers":[["myInput1",0,0],["myInput2",0,0]],"output_layers":[["myConcatenate1Dense4",0,0]]},"keras_version":"tfjs-layers 0.8.1","backend":"tensor_flow.js"},"weightsManifest":[{"paths":["./myModel01.weights.bin"],"weights":[{"name":"myInput1Dense1/kernel","shape":[1,20],"dtype":"float32"},{"name":"myInput1Dense1/bias","shape":[20],"dtype":"float32"},{"name":"myInput2Dense1/kernel","shape":[1,20],"dtype":"float32"},{"name":"myInput2Dense1/bias","shape":[20],"dtype":"float32"},{"name":"myInput1Dense2/kernel","shape":[20,20],"dtype":"float32"},{"name":"myInput1Dense2/bias","shape":[20],"dtype":"float32"},{"name":"myInput2Dense2/kernel","shape":[20,20],"dtype":"float32"},{"name":"myInput2Dense2/bias","shape":[20],"dtype":"float32"},{"name":"myInput1Dense3/kernel","shape":[20,1],"dtype":"float32"},{"name":"myInput1Dense3/bias","shape":[1],"dtype":"float32"},{"name":"myInput2Dense3/kernel","shape":[20,1],"dtype":"float32"},{"name":"myInput2Dense3/bias","shape":[1],"dtype":"float32"},{"name":"myConcatenate1Dense4/kernel","shape":[2,1],"dtype":"float32"},{"name":"myConcatenate1Dense4/bias","shape":[1],"dtype":"float32"}]}]}
+{
+  "modelTopology": {
+    "class_name": "Model",
+    "config": {
+      "name": "model1",
+      "layers": [
+        {
+          "name": "myInput1",
+          "class_name": "InputLayer",
+          "config": {
+            "batch_input_shape": [
+              null,
+              1
+            ],
+            "dtype": "float32",
+            "sparse": false,
+            "name": "myInput1"
+          },
+          "inbound_nodes": []
+        },
+        {
+          "name": "myInput2",
+          "class_name": "InputLayer",
+          "config": {
+            "batch_input_shape": [
+              null,
+              1
+            ],
+            "dtype": "float32",
+            "sparse": false,
+            "name": "myInput2"
+          },
+          "inbound_nodes": []
+        },
+        {
+          "name": "myInput1Dense1",
+          "class_name": "Dense",
+          "config": {
+            "units": 20,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput1Dense1",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myInput2Dense1",
+          "class_name": "Dense",
+          "config": {
+            "units": 20,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput2Dense1",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput2",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myInput1Dense2",
+          "class_name": "Dense",
+          "config": {
+            "units": 20,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput1Dense2",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput1Dense1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myInput2Dense2",
+          "class_name": "Dense",
+          "config": {
+            "units": 20,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput2Dense2",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput2Dense1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myInput1Dense3",
+          "class_name": "Dense",
+          "config": {
+            "units": 1,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput1Dense3",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput1Dense2",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myInput2Dense3",
+          "class_name": "Dense",
+          "config": {
+            "units": 1,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput2Dense3",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput2Dense2",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myConcatenate1",
+          "class_name": "Concatenate",
+          "config": {
+            "axis": 1,
+            "name": "myConcatenate1",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput1Dense3",
+                0,
+                0,
+                {}
+              ],
+              [
+                "myInput2Dense3",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myConcatenate1Dense4",
+          "class_name": "Dense",
+          "config": {
+            "units": 1,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myConcatenate1Dense4",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myConcatenate1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        }
+      ],
+      "input_layers": [
+        [
+          "myInput1",
+          0,
+          0
+        ],
+        [
+          "myInput2",
+          0,
+          0
+        ]
+      ],
+      "output_layers": [
+        [
+          "myConcatenate1Dense4",
+          0,
+          0
+        ]
+      ]
+    },
+    "keras_version": "tfjs-layers 0.8.1",
+    "backend": "tensor_flow.js"
+  },
+  "weightsManifest": [
+    {
+      "paths": [
+        "./myModel01.weights.bin"
+      ],
+      "weights": [
+        {
+          "name": "myInput1Dense1/kernel",
+          "shape": [
+            1,
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense1/bias",
+          "shape": [
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput2Dense1/kernel",
+          "shape": [
+            1,
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput2Dense1/bias",
+          "shape": [
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense2/kernel",
+          "shape": [
+            20,
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense2/bias",
+          "shape": [
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput2Dense2/kernel",
+          "shape": [
+            20,
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput2Dense2/bias",
+          "shape": [
+            20
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense3/kernel",
+          "shape": [
+            20,
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense3/bias",
+          "shape": [
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput2Dense3/kernel",
+          "shape": [
+            20,
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput2Dense3/bias",
+          "shape": [
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myConcatenate1Dense4/kernel",
+          "shape": [
+            2,
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myConcatenate1Dense4/bias",
+          "shape": [
+            1
+          ],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ]
+}
