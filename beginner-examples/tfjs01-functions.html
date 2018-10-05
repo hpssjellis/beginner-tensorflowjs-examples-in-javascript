@@ -115,6 +115,73 @@ Click here to see the working HTML code.
 
 
 
+ 
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Hold the Press!
+</div><br>
+  
+
+<div id="myDiv2233Code"> 
+
+   
+    
+<input id="myButton2233" type="button" value="Typical Async Function" onclick="{  
+
+  // define the function
+                                                                               
+   async function myTypicalFunction(){                                                             
+      const matrixShape = [2, 3];  // 2 rows, 3 columns.
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
+      const vector = tf.tensor1d([0, 1, 2]);
+      const myResult = tf.matrixTimesVector(matrix, vector);
+                                                           
+      document.getElementById('myDiv2233').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
+   }  
+                                                                               
+   // call the function
+                                                                               
+   myTypicalFunction()   
+                                                                 
+}"><br><br>
+
+</div>
+<div id='myDiv2233'>...</div><br>
+
+<input id="myUpdate2233" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea2233').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv2233Code').innerHTML =    myJoe 
+  document.getElementById('myButton2233').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea2233"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce2233A){
+     myTextGrow('myTextarea2233', 'myDiv2233Code')
+     document.getElementById('myUpdate2233').style.visibility = 'visible'
+     myOnce2233A = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+ 
+ 
+
 
 
 
@@ -170,10 +237,10 @@ This function within the button is editable from this online webpage.
 }"><br>
 
 <textarea id="myTextarea2233"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
-  if (myOnce2233){
+  if (myOnce2233B){
      myTextGrow('myTextarea2233', 'myDiv2233Code')
      document.getElementById('myUpdate2233').style.visibility = 'visible'
-     myOnce2233 = false
+     myOnce2233B = false
   }
 }">
 Click here to see the working HTML code.
@@ -618,7 +685,8 @@ Use at your own risk!
 <script>
 
 myOnce223 = true    // so textareas are only clicked once 
-myOnce2233 = true 
+myOnce2233A = true 
+myOnce2233B = true 
 myOnce224 = true 
 myOnce225 = true 
 myOnce226 = true 
