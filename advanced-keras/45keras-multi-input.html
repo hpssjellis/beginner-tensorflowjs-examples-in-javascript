@@ -56,7 +56,7 @@ So first lets just define a multi input keras model. The summary should output t
 
 <div id="myDiv123Code"> 
 
-<input id="myLocalFileName" type="text" value="tensorflowjs_models/myMultiModel01/model_topology">
+<input id="myLocalFileName" type="text" value="tensorflowjs_models/myMultiModel01/model_topology"><br>
  
 <input id="myButton123" type=button value="Define Multi Input Keras Model"  onclick="{
     (async function(){
@@ -99,7 +99,7 @@ So first lets just define a multi input keras model. The summary should output t
    // console.log(cool)                                                                                    
                                                                                 
    console.log('Inserting model.json file into webpage textarea')                                                                                    
-   document.getElementById('myArea01').value   = myLocalIncomingFile                                                                                     
+   document.getElementById('myArea01').value   = JSON.stringify(myLocalIncomingFile, null, 3)                                                                                     
                                                                                              
                                                                              
   })()  // end inline async function                                                                          
