@@ -93,7 +93,7 @@ So first lets just define a multi input keras model. The summary should output t
                                                                            
    console.log('Loading myMultiModel01.json file from local storage')   
    console.log('Note: This is very different than loading the model!') 
-   const myIncomingLocalFile = await localStorage.getItem('myMultiModel01.json');
+   const myIncomingLocalFile = await localStorage.getItem('tensorflowjs_models/myMultiModel01/model_topology.json');
    const myIncomingLocalJsonFile = await JSON.parse(myIncomingLocalFile);                                                                                                                                                                  
    console.log(myIncomingLocalJsonFile)                                                                               
                                                                                      
