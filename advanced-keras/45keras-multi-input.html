@@ -93,8 +93,8 @@ So first lets just define a multi input keras model. The summary should output t
                                                                            
    console.log('Loading myMultiModel01.json file from local storage')   
    console.log('Note: This is very different than loading the model!') 
-   const myIncomingLocalFile = localStorage.getItem('myMultiModel01.json');
-   const myIncomingLocalJsonFile = JSON.parse(myIncomingLocalFile);                                                                                                                                                                  
+   const myIncomingLocalFile = await localStorage.getItem('myMultiModel01.json');
+   const myIncomingLocalJsonFile = await JSON.parse(myIncomingLocalFile);                                                                                                                                                                  
    console.log(myIncomingLocalJsonFile)                                                                               
                                                                                      
    console.log('Inserting model.json file into webpage textarea')                                                                                    
