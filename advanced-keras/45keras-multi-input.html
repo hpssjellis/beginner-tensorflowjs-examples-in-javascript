@@ -87,7 +87,7 @@ So first lets just define a multi input keras model. The summary should output t
    model2 = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});    // This would be a global model
                                                                                              
    model2.summary()                                                                                          
-   await model2.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                          
+   model2.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                          
    document.getElementById('myArea01').value   = 'Cool'                                                                                       
                                                                                              
                                                                              
