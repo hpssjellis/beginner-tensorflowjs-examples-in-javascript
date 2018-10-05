@@ -398,8 +398,10 @@ myLoadData = async function(){
    // model = tf.sequential(); // no const so that it is a global variable 
    // model.add(tf.layers.dense({ units: 20,  inputShape: [1] }) );  
    // model.add(tf.layers.dense({ units: 20 }) );  
-   // model.add(tf.layers.dense({ units:  1 }) );   
+   // model.add(tf.layers.dense({ units:  1 }) );  
                                                                                              
+                                                                                             
+   /*                                                                                          
                                                                                              
    const myInput1 = tf.input({shape: [1]});
    const myInput1Dense1 = tf.layers.dense({units: 20}).apply(myInput1);
@@ -417,6 +419,29 @@ myLoadData = async function(){
    const myConcatenate1Dense4 = tf.layers.dense({units: 1}).apply(myConcatenate1)                                                                                              
                                                                                              
    model = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});
+                                                                                             
+  */
+                                                                                             
+     // Now a multi input keras layers with concatenation                                                                                          
+   const myInput1 = tf.input({shape: [1], name: 'myInput1'});
+   const myInput1Dense1 = tf.layers.dense({units: 20, name: 'myInput1Dense1'}).apply(myInput1);
+   const myInput1Dense2 = tf.layers.dense({units: 20, name: 'myInput1Dense2'}).apply(myInput1Dense1);
+   const myInput1Dense3 = tf.layers.dense({units: 1, name: 'myInput1Dense3'}).apply(myInput1Dense2)
+                                                                                             
+                                                                                                
+   const myInput2 = tf.input({shape: [1], name: 'myInput2'});
+   const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
+   const myInput2Dense2 = tf.layers.dense({units: 20, name: 'myInput2Dense2'}).apply(myInput2Dense1);
+   const myInput2Dense3 = tf.layers.dense({units: 1, name: 'myInput2Dense3'}).apply(myInput2Dense2)                                                                                          
+                                                                                             
+   const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense3, myInput2Dense3]);                                                                                               
+   const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)                                                                                              
+                                                                                             
+   model = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});    // This would be a global model
+                                                                                     
+                                                                                           
+                                                                                             
+                                                                                             
                                                                                              
                                                                                              
                                                                                              
