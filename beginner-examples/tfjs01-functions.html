@@ -117,30 +117,39 @@ Click here to see the working HTML code.
 
  
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Hold the Press!
+Hold the Press! This is not on the video. Since about August 2018 I have been doing my functions using in a slightly
+for various reasons connected to how javascript makes global variables. Using this method the functions become global.
+I also have started using the style tag instead of the script tag since a style can load scripts dynamically. 
 </div><br>
   
 
 <div id="myDiv2233Code"> 
 
-   
-    
-<input id="myButton2233A" type="button" value="Typical Async Function" onclick="{  
+ 
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
 
-  // define the function
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+ // define the function
                                                                                
-   async function myTypicalFunction(){                                                             
+myTypicalFunctionNew = async function(){       // note how the brakets for passing variables is removed from the function name                                                          
       const matrixShape = [2, 3];  // 2 rows, 3 columns.
       const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
       const vector = tf.tensor1d([0, 1, 2]);
       const myResult = tf.matrixTimesVector(matrix, vector);
                                                            
       document.getElementById('myDiv2233A').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
-   }  
-                                                                               
+   }                                                                                               
+}}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+     
+    
+<input id="myButton2233A" type="button" value="Typical Async Function" onclick="{  
+                                                                                
    // call the function
                                                                                
-   myTypicalFunction()   
+   myTypicalFunctionNew()   
                                                                  
 }"><br><br>
 
