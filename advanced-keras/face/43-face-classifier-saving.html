@@ -240,29 +240,35 @@ myPredict = async function(){
 }
                                                                                              
 
-myDefineClassifierInputs = async function(){
-                                                                                           
-   // needs to be a loop based on the number of sets of training for each classifier                                                                                          
-   const myInput1 = tf.input({shape: [1], name: 'myInput1'});
-   const myInput1Dense1 = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
+                                                                                      
+                                                                                             
+                                                                                             
+ myDefineClassifierModel = async function(myNumberClassifiers, myArrayNumberEachClassfier){
+
+    let myInputsArray = []    
+    let myConcateArray = []
+                                                                                             
+                                                                                             
+    for (let myClassifiers = 0; myClassifiers < myNumberClassifiers; myClassifiers++ ){      // need number of classifiers                                        
+     // for (let myTrained = 0; myTrained < myArrayNumberEachClassfier; myTrained++ ){        // need number of trained classifiers                                                                                           
+
+          // needs to be a loop based on the number of sets of training for each classifier                                                                                          
+          const myInput1 = tf.input({shape: [1], name: 'myInput1'});
+          const myInput1Dense1 = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
+          myInputsArray[myClassifiers]   =   'myInput1'   
+          myConcateArray[myClassifiers]  =   'myInput1Dense1'                                                                                
+     // }
+    }
+                                                                                             
+
                                                                                                
    //const myInput2 = tf.input({shape: [1], name: 'myInput2'});
    //const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
-                                                                                          
-}  
                                                                                              
-myDefineClassifierConcatenate = async function(){
-                                                                                                                                                                                 
-   // tensor array to concatenate needs to be added here                                                                                              
+    // tensor array to concatenate needs to be added here                                                                                              
    const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense1, myInput2Dense1]);                                                                                               
    const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)                                                                                              
-                                                                                            
-}                                                                                              
-                                                                                             
-                                                                                             
-                                                                                             
- myDefineClassifierModel = async function(){
-                                                                                             
+                                                                                               
    // tensor array of inputs needs to be added here                                                                                          
    myClassifierModel = tf.model({inputs: [myInput1, myInput2], outputs: myConcatenate1Dense4});    // This would be a global model                                                                                                                                                                                         
 
