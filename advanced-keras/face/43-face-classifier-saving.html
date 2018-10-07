@@ -246,10 +246,11 @@ myPredict = async function(){
  myDefineClassifierModel = async function(myPassedClassifier){
 
     let myArray = []
+    let myMaxClasses =    myPassedClassifier.getNumClasses()                                                                                      
     console.log('myPassedClassifier.getNumClasses()')
-    console.log(myPassedClassifier.getNumClasses())                                                                                      
+    console.log(myMaxClasses)                                                                                      
                                                                                              
-    for (let myClassifierLoop = 0; myClassifierLoop < 2; myClassifierLoop++ ){      // need number of classifiers                                        
+    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){      // need number of classifiers                                        
       myArray[myClassifierLoop] = {}                                                                                                                                                                                                      
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])                                                                                                                                                           
       console.log('shape first layer =')                                                                                                                                                           
