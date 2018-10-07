@@ -245,23 +245,24 @@ myPredict = async function(){
                                                                                              
  myDefineClassifierModel = async function(myPassedClassifier){
 
-    let myInputsArray = []    
-    let myConcateArray = []
+    let myArray = []
     console.log('myPassedClassifier.getNumClasses()')
-    console.log(myPassedClassifier.getNumClasses())
-    console.log(myPassedClassifier.getClassifierDataset()[0])   
-    console.log(myPassedClassifier.getClassifierDataset()[1])                                                                                        
+    console.log(myPassedClassifier.getNumClasses())                                                                                      
                                                                                              
-    for (let myClassifiers = 0; myClassifiers < myNumberClassifiers; myClassifiers++ ){      // need number of classifiers                                        
-                                                                                        
-        console.log(myPassedClassifier.getNumClasses()[myClassifiers])
+    for (let myClassifierLoop = 0; myClassifierLoop < myNumberClassifiers; myClassifierLoop++ ){      // need number of classifiers                                        
+      myArray[myClassifierLoop] = {}                                                                                                                                                                                                      
+      console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])                                                                                                                                                           
+      console.log('shape first layer =')                                                                                                                                                           
+      console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])
                                                                                              
-          // needs to be a loop based on the number of sets of training for each classifier                                                                                          
-        //  const myInput1 = tf.input({shape: [1], name: 'myInput1'});
-        //  const myInput1Dense1 = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
-        //  myInputsArray[myClassifiers]   =   'myInput1'   
-        //  myConcateArray[myClassifiers]  =   'myInput1Dense1'                                                                                
-
+          // needs to be a loop based on the number of sets of training for each classifier                 
+          myArray[myClassifierLoop].inputString   =   'myInput'  + myClassifierLoop 
+          myArray[myClassifierLoop].concatenateString  =   'myInput'+myClassifierLoop+'Dense1'                                                                                
+                                                                         
+        myArray[myClassifierLoop].input = tf.input({shape: [1], name: 'myInput1'});
+        myArray[myClassifierLoop].input = tf.input({shape: [1], name: 'myInput1'});
+       // myArray[myClassifierLoop].concatenate = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
+        //myArray[myClassifierLoop].concatenate = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
     }
                                                                                              
 
