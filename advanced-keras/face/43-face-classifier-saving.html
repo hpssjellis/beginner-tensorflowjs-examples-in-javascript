@@ -253,7 +253,7 @@ myPredict = async function(){
     console.log(myPassedClassifier.getClassifierDataset()[1])                                                                                        
                                                                                              
     for (let myClassifiers = 0; myClassifiers < myNumberClassifiers; myClassifiers++ ){      // need number of classifiers                                        
-     // for (let myTrained = 0; myTrained < myArrayNumberEachClassfier; myTrained++ ){        // need number of trained classifiers                                                                                           
+                                                                                        
         console.log(myPassedClassifier.getNumClasses()[myClassifiers])
                                                                                              
           // needs to be a loop based on the number of sets of training for each classifier                                                                                          
@@ -261,7 +261,7 @@ myPredict = async function(){
         //  const myInput1Dense1 = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
         //  myInputsArray[myClassifiers]   =   'myInput1'   
         //  myConcateArray[myClassifiers]  =   'myInput1Dense1'                                                                                
-     // }
+
     }
                                                                                              
 
