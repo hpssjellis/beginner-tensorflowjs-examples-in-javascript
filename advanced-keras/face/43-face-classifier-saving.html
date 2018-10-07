@@ -251,7 +251,9 @@ myPredict = async function(){
     console.log(myMaxClasses)                                                                                      
                                                                                              
     for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){      // need number of classifiers                                        
-      myArray[myClassifierLoop] = {}                                                                                                                                                                                                      
+     
+      /*                                                                                       
+                                                                                             myArray[myClassifierLoop] = {}                                                                                                                                                                                                      
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])                                                                                                                                                           
       console.log('shape first layer =')                                                                                                                                                           
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape.0)
@@ -264,6 +266,9 @@ myPredict = async function(){
         myArray[myClassifierLoop].concatenate = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
         //myArray[myClassifierLoop].input = tf.input({shape: [1], name: 'myInput1'});
         //myArray[myClassifierLoop].concatenate = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
+                                                                                             
+       */                                                                                      
+                                                                                             
     }
                                                                                              
 
