@@ -240,30 +240,34 @@ myPredict = async function(){
 }
                                                                                              
 
-                                                                                      
+/////////////////////////////////////////// NEW SAVING LOADING STUFF ///////////////////////////////////////////                                                                                      
                                                                                              
                                                                                              
- myDefineClassifierModel = async function(myNumberClassifiers, myArrayNumberEachClassfier){
+ myDefineClassifierModel = async function(myPassedClassifier){
 
     let myInputsArray = []    
     let myConcateArray = []
-                                                                                             
+    console.log('myPassedClassifier.getNumClasses()')
+    console.log(myPassedClassifier.getNumClasses())
+    console.log(myPassedClassifier.getClassifierDataset()[0])   
+    console.log(myPassedClassifier.getClassifierDataset()[1])                                                                                        
                                                                                              
     for (let myClassifiers = 0; myClassifiers < myNumberClassifiers; myClassifiers++ ){      // need number of classifiers                                        
      // for (let myTrained = 0; myTrained < myArrayNumberEachClassfier; myTrained++ ){        // need number of trained classifiers                                                                                           
-
+        console.log(myPassedClassifier.getNumClasses()[myClassifiers])
+                                                                                             
           // needs to be a loop based on the number of sets of training for each classifier                                                                                          
-          const myInput1 = tf.input({shape: [1], name: 'myInput1'});
-          const myInput1Dense1 = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
-          myInputsArray[myClassifiers]   =   'myInput1'   
-          myConcateArray[myClassifiers]  =   'myInput1Dense1'                                                                                
+        //  const myInput1 = tf.input({shape: [1], name: 'myInput1'});
+        //  const myInput1Dense1 = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
+        //  myInputsArray[myClassifiers]   =   'myInput1'   
+        //  myConcateArray[myClassifiers]  =   'myInput1Dense1'                                                                                
      // }
     }
                                                                                              
 
                                                                                                
    //const myInput2 = tf.input({shape: [1], name: 'myInput2'});
-   //const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
+   const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
                                                                                              
     // tensor array to concatenate needs to be added here                                                                                              
    const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense1, myInput2Dense1]);                                                                                               
@@ -287,13 +291,27 @@ myPredict = async function(){
                                                                                              
                                                                                              
                                                                                              
-                                                                                             
+/////////////////////////////////////////////                                                                                             
 mySetClassiferModelWeights  = async function(){
                                                                                              
                                                                                              
 }                                                                                              
+  
                                                                                              
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+///////////////////////////////////////////////////////////////////////////////                                                                                             
 myClassifierSave  = async function(){
+                                                                                             
+                                                                                             
+ myDefineClassifierModel(classifier)         // pass global classifier                                                                                     
+                                                                                             
+ /*                                                                                            
  for (let myClassifiers = 0; myClassifiers <= 3; myClassifiers++ ){      // need number of classifiers                                        
     for (let myTrained = 0; myTrained <= 3; myTrained++ ){        // need number of trained classifiers 
      myDefineClassifierInputs()                                                                                        
@@ -304,10 +322,18 @@ myClassifierSave  = async function(){
   for (let myLoop = 0; myLoop <= 3; myLoop++ ){        // need number of classifiers                                                                                     
      mySetClassiferModelWeights()
   }                                                                                           
-  classifierModel.save('downloads://myClassifierModel01')                                                                                          
+  classifierModel.save('downloads://myClassifierModel01')  
+                                                                                             
+                                                                                             
+   */                                                                                          
+                                                                                             
 }
                                                                                              
+ 
                                                                                              
+                                                                                             
+                                                                                             
+//////////////////////////////////////////////////////////////////////////////
 myClassifierLoad  = async function(){
                                                                                              
                                                                                              
