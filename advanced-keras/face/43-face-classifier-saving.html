@@ -292,7 +292,7 @@ myPredict = async function(){
                                                                                              
    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){   // since the first layers are inputs must add maxClasses   
      const myInWeight = await myPassedClassifier.getClassifierDataset()[myClassifierLoop]                                                                                        
-     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights([myInWeight, tf.ones([136])]);       //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
+     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights([myInWeight, tf.zeros([136])]);       //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
    }                                                                                           
     myClassifierModel.layers[3].getWeights()[0].print(true)     // weights layer  3                             
     myClassifierModel.layers[3].getWeights()[1].print(true)     // bias layer  3                                                                                      
