@@ -1,1 +1,255 @@
-{"modelTopology":{"class_name":"Model","config":{"name":"model1","layers":[{"name":"input1","class_name":"InputLayer","config":{"batch_input_shape":[null,3],"dtype":"float32","sparse":false,"name":"input1"},"inbound_nodes":[]},{"name":"input2","class_name":"InputLayer","config":{"batch_input_shape":[null,5],"dtype":"float32","sparse":false,"name":"input2"},"inbound_nodes":[]},{"name":"myInput0Dense1","class_name":"Dense","config":{"units":136,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput0Dense1","trainable":true},"inbound_nodes":[[["input1",0,0,{}]]]},{"name":"myInput1Dense1","class_name":"Dense","config":{"units":136,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myInput1Dense1","trainable":true},"inbound_nodes":[[["input2",0,0,{}]]]},{"name":"myConcatenate1","class_name":"Concatenate","config":{"axis":1,"name":"myConcatenate1","trainable":true},"inbound_nodes":[[["myInput0Dense1",0,0,{}],["myInput1Dense1",0,0,{}]]]},{"name":"myConcatenate1Dense4","class_name":"Dense","config":{"units":1,"activation":"linear","use_bias":true,"kernel_initializer":{"class_name":"VarianceScaling","config":{"scale":1,"mode":"fan_avg","distribution":"normal","seed":null}},"bias_initializer":{"class_name":"Zeros","config":{}},"kernel_regularizer":null,"bias_regularizer":null,"activity_regularizer":null,"kernel_constraint":null,"bias_constraint":null,"name":"myConcatenate1Dense4","trainable":true},"inbound_nodes":[[["myConcatenate1",0,0,{}]]]}],"input_layers":[["input1",0,0],["input2",0,0]],"output_layers":[["myConcatenate1Dense4",0,0]]},"keras_version":"tfjs-layers 0.8.1","backend":"tensor_flow.js"},"weightsManifest":[{"paths":["./myClassifierModel01.weights.bin"],"weights":[{"name":"myInput0Dense1/kernel","shape":[3,136],"dtype":"float32"},{"name":"myInput0Dense1/bias","shape":[136],"dtype":"float32"},{"name":"myInput1Dense1/kernel","shape":[5,136],"dtype":"float32"},{"name":"myInput1Dense1/bias","shape":[136],"dtype":"float32"},{"name":"myConcatenate1Dense4/kernel","shape":[272,1],"dtype":"float32"},{"name":"myConcatenate1Dense4/bias","shape":[1],"dtype":"float32"}]}]}
+{
+  "modelTopology": {
+    "class_name": "Model",
+    "config": {
+      "name": "model1",
+      "layers": [
+        {
+          "name": "input1",
+          "class_name": "InputLayer",
+          "config": {
+            "batch_input_shape": [
+              null,
+              3
+            ],
+            "dtype": "float32",
+            "sparse": false,
+            "name": "input1"
+          },
+          "inbound_nodes": []
+        },
+        {
+          "name": "input2",
+          "class_name": "InputLayer",
+          "config": {
+            "batch_input_shape": [
+              null,
+              5
+            ],
+            "dtype": "float32",
+            "sparse": false,
+            "name": "input2"
+          },
+          "inbound_nodes": []
+        },
+        {
+          "name": "myInput0Dense1",
+          "class_name": "Dense",
+          "config": {
+            "units": 136,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput0Dense1",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "input1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myInput1Dense1",
+          "class_name": "Dense",
+          "config": {
+            "units": 136,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myInput1Dense1",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "input2",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myConcatenate1",
+          "class_name": "Concatenate",
+          "config": {
+            "axis": 1,
+            "name": "myConcatenate1",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myInput0Dense1",
+                0,
+                0,
+                {}
+              ],
+              [
+                "myInput1Dense1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "myConcatenate1Dense4",
+          "class_name": "Dense",
+          "config": {
+            "units": 1,
+            "activation": "linear",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "VarianceScaling",
+              "config": {
+                "scale": 1,
+                "mode": "fan_avg",
+                "distribution": "normal",
+                "seed": null
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {}
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null,
+            "name": "myConcatenate1Dense4",
+            "trainable": true
+          },
+          "inbound_nodes": [
+            [
+              [
+                "myConcatenate1",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        }
+      ],
+      "input_layers": [
+        [
+          "input1",
+          0,
+          0
+        ],
+        [
+          "input2",
+          0,
+          0
+        ]
+      ],
+      "output_layers": [
+        [
+          "myConcatenate1Dense4",
+          0,
+          0
+        ]
+      ]
+    },
+    "keras_version": "tfjs-layers 0.8.1",
+    "backend": "tensor_flow.js"
+  },
+  "weightsManifest": [
+    {
+      "paths": [
+        "./myClassifierModel01.weights.bin"
+      ],
+      "weights": [
+        {
+          "name": "myInput0Dense1/kernel",
+          "shape": [
+            3,
+            136
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput0Dense1/bias",
+          "shape": [
+            136
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense1/kernel",
+          "shape": [
+            5,
+            136
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myInput1Dense1/bias",
+          "shape": [
+            136
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myConcatenate1Dense4/kernel",
+          "shape": [
+            272,
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "myConcatenate1Dense4/bias",
+          "shape": [
+            1
+          ],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ]
+}
