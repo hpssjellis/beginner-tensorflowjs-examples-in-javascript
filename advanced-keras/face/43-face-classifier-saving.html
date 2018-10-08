@@ -139,7 +139,7 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
                                                                                             
 
 let myGroups = []
-let myIncomingClassifier = []                                                                                          
+//let myIncomingClassifier = []                                                                                          
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -288,9 +288,10 @@ myPredict = async function(){
    myClassifierModel.summary()
    console.log('myClassifierModel.layers[myMaxClasses]')     
    console.log(myClassifierModel.layers[myMaxClasses])
-   myPassedClassifier.print(true)
+   myPassedClassifier.getClassifierDataset()[0].print                                                                                            
+                                                                                             
    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){   // since the first layers are inputs must add maxClasses                                                                                          
-    // myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights(myPassedClassifier[myClassifierLoop])    //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
+     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights(myPassedClassifier.getClassifierDataset()[myClassifierLoop])    //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
    }                                                                                           
    
    console.log(myClassifierModel.layers[myMaxClasses])                                                                                              
