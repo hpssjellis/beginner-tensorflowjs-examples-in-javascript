@@ -245,7 +245,10 @@ myPredict = async function(){
                                                                                              
  myDefineClassifierModel = async function(myPassedClassifier){
 
-    let myArray = []
+    let myLayerList = []
+    myLayerList[0] = []    // for the input layer
+                                                                                             
+                                                                                             
     let myMaxClasses =    myPassedClassifier.getNumClasses()                                                                                      
     console.log('myPassedClassifier.getNumClasses()')
     console.log(myMaxClasses)                                                                                      
@@ -253,13 +256,13 @@ myPredict = async function(){
     for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){      // need number of classifiers                                        
      
                                                                                        
-      myArray[myClassifierLoop] = {}    
+      
                                                                                              
                                                                                              
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])                                                                                                                                                           
       console.log('shape first layer =')                                                                                                                                                           
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape.0)
-       myArray[myClassifierLoop].input = tf.input({shape: [1], name: 'myInput1'});
+      myLayerList[0][myClassifierLoop] = tf.input({shape: [1], name: 'myInput1'});
                                                                                              
        /*                                                                                            
                                                                                              
