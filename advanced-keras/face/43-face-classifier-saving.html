@@ -49,7 +49,8 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
- DRAFT MODE: COOL IDEA TO SAVE THE CLASSIFIER ARRAY OF TENSORS AS A STRIANGE MULTI INPUT MODEL <br><br>
+ DRAFT MODE: COOL IDEA TO SAVE THE CLASSIFIER ARRAY OF TENSORS AS A STRANGE MULTI INPUT MODEL. Then use TFJS
+ model save feacture to save all the classifier information<br><br>
  
  Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> 
  Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository<br><br>
@@ -164,7 +165,7 @@ myTextChange = async function(){
     if (myGroups[document.getElementById('myClassNumber').value] == undefined){
         document.getElementById('myClassText').value    = ''   // clear the box                                                                                     
       } else {                                                                                         
-        document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value] 
+        document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value.replace(' ','-')] 
     }
 }                                                                                             
 
@@ -269,8 +270,11 @@ myPredict = async function(){
       myLayerList[1][myClassifierLoop] = tf.input({shape: myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0], name: myLayerList[1][myClassifierLoop]});      // Define input layer
       //console.log('define dense for: '+myClassifierLoop)
       myLayerList[2][myClassifierLoop] = 'myInput'+myClassifierLoop+'Dense1'    // concatenate as a string                                                                                  
-      myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
-                                                                                           
+     // myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
+ 
+     .// try to insert group label as a fake name for this layer                                                                                        
+     myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myGroup[myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
+                                                                                             
     }
                                                                                              
 
