@@ -318,7 +318,7 @@ mySetClassiferModelWeights  = async function(){
 myClassifierSave  = async function(){
                                                                                                                                                                                         
    const myClassifierModel2 = myDefineClassifierModel(classifier)         // pass global classifier                                                                                                                                                                                                                                                                      
-   myClassifierModel2.save('downloads://myClassifierModel01')  
+   await myClassifierModel2.save('downloads://myClassifierModel01')  
    await myClassifierModel2.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                                                                                                                                                                                                             
 }
                                                                                              
