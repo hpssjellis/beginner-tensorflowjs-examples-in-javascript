@@ -266,10 +266,10 @@ myPredict = async function(){
                                                                                              
       myLayerList[0][myClassifierLoop] = 'myInput'  + myClassifierLoop                  // input name as a string
     //  console.log('define input for'+myClassifierLoop)                                                                                       
-      myLayerList[1][myClassifierLoop] = tf.input({shape: myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0], name: myLayerList[0][myClassifierLoop]});      // Define input layer
+      myLayerList[1][myClassifierLoop] = tf.input({shape: myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0], name: myLayerList[1][myClassifierLoop]});      // Define input layer
      // console.log('define dense for: '+myClassifierLoop)
       myLayerList[2][myClassifierLoop] = 'myInput'+myClassifierLoop+'Dense1'    // concatenate as a string                                                                                  
-      myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[2][myClassifierLoop]);             //Define concatenate layer                                                                          
+      myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[3][myClassifierLoop]);             //Define concatenate layer                                                                          
                                                                                            
     }
                                                                                              
