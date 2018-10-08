@@ -301,14 +301,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
                                                                                              
-                                                                                             
-/////////////////////////////////////////////                                                                                             
-mySetClassiferModelWeights  = async function(){
-                                                                                             
-                                                                                             
-}                                                                                              
-  
-                                                                                             
+                                                                                          
                                                                                              
                                                                                              
                                                                                              
@@ -327,11 +320,23 @@ myClassifierSave  = async function(){
  
                                                                                              
                                                                                              
+/////////////////////////////////////////////                                                                                             
+mySetClassiferModelWeights  = async function(){
+                                                                                             
+                                                                                             
+}                                                                                              
+  
+                                                                                                
                                                                                              
 //////////////////////////////////////////////////////////////////////////////
 myClassifierLoad  = async function(){
-   const myLoadedModel  = await	 tf.loadModel(document.getElementById('myInFile').value)                                                                                          
-   myLoadedModel.summary()                                                                                          
+   const myLoadedModel  = await	tf.loadModel(document.getElementById('myInFile').value)                                                                                          
+   myLoadedModel.summary()   
+   console.log()
+   console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+   console.log()
+   console.log('myLoadedModel.modelTopology.layers.length')   
+   console.log(myLoadedModel.modelTopology.layers.length)                                                                                         
 }                                                                                             
                                                                                              
                                                                                              
