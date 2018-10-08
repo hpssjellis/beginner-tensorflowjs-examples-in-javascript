@@ -90,12 +90,13 @@ live "Train" objects from the model and get results at the same time! <br>
  
  Train a few items with a group number and a text label<br><br>
 
-<input type=number value=0 size="6" id="myClassNumber" onchange = "{
+<input type=number value=0 style="width:20" id="myClassNumber" onchange = "{
    myTextChange()                                                       
 }">
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe Smith"><br><br>
 <input type=button value="Train Classifier" onclick="{myNewTrain()}"> 
 <input type=button value="Save Classifier" onclick="{myClassifierSave()}"> <br>
+ 
 <inut type=text id="myInFile" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/myClassifierModel01.json"> <br>
 <input type=button value="Load Classifier" onclick="{myClassifierLoad()}"> 
 <div id="myDivLoss">...</div><br>
