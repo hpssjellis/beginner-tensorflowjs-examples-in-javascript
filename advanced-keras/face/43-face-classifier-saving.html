@@ -139,7 +139,7 @@ Analyse every <input type=number id="myInterval"  value="3000" size=5> milliseco
                                                                                             
 
 let myGroups = []
-                                                                                          
+let myIncomingClassifier = []                                                                                          
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -330,13 +330,17 @@ mySetClassiferModelWeights  = async function(){
                                                                                              
 //////////////////////////////////////////////////////////////////////////////
 myClassifierLoad  = async function(){
+   // note global varaible called        myIncomingClassifier        
+                                                                                             
    const myLoadedModel  = await	tf.loadModel(document.getElementById('myInFile').value)                                                                                          
-   myLoadedModel.summary()   
-   console.log()
-   console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-   console.log()
    console.log('myLoadedModel.layers.length')   
-   console.log(myLoadedModel.layers.length)                                                                                         
+   console.log(myLoadedModel.layers.length) 
+                                                                                    
+   console.log('myLoadedModel.layers[0]')   
+   console.log(myLoadedModel.layers[0])   
+   for (let myWeightLoop = 0; myWeightLoop < myLoadedModel.layers.length; myWeightLoop++ ){      // need number of classifiers                                        
+       console.log(myWeightLoop)                                                                                    
+   }
 }                                                                                             
                                                                                              
                                                                                              
