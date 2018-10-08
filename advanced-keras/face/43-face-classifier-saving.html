@@ -287,9 +287,10 @@ myPredict = async function(){
    const myClassifierModel = tf.model({inputs: myLayerList[1], outputs: myConcatenate1Dense4});    // This would be a global model. With list of inputs as an array                                                                                                                                                                                         
    myClassifierModel.summary()
    console.log('myClassifierModel.layers[myMaxClasses]')     
-   console.log(myClassifierModel.layers[myMaxClasses])                                                                                        
+   console.log(myClassifierModel.layers[myMaxClasses])
+   myPassedClassifier[0].print(true)
    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){   // since the first layers are inputs must add maxClasses                                                                                          
-     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights(myPassedClassifier[myClassifierLoop])    //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
+    // myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights(myPassedClassifier[myClassifierLoop])    //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
    }                                                                                           
    
    console.log(myClassifierModel.layers[myMaxClasses])                                                                                              
