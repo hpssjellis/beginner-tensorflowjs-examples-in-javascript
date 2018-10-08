@@ -335,16 +335,16 @@ myClassifierLoad  = async function(){
    const myLoadedModel  = await	tf.loadModel(document.getElementById('myInFile').value)                                                                                          
    console.log('myLoadedModel.layers.length')   
    console.log(myLoadedModel.layers.length) 
-                                                                                    
-   console.log('myLoadedModel.layers[0]')   
-   console.log(myLoadedModel.layers[0])  
+                                           
                                            
    console.log('myLoadedModel.layers[0].batchInputShape[1]')   
    console.log(myLoadedModel.layers[0].batchInputShape[1] )                                                                                            
                                                                                              
                                                                                             
    for (let myWeightLoop = 0; myWeightLoop < myLoadedModel.layers.length; myWeightLoop++ ){      // need number of classifiers                                        
-       console.log(myWeightLoop)                                                                                    
+                                              
+   console.log('myLoadedModel.layers['+myWeightLoop+']')   
+   console.log(myLoadedModel.layers[myWeightLoop])                                                                                  
    }
 }                                                                                             
                                                                                              
