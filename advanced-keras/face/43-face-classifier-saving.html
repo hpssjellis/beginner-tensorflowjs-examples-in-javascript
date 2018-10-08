@@ -284,6 +284,7 @@ myPredict = async function(){
    console.log('Define Model')                                                                                                                                                                                       
    myClassifierModel = tf.model({inputs: myLayerList[1], outputs: myConcatenate1Dense4});    // This would be a global model. With list of inputs as an array                                                                                                                                                                                         
    myClassifierModel.summary()
+   return  myClassifierModel                                                                                        
 }                                                                                             
                                                                                              
                                                                                              
@@ -316,9 +317,9 @@ mySetClassiferModelWeights  = async function(){
 ///////////////////////////////////////////////////////////////////////////////                                                                                             
 myClassifierSave  = async function(){
                                                                                                                                                                                         
-   myDefineClassifierModel(classifier)         // pass global classifier                                                                                                                                                                                                                                                                      
-   classifierModel.save('downloads://myClassifierModel01')  
-   await classifierModel.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                                                                                                                                                                                                             
+   const myClassifierModel2 = myDefineClassifierModel(classifier)         // pass global classifier                                                                                                                                                                                                                                                                      
+   myClassifierModel2.save('downloads://myClassifierModel01')  
+   await myClassifierModel2.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                                                                                                                                                                                                             
 }
                                                                                              
  
