@@ -261,7 +261,7 @@ myPredict = async function(){
                                                                                              
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])                                                                                                                                                           
       console.log('shape first layer =')                                                                                                                                                           
-      console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape.0)
+     // console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape.0)
       myLayerList[0][myClassifierLoop] = tf.input({shape: [1], name: 'myInput1'});
                                                                                              
        /*                                                                                            
