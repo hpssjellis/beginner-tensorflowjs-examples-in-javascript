@@ -246,8 +246,10 @@ myPredict = async function(){
  myDefineClassifierModel = async function(myPassedClassifier){
 
     let myLayerList = []
-     myLayerList[0] = []    // for the input layer
-     myLayerList[1] = []    // for the input layer name as a string
+     myLayerList[0] = []    // for the input layer name as a string
+     myLayerList[1] = []    // for the input layer
+     myLayerList[2] = []    // for the concatenate layer name as a string
+     myLayerList[3] = []    // for the concatenate layer
                                                                                              
                                                                                              
     let myMaxClasses =    myPassedClassifier.getNumClasses()                                                                                      
@@ -264,38 +266,28 @@ myPredict = async function(){
       console.log('shape first layer =')                                                                                                                                                           
       console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0])
                                                                                              
-      myLayerList[1][myClassifierLoop] = 'myInput'  + myClassifierLoop                  // input name as a string
-      myLayerList[0][myClassifierLoop] = tf.input({shape: [1], name: myLayerList[1][myClassifierLoop]});      // Define input layer
+      myLayerList[0][myClassifierLoop] = 'myInput'  + myClassifierLoop                  // input name as a string
+      myLayerList[1][myClassifierLoop] = tf.input({shape: myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0], name: myLayerList[1][myClassifierLoop]});      // Define input layer
+ 
+      myLayerList[2][myClassifierLoop] = 'myInput'+myClassifierLoop+'Dense1'    // concatenate as a string                                                                                  
+      myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[0][myClassifierLoop]);             //Define concatenate layer                                                                          
                                                                                              
-      //tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);                                                                                       
-                                                                                             
-       /*                                                                                            
-                                                                                             
-          // needs to be a loop based on the number of sets of training for each classifier                 
-          myArray[myClassifierLoop].inputString   =   'myInput'  + myClassifierLoop 
-          myArray[myClassifierLoop].concatenateString  =   'myInput'+myClassifierLoop+'Dense1'                                                                                
-                                                                         
-        myArray[myClassifierLoop].input = tf.input({shape: [1], name: 'myInput1'});
-        myArray[myClassifierLoop].concatenate = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
-       // myArray[myClassifierLoop].input = tf.input({shape: [1], name: 'myInput1'});
-        //myArray[myClassifierLoop].concatenate = tf.layers.dense({units: 136, name: 'myInput1Dense1'}).apply(myInput1);
-                                                                                             
-       */                                                                                      
+                                                                                  
                                                                                              
     }
                                                                                              
 
-                                                                                               
+   // what the layers used to look like                                                                                            
    //const myInput2 = tf.input({shape: [1], name: 'myInput2'});
-   const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
+   //const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
                                                                                              
     // tensor array to concatenate needs to be added here                                                                                              
-   const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense1, myInput2Dense1]);                                                                                               
+   const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply(myLayerList[3]);    // send the entire list of dense                                                                                           
    const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)                                                                                              
                                                                                                
    // tensor array of inputs needs to be added here                                                                                          
-   myClassifierModel = tf.model({inputs: [myInput1, myInput2], outputs: myConcatenate1Dense4});    // This would be a global model                                                                                                                                                                                         
-
+   myClassifierModel = tf.model({inputs: myLayerList[1], outputs: myConcatenate1Dense4});    // This would be a global model. With list of inputs as an array                                                                                                                                                                                         
+   myClassifierModel.summary()
 }                                                                                             
                                                                                              
                                                                                              
