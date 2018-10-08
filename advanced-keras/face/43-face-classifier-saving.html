@@ -315,26 +315,10 @@ mySetClassiferModelWeights  = async function(){
                                                                                              
 ///////////////////////////////////////////////////////////////////////////////                                                                                             
 myClassifierSave  = async function(){
-                                                                                             
-                                                                                             
- myDefineClassifierModel(classifier)         // pass global classifier                                                                                     
-                                                                                             
- /*                                                                                            
- for (let myClassifiers = 0; myClassifiers <= 3; myClassifiers++ ){      // need number of classifiers                                        
-    for (let myTrained = 0; myTrained <= 3; myTrained++ ){        // need number of trained classifiers 
-     myDefineClassifierInputs()                                                                                        
-    }  
- }                                                                                            
-  myDefineClassifierConcatenate()                                                                   
-  myDefineClassifierModel()  
-  for (let myLoop = 0; myLoop <= 3; myLoop++ ){        // need number of classifiers                                                                                     
-     mySetClassiferModelWeights()
-  }                                                                                           
-  classifierModel.save('downloads://myClassifierModel01')  
-                                                                                             
-                                                                                             
-   */                                                                                          
-                                                                                             
+                                                                                                                                                                                        
+   myDefineClassifierModel(classifier)         // pass global classifier                                                                                                                                                                                                                                                                      
+   classifierModel.save('downloads://myClassifierModel01')  
+   await classifierModel.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                                                                                                                                                                                                             
 }
                                                                                              
  
