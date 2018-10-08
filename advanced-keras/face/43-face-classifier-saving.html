@@ -286,15 +286,16 @@ myPredict = async function(){
    console.log('Define Model')                                                                                                                                                                                       
    const myClassifierModel = tf.model({inputs: myLayerList[1], outputs: myConcatenate1Dense4});    // This would be a global model. With list of inputs as an array                                                                                                                                                                                         
    myClassifierModel.summary()
-   console.log('myClassifierModel.layers[myMaxClasses]')     
-   console.log(myClassifierModel.layers[myMaxClasses])
-   myPassedClassifier.getClassifierDataset()[0].print(true)                                                                                            
+   //console.log('myClassifierModel.layers[myMaxClasses]')     
+   //console.log(myClassifierModel.layers[myMaxClasses])
+   //myPassedClassifier.getClassifierDataset()[0].print(true)                                                                                            
                                                                                              
    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){   // since the first layers are inputs must add maxClasses   
      const myInWeight = await myPassedClassifier.getClassifierDataset()[myClassifierLoop]                                                                                        
      myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights([myInWeight, tf.ones([136])]);       //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
    }                                                                                           
-                                                                                                
+    myClassifierModel.layers[3].getWeights()[0].print(true)     // weights layer  3                             
+    myClassifierModel.layers[3].getWeights()[1].print(true)     // bias layer  3                                                                                      
                                                                                              
    return  myClassifierModel                                                                                        
 }                                                                                             
