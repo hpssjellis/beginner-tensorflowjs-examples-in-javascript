@@ -96,7 +96,7 @@ live "Train" objects from the model and get results at the same time! <br>
 <input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe Smith"><br><br>
 <input type=button value="Train Classifier" onclick="{myNewTrain()}"> 
 <input type=button value="Save Classifier" onclick="{myClassifierSave()}"> <br>
-<inut type=text id="myInFile" value="https://"> <br>
+<inut type=text id="myInFile" value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/myClassifierModel01.json"> <br>
 <input type=button value="Load Classifier" onclick="{myClassifierLoad()}"> 
 <div id="myDivLoss">...</div><br>
  
@@ -329,8 +329,8 @@ myClassifierSave  = async function(){
                                                                                              
 //////////////////////////////////////////////////////////////////////////////
 myClassifierLoad  = async function(){
-   const myLoadedModel  =                                                                                           
-                                                                                             
+   const myLoadedModel  = await	 tf.loadModel(document.getElementById('myInFile').value)                                                                                          
+   myLoadedModel.summary()                                                                                          
 }                                                                                             
                                                                                              
                                                                                              
