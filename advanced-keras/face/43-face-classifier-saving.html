@@ -212,12 +212,13 @@ myNewTrain = async function(){
                                                                                              
                                                                                              
 myPredict = async function(){
-
-  if (classifier.getNumClasses() >= 1){
+   //just to clear the other canvas
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');                                                                                            
+   myCTX.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                          
                                                                                              
-  // let myCanvasElement = document.getElementById('myVideo');
-  // let myCTX = myCanvasElement.getContext('2d');
-  // myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+  if (classifier.getNumClasses() >= 1){
+                                                                                                                                                                                     
    const img2 = tf.fromPixels(myVideo);                                                                                            
    const wow2 = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
