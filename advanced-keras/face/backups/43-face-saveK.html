@@ -1,0 +1,592 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center> As easy as I can make Loading Tensorflowjs KNN-Classifier Demo </h2>
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+ DRAFT MODE: COOL IDEA TO SAVE THE CLASSIFIER ARRAY OF TENSORS AS A STRIANGE MULTI INPUT MODEL <br><br>
+ 
+ Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> 
+ Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository<br><br>
+ 
+KNN-Classifier takes a Deep Learning model and uses K-Nearest-Neighbor analysis to it. So you can, from a website, 
+live "Train" objects from the model and get results at the same time! <br>
+ 
+ This time we are going to use <a href="https://github.com/justadudewhohacks/face-api.js">face-api.js</a> to run a 68 point face detection
+ model then train the knn-classifier on people. Kind of fun to google celebrities for training then check out the rest of us. The KNN classifier
+ will detect the closest celebrity.<br><br>
+ I am looking into how to save the knn-classfier data with labels.
+ 
+</div><br>
+
+
+<div id="myDiv123Code"> 
+
+<!-- Load face-api from this github -->
+<script src="face-api.js"></script>
+<!-- Load KNN Classifier -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier@0.2.2"></script> 
+    
+
+
+<input type=button value="Load Face-api.js face_landmark_68_tiny_model" onclick="{
+   myRunFace() 
+}"><br><br>
+
+
+
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='user'>Front Mobile Camera
+</select>
+
+<input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> <br><br>
+ 
+ Train a few items with a group number and a text label<br><br>
+
+<input type=number value=0 style="width:100px" id="myClassNumber" onchange = "{
+   myTextChange()                                                       
+}">
+<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe_Smith" onchange="{
+  let x =  document.getElementById('myClassText').value                                                                                        
+  if ((x.indexOf('-') > -1) || (x.indexOf(' ') > -1) || (x.indexOf(':') > -1)){                         
+    alert('Bad character. Either a space, colon or dash')
+    document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(' ','_') 
+    document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(':','_') 
+    document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace('-','_')                                                                                      
+  }                                                                                                                          
+                                                                                                                             
+}"><br><br>
+<input type=button value="Train Classifier" onclick="{myNewTrain()}"> 
+<input type=button value="Save Classifier" onclick="{myClassifierSave()}"> <br><br>
+ 
+<input type=text id="myInFile" size=120 value="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/myClassifierModel01.json"> <br>
+<input type=button value="Load Classifier" onclick="{myClassifierLoad()}"> 
+<div id="myDivLoss">...</div><br>
+ 
+ 
+<video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
+<canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
+
+
+Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
+<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
+
+<div id="myDivTest">...</div><br>
+
+ 
+<input type=button value="Show data for above Group" onclick="{
+  console.log('classifier.getNumClasses()')
+  console.log(classifier.getNumClasses())
+  const myOut = classifier.getClassifierDataset()
+  console.log('myOut['+parseInt(document.getElementById('myClassNumber').value)+']') 
+  myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)      
+                                                              
+  document.getElementById('myDivSummary').innerHTML =  'See console, will print a lot of information'                                                                                                       
+  //document.getElementById('myDivSummary').innerHTML =   myOut[parseInt(document.getElementById('myClassNumber').value)].dataSync()                                             
+}"><br><br>
+ 
+ 
+<div id="myDivSummary">...</div><br><br>
+
+ 
+ 
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+
+ ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
+                                                                                            
+
+let myGroups = []
+let myIncomingClassifier = []                                                                                          
+let    classifier = knnClassifier.create();
+                                                                                             
+//////////////////////////////////////// knn classifier stuff///////////////////////////
+
+
+
+myRunFace = async function() {
+  // clearInterval(document.myTimer)                                                                                          
+
+   // mobilenetModule = await mobilenet.load();
+   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
+                                                                                             
+   console.log('knn-classigfier and face-api loaded')
+  // document.myTimer = setInterval(myPredict, 1000)                                                                                           
+}
+
+
+myTextChange = async function(){                                                                                               
+    if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
+           document.getElementById('myClassNumber').value = 0                                                                                  
+    }                         
+    if (myGroups[document.getElementById('myClassNumber').value] == undefined){
+        document.getElementById('myClassText').value    = ''   // clear the box                                                                                     
+      } else {                                                                                         
+        document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value] 
+    }
+}                                                                                             
+
+myNewTrain = async function(){   
+
+    let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
+  // const { boxes, scores } = await net.forward(img1) 
+   //console.log('boxes and scores loaded')  
+
+  const wow = await net.detectLandmarks(img1)                                                                                           
+  //console.log('wow')                                                                                                                    
+  //console.log(wow)                                                                                                                     
+  //console.log('wow._faceLandmarks')                                                                                                      
+  //console.log(wow._faceLandmarks)  
+  
+                                                                                             
+  newArray = []                                                                                           
+
+                                                                                             
+    
+  for (let j=0;  j < wow._faceLandmarks.length; j++ ){  
+     newArray[j] = []                                                                                        
+     newArray[j][0] = wow._faceLandmarks[j].x                                                                
+     newArray[j][1] = wow._faceLandmarks[j].y  
+   }                                                                                          
+    
+                                                                                                                                                                                    
+                                                                                             
+   classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
+   myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value.replace(' ','_')
+ 
+   const myAddCount = classifier.getClassExampleCount()[document.getElementById('myClassNumber').value]
+   const myGroupNumber =  document.getElementById('myClassNumber').value                                                                                         
+   document.getElementById('myDivLoss').innerHTML = myAddCount + ' times, Example Added: to group #: '+ myGroupNumber 
+                                                                                     
+                                                                                             
+                                                                                                                                                                                   
+                                                                                             
+                                                                                             
+                                                                                             
+}
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+myPredict = async function(){
+   //just to clear the other canvas
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');                                                                                            
+   myCTX.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                          
+                                                                                             
+  if (classifier.getNumClasses() >= 1){
+                                                                                                                                                                                     
+   const img2 = tf.fromPixels(myVideo);                                                                                            
+   const wow2 = await net.detectLandmarks(img2)                                                                                                                                                                                       
+   newArray2 = []                                                                                           
+
+                                                                                             
+    
+  for (let j=0;  j < wow2._faceLandmarks.length; j++ ){  
+     newArray2[j] = []                                                                                        
+     newArray2[j][0] = wow2._faceLandmarks[j].x                                                                
+     newArray2[j][1] = wow2._faceLandmarks[j].y  
+   }                                                                                          
+    
+                                                                                                                                                                                    
+
+   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
+    
+   document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
+       Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
+  } else {(console.log('Need to train groups'))}
+}
+                                                                                             
+
+/////////////////////////////////////////// NEW SAVING and LOADING functions ///////////////////////////////////////////                                                                                      
+                                                                                             
+                                                                                             
+ myDefineClassifierModel = async function(myPassedClassifier){
+
+    let myLayerList = []
+     myLayerList[0] = []    // for the input layer name as a string
+     myLayerList[1] = []    // for the input layer
+     myLayerList[2] = []    // for the concatenate layer name as a string
+     myLayerList[3] = []    // for the concatenate layer
+                                                                                                                                                                                        
+    let myMaxClasses =    myPassedClassifier.getNumClasses()                                                                                      
+    //console.log('myPassedClassifier.getNumClasses()')
+    //console.log(myMaxClasses)                                                                                      
+                                                                                             
+    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){      // need number of classifiers                                        
+                                                                                         
+      //console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop])                                                                                                                                                           
+      //console.log('shape first layer =')                                                                                                                                                           
+      //console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0])
+                                                                                             
+      myLayerList[0][myClassifierLoop] = 'myInput'  + myClassifierLoop                  // input name as a string
+      console.log('define input for'+myClassifierLoop)                                                                                       
+      myLayerList[1][myClassifierLoop] = tf.input({shape: myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0], name: myLayerList[1][myClassifierLoop]});      // Define input layer
+      console.log('define dense for: '+myClassifierLoop)
+      myLayerList[2][myClassifierLoop] = 'myInput'+myClassifierLoop+'Dense1'    // concatenate as a string                                                                                  
+      myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myGroups[myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
+                                                                                           
+    }
+                                                                                             
+
+   // what the layers used to look like before the loop                                                                                            
+   //const myInput2 = tf.input({shape: [1], name: 'myInput2'});
+   //const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
+
+                                                                                             
+   console.log('Concatenate Paths')                                                                                                                                                                                          
+   const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply(myLayerList[3]);    // send the entire list of dense                                                                                           
+   const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)                                                                                              
+ 
+   console.log('Define Model')                                                                                                                                                                                       
+   const myClassifierModel = tf.model({inputs: myLayerList[1], outputs: myConcatenate1Dense4});    // This would be a global model. With list of inputs as an array                                                                                                                                                                                         
+   myClassifierModel.summary()
+   console.log('myClassifierModel.layers[myMaxClasses]')     
+   console.log(myClassifierModel.layers[myMaxClasses])
+   myPassedClassifier.getClassifierDataset()[0].print(true)                                                                                            
+                                                                                             
+   for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){   // since the first layers are inputs must add maxClasses   
+     const myInWeight = await myPassedClassifier.getClassifierDataset()[myClassifierLoop]                                                                                        
+     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights([myInWeight, tf.ones([136])]);       //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
+
+  }                                                                                           
+                                                                                             
+ return  myClassifierModel                                                                                        
+}                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                          
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+///////////////////////////////////////////////////////////////////////////////                                                                                             
+myClassifierSave  = async function(){
+                                                                                                                                                                                        
+   const myClassifierModel2 = await myDefineClassifierModel(classifier)         // pass global classifier                                                                                                                                                                                                                                                                      
+   myClassifierModel2.save('downloads://myClassifierModel01')  
+   myClassifierModel2.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});                                                                                                                                                                                                                                                                             
+}
+                                                                                             
+ 
+                                                                                             
+                                                                                             
+/////////////////////////////////////////////                                                                                             
+mySetClassiferModelWeights  = async function(){
+                                                                                             
+                                                                                             
+}                                                                                              
+  
+                                                                                                
+                                                                                             
+//////////////////////////////////////////////////////////////////////////////
+myClassifierLoad  = async function(){
+   // note global variable called        myIncomingClassifier        
+                                                                                             
+   const myLoadedModel  = await	tf.loadModel(document.getElementById('myInFile').value)                                                                                          
+   console.log('myLoadedModel.layers.length')   
+   console.log(myLoadedModel.layers.length) 
+                                           
+                                           
+  // console.log('myLoadedModel.layers[0].batchInputShape[1]')   
+  // console.log(myLoadedModel.layers[0].batchInputShape[1] )       
+                                                                                   
+  const myMaxLayers = myLoadedModel.layers.length
+  const myDenseEnd =  myMaxLayers - 2                                                                                          
+  const myDenseStart = myDenseEnd/2         // assume 0 = first layer: if 6 layers 0-1 input, 2-3 dense, 4 concatenate, 5 dense output                                                                                  
+                                                                                            
+   for (let myWeightLoop = myDenseStart; myWeightLoop < myDenseEnd; myWeightLoop++ ){      // need number of classifiers                                        
+                                              
+      // console.log('myLoadedModel.layers['+myWeightLoop+']')   
+      // console.log(myLoadedModel.layers[myWeightLoop])          
+      console.log('myLoadedModel.layers['+myWeightLoop+'].getWeights()[0].print(true)') 
+     // myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)                                                                                        
+      myIncomingClassifier[myWeightLoop - myDenseStart] =  myLoadedModel.layers[myWeightLoop].getWeights()[0] 
+      myGroups[myWeightLoop - myDenseStart] =  myLoadedModel.layers[myWeightLoop].name     // hopefully the name is the group name                                                                                     
+   }
+  console.log('Printing all the incoming classifiers')
+  for (x=0;  x < myIncomingClassifier.length ; x++){
+    myIncomingClassifier[x].print(true)                                                                                          
+  }                                                                                           
+  console.log('Activating Classifier')   
+  
+  classifier.dispose() // clear old classifier 
+  classifier.setClassifierDataset(myIncomingClassifier)  
+  console.log('Classifier loaded')                                                                                              
+                                                                                             
+}                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+            
+///////////////////////////////////// End KNN- Classifier stuff /////////////////////////////////////                                                                                                
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
+                                                                                             
+var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+var myStoredInterval = 0
+
+                                                                                             
+                                                                                             
+stopVideo = async function() {  
+  clearInterval(myStoredInterval)   // god idea to stop the auto snapshot taking                                                                                         
+  myVideoStream.srcObject.getTracks().forEach(track => track.stop())  
+}
+   
+   
+                                                                                             
+                                                                                             
+                                                                                             
+getVideo = async function() {  
+  const myCamera = await document.getElementById('myCheck').value
+                                                                                     
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+   
+                                                                                             
+                                                                                             
+
+
+                                                                                             
+takeAuto = async function(){                                                                                           
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await myPredict()                                                                                   
+   }, document.getElementById('myInterval').value);        
+}
+  
+   
+                                                                                             
+                                                                                             
+myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+  
+                                                                                             
+                                                                                             
+                                                                                             
+ ///////////////////////////////////////////// Done Webcam functions ////////////////////////////////////////                                                                                               
+                                                                                             
+ myLoadUrl = async function(){
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
+  const myFileName = document.getElementById('myInFile').value
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);     // should make the model a global variable
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+   // await myPredict()
+  }                                                                           
+}                                                                                             
+                                                                                             
+
+                                                                                             
+                                                                                  
+                                                                                             
+                                                                                             
+/////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+//////////////////////////////////   WEIRD STYLE TAG THAT IS ACTUALLY A DYNAMIC SCRIPT TAG ///////////////////                                                                                          
+                                                                                             
+                                                                                             
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</div>
+<div id='myDiv123'>...</div><br>
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea123"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce123 = true    // so textareas are only clicked once
+
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
