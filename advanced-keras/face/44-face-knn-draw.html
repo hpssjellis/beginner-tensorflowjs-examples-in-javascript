@@ -236,14 +236,14 @@ myPredict = async function(){
    }                                                                                          
    
    
-  const myLandmarksForSize = myLandmarks.forSize(img2.width, img2.height)                                                                                           
+ // const myLandmarksForSize = myLandmarks.forSize(img2.width, img2.height)                                                                                           
 
                                                                                              
   let myCanvasElement = document.getElementById('my32x32CanvasA');
   let myCTX = myCanvasElement.getContext('2d');                                                                                           
   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
-  faceapi.drawLandmarks(myCanvasElement, myLandmarksForSize, { lineWidth: 4, color: 'red' })    // works but is weird                                                                   
-  //faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
+ // faceapi.drawLandmarks(myCanvasElement, myLandmarksForSize, { lineWidth: 4, color: 'red' })    // works but is weird                                                                   
+  faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
  
                                                                                              
                                                                                              
