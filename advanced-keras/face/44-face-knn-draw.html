@@ -241,8 +241,10 @@ myPredict = async function(){
     //const canvas = faceapi.createCanvasFromMedia(myVideo)
     //  $('#faceContainer').empty()
      // $('#faceContainer').append(canvas) 
+  
                                                                                              
-   const myDrawCanvas = faceapi.createCanvasFromMedia(my32x32CanvasA)                                                                                          
+   currentImg = await faceapi.bufferToImage(my32x32CanvasA)                                                                                           
+   const myDrawCanvas = faceapi.createCanvasFromMedia(currentImg)                                                                                          
    faceapi.drawLandmarks(myDrawCanvas, myLandmarks, { lineWidth: 4, color: 'red' })     
                                                                                                                                                         
   // faceapi.drawLandmarks(myCTX, myLandmarks, { lineWidth: 4, color: 'red' })                                                                                                                                                                                 
