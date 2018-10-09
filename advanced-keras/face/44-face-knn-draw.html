@@ -141,14 +141,16 @@ let myGroups = []
 
 myRunFace = async function() {
                                                                                        
-   classifier = knnClassifier.create();
-   // mobilenetModule = await mobilenet.load();
+   classifier = knnClassifier.create();                                                                                                                               
+   console.log('knn-classigfier loaded')
+                                                                                             
    net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
-   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
+   console.log(' face-api loaded')
                                                                                              
-   console.log('knn-classigfier and face-api loaded')
-                                                                                             
-                                                                                             
+   netYolo = new faceapi.TinyYolov2()       // made it global                                                                                      
+   await netYolo.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/tiny_yolov2_separable_conv_model-weights_manifest.json')                                                                                                                                                                                                                                              
+   console.log('Yolo V2 Loaded')                                                                                           
                                                                                              
                                                                                         
 }
