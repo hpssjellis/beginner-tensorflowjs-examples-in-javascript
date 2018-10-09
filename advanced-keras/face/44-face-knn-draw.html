@@ -230,8 +230,13 @@ myPredict = async function(){
      newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
      newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
    }                                                                                          
-    
-   //faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: drawLines ? 2 : 4, true })                                                                                                                                                                                 
+   
+                                                                                             
+    //const canvas = faceapi.createCanvasFromMedia(myVideo)
+    //  $('#faceContainer').empty()
+     // $('#faceContainer').append(canvas)                                                                                          
+                                                                                             
+   faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: drawLines ? 2 : 4, true })                                                                                                                                                                                 
 
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
     
