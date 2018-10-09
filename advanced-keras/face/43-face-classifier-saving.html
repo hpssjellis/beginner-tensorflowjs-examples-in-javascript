@@ -363,7 +363,9 @@ myClassifierLoad  = async function(){
    for (let myWeightLoop = 0; myWeightLoop < myLoadedModel.layers.length; myWeightLoop++ ){      // need number of classifiers                                        
                                               
    console.log('myLoadedModel.layers['+myWeightLoop+']')   
-   console.log(myLoadedModel.layers[myWeightLoop])                                                                                  
+   console.log(myLoadedModel.layers[myWeightLoop])          
+   console.log('myLoadedModel.layers['+myWeightLoop+'].getWeights()[0]')   
+   console.log(myLoadedModel.layers[myWeightLoop].getWeights()[0])                                                                                  
    }
 }                                                                                             
                                                                                              
