@@ -93,7 +93,16 @@ live "Train" objects from the model and get results at the same time! <br>
 <input type=number value=0 style="width:100px" id="myClassNumber" onchange = "{
    myTextChange()                                                       
 }">
-<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe_Smith"><br><br>
+<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe_Smith" onchange="{
+  let x =  document.getElementById('myClassText').value                                                                                        
+  if ((x.indexOf('-') > -1) || (x.indexOf(' ') > -1) || (x.indexOf(':') > -1)){                         
+    alert('Bad character. Either a space, colon or dash')
+    document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(' ','_') 
+    document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(':','_') 
+    document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace('-','_')                                                                                      
+  }                                                                                                                          
+                                                                                                                             
+}"><br><br>
 <input type=button value="Train Classifier" onclick="{myNewTrain()}"> 
 <input type=button value="Save Classifier" onclick="{myClassifierSave()}"> <br>
  
@@ -157,15 +166,7 @@ myRunFace = async function() {
 }
 
 
-myTextChange = async function(){  
-    let x =  document.getElementById('myClassText').value                                                                                        
-    if ((x.indexOf('-') > -1) || (x.indexOf(' ') > -1) || (x.indexOf(':') > -1)){                         
-       alert('Bad character. Either a space, colon or dash')
-       document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(' ','_') 
-       document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(':','_') 
-       document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace('-','_')                                                                                      
-    }
-                                                                                             
+myTextChange = async function(){                                                                                               
     if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
            document.getElementById('myClassNumber').value = 0                                                                                  
     }                         
