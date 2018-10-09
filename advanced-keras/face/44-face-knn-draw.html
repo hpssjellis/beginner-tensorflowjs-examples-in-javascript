@@ -148,9 +148,9 @@ myRunFace = async function() {
    await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
    console.log('face-api loaded')
                                                                                              
-   netYolo = new faceapi.TinyYolov2()       // made it global                                                                                      
-   await netYolo.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/tiny_yolov2_separable_conv_model-weights_manifest.json')                                                                                                                                                                                                                                              
-   console.log('Yolo V2 Loaded')                                                                                           
+   TinyYolov2 = new faceapi.TinyYolov2()       // made it global                                                                                      
+   await TinyYolov2.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/tiny_yolov2_separable_conv_model-weights_manifest.json')                                                                                                                                                                                                                                              
+   console.log('Yolo V2 Loaded as TinyYolov2')                                                                                           
                                                                                              
                                                                                         
 }
@@ -246,15 +246,23 @@ myPredict = async function(){
   faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
  
                                                                                              
-                                                                                             
+/*                                                                                             
 const fullFaceDescriptions = await faceapi.allFacesTinyYolov2(myCanvasElement, { inputSize: 'md' })
 const fullFaceDescription0 = fullFaceDescriptions[0]
 console.log(fullFaceDescription0.detection) // bounding box & score
 console.log(fullFaceDescription0.landmarks) // face landmarks
 console.log(fullFaceDescription0.descriptor) // face descriptor                                                                                           
+*/                                                                                             
                                                                                              
-                                                                                             
-                                                                                             
+// defaults parameters shown:
+const forwardParams = {
+  scoreThreshold: 0.5,
+  // any number or one of the predefined sizes:
+  // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)
+  inputSize: 'md'
+}
+
+const detections = await faceapi.tinyYolov2(img2, forwardParams)                                                                                             
                                                                                              
                                                                                              
   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
