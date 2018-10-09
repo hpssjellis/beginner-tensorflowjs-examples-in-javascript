@@ -49,8 +49,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
- DRAFT MODE: COOL IDEA TO SAVE THE CLASSIFIER ARRAY OF TENSORS AS A STRANGE MULTI INPUT MODEL. Then use TFJS
- model save feacture to save all the classifier information<br><br>
+ DRAFT MODE: COOL IDEA TO SAVE THE CLASSIFIER ARRAY OF TENSORS AS A STRIANGE MULTI INPUT MODEL <br><br>
  
  Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> 
  Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository<br><br>
@@ -266,15 +265,12 @@ myPredict = async function(){
       //console.log(myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0])
                                                                                              
       myLayerList[0][myClassifierLoop] = 'myInput'  + myClassifierLoop                  // input name as a string
-     // console.log('define input for'+myClassifierLoop)                                                                                       
+      console.log('define input for'+myClassifierLoop)                                                                                       
       myLayerList[1][myClassifierLoop] = tf.input({shape: myPassedClassifier.getClassifierDataset()[myClassifierLoop].shape[0], name: myLayerList[1][myClassifierLoop]});      // Define input layer
-      //console.log('define dense for: '+myClassifierLoop)
+      console.log('define dense for: '+myClassifierLoop)
       myLayerList[2][myClassifierLoop] = 'myInput'+myClassifierLoop+'Dense1'    // concatenate as a string                                                                                  
-     // myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
- 
-     .// try to insert group label as a fake name for this layer                                                                                        
-     myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myGroup[myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
-                                                                                             
+      myLayerList[3][myClassifierLoop] = tf.layers.dense({units: 136, name: myLayerList[2][myClassifierLoop]}).apply(myLayerList[1][myClassifierLoop]);             //Define concatenate layer                                                                          
+                                                                                           
     }
                                                                                              
 
@@ -283,20 +279,20 @@ myPredict = async function(){
    //const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);
 
                                                                                              
-   //console.log('Concatenate Paths')                                                                                                                                                                                          
+   console.log('Concatenate Paths')                                                                                                                                                                                          
    const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply(myLayerList[3]);    // send the entire list of dense                                                                                           
    const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)                                                                                              
  
-   //console.log('Define Model')                                                                                                                                                                                       
+   console.log('Define Model')                                                                                                                                                                                       
    const myClassifierModel = tf.model({inputs: myLayerList[1], outputs: myConcatenate1Dense4});    // This would be a global model. With list of inputs as an array                                                                                                                                                                                         
    myClassifierModel.summary()
-   //console.log('myClassifierModel.layers[myMaxClasses]')     
-  // console.log(myClassifierModel.layers[myMaxClasses])
-  // myPassedClassifier.getClassifierDataset()[0].print(true)                                                                                            
+   console.log('myClassifierModel.layers[myMaxClasses]')     
+   console.log(myClassifierModel.layers[myMaxClasses])
+   myPassedClassifier.getClassifierDataset()[0].print(true)                                                                                            
                                                                                              
    for (let myClassifierLoop = 0; myClassifierLoop < myMaxClasses; myClassifierLoop++ ){   // since the first layers are inputs must add maxClasses   
      const myInWeight = await myPassedClassifier.getClassifierDataset()[myClassifierLoop]                                                                                        
-     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights([myInWeight, tf.zeros([136])]);       //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
+     myClassifierModel.layers[myClassifierLoop + myMaxClasses].setWeights([myInWeight, tf.ones([136])]);       //model.layers[0].setWeights([tf.ones([10, 2]), tf.ones([2])]);                                                                                        
    }                                                                                           
                                                                                                 
                                                                                              
