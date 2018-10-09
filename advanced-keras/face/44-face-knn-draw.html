@@ -140,14 +140,17 @@ let myGroups = []
 
 
 myRunFace = async function() {
-  // clearInterval(document.myTimer)                                                                                          
+                                                                                       
    classifier = knnClassifier.create();
    // mobilenetModule = await mobilenet.load();
    net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
    await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
                                                                                              
    console.log('knn-classigfier and face-api loaded')
-  // document.myTimer = setInterval(myPredict, 1000)                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                        
 }
 
 
@@ -238,8 +241,8 @@ myPredict = async function(){
   let myCTX = myCanvasElement.getContext('2d');                                                                                           
   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
                                                                                              
-   const faces = await faceapi.extractFaces(myCanvasElement, 0.7)  
-   console.log(faces)                                                                                          
+  // const faces = await faceapi.extractFaces(myCanvasElement, 0.7)  
+  // console.log(faces)                                                                                          
    faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
                                                                                              
                                                                                              
