@@ -144,11 +144,11 @@ myRunFace = async function() {
    classifier = knnClassifier.create();                                                                                                                               
    console.log('knn-classigfier loaded')
                                                                                              
-  // net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
- //  await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
+   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
 
                                                                                              
-  await faceapi.loadFaceLandmarkTinyModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                           
+ // await faceapi.loadFaceLandmarkTinyModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                           
   console.log('face-api loaded')                                                                                           
                                                                                              
                                                                                              
