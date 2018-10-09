@@ -349,7 +349,7 @@ mySetClassiferModelWeights  = async function(){
                                                                                              
 //////////////////////////////////////////////////////////////////////////////
 myClassifierLoad  = async function(){
-   // note global varaible called        myIncomingClassifier        
+   // note global variable called        myIncomingClassifier        
                                                                                              
    const myLoadedModel  = await	tf.loadModel(document.getElementById('myInFile').value)                                                                                          
    console.log('myLoadedModel.layers.length')   
@@ -367,10 +367,16 @@ myClassifierLoad  = async function(){
                                               
       // console.log('myLoadedModel.layers['+myWeightLoop+']')   
       // console.log(myLoadedModel.layers[myWeightLoop])          
-      console.log('myLoadedModel.layers['+myWeightLoop+'].getWeights()[0]')   
-      myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)  
+      console.log('myLoadedModel.layers['+myWeightLoop+'].getWeights()[0].print(true)') 
+      myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)                                                                                        
+      myIncomingClassifier[myWeightLoop - myDenseStart] =  myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)  
                                                                                              
    }
+  
+  for (x=0;  x < myIncomingClassifier.length ; x++){
+    myIncomingClassifier[x].print(true)                                                                                          
+  }                                                                                           
+                                                                                             
 }                                                                                             
                                                                                              
                                                                                              
