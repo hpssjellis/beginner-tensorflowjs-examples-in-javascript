@@ -216,9 +216,8 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
-   let myCanvasElement = document.getElementById('myVideo');
-  // let myCTX = myCanvasElement.getContext('2d');
-  // myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+
+                                                                                             
    const img2 = tf.fromPixels(myVideo);                                                                                            
    const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
@@ -231,12 +230,22 @@ myPredict = async function(){
      newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
    }                                                                                          
    
+   
+                                                                                             
+                                                                                             
+       let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                             
+                                                                                             
                                                                                              
     //const canvas = faceapi.createCanvasFromMedia(myVideo)
     //  $('#faceContainer').empty()
-     // $('#faceContainer').append(canvas)                                                                                          
-   const myDrawCanvas = faceapi.createCanvasFromMedia(myVideo)                                                                                          
-   faceapi.drawLandmarks(myDrawCanvas, myLandmarks, { lineWidth: 4, color: 'red' })                                                                                                                                                                                 
+     // $('#faceContainer').append(canvas) 
+                                                                                             
+   //const myDrawCanvas = faceapi.createCanvasFromMedia(myVideo)                                                                                          
+   //faceapi.drawLandmarks(myDrawCanvas, myLandmarks, { lineWidth: 4, color: 'red' })     
+                                                                                                                                                        
+   faceapi.drawLandmarks(myCTX, myLandmarks, { lineWidth: 4, color: 'red' })                                                                                                                                                                                 
 
                                                                                              
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
