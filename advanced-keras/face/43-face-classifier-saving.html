@@ -149,14 +149,15 @@ Analyse every <input type=number id="myInterval"  value="500" size=5> millisecon
 
 let myGroups = []
 let myIncomingClassifier = []                                                                                          
-
+let    classifier = knnClassifier.create();
+                                                                                             
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
 
 
 myRunFace = async function() {
   // clearInterval(document.myTimer)                                                                                          
-   classifier = knnClassifier.create();
+
    // mobilenetModule = await mobilenet.load();
    net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
    await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
@@ -378,7 +379,7 @@ myClassifierLoad  = async function(){
   }                                                                                           
   console.log('Activating Classifier')   
   
-  //classifier.dispose() // clear old classifier 
+  classifier.dispose() // clear old classifier 
   classifier.setClassifierDataset(myIncomingClassifier)  
   console.log('Classifier loaded')                                                                                              
                                                                                              
