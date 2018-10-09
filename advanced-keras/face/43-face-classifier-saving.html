@@ -368,7 +368,7 @@ myClassifierLoad  = async function(){
       // console.log('myLoadedModel.layers['+myWeightLoop+']')   
       // console.log(myLoadedModel.layers[myWeightLoop])          
       console.log('myLoadedModel.layers['+myWeightLoop+'].getWeights()[0].print(true)') 
-      myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)                                                                                        
+     // myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)                                                                                        
       myIncomingClassifier[myWeightLoop - myDenseStart] =  myLoadedModel.layers[myWeightLoop].getWeights()[0] 
                                                                                              
    }
@@ -376,7 +376,7 @@ myClassifierLoad  = async function(){
   for (x=0;  x < myIncomingClassifier.length ; x++){
     myIncomingClassifier[x].print(true)                                                                                          
   }                                                                                           
-  Console.log('Print done')                                                                                           
+  console.log('Print done')                                                                                           
 }                                                                                             
                                                                                              
                                                                                              
