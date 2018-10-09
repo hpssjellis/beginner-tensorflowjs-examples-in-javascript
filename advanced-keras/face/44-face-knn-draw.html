@@ -171,21 +171,21 @@ myNewTrain = async function(){
   // const { boxes, scores } = await net.forward(img1) 
    //console.log('boxes and scores loaded')  
 
-  const wow = await net.detectLandmarks(img1)                                                                                           
-  //console.log('wow')                                                                                                                    
-  //console.log(wow)                                                                                                                     
-  //console.log('wow._faceLandmarks')                                                                                                      
-  //console.log(wow._faceLandmarks)  
+  const myDetectMarks = await net.detectLandmarks(img1)                                                                                           
+  //console.log('myDetectMarks')                                                                                                                    
+  //console.log(myDetectMarks)                                                                                                                     
+  //console.log('myDetectMarks._faceLandmarks')                                                                                                      
+  //console.log(myDetectMarks._faceLandmarks)  
   
                                                                                              
   newArray = []                                                                                           
 
                                                                                              
     
-  for (let j=0;  j < wow._faceLandmarks.length; j++ ){  
+  for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
      newArray[j] = []                                                                                        
-     newArray[j][0] = wow._faceLandmarks[j].x                                                                
-     newArray[j][1] = wow._faceLandmarks[j].y  
+     newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
+     newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
    }                                                                                          
     
                                                                                                                                                                                     
