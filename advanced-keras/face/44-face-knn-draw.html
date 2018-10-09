@@ -235,15 +235,20 @@ myPredict = async function(){
      newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
    }                                                                                          
    
-   
- // const myLandmarksForSize = myLandmarks.forSize(img2.width, img2.height)                                                                                           
-
-                                                                                             
+   /*                                                                                           
   let myCanvasElement = document.getElementById('my32x32CanvasA');
   let myCTX = myCanvasElement.getContext('2d');                                                                                           
   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
- // faceapi.drawLandmarks(myCanvasElement, myLandmarksForSize, { lineWidth: 4, color: 'red' })    // works but is weird                                                                   
+                                                               
   faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
+ */
+   
+                                                                                             
+  let myCanvasElement = document.getElementById('myVideo');
+  let myCTX = myCanvasElement.getContext('2d');                                                                                           
+  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
+                                                               
+  faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })      
  
                                                                                              
 /*                                                                                             
