@@ -376,7 +376,12 @@ myClassifierLoad  = async function(){
   for (x=0;  x < myIncomingClassifier.length ; x++){
     myIncomingClassifier[x].print(true)                                                                                          
   }                                                                                           
-  console.log('Print done')                                                                                           
+  console.log('Activating Classifier')   
+  
+  classifier.dispose() // clear old classifier 
+  classifier.setClassifierDataset(myIncomingClassifier)  
+    console.log('Classifier loaded')                                                                                              
+                                                                                             
 }                                                                                             
                                                                                              
                                                                                              
