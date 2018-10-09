@@ -180,7 +180,7 @@ myNewTrain = async function(){
   // const { boxes, scores } = await net.forward(img1) 
    //console.log('boxes and scores loaded')  
 
-  const myDetectMarks = await faceapi.detectLandmarks(img1)                                                                                           
+  const myDetectMarks = await net.detectLandmarks(img1)                                                                                           
   //console.log('myDetectMarks')                                                                                                                    
   //console.log(myDetectMarks)                                                                                                                     
   //console.log('myDetectMarks._faceLandmarks')                                                                                                      
@@ -228,7 +228,7 @@ myPredict = async function(){
 
                                                                                              
    const img2 = tf.fromPixels(myVideo);                                                                                            
-   const myLandmarks = await faceapi.detectLandmarks(img2)                                                                                                                                                                                       
+   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
                                                                                              
@@ -244,7 +244,7 @@ myPredict = async function(){
   let myCTX = myCanvasElement.getContext('2d');                                                                                           
   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
                                                                
-  faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
+  net.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
 
                                                                                              
                                                                                              
