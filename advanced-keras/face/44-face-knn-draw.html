@@ -247,7 +247,11 @@ myPredict = async function(){
  
                                                                                              
                                                                                              
-                                                                                             
+const fullFaceDescriptions = await faceapi.allFacesTinyYolov2(myCanvasElement, { inputSize: 'md' })
+const fullFaceDescription0 = fullFaceDescriptions[0]
+console.log(fullFaceDescription0.detection) // bounding box & score
+console.log(fullFaceDescription0.landmarks) // face landmarks
+console.log(fullFaceDescription0.descriptor) // face descriptor                                                                                           
                                                                                              
                                                                                              
                                                                                              
