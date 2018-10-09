@@ -159,12 +159,13 @@ myRunFace = async function() {
 
 myTextChange = async function(){  
     let x =  document.getElementById('myClassText').value                                                                                        
-    if ((x.indexOf('-' > -1) || (x.indexOf(' ' > -1) || (x.indexOf(':' > -1)){                         
+    if ((x.indexOf('-') > -1) || (x.indexOf(' ') > -1) || (x.indexOf(':') > -1)){                         
        alert('Bad character. Either a space, colon or dash')
        document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(' ','_') 
        document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace(':','_') 
        document.getElementById('myClassText').value = document.getElementById('myClassText').value.replace('-','_')                                                                                      
-    }                                                                                         
+    }
+                                                                                             
     if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
            document.getElementById('myClassNumber').value = 0                                                                                  
     }                         
