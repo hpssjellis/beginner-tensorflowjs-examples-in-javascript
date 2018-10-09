@@ -246,7 +246,7 @@ myPredict = async function(){
                                                                                              
   let myCanvasElement = document.getElementById('myVideo');
   let myCTX = myCanvasElement.getContext('2d');                                                                                           
-  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
+  //myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
                                                                
   faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })      
  
