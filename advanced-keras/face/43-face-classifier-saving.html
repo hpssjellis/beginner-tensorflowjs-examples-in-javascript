@@ -371,7 +371,7 @@ myClassifierLoad  = async function(){
       console.log('myLoadedModel.layers['+myWeightLoop+'].getWeights()[0].print(true)') 
      // myLoadedModel.layers[myWeightLoop].getWeights()[0].print(true)                                                                                        
       myIncomingClassifier[myWeightLoop - myDenseStart] =  myLoadedModel.layers[myWeightLoop].getWeights()[0] 
-      myGroups[myWeightLoop - myDenseStart] =  'wow '+ myWeightLoop                                                                                      
+      myGroups[myWeightLoop - myDenseStart] =  myLoadedModel.layers[myWeightLoop].name     // hopefully the name is the group name                                                                                     
    }
   console.log('Printing all the incoming classifiers')
   for (x=0;  x < myIncomingClassifier.length ; x++){
