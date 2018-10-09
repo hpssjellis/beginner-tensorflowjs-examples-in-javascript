@@ -205,6 +205,11 @@ myNewTrain = async function(){
 }
                                                                                              
                                                                                              
+ 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
                                                                                              
                                                                                              
 myPredict = async function(){
@@ -215,15 +220,15 @@ myPredict = async function(){
   // let myCTX = myCanvasElement.getContext('2d');
   // myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img2 = tf.fromPixels(myVideo);                                                                                            
-   const wow2 = await net.detectLandmarks(img2)                                                                                                                                                                                       
+   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
                                                                                              
     
-  for (let j=0;  j < wow2._faceLandmarks.length; j++ ){  
+  for (let j=0;  j < myLandmarks._faceLandmarks.length; j++ ){  
      newArray2[j] = []                                                                                        
-     newArray2[j][0] = wow2._faceLandmarks[j].x                                                                
-     newArray2[j][1] = wow2._faceLandmarks[j].y  
+     newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
+     newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
    }                                                                                          
     
                                                                                                                                                                                     
