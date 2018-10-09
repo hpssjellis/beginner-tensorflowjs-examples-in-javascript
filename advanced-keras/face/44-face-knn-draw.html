@@ -236,11 +236,15 @@ myPredict = async function(){
                                                                                              
   let myCanvasElement = document.getElementById('my32x32CanvasA');
   let myCTX = myCanvasElement.getContext('2d');                                                                                           
-  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                             
-                                                                                                                                                        
-  // faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird                                                                                                                                                                             
-   const faces = await faceapi.extractFaces(myCanvasElement, myLandmarks)
-   let landmarksByFace = await Promise.all(faces.map(face => faceapi.detectLandmarks(face)))
+  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
+                                                                                             
+   const faces = await faceapi.extractFaces(myCanvasElement, 0.7)  
+   console.log(faces)                                                                                          
+   faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
+                                                                                             
+                                                                                             
+  // const faces = await faceapi.extractFaces(myCanvasElement, myLandmarks)
+ //  let landmarksByFace = await Promise.all(faces.map(face => faceapi.detectLandmarks(face)))
                                                                                              
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
     
