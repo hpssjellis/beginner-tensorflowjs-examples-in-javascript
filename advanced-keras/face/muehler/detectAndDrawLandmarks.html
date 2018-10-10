@@ -103,8 +103,8 @@
     }
 
     async function run() {
-      await faceapi.loadFaceDetectionModel('/')
-      await faceapi.loadFaceLandmarkModel('/')
+      await faceapi.loadFaceDetectionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
+      await faceapi.loadFaceLandmarkModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
       $('#loader').hide()
       onSelectionChanged($('#selectList select').val())
     }
