@@ -144,9 +144,11 @@ myRunFace = async function() {
    classifier = knnClassifier.create();                                                                                                                               
    console.log('knn-classigfier loaded')
                                                                                              
-   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
-   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
+  // net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+ //  await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
 
+   await faceapi.loadFaceDetectionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                          
+   console.log('loadFaceDetectionModel  SSD mobinet loaded')      
                                                                                              
  // await faceapi.loadFaceLandmark68TinyModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                           
   console.log('face-api loaded')                                                                                           
@@ -177,10 +179,10 @@ myNewTrain = async function(){
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
-  // const { boxes, scores } = await net.forward(img1) 
+  // const { boxes, scores } = await faceapi.forward(img1) 
    //console.log('boxes and scores loaded')  
 
-  const myDetectMarks = await net.detectLandmarks(img1)                                                                                           
+  const myDetectMarks = await faceapi.detectLandmarks(img1)                                                                                           
   //console.log('myDetectMarks')                                                                                                                    
   //console.log(myDetectMarks)                                                                                                                     
   //console.log('myDetectMarks._faceLandmarks')                                                                                                      
@@ -229,8 +231,7 @@ myPredict = async function(){
    const img2 = tf.fromPixels(myVideo);   
  ////////////////////////////////////////     
                                                                                              
-   await faceapi.loadFaceDetectionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                          
-      console.log('loadFaceDetectionModel')                                                                                          
+                                                                                    
                                                                                              
    result = await faceapi.locateFaces(img2, 0.7)                                                                                           
    console.log(result)  
@@ -240,7 +241,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
   ///////////////////////////////////////////////////                                                                                                                                 
-   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
+   const myLandmarks = await faceapi.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
                                                                                              
