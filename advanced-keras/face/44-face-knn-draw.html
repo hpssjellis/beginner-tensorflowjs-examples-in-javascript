@@ -97,6 +97,7 @@ live "Train" objects from the model and get results at the same time! <br>
  
  
 <video  id="myVideo" width="300" height="200" style="border: 1px solid #ddd;"></video>
+<canvas id="overlay" style="position:relative; left:-650px;" />
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="300" height="200" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
 
 
@@ -140,14 +141,17 @@ let myGroups = []
 
 
 myRunFace = async function() {
-  // clearInterval(document.myTimer)                                                                                          
-   classifier = knnClassifier.create();
-   // mobilenetModule = await mobilenet.load();
-   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
-   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
+                                                                                        
+   classifier = knnClassifier.create();                                     
+   console.log('knn-classigfier loaded')
                                                                                              
-   console.log('knn-classigfier and face-api loaded')
-  // document.myTimer = setInterval(myPredict, 1000)                                                                                           
+   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                 
+   console.log('face_landmark_68_tiny_model loaded')
+                                                                                             
+   await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
+   console.log('loadTinyYolov2Model loaded')
+                                                                                          
 }
 
 
@@ -213,12 +217,32 @@ myNewTrain = async function(){
                                                                                              
                                                                                              
 myPredict = async function(){
-
+    let scoreThreshold = 0.5   //0.5
+    let sizeType = '320'
+    let modelLoaded = false
+    let forwardTimes = []
+                                                                                             
+                                                                                             
+                                                                                             
   if (classifier.getNumClasses() >= 1){
+     
+    const img2 = tf.fromPixels(myVideo);                                                                                            
+//////////////////////////////////
                                                                                              
-
                                                                                              
-   const img2 = tf.fromPixels(myVideo);                                                                                            
+  const { width, height } = faceapi.getMediaDimensions(img2)
+      const canvas = document.getElementById('overlay')
+      canvas.width = width
+      canvas.height = height
+      const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
+   
+      result = await faceapi.tinyYolov2(videoEl, forwardParams)
+      faceapi.drawDetection('overlay', result.map(det => det.forSize(width, height)))                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+////////////////////////////////////////////                                                                                             
+                                                                                          
    const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
