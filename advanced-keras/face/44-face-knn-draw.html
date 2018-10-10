@@ -140,25 +140,14 @@ let myGroups = []
 
 
 myRunFace = async function() {
-                                                                                       
-   classifier = knnClassifier.create();                                                                                                                               
-   console.log('knn-classigfier loaded')
+  // clearInterval(document.myTimer)                                                                                          
+   classifier = knnClassifier.create();
+   // mobilenetModule = await mobilenet.load();
+   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                           
                                                                                              
-  // net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
- //  await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                                                                    
-
-   await faceapi.loadFaceDetectionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                          
-   console.log('loadFaceDetectionModel  SSD mobinet loaded')      
-                                                                                             
- // await faceapi.loadFaceLandmark68TinyModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                           
-  console.log('face-api loaded')                                                                                           
-                                                                                             
-                                                                                             
- //  TinyYolov2 = new faceapi.TinyYolov2()       // made it global                                                                                      
-  // await TinyYolov2.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/tiny_yolov2_separable_conv_model-weights_manifest.json')                                                                                                                                                                                                                                              
- //  console.log('Yolo V2 Loaded as TinyYolov2')                                                                                           
-                                                                                             
-                                                                                        
+   console.log('knn-classigfier and face-api loaded')
+  // document.myTimer = setInterval(myPredict, 1000)                                                                                           
 }
 
 
@@ -179,10 +168,10 @@ myNewTrain = async function(){
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
-  // const { boxes, scores } = await faceapi.forward(img1) 
+  // const { boxes, scores } = await net.forward(img1) 
    //console.log('boxes and scores loaded')  
 
-  const myDetectMarks = await faceapi.detectLandmarks(img1)                                                                                           
+  const myDetectMarks = await net.detectLandmarks(img1)                                                                                           
   //console.log('myDetectMarks')                                                                                                                    
   //console.log(myDetectMarks)                                                                                                                     
   //console.log('myDetectMarks._faceLandmarks')                                                                                                      
@@ -227,21 +216,10 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
-                                                   
-   const img2 = tf.fromPixels(myVideo);   
- ////////////////////////////////////////     
+
                                                                                              
-                                                                                    
-                                                                                             
-   result = await faceapi.locateFaces(img2, 0.7)                                                                                           
-   console.log(result)  
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-  ///////////////////////////////////////////////////                                                                                                                                 
-   const myLandmarks = await faceapi.detectLandmarks(img2)                                                                                                                                                                                       
+   const img2 = tf.fromPixels(myVideo);                                                                                            
+   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
                                                                                              
@@ -252,16 +230,18 @@ myPredict = async function(){
      newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
    }                                                                                          
    
-                                                                                          
-  let myCanvasElement = document.getElementById('my32x32CanvasA');
-  let myCTX = myCanvasElement.getContext('2d');                                                                                           
-  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
-                                                               
-  faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })    // works but is weird   
+   
+                                                                                             
 
                                                                                              
+  let myCanvasElement = document.getElementById('my32x32CanvasA');
+  let myCTX = myCanvasElement.getContext('2d');                                                                                           
+  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                             
+                                                                                                                                                        
+   faceapi.drawLandmarks(myCanvasElement, myLandmarks, { lineWidth: 4, color: 'red' })                                                                                                                                                                                 
+
                                                                                              
-  const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
+   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
