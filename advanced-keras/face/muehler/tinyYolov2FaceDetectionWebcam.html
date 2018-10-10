@@ -15,17 +15,13 @@
 
 
 
-    function onSizeTypeChanged(e, c) {
-      sizeType = e.target.value
-      $('#sizeType').val(sizeType)
-    }
 
     async function onPlay(videoEl) {
       if(videoEl.paused || videoEl.ended || !modelLoaded)
         return false
 
       const { width, height } = faceapi.getMediaDimensions(videoEl)
-      const canvas = $('#overlay').get(0)
+      const canvas = document.getElementById('overlay').get(0)
       canvas.width = width
       canvas.height = height
 
@@ -54,26 +50,20 @@
       await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
       modelLoaded = true
 
-      const videoEl = $('#inputVideo').get(0)
+      const videoEl = document.getElementById('inputVideo').get(0)
       navigator.getUserMedia(
         { video: {} },
         stream => videoEl.srcObject = stream,
         err => console.error(err)
       )
 
-      onPlay($('#inputVideo').get(0))
-      $('#loader').hide()
+      onPlay(document.getElementById('inputVideo').get(0))
+      document.getElementById('loader').hide()
     }
 
-    $(document).ready(function() {
-      renderNavBar('#navbar', 'tiny_yolov2_face_detection_webcam')
 
-      const sizeTypeSelect = $('#sizeType')
-      sizeTypeSelect.val(sizeType)
-      sizeTypeSelect.on('change', onSizeTypeChanged)
-      sizeTypeSelect.material_select()
       run()
-    })
+
   </script>
 </body>
 </html>
