@@ -97,7 +97,7 @@ live "Train" objects from the model and get results at the same time! <br>
  
  
 <video  id="myVideo" width="320" height="320" style="border: 1px solid #ddd;"></video>
-<canvas id="overlay" style="position:relative; left:-50px;" ></canvas>
+<canvas id="overlay" style="position:relative; left:-450px;" ></canvas>
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="320" height="320" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
 
 
@@ -236,7 +236,7 @@ myPredict = async function(){
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
-      result = await faceapi.tinyYolov2(videoEl, forwardParams)
+      result = await faceapi.tinyYolov2(img2, forwardParams)
       faceapi.drawDetection('overlay', result.map(det => det.forSize(width, height)))                                                                                           
                                                                                              
                                                                                              
