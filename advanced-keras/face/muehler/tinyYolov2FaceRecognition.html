@@ -167,9 +167,9 @@
     }
 
     async function run() {
-      await faceapi.loadTinyYolov2Model('/')
-      await faceapi.loadFaceLandmarkModel('/')
-      await faceapi.loadFaceRecognitionModel('/')
+      await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
+      await faceapi.loadFaceLandmarkModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
+      await faceapi.loadFaceRecognitionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
       trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet, 1)
       $('#loader').hide()
       onSelectionChanged($('#selectList select').val())
