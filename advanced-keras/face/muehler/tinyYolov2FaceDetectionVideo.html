@@ -112,7 +112,7 @@
       return new Float32Array(await (await fetch(uri)).arrayBuffer())
     }
     async function run() {
-      await faceapi.loadTinyYolov2Model('/')
+      await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
       modelLoaded = true
       onPlay($('#inputVideo').get(0))
       $('#loader').hide()
