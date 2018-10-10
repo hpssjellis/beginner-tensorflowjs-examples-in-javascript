@@ -230,13 +230,13 @@ myPredict = async function(){
 //////////////////////////////////
                                                                                              
                                                                                              
-  const { width, height } = faceapi.getMediaDimensions(myVideo)
+  const { width, height } = faceapi.getMediaDimensions(img2)
       const canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
-      result = await faceapi.tinyYolov2(img2, forwardParams)
+      result = await faceapi.tinyYolov2(myVideo, forwardParams)
       faceapi.drawDetection('overlay', result.map(det => det.forSize(width, height)))                                                                                           
                                                                                              
                                                                                              
