@@ -101,7 +101,7 @@
     }
 
     async function run() {
-      await faceapi.loadMtcnnModel('/')
+      await faceapi.loadMtcnnModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
       modelLoaded = true
       onPlay($('#inputVideo').get(0))
       $('#loader').hide()
