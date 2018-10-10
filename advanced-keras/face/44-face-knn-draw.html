@@ -227,11 +227,19 @@ myPredict = async function(){
                                                                                              
                                                    
    const img2 = tf.fromPixels(myVideo);   
+ ////////////////////////////////////////     
+                                                                                             
+   await faceapi.loadFaceDetectionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models')                                                                                          
+      console.log('loadFaceDetectionModel')                                                                                          
                                                                                              
    result = await faceapi.locateFaces(img2, 0.7)                                                                                           
-   console.log(result)                                                                                          
+   console.log(result)  
                                                                                              
-                                                                                                                                   
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+  ///////////////////////////////////////////////////                                                                                                                                 
    const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
