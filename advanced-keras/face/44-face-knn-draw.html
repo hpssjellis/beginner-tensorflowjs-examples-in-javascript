@@ -244,7 +244,9 @@ myPredict = async function(){
                                                                                              
 ////////////////////////////////////////////                                                                                             
                                                                                           
-   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
+   //const myLandmarks = await net.detectLandmarks(img2)  
+   const landmarks = (await net.detectLandmarks(img2)).forSize(width, height)                                                                                         
+                                                                                             
    newArray2 = []                                                                                           
 
                                                                                              
