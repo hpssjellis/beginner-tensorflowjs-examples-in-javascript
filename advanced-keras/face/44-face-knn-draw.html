@@ -225,18 +225,19 @@ myPredict = async function(){
                                                                                              
                                                                                              
   if (classifier.getNumClasses() >= 1){
-     
+    
+    const videoEl = document.getElementById('myVideo')                                                                                          
     const img2 = tf.fromPixels(myVideo);                                                                                            
 //////////////////////////////////
                                                                                              
                                                                                              
-  const { width, height } = faceapi.getMediaDimensions(img2)
+  const { width, height } = faceapi.getMediaDimensions(videoEl)
       const canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
-      result = await faceapi.tinyYolov2(myVideo, forwardParams)
+      result = await faceapi.tinyYolov2(videoEl, forwardParams)
       faceapi.drawDetection('overlay', result.map(det => det.forSize(width, height)))                                                                                           
                                                                                              
                                                                                              
