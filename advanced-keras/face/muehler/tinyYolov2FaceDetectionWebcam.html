@@ -21,7 +21,7 @@
         return false
 
       const { width, height } = faceapi.getMediaDimensions(videoEl)
-      const canvas = document.getElementById('overlay').get(0)
+      const canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
 
@@ -58,7 +58,7 @@
       )
 
       onPlay(document.getElementById('inputVideo'))
-      document.getElementById('loader').hide()
+     // document.getElementById('loader').hide()
     }
 
 
