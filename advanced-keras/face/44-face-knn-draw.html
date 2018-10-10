@@ -228,7 +228,7 @@ myPredict = async function(){
                                                    
    const img2 = tf.fromPixels(myVideo);   
                                                                                              
-   result = await net.locateFaces(img2, 0.7)                                                                                           
+   result = await faceapi.locateFaces(img2, 0.7)                                                                                           
    console.log(result)                                                                                          
                                                                                              
                                                                                                                                    
