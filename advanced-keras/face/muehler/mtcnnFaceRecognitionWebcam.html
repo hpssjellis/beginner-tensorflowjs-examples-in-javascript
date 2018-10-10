@@ -109,8 +109,8 @@
     }
 
     async function run() {
-      await faceapi.loadMtcnnModel('/')
-      await faceapi.loadFaceRecognitionModel('/')
+      await faceapi.loadMtcnnModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
+      await faceapi.loadFaceRecognitionModel('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
 
       // init reference data, e.g. compute a face descriptor for each class
       trainDescriptorsByClass = await initTrainDescriptorsByClass(faceapi.recognitionNet)
