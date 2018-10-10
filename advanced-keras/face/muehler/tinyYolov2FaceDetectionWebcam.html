@@ -50,7 +50,7 @@
       await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
       modelLoaded = true
 
-      const videoEl = document.getElementById('inputVideo').get(0)
+      const videoEl = document.getElementById('inputVideo')
       navigator.getUserMedia(
         { video: {} },
         stream => videoEl.srcObject = stream,
