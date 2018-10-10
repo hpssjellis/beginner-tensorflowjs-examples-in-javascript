@@ -113,7 +113,7 @@
     }
 
     async function run() {
-      await faceapi.loadTinyYolov2Model('/')
+      await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
 
       $('#loader').hide()
       onSelectionChanged($('#selectList select').val())
