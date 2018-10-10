@@ -127,15 +127,9 @@
       $('#loader').hide()
     }
 
-    $(document).ready(function() {
-      renderNavBar('#navbar', 'tiny_yolov2_face_detection_webcam')
 
-      const sizeTypeSelect = $('#sizeType')
-      sizeTypeSelect.val(sizeType)
-      sizeTypeSelect.on('change', onSizeTypeChanged)
-      sizeTypeSelect.material_select()
       run()
-    })
+
   </script>
 </body>
 </html>
