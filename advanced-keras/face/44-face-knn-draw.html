@@ -225,13 +225,13 @@ myPredict = async function(){
 
   if (classifier.getNumClasses() >= 1){
                                                                                              
-
+                                                   
+   const img2 = tf.fromPixels(myVideo);   
                                                                                              
    result = await net.locateFaces(img2, 0.7)                                                                                           
    console.log(result)                                                                                          
                                                                                              
-                                                                                             
-   const img2 = tf.fromPixels(myVideo);                                                                                            
+                                                                                                                                   
    const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
