@@ -241,9 +241,11 @@ myPredict = async function(){
       result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
       faceapi.drawDetection('overlay', result2.map(det => {
         det.forSize(width, height)
-        console.log(det)                                                                                     
+        //console.log(det)                                                                                     
       }))                                                                                           
-                                                                                             
+      console.log(result2)                                                                          
+      console.log(result2._box)                                                                     
+      console.log(result2._box._x)                                                                                     
    let myCanvasElement2 = document.getElementById('myCan2');
    let myCTX2 = myCanvasElement2.getContext('2d');
    myCTX2.drawImage(myVideoStream, 0, 0, width, height); 
