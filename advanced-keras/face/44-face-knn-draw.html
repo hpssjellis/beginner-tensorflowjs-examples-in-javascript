@@ -124,7 +124,8 @@ Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseco
                                                                                             
 //position:relative; left:-650px;
 let myGroups = []
-let newArray2 = []                                                                                             
+let newArray2 = []  
+let myFaceToClose = 20    // pixels to make bounding box bigger
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -242,7 +243,7 @@ myPredict = async function(){
      let myCanvasElement3 = document.getElementById('otherVideo');
      let myCTX3 = myCanvasElement3.getContext('2d');
                                                                                              
-     myCTX3.drawImage(myCanvasElement4, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
+     myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+myFaceToClose, result2[0]._box._height+myFaceToClose, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
     //myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
 
                                                                                           
