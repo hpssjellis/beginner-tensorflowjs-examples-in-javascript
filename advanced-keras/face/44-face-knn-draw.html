@@ -234,7 +234,8 @@ myPredict = async function(){
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
-      result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
+     // result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
+      result2 = await faceapi.tinyYolov2(myCanvasElement, forwardParams)
       faceapi.drawDetection('overlay', result2.map(det => det.forSize(width, height)))                                                                                           
      // console.log(result2)
 
