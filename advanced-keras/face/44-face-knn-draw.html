@@ -124,8 +124,23 @@ Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseco
                                                                                             
 //position:relative; left:-650px;
 let myGroups = []
-let newArray2 = []                                                                                             
+let newArray2 = []                  
+                                                                                             
 
+ ///////////////////////////////////// Set up all canvases and video element ////////////////////////////////     
+                                                                                             
+ let myVideoStream = document.getElementById('myVideo')     // make it a global variable
+                                                                                             
+ let myCanvasElement3 = document.getElementById('otherVideo');
+ let myCTX3 = myCanvasElement3.getContext('2d');                                                                                            
+     
+ let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
+ let myCTX4 = myCanvasElement4.getContext('2d');
+                                                                                             
+ let myCanvasElement = document.getElementById('my32x32CanvasA');
+ let myCTX = myCanvasElement.getContext('2d');                                                                                              
+                                                                                             
+                                                                                             
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
 
@@ -158,9 +173,7 @@ myTextChange = async function(){
 
 myNewTrain = async function(){   
 
-    let myCanvasElement = document.getElementById('my32x32CanvasA');
-   let myCTX = myCanvasElement.getContext('2d');
-   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+                                                                                         
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
   // const { boxes, scores } = await net.forward(img1) 
    //console.log('boxes and scores loaded')  
@@ -231,16 +244,14 @@ myPredict = async function(){
      // console.log(result2)
 
     if (result2.length >= 1){     // box drawing working                                                                             
-     let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
-     let myCTX4 = myCanvasElement4.getContext('2d');
+
      myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
                                                                                              
       //console.log(result2[0]._box)                                                                                                                                          
       //console.log(result2[0]._box._x)                                                                                                                                       
       //console.log(result2[0]._box._width)  
                                                                                    
-     let myCanvasElement3 = document.getElementById('otherVideo');
-     let myCTX3 = myCanvasElement3.getContext('2d');
+
                                                                                              
      myCTX3.drawImage(myCanvasElement4, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
     //myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
@@ -269,9 +280,7 @@ myPredict = async function(){
    
                                                                                              
 
-                                                                                             
-  let myCanvasElement = document.getElementById('my32x32CanvasA');
-  let myCTX = myCanvasElement.getContext('2d');                                                                                           
+                                                                                         
   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                     
   //myCTX.drawImage(myCanvasElement3, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
           
@@ -297,7 +306,7 @@ myPredict = async function(){
 ///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
  
                                                                                              
-var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+
 var myStoredInterval = 0
 
                                                                                              
