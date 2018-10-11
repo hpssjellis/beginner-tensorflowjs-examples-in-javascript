@@ -126,6 +126,11 @@ Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseco
 let myGroups = []
 let newArray2 = []  
 let myFaceToClose = 10    // pixels to make bounding box bigger
+                                                                                             
+
+ ///////////////////////////////////// Canvas and video elements ////////////////////////////////                                                                                                   
+                                                                                             
+                                                                                             
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -213,7 +218,8 @@ myPredict = async function(){
     let modelLoaded = false
     let forwardTimes = []
                                                                                              
-                                                                                             
+    let myCanvasElement = document.getElementById('my32x32CanvasA');
+    let myCTX = myCanvasElement.getContext('2d');                                                                                             
                                                                                              
   if (classifier.getNumClasses() >= 1){
     
@@ -272,8 +278,7 @@ myPredict = async function(){
                                                                                              
 
                                                                                              
-  let myCanvasElement = document.getElementById('my32x32CanvasA');
-  let myCTX = myCanvasElement.getContext('2d');                                                                                           
+                                                                                       
   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                     
   //myCTX.drawImage(myCanvasElement3, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
           
