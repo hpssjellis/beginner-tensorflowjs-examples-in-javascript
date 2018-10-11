@@ -97,10 +97,9 @@ live "Train" objects from the model and get results at the same time! <br>
  
  
 <video  id="myVideo" width="320" height="320" style="border: 1px solid #ddd;"></video>
-<canvas id="overlay" style="border: 1px solid #ddd; position:relative; left:-325px;" ></canvas>
+<canvas id="overlay" style=" background-color:lightgray;" ></canvas>
+<canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="320" height="320" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
 
-<canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="320" height="320" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas>
-<canvas id="myCan2" style="border: 1px solid #ddd;" width="320" height="320" ></canvas> <br><br>
 
 Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
@@ -135,7 +134,7 @@ Analyse every <input type=number id="myInterval"  value="500" size=5> millisecon
                                                                                             
 //position:relative; left:-650px;
 let myGroups = []
-let myVideoStream = document.getElementById('myVideo')     // make it a global variable                                                                                          
+                                                                                          
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -233,35 +232,19 @@ myPredict = async function(){
                                                                                              
                                                                                              
   const { width, height } = faceapi.getMediaDimensions(videoEl)
-      let myFaceData = {}                                                                                       
       const canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
       result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
-      myWow = faceapi.drawDetection('overlay', result2.map(det => {
-        det.forSize(width, height)
-       // myFaceData.x = det._box._x          
-      //  myFaceData.y = det._box._y          
-      //  myFaceData.width = det._box._width          
-      //  myFaceData.height = det._box._height                                                                                     
-                                                                                           
-      }))                                                                                           
-     // console.log('myFaceData')                                                                      
-     // console.log(myFaceData)     
-       console.log(myWow)                                                                                      
-   let myCanvasElement2 = document.getElementById('myCan2');
-   let myCTX2 = myCanvasElement2.getContext('2d');
-   myCTX2.drawImage(myVideoStream, myFaceData.x, myFaceData.y, myFaceData.width, myFaceData.height); 
-
-                                                                                         
+      faceapi.drawDetection('overlay', result2.map(det => det.forSize(width, height)))                                                                                           
+                                                                                             
+                                                                                             
                                                                                              
 ////////////////////////////////////////////                                                                                             
                                                                                           
-   const myLandmarks = await net.detectLandmarks(img2)  
-  // const myLandmarks = await net.detectLandmarks(img2.forSize(width, height))                                                                                         
-                                                                                             
+   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
                                                                                              
@@ -296,7 +279,7 @@ myPredict = async function(){
 ///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
  
                                                                                              
-
+var myVideoStream = document.getElementById('myVideo')     // make it a global variable
 var myStoredInterval = 0
 
                                                                                              
