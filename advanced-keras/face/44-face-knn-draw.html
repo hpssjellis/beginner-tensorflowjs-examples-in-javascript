@@ -42,12 +42,6 @@
 <h2 align=center> As easy as I can make Loading Tensorflowjs KNN-Classifier Demo </h2>
 
 
-
-
-
-
-
-
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
  Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> 
  Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository<br><br>
@@ -287,15 +281,22 @@ myPredict = async function(){
   //myCTX.drawImage(myCanvasElement3, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
           
                                                                                              
-                                                                                             
-                                                                                             
-   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
 
                                                                                              
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
+                                                                                             
+   //predict then draw red dots                                                                                          
+                                                                                                
+                                                                                             
+   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
+                                                                                          
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
     } // end box drawing OK                                                                                             
   } else {(console.log('Need to train groups'))}
                                                                                              
