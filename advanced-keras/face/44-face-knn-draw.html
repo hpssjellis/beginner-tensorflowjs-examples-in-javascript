@@ -281,9 +281,10 @@ myPredict = async function(){
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
+    } // end box drawing OK                                                                                             
   } else {(console.log('Need to train groups'))}
                                                                                              
- } // end box drawing OK                                                                                            
+                                                                                         
 }
                                                                                              
                                                                                              
