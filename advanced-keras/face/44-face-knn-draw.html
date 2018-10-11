@@ -239,17 +239,15 @@ myPredict = async function(){
    
       result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
       faceapi.drawDetection('overlay', result2.map(det => det.forSize(width, height)))                                                                                           
-      console.log(result2)
+     // console.log(result2)
 
-    
-    try {
+    if (result2.length >= 1){
+
       console.log(result2[0]._box)                                                                                                                                          
       console.log(result2[0]._box._x)                                                                                                                                       
       console.log(result2[0]._box._width)  
-}
-catch(err) {
-   console.log(err)
-}                                                                                         
+    }
+                                                                                      
                                                                                              
                                                                                              
   // let myCanvasElement3 = document.getElementById('otherVideo');
