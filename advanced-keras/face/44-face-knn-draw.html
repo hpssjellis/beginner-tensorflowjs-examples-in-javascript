@@ -220,6 +220,9 @@ myPredict = async function(){
                                                                                              
     let myCanvasElement = document.getElementById('my32x32CanvasA');
     let myCTX = myCanvasElement.getContext('2d');                                                                                             
+    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
+                                                                                             
+                                                                                             
                                                                                              
   if (classifier.getNumClasses() >= 1){
     
