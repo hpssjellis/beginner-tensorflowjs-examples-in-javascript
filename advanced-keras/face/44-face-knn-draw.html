@@ -243,17 +243,14 @@ myPredict = async function(){
 
     if (result2.length >= 1){
 
-      console.log(result2[0]._box)                                                                                                                                          
-      console.log(result2[0]._box._x)                                                                                                                                       
-      console.log(result2[0]._box._width)  
-    }
-                                                                                      
-                                                                                             
-                                                                                             
-  // let myCanvasElement3 = document.getElementById('otherVideo');
- //  let myCTX3 = myCanvasElement3.getContext('2d');
- //  myCTX3.drawImage(myVideoStream, result2._box._x, result2._box._y, result2._box._x+result2._box._width, result2._box._y+result2._box._height);                                                                                               
-                                                                                             
+      //console.log(result2[0]._box)                                                                                                                                          
+      //console.log(result2[0]._box._x)                                                                                                                                       
+      //console.log(result2[0]._box._width)  
+                                                                                           
+     let myCanvasElement3 = document.getElementById('otherVideo');
+     let myCTX3 = myCanvasElement3.getContext('2d');
+     myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._x+result2[0]._box._width, result2[0]._box._y+result2[0]._box._height);                                                                                               
+   }                                                                                         
                                                                                              
                                                                                              
                                                                                              
