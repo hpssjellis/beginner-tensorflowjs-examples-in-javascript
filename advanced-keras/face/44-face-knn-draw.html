@@ -102,7 +102,7 @@ live "Train" objects from the model and get results at the same time! <br>
 <canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;"></canvas> <br>
 
 
-Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
+Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseconds<br>
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
 
@@ -251,11 +251,11 @@ myPredict = async function(){
                                                                                              
                                                                                              
 ////////////////////////////////////////////                                                                                             
-      const img2 = tf.fromPixels(myVideo);                                                                                           
+      const img3 = tf.fromPixels(otherVideo);                                                                                           
    // const img2 = tf.fromPixels(myVideo);  
                                                                                              
   //const myLandmarks = await net.detectLandmarks(img2)                                     
-   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                      
+   const myLandmarks = await net.detectLandmarks(img3)                                                                                                                                                                                      
    newArray2 = []                                                                                           
 
                                                                                              
