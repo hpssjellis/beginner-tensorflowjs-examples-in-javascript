@@ -125,7 +125,7 @@ Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseco
 //position:relative; left:-650px;
 let myGroups = []
 let newArray2 = []  
-let myFaceToClose = 20    // pixels to make bounding box bigger
+let myFaceToClose = 10    // pixels to make bounding box bigger
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -217,11 +217,12 @@ myPredict = async function(){
                                                                                              
   if (classifier.getNumClasses() >= 1){
     
-    let videoEl = document.getElementById('my32x32CanvasA')                                                                           
+  //  let videoEl = document.getElementById('my32x32CanvasA')                                                                           
 //////////////////////////////////
                                                                                              
-                                                                                             
-  let { width, height } = faceapi.getMediaDimensions(videoEl)
+ //myCanvasElement                                                                                           
+ // let { width, height } = faceapi.getMediaDimensions(videoEl)                                             
+  let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
       let canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
