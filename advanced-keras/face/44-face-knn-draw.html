@@ -135,7 +135,7 @@ Analyse every <input type=number id="myInterval"  value="500" size=5> millisecon
                                                                                             
 //position:relative; left:-650px;
 let myGroups = []
-                                                                                          
+let myVideoStream = document.getElementById('myVideo')     // make it a global variable                                                                                          
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -233,7 +233,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
   const { width, height } = faceapi.getMediaDimensions(videoEl)
-      let myData = {}                                                                                       
+      let myFaceData = {}                                                                                       
       const canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
@@ -247,12 +247,18 @@ myPredict = async function(){
         console.log(det._box._x)       
         console.log(det._box._y)       
         console.log(det._box._width)  
-        console.log(det._box._height)                                                                                    
+        console.log(det._box._height)  
+        myFaceData.x = det._box._x          
+        myFaceData.y = det._box._y          
+        myFaceData.width = det._box._width          
+        myFaceData.height = det._box._height                                                                                     
+                                                                                             
+                                                                                             
       }))                                                                                           
-     // console.log(myData.x)                                                                                             
+      console.log(myFaceData)                                                                                             
    let myCanvasElement2 = document.getElementById('myCan2');
    let myCTX2 = myCanvasElement2.getContext('2d');
-   myCTX2.drawImage(myVideoStream, 0, 0, width, height); 
+   myCTX2.drawImage(myVideoStream, myFaceData.x, myFaceData.y, myFaceData.width, myFaceData.height); 
 
                                                                                          
                                                                                              
@@ -295,7 +301,7 @@ myPredict = async function(){
 ///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
  
                                                                                              
-var myVideoStream = document.getElementById('myVideo')     // make it a global variable
+
 var myStoredInterval = 0
 
                                                                                              
