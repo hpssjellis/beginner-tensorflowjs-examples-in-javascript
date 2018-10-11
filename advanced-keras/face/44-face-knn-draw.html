@@ -249,7 +249,7 @@ myPredict = async function(){
                                                                                            
      let myCanvasElement3 = document.getElementById('otherVideo');
      let myCTX3 = myCanvasElement3.getContext('2d');
-     myCTX3.drawImage(myVideoStream, 0, 0, myCanvasElement3.width, myCanvasElement3.height, result2[0]._box._x, result2[0]._box._y, result2[0]._box._x + result2[0]._box._width, result2[0]._box._y + result2[0]._box._height);                                                                                               
+     myCTX3.drawImage(myVideoStream,result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height,  0, 0, myCanvasElement3.width, myCanvasElement3.height);                                                                                               
    }                                                                                         
                                                                                              
                                                                                              
