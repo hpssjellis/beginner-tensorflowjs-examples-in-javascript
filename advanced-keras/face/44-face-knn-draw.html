@@ -102,7 +102,7 @@ live "Train" objects from the model and get results at the same time! <br>
 <canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;"></canvas> <br>
 
 
-Analyse every <input type=number id="myInterval"  value="1500" size=5> milliseconds<br>
+Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
 <input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
 <input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
 
@@ -216,8 +216,7 @@ myPredict = async function(){
                                                                                              
   if (classifier.getNumClasses() >= 1){
     
-    const videoEl = document.getElementById('my32x32CanvasA')                                                                                          
-    const img2 = tf.fromPixels(myVideo);                                                                                            
+    const videoEl = document.getElementById('my32x32CanvasA')                                                                           
 //////////////////////////////////
                                                                                              
                                                                                              
@@ -252,8 +251,11 @@ myPredict = async function(){
                                                                                              
                                                                                              
 ////////////////////////////////////////////                                                                                             
-                                                                                          
-   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                       
+      const img2 = tf.fromPixels(myVideo);                                                                                           
+   // const img2 = tf.fromPixels(myVideo);  
+                                                                                             
+  //const myLandmarks = await net.detectLandmarks(img2)                                     
+   const myLandmarks = await net.detectLandmarks(img2)                                                                                                                                                                                      
    newArray2 = []                                                                                           
 
                                                                                              
