@@ -97,7 +97,7 @@ live "Train" objects from the model and get results at the same time! <br>
  
  
 <video  id="myVideo" width="320" height="320" style="border: 1px solid #ddd;"></video>
-<canvas id="overlay" style="position:relative; left:-325px" ></canvas><canvas id="otherVideo" style="" ></canvas>
+<canvas id="overlay" style="position:relative; left:-325px" ></canvas><br><canvas id="otherVideo" width="160" height="200" ></canvas>
 <canvas id="my32x32CanvasA" style="border: 1px solid #ddd; background-color:lightgray;" width="320" height="320" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
 
 
@@ -249,8 +249,10 @@ myPredict = async function(){
                                                                                            
      let myCanvasElement3 = document.getElementById('otherVideo');
      let myCTX3 = myCanvasElement3.getContext('2d');
-     myCTX3.drawImage(myVideoStream,result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height,  0, 0, myCanvasElement3.width, myCanvasElement3.height);                                                                                               
-   }                                                                                         
+     //myCTX3.drawImage(myVideoStream,result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height,  0, 0, myCanvasElement3.width, myCanvasElement3.height);                                                                                               
+   
+     myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height);
+}                                                                                         
                                                                                              
                                                                                              
                                                                                              
