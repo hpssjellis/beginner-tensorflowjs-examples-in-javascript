@@ -216,12 +216,12 @@ myPredict = async function(){
                                                                                              
   if (classifier.getNumClasses() >= 1){
     
-    const videoEl = document.getElementById('my32x32CanvasA')                                                                           
+    let videoEl = document.getElementById('my32x32CanvasA')                                                                           
 //////////////////////////////////
                                                                                              
                                                                                              
-  const { width, height } = faceapi.getMediaDimensions(videoEl)
-      const canvas = document.getElementById('overlay')
+  let { width, height } = faceapi.getMediaDimensions(videoEl)
+      let canvas = document.getElementById('overlay')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
@@ -251,7 +251,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
 ////////////////////////////////////////////                                                                                             
-      const img3 = tf.fromPixels(otherVideo);                                                                                           
+      let img3 = tf.fromPixels(otherVideo);                                                                                           
    // const img2 = tf.fromPixels(myVideo);  
                                                                                              
   //const myLandmarks = await net.detectLandmarks(img2)                                     
