@@ -99,7 +99,7 @@ live "Train" objects from the model and get results at the same time! <br>
 <video  id="myVideo" width="320" height="320" style="border: 1px solid #ddd;"></video>
 <canvas id="overlay" style="position:relative; left:-325px" ></canvas><br><canvas id="otherVideo" width="320" height="320" ></canvas>
 <canvas id="my32x32CanvasA"  width="320" height="320" style="background-color:lightgray; border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
-<canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas> <br><br>
+<canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;"></canvas> <br><br>
 
 
 Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
@@ -239,12 +239,12 @@ myPredict = async function(){
       //console.log(result2[0]._box)                                                                                                                                          
       //console.log(result2[0]._box._x)                                                                                                                                       
       //console.log(result2[0]._box._width)  
-     let my32Element = document.getElementById('my32x32CanvasA');                                                                                      
+                                                                                   
      let myCanvasElement3 = document.getElementById('otherVideo');
      let myCTX3 = myCanvasElement3.getContext('2d');
                                                                                              
      myCTX3.drawImage(myCanvasElement4, result2[0]._box._x, result2[0]._box._y, result2[0]._box._x+result2[0]._box._width, result2[0]._box._y+result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
-    //myCTX3.drawImage(my32Element, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
+    //myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
 
  }                                                                                         
                                                                                              
