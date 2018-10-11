@@ -107,18 +107,7 @@ Analyse every <input type=number id="myInterval"  value="500" size=5> millisecon
 
 <div id="myDivTest">...</div><br>
 
- 
-<input type=button value="Show data for above Group" onclick="{
-  console.log('classifier.getNumClasses()')
-  console.log(classifier.getNumClasses())
-  const myOut = classifier.getClassifierDataset()
-  console.log('myOut['+parseInt(document.getElementById('myClassNumber').value)+']') 
-  myOut[parseInt(document.getElementById('myClassNumber').value)].print(true)      
-                                                              
-  document.getElementById('myDivSummary').innerHTML =  'See console, will print a lot of information'                                                                                                       
-  //document.getElementById('myDivSummary').innerHTML =   myOut[parseInt(document.getElementById('myClassNumber').value)].dataSync()                                             
-}"><br><br>
- 
+
  
 <div id="myDivSummary">...</div><br><br>
 
