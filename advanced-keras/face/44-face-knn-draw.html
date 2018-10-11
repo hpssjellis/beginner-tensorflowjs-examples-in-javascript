@@ -230,7 +230,7 @@ myPredict = async function(){
       faceapi.drawDetection('overlay', result2.map(det => det.forSize(width, height)))                                                                                           
      // console.log(result2)
 
-    if (result2.length >= 1){                                                                                  
+    if (result2.length >= 1){     // box drawing working                                                                             
      let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
      let myCTX4 = myCanvasElement4.getContext('2d');
      myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
@@ -245,7 +245,7 @@ myPredict = async function(){
      myCTX3.drawImage(myCanvasElement4, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
     //myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
 
- }                                                                                         
+                                                                                          
                                                                                              
                                                                                              
                                                                                              
@@ -282,6 +282,8 @@ myPredict = async function(){
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
   } else {(console.log('Need to train groups'))}
+                                                                                             
+ } // end box drawing OK                                                                                            
 }
                                                                                              
                                                                                              
