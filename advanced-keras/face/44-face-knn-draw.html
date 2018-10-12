@@ -132,7 +132,10 @@ let myFaceToClose = 0    // pixels to make bounding box bigger
 
  ///////////////////////////////////// Canvas and video elements ////////////////////////////////                                                                                                   
                                                                                              
-                                                                                             
+      let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
+     let myCTX4 = myCanvasElement4.getContext('2d');
+     myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);                                                                                          
+                                                                                                        
 
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
@@ -166,10 +169,11 @@ myTextChange = async function(){
 
 myNewTrain = async function(){   
 
-    let myCanvasElement = document.getElementById('my32x32CanvasA');
-   let myCTX = myCanvasElement.getContext('2d');
-   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
-   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
+   // let myCanvasElement = document.getElementById('myVideoAsCanvas');
+  // let myCTX = myCanvasElement.getContext('2d');
+  // myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height); 
+                                                                                             
+   const img1 = tf.fromPixels(myVideoAsCanvas);                                                                                            
   // const { boxes, scores } = await net.forward(img1) 
    //console.log('boxes and scores loaded')  
 
@@ -220,36 +224,34 @@ myPredict = async function(){
     let modelLoaded = false
     let forwardTimes = []
                                                                                              
-    let myCanvasElement = document.getElementById('my32x32CanvasA');
-    let myCTX = myCanvasElement.getContext('2d');                                                                                             
-    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
+    //let myCanvasElement = document.getElementById('myVideoAsCanvas');
+    //let myCTX = myCanvasElement.getContext('2d');                                                                                             
+    //myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
                                                                                              
-                                                                                             
+                                                                                 
                                                                                              
   if (classifier.getNumClasses() >= 1){
     
-  //  let videoEl = document.getElementById('my32x32CanvasA')                                                                           
+  //  let videoEl = document.getElementById('myVideoAsCanvas')                                                                           
 //////////////////////////////////
                                                                                              
  //myCanvasElement                                                                                           
  // let { width, height } = faceapi.getMediaDimensions(videoEl)                                             
-  let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
+  let { width, height } = faceapi.getMediaDimensions(myCanvasElement4)
       let canvas = document.getElementById('myBorderAsCanvas')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
      // result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
-      result2 = await faceapi.tinyYolov2(myCanvasElement, forwardParams)
+      result2 = await faceapi.tinyYolov2(myCanvasElement4, forwardParams)
       faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))                                                                                           
      // console.log(result2)
 
     if (result2.length >= 1){     // box drawing working   
                                                                                              
                                                                                              
-     let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
-     let myCTX4 = myCanvasElement4.getContext('2d');
-     myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
+
                                                                                              
       //console.log(result2[0]._box)                                                                                                                                          
       //console.log(result2[0]._box._x)                                                                                                                                       
