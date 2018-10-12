@@ -150,18 +150,16 @@ let myIncomingImages = []
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
 myLoadManyImages = async function() {
-                                                                                             
-   myIncomingImages[0] = []      // group number                                                             
-   myIncomingImages[1] = []      // statement                                                           
-   myIncomingImages[2] = []      // image URL Google search "labelled for reuse"      
-   
+  
    const myIn = document.getElementById('myArray01').value.split('***')
                                                                                  
    for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
-      myIncomingImages[myIteration] = myIn.split(',')    
+      myIncomingImages[myIteration] = myIn.split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
+      myGroups[myIteration] = parseInt(myIncomingImages[myIteration][0])                                                                       
    }                                                                             
-   console.log(myIncomingImages)                                                                                         
+   console.log(myIncomingImages)                                                  
+   console.log(myGroups)                                                                                        
                                                                                              
 }
                                                                                              
