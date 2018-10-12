@@ -140,7 +140,8 @@ let myGroups = []
 let newArray = []  
 let newArray2 = []  
 let myFaceToClose = 0    // pixels to make bounding box bigger
-                                                                                             
+
+let myIncomingImages = []                                                                                             
 
  ///////////////////////////////////// Canvas and video elements ////////////////////////////////                                                                                                   
                                                                                              
@@ -149,7 +150,18 @@ let myFaceToClose = 0    // pixels to make bounding box bigger
 //////////////////////////////////////// knn classifier stuff///////////////////////////
 
 myLoadManyImages = async function() {
-   console.log(document.getElementById('myArray01').value.split('***'))                                                                                         
+                                                                                             
+   myIncomingImages[0] = []      // group number                                                             
+   myIncomingImages[1] = []      // statement                                                           
+   myIncomingImages[2] = []      // image URL Google search "labelled for reuse"      
+   
+   const myIn = document.getElementById('myArray01').value.split('***')
+                                                                                 
+   for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
+      myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
+      myIncomingImages[myIteration] = myIn.split(',')    
+   }                                                                             
+   console.log(myIncomingImages)                                                                                         
                                                                                              
 }
                                                                                              
