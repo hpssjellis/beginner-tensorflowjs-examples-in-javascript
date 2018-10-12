@@ -97,10 +97,11 @@ live "Train" objects from the model and get results at the same time! <br>
  
  
 <video  id="myVideoElement" width="320" height="320" style="border: 1px solid #ddd;"></video>
-<canvas id="overlay" style="position:relative; left:-325px" ><br></canvas><br>
- <canvas id="otherVideo" width="240" height="320" ></canvas>
+<canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;">
+<canvas id="myBorderAsCanvas" style="position:relative; left:-325px" ><br></canvas><br>
+<canvas id="myFaceCanvas" width="240" height="320" ></canvas>
 <canvas id="my32x32CanvasA"  width="320" height="320" style="background-color:lightgray; border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas>
-<canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;"></canvas> <br><br>
+</canvas> <br><br>
 
 
 Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
@@ -233,14 +234,14 @@ myPredict = async function(){
  //myCanvasElement                                                                                           
  // let { width, height } = faceapi.getMediaDimensions(videoEl)                                             
   let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
-      let canvas = document.getElementById('overlay')
+      let canvas = document.getElementById('myBorderAsCanvas')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
    
      // result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
       result2 = await faceapi.tinyYolov2(myCanvasElement, forwardParams)
-      faceapi.drawDetection('overlay', result2.map(det => det.forSize(width, height)))                                                                                           
+      faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))                                                                                           
      // console.log(result2)
 
     if (result2.length >= 1){     // box drawing working   
@@ -254,7 +255,7 @@ myPredict = async function(){
       //console.log(result2[0]._box._x)                                                                                                                                       
       //console.log(result2[0]._box._width)  
                                                                                    
-     let myCanvasElement3 = document.getElementById('otherVideo');
+     let myCanvasElement3 = document.getElementById('myFaceCanvas');
      let myCTX3 = myCanvasElement3.getContext('2d');
                                                                                              
      myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+(2*myFaceToClose), result2[0]._box._height+(2*myFaceToClose), 0, 0, myCanvasElement3.width, myCanvasElement3.height);
@@ -266,7 +267,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
 ////////////////////////////////////////////                                                                                             
-      let img3 = tf.fromPixels(otherVideo);    // the bounded canvas                                                                                       
+      let img3 = tf.fromPixels(myFaceCanvas);    // the bounded canvas                                                                                       
    // const img2 = tf.fromPixels(myVideo);  
                                                                                              
   //const myLandmarks = await net.detectLandmarks(img2)                                     
