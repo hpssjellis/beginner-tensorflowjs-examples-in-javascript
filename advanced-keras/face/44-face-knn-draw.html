@@ -247,7 +247,7 @@ myPredict = async function(){
                                                                                              
      let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
      let myCTX4 = myCanvasElement4.getContext('2d');
-     myCTX4.drawImage(myVideoStream, 0, 0, result2[0]._box._width, result2[0]._box.height);
+     myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
                                                                                              
       //console.log(result2[0]._box)                                                                                                                                          
       //console.log(result2[0]._box._x)                                                                                                                                       
@@ -256,7 +256,7 @@ myPredict = async function(){
      let myCanvasElement3 = document.getElementById('otherVideo');
      let myCTX3 = myCanvasElement3.getContext('2d');
                                                                                              
-     myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+(2*myFaceToClose), result2[0]._box._height+(2*myFaceToClose), 0, 0, myCanvasElement3.width, myCanvasElement3.height);
+     myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+(2*myFaceToClose), result2[0]._box._height+(2*myFaceToClose), 0, 0, result2[0]._box._width, result2[0]._box._height);
     //myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
 
                                                                                           
