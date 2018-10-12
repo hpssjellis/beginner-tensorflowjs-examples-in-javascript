@@ -215,34 +215,24 @@ myNewTrain = async function(){
                                                                                              
                                                                                              
 myPredict = async function(){
-    let scoreThreshold = 0.5   //0.5
-    let sizeType = '320'
-    let modelLoaded = false
-    let forwardTimes = []
+  let scoreThreshold = 0.5   //0.5
+  let sizeType = '320'
+  let modelLoaded = false
+  let forwardTimes = []
                                                                                              
-    let myCanvasElement = document.getElementById('my32x32CanvasA');
-    let myCTX = myCanvasElement.getContext('2d');                                                                                             
-    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
-                                                                                             
-                                                                                             
-                                                                                             
-  if (classifier.getNumClasses() >= 1){
-    
-  //  let videoEl = document.getElementById('my32x32CanvasA')                                                                           
-//////////////////////////////////
-                                                                                             
- //myCanvasElement                                                                                           
- // let { width, height } = faceapi.getMediaDimensions(videoEl)                                             
-  let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
+  let myCanvasElement = document.getElementById('my32x32CanvasA');
+  let myCTX = myCanvasElement.getContext('2d');                                                                                             
+  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
+                                                                                            
+  if (classifier.getNumClasses() >= 1){    // have groups to rate
+                                            
+      let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
       let canvas = document.getElementById('myBorderAsCanvas')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: parseInt(sizeType), scoreThreshold}
-   
-     // result2 = await faceapi.tinyYolov2(videoEl, forwardParams)
       result2 = await faceapi.tinyYolov2(myCanvasElement, forwardParams)
       faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))                                                                                           
-     // console.log(result2)
 
     if (result2.length >= 1){     // box drawing working   
                                                                                              
@@ -250,60 +240,31 @@ myPredict = async function(){
      let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
      let myCTX4 = myCanvasElement4.getContext('2d');
      myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
-                                                                                             
-      //console.log(result2[0]._box)                                                                                                                                          
-      //console.log(result2[0]._box._x)                                                                                                                                       
-      //console.log(result2[0]._box._width)  
-                                                                                   
+                                      
      let myCanvasElement3 = document.getElementById('myFaceCanvas');
      let myCTX3 = myCanvasElement3.getContext('2d');
                                                                                              
      myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+(2*myFaceToClose), result2[0]._box._height+(2*myFaceToClose), 0, 0, myCanvasElement3.width, myCanvasElement3.height);
-    //myCTX3.drawImage(myVideoStream, result2[0]._box._x, result2[0]._box._y, result2[0]._box._width, result2[0]._box._height, 0, 0, myCanvasElement3.width, myCanvasElement3.height);
-
-                                                                                          
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-////////////////////////////////////////////                                                                                             
-      let img3 = tf.fromPixels(myFaceCanvas);    // the bounded canvas                                                                                       
-   // const img2 = tf.fromPixels(myVideo);  
-                                                                                             
-  //const myLandmarks = await net.detectLandmarks(img2)                                     
-   const myLandmarks = await net.detectLandmarks(img3)                                                                                                                                                                                      
-                                                                                       
-
-                                                                                             
-    
-  for (let j=0;  j < myLandmarks._faceLandmarks.length; j++ ){  
-     newArray2[j] = []                                                                                        
-     newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
-     newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
-   }                                                                                          
-   
-   
-                                                                                             
-
-                                                                                             
-                                                                                       
-  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                     
-  //myCTX.drawImage(myCanvasElement3, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
-          
-                                                                                             
-                                                                                             
-
-                                                                                             
-   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
-                                                                                              
-   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
-   
-   document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
-       Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
-    } // end box drawing OK                                                                                             
-  } else {(console.log('Need to train groups'))}
-                                                                                             
                                                                                          
+     let img3 = tf.fromPixels(myFaceCanvas);    // the bounded canvas                                                                                                                    
+     const myLandmarks = await net.detectLandmarks(img3)                                                                                                                                                                                      
+  
+     for (let j=0;  j < myLandmarks._faceLandmarks.length; j++ ){  
+       newArray2[j] = []                                                                                        
+       newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
+       newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
+     }                                                                                          
+                                                                                     
+     myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                                                                                                                            
+     const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
+                                                                                              
+    faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
+   
+    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
+       Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
+  } // end box drawing OK                                                                                             
+ } else {(console.log('Need to train groups'))}
+                                                                                             
 }
                                                                                              
                                                                                              
