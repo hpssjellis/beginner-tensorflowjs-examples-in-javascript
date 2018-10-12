@@ -125,7 +125,7 @@ Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseco
 //position:relative; left:-650px;
 let myGroups = []
 let newArray2 = []  
-let myFaceToClose = 100    // pixels to make bounding box bigger
+let myFaceToClose = 5    // pixels to make bounding box bigger
                                                                                              
 
  ///////////////////////////////////// Canvas and video elements ////////////////////////////////                                                                                                   
@@ -263,7 +263,7 @@ myPredict = async function(){
                                                                                              
                                                                                              
 ////////////////////////////////////////////                                                                                             
-      let img3 = tf.fromPixels(otherVideo);                                                                                           
+      let img3 = tf.fromPixels(otherVideo);    // the bounded canvas                                                                                       
    // const img2 = tf.fromPixels(myVideo);  
                                                                                              
   //const myLandmarks = await net.detectLandmarks(img2)                                     
@@ -288,12 +288,12 @@ myPredict = async function(){
           
                                                                                              
                                                                                              
-                                                                                             
-   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
 
                                                                                              
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
-    
+                                                                                              
+   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
+   
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
     } // end box drawing OK                                                                                             
