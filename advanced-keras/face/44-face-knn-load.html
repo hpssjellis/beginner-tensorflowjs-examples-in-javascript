@@ -155,8 +155,8 @@ myLoadManyImages = async function() {
                                                                                  
    for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
-      myIncomingImages[myIteration] = myIn.split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
-      myGroups[myIteration] = parseInt(myIncomingImages[myIteration][0])                                                                       
+      myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
+      myGroups[parseInt(myIncomingImages[myIteration][0])] =     myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
    }                                                                             
    console.log(myIncomingImages)                                                  
    console.log(myGroups)                                                                                        
