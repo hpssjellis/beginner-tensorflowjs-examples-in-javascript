@@ -169,32 +169,19 @@ myTextChange = async function(){
 
 myNewTrain = async function(){   
 
-    let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
-  // const { boxes, scores } = await net.forward(img1) 
-   //console.log('boxes and scores loaded')  
 
-  const myDetectMarks = await net.detectLandmarks(img1)                                                                                           
-  //console.log('myDetectMarks')                                                                                                                    
-  //console.log(myDetectMarks)                                                                                                                     
-  //console.log('myDetectMarks._faceLandmarks')                                                                                                      
-  //console.log(myDetectMarks._faceLandmarks)  
-  
-                                                                                             
-  newArray = []                                                                                           
+   const myDetectMarks = await net.detectLandmarks(img1)                                                                                                                                                                                        
 
-                                                                                             
-    
-  for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
-     newArray[j] = []                                                                                        
-     newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
-     newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
+   for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
+      newArray[j] = []                                                                                        
+      newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
+      newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
    }                                                                                          
-    
-                                                                                                                                                                                    
-                                                                                             
+                                                                                               
    classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
    myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
  
@@ -239,6 +226,8 @@ myPredict = async function(){
 
     if (result2.length >= 1){     // box drawing working   
                                                                                              
+      
+                                                                                             
                                                                                              
      let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
      let myCTX4 = myCanvasElement4.getContext('2d');
@@ -257,12 +246,16 @@ myPredict = async function(){
        newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
        newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
      }                                                                                          
-                                                                                     
+                                                                                                    
      myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                                                                                                                            
      const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
                                                                                               
     faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
    
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
     document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
   } // end box drawing OK                                                                                             
