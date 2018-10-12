@@ -42,6 +42,12 @@
 <h2 align=center> As easy as I can make Loading Tensorflowjs KNN-Classifier Demo </h2>
 
 
+
+
+
+
+
+
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
  Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> 
  Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository<br><br>
@@ -93,6 +99,7 @@ live "Train" objects from the model and get results at the same time! <br>
 <video  id="myVideo" width="320" height="320" style="border: 1px solid #ddd;"></video>
 <canvas id="overlay" style="position:relative; left:-325px" ><br></canvas><br><canvas id="otherVideo" width="320" height="320" ></canvas>
 <canvas id="my32x32CanvasA"  width="320" height="320" style="background-color:lightgray; border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;"></canvas>
+<canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;"></canvas> <br>
 
 
 Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseconds<br>
@@ -118,7 +125,7 @@ Analyse every <input type=number id="myInterval"  value="1000" size=5> milliseco
 //position:relative; left:-650px;
 let myGroups = []
 let newArray2 = []  
-let myFaceToClose = 50    // pixels to make bounding box bigger
+let myFaceToClose = 10    // pixels to make bounding box bigger
                                                                                              
 
  ///////////////////////////////////// Canvas and video elements ////////////////////////////////                                                                                                   
@@ -236,7 +243,9 @@ myPredict = async function(){
      // console.log(result2)
 
     if (result2.length >= 1){     // box drawing working                                                                             
-
+     let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
+     let myCTX4 = myCanvasElement4.getContext('2d');
+     myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
                                                                                              
       //console.log(result2[0]._box)                                                                                                                                          
       //console.log(result2[0]._box._x)                                                                                                                                       
@@ -278,22 +287,15 @@ myPredict = async function(){
   //myCTX.drawImage(myCanvasElement3, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                            
           
                                                                                              
+                                                                                             
+                                                                                             
+   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
 
                                                                                              
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
-                                                                                             
-   //predict then draw red dots                                                                                          
-                                                                                                
-                                                                                             
-   faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
-                                                                                          
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
     } // end box drawing OK                                                                                             
   } else {(console.log('Need to train groups'))}
                                                                                              
