@@ -242,10 +242,12 @@ myPredict = async function(){
       faceapi.drawDetection('overlay', result2.map(det => det.forSize(width, height)))                                                                                           
      // console.log(result2)
 
-    if (result2.length >= 1){     // box drawing working                                                                             
+    if (result2.length >= 1){     // box drawing working   
+                                                                                             
+                                                                                             
      let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
      let myCTX4 = myCanvasElement4.getContext('2d');
-     myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
+     myCTX4.drawImage(myVideoStream, 0, 0, result2[0]._box._width, result2[0]._box.height);
                                                                                              
       //console.log(result2[0]._box)                                                                                                                                          
       //console.log(result2[0]._box._x)                                                                                                                                       
