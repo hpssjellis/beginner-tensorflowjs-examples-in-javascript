@@ -228,7 +228,7 @@ myLoadManyImages = async function() {
        newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
      }                                                                                          
                                                                                                     
-     myCTX3.drawImage(myVideoStream, 0, 0, can.width, can.height);                                                                                                                                                                                            
+     myCTX3.drawImage(img2, 0, 0, myCanvasElement3.width, myCanvasElement3.height);                                                                                                                                                                                            
      const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
                                                                                               
     faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
