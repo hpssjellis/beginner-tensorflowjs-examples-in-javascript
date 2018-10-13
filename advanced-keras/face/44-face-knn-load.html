@@ -157,7 +157,7 @@ myLoadManyImages = async function() {
    for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
       myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
-      myI = parseInt(myIncomingImages[myIteration][0])
+      let myI = parseInt(myIncomingImages[myIteration][0])
       myGroups[myI] =  myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
                                                                                          
       let myFileName2 =  myIncomingImages[myIteration][2]    // the URL                                                                                   
@@ -183,8 +183,8 @@ myLoadManyImages = async function() {
          newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
          newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
        }                                                                                          
-                                                                                       
-       classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myGroups[myI]));                                                                
+  
+       classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myGroups[myI]);                                                                                                                                                                                                                                              
        const myAddCount = classifier.getClassExampleCount()[myGroups[myI]]                                                                                     
        document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myGroups[myI] +'<br>'                                                                                           
                                                                                              
