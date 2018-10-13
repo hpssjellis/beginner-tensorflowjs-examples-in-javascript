@@ -198,13 +198,14 @@ myLoadManyImages = async function() {
                                                                                              
                                                                                              
        /////////////////////////////// prove we got a face ///////////////////////////////
+ 
                                                                                              
-      let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
+      let { width, height } = faceapi.getMediaDimensions(can)
       let canvas = document.getElementById('myBorderAsCanvas')
       canvas.width = width
       canvas.height = height
       const forwardParams = {inputSize: 'ms', scoreThreshold: 0.5}
-      result2 = await faceapi.tinyYolov2(myCanvasElement, forwardParams)                                                                                        
+      result2 = await faceapi.tinyYolov2(can, forwardParams)                                                                                        
                                                                                         
       faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))   
                                                                                              
@@ -227,7 +228,7 @@ myLoadManyImages = async function() {
        newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
      }                                                                                          
                                                                                                     
-     myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                                                                                                                            
+     myCTX.drawImage(myVideoStream, 0, 0, can.width, can.height);                                                                                                                                                                                            
      const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
                                                                                               
     faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
