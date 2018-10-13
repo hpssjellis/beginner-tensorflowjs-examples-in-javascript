@@ -188,7 +188,7 @@ myLoadManyImages = async function() {
        const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
        document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'                                                                                           
                                                                                    
-       const forwardParams = {inputSize: parseInt(0.5), '320'}
+       const forwardParams = {inputSize: 1, scoreThreshold:0.5}   // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
        result2 = await faceapi.tinyYolov2(can, forwardParams) 
        consol.log(result2)                                                                                       
      }     // if                                                                                                                                                                                            
@@ -264,7 +264,7 @@ myNewTrain = async function(){
                                                                                              
 myPredict = async function(){
   let scoreThreshold = 0.5   //0.5
-  let sizeType = '320'
+  let sizeType = 1      // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
   let modelLoaded = false
   let forwardTimes = []
                                                                                              
