@@ -204,7 +204,7 @@ myLoadManyImages = async function() {
       let canvas = document.getElementById('myBorderAsCanvas')
       canvas.width = width
       canvas.height = height
-      const forwardParams = {inputSize: 'ms', scoreThreshold: 0.5}
+      const forwardParams = {inputSize: 'sm', scoreThreshold: 0.5}
       result2 = await faceapi.tinyYolov2(can, forwardParams)                                                                                        
                                                                                         
       faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))   
