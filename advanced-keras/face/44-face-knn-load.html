@@ -193,7 +193,39 @@ myLoadManyImages = async function() {
                                                                                              
           classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
           const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
-          document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'                                                                                          
+          document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'     
+                                                                                             
+                                                                                             
+                                                                                             
+       /////////////////////////////// prove we got a face ///////////////////////////////
+                                                                                             
+                                                                                             
+                                                                                             
+       // let img3 = tf.fromPixels(myFaceCanvas);    // the bounded canvas                                                                                                                    
+        const myLandmarks = await net.detectLandmarks(img2)         // use the one we are working with                                                                                                                                                                             
+  
+     for (let j=0;  j < myLandmarks._faceLandmarks.length; j++ ){  
+       newArray2[j] = []                                                                                        
+       newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
+       newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
+     }                                                                                          
+                                                                                                    
+     ctx.drawImage(myVideoStream, 0, 0, can.width, can.height);                                                                                                                                                                                            
+                                                                                              
+     faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
+   
+                                                                                                
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+        ///////////////////////////////// end proof ///////////////////////////////////                                                                                     
+                                                                                             
                                                                                              
        }                                                                                      
                                                                                              
