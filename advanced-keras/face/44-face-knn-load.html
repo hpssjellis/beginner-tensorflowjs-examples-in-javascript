@@ -160,12 +160,12 @@ myLoadManyImages = async function() {
        
       let myFileName2 =  myIncomingImages[myIteration][2]    // the URL                                                                                   
       if (myFileName2 != null) {
-        let img = new Image();
-        img.src = myFileName2;
-        img.crossOrigin = "Anonymous";                                                                                            
+        let img = new Image()
+        img.src = myFileName2
+        img.crossOrigin = 'Anonymous'                                                                                            
                                                                                                                                                                                     
-        let can = document.getElementById("my32x32CanvasA");
-        let ctx = can.getContext("2d");                                                
+        let can = document.getElementById('my32x32CanvasA');
+        let ctx = can.getContext('2d');                                                
         img.onload = function() {
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, can.width, can.height);                                         
         }  // img                                                                                 
@@ -207,9 +207,9 @@ myNewTrain = async function(){
 
    let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
-   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);   
+                                     
    const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
-
    const myDetectMarks = await net.detectLandmarks(img1)                                                                                                                                                                                        
 
    for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
