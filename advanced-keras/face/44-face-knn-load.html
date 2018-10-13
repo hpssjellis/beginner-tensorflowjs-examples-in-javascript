@@ -152,7 +152,8 @@ let myIncomingImages = []
 myLoadManyImages = async function() {
   
    const myIn = document.getElementById('myArray01').value.split('***')
-                                                                                 
+   document.getElementById('myDivLoss').innerHTML = '' // clear it  
+                                                                                             
    for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
       myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
@@ -173,7 +174,24 @@ myLoadManyImages = async function() {
         img.onload = await async function() {
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, can.width, can.height);                                         
         }  // img  
-       document.getElementById('myDivLoss').innerHTML +=    myIncomingImages[myIteration][1] + '<br>'                                                                                   
+                                                                                             
+       const img2 = await tf.fromPixels(my32x32CanvasA);          // now lets classify the image                                                                                    
+       const myDetectMarks = await net.detectLandmarks(img2)                                                                                                                                                                                        
+
+       for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
+         newArray[j] = []                                                                                        
+         newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
+         newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
+       }                                                                                          
+                                                                                       
+       classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myGroups[myI]));                                                                
+       const myAddCount = classifier.getClassExampleCount()[myGroups[myI]]                                                                                     
+       document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myGroups[myI] +'<br>'                                                                                           
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+       //document.getElementById('myDivLoss').innerHTML +=    myIncomingImages[myIteration][1] + '<br>'                                                                                   
      }     // if                                                                                                                                                                                            
    }       // for                                                                        
    console.log(myIncomingImages)                                                  
