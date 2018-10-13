@@ -156,8 +156,9 @@ myLoadManyImages = async function() {
    for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
       myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
-      myGroups[parseInt(myIncomingImages[myIteration][0])] =     myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
-       
+      myI = parseInt(myIncomingImages[myIteration][0])
+      myGroups[myI] =  myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
+                                                                                         
       let myFileName2 =  myIncomingImages[myIteration][2]    // the URL                                                                                   
       if (myFileName2 != null) {
         let img = new Image()
@@ -171,7 +172,8 @@ myLoadManyImages = async function() {
                                                                                              
         img.onload = await async function() {
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, can.width, can.height);                                         
-        }  // img                                                                                 
+        }  // img  
+       document.getElementById('myDivLoss').innerHTML +=    myIncomingImages[myIteration][1] + '<br>'                                                                                   
      }     // if                                                                                                                                                                                            
    }       // for                                                                        
    console.log(myIncomingImages)                                                  
