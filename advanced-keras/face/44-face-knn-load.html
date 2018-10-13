@@ -157,7 +157,20 @@ myLoadManyImages = async function() {
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
       myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
       myGroups[parseInt(myIncomingImages[myIteration][0])] =     myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
-   }                                                                             
+       
+      let myFileName2 =  myIncomingImages[myIteration][2]    // the URL                                                                                   
+      if (myFileName2 != null) {
+        let img = new Image();
+        img.src = myFileName2;
+        img.crossOrigin = "Anonymous";                                                                                            
+                                                                                                                                                                                    
+        let can = document.getElementById("my32x32CanvasA");
+        let ctx = can.getContext("2d");                                                
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, can.width, can.height);                                         
+        }  // img                                                                                 
+     }     // if                                                                                                                                                                                            
+   }       // for                                                                        
    console.log(myIncomingImages)                                                  
    console.log(myGroups)                                                                                        
                                                                                              
