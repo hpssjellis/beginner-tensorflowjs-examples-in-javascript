@@ -184,9 +184,9 @@ myLoadManyImages = async function() {
          newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
        }                                                                                          
   
-                                                                                         
+       document.getElementById('myDivLoss').innerHTML += 'Checking ' + myI + '<br>'                                                                                  
                                                                                    
-       const forwardParams = {inputSize: 'sm', scoreThreshold:0.5}   // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
+       const forwardParams = {inputSize: 1, scoreThreshold:0.5}   // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
        result2 = await faceapi.tinyYolov2(can, forwardParams) 
        console.log(result2)  
        if (result2.length > 0){                                                                                      
@@ -270,7 +270,7 @@ myNewTrain = async function(){
                                                                                              
 myPredict = async function(){
   let scoreThreshold = 0.5   //0.5
-  let sizeType = 'sm'      // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
+  let sizeType = 1      // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
   let modelLoaded = false
   let forwardTimes = []
                                                                                              
