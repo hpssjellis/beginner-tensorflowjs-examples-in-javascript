@@ -99,7 +99,7 @@ live "Train" objects from the model and get results at the same time! <br>
 <video  id="myVideoElement" width="320" height="320" style="display:inline; border: 1px solid #ddd;" title="myVideoElement: WebCam-Live"></video>
 <canvas id="my32x32CanvasA"  width="320" height="320" style="display:inline; border: 1px solid #ddd;  interpolation-mode: nearest-neighbor;" title="my32x32CanvasA: interval snapshots, presently for training"></canvas><br>
 
-<canvas id="myFaceCanvas" width="240" height="320"  style="border: 1px solid #ddd;" title="myFaceCanvas: Zoomed in face"></canvas>
+<canvas id="myFaceCanvas" width="320" height="320"  style="border: 1px solid #ddd;" title="myFaceCanvas: Zoomed in face"></canvas>
 <canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;" title="myVideoAsCanvas: back layer"></canvas>
 <canvas id="myBorderAsCanvas" style="position:relative; left:-325px" title="myBorderAsCanvas: Layer with box, in front of myVideoAsCanvas interval snapshot"></canvas><br>
 
@@ -184,13 +184,19 @@ myLoadManyImages = async function() {
          newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
        }                                                                                          
   
-       classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
-       const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
-       document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'                                                                                           
+                                                                                         
                                                                                    
        const forwardParams = {inputSize: 'sm', scoreThreshold:0.5}   // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
        result2 = await faceapi.tinyYolov2(can, forwardParams) 
-       console.log(result2)                                                                                       
+       console.log(result2)  
+       if (result2.length > 0){                                                                                      
+                                                                                             
+          classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
+          const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
+          document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'                                                                                          
+                                                                                             
+       }                                                                                      
+                                                                                             
      }     // if                                                                                                                                                                                            
    }       // for                                                                        
   // console.log(myIncomingImages)                                                  
