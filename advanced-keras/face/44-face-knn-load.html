@@ -187,11 +187,10 @@ myLoadManyImages = async function() {
        classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
        const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
        document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'                                                                                           
-                                                                                             
-                                                                                             
-                                                                                             
-                                                                                             
-       //document.getElementById('myDivLoss').innerHTML +=    myIncomingImages[myIteration][1] + '<br>'                                                                                   
+                                                                                   
+       const forwardParams = {inputSize: parseInt(0.5), '320'}
+       result2 = await faceapi.tinyYolov2(can, forwardParams) 
+       consol.log(result2)                                                                                       
      }     // if                                                                                                                                                                                            
    }       // for                                                                        
    console.log(myIncomingImages)                                                  
