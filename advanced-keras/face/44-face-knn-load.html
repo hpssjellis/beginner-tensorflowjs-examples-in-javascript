@@ -165,8 +165,11 @@ myLoadManyImages = async function() {
         img.crossOrigin = 'Anonymous'                                                                                            
                                                                                                                                                                                     
         let can = document.getElementById('my32x32CanvasA');
-        let ctx = can.getContext('2d');                                                
-        await img.onload = function() {
+        let ctx = can.getContext('2d');  
+                                                                                             
+     //const getIngredients = async () => {}                                                                                        
+                                                                                             
+        img.onload = await async function() {
             ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, can.width, can.height);                                         
         }  // img                                                                                 
      }     // if                                                                                                                                                                                            
