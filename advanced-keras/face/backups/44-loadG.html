@@ -1,0 +1,577 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+
+-->
+
+
+
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
+
+
+<script src="myNewDownloadedTensorflow.js"></script>
+
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0/dist/tf.js"></script>
+
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+    
+    
+<h2 align=center> As easy as I can make Loading Tensorflowjs KNN-Classifier Demo </h2>
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+ Online demo of the very interesting <a href="https://github.com/tensorflow/tfjs-models/tree/master/knn-classifier">KNN-Classifier </a> 
+ Github in the <a href="https://github.com/tensorflow/tfjs-models">TFJS-models </a> repository<br><br>
+ 
+KNN-Classifier takes a Deep Learning model and uses K-Nearest-Neighbor analysis to it. So you can, from a website, 
+live "Train" objects from the model and get results at the same time! <br>
+ 
+ This time we are going to use <a href="https://github.com/justadudewhohacks/face-api.js">face-api.js</a> to run a 68 point face detection
+ model then train the knn-classifier on people. Kind of fun to google celebrities for training then check out the rest of us. The KNN classifier
+ will detect the closest celebrity.<br><br>
+ I am looking into how to save the knn-classfier data with labels.
+ 
+</div><br>
+
+
+<div id="myDiv123Code"> 
+
+<!-- Load face-api from this github -->
+<script src="face-api.js"></script>
+<!-- Load KNN Classifier -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier@0.2.2"></script> 
+    
+
+
+<input type=button value="Load Face-api.js face_landmark_68_tiny_model"style="background-color:lime"  onclick="{
+   myRunFace() 
+}"><br><br>
+
+
+
+<select size=1 id="myCheck">
+ <option value='environment'>Rear Mobile Camera
+ <option value='user'>Front Mobile Camera
+</select>
+
+<input type=button id="myButtonActivateWebCam" value="Activate WebCam" onclick="{getVideo()}"> 
+<input type=button id="myButtonActivateWebCam" value="Stop WebCam" onclick="{ stopVideo()  }"> <br><br>
+ 
+ Train a few items with a group number and a text label<br>
+<input type=button value="Train. Get close, no bounding box used" onclick="{myNewTrain()}"> 
+<input type=number value=0 size=3 id="myClassNumber" onchange = "{
+   myTextChange()                                                       
+}">
+<input type=text id="myClassText" placeholder="Label for this trained class: example Cell Phone" value="Joe Smith"><br><br>
+ 
+<div id="myDivLoss">...</div><br>
+ 
+ 
+<video  id="myVideoElement" width="320" height="320" style="display:inline; border: 1px solid #ddd;" title="myVideoElement: WebCam-Live"></video>
+<canvas id="my32x32CanvasA"  width="320" height="320" style="display:inline; border: 1px solid #ddd;  interpolation-mode: nearest-neighbor;" title="my32x32CanvasA: interval snapshots, presently for training"></canvas><br>
+
+<canvas id="myFaceCanvas" width="320" height="320"  style="border: 1px solid #ddd;" title="myFaceCanvas: Zoomed in face"></canvas>
+<canvas id="myVideoAsCanvas" width="320" height="320" style="border: 1px solid #ddd;" title="myVideoAsCanvas: back layer"></canvas>
+<canvas id="myBorderAsCanvas" style="position:relative; left:-325px" title="myBorderAsCanvas: Layer with box, in front of myVideoAsCanvas interval snapshot"></canvas><br>
+
+
+ <br><br>
+
+
+Analyse every <input type=number id="myInterval"  value="500" size=5> milliseconds<br>
+<input type=button id="myButtonAuto" value="Auto" onclick="{takeAuto()}"> 
+<input type=button value="Stop Auto" onclick="{myStopAuto()}"><br><br>
+
+<div id="myDivTest">...</div><br>
+
+
+ 
+<div id="myDivSummary">...</div><br><br>
+
+ 
+<input type=button value="Load Group" onclick="{
+   myLoadManyImages()                                              
+}"><br>
+To get faces use google search but set "tools" from "Not filtered by License" to "Labelled for reuse" I also set "any Size" to "medium"<br>
+ <textarea id="myArray01" rows=10 cols=120>
+0,Daniel_Radcliff,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUFjvipbdoaGuo7AVoz5mXckJQTr1M-cWd6MW4JSiy7gC9pqaC***
+1,Old_man,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDqiMuPNkyz0Ukk1f_QT_1B92LgW8XVK8PbKGFtyQRbvEWKSDRRw***
+2,Young_Guy,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfeV9lzRPnjmaolJ3nWlTt92Svv2q4b7xu09LKwlo-9j-nciRe***</textarea> 
+ 
+ <!-- ************* Next we define the Javascript inside a web element so that the page can be refreshed dynamically **************-->
+ 
+ <!--  ************* The entire next line can be replaced with the <script> tag for a more conventional approch. ****************** -->
+
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+
+ ///////////////////////////////////// Global Variables ////////////////////////////////                                                                                            
+                                                                                            
+//position:relative; left:-650px;
+let myGroups = []
+let newArray = []  
+let newArray2 = []  
+let myFaceToClose = 0    // pixels to make bounding box bigger
+
+let myIncomingImages = []                                                                                             
+
+ ///////////////////////////////////// Canvas and video elements ////////////////////////////////                                                                                                   
+                                                                                             
+                                                                                             
+
+//////////////////////////////////////// knn classifier stuff///////////////////////////
+
+myLoadManyImages = async function() {
+  
+   const myIn = document.getElementById('myArray01').value.split('***')
+   document.getElementById('myDivLoss').innerHTML = '' // clear it  
+                                                                                             
+   for (myIteration = 0;  myIteration < myIn.length; myIteration++){ 
+      myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
+      myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
+      let myI = parseInt(myIncomingImages[myIteration][0])
+                                                                                         
+      let myFileName2 =  myIncomingImages[myIteration][2]    // the URL                                                                                   
+      if (myFileName2 != null) {
+        let img = new Image()
+        img.src = myFileName2
+        img.crossOrigin = 'Anonymous'                                                                                            
+                                                                                                                                                                                    
+        let can = document.getElementById('my32x32CanvasA');
+        let ctx = can.getContext('2d');  
+                                                                                             
+     //const getIngredients = async () => {}                                                                                        
+                                                                                             
+        img.onload = await async function() {
+            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, can.width, can.height);                                         
+        }  // img  
+                                                                                             
+       const img2 = await tf.fromPixels(my32x32CanvasA);          // now lets classify the image                                                                                    
+       const myDetectMarks = await net.detectLandmarks(img2)                                                                                                                                                                                        
+
+       for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
+         newArray[j] = []                                                                                        
+         newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
+         newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
+       }                                                                                          
+  
+       document.getElementById('myDivLoss').innerHTML += 'Checking ' + myI + '<br>'                                                                                  
+                                                                                   
+       const forwardParams = {inputSize: 'sm', scoreThreshold:0.5}   // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
+       result2 = await faceapi.tinyYolov2(can, forwardParams) 
+       console.log(result2)  
+       if (result2.length > 0){     
+                                                                                             
+          myGroups[myI] =  myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
+                                                                                         
+          classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
+          const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
+          document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'     
+                                                                                             
+                                                                                             
+                                                                                             
+       /////////////////////////////// prove we got a face ///////////////////////////////
+ 
+                                                                                             
+      let { width, height } = faceapi.getMediaDimensions(can)
+      let canvas = document.getElementById('myBorderAsCanvas')
+      canvas.width = width
+      canvas.height = height
+      const forwardParams = {inputSize: 'sm', scoreThreshold: 0.5}
+      result2 = await faceapi.tinyYolov2(can, forwardParams)                                                                                        
+                                                                                        
+      faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))   
+                                                                                             
+                                                                                             
+     let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
+     let myCTX4 = myCanvasElement4.getContext('2d');
+     myCTX4.drawImage(can, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
+                                      
+     let myCanvasElement3 = document.getElementById('myFaceCanvas');
+     let myCTX3 = myCanvasElement3.getContext('2d');
+                                                                                             
+     myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+(2*myFaceToClose), result2[0]._box._height+(2*myFaceToClose), 0, 0, myCanvasElement3.width, myCanvasElement3.height);
+                                                                                         
+     let img3 = tf.fromPixels(myFaceCanvas);    // the bounded canvas                                                                                                                    
+     const myLandmarks = await net.detectLandmarks(img3)                                                                                                                                                                                      
+  
+     for (let j=0;  j < myLandmarks._faceLandmarks.length; j++ ){  
+       newArray2[j] = []                                                                                        
+       newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
+       newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
+     }                                                                                          
+                                                                                                    
+    // myCTX3.drawImage(can, 0, 0, myCanvasElement3.width, myCanvasElement3.height);                                                                                                                                                                                            
+     const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
+                                                                                              
+    faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
+                                                                                         
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+        ///////////////////////////////// end proof ///////////////////////////////////                                                                                     
+                                                                                             
+                                                                                             
+       }                                                                                      
+                                                                                             
+     }     // if                                                                                                                                                                                            
+   }       // for                                                                        
+  // console.log(myIncomingImages)                                                  
+  // console.log(myGroups)                                                                                        
+                                                                                             
+}
+                                                                                             
+
+myRunFace = async function() {
+                                                                                        
+   classifier = knnClassifier.create();                                     
+   console.log('knn-classigfier loaded')
+                                                                                             
+   net = new faceapi.FaceLandmark68TinyNet()       // made it global                                                                                      
+   await net.load('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/models/face_landmark_68_tiny_model-weights_manifest.json')                                                                                                                                 
+   console.log('face_landmark_68_tiny_model loaded')
+                                                                                             
+   await faceapi.loadTinyYolov2Model('https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/face/muehler/models')
+   console.log('loadTinyYolov2Model loaded')
+                                                                                          
+}
+
+
+myTextChange = async function(){     
+    if (parseInt(document.getElementById('myClassNumber').value) < 0 ){
+           document.getElementById('myClassNumber').value = 0                                                                                  
+    }                         
+    if (myGroups[document.getElementById('myClassNumber').value] == undefined){
+        document.getElementById('myClassText').value    = ''   // clear the box                                                                                     
+      } else {                                                                                         
+        document.getElementById('myClassText').value    = myGroups[document.getElementById('myClassNumber').value] 
+    }
+}                                                                                             
+
+myNewTrain = async function(){   
+
+   let myCanvasElement = document.getElementById('my32x32CanvasA');
+   let myCTX = myCanvasElement.getContext('2d');
+   myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);   
+                                     
+   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
+   const myDetectMarks = await net.detectLandmarks(img1)                                                                                                                                                                                        
+
+   for (let j=0;  j < myDetectMarks._faceLandmarks.length; j++ ){  
+      newArray[j] = []                                                                                        
+      newArray[j][0] = myDetectMarks._faceLandmarks[j].x                                                                
+      newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
+   }                                                                                          
+                                                                                               
+   classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
+   myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
+ 
+   const myAddCount = classifier.getClassExampleCount()[document.getElementById('myClassNumber').value]
+   const myGroupNumber =  document.getElementById('myClassNumber').value                                                                                         
+   document.getElementById('myDivLoss').innerHTML = myAddCount + ' times, Example Added: to group #: '+ myGroupNumber 
+                                                                                     
+                                                                                             
+                                                                                                                                                                                   
+                                                                                             
+                                                                                             
+                                                                                             
+}
+                                                                                             
+                                                                                             
+ 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+myPredict = async function(){
+  let scoreThreshold = 0.5   //0.5
+  let sizeType = 'sm'      // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
+  let modelLoaded = false
+  let forwardTimes = []
+                                                                                             
+  let myCanvasElement = document.getElementById('my32x32CanvasA');
+  let myCTX = myCanvasElement.getContext('2d');                                                                                             
+  myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);  
+                                                                                            
+  if (classifier.getNumClasses() >= 1){    // have groups to rate
+                                            
+      let { width, height } = faceapi.getMediaDimensions(myCanvasElement)
+      let canvas = document.getElementById('myBorderAsCanvas')
+      canvas.width = width
+      canvas.height = height
+      const forwardParams = {inputSize: sizeType, scoreThreshold}
+      result2 = await faceapi.tinyYolov2(myCanvasElement, forwardParams)                                                                                        
+
+    if (result2.length >= 1){     // box drawing working   
+                                                                                             
+      
+      faceapi.drawDetection('myBorderAsCanvas', result2.map(det => det.forSize(width, height)))   
+                                                                                             
+                                                                                             
+     let myCanvasElement4 = document.getElementById('myVideoAsCanvas');
+     let myCTX4 = myCanvasElement4.getContext('2d');
+     myCTX4.drawImage(myVideoStream, 0, 0, myCanvasElement4.width, myCanvasElement4.height);
+                                      
+     let myCanvasElement3 = document.getElementById('myFaceCanvas');
+     let myCTX3 = myCanvasElement3.getContext('2d');
+                                                                                             
+     myCTX3.drawImage(myCanvasElement4, result2[0]._box._x-myFaceToClose, result2[0]._box._y-myFaceToClose, result2[0]._box._width+(2*myFaceToClose), result2[0]._box._height+(2*myFaceToClose), 0, 0, myCanvasElement3.width, myCanvasElement3.height);
+                                                                                         
+     let img3 = tf.fromPixels(myFaceCanvas);    // the bounded canvas                                                                                                                    
+     const myLandmarks = await net.detectLandmarks(img3)                                                                                                                                                                                      
+  
+     for (let j=0;  j < myLandmarks._faceLandmarks.length; j++ ){  
+       newArray2[j] = []                                                                                        
+       newArray2[j][0] = myLandmarks._faceLandmarks[j].x                                                                
+       newArray2[j][1] = myLandmarks._faceLandmarks[j].y  
+     }                                                                                          
+                                                                                                    
+     myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                                                                                                                            
+     const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
+                                                                                              
+    faceapi.drawLandmarks(myCanvasElement3, myLandmarks, { lineWidth: 2, color: 'red' })    // may remove these eventually                                                                                                                                                                             
+   
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
+       Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
+  } // end box drawing OK                                                                                             
+ } else {(console.log('Need to train groups'))}
+                                                                                             
+}
+                                                                                             
+                                                                                             
+            
+///////////////////////////////////// End KNN- Classifier stuff /////////////////////////////////////                                                                                                
+///////////////////////////////////// webcam stuff /////////////////////////////////////                                                                                             
+ 
+                                                                                             
+var myVideoStream = document.getElementById('myVideoElement')     // make it a global variable
+var myStoredInterval = 0
+
+                                                                                             
+                                                                                             
+stopVideo = async function() {  
+  clearInterval(myStoredInterval)   // god idea to stop the auto snapshot taking                                                                                         
+  myVideoStream.srcObject.getTracks().forEach(track => track.stop())  
+}
+   
+   
+                                                                                             
+                                                                                             
+                                                                                             
+getVideo = async function() {  
+  const myCamera = await document.getElementById('myCheck').value
+                                                                                     
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+  navigator.getMedia({video: { facingMode: myCamera }, audio: false},
+                     
+    function(stream) {
+      myVideoStream.srcObject = stream   
+      myVideoStream.play();
+  }, 
+                     
+   function(error) {
+     alert('webcam not working');
+  });
+}
+   
+                                                                                             
+                                                                                             
+
+
+                                                                                             
+takeAuto = async function(){                                                                                           
+    myStoredInterval = setInterval(async function(){                                                                                         
+       await myPredict()                                                                                   
+   }, document.getElementById('myInterval').value);        
+}
+  
+   
+                                                                                             
+                                                                                             
+myStopAuto  = async function(){                                                                                             
+    clearInterval(myStoredInterval)    
+}                                                                                            
+  
+                                                                                             
+                                                                                             
+                                                                                             
+ ///////////////////////////////////////////// Done Webcam functions ////////////////////////////////////////                                                                                               
+                                                                                             
+ myLoadUrl = async function(){
+  //alert('The test function will need to be changed if other models are loaded')                                                                                             
+  document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
+  const myFileName = document.getElementById('myInFile').value
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName);     // should make the model a global variable
+    document.getElementById('myDivSummary').innerHTML = ''      
+    await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
+   // await myPredict()
+  }                                                                           
+}                                                                                             
+                                                                                             
+
+                                                                                             
+                                                                                  
+                                                                                             
+                                                                                             
+/////////////////////////////////// END ALL FUNCTIONS ///////////////////////////////////////                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+//////////////////////////////////   WEIRD STYLE TAG THAT IS ACTUALLY A DYNAMIC SCRIPT TAG ///////////////////                                                                                          
+                                                                                             
+                                                                                             
+}"></style>
+<!-- If you replaced the <style> tag with a <script> tag don't forget to change the above line to just </script>  -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</div>
+<div id='myDiv123'>...</div><br>
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea123"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+
+myOnce123 = true    // so textareas are only clicked once
+
+
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+
+}  
+
+
+</script>  
+ 
+ 
+</body>
