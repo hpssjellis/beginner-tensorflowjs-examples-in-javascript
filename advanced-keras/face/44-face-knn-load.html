@@ -184,9 +184,9 @@ myLoadManyImages = async function() {
          newArray[j][1] = myDetectMarks._faceLandmarks[j].y  
        }                                                                                          
   
-       classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myGroups[myI]);                                                                                                                                                                                                                                              
-       const myAddCount = classifier.getClassExampleCount()[myGroups[myI]]                                                                                     
-       document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myGroups[myI] +'<br>'                                                                                           
+       classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
+       const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
+       document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'                                                                                           
                                                                                              
                                                                                              
                                                                                              
