@@ -72,7 +72,7 @@ live "Train" objects from the model and get results at the same time! <br>
     
 
 
-<input type=button value="Load Face-api.js face_landmark_68_tiny_model" onclick="{
+<input type=button value="Load Face-api.js face_landmark_68_tiny_model"style="background-color:lime"  onclick="{
    myRunFace() 
 }"><br><br>
 
@@ -158,7 +158,6 @@ myLoadManyImages = async function() {
       myIncomingImages[myIteration] = []    // make new part of 2D array                                                                         
       myIncomingImages[myIteration] = myIn[myIteration].split(',')    // [0] = groups,   [1] = labels,    [2] = Image URL
       let myI = parseInt(myIncomingImages[myIteration][0])
-      myGroups[myI] =  myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
                                                                                          
       let myFileName2 =  myIncomingImages[myIteration][2]    // the URL                                                                                   
       if (myFileName2 != null) {
@@ -189,8 +188,10 @@ myLoadManyImages = async function() {
        const forwardParams = {inputSize: 'sm', scoreThreshold:0.5}   // 'xs' (224 x 224) | 'sm' (320 x 320) | 'md' (416 x 416) | 'lg' (608 x 608)  //0, 1, 2, 3
        result2 = await faceapi.tinyYolov2(can, forwardParams) 
        console.log(result2)  
-       if (result2.length > 0){                                                                                      
+       if (result2.length > 0){     
                                                                                              
+          myGroups[myI] =  myIncomingImages[myIteration][1]       // add the label to the myGroups array                                                             
+                                                                                         
           classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), myI);                                                                                                                                                                                                                                              
           const myAddCount = classifier.getClassExampleCount()[myI]                                                                                     
           document.getElementById('myDivLoss').innerHTML += myAddCount + ' times, Example Added: to group #: '+ myI +'<br>'     
