@@ -521,18 +521,16 @@ myTest = async function(){
                                                                                             
                                                                                              
   const myPredictArray = await   model.predict(myIn) 
-                                                                            
+              
+                                                                                             
    console.log('await myPredictArray[0].data()')                                                
-   console.log(await myPredictArray[0].data())                   
-                                                                                             
-   console.log('await myPredictArray[0].data().0')                                                
-   console.log(await myPredictArray[0].data().0)                                              
-   console.log('await myPredictArray[1].data().0')                                              
-   console.log(await myPredictArray[1].data().0)                                                                                        
+   console.log(await myPredictArray[0].data())                                              
+   console.log('await myPredictArray[1].data()')                                              
+   console.log(await myPredictArray[1].data())                                                                                        
                                                                                              
                                                                                              
-  const myOutNow = 'Asking: '+document.getElementById('myAsk').value + ', result multi dense layers Path 1: ' + await myPredictArray[0].data().0 +
-    ', result single dense layer Path2: ' + await myPredictArray[1].data().0
+  const myOutNow = 'Asking: '+document.getElementById('myAsk').value + ', result multi dense layers Path 1: ' + await myPredictArray[0].data() +
+    ', result single dense layer Path2: ' + await myPredictArray[1].data()
                                                                                              
   document.getElementById('myDivTest').innerHTML = myOutNow                                                                                          
   console.log(myOutNow) 
