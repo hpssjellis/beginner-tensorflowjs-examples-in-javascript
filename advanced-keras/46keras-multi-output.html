@@ -70,21 +70,17 @@ model.add(tf.layers.dense({ units:  1 }) );<br>  <br>
  
  <h3>This Advanced Keras multiple input single output model</h3>  
  
-const myInput1 = tf.input({shape: [1], name: 'myInput1'});<br>
-const myInput1Dense1 = tf.layers.dense({units: 20, name: 'myInput1Dense1'}).apply(myInput1);<br>
-const myInput1Dense2 = tf.layers.dense({units: 20, name: 'myInput1Dense2'}).apply(myInput1Dense1);<br>
-const myInput1Dense3 = tf.layers.dense({units: 1, name: 'myInput1Dense3'}).apply(myInput1Dense2)<br><br>
+ const myInput1 = tf.input({shape: [1], name: 'myInput1'});
+                                                                                     
+   const myInput1Path1Dense1 = tf.layers.dense({units: 20, name: 'myInput1Path1Dense1'}).apply(myInput1);
+   const myInput1Path1Dense2 = tf.layers.dense({units: 20, name: 'myInput1Path1Dense2'}).apply(myInput1Path1Dense1);
+   const myInput1Path1Dense3 = tf.layers.dense({units: 20, name: 'myInput1Path1Dense3'}).apply(myInput1Path1Dense2)
+   const myInput1Path1Dense4 = tf.layers.dense({units: 1, name: 'myInput1Path1Dense4'}).apply(myInput1Path1Dense3)
+                                                                                                                                                        
+   const myInput1Path2Dense1 = tf.layers.dense({units: 20, name: 'myInput1Path2Dense1'}).apply(myInput1);                                                                                                            
                                                                                              
-                                                                                                
-const myInput2 = tf.input({shape: [1], name: 'myInput2'});<br>
-const myInput2Dense1 = tf.layers.dense({units: 20, name: 'myInput2Dense1'}).apply(myInput2);<br>
-const myInput2Dense2 = tf.layers.dense({units: 20, name: 'myInput2Dense2'}).apply(myInput2Dense1);<br>
-const myInput2Dense3 = tf.layers.dense({units: 1, name: 'myInput2Dense3'}).apply(myInput2Dense2);<br><br>                                                                                          
-                                                                                             
-const myConcatenate1 = tf.layers.concatenate({axis : 1, name: 'myConcatenate1'}).apply([myInput1Dense3, myInput2Dense3]);<br>                                                                                               
-const myConcatenate1Dense4 = tf.layers.dense({units: 1, name: 'myConcatenate1Dense4'}).apply(myConcatenate1)<br><br>                                                                                              
-                                                                                             
-model2 = tf.model({inputs: [myInput1,myInput2], outputs: myConcatenate1Dense4});    // This would be a global model<br><br>
+   model2 = tf.model({inputs: [myInput1,myInput2], outputs: [myInput1Dense3,myInput1Path1Dense4,myInput1Path2Dense1]});    // This would be a global model
+   // This would be a global model<br><br>
  
  
  
