@@ -370,7 +370,13 @@ myLoadData = async function(){
    xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);    // old one input tensor
                                                                                              
                                                                                              
-   yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+  //yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]); // old one
+                                                                                             
+                       
+   yArrayTrainingTarget = []
+                                                                                                                 
+   yArrayTrainingTarget[0] = tf.tensor2d(yArray, shape=[yArray.length, 1]);                                                                                                                 
+   yArrayTrainingTarget[0] = tf.tensor2d(yArray, shape=[yArray.length, 1]);
                                            
     //console.log(xTrainingData)
     //console.log(yTrainingTarget) 
@@ -473,7 +479,7 @@ myLoadData = async function(){
   
   if (!document.stopRequested){  
     console.log('Training Model');                                                                                          
-    var myFit = await model.fit(xTrainingData, yTrainingTarget, {
+    var myFit = await model.fit(xTrainingData, yArrayTrainingTarget, {
     batchSize: Number.parseInt(document.getElementById('myBatch').value),
     epochs: Number.parseInt(document.getElementById('myEpoch').value),
     validationSplit: Number.parseFloat(document.getElementById('myValidationSplit').value), // for seperating percent of data for testing  0.15 = 15% for testing
