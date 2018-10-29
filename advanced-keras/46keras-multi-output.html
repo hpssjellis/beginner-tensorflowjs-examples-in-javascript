@@ -407,8 +407,7 @@ myLoadData = async function(){
                                                                                                                                                         
    const myInput1Path2Dense1 = tf.layers.dense({units: 20, name: 'myInput1Path2Dense1'}).apply(myInput1);                                                                                                            
                                                                                              
-   model2 = tf.model({inputs: [myInput1,myInput2], outputs: [myInput1Path1Dense4,myInput1Path2Dense1]});    // This would be a global model
-   
+   model = tf.model({ inputs: myInput1, outputs: [myInput1Path1Dense4,myInput1Path2Dense1] });   // global variable
                                                                                            
                                                                                              
                                                                                              
