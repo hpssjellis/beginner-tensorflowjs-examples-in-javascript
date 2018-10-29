@@ -102,7 +102,7 @@ On my machine they have the same root as the below localStorage identifier: <br>
  
  
  
-localStorage identifier: <input size="120" id="myLocalFileName" type="text" value="tensorflowjs_models/myMultiModel01/model_topology"><br> 
+localStorage identifier: <input size="120" id="myLocalFileName" type="text" value="tensorflowjs_models/myMultiModel02/model_topology"><br> 
 <input id="myButton123" type=button value="Define Multi Input Keras Model"  onclick="{
     (async function(){
     console.log('Defining Model')  
@@ -125,13 +125,13 @@ localStorage identifier: <input size="120" id="myLocalFileName" type="text" valu
                                                                                                                                                         
    const myInput1Path2Dense1 = tf.layers.dense({units: 20, name: 'myInput1Path2Dense1'}).apply(myInput1);                                                                                                            
                                                                                              
-   model2 = tf.model({inputs: [myInput1,myInput2], outputs: [myInput1Dense3,myInput1Path1Dense4,myInput1Path2Dense1]});    // This would be a global model
+   model2 = tf.model({ inputs: myInput1, outputs: [myInput1Path1Dense4,myInput1Path2Dense1] });
                                                                                      
    console.log('Printing Model to web page')                                                                                                                                                                                   
    await model2.summary(null,null,x => {document.getElementById('myDiv123').innerHTML += x + '<br>'}); 
                                                                                      
    console.log('Saving Model to local storage')                                                                                    
-   const saveResults = await model2.save('localstorage://myMultiModel01');                                                                                  
+   const saveResults = await model2.save('localstorage://myMultiModel02');                                                                                  
                                                                            
    console.log('Loading model information from local storage')   
    console.log('Note: This is very different than loading the model!') 
