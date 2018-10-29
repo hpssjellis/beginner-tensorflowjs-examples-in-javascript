@@ -521,8 +521,6 @@ myTest = async function(){
                                                                                             
                                                                                              
   const myPredictArray = await   model.predict(myIn) 
-  document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
-        ', Output = ' + await myPredictArray.data()
                                                     
                                                                                              
    console.log('await myPredictArray[0].data()')                                                
@@ -531,7 +529,9 @@ myTest = async function(){
    console.log(await myPredictArray[1].data())                                                                                        
                                                                                              
                                                                                              
-                                                                                             
+  
+  document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
+        ', Output = ' + await myPredictArray.data()                                                                                           
   console.log('Asking: '+document.getElementById('myAsk').value + ', result: ' + await myPredictArray.data()) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
