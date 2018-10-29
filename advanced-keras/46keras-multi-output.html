@@ -522,17 +522,17 @@ myTest = async function(){
                                                                                              
   const myPredictArray = await   model.predict(myIn) 
   
-  const path0 = await myPredictArray[0].data()
-  const path1 = await myPredictArray[1].data()
+  const path1 = await myPredictArray[0].data()
+  const path2 = await myPredictArray[1].data()
                                                                                              
    console.log('await myPredictArray[0].data()')                                                
-   console.log(path0)                                              
+   console.log(path1)                                              
    console.log('await myPredictArray[1].data()')                                              
-   console.log(path1)                                                                                        
+   console.log(path2)                                                                                        
 
                                                                                              
-  document.getElementById('myDivTest').innerHTML = 'Asking: '+document.getElementById('myAsk').value + ', result Path 1: <b>' + path0.toFixed(2)  +
-    '</b>, result Path2: <b>' + path1.toFixed(2)  + '</b>'                                                                                        
+  document.getElementById('myDivTest').innerHTML = 'Asking: '+document.getElementById('myAsk').value + ', result Path 1: <b>' + path1  +
+    '</b>, result Path2: <b>' + path2 + '</b>'                                                                                        
                                                                                              
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
 }
