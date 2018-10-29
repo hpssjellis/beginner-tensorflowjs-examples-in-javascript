@@ -521,7 +521,9 @@ myTest = async function(){
                                                                                             
                                                                                              
   const myPredictArray = await   model.predict(myIn) 
-                                                    
+                                                                            
+   console.log('await myPredictArray[0].data()')                                                
+   console.log(await myPredictArray[0].data())                   
                                                                                              
    console.log('await myPredictArray[0].data().0')                                                
    console.log(await myPredictArray[0].data().0)                                              
