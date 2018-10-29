@@ -516,13 +516,11 @@ myTest = async function(){
   console.log('Model Predict')
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
                                                                                              
+
+  myIn = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
+                                                                                            
                                                                                              
-  let myInArray = []
-  myInArray[0] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
-  myInArray[1] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
-                                                                                             
-                                                                                             
-  const myPredictArray = await   model.predict(myInArray) 
+  const myPredictArray = await   model.predict(myI) 
   document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data()
                                                                                              
