@@ -529,8 +529,8 @@ myTest = async function(){
    console.log(await myPredictArray[1].data())                                                                                        
                                                                                              
                                                                                              
-  const myOutNow = 'Asking: '+document.getElementById('myAsk').value + ', result Path 1: <b>' + await myPredictArray[0].data().toFixed(2)  +
-    '</b>, result Path2: <b>' + await myPredictArray[1].data().toFixed(2)  + '</b>'
+  const myOutNow = 'Asking: '+document.getElementById('myAsk').value + ', result Path 1: <b>' + parseFloat(myPredictArray[0].data()).toFixed(2)  +
+    '</b>, result Path2: <b>' + parseFloat(myPredictArray[1].data()).toFixed(2)  + '</b>'
                                                                                              
   document.getElementById('myDivTest').innerHTML = myOutNow                                                                                          
                                                                                              
