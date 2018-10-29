@@ -3,8 +3,17 @@ These files are a bit move complex than the beginner keras files. Either the pro
 
 Working on
 
+
+
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/40keras-lstm-batching.html
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/46keras-multi-output.html
+
+
+
+
+
+These are good
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/40keras-lstm.html
 
