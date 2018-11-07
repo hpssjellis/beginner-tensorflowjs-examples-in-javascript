@@ -1,0 +1,29 @@
+{
+    "name": "fourth-tensorflow",
+    "description": "Several example Tensorflow programs optimized for iPython Notebook now called jupyter.",
+    "version": "0.0.3",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hpssjellis/fourth-tensorflow.git"
+		
+    },
+    "private": "false",
+    "scripts": {
+        "start": "bash setup.sh"
+    },
+    "engines": {
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "contributors": [
+        {
+            "name": "Jeremy Ellis",
+            "email": "info@rocksetta.com", 
+            "twitter": "@rocksetta",
+            "url": "http://rocksetta.com/"
+        }
+
+    ]
+}

@@ -1,0 +1,49 @@
+right click on rocksetta???.sh files and select run to see examples working
+
+You can always run any of the python files the normal way by openning a terminal and entering
+
+source ~/virtual-tf/bin/activate
+
+
+then enter
+python filename.py
+
+reminder to type deactivate to stop running the virtual environment
+
+A few extra reminders
+
+type a few letters of a file and click the tab key to autocomplete
+cd .. goes up a lvel
+cd foldername goes into the folder
+
+ls or dir list a folders files
+
+the rocksetta bash files can also be run this way by typing
+bash rocksetta??.sh
+
+
+
+
+NOTE: The above manual method presently will have to be used for true TensorFlow examples as I have not made rocksetta files for those yet.
+
+Note with the tensoerflow examples you may have to change the /tmp file path so that the examples work with tensorboard. I use this file path, since thenormal /tmp is invisible to the easy cloud9 directory structure (still works using the manual method)
+
+/home/ubuntu/workspace/tmp5
+
+
+
+
+P.S. always close your run windows as some of them may have processes still running that then stops new processes from running.
+
+
+
+
+
+not yet installed
+
+cuda cudnn
+ls -l /path/to/cuda/lib/libcud*
+
+python version
+
+python -c "import tensorflow; print(tensorflow.__version__)"
