@@ -106,7 +106,7 @@ const xs = tf.tensor4d([
 ], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([1,0,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,0,1,0,0,0,0,0,      0,0,1,0,0,0,0,0,     0,0,0,1,0,0,0,0,       0,0,0,0,0,0,0,0,       0,0,2,0,0,0,0,0  ], shape=[8, 8]);        // 8 images 8 dimension                                                                                                                  
+const ys = tf.tensor2d([1,0,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,0,1,0,0,0,0,0,      0,0,1,0,0,0,0,0,     0,0,0,1,0,0,0,0,       0,0,0,0,0,0,0,0,       0,0,2,0,0,0,0,0  ], shape=[8, 8], 'int32');        // 8 images 8 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -579,8 +579,8 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 4, 4, 1]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/8, 8]);
+   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 4, 4, 1], 'int32');
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/8, 8], 'int32');
                                            
    // console.log(xTrainingData)
    // console.log(yTrainingTarget) 
