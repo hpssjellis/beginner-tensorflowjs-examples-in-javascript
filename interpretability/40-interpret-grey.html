@@ -146,7 +146,7 @@ async function myGo() { // inline async so we can use promises and await
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1])).data()                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
@@ -610,7 +610,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape), 'int32').data()                                                                                                                                      
     document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
     document.getElementById('myDivTest').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDivTest').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
