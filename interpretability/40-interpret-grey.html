@@ -149,8 +149,8 @@ async function myGo() { // inline async so we can use promises and await
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>Grey scale ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Black object on white ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>White objct on black ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
+    document.getElementById('myDiv7979').innerHTML += '<b>Black object on White background' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>White objct on Black background' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
                                                              
  })()   // end the inline async function
 }" >  
