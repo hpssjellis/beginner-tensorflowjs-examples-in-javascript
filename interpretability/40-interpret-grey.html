@@ -106,7 +106,7 @@ const xs = tf.tensor4d([
 ], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([1,0,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,0,1,0,0,0,0,0,      0,0,1,0,0,0,0,0,     0,0,0,1,0,0,0,0,       0,0,0,0,0,0,0,0,       0,0,2,0,0,0,0,0  ], shape=[8, 8], 'int32');        // 8 images 8 dimension                                                                                                                  
+const ys = tf.tensor2d([1,0,0,,      0,1,0,      0,1,0,      0,0,1,      0,0,1,    0,0,0,       0,0,0,      0,0,2  ], shape=[8, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -124,7 +124,7 @@ model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 
                                                                                                                                                                         
 model.add(tf.layers.flatten());                                                                                                                                         
 model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
-model.add(tf.layers.dense({ units: 8, activation: 'linear' }) ); 
+model.add(tf.layers.dense({ units: 3, activation: 'linear' }) ); 
                                           
 model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
@@ -148,14 +148,9 @@ async function myGo() { // inline async so we can use promises and await
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>2 lines ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>3 lines ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'       
-    document.getElementById('myDiv7979').innerHTML += '<b>4 lines ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'       
-    document.getElementById('myDiv7979').innerHTML += '<b>5 lines ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'       
-    document.getElementById('myDiv7979').innerHTML += '<b>6 lines ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'       
-    document.getElementById('myDiv7979').innerHTML += '<b>7 lines ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'                 
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Black object on white ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>White objct on black ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
                                                              
  })()   // end the inline async function
 }" >  
@@ -217,7 +212,7 @@ Now lets try the above in a full Machine Learning Web App.
  but builT into the model <br><BR>
  <Minamilist setup, lets try a grey detector Neural Network. <br><br>
  4x4 input array with 0=transparent, 1=black, 2=white; may eventually switch this to 5x5 or 6x6<br>
- Output 1x3 one hot array in this order: White object on black, black object on white, grey scale<br><br>
+ Output 1x3 one hot array in this order: grey scale, black object on white, White object on black  <br><br>
  Note: For interpretability I will not train the NN on the transparent feature (may slip it in occassionally)<br>
  To run an interpretability test I will run the prediction multiple times with inserted transparent blocks, then show and 
  sort the results.<br><br>
@@ -623,14 +618,9 @@ myTest = async function(){
   
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape, 'int32')).data()                                                                                                                                      
     document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
-    document.getElementById('myDivTest').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDivTest').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>2 lines ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>3 lines ' + await Math.round(myPredictArray[3]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>4 lines ' + await Math.round(myPredictArray[4]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>5 lines ' + await Math.round(myPredictArray[5]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>6 lines ' + await Math.round(myPredictArray[6]*100) +'%</b><br>'       
-    document.getElementById('myDivTest').innerHTML += '<b>7 lines ' + await Math.round(myPredictArray[7]*100) +'%</b><br>'  
+    document.getElementById('myDivTest').innerHTML += '<b>grey scale ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>black object on white background ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>white object on black background' + await Math.round(myPredictArray[2]*100) +'%</b><br>'     
                                                                                              
   console.log(document.getElementById('myAsk2').value + ': ' + await myPredictArray) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
