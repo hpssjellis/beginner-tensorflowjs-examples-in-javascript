@@ -73,40 +73,40 @@ const xs = tf.tensor4d([
 2,1,2,1,                                                                                                                                                                
 1,2,1,2,                                                                                                                                                                
                                                                                                                                                                         
-0,0,0,0,                                                                                                                                                                
-0,0,0,0,                                                                                                                                                                
-1,0,0,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
 1,1,1,1,    
                                                                                     
-0,1,0,0,                                                                                                                                                                
-0,1,0,0,                                                                                                                                                                
-0,1,0,0,                                                                                                                                                                
-1,1,1,1,    
+2,2,2,2,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,1,1,1,     
                                                                                      
-0,1,0,0,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-0,1,0,0,                                                                                                                                                                
-0,0,0,0, 
+1,1,2,2,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+2,2,1,1,                                                                                                                                                                
+2,1,1,1,  
                                                                                                                                                               
+2,2,1,1,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
-0,1,0,0,                                                                                                                                                                
-0,1,0,0,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
 1,1,1,1,  
                                                                                                                                                               
-0,1,0,0,                                                                                                                                                                
-0,0,0,0,                                                                                                                                                                
-0,1,0,0,                                                                                                                                                                
-1,0,1,0,  
-                                                                                                                                                                        
-0,0,1,0,                                                                                                                                                                
-0,0,1,0,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
-0,0,1,0 
+1,1,1,1,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+1,1,2,2,   
+                                                                                                                                                                        
+2,1,1,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,1,1,2
                                                                                     
 ], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([1,0,0,      1,0,0,      0,1,0,      0,0,1,      0,0,1,    0,0,0,       0,0,0,      0,0,2  ], shape=[8, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
+const ys = tf.tensor2d([1,0,0,      1,0,0,      0,1,0,      0,1,0,      0,1,0,    0,0,1,       0,0,1,      0,0,1  ], shape=[8, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
