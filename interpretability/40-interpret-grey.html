@@ -149,9 +149,9 @@ async function myGo() { // inline async so we can use promises and await
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Black object on White background' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>White objct on Black background' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
                                                              
  })()   // end the inline async function
 }" >  
@@ -621,9 +621,9 @@ myTest = async function(){
   
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape, 'int32')).data()                                                                                                                                      
     document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
-    document.getElementById('myDivTest').innerHTML += '<b>grey scale ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDivTest').innerHTML += '<b>black object on white background ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDivTest').innerHTML += '<b>white object on black background' + await Math.round(myPredictArray[2]*100) +'%</b><br>'     
+    document.getElementById('myDivTest').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDivTest').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDivTest').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'     
                                                                                              
   console.log(document.getElementById('myAsk2').value + ': ' + await myPredictArray) 
   document.getElementById('myButtonTest').style.backgroundColor = 'yellow'
