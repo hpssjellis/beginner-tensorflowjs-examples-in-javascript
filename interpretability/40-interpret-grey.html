@@ -79,8 +79,8 @@ const xs = tf.tensor4d([
 1,1,1,1,    
                                                                                     
 2,2,2,2,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
 1,1,1,1,     
                                                                                      
 1,1,2,2,                                                                                                                                                                
@@ -89,14 +89,14 @@ const xs = tf.tensor4d([
 2,1,1,1,  
                                                                                                                                                               
 2,2,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
+2,2,1,1,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
 1,1,1,1,  
                                                                                                                                                               
 1,1,1,1,                                                                                                                                                                
 1,1,1,1,                                                                                                                                                                
-1,2,2,2,                                                                                                                                                                
-1,1,2,2,   
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,   
                                                                                                                                                                         
 2,1,1,1,                                                                                                                                                                
 1,2,1,1,                                                                                                                                                                
@@ -105,8 +105,9 @@ const xs = tf.tensor4d([
                                                                                     
 ], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
-// Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([1,0,0,      1,0,0,      0,1,0,      0,1,0,      0,1,0,    0,0,1,       0,0,1,      0,0,1  ], shape=[8, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
+// Labels of how many lines in each image. I can make much more images just few here for simplicity 
+// grey, blocks, diagonals, 
+const ys = tf.tensor2d([1,0,0,      1,0,0,      0,1,0,      0,1,0,      0,0,1,    0,1,0,       0,1,0,      0,0,1  ], shape=[8, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -212,7 +213,9 @@ Now lets try the above in a full Machine Learning Web App.
  but builT into the model <br><BR>
  <Minamilist setup, lets try a grey detector Neural Network. <br><br>
  4x4 input array with 0=transparent, 1=black, 2=white; may eventually switch this to 5x5 or 6x6<br>
- Output 1x3 one hot array in this order: grey scale, black object on white, White object on black  <br><br>
+ 
+ Output 1x3 one hot array in this order: grey scale, white of black blocks, White or black diagonal lines  <br><br>
+ 
  Note: For interpretability I will not train the NN on the transparent feature (may slip it in occassionally)<br>
  To run an interpretability test I will run the prediction multiple times with inserted transparent blocks, then show and 
  sort the results.<br><br>
