@@ -119,10 +119,10 @@ const xs = tf.tensor4d([
 1,1,1,1,                                                                                                                                                                
 0,0,1,0 
                                                                                     
-], shape=[8, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
+], shape=[8, 4, 4, 1], 'int32' );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity                                                                     
-const ys = tf.tensor2d([1,0,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,0,1,0,0,0,0,0,      0,0,1,0,0,0,0,0,     0,0,0,1,0,0,0,0,       0,0,0,0,0,0,0,0,       0,0,2,0,0,0,0,0  ], shape=[8, 8]);        // 8 images 8 dimension                                                                                                                  
+const ys = tf.tensor2d([1,0,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,1,0,0,0,0,0,0,      0,0,1,0,0,0,0,0,      0,0,1,0,0,0,0,0,     0,0,0,1,0,0,0,0,       0,0,0,0,0,0,0,0,       0,0,2,0,0,0,0,0  ], shape=[8, 8], 'int32');        // 8 images 8 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -162,7 +162,7 @@ async function myGo() { // inline async so we can use promises and await
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
   (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1])).data()                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
@@ -592,8 +592,8 @@ console.log('myMonoChromePixels  ' + myMonoChromePixels)
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 4, 4, 1]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/8, 8]);
+   const xTrainingData   = tf.tensor4d(xArray, shape=[xArray.length/16, 4, 4, 1], 'int32');
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/8, 8], 'int32');
                                            
    // console.log(xTrainingData)
    // console.log(yTrainingTarget) 
@@ -623,7 +623,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape)).data()                                                                                                                                      
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape, 'int32')).data()                                                                                                                                      
     document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
     document.getElementById('myDivTest').innerHTML += '<b>0 lines ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDivTest').innerHTML += '<b>1 lines ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
