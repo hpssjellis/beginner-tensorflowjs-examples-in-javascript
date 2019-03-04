@@ -229,7 +229,10 @@ async function myGo() { // inline async so we can use promises and await
  globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
  
-<input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
+<input  type="button" id="myButtonTest" value="Re-Test" onclick="{ 
+  document.getElementById('myAsk2').value = globalOriginal 
+  document.all.myAsk2.onchange(); // have it show the pattern
+                                                                 
   (async function () {                                                                                                                                                                                                                                                                            globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
