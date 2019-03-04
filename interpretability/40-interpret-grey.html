@@ -58,17 +58,12 @@ Test or change this data: 0 = transparent, 1 = black. 2=white <br>
 <textarea id="myAsk2" rows=7 cols=20 wrap=false onChange="{
                                                           
                                                           
-var myCanvasElement = document.getElementById("myCanvas");
-
-// get the context
+var myCanvasElement = document.getElementById('myCanvas');
 var ctx = myCanvasElement.getContext('2d');
-// fill the canvas with black
-ctx.fillRect(0, 0, 200, 200);
-// get the ImageData for the top/left 10 pixels
-var imageData = ctx.getImageData(0, 0, 10, 10);
 
-// logs an array of 10 x 10 x 4 (400 items)
-console.log(imageData.data);                                                 
+ctx.fillRect(0, 0, 200, 200); // fill the canvas with black
+var imageData = ctx.getImageData(0, 0, 10, 10);  // get the ImageData for the top/left 10 pixels
+console.log(imageData.data); // logs an array of 10 x 10 x 4 (400 items)                                                
                                                           
                                                           
                                                           
