@@ -309,11 +309,11 @@ model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 700; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 1500; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/700 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/1500 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
@@ -323,7 +323,7 @@ async function myGo() { // inline async so we can use promises and await
  globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
  
-<input  type="button" id="myButtonTest" value="Re-Test-Original" onclick="{ 
+<input  type="button" id="myButtonTest" value="Re-Test-and-Show-Original" onclick="{ 
   document.getElementById('myAsk2').value = globalOriginal 
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
@@ -338,7 +338,7 @@ async function myGo() { // inline async so we can use promises and await
 }" >  
  
   
-<input  type="button"  value="Set-Original" onclick="{ 
+<input  type="button"  value="Set-New-Original" onclick="{ 
    globalOriginal =  document.getElementById('myAsk2').value  
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
