@@ -92,7 +92,7 @@ myIn[3] = myInput[3].split(',')
 
 
 
-console.log(myIn)
+//console.log(myIn)
 //alert(myIn[2,2])
 //alert(imgData.data.length)
 for (var i = 0;  i < imgData.data.length; i += 4){
@@ -102,7 +102,7 @@ for (var i = 0;  i < imgData.data.length; i += 4){
        if (i % (myMax*4) == 0){myCountY += 1}    // then ones each of 4 for each pixel in a row do next row                                                  
     }
     if (myCountY >= 4){myCountY = 0; }
-    console.log('i:' + i + ', myCountX:' + myCountX + ', myCountY:' + myCountY + ', array:'+myIn[myCountY][myCountX])
+   // console.log('i:' + i + ', myCountX:' + myCountX + ', myCountY:' + myCountY + ', array:'+myIn[myCountY][myCountX])
 
 
     if(myIn[myCountY][myCountX] == 0){myTransparent=0; myColor=100;} // transparent
@@ -116,7 +116,7 @@ for (var i = 0;  i < imgData.data.length; i += 4){
 
 
 ctx.putImageData(imgData, 0, 0);
-console.log(imgData);
+//console.log(imgData);
 
 
 
