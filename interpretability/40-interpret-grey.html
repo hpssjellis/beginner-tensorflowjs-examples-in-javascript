@@ -226,11 +226,11 @@ async function myGo() { // inline async so we can use promises and await
 }
                                                                                                                                                                       
  myGo() // call the main async function 
-                                                                                                                                                                       
+ globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
  
 <input  type="button" id="myButtonTest" value="Re-Test" onclick="{  
-  (async function () {                                                                                                                                                                                                                                                                                                                                                                                                                                      
+  (async function () {                                                                                                                                                                                                                                                                            globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -243,17 +243,35 @@ async function myGo() { // inline async so we can use promises and await
  
  
 <input  type="button" id="myButtonTest" value="Interpret" onclick="{  
-  (async function () {     
-   var myRan = Math.floor(Math.random()*16+1)    // 4x4 table
-   alert(myRan)
-                                                                   
-   var myOne = Math.floor(Math.random()*myRan+1)    // starting point
-   for (var myWow=myOne;  myWow < myRan; myWow++){  
-      if (( document.getElementById('myAsk2').value[myWow] == 0)||( document.getElementById('myAsk2').value[myWow] == 1)){                                                              
-         document.getElementById('myAsk2').value[myWow] = '0'
-       }                                                            
-    }                                                               
-                                                                   
+  (async function () { 
+
+
+/////////////////////////////start to parse the original /////////////////////////////////
+
+     
+
+     let myVal2 = globalOriginal.split('\n')
+     let myVal = new Array(4)
+     myVal[0] = myVal2[0].split(',')
+     myVal[1] = myVal2[1].split(',')
+     myVal[2] = myVal2[2].split(',')
+     myVal[3] = myVal2[3].split(',')
+     for (var myOne=0;  myOne < 4; myOne++){
+       if (Math.random() > 0.5){myVal[0][myOne] = 0}
+       if (Math.random() > 0.5){myVal[1][myOne] = 0}
+       if (Math.random() > 0.5){myVal[2][myOne] = 0}
+       if (Math.random() > 0.5){myVal[3][myOne] = 0}
+     }
+
+    document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+
+
+///////////////////////////// done parsing the original /////////////////////////////////
+
+    document.all.myAsk2.onchange(); // have it show the pattern
+
+
+                                                               
                                                                    
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
