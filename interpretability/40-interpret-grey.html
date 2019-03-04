@@ -251,7 +251,7 @@ async function myGo() { // inline async so we can use promises and await
 
 /////////////////////////////start to parse the original /////////////////////////////////
 
-     
+     let myCutOff = parseInt(document.getElementById('myCut').value)
 
      let myVal2 = globalOriginal.split('\n')
      let myVal = new Array(4)
@@ -260,10 +260,10 @@ async function myGo() { // inline async so we can use promises and await
      myVal[2] = myVal2[2].split(',')
      myVal[3] = myVal2[3].split(',')
      for (var myOne=0;  myOne < 4; myOne++){
-       if (Math.random() > 0.5){myVal[0][myOne] = 0}
-       if (Math.random() > 0.5){myVal[1][myOne] = 0}
-       if (Math.random() > 0.5){myVal[2][myOne] = 0}
-       if (Math.random() > 0.5){myVal[3][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[0][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[1][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[2][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[3][myOne] = 0}
      }
 
     document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
@@ -283,7 +283,9 @@ async function myGo() { // inline async so we can use promises and await
     document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
                                                              
  })()   // end the inline async function
-}" >   
+}" > 
+ 
+ <input id="myCut" type=text value = 0.5>
  
  
  
