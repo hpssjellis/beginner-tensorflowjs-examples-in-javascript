@@ -61,8 +61,9 @@ Test or change this data: 0 = transparent, 1 = black. 2=white <br>
 var myCanvas2Element = document.getElementById('myCanvas2');
 var ctx = myCanvas2Element.getContext('2d');
 
-ctx.fillRect(0, 0, 200, 200); // fill the canvas with black
-var imageData = ctx.getImageData(0, 0, 10, 10);  // get the ImageData for the top/left 10 pixels
+ctx.fillRect(0, 0, 1, 1); // fill the canvas with black
+ctx.fillRect(3, 3, 1, 1); // fill the canvas with black
+var imageData = ctx.getImageData(0, 0, 1, 1);  // get the ImageData for the top/left 10 pixels
 console.log(imageData.data); // logs an array of 10 x 10 x 4 (400 items)                                                
                                                           
                                                           
