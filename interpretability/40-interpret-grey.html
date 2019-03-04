@@ -229,7 +229,7 @@ async function myGo() { // inline async so we can use promises and await
  globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
  
-<input  type="button" id="myButtonTest" value="Re-Test" onclick="{ 
+<input  type="button" id="myButtonTest" value="Re-Test-Original" onclick="{ 
   document.getElementById('myAsk2').value = globalOriginal 
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
@@ -251,7 +251,7 @@ async function myGo() { // inline async so we can use promises and await
 
 /////////////////////////////start to parse the original /////////////////////////////////
 
-     let myCutOff = parseInt(document.getElementById('myCut').value)
+     let myCutOff = parseFloat(document.getElementById('myCut').value)
 
      let myVal2 = globalOriginal.split('\n')
      let myVal = new Array(4)
