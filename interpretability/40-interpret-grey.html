@@ -58,8 +58,8 @@ Test or change this data: 0 = transparent, 1 = black. 2=white <br>
 <textarea id="myAsk2" rows=7 cols=20 wrap=false onChange="{
                                                           
                                                           
-var myCanvasElement = document.getElementById('myCanvas');
-var ctx = myCanvasElement.getContext('2d');
+var myCanvas2Element = document.getElementById('myCanvas2');
+var ctx = myCanvas2Element.getContext('2d');
 
 ctx.fillRect(0, 0, 200, 200); // fill the canvas with black
 var imageData = ctx.getImageData(0, 0, 10, 10);  // get the ImageData for the top/left 10 pixels
@@ -80,7 +80,7 @@ console.log(imageData.data); // logs an array of 10 x 10 x 4 (400 items)
  
  
  
- <canvas id="myCanvas" width="200" height="200"></canvas>
+<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> 
  <br>
 <input id="myButton7979" type="button" value="Convolutional Train and Test" onclick="{ 
   
