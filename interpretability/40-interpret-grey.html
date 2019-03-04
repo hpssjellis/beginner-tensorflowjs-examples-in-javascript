@@ -132,17 +132,17 @@ console.log(imgData);
                                                           
                                                           
 }">
-1,1,1,1,
-1,1,1,1,
-1,1,1,1,
-1,1,1,1</textarea><br>
+1,2,1,2,
+2,1,2,1,
+1,2,1,2,
+2,1,2,1</textarea><br>
  
  <!--<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> -->
  
 <canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd;  "></canvas> 
  <br>
 <input id="myButton7979" type="button" value="Convolutional Train and Test" onclick="{ 
-  
+ document.all.myAsk2.onchange(); // have it show the pattern
  document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
 const xs = tf.tensor4d([                                                                                                                                                
@@ -491,8 +491,8 @@ Pixels closer to black = 1 line, etc <br><br>
     }"> New Data:</td><td  colSpan=2><textarea id="myAsk" rows=6 cols=100% NOWRAP placeholder="">
 1,2,1,2,
 2,1,2,1,
-1,2,1,1,
-1,1,1,1
+1,2,1,2,
+2,1,2,1
 </textarea></td><td>Shape: <input type="text" id="myShape" Title="Define the shape of your testing data" value="1, 4, 4, 1" placeHolder="1, 4, 4, 1"></td><tr>
 </table><br>
 
