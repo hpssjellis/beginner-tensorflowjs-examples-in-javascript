@@ -244,9 +244,11 @@ async function myGo() { // inline async so we can use promises and await
  
 <input  type="button" id="myButtonTest" value="Interpret" onclick="{  
   (async function () {     
-   var myRan = Math.random()*9+1
+   var myRan = Math.random()*16+1    // 4x4 table
    alert(myRan)
-   for (var myWow=0;  myWow < myRan; myWow++){  
+                                                                   
+   var myOne = Math.random()*myRan+1    // starting point
+   for (var myWow=myOne;  myWow < myRan; myWow++){  
       if (( document.getElementById('myAsk2').value[myWow] == 0)||( document.getElementById('myAsk2').value[myWow] == 1)){                                                              
          document.getElementById('myAsk2').value[myWow] = '0'
        }                                                            
