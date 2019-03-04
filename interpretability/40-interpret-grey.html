@@ -96,8 +96,11 @@ console.log(myIn)
 //alert(myIn[2,2])
 //alert(imgData.data.length)
 for (var i = 0;  i < imgData.data.length; i += 4){
-    if (i % myMax  == 0 ) {myCountX += 1}   // should do all the rows first
-    if (myCountX >= 4){myCountX = 0; myCountY += 1}
+    if (i % 4  == 0 ) {myCountX += 1}   // should do all the rows first
+    if (myCountX >= 4){
+       myCountX = 0; 
+       if (i % myMax == 0){myCountY += 1}                                                      
+    }
     if (myCountY >= 4){myCountY = 0; }
     console.log('i:' + i + ', myCountX:' + myCountX + ', myCountY:' + myCountY + ', array:'+myIn[myCountY][myCountX])
 
