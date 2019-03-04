@@ -244,9 +244,13 @@ async function myGo() { // inline async so we can use promises and await
  
 <input  type="button" id="myButtonTest" value="Interpret" onclick="{  
   (async function () {     
-                                                                   
-   alerty(document.getElementById('myAsk2').value[4] )             
-   alerty(document.getElementById('myAsk2').value[4][2] )                                                               
+   var myRan = Math.random()*9+1
+   alert(myRan)
+   for (var myWow=0;  myWow < myRan; myWow++){  
+      if (( document.getElementById('myAsk2').value[myWow] == 0)||( document.getElementById('myAsk2').value[myWow] == 1)){                                                              
+         document.getElementById('myAsk2').value[myWow] = '0'
+       }                                                            
+    }                                                               
                                                                    
                                                                    
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
