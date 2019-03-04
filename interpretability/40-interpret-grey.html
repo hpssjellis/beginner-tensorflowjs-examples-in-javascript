@@ -299,9 +299,9 @@ model.add(tf.layers.conv2d({
 }));                                                                                                                                                                    
                                                                                                                                                                         
 model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                           
-model.add(tf.layers.flatten());       
-model.add(tf.layers.conv2d({ kernelSize: 3, filters: 6, strides: 2, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                           
-model.add(tf.layers.flatten());                                                                                                                                         
+model.add(tf.layers.flatten());                                                                                                                                          
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                           
+model.add(tf.layers.flatten());                                                                                                                                  
 model.add(tf.layers.dense({ units: 50, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                
 model.add(tf.layers.dense({ units: 3, activation: 'linear' }) );
                                                                                      
