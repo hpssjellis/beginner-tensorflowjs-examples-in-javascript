@@ -54,9 +54,8 @@ DRAFT: STILL WORKING ON THIS<BR>
  
  
  
-Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
- Following image has the pattern repeated 16x16 = 256 times to show the larger shade<br>
-<textarea id="myAsk2" rows=5 cols=15 wrap=false onChange="{
+Test or change this data: 0 = transparent, 1 = black. 2=white <br>
+<textarea id="myAsk2" rows=7 cols=20 wrap=false onChange="{
                                                           
                                                           
 var myCanvas2Element = document.getElementById('myCanvas2');
@@ -118,11 +117,10 @@ for (var i = 0;  i < imgData.data.length; i += 4){
 
 ctx.putImageData(imgData, 0, 0);
 //console.log(imgData);
-//ctx.font = "30px Arial";
-//ctx.fillText("Hello World", 10, 50);
 
 
-// ctx.fillRect(myCountX, myCountY, 0, 0); // fill the canvas with the pixel 
+
+   // ctx.fillRect(myCountX, myCountY, 0, 0); // fill the canvas with the pixel 
 //var imageData = ctx.getImageData(0, 0, 1, 1);  // get the ImageData for the top/left 10 pixels
 //console.log(imageData.data); // logs an array of 10 x 10 x 4 (400 items)                                                
                                                           
@@ -137,68 +135,26 @@ ctx.putImageData(imgData, 0, 0);
 1,2,1,2,
 2,1,2,1,
 1,2,1,2,
-2,1,2,1</textarea>
+2,1,2,1</textarea><br>
  
  <!--<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> -->
  
-<canvas id="myCanvas2" width="100" height="70" style="border: 1px solid #ddd;  "></canvas> 
+<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd;  "></canvas> 
  <br>
 <input id="myButton7979" type="button" value="Convolutional Train and Test" onclick="{ 
  document.all.myAsk2.onchange(); // have it show the pattern
  document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
 const xs = tf.tensor4d([                                                                                                                                                
-   
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                    
-   
-2,2,2,2,  
-2,2,2,2,  
-2,2,2,2, 
-2,2,2,2,  
-                                                                                     
-2,2,2,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2, 
-                                                                                        
-2,2,2,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-2,2,2,2, 
-                                                                                        
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-2,2,2,2, 
-                                                                                        
-1,1,1,1,                                                                                                                                                                
-1,2,2,2,                                                                                                                                                                
-1,2,2,2,                                                                                                                                                                
-1,2,2,2, 
-                                                                                        
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,1,1,1, 
-                                                                                        
-2,2,2,1,                                                                                                                                                                
-2,2,2,1,                                                                                                                                                                
-2,2,2,1,                                                                                                                                                                
-1,1,1,1, 
-
-                                                                                     
-1,2,1,2,                                                                                     
-2,1,2,1,                                                                                     
-1,2,1,2,
-2,1,2,1,
-                                                                                     
-                                                                                     
-2,1,2,1,
-1,2,1,2,
-2,1,2,1,
+                                                                                                                                                                        
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+                                                                                                                                                                        
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
 1,2,1,2,                                                                                                                                                                
                                                                                                                                                                         
 1,2,1,2,                                                                                                                                                                
@@ -208,28 +164,28 @@ const xs = tf.tensor4d([
                                                                                     
 1,2,1,2,                                                                                                                                                                
 2,1,2,1,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,      
-                                                                                     
-2,1,2,1,                                                                                                                                                                
 1,2,1,2,                                                                                                                                                                
+2,1,2,1,      
+                                                                                     
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
 1,2,1,2,                                                                                                                                                                
 2,1,2,1,   
                                                                                                                                                               
 1,2,1,2,                                                                                                                                                                
 2,1,2,1,                                                                                                                                                                
-1,2,1,1,                                                                                                                                                                
-2,1,2,2,   
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,   
                                                                                                                                                               
 1,2,1,2,                                                                                                                                                                
 2,1,2,1,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
 2,1,2,1,    
                                                                                                                                                                         
-2,1,1,2,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-2,1,1,2,                                                                                                                                                                
-1,2,2,1, 
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1, 
                                                                                      
 
  
@@ -318,18 +274,17 @@ const xs = tf.tensor4d([
 2,1,2,1,                                                                                                                                                                
 1,2,1,2
                                                                                     
-], shape=[32, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
+], shape=[24, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity 
 // grey, blocks, diagonals, 
 const ys = tf.tensor2d([
                                                                                      
-0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,                                                                                     
 1,0,0,      1,0,0,      1,0,0,      1,0,0,      1,0,0,    1,0,0,       1,0,0,      1,0,0,
 0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,
-0,1,0,      0,0,1,      0,0,1,      0,0,1,      0,0,1,    0,0,1,       1,0,0,      1,0,0
+0,0,1,      0,0,1,      0,0,1,      0,0,1,      0,0,1,    0,0,1,       0,0,1,      0,0,1
                                                                                      
-], shape=[32, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
+], shape=[24, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -343,21 +298,21 @@ model.add(tf.layers.conv2d({
     kernelInitializer: 'varianceScaling'                                                                                                                                    
 }));                                                                                                                                                                    
                                                                                                                                                                         
-model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                           
-model.add(tf.layers.flatten());                                                                                                                                     
-model.add(tf.layers.dense({ units: 50, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                
-model.add(tf.layers.dense({ units: 3, activation: 'linear' }) );
-                                                                                     
-const myOptimizer = tf.train.sgd(0.3);               
-model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                                                          
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
+                                                                                                                                                                        
+model.add(tf.layers.flatten());                                                                                                                                         
+model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 3, activation: 'linear' }) ); 
+                                          
+model.compile({optimizer: 'sgd', loss: 'meanSquaredError'});                                                                                                            
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 5000; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 300; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/5000 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/300 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
@@ -367,7 +322,7 @@ async function myGo() { // inline async so we can use promises and await
  globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
  
-<input  type="button" id="myButtonTest" value="Re-Test-and-Show-Original" onclick="{ 
+<input  type="button" id="myButtonTest" value="Re-Test-Original" onclick="{ 
   document.getElementById('myAsk2').value = globalOriginal 
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
@@ -382,7 +337,7 @@ async function myGo() { // inline async so we can use promises and await
 }" >  
  
   
-<input  type="button"  value="Set-New-Original" onclick="{ 
+<input  type="button"  value="Set-Original" onclick="{ 
    globalOriginal =  document.getElementById('myAsk2').value  
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
