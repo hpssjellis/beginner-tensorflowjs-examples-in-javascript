@@ -299,18 +299,16 @@ model.add(tf.layers.conv2d({
 }));                                                                                                                                                                    
                                                                                                                                                                         
 model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                           
-model.add(tf.layers.flatten());                                                                                                                                          
-model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                                                                                                                                                                                           
-model.add(tf.layers.flatten());                                                                                                                                  
+model.add(tf.layers.flatten());                                                                                                                                     
 model.add(tf.layers.dense({ units: 50, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                
 model.add(tf.layers.dense({ units: 3, activation: 'linear' }) );
                                                                                      
-const myOptimizer = tf.train.sgd(0.005);               
+const myOptimizer = tf.train.sgd(0.5);               
 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                                                          
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 1500; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 5000; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
