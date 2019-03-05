@@ -55,6 +55,7 @@ DRAFT: STILL WORKING ON THIS<BR>
  
  
 Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
+ Following image has the pattern repeated 64 times to show the larger shade<br>
 <textarea id="myAsk2" rows=5 cols=15 wrap=false onChange="{
                                                           
                                                           
@@ -312,7 +313,7 @@ async function myGo() { // inline async so we can use promises and await
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/1500 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/5000 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
