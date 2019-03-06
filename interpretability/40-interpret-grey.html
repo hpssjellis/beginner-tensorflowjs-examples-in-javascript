@@ -355,11 +355,11 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 300; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 3000; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/300 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/3000 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
@@ -454,7 +454,7 @@ async function myGo() { // inline async so we can use promises and await
     const saveResults = await model.save(myFileName);
     //document.getElementById('myDivSummary').innerHTML = ''    
     model.summary() 
-})
+})()
                                                     
 }">
  
