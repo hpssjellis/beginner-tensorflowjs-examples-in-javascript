@@ -355,7 +355,7 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 1000; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 3000; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
@@ -441,6 +441,22 @@ async function myGo() { // inline async so we can use promises and await
  
   Cutoff:<input id="myCut" type=text value = 0.5 size=5>
  
+ 
+ 
+ 
+ 
+ 
+ <input  type="button"  value="Save-Model" onclick="{ 
+
+(async function () { 
+  mySaveDisk = async function(){
+  alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
+  const myFileName = prompt('Enter filename to store this model','downloads://40-interpret0-grey');
+  const saveResults = await model.save(myFileName);
+  document.getElementById('myDivSummary').innerHTML = ''    
+  model.summary()
+}
+}">
  
  
  
