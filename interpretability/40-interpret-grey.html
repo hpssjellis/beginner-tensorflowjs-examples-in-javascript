@@ -79,7 +79,7 @@ var imgData = ctx.createImageData(myMax, myMax);
 let myTransparent, myColor
 var myCountX = -1
 var myCountY = 0
-
+var globalOriginal
 
 
 myInput = this.value.split('\n')
@@ -149,9 +149,9 @@ ctx.putImageData(imgData, 0, 0);
   (async function () {                                                                 
   const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
   if (myFileName != null){  
-    model = await tf.loadModel(myFileName); 
+    model = await tf.loadLayersModel(myFileName); 
   } 
-                                                                                 
+  globalOriginal = document.getElementById('myAsk2').value                                                                               
   await   document.getElementById('myButtonTest').click()  
                                                                    
   })()     //end async                                                            
@@ -391,7 +391,8 @@ async function myGo() { // inline async so we can use promises and await
   document.getElementById('myAsk2').value = globalOriginal 
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
-  (async function () {                                                                                                                                                                                                                                                                            globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
+  (async function () { 
+    globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -406,7 +407,8 @@ async function myGo() { // inline async so we can use promises and await
    globalOriginal =  document.getElementById('myAsk2').value  
   document.all.myAsk2.onchange(); // have it show the pattern
                                                                  
-  (async function () {                                                                                                                                                                                                                                                                            globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
+  (async function () {     
+    globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
     const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
