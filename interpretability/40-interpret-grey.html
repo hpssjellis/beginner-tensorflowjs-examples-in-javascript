@@ -146,7 +146,7 @@ ctx.putImageData(imgData, 0, 0);
  
 <input id="myButton7979" type="button" value="Load Model" onclick="{ 
 
-  (function () {                                                                 
+  (async function () {                                                                 
   const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
   if (myFileName != null){  
     model = await tf.loadModel(myFileName); 
