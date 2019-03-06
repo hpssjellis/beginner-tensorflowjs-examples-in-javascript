@@ -6,3 +6,7 @@ Attempt to make a model contain a small amount of interpretatbility instead of j
 first atttempt
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/interpretability/40-interpret-grey.html
+
+
+
+https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json
