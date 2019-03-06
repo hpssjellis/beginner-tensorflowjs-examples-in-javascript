@@ -142,7 +142,21 @@ ctx.putImageData(imgData, 0, 0);
  
 <canvas id="myCanvas2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> 
  <br>
-<input id="myButton7979" type="button" value="Convolutional Train and Test" onclick="{ 
+ 
+ 
+<input id="myButton7979" type="button" value="Convolutional Load Model" onclick="{ 
+
+  const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
+  if (myFileName != null){  
+    model = await tf.loadModel(myFileName); 
+  } 
+                                                                                 
+  await   document.getElementById('myButtonTest').click()                                                                                     
+}">
+ 
+ 
+ 
+<input  type="button" value="Convolutional Train and Test" onclick="{ 
  document.all.myAsk2.onchange(); // have it show the pattern
  document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
