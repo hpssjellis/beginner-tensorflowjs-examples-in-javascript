@@ -56,7 +56,7 @@ var    myInterpretArray = new Array()
 
 
 function mySortResults(myNum){
-   if (myNum ==0) {myNum = 1}
+   if (myNum == 0) {myNum = 1}
    myInterpretArray.sort((a, b) => a[myNum] - b[myNum]);   // for number sorting
    console.log('sorted by  column')
    console.log(myInterpretArray)
@@ -526,7 +526,7 @@ async function myGo() { // inline async so we can use promises and await
 
    //console.log(myInterpretArray)                                                     
                                                     
-    var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{mySortResults(1)}'></th><th><input type=button value='Blocks, Lines' onclick='{mySortResults(2)}'></th><th><input type=button value='Diagonal' onclick='{mySortResults(1)}'></th></tr>`
+    var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{mySortResults(1)}'></th><th><input type=button value='Blocks, Lines' onclick='{mySortResults(2)}'></th><th><input type=button value='Diagonal' onclick='{mySortResults(3)}'></th></tr>`
 
     for (let myStore=1; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
        let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
@@ -549,7 +549,8 @@ async function myGo() { // inline async so we can use promises and await
 
    myInterpretArray[1] = ['1,2,1,2,\n2,1,2,1,\n1,2,1,2,\n2,1,2,1', 100, 0, 0];
    myInterpretArray[2] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
-   myInterpretArray[3] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];                                             
+   myInterpretArray[3] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];  
+   console.log(myInterpretArray)
  }">
  
 <input type=button value="interpret more" onclick="{
@@ -560,7 +561,6 @@ async function myGo() { // inline async so we can use promises and await
  
  
 <table id="myIntTable" border=1>
-<tr><th>Data</th><th>Visual</th><th><input type=button value="Grey Scale" onclick="{alert()}"></th><th><input type=button value="Blocks, Lines" onclick="{alert()}"></th><th><input type=button value="Diagonal" onclick="{alert()}"></th></tr>
  
 
  
