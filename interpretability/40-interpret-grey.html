@@ -492,13 +492,13 @@ async function myGo() { // inline async so we can use promises and await
  
 <div id='myInterpret'>
 <table id="myIntTable" border=1>
-<tr><th>Data</th><th>Visual</th><th><input type=button value="Grey Scale" onclick="{alert()}"></th><th>Lines</th><th>Diagonal</th></tr>
+<tr><th>Data</th><th>Visual</th><th><input type=button value="Grey Scale" onclick="{alert()}"></th><th><input type=button value="Blocks, Lines" onclick="{alert()}"></th><th><input type=button value="Diagonal" onclick="{alert()}"></th></tr>
  
  <input type=button value="show shade" onclick="{
  // myShowGrid('myIntArray01','myIntShow01')                
  // myShowGrid('myIntArray02','myIntShow02') 
 // alert(document.getElementById('myIntTable').rows.length)
-  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length; myRows++) {                                             
+  for (let myRows=1;  myRows < document.getElementById('myIntTable').rows.length; myRows++) {                                             
      myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
   }
 }">
