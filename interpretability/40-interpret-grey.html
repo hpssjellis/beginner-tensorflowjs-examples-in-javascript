@@ -55,9 +55,19 @@ DRAFT: STILL WORKING ON THIS, getting better......<BR>
 var    myInterpretArray = new Array()       
 
 
-function mySortResults(myNum){
+function mySortResultsUp(myNum){
    if (myNum == 0) {myNum = 1}
-   myInterpretArray.sort((a, b) => a[myNum] - b[myNum]);   // for number sorting
+   myInterpretArray.sort((a, b) => b[myNum] - a[myNum]);   // for number sorting max first
+   console.log('sorted by  column')
+   console.log(myInterpretArray)
+   document.getElementById('myShowArray').click()
+
+} 
+ 
+ 
+function mySortResultsDown(myNum){
+   if (myNum == 0) {myNum = 1}
+   myInterpretArray.sort((a, b) => a[myNum] - b[myNum]);   // for number sorting max last
    console.log('sorted by  column')
    console.log(myInterpretArray)
    document.getElementById('myShowArray').click()
@@ -526,7 +536,7 @@ async function myGo() { // inline async so we can use promises and await
 
    //console.log(myInterpretArray)                                                     
                                                     
-    var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{mySortResults(1)}'></th><th><input type=button value='Blocks, Lines' onclick='{mySortResults(2)}'></th><th><input type=button value='Diagonal' onclick='{mySortResults(3)}'></th></tr>`
+    var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{mySortResultsUp(1)}'></th><th><input type=button value='Blocks, Lines' onclick='{mySortResultsUp(2)}'></th><th><input type=button value='Diagonal' onclick='{mySortResultsUp(3)}'></th></tr>`
 
     for (let myStore=0; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
        let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
