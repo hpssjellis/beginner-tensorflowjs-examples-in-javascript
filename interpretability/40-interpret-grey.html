@@ -502,15 +502,18 @@ async function myGo() { // inline async so we can use promises and await
 }">
  
  <input type=button value="Array to table" onclick="{
+   alert()                                                 
+  //var person = ['John', 'Doe', 46];
+  // console.log(person)   
+               
+  //var myInterpretArray = ['John', 'Doe', 46];
+  // console.log(myInterpretArray)                                                     
                                                     
-  var person = ['John', 'Doe', 46];
-   console.log(person)                          
+                                                    
                                                     
  // myInterpretArray = new Array()    // no var needs to be global
  // myInterpretArray[1] =    6 // ('1,2,1,2,2,1,2,1,1,2,1,2,2,1,2,1','100','0','0')     
   //myInterpretArray[1] =   ['1,2,1,2,2,1,2,1,1,2,1,2,2,1,2,1',100,0,0]       
- // myInterpretArray[2] =   ['1,0,1,2,&#13;&#10;2,0,2,1,&#13;&#10;1,2,1,0,&#13;&#10;2,1,2,1',20,40,50]    
- // myInterpretArray[3] =   ['1,0,0,0,&#13;&#10;2,1,2,1,&#13;&#10;1,2,0,2,&#13;&#10;2,1,0,1',60,90,20]
  // console.log(myInterpretArray)
                                                     
                                                 
@@ -518,6 +521,8 @@ async function myGo() { // inline async so we can use promises and await
                                                     
 }"> 
  
+ // myInterpretArray[2] =   ['1,0,1,2,&#13;&#10;2,0,2,1,&#13;&#10;1,2,1,0,&#13;&#10;2,1,2,1',20,40,50]    
+ // myInterpretArray[3] =   ['1,0,0,0,&#13;&#10;2,1,2,1,&#13;&#10;1,2,0,2,&#13;&#10;2,1,0,1',60,90,20]
  
 <table id="myIntTable" border=1>
 <tr><th>Data</th><th>Visual</th><th><input type=button value="Grey Scale" onclick="{alert()}"></th><th><input type=button value="Blocks, Lines" onclick="{alert()}"></th><th><input type=button value="Diagonal" onclick="{alert()}"></th></tr>
