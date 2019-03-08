@@ -53,7 +53,7 @@ DRAFT: STILL WORKING ON THIS, getting better......<BR>
 
 <script>
 var    myInterpretArray = new Array()       
-
+var myPredictArray = new Array()
 
 function mySortResultsUp(myNum){
    if (myNum == 0) {myNum = 1}
@@ -568,6 +568,7 @@ async function myGo() { // inline async so we can use promises and await
        document.getElementById('myInterpretButton').click() 
        alert(document.getElementById('myAsk2').value) 
        myInterpretArray.push('1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90)
+       alert(myPredictArray[0])
    }                                         
  }">
  
@@ -1052,7 +1053,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape, 'int32')).data()                                                                                                                                      
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk').value.split(','), myShape, 'int32')).data()                                                                                                                                      
     document.getElementById('myDivTest').innerHTML = 'Input '+document.getElementById('myAsk').value+'<br><br> Output = <br>'
     document.getElementById('myDivTest').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDivTest').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
