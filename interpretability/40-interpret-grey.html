@@ -569,8 +569,11 @@ async function myGo() { // inline async so we can use promises and await
  
  
  
- <input type=button value="set array" onclick="{
+ <input type=button value="Clear Interpret" onclick="{
   myInterpretArray.length = 0
+  document.getElementById('myShowArray').click() 
+                                               
+                                               
   // myInterpretArray[0] = ['1,2,1,2,\n2,1,2,1,\n1,2,1,2,\n2,1,2,1', 100, 0, 0];
   // myInterpretArray[1] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
   // myInterpretArray[2] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];  
