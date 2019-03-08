@@ -471,9 +471,9 @@ async function myGo() { // inline async so we can use promises and await
     document.all.myAsk2.onchange(); // have it show the pattern
 
 
-                                                               
+    // defined as global    myPredictArray above                                                        
                                                                    
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
@@ -564,10 +564,12 @@ async function myGo() { // inline async so we can use promises and await
  }">
  
 <input type=button value="interpret more" onclick="{
+   let myAr = new Array()                                                
    for (let myLoop=0; myLoop < 2; myLoop++){                                           
        document.getElementById('myInterpretButton').click() 
-       alert(document.getElementById('myAsk2').value) 
-       myInterpretArray.push('1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90)
+      // alert(document.getElementById('myAsk2').value) 
+       myAr = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90]                                            
+       myInterpretArray.push(myAr)
        alert(myPredictArray[0])
    }                                         
  }">
