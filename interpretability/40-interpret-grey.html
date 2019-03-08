@@ -564,14 +564,16 @@ async function myGo() { // inline async so we can use promises and await
  }">
  
 <input type=button value="interpret more" onclick="{
-   let myAr = new Array()                                                
-   for (let myLoop=0; myLoop < 2; myLoop++){                                           
+   let myAr = new Array()  
+   let myStrin = ''                                                
+  // for (let myLoop=0; myLoop < 2; myLoop++){                                           
        document.getElementById('myInterpretButton').click() 
       // alert(document.getElementById('myAsk2').value) 
-       myAr = [document.getElementById('myAsk2').value, myPredictArray[0], myPredictArray[1], myPredictArray[2]]                                            
+       myStrin =document.getElementById('myAsk2').value +','+ myPredictArray[0]*100 +','+ myPredictArray[1]*100+','+ myPredictArray[2]*100                                            
+       myAr = [myStrin]                                            
        myInterpretArray.push(myAr)
-       alert(myPredictArray[0])
-   }                                         
+      // alert(myPredictArray[0])
+ //  }                                         
  }">
  
  
