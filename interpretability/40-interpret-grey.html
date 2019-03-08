@@ -518,7 +518,7 @@ async function myGo() { // inline async so we can use promises and await
     var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{alert()}'></th><th><input type=button value='Blocks, Lines' onclick='{alert()}'></th><th><input type=button value='Diagonal' onclick='{alert()}'></th></tr>`
 
     for (let myStore=1; myStore<=myInterpretArray.length; myStore++){
-       myTemp +=    `<tr><td><textarea id='myIntArray'`+myStore+` readonly rows=4 cols=8>`+myInterpretArray[`+myStore+`]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px solid #ddd;'></canvas></td><td>ggg</td><td>ggg</td></td>`                                        
+       myTemp +=    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[`+myStore+`]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px solid #ddd;'></canvas></td><td>ggg</td><td>ggg</td></td>`                                        
        myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                                               
    }                                                
                                                     
