@@ -54,6 +54,7 @@ DRAFT: STILL WORKING ON THIS, getting better......<BR>
 <script>
 var    myInterpretArray = new Array()       
 var myPredictArray = new Array()
+var myGlobalAnswer = ''
 
 function mySortResultsUp(myNum){
    if (myNum == 0) {myNum = 1}
@@ -420,8 +421,15 @@ async function myGo() { // inline async so we can use promises and await
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
-                                                             
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'
+    myGlobalAnswer = 0 // greyscale
+    let myGrey = Math.round(myPredictArray[0]*100)
+    let myLines = Math.round(myPredictArray[1]*100)
+    let myDiagonal = Math.round(myPredictArray[2]*100)
+    if (myLines > myGrey) {myGlobalAnswer = 1}  // lines
+    if (myLines > myGrey) {myGlobalAnswer = 2}    // diagonals                                                                 
+     console.log('myGlobalAnswer')                                                                                             
+     console.log(myGlobalAnswer)                                                         
  })()   // end the inline async function
 }" >  
  
