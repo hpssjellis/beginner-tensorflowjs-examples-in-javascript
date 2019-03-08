@@ -501,9 +501,6 @@ async function myGo() { // inline async so we can use promises and await
 <div id='myInterpret'>
  
   <input type=button value="show shade" onclick="{
- // myShowGrid('myIntArray01','myIntShow01')                
- // myShowGrid('myIntArray02','myIntShow02') 
-// alert(document.getElementById('myIntTable').rows.length)
   for (let myRows=1;  myRows < document.getElementById('myIntTable').rows.length; myRows++) {                                             
      myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
   }
@@ -518,15 +515,14 @@ async function myGo() { // inline async so we can use promises and await
 
    console.log(myInterpretArray)                                                     
                                                     
+    var myTemp ='' 
+    for (let myStore=1; myStore<=myInterpretArray.length; myStore++){
+         myTemp +=    'ggg'                                        
                                                     
-                                                    
- // myInterpretArray = new Array()    // no var needs to be global
- // myInterpretArray[1] =    6 // ('1,2,1,2,2,1,2,1,1,2,1,2,2,1,2,1','100','0','0')     
-  //myInterpretArray[1] =   ['1,2,1,2,2,1,2,1,1,2,1,2,2,1,2,1',100,0,0]       
- // console.log(myInterpretArray)
+   }                                                
                                                     
                                                 
-   document.getElementById('myIntTable').innerHTML    = 'wow'                                             
+   document.getElementById('myIntTable').innerHTML    = myTemp                                            
                                                     
 }"> 
  
