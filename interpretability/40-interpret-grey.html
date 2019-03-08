@@ -51,14 +51,10 @@ DRAFT: STILL WORKING ON THIS<BR>
 
 <div id="myDiv7979Code"> 
 
+<script>
  
- 
- 
-Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
-Following image has the pattern repeated 16x16 = 256 times to show the larger shade<br>
-<textarea id="myAsk2" rows=4 cols=8 wrap=false onChange="{
-                                                          
-                                                          
+function myShowGrid(myCanvas2){
+
 var myCanvas2Element = document.getElementById('myCanvas2');
 var ctx = myCanvas2Element.getContext('2d');
 
@@ -128,11 +124,17 @@ ctx.putImageData(imgData, 0, 0);
                                                           
                                                           
                                                           
-                                                          
-                                                          
-                                                          
-                                                          
-}">
+            
+
+} 
+ 
+</script>
+ 
+ 
+ 
+Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
+Following image has the pattern repeated 16x16 = 256 times to show the larger shade<br>
+<textarea id="myAsk2" rows=4 cols=8 wrap=false onChange="{myShowGrid('myCanvasTest')}">
 1,2,1,2,
 2,1,2,1,
 1,2,1,2,
@@ -140,7 +142,7 @@ ctx.putImageData(imgData, 0, 0);
  
  <!--<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> -->
  
-<canvas id="myCanvas2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> 
+<canvas id="myCanvasTest" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> 
  <br>
  
  
