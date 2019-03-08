@@ -491,12 +491,13 @@ async function myGo() { // inline async so we can use promises and await
  
  
 <div id='myInterpret'>
-<table border=1>
+<table id="myIntTable" border=1>
 <tr><th>Data</th><th>Visual</th><th>Grey</th><th>Lines</th><th>Diagonal</th></tr>
  
  <input type=button value="show shade" onclick="{
   myShowGrid('myIntArray01','myIntShow01')                
-  myShowGrid('myIntArray02','myIntShow02')                                             
+  myShowGrid('myIntArray02','myIntShow02') 
+ alert(document.gertElementById('myIntTable').rows.length)
 
 }">
  
