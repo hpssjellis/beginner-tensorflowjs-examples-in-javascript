@@ -518,7 +518,7 @@ async function myGo() { // inline async so we can use promises and await
     var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{alert()}'></th><th><input type=button value='Blocks, Lines' onclick='{alert()}'></th><th><input type=button value='Diagonal' onclick='{alert()}'></th></tr>`
 
     for (let myStore=1; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
-       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px solid #ddd;'></canvas></td><td>myInterpretArray[`+myStore+`][1]</td><td>myInterpretArray[`+myStore+`][2]</td><td>myInterpretArray[`+myStore+`][3]</td></td>`                                     
+       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></td>`                                     
        console.log(myTemp2)
        myTemp   += myTemp2                                           
        myShowGrid('myIntArray'+myStore,'myIntShow'+myStore) 
@@ -536,11 +536,6 @@ async function myGo() { // inline async so we can use promises and await
  
 
  
- 
-<tr><td><textarea id="myIntArray1" readonly rows=4 cols=8>1,2,1,2,&#13;&#10;2,1,2,1,&#13;&#10;1,2,1,2,&#13;&#10;2,1,2,1</textarea></td><td><canvas id="myIntShow1" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>100%</td><td>0%</td><td>0%</td></tr>
-<tr><td><textarea id="myIntArray2" readonly rows=4 cols=8>1,0,1,2,&#13;&#10;2,0,2,1,&#13;&#10;1,2,1,0,&#13;&#10;2,1,2,1</textarea></td><td><canvas id="myIntShow2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>20%</td><td>40%</td><td>50%</td></tr>
-<tr><td><textarea id="myIntArray3" readonly rows=4 cols=8>1,0,0,0,&#13;&#10;2,1,2,1,&#13;&#10;1,2,0,2,&#13;&#10;2,1,0,1</textarea></td><td><canvas id="myIntShow3" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>60%</td><td>90%</td><td>20%</td></tr>
-
 
 
 
