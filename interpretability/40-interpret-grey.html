@@ -426,8 +426,14 @@ async function myGo() { // inline async so we can use promises and await
     let myGrey = Math.round(myPredictArray[0]*100)
     let myLines = Math.round(myPredictArray[1]*100)
     let myDiagonal = Math.round(myPredictArray[2]*100)
-    if (myLines > myGrey) {myGlobalAnswer = 1}  // lines
-    if (myLines > myGrey) {myGlobalAnswer = 2}    // diagonals                                                                 
+    if (myLines > myGrey) || (myDiagonal > myGrey) {
+        if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
+     }  // lines
+                                                                          
+                                                                          
+  //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
+                                                                          
+                                                                          
      console.log('myGlobalAnswer')                                                                                             
      console.log(myGlobalAnswer)                                                         
  })()   // end the inline async function
