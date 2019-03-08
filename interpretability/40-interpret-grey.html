@@ -515,13 +515,14 @@ async function myGo() { // inline async so we can use promises and await
 
    console.log(myInterpretArray)                                                     
                                                     
-    var myTemp ='' 
+    var myTemp ='<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{alert()}'></th><th><input type=button value='Blocks, Lines' onclick='{alert()}'></th><th><input type=button value='Diagonal' onclick={alert()}'></th></tr>'
+
     for (let myStore=1; myStore<=myInterpretArray.length; myStore++){
-         myTemp +=    'ggg'                                        
+       myTemp +=    '<tr><td>ggg</td><td>ggg</td><td>ggg</td><td>ggg</td></td>'                                        
                                                     
    }                                                
                                                     
-                                                
+    myTemp +=    ''                                               
    document.getElementById('myIntTable').innerHTML    = myTemp                                            
                                                     
 }"> 
