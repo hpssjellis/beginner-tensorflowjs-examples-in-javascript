@@ -568,7 +568,7 @@ async function myGo() { // inline async so we can use promises and await
    for (let myLoop=0; myLoop < 2; myLoop++){                                           
        document.getElementById('myInterpretButton').click() 
       // alert(document.getElementById('myAsk2').value) 
-       myAr = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90]                                            
+       myAr = [document.getElementById('myAsk2').value, myPredictArray[0], myPredictArray[1], myPredictArray[2]]                                            
        myInterpretArray.push(myAr)
        alert(myPredictArray[0])
    }                                         
