@@ -515,13 +515,13 @@ async function myGo() { // inline async so we can use promises and await
    myInterpretArray[2] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
    myInterpretArray[3] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];
 
-   console.log(myInterpretArray)                                                     
+   //console.log(myInterpretArray)                                                     
                                                     
     var myTemp =`<tr><th>Data</th><th>Visual</th><th><input type=button value='Grey Scale' onclick='{alert()}'></th><th><input type=button value='Blocks, Lines' onclick='{alert()}'></th><th><input type=button value='Diagonal' onclick='{alert()}'></th></tr>`
 
     for (let myStore=1; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
        let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
-       console.log(myTemp2)
+      // console.log(myTemp2)
        myTemp   += myTemp2                                           
             myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
    }   
@@ -536,10 +536,17 @@ async function myGo() { // inline async so we can use promises and await
  
  
  
- <input type=button value="Grey Scale" onclick="{
+ <input type=button value="show grid" onclick="{
    //alert(document.getElementById('myIntArray1').value)                                             
    myShowGrid('myIntArray1','myIntShow1')                                              
  }">
+ 
+<input type=button value="interpret more" onclick="{
+     for (let myLoop=1; myLoop < 2; myLoop++){
+        alert(myLoop)                                                                                                  
+   }                                         
+ }">
+ 
  
 <table id="myIntTable" border=1>
 <tr><th>Data</th><th>Visual</th><th><input type=button value="Grey Scale" onclick="{alert()}"></th><th><input type=button value="Blocks, Lines" onclick="{alert()}"></th><th><input type=button value="Diagonal" onclick="{alert()}"></th></tr>
