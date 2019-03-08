@@ -523,10 +523,10 @@ async function myGo() { // inline async so we can use promises and await
        let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=8>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
       // console.log(myTemp2)
        myTemp   += myTemp2                                           
-            myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
+           // myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
    }   
                                                     
-        // setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
+         setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
                                                     
         //  alert(document.getElementById('myIntArray1').value)                                                  
     myTemp +=    ''                                               
