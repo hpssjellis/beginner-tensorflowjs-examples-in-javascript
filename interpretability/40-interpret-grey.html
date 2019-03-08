@@ -442,7 +442,7 @@ async function myGo() { // inline async so we can use promises and await
 }" >  
  
  
-<input  type="button" id="myPredictButton"  value="Interpret" onclick="{  
+<input  type="button" id="myInterpretButton"  value="Interpret" onclick="{  
   (async function () { 
 
 
@@ -564,8 +564,10 @@ async function myGo() { // inline async so we can use promises and await
  }">
  
 <input type=button value="interpret more" onclick="{
-     for (let myLoop=1; myLoop < 2; myLoop++){
-        alert(myLoop)                                                                                                  
+   for (let myLoop=0; myLoop < 2; myLoop++){                                           
+       document.getElementById('myInterpretButton').click() 
+       alert(document.getElementById('myAsk2').value) 
+       myInterpretArray.push(['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90])
    }                                         
  }">
  
