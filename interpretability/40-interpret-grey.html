@@ -53,7 +53,7 @@ DRAFT: STILL WORKING ON THIS, getting better<BR>
 
 <script>
  
-function myShowGrid(myCanvas2){
+function myShowGrid(myArea2, myCanvas2){
 
 var myCanvas2Element = document.getElementById(myCanvas2);
 var ctx = myCanvas2Element.getContext('2d');
@@ -78,7 +78,7 @@ var myCountY = 0
 var globalOriginal
 
 
-myInput = this.value.split('\n')
+myInput = document.getElementById(myArea2).value.split('\n')
 var myIn  = new Array(4)
 myIn[0] = myInput[0].split(',')
 myIn[1] = myInput[1].split(',')
@@ -134,7 +134,7 @@ ctx.putImageData(imgData, 0, 0);
  
 Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
 Following image has the pattern repeated 16x16 = 256 times to show the larger shade<br>
-<textarea id="myAsk2" rows=4 cols=8 wrap=false onChange="{myShowGrid('myCanvasTest')}">
+<textarea id="myAsk2" rows=4 cols=8 wrap=false onChange="{myShowGrid('myAsk2','myCanvasTest')}">
 1,2,1,2,
 2,1,2,1,
 1,2,1,2,
@@ -494,9 +494,9 @@ async function myGo() { // inline async so we can use promises and await
 <table border=1>
 <tr><th>Data</th><th>Visual</th><th>Grey</th><th>Lines</th><th>Diagonal</th></tr>
  
-<tr><td><textarea rows=4 cols=8>1,2,1,2,&#13;&#10;2,1,2,1,&#13;&#10;1,2,1,2,&#13;&#10;2,1,2,1</textarea></td><td><canvas id="myInt01" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>100%</td><td>0%</td><td>0%</td></tr>
-<tr><td><textarea rows=4 cols=8>1,0,1,2,&#13;&#10;2,0,2,1,&#13;&#10;1,2,1,0,&#13;&#10;2,1,2,1</textarea></td><td><canvas id="myInt01" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>20%</td><td>40%</td><td>50%</td></tr>
-<tr><td><textarea rows=4 cols=8>1,0,0,0,&#13;&#10;2,1,2,1,&#13;&#10;1,2,0,2,&#13;&#10;2,1,0,1</textarea></td><td><canvas id="myInt01" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>50%</td><td>90%</td><td>20%</td></tr>
+<tr><td><textarea id="myIntArray01" rows=4 cols=8>1,2,1,2,&#13;&#10;2,1,2,1,&#13;&#10;1,2,1,2,&#13;&#10;2,1,2,1</textarea></td><td><canvas id="myIntShow01" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>100%</td><td>0%</td><td>0%</td></tr>
+<tr><td><textarea id="myIntArray02"  rows=4 cols=8>1,0,1,2,&#13;&#10;2,0,2,1,&#13;&#10;1,2,1,0,&#13;&#10;2,1,2,1</textarea></td><td><canvas id="myIntShow02" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>20%</td><td>40%</td><td>50%</td></tr>
+<tr><td><textarea id="myIntArray03" rows=4 cols=8>1,0,0,0,&#13;&#10;2,1,2,1,&#13;&#10;1,2,0,2,&#13;&#10;2,1,0,1</textarea></td><td><canvas id="myIntShow03" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td>50%</td><td>90%</td><td>20%</td></tr>
 
 
 
