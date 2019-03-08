@@ -426,7 +426,7 @@ async function myGo() { // inline async so we can use promises and await
     let myGrey = Math.round(myPredictArray[0]*100)
     let myLines = Math.round(myPredictArray[1]*100)
     let myDiagonal = Math.round(myPredictArray[2]*100)
-    if (myLines > myGrey) || (myDiagonal > myGrey) {
+    if ((myLines > myGrey) || (myDiagonal > myGrey)) {
         if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
      }  // lines
                                                                           
@@ -583,14 +583,14 @@ async function myGo() { // inline async so we can use promises and await
   // (async function() {                                                
                                                    
    // for (let myLoop=0; myLoop < 2; myLoop++){                                           
-   await document.getElementById('myInterpretButton').click() 
+   document.getElementById('myInterpretButton').click() 
    myAr[0] = document.getElementById('myAsk2').value
    myAr[1] =  Math.round(myPredictArray[0]*100)                          
    myAr[2] =  Math.round(myPredictArray[1]*100)                          
    myAr[3] =  Math.round(myPredictArray[2]*100)                                           
    console.log(myAr)                                            
    myInterpretArray.push(myAr)
-   await document.getElementById('myShowArray').click()   
+   document.getElementById('myShowArray').click()   
   // })()                                                
                                                    
                                                    
