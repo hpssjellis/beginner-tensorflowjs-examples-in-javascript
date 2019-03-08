@@ -514,7 +514,7 @@ async function myGo() { // inline async so we can use promises and await
   <input type=button id="myShowShade" value="show shade" onclick="{
  // alert(document.getElementById('myIntTable').rows.length)
    //alert(document.getElementById('myIntArray1').value)                                                                  
-  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length; myRows++) {                                             
+  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
      myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
   }
 }">
