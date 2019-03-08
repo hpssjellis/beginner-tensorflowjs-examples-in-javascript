@@ -512,8 +512,8 @@ async function myGo() { // inline async so we can use promises and await
  <input type=button value="Array to table" onclick="{
  
                
-   myInterpretArray = ['1,2,1,2,&#13;&#10;2,1,2,1,1,2,1,2,2,1,2,1', 100, 0, 0];
-   console.log('cool asdfgsdfg') 
+   myInterpretArray[1] = ['1,2,1,2,2,1,2,1,1,2,1,2,2,1,2,1', 100, 0, 0];
+
    console.log(myInterpretArray)                                                     
                                                     
                                                     
@@ -524,7 +524,7 @@ async function myGo() { // inline async so we can use promises and await
  // console.log(myInterpretArray)
                                                     
                                                 
-   //document.getElementById('myIntTable').innerHTML    = 'wow'                                             
+   document.getElementById('myIntTable').innerHTML    = 'wow'                                             
                                                     
 }"> 
  
