@@ -484,6 +484,16 @@ async function myGo() { // inline async so we can use promises and await
  
  
  
+ 
+ 
+ Original Prediction<br>
+ <table border=1>
+  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><td><span id="mySpan02">...</span></td><td><span id="mySpan03">...</span></td></tr>
+ </table>
+ 
+ 
+ 
+ 
 <div id='myInterpret'>
  
   <input type=button id="myShowShade" value="show shade" onclick="{
@@ -554,15 +564,22 @@ async function myGo() { // inline async so we can use promises and await
  }">
  
  
+ Sort By Descending:<select id="myOutput" size=1 onChange="{
+// if (this.value == 0){mySortResultsDown(0) }
+// if (this.value == 1){mySortResultsDown(1) }
+// if (this.value == 2){mySortResultsDown(2) }
+}">
+   <option value=0>Grey Scale
+   <option value=1>Blocks and Lines
+   <option value=2>Diagonals
+ </select>
+ 
+ 
+ 
+ 
 <table id="myIntTable" border=1>
  
 
- 
-
-
-
- 
- 
  </table>
  </div> 
  
