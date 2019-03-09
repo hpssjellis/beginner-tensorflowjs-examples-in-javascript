@@ -451,6 +451,14 @@ async function myGo() { // inline async so we can use promises and await
  })()   // end the inline async function
 }" > 
  
+ 
+<input  type="button"  value="10 Interpretations" onclick="{
+   (async function (){                                                        
+       document.getElementById('myCut').value = Math.random()  
+                                                           
+    })()                                                       
+ }">
+ 
   Randomizer:<input id="myCut" type=text value = 0.5 size=5>
  
  
