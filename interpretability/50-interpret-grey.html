@@ -32,7 +32,7 @@
 
     
     
-<h2 align=center>Interpretability Minimalist Example.</h2>
+<h2 align=center>Interpretability Minimalist Example using Tensorflowjs Keras COnvolutional Layers.</h2>
 
 
 
@@ -43,9 +43,10 @@ Hopefully Machine Learning Libraries will provide more interpretability tools an
  
  From this very quick test it looks like all libraries would need is:<br>
  
- <li> Various abilities to parse the input data: <font color=blue><b>interpret.input.parse() </b></font>  I have done a very simple random parse injecting 
+ <li> Various abilities to parse the input data: <font color=blue><b>interpret.input.parse() </b></font> 
+  <i>I have done a very simple random parse injecting 
   transparent pixels into the data. I am sure other people could come up with more complex ways to parse the input data. 
-  Perhaps use mobinet to exclude non-identified objects or take turns removing obects, etc.
+   Perhaps use mobinet to exclude non-identified objects or take turns removing obects, etc.</i>
  <li> The predict feature (which is already available):   <font color=blue><b> model.predict()</b></font>
  <li> A method to store, sort and show the interpretations: <font color=blue><b>interpret.add(), interpret.sort(), interpret.show() </b></font> <br><br>
  
@@ -71,7 +72,9 @@ This demo is loosely based on:
 
 <div id="myDiv7979Code"> 
 
-<script>
+<!-- <script> tags only load once and are not dynamic. I use <style> below change it if you wish-->
+<style id="myButton124"  onload="{document.getElementById('myButton124').click()}"  onclick="{
+
 var    myInterpretArray = new Array()       
 var myPredictArray = new Array()
 var myGlobalAnswer = ''
@@ -137,14 +140,17 @@ ctx.putImageData(imgData, 0, 0);
    // ctx.fillRect(myCountX, myCountY, 0, 0); // fill the canvas with the pixel 
 //var imageData = ctx.getImageData(0, 0, 1, 1);  // get the ImageData for the top/left 10 pixels
 //console.log(imageData.data); // logs an array of 10 x 10 x 4 (400 items)                                                
-                                                          
-                                                          
-                                                          
-                                                          
             
 } 
  
-</script>
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+}"></style>
+<!-- If you replaced the <style> tag way above with a <script> tag don't forget to change the above line to just </script>  -->
+ 
  
  
  
