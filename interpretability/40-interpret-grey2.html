@@ -142,7 +142,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
     model = await tf.loadLayersModel(myFileName); 
   } 
   globalOriginal = document.getElementById('myAsk2').value                                                                               
-  await   document.getElementById('myButtonTest').click()  
+  await   document.getElementById('mySetOriginal').click()  
                                                                    
   })()     //end async                                                            
                                                                                                                                      
@@ -389,10 +389,11 @@ async function myGo() { // inline async so we can use promises and await
 }" >  
  
   
-<input  type="button"  value="Set-Original" onclick="{ 
+<input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
    globalOriginal =  document.getElementById('myAsk2').value  
    document.getElementById('myAsk3').value  = globalOriginal 
-  document.all.myAsk2.onchange(); // have it show the pattern
+   document.all.myAsk2.onchange(); // have it show the pattern
+   myShowGrid('myAsk3', 'myCanvasTest2')                                                                     
                                                                  
   (async function () {     
     globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
