@@ -83,7 +83,9 @@ This demo is loosely based on:
 var    myInterpretArray = new Array()       
 var myPredictArray = new Array()
 var myGlobalAnswer = ''
-function mySortResultsUp(myNum){
+                                                                                             
+mySortResultsUp = function(myNum){                                                                                                                                                                                          
+//function mySortResultsUp(myNum){
    if (myNum == 0) {myNum = 1}
    myInterpretArray.sort((a, b) => b[myNum] - a[myNum]);   // for number sorting max first
    //console.log('sorted by  column')
@@ -92,7 +94,7 @@ function mySortResultsUp(myNum){
 } 
  
  
-function mySortResultsDown(myNum){
+mySortResultsDown = funciton(myNum){
    if (myNum == 0) {myNum = 1}
    myInterpretArray.sort((a, b) => a[myNum] - b[myNum]);   // for number sorting max last
    //console.log('sorted by  column')
@@ -100,7 +102,7 @@ function mySortResultsDown(myNum){
    document.getElementById('myShowArray').click()
 } 
  
-function myShowGrid(myArea2, myCanvas2){
+myShowGrid = function(myArea2, myCanvas2){
 var myCanvas2Element = document.getElementById(myCanvas2);
 var ctx = myCanvas2Element.getContext('2d');
 var myMax = 64
