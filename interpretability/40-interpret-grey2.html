@@ -462,8 +462,10 @@ async function myGo() { // inline async so we can use promises and await
        }, 100);                                                          
                                                                                                                                                                          
  }">
- 
-  Randomizer:<input id="myCut" type=text value = 0.5 size=5>
+ <input  type="button"  value="Randomizer:" onclick="{                                                  
+           document.getElementById('myCut').value = Math.random().toFixed(3)                                                                                                                                                                         
+ }">
+ <input id="myCut" type=text value = 0.5 size=5>
  
  
  
