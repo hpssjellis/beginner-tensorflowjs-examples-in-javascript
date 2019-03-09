@@ -567,7 +567,12 @@ async function myGo() { // inline async so we can use promises and await
         //  alert(document.getElementById('myIntArray1').value)                                                  
     myTemp +=    ''                                               
    document.getElementById('myIntTable').innerHTML    = myTemp                                            
-                                                    
+   
+   if (){
+                                                                     
+   alert()
+                                                                     
+   }                                                                  
 }"> 
  
  
@@ -586,7 +591,7 @@ async function myGo() { // inline async so we can use promises and await
 <input type=button value="interpret more" onclick="{
    let myAr = new Array()   
                                                    
-   //(async function() {                                                
+                                              
                                                    
    // for (let myLoop=0; myLoop < 2; myLoop++){                                           
    document.getElementById('myInterpretButton').click() 
@@ -601,14 +606,23 @@ async function myGo() { // inline async so we can use promises and await
    document.getElementById('myShowArray').click() 
      }, 30);                                                     
                                                    
-                                                   
- //  })()                                                
+  
+ if (document.getElementById('myOutput').value == 0){mySortResultsDown(0) }
+ if (document.getElementById('myOutput').value == 1){mySortResultsDown(1) }
+ if (document.getElementById('myOutput').value == 2){mySortResultsDown(2) }                                                 
+                                              
                                                    
                                                    
  }">
  
-<select id="myOutput" size=1 onChange="{
-   alert()                                        
+ 
+ 
+ 
+ 
+Sort By Descending:<select id="myOutput" size=1 onChange="{
+ if (this.value == 0){mySortResultsDown(0) }
+ if (this.value == 1){mySortResultsDown(1) }
+ if (this.value == 2){mySortResultsDown(2) }
 }">
    <option value=0>Grey Scale
    <option value=1>Blocks and Lines
