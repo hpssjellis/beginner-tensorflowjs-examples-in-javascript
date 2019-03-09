@@ -549,10 +549,7 @@ async function myGo() { // inline async so we can use promises and await
  
 <input type=button id="myInterpretMore" value="interpret more" onclick="{
    let myAr = new Array()   
-                                                   
-   //(async function() {                                                
-                                                   
-   // for (let myLoop=0; myLoop < 2; myLoop++){                                           
+                                       
    document.getElementById('myInterpretButton').click() 
                                                    
       setTimeout(function(){                                            
@@ -563,18 +560,37 @@ async function myGo() { // inline async so we can use promises and await
   // console.log(myAr)                                            
    myInterpretArray.push(myAr)
    document.getElementById('myShowArray').click() 
-                                                    
-  
-                                                   
                                                    
   if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
   if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
   if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
      }, 30);                                                    
- //  })()                                                
-                                                   
-                                                   
+                                                  
  }">
+
+ 
+ 
+ <input type=button id="myInterpretMore" value="Just add" onclick="{
+   let myAr = new Array()   
+                                       
+  // document.getElementById('myInterpretButton').click() 
+                                                   
+      setTimeout(function(){                                            
+   myAr[0] = document.getElementById('myAsk2').value
+   myAr[1] =  Math.round(myPredictArray[0]*100)                          
+   myAr[2] =  Math.round(myPredictArray[1]*100)                          
+   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
+  // console.log(myAr)                                            
+   myInterpretArray.push(myAr)
+   document.getElementById('myShowArray').click() 
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
+     }, 30);                                                    
+                                                  
+ }">
+ 
  
  
  Sort By Descending:<select id="myOutput" size=1 onChange="{
