@@ -372,21 +372,7 @@ async function myGo() { // inline async so we can use promises and await
  myGo() // call the main async function 
  globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
- 
-<input  type="button" id="myButtonTest" value="Re-Test-Original" onclick="{ 
-  document.getElementById('myAsk2').value = globalOriginal 
-  document.all.myAsk2.onchange(); // have it show the pattern
-                                                                 
-  (async function () { 
-    globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'
-                                                      
- })()   // end the inline async function
-}" >  
+
  
   
 <input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
