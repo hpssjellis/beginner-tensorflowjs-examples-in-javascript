@@ -384,7 +384,24 @@ async function myGo() { // inline async so we can use promises and await
     document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
     document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
     document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'
-    myGlobalAnswer = 0 // greyscale
+                                                      
+ })()   // end the inline async function
+}" >  
+ 
+  
+<input  type="button"  value="Set-Original" onclick="{ 
+   globalOriginal =  document.getElementById('myAsk2').value  
+   document.getElementById('myAsk3').value  = globalOriginal 
+  document.all.myAsk2.onchange(); // have it show the pattern
+                                                                 
+  (async function () {     
+    globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
+     myGlobalAnswer = 0 // greyscale
     let myGrey = Math.round(myPredictArray[0]*100)
     let myLines = Math.round(myPredictArray[1]*100)
     let myDiagonal = Math.round(myPredictArray[2]*100)
@@ -395,25 +412,9 @@ async function myGo() { // inline async so we can use promises and await
                                                                           
   //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
                                                                           
-                                                                          
+     document.getElementById('myOutput').value = myGlobalAnswer                                                                    
      console.log('myGlobalAnswer')                                                                                             
-     console.log(myGlobalAnswer)                                                         
- })()   // end the inline async function
-}" >  
- 
-  
-<input  type="button"  value="Set-Original" onclick="{ 
-   globalOriginal =  document.getElementById('myAsk2').value  
-  document.all.myAsk2.onchange(); // have it show the pattern
-                                                                 
-  (async function () {     
-    globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                          
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
-                                                             
+     console.log(myGlobalAnswer)                                                               
  })()   // end the inline async function
 }" >  
  
