@@ -557,7 +557,12 @@ async function myGo() { // inline async so we can use promises and await
    myInterpretArray.push(myAr)
    document.getElementById('myShowArray').click() 
      }, 30);                                                     
+  
                                                    
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
                                                    
  //  })()                                                
                                                    
