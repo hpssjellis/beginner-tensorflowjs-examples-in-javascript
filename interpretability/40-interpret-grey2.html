@@ -51,8 +51,8 @@ var myGlobalAnswer = ''
 function mySortResultsUp(myNum){
    if (myNum == 0) {myNum = 1}
    myInterpretArray.sort((a, b) => b[myNum] - a[myNum]);   // for number sorting max first
-   console.log('sorted by  column')
-   console.log(myInterpretArray)
+   //console.log('sorted by  column')
+   //console.log(myInterpretArray)
    document.getElementById('myShowArray').click()
 } 
  
@@ -60,8 +60,8 @@ function mySortResultsUp(myNum){
 function mySortResultsDown(myNum){
    if (myNum == 0) {myNum = 1}
    myInterpretArray.sort((a, b) => a[myNum] - b[myNum]);   // for number sorting max last
-   console.log('sorted by  column')
-   console.log(myInterpretArray)
+   //console.log('sorted by  column')
+   //console.log(myInterpretArray)
    document.getElementById('myShowArray').click()
 } 
  
@@ -561,14 +561,14 @@ async function myGo() { // inline async so we can use promises and await
   // console.log(myAr)                                            
    myInterpretArray.push(myAr)
    document.getElementById('myShowArray').click() 
-     }, 30);                                                     
+                                                    
   
                                                    
                                                    
   if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
   if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
   if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
-                                                   
+     }, 30);                                                    
  //  })()                                                
                                                    
                                                    
