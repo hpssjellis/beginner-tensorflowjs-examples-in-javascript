@@ -454,7 +454,8 @@ async function myGo() { // inline async so we can use promises and await
  
 <input  type="button"  value="+10 INTERPRETATIONS" onclick="{
    (async function (){                                                        
-       document.getElementById('myCut').value = Math.random().toFixed(3)
+       await document.getElementById('myCut').value = Math.random().toFixed(3)
+       await document.getElementById('myInterpretMore').click()                                                    
                                                            
     })()                                                       
  }">
@@ -541,7 +542,7 @@ async function myGo() { // inline async so we can use promises and await
    //console.log(myInterpretArray)
  }">
  
-<input type=button value="interpret more" onclick="{
+<input type=button id="myInterpretMore" value="interpret more" onclick="{
    let myAr = new Array()   
                                                    
    //(async function() {                                                
