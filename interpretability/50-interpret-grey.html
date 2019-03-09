@@ -37,9 +37,9 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Shedding a small beam of light into the Neural Network Black Box.<br>
+<h2>Shedding a small beam of light into the Neural Network Black Box.</h2>
 Hopefully Machine Learning Libraries will provide more interpretability tools and 
- Machine Learning Developers will incorporate more interpretability within their model design.<br>
+ Machine Learning Developers will incorporate more interpretability within their model design.<br><br>
  
  From this very quick test it looks like all libraries would need is:<br>
  
@@ -53,9 +53,10 @@ Hopefully Machine Learning Libraries will provide more interpretability tools an
 This demo is loosely based on:  
  <a href="https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime">LIME</a>, 
  but I have built it into the model <br><BR>
- <Minamilist setup, lets try a grey detector Neural Network. <br><br>
- 4x4 input array with 0=transparent, 1=black, 2=white; <br>
- 
+ Minamilist setup, lets try a grey detector Neural Network. <br><br>
+  
+ Using a 4x4 input array of pixels with 0=transparent, 1=black, 2=white; <br>
+ Note: this makes a very small screenpattern. I have preseted it repeated 256 times to make a larger image.<br>
  Output 1x3 one hot array in this order: grey scale, blocks or lines, diagonal lines  <br><br>
  
  Note: For interpretability I will not train the NN on the transparent feature "0" (may slip it in occassionally)<br>
