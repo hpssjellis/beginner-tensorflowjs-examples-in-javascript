@@ -423,7 +423,13 @@ async function myGo() { // inline async so we can use promises and await
                                                                           
      document.getElementById('myOutput').value = myGlobalAnswer                                                                    
      console.log('myGlobalAnswer')                                                                                             
-     console.log(myGlobalAnswer)                                                               
+     console.log(myGlobalAnswer)    
+     
+     // clear the interpretations chart                                                                  
+     myInterpretArray.length = 0
+     document.getElementById('myShowArray').click()                                                                     
+                                                                       
+                                                                       
  })()   // end the inline async function
 }" >  
  
