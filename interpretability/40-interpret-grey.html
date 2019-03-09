@@ -531,10 +531,13 @@ async function myGo() { // inline async so we can use promises and await
   <!--   *************************************************************************************** -->
  <h2 align=center>Minimalist Interpretation of the Neural Network Black Box</h2>
  
- 
- 
+ Original Prediction<br>
+ <table border=1>
+  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><span id="mySpan02">...</span></td><span id="mySpan03">...</span></td></tr>
+ </table>
 <div id='myInterpret'>
  
+ Interpretation by inserting transparent pixels ("0") not trained by the Neural Network<br>
   <input type=button id="myShowShade" value="show shade" onclick="{
  // alert(document.getElementById('myIntTable').rows.length)
    //alert(document.getElementById('myIntArray1').value)                                                                  
