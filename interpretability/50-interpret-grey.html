@@ -48,25 +48,26 @@ Hopefully Machine Learning Libraries will provide more interpretability tools an
  <img src="interpret-grey.png"><br><br>
  
  From this very quick test it looks like, all libraries would need is:<br>
- 
+ <ol>
  <li> Various abilities to parse the input data: <font color=blue><b>interpret.input.parse() </b></font> 
   <i>I have done a very simple random parse injecting 
   transparent pixels into the data. I am sure other people could come up with more complex ways to parse the input data. 
    Perhaps use mobinet to exclude non-identified objects or take turns removing obects, etc.</i>
  <li> The predict feature (which is already available):   <font color=blue><b> model.predict()</b></font>
  <li> A method to store, sort and show the interpretations: <font color=blue><b>interpret.add(), interpret.sort(), interpret.show() </b></font> <br><br>
- 
+ </ol>
+ Note: I have not used those method names I have simply got the example working.<br>
  
 This demo is loosely based on:  
  <a href="https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime">LIME</a>, 
  but I have built it into the model <br><BR>
   
   
-<h3> This is a minimalist setup, lets try a grey detector Neural Network. </h3>
+<h3> This is a minimalist setup of a grey shade detector but using only black and white pixels.</h3>
   
  Using a 4x4 input array of pixels with 0=transparent, 1=black, 2=white; <br>
- Note: this makes a very small screen pattern. I have preseted it repeated 256 times to make a larger image.<br>
- Output 1x3 one hot array in this order: grey scale, blocks or lines, diagonal lines  <br><br>
+ Note: this makes a very small screen pattern. I have presented it repeated 256 times to make a much larger image.<br>
+ Output is a 1x3 one hot array in this order: grey scale, blocks or lines, diagonal lines  <br><br>
  
  Note: For interpretability I will not train the NN on the transparent feature "0" (may slip it in occassionally)<br>
  To run an interpretability test, I will run the prediction multiple times with inserted transparent blocks, then show and 
