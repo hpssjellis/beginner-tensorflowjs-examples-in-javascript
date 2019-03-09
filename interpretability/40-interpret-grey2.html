@@ -453,10 +453,11 @@ async function myGo() { // inline async so we can use promises and await
  
  
 <input  type="button"  value="+10 INTERPRETATIONS" onclick="{
-   (async function (){                                                        
-      document.getElementById('myCut').value = Math.random().toFixed(3)
-      document.getElementById('myInterpretMore').click()                                                    
-                                                           
+   (async function (){    
+      for (let myRun=0;  myRun<10; myRun++){                                                      
+         document.getElementById('myCut').value = Math.random().toFixed(3)
+         document.getElementById('myInterpretMore').click()                                                    
+      }                                                     
     })()                                                       
  }">
  
