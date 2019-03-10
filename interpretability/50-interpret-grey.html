@@ -502,19 +502,8 @@ The above example uses a premade model. Your job is to make a better model, eith
 
  
  
- 
- 
- <textarea id="myAsk2a" rows=4 cols=9 wrap=false onChange="{myShowGrid('myAsk2a','myCanvasTest')}">
-1,2,1,2,
-2,1,2,1,
-1,2,1,2,
-2,1,2,1</textarea>
- 
- <!--<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> -->
- 
-<canvas id="myCanvasTest" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> 
- <br>
- 
+
+<input id="myFileIn" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
  
 <input id="myButton7979a" type="button" value="Load Model" onclick="{ 
   (async function () {                                                                 
@@ -740,11 +729,11 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 30; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 60; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/30 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/60 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
@@ -758,8 +747,8 @@ async function myGo() { // inline async so we can use promises and await
   
  <input  type="button"  value="Save-Model" onclick="{ 
 (async function () { 
-    alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
-    const myFileName = prompt('Enter filename to store this model','downloads://40-interpret0-grey');
+    alert('Make a new folder on your computer, save the model (both json and bin extensions seperately but with the same file name) to the folder, then upload the folder to a website')
+    const myFileName = prompt('Enter filename to store this model','downloads://myFileName');
     const saveResults = await model.save(myFileName);
     //document.getElementById('myDivSummary').innerHTML = ''    
     model.summary() 
