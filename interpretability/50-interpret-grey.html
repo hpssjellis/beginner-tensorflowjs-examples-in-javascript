@@ -503,8 +503,7 @@ The above example uses a premade model. Your job is to make a better model, eith
  
  
 
-<input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
- 
+
 
  
  
@@ -749,7 +748,7 @@ async function myGo() { // inline async so we can use promises and await
  
 <input id="myButton7979a" type="button" value="Load Model" onclick="{ 
   (async function () {                                                                 
-  const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
+  const myFileName = document.getElementById('myFileIn').value  
   if (myFileName != null){  
     model = await tf.loadLayersModel(myFileName); 
   } 
@@ -758,7 +757,8 @@ async function myGo() { // inline async so we can use promises and await
                                                                    
   })()     //end async                                                            
                                                                                                                                      
-}"> 
+}"> load this file URL: <input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
+ 
  
  
  
