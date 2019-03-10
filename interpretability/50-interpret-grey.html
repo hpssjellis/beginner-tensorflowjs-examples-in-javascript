@@ -87,6 +87,7 @@ This demo is loosely based on:
 myInterpretArray = new Array()       
 myPredictArray = new Array()
 myGlobalAnswer = ''
+model = tf.sequential();  // the main global model
 
 // global functions (Dynamic means you can change them onthe webpage. see black textarea)
                                                                                              
@@ -716,7 +717,7 @@ const ys = tf.tensor2d([
 ], shape=[32, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
-model = tf.sequential();                                                                                                                                          
+                                                                                                                                        
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
     inputShape: [4, 4, 1],                                                                                                                                                  
@@ -738,11 +739,11 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 300; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 30; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/300 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/30 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
   await   document.getElementById('myButtonTest').click()                                                                                
