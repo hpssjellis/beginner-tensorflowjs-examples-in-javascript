@@ -505,18 +505,7 @@ The above example uses a premade model. Your job is to make a better model, eith
 
 <input id="myFileIn" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
  
-<input id="myButton7979a" type="button" value="Load Model" onclick="{ 
-  (async function () {                                                                 
-  const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
-  if (myFileName != null){  
-    model = await tf.loadLayersModel(myFileName); 
-  } 
-  globalOriginal = document.getElementById('myAsk2a').value                                                                               
-  await   document.getElementById('mySetOriginal').click()  
-                                                                   
-  })()     //end async                                                            
-                                                                                                                                     
-}">
+
  
  
  
@@ -757,7 +746,18 @@ async function myGo() { // inline async so we can use promises and await
 }">
  
  
- 
+<input id="myButton7979a" type="button" value="Load Model" onclick="{ 
+  (async function () {                                                                 
+  const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
+  if (myFileName != null){  
+    model = await tf.loadLayersModel(myFileName); 
+  } 
+  globalOriginal = document.getElementById('myAsk2a').value                                                                               
+  await   document.getElementById('mySetOriginal').click()  
+                                                                   
+  })()     //end async                                                            
+                                                                                                                                     
+}"> 
  
  
  
