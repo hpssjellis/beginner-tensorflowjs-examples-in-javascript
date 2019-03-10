@@ -212,7 +212,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
     document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
     document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
     document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'  
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'  
   
     // mySpan01    
     document.getElementById('mySpan01').innerHTML = '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>'          
@@ -402,7 +402,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
   if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
      }, 30);                                                    
                                                   
- }">
+ }"><br>
  
  
 
@@ -419,7 +419,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
 <b> Interpretations</b>
  
   
- Sort By Descending:<select id="myOutput" size=1 onChange="{
+ Sort by:<select id="myOutput" size=1 onChange="{
   //alert(this.value)
   if (this.value == 0){mySortResultsUp(1) }
   if (this.value == 1){mySortResultsUp(2) }
