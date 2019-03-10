@@ -318,7 +318,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  
 <div id='myInterpret'>
  
-  <input type=button id="myShowShade" value="show shade" onclick="{
+  <input type=hidden id="myShowShade" value="show shade" onclick="{
  // alert(document.getElementById('myIntTable').rows.length)
    //alert(document.getElementById('myIntArray1').value)                                                                  
   for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
@@ -326,7 +326,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
   }
 }">
  
- <input type=button id="myShowArray" value="Array to table" onclick="{
+ <input type=hidden id="myShowArray" value="Array to table" onclick="{
    document.getElementById('myIntTable').innerHTML =''
                                                                      
   // myInterpretArray = new Array()        declared globally above    
