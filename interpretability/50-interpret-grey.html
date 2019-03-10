@@ -87,6 +87,7 @@ This demo is loosely based on:
 myInterpretArray = new Array()       
 myPredictArray = new Array()
 myGlobalAnswer = ''
+model = tf.sequential();  // the main global model
 
 // global functions (Dynamic means you can change them onthe webpage. see black textarea)
                                                                                              
@@ -195,229 +196,6 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
 }">
  
  
- 
-<input  type="button" value="Convolutional Train and Test" onclick="{ 
- document.all.myAsk2.onchange(); // have it show the pattern
- document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
-                                                                                                                                                                        
-const xs = tf.tensor4d([                                                                                                                                                
-                                                                                                                                                                        
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                    
-   
-2,2,2,2,  
-2,2,2,2,  
-2,2,2,2, 
-2,2,2,2,  
-                                                                                     
-2,2,2,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2, 
-                                                                                        
-2,2,2,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-2,2,2,2, 
-                                                                                        
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-2,2,2,2, 
-                                                                                        
-1,1,1,1,                                                                                                                                                                
-1,2,2,2,                                                                                                                                                                
-1,2,2,2,                                                                                                                                                                
-1,2,2,2, 
-                                                                                        
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,1,1,1, 
-                                                                                        
-2,2,2,1,                                                                                                                                                                
-2,2,2,1,                                                                                                                                                                
-2,2,2,1,                                                                                                                                                                
-1,1,1,1, 
-                                                                                     
-1,2,1,2,                                                                                     
-2,1,2,1,                                                                                     
-1,2,1,2,
-2,1,2,1,
-                                                                                     
-                                                                                     
-2,1,2,1,
-1,2,1,2,
-2,1,2,1,
-1,2,1,2,                                                                                                                                                                
-                                                                                                                                                                        
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,     
-                                                                                    
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,      
-                                                                                     
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,                                                                                                                                                                
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,   
-                                                                                                                                                              
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,1,                                                                                                                                                                
-2,1,2,2,   
-                                                                                                                                                              
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-2,1,2,1,    
-                                                                                                                                                                        
-2,1,1,2,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-2,1,1,2,                                                                                                                                                                
-1,2,2,1, 
-                                                                                     
- 
-                                                                                     
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,2,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-                                                                                                                                                                        
-2,2,2,2,                                                                                                                                                                
-1,2,2,2,                                                                                                                                                                
-2,2,2,2,                                                                                                                                                                
-2,2,2,2,                                                                                                                                                                
-                                                                                                                                                                        
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,                                                                                                                                                                
-1,2,2,1,    
-                                                                                    
-2,2,2,2,                                                                                                                                                                
-2,2,2,2,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,     
-                                                                                     
-2,2,2,2,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,  
-                                                                                                                                                              
-2,2,2,2,                                                                                                                                                                
-2,2,2,2,                                                                                                                                                                
-2,2,2,2,                                                                                                                                                                
-1,1,1,1,  
-                                                                                                                                                              
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-2,2,2,2,                                                                                                                                                                
-2,2,2,2,   
-                                                                                                                                                                        
-2,1,1,1,                                                                                                                                                                
-2,1,1,1,                                                                                                                                                                
-2,1,1,1,                                                                                                                                                                
-2,1,1,1,
-                                                                                      
-                                                                                     
-                                                                                     
-                                                                                     
-                                                                                     
-1,1,2,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-1,1,1,1,                                                                                                                                                                
-                                                                                                                                                                        
-2,1,1,1,                                                                                                                                                                
-1,2,1,1,                                                                                                                                                                
-1,1,2,1,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-                                                                                                                                                                        
-1,1,1,2,                                                                                                                                                                
-1,1,2,1,                                                                                                                                                                
-1,2,1,1,                                                                                                                                                                
-2,1,1,1,    
-                                                                                    
-1,2,1,1,                                                                                                                                                                
-1,1,2,1,                                                                                                                                                                
-2,1,1,2,                                                                                                                                                                
-1,2,1,1,     
-                                                                                     
-1,2,1,1,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,                                                                                                                                                                
-1,1,2,1,  
-                                                                                                                                                              
-1,1,2,2,                                                                                                                                                                
-1,1,1,2,                                                                                                                                                                
-2,1,1,1,                                                                                                                                                                
-2,2,1,1,  
-                                                                                                                                                              
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,   
-                                                                                                                                                                        
-2,1,2,1,                                                                                                                                                                
-1,2,1,2,                                                                                                                                                                
-2,1,2,1,                                                                                                                                                                
-1,2,1,2
-                                                                                    
-], shape=[32, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
-                                                                                                                                                                        
-// Labels of how many lines in each image. I can make much more images just few here for simplicity 
-// grey, blocks, diagonals, 
-const ys = tf.tensor2d([
-                                                                                     
-0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,                                                                                     
-1,0,0,      1,0,0,      1,0,0,      1,0,0,      1,0,0,    1,0,0,       1,0,0,      1,0,0,
-0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,
-0,1,0,      0,0,1,      0,0,1,      0,0,1,      0,0,1,    0,0,1,       1,0,0,      1,0,0
-                                                                                     
-], shape=[32, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
-                                                                                                                                                                        
-                                                                                                                                                                        
-model = tf.sequential();                                                                                                                                          
-                                                                                                                                                                        
-model.add(tf.layers.conv2d({                                                                                                                                            
-    inputShape: [4, 4, 1],                                                                                                                                                  
-    kernelSize: 2,                                                                                                                                                          
-    filters: 4,                                                                                                                                                             
-    strides: 1,                                                                                                                                                             
-    activation: 'relu',                                                                                                                                                     
-    kernelInitializer: 'varianceScaling'                                                                                                                                    
-}));                                                                                                                                                                    
-                                                                                                                                                                        
-model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
-                                                                                                                                                                        
-model.add(tf.layers.flatten());                                                                                                                                         
-model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
-model.add(tf.layers.dense({ units: 3, activation: 'linear' }) ); 
-                                                                                     
-const myOptimizer = tf.train.adamax()             
-model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                                                         
-                                                                                                                                                                        
-async function myGo() { // inline async so we can use promises and await                                                                                                   
-                                                                                                                                                                        
-  for ( let myLoop = 1; myLoop <= 3000; myLoop++ ) {                                                                                                                     
-    var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
-    if (myLoop % 20 == 0){                                                                                                                                              
-      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/3000 : ' + myFit.history.loss[0] +' <br><br>'                                          
-    }                                                                                                                                                                   
-  }    
-  await   document.getElementById('myButtonTest').click()                                                                                
-}
-                                                                                                                                                                      
- myGo() // call the main async function 
- globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
-}" > 
 
  
   
@@ -517,17 +295,7 @@ async function myGo() { // inline async so we can use promises and await
  
  
  
- 
- <input  type="button"  value="Save-Model" onclick="{ 
-(async function () { 
-    alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
-    const myFileName = prompt('Enter filename to store this model','downloads://40-interpret0-grey');
-    const saveResults = await model.save(myFileName);
-    //document.getElementById('myDivSummary').innerHTML = ''    
-    model.summary() 
-})()
-                                                    
-}">
+
  
  
 
@@ -721,15 +489,280 @@ Click here to see the working HTML code.
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-Blah Blah Blah Blah 
+The above example uses a premade model. Your job is to make a better model, either using local storage or saving the model 
+ loading on the internet and loading the model here. Main buttons once the model is loaded are still above.
 </div><br>
 
 
 <div id="myDiv124Code"> 
 
-<input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
-      document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
-}"><br><br>
+ 
+ 
+ 
+
+ 
+ 
+
+<input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
+ 
+
+ 
+ 
+ 
+<input  type="button"  id="myButton124"   value="Convolutional Train and Test" onclick="{ 
+ document.all.myAsk2.onchange(); // have it show the pattern
+ document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
+                                                                                                                                                                        
+const xs = tf.tensor4d([                                                                                                                                                
+                                                                                                                                                                        
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                    
+   
+2,2,2,2,  
+2,2,2,2,  
+2,2,2,2, 
+2,2,2,2,  
+                                                                                     
+2,2,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2, 
+                                                                                        
+2,2,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+2,2,2,2, 
+                                                                                        
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+2,2,2,2, 
+                                                                                        
+1,1,1,1,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+1,2,2,2, 
+                                                                                        
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,1,1,1, 
+                                                                                        
+2,2,2,1,                                                                                                                                                                
+2,2,2,1,                                                                                                                                                                
+2,2,2,1,                                                                                                                                                                
+1,1,1,1, 
+                                                                                     
+1,2,1,2,                                                                                     
+2,1,2,1,                                                                                     
+1,2,1,2,
+2,1,2,1,
+                                                                                     
+                                                                                     
+2,1,2,1,
+1,2,1,2,
+2,1,2,1,
+1,2,1,2,                                                                                                                                                                
+                                                                                                                                                                        
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,     
+                                                                                    
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,      
+                                                                                     
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,   
+                                                                                                                                                              
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+2,1,2,2,   
+                                                                                                                                                              
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+2,1,2,1,    
+                                                                                                                                                                        
+2,1,1,2,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+2,1,1,2,                                                                                                                                                                
+1,2,2,1, 
+                                                                                     
+ 
+                                                                                     
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+                                                                                                                                                                        
+2,2,2,2,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+                                                                                                                                                                        
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,    
+                                                                                    
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,     
+                                                                                     
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,  
+                                                                                                                                                              
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,  
+                                                                                                                                                              
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,   
+                                                                                                                                                                        
+2,1,1,1,                                                                                                                                                                
+2,1,1,1,                                                                                                                                                                
+2,1,1,1,                                                                                                                                                                
+2,1,1,1,
+                                                                                      
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     
+1,1,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+                                                                                                                                                                        
+2,1,1,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+                                                                                                                                                                        
+1,1,1,2,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+2,1,1,1,    
+                                                                                    
+1,2,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+2,1,1,2,                                                                                                                                                                
+1,2,1,1,     
+                                                                                     
+1,2,1,1,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+1,1,2,1,  
+                                                                                                                                                              
+1,1,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+2,1,1,1,                                                                                                                                                                
+2,2,1,1,  
+                                                                                                                                                              
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,   
+                                                                                                                                                                        
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2
+                                                                                    
+], shape=[32, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
+                                                                                                                                                                        
+// Labels of how many lines in each image. I can make much more images just few here for simplicity 
+// grey, blocks, diagonals, 
+const ys = tf.tensor2d([
+                                                                                     
+0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,                                                                                     
+1,0,0,      1,0,0,      1,0,0,      1,0,0,      1,0,0,    1,0,0,       1,0,0,      1,0,0,
+0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,
+0,1,0,      0,0,1,      0,0,1,      0,0,1,      0,0,1,    0,0,1,       1,0,0,      1,0,0
+                                                                                     
+], shape=[32, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
+                                                                                                                                                                        
+                                                                                                                                                                        
+                                                                                                                                        
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({                                                                                                                                            
+    inputShape: [4, 4, 1],                                                                                                                                                  
+    kernelSize: 2,                                                                                                                                                          
+    filters: 4,                                                                                                                                                             
+    strides: 1,                                                                                                                                                             
+    activation: 'relu',                                                                                                                                                     
+    kernelInitializer: 'varianceScaling'                                                                                                                                    
+}));                                                                                                                                                                    
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
+                                                                                                                                                                        
+model.add(tf.layers.flatten());                                                                                                                                         
+model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 3, activation: 'linear' }) ); 
+                                                                                     
+const myOptimizer = tf.train.adamax()             
+model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                                                         
+                                                                                                                                                                        
+async function myGo() { // inline async so we can use promises and await                                                                                                   
+                                                                                                                                                                        
+  for ( let myLoop = 1; myLoop <= 60; myLoop++ ) {                                                                                                                     
+    var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
+    if (myLoop % 20 == 0){                                                                                                                                              
+      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
+      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/60 : ' + myFit.history.loss[0] +' <br><br>'                                          
+    }                                                                                                                                                                   
+  }    
+  await   document.getElementById('mySetOriginal').click()
+  document.getElementById('myDiv124').innerHTML += '<br> Check the above area for predictions<br>'
+}
+                                                                                                                                                                      
+ myGo() // call the main async function 
+ //globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
+}" > 
+
+ 
+  
+ <input  type="button"  value="Save-Model" onclick="{ 
+(async function () { 
+    alert('Make a new folder on your computer, save the model (both json and bin extensions seperately but with the same file name) to the folder, then upload the folder to a website')
+    const myFileName = 'downloads://myFileName'
+    const saveResults = await model.save(myFileName);
+    //document.getElementById('myDivSummary').innerHTML = ''    
+    model.summary() 
+})()
+                                                    
+}">
+ 
+ 
+<input id="myButton7979a" type="button" value="Load Model" onclick="{ 
+  (async function () {                                                                 
+  const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
+  if (myFileName != null){  
+    model = await tf.loadLayersModel(myFileName); 
+  } 
+  globalOriginal = document.getElementById('myAsk2').value                                                                               
+  await   document.getElementById('mySetOriginal').click()  
+                                                                   
+  })()     //end async                                                            
+                                                                                                                                     
+}"> 
+ 
+ 
+ 
+ 
 
 </div>
 <div id='myDiv124'>...</div><br>
