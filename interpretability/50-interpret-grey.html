@@ -197,54 +197,6 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  
  
 
- 
-  
-<input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
-   globalOriginal =  document.getElementById('myAsk2').value  
-   document.getElementById('myAsk3').value  = globalOriginal 
-   document.all.myAsk2.onchange(); // have it show the pattern
-                                                                 
-                                                                 
-  (async function () {  
-                                                                       
-    await myShowGrid('myAsk3', 'myCanvasTest2')                                                                                                                                                        
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
-    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'  
-  
-    // mySpan01    
-    document.getElementById('mySpan01').innerHTML = '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>'          
-    document.getElementById('mySpan02').innerHTML = '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>'        
-    document.getElementById('mySpan03').innerHTML = '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b>'                                                    
-                                               
-                                                     
-                                                     
-     myGlobalAnswer = 0 // greyscale
-    let myGrey = Math.round(myPredictArray[0]*100)
-    let myLines = Math.round(myPredictArray[1]*100)
-    let myDiagonal = Math.round(myPredictArray[2]*100)
-    if ((myLines > myGrey) || (myDiagonal > myGrey)) {
-        if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
-     }  // lines
-                                                                          
-                                                                          
-  //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
-                                                                          
-     document.getElementById('myOutput').value = myGlobalAnswer                                                                    
-     //console.log('myGlobalAnswer')                                                                                             
-    // console.log(myGlobalAnswer)    
-     
-     // clear the interpretations chart                                                                  
-     myInterpretArray.length = 0
-     document.getElementById('myShowArray').click()                                                                     
-                                                                       
-                                                                       
- })()   // end the inline async function
-}" >  
- 
- 
 
  
  
@@ -294,9 +246,9 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
     // defined as global    myPredictArray above                                                        
                                                                    
     myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
     document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
                                                              
  })()   // end the inline async function
@@ -379,7 +331,62 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
    Ratio Original/transparent:
  <input id="myCut" type=text value = 0.5 size=5 onclick="{
       document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
- }">
+ }"><br>
+   
+   
+   
+  
+ 
+  
+<input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
+   globalOriginal =  document.getElementById('myAsk2').value  
+   document.getElementById('myAsk3').value  = globalOriginal 
+   document.all.myAsk2.onchange(); // have it show the pattern
+                                                                 
+                                                                 
+  (async function () {  
+                                                                       
+    await myShowGrid('myAsk3', 'myCanvasTest2')                                                                                                                                                        
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'  
+  
+    // mySpan01    
+    document.getElementById('mySpan01').innerHTML = '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>'          
+    document.getElementById('mySpan02').innerHTML = '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>'        
+    document.getElementById('mySpan03').innerHTML = '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b>'                                                    
+                                               
+                                                     
+                                                     
+     myGlobalAnswer = 0 // greyscale
+    let myGrey = Math.round(myPredictArray[0]*100)
+    let myLines = Math.round(myPredictArray[1]*100)
+    let myDiagonal = Math.round(myPredictArray[2]*100)
+    if ((myLines > myGrey) || (myDiagonal > myGrey)) {
+        if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
+     }  // lines
+                                                                          
+                                                                          
+  //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
+                                                                          
+     document.getElementById('myOutput').value = myGlobalAnswer                                                                    
+     //console.log('myGlobalAnswer')                                                                                             
+    // console.log(myGlobalAnswer)    
+     
+     // clear the interpretations chart                                                                  
+     myInterpretArray.length = 0
+     document.getElementById('myShowArray').click()                                                                     
+                                                                       
+                                                                       
+ })()   // end the inline async function
+}" >  
+ 
+  
+   
+   
+   
    
    
   <input type=button value="Clear Interpret" onclick="{
@@ -451,61 +458,11 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  
  
  
- <input type=button value="Clear Interpret" onclick="{
-  myInterpretArray.length = 0
-  document.getElementById('myShowArray').click() 
-                                               
-                                               
-  // myInterpretArray[0] = ['1,2,1,2,\n2,1,2,1,\n1,2,1,2,\n2,1,2,1', 100, 0, 0];
-  // myInterpretArray[1] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
-  // myInterpretArray[2] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];  
-   //console.log(myInterpretArray)
- }">
- 
-<input type=button id="myInterpretMore" value="interpret more" onclick="{
-   let myAr = new Array()   
-                                       
-   document.getElementById('myInterpretButton').click() 
-                                                   
-      setTimeout(function(){                                            
-   myAr[0] = document.getElementById('myAsk2').value
-   myAr[1] =  Math.round(myPredictArray[0]*100)                          
-   myAr[2] =  Math.round(myPredictArray[1]*100)                          
-   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
-  // console.log(myAr)                                            
-   myInterpretArray.push(myAr)
-   document.getElementById('myShowArray').click() 
-                                                   
-  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
-  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
-  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
-     }, 30);                                                    
-                                                  
- }">
+
 
  
  
- <input type=button id="myInterpretMore" value="Just add" onclick="{
-   let myAr = new Array()   
-                                       
-  // document.getElementById('myInterpretButton').click() 
-                                                   
-      setTimeout(function(){                                            
-   myAr[0] = document.getElementById('myAsk2').value
-   myAr[1] =  Math.round(myPredictArray[0]*100)                          
-   myAr[2] =  Math.round(myPredictArray[1]*100)                          
-   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
-  // console.log(myAr)                                            
-   myInterpretArray.push(myAr)
-   document.getElementById('myShowArray').click() 
-                                                   
-  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
-  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
-  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
-     }, 30);                                                    
-                                                  
- }"><br>
- 
+
  
 
   
