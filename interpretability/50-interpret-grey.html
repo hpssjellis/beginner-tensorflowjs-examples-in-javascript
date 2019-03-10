@@ -738,7 +738,7 @@ async function myGo() { // inline async so we can use promises and await
  <input  type="button"  value="Save-Model" onclick="{ 
 (async function () { 
     alert('Make a new folder on your computer, save the model (both json and bin extensions seperately but with the same file name) to the folder, then upload the folder to a website')
-    const myFileName = prompt('Enter filename to store this model','downloads://myFileName');
+    const myFileName = 'downloads://myFileName'
     const saveResults = await model.save(myFileName);
     //document.getElementById('myDivSummary').innerHTML = ''    
     model.summary() 
