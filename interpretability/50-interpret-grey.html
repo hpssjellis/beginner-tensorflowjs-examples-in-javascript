@@ -176,6 +176,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  <tr><td> 
  
  
+Only this table can be changed<br>
 <textarea id="myAsk2" rows=4 cols=9 wrap=false onChange="{myShowGrid('myAsk2','myCanvasTest')}">
 1,2,1,2,
 2,1,2,1,
@@ -184,11 +185,11 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  
  <!--<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> -->
  
-<canvas id="myCanvasTest" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> 
+<canvas id="myCanvasTest" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> <br>
 
 Automatic Interpretations:
  
-<input id="myButton7979" type="button" value="Load Model" onclick="{ 
+<input id="myButton7979" type="button" value="LOAD SAVED MODEL" onclick="{ 
   (async function () {                                                                 
   const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
   if (myFileName != null){  
@@ -228,9 +229,25 @@ Automatic Interpretations:
  
  
  
- 
  <table border=1>
   <tr><td>Manual Interpretations:
+ <input  type="button" id="myInterpretButton"  value="Edit Show" onclick="{  
+  (async function () { 
+    document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+    document.all.myAsk2.onchange(); // have it show the pattern
+    // defined as global    myPredictArray above                                                        
+                                                                   
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
+                                                             
+ })()   // end the inline async function
+}" > 
+ 
+ 
+
  <input  type="button" id="myInterpretButton"  value="View" onclick="{  
   (async function () { 
 /////////////////////////////start to parse the original /////////////////////////////////
@@ -262,7 +279,7 @@ Automatic Interpretations:
 }" > 
    
    
-   <input type=button id="myInterpretMore2" value="Just add" onclick="{
+   <input type=button id="myInterpretMore2" value="Add" onclick="{
    let myAr = new Array()   
                                        
   // document.getElementById('myInterpretButton').click() 
@@ -281,7 +298,7 @@ Automatic Interpretations:
   if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
      }, 30);                                                    
                                                   
- }">
+ }"><br>
   
    
    
@@ -309,7 +326,7 @@ Automatic Interpretations:
  }">
 
  
- <input type=button  value="Randomize Interpretation" onclick="{
+ <input type=button  value="Interpret Random" onclick="{
   document.getElementById('myCut').value = Math.random().toFixed(3)  
    let myAr = new Array()   
                                        
@@ -335,7 +352,7 @@ Automatic Interpretations:
 
    
    
-   Ratio original/transparent:
+   Ratio original/transparent (can edit):
  <input id="myCut" type=text value = 0.5 size=5 onclick="{
       document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
  }">
