@@ -232,7 +232,7 @@ Automatic Interpretations:
  
  <table border=1>
   <tr><td>Manual Interpretations:
- <input  type="button"  value="Show" onclick="{  
+ <input  type="button"  value="Show" title="Shows and does a prediction on what is in the textarea. Make changes first" onclick="{  
   (async function () { 
     //document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
     document.all.myAsk2.onchange(); // have it show the pattern
@@ -249,7 +249,7 @@ Automatic Interpretations:
  
  
 
- <input  type="button"  value="Recall" onclick="{  
+ <input  type="button"  value="Recall" title="Recalls the original textrea so you can start again making changes"  onclick="{  
   (async function () { 
     document.getElementById('myAsk2').value   = globalOriginal                                     
    // document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
@@ -266,7 +266,7 @@ Automatic Interpretations:
 }" > 
  
 
- <input  type="button" id="myInterpretButton"  value="View" onclick="{  
+ <input  type="button" id="myInterpretButton"  value="Try"  title="Trys an interpretation but does not record it in the chart"  onclick="{  
   (async function () { 
 /////////////////////////////start to parse the original /////////////////////////////////
      let myCutOff = parseFloat(document.getElementById('myCut').value)
@@ -297,7 +297,7 @@ Automatic Interpretations:
 }" > 
    
    
-   <input type=button id="myInterpretMore2" value="Add" onclick="{
+   <input type=button id="myInterpretMore2" value="Add" title="Adds to the chart what you tried"  onclick="{
    let myAr = new Array()   
                                        
   // document.getElementById('myInterpretButton').click() 
@@ -322,7 +322,7 @@ Automatic Interpretations:
    
 
  
-<input type=button id="myInterpretMore" value="Interpret" onclick="{
+<input type=button id="myInterpretMore" value="Interpret"  title="Interprets and adds to chart"  onclick="{
    let myAr = new Array()   
                                        
    document.getElementById('myInterpretButton').click() 
@@ -344,7 +344,7 @@ Automatic Interpretations:
  }">
 
  
- <input type=button  value="Interpret Random" onclick="{
+ <input type=button  value="Interpret Random"  title="Random interpretations and adds to chart"  onclick="{
   document.getElementById('myCut').value = Math.random().toFixed(3)  
    let myAr = new Array()   
                                        
@@ -371,7 +371,7 @@ Automatic Interpretations:
    
    
    Ratio original/transparent (can edit):
- <input id="myCut" type=text value = 0.5 size=5 onclick="{
+ <input id="myCut" type=text value = 0.5 size=5  title="Determines the amount of regular pixels to leave or random transparent pixels to add"  onclick="{
       document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
  }">
    
@@ -380,7 +380,7 @@ Automatic Interpretations:
   
  
   
-<input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
+<input  type="button" id="mySetOriginal" value="Set-Original" title="Sets the original input that will forever be interpreted until you change it again"  onclick="{ 
    globalOriginal =  document.getElementById('myAsk2').value  
    document.getElementById('myAsk3').value  = globalOriginal 
    document.all.myAsk2.onchange(); // have it show the pattern
@@ -431,7 +431,7 @@ Automatic Interpretations:
    
    
    
-  <input type=button value="Clear Interpret" onclick="{
+  <input type=button value="Clear Interpret"  title="Clears the chart below"  onclick="{
   myInterpretArray.length = 0
   document.getElementById('myShowArray').click() 
                                                
