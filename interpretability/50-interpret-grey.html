@@ -170,6 +170,12 @@ ctx.putImageData(imgData, 0, 0);
  
 Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
 Following image has the pattern repeated 16x16 = 256 times to show the larger shade<br>
+ 
+ 
+ <table border=1>
+ <tr><td> Automatic Interpretations:
+ 
+ 
 <textarea id="myAsk2" rows=4 cols=9 wrap=false onChange="{myShowGrid('myAsk2','myCanvasTest')}">
 1,2,1,2,
 2,1,2,1,
@@ -180,8 +186,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  
 <canvas id="myCanvasTest" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> 
 
-<table border=1>
- <tr><td> Automatic Interpretations:
+
  
 <input id="myButton7979" type="button" value="Load Model" onclick="{ 
   (async function () {                                                                 
