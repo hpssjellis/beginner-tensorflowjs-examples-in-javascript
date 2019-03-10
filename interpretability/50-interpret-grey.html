@@ -231,7 +231,7 @@ Automatic Interpretations:
  
  <table border=1>
   <tr><td>Manual Interpretations:
- <input  type="button"  value="Edit Show" onclick="{  
+ <input  type="button"  value="Show" onclick="{  
   (async function () { 
     document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
     document.all.myAsk2.onchange(); // have it show the pattern
@@ -246,6 +246,23 @@ Automatic Interpretations:
  })()   // end the inline async function
 }" > 
  
+ 
+
+ <input  type="button"  value="Recall" onclick="{  
+  (async function () { 
+    document.getElementById('myAsk2').value   = globalOriginal                                     
+   // document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+    document.all.myAsk2.onchange(); // have it show the pattern
+    // defined as global    myPredictArray above                                                        
+                                                                   
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'                   
+                                                             
+ })()   // end the inline async function
+}" > 
  
 
  <input  type="button" id="myInterpretButton"  value="View" onclick="{  
