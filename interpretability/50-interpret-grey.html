@@ -401,7 +401,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
 <div id='myDiv7979'>...</div>
 
   <!--   *************************************************************************************** -->
- <h2 align=center>Minimalist Interpretation of the Neural Network Black Box</h2>
+
  
  
 
@@ -442,9 +442,20 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
  
  
  
+
+  
  
  
- Sort By Descending:<select id="myOutput" size=1 onChange="{
+<b>Original Prediction</b>
+ <table border=1>
+  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><td><span id="mySpan02">...</span></td><td><span id="mySpan03">...</span></td></tr>
+ </table> 
+ 
+ 
+ 
+<b> Interpretations</b>  
+ 
+Sorting by:<select id="myOutput" size=1 onChange="{
   //alert(this.value)
   if (this.value == 0){mySortResultsUp(1) }
   if (this.value == 1){mySortResultsUp(2) }
@@ -455,17 +466,6 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
    <option value=2>Diagonals
  </select><br>
  
-  
- 
- 
-<h3>Original Prediction</h3>
- <table border=1>
-  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><td><span id="mySpan02">...</span></td><td><span id="mySpan03">...</span></td></tr>
- </table> <br>
- 
- 
- 
-<h3> Interpretations</h3>
 By inserting transparent ("0") pixels as data not trained on the neural network<br> 
  
 <table id="myIntTable" border=1>
