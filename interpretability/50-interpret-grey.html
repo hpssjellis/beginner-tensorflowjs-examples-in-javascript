@@ -32,7 +32,7 @@
 
     
     
-<h2 align=center>Interpretability Minimalist Example using Tensorflowjs Keras Convolutional Layers.</h2>
+<h2 align=center>Interpretability Minimalist Example using Tensorflowjs Keras COnvolutional Layers.</h2>
 
 
 
@@ -87,7 +87,6 @@ This demo is loosely based on:
 myInterpretArray = new Array()       
 myPredictArray = new Array()
 myGlobalAnswer = ''
-model = tf.sequential();  // the main global model
 
 // global functions (Dynamic means you can change them onthe webpage. see black textarea)
                                                                                              
@@ -196,357 +195,8 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
 }">
  
  
-
  
-  
-<input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
-   globalOriginal =  document.getElementById('myAsk2').value  
-   document.getElementById('myAsk3').value  = globalOriginal 
-   document.all.myAsk2.onchange(); // have it show the pattern
-                                                                 
-                                                                 
-  (async function () {  
-                                                                       
-    await myShowGrid('myAsk3', 'myCanvasTest2')                                                                                                                                                        
-    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'  
-  
-    // mySpan01    
-    document.getElementById('mySpan01').innerHTML = '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>'          
-    document.getElementById('mySpan02').innerHTML = '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>'        
-    document.getElementById('mySpan03').innerHTML = '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b>'                                                    
-                                               
-                                                     
-                                                     
-     myGlobalAnswer = 0 // greyscale
-    let myGrey = Math.round(myPredictArray[0]*100)
-    let myLines = Math.round(myPredictArray[1]*100)
-    let myDiagonal = Math.round(myPredictArray[2]*100)
-    if ((myLines > myGrey) || (myDiagonal > myGrey)) {
-        if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
-     }  // lines
-                                                                          
-                                                                          
-  //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
-                                                                          
-     document.getElementById('myOutput').value = myGlobalAnswer                                                                    
-     //console.log('myGlobalAnswer')                                                                                             
-    // console.log(myGlobalAnswer)    
-     
-     // clear the interpretations chart                                                                  
-     myInterpretArray.length = 0
-     document.getElementById('myShowArray').click()                                                                     
-                                                                       
-                                                                       
- })()   // end the inline async function
-}" >  
- 
- 
-
- 
-<input  type="button"  value="+10 INTERPRETATIONS" onclick="{      
-      let myCount = 0                                                      
-      let myCheck = setInterval(function(){ 
-           myCount++                                                 
-           document.getElementById('myCut').value = Math.random().toFixed(3)
-           document.getElementById('myInterpretMore').click()                                                       
-           if (myCount >= 10){clearInterval(myCheck)}                                                 
-       }, 100);                                                          
-                                                                                                                                                                         
- }"><br><br>
- 
- 
- <table border=1>
-  <tr><td>Manual Interpretations:
- <input  type="button" id="myInterpretButton"  value="View" onclick="{  
-  (async function () { 
-/////////////////////////////start to parse the original /////////////////////////////////
-     let myCutOff = parseFloat(document.getElementById('myCut').value)
-     let myVal2 = globalOriginal.split('\n')
-     let myVal = new Array(4)
-     myVal[0] = myVal2[0].split(',')
-     myVal[1] = myVal2[1].split(',')
-     myVal[2] = myVal2[2].split(',')
-     myVal[3] = myVal2[3].split(',')
-     for (var myOne=0;  myOne < 4; myOne++){
-       if (Math.random() > myCutOff){myVal[0][myOne] = 0}
-       if (Math.random() > myCutOff){myVal[1][myOne] = 0}
-       if (Math.random() > myCutOff){myVal[2][myOne] = 0}
-       if (Math.random() > myCutOff){myVal[3][myOne] = 0}
-     }
-    document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
-///////////////////////////// done parsing the original /////////////////////////////////
-    document.all.myAsk2.onchange(); // have it show the pattern
-    // defined as global    myPredictArray above                                                        
-                                                                   
-    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
-    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
-    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
-    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
-    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
-                                                             
- })()   // end the inline async function
-}" > 
-   
-   
-   <input type=button id="myInterpretMore" value="Just add" onclick="{
-   let myAr = new Array()   
-                                       
-  // document.getElementById('myInterpretButton').click() 
-                                                   
-      setTimeout(function(){                                            
-   myAr[0] = document.getElementById('myAsk2').value
-   myAr[1] =  Math.round(myPredictArray[0]*100)                          
-   myAr[2] =  Math.round(myPredictArray[1]*100)                          
-   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
-  // console.log(myAr)                                            
-   myInterpretArray.push(myAr)
-   document.getElementById('myShowArray').click() 
-                                                   
-  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
-  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
-  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
-     }, 30);                                                    
-                                                  
- }">
-  
-   
-   
-
- 
-<input type=button id="myInterpretMore" value="interpret" onclick="{
-   let myAr = new Array()   
-                                       
-   document.getElementById('myInterpretButton').click() 
-                                                   
-      setTimeout(function(){                                            
-   myAr[0] = document.getElementById('myAsk2').value
-   myAr[1] =  Math.round(myPredictArray[0]*100)                          
-   myAr[2] =  Math.round(myPredictArray[1]*100)                          
-   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
-  // console.log(myAr)                                            
-   myInterpretArray.push(myAr)
-   document.getElementById('myShowArray').click() 
-                                                   
-  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
-  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
-  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
-     }, 30);                                                    
-                                                  
- }">
-
- 
- <input type=button  value="Randomize Interpretation" onclick="{
-  document.getElementById('myCut').value = Math.random().toFixed(3)  
-   let myAr = new Array()   
-                                       
-   document.getElementById('myInterpretButton').click() 
-                                                   
-      setTimeout(function(){                                            
-   myAr[0] = document.getElementById('myAsk2').value
-   myAr[1] =  Math.round(myPredictArray[0]*100)                          
-   myAr[2] =  Math.round(myPredictArray[1]*100)                          
-   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
-  // console.log(myAr)                                            
-   myInterpretArray.push(myAr)
-   document.getElementById('myShowArray').click() 
-                                                   
-  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
-  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
-  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
-     }, 30);                                                    
-                                                  
- }">
-
- 
-
-   
-   
-   Ratio Original/transparent:
- <input id="myCut" type=text value = 0.5 size=5 onclick="{
-      document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
- }">
-   
-   
-  <input type=button value="Clear Interpret" onclick="{
-  myInterpretArray.length = 0
-  document.getElementById('myShowArray').click() 
-                                               
-                                               
-  // myInterpretArray[0] = ['1,2,1,2,\n2,1,2,1,\n1,2,1,2,\n2,1,2,1', 100, 0, 0];
-  // myInterpretArray[1] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
-  // myInterpretArray[2] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];  
-   //console.log(myInterpretArray)
- }">  
-   
-   
-   </td></tr> 
- </table>
- 
- 
-
- 
- 
-
- 
- 
- 
-
- 
- 
-</div>
-<div id='myDiv7979'>...</div>
-
-  <!--   *************************************************************************************** -->
-
- 
- 
-
- 
- 
- 
-<div id='myInterpret'>
- 
-  <input type=hidden id="myShowShade" value="show shade" onclick="{
- // alert(document.getElementById('myIntTable').rows.length)
-   //alert(document.getElementById('myIntArray1').value)                                                                  
-  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
-     myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
-  }
-}">
- 
- <input type=hidden id="myShowArray" value="Array to table" onclick="{
-   document.getElementById('myIntTable').innerHTML =''
-                                                                     
-  // myInterpretArray = new Array()        declared globally above    
-   //console.log(myInterpretArray)                                                     
-                                                    
-    var myTemp =`<tr><th>Data</th><th>Visual</th><th>Grey Scale<br><input type=button value='+' onclick='{mySortResultsUp(1)}'><input type=button value='-' onclick='{mySortResultsDown(1)}'></th><th>Blocks, Lines<br><input type=button value='+' onclick='{mySortResultsUp(2)}'><input type=button value='-' onclick='{mySortResultsDown(2)}'></th><th>Diagonals<br><input type=button value='+' onclick='{mySortResultsUp(3)}'><input type=button value='-' onclick='{mySortResultsDown(3)}'></th></tr>`
-    for (let myStore=0; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
-       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=10>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
-      // console.log(myTemp2)
-       myTemp   += myTemp2                                           
-           // myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
-   }   
-                                                    
-         setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
-                                                    
-        //  alert(document.getElementById('myIntArray1').value)                                                  
-    myTemp +=    ''                                               
-   document.getElementById('myIntTable').innerHTML    = myTemp                                            
-                                                    
-}"> 
- 
- 
- 
-
-  
- 
- 
-<b>Original Prediction</b>
- <table border=1>
-  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><td><span id="mySpan02">...</span></td><td><span id="mySpan03">...</span></td></tr>
- </table> 
- 
- 
- 
-<b> Interpretations</b>  
- 
-Sorting by:<select id="myOutput" size=1 onChange="{
-  //alert(this.value)
-  if (this.value == 0){mySortResultsUp(1) }
-  if (this.value == 1){mySortResultsUp(2) }
-  if (this.value == 2){mySortResultsUp(3) }
-}">
-   <option value=0>Grey Scale
-   <option value=1>Blocks and Lines
-   <option value=2>Diagonals
- </select><br>
- 
-By inserting transparent ("0") pixels as data not trained on the neural network<br> 
- 
-<table id="myIntTable" border=1>
- 
-
- </table>
- </div> 
- 
- 
- 
- 
- 
- 
-
- <!--   *************************************************************************************** --> 
- 
-
-<input id="myUpdate7979" type=button value="Update and Run" style="visibility:hidden;" onclick="{
-   // first remove first and last line since they are injected
-  myFred = document.getElementById('myTextarea7979').value.split('\n')
-  myFred.pop()
-  myFred.push('')
-  myFred.shift()
-  myFred.shift()
-  myJoe = myFred.join('\n')
-  document.getElementById('myDiv7979Code').innerHTML =    myJoe 
-  document.getElementById('myButton7979').click()
-                                             
-}"><br>
-
-
-<textarea id="myTextarea7979"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
-  if (myOnce7979){
-     myTextGrow('myTextarea7979', 'myDiv7979Code')
-     document.getElementById('myUpdate7979').style.visibility = 'visible'
-     myOnce7979 = false
-  }
-}">
-Click here to see the working HTML code.
-</textarea><br>
-
-
-
-
-
-
-
-<br><br><br><hr><br><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-The above example uses a premade model. Your job is to make a better model, either using local storage or saving the model 
- loading on the internet and loading the model here. Main buttons once the model is loaded are still above.
-</div><br>
-
-
-<div id="myDiv124Code"> 
-
- 
- 
- 
-
- 
- 
-
-
-
- 
- 
- 
-<input  type="button"  id="myButton124"   value="Convolutional Train and Test" onclick="{ 
- document.getElementById('myDiv124').innerHTML = 'Defining the Keras Model'                                                                                       
+<input  type="button" value="Convolutional Train and Test" onclick="{ 
  document.all.myAsk2.onchange(); // have it show the pattern
  document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
@@ -733,7 +383,7 @@ const ys = tf.tensor2d([
 ], shape=[32, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
-                                                                                                                                        
+model = tf.sequential();                                                                                                                                          
                                                                                                                                                                         
 model.add(tf.layers.conv2d({                                                                                                                                            
     inputShape: [4, 4, 1],                                                                                                                                                  
@@ -755,27 +405,123 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
                                                                                                                                                                         
-  for ( let myLoop = 1; myLoop <= 60; myLoop++ ) {                                                                                                                     
+  for ( let myLoop = 1; myLoop <= 3000; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/60 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv7979').innerHTML = 'Loss after Batch ' + myLoop + '/3000 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
-  await   document.getElementById('mySetOriginal').click()
-  document.getElementById('myDiv124').innerHTML += '<br> Check the above area for predictions<br>'
+  await   document.getElementById('myButtonTest').click()                                                                                
 }
                                                                                                                                                                       
  myGo() // call the main async function 
- //globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
+ globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
 }" > 
 
  
   
+<input  type="button" id="mySetOriginal" value="Set-Original" onclick="{ 
+   globalOriginal =  document.getElementById('myAsk2').value  
+   document.getElementById('myAsk3').value  = globalOriginal 
+   document.all.myAsk2.onchange(); // have it show the pattern
+                                                                 
+                                                                 
+  (async function () {  
+                                                                       
+    await myShowGrid('myAsk3', 'myCanvasTest2')                                                                                                                                                        
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'  
+  
+    // mySpan01    
+    document.getElementById('mySpan01').innerHTML = '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>'          
+    document.getElementById('mySpan02').innerHTML = '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>'        
+    document.getElementById('mySpan03').innerHTML = '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b>'                                                    
+                                               
+                                                     
+                                                     
+     myGlobalAnswer = 0 // greyscale
+    let myGrey = Math.round(myPredictArray[0]*100)
+    let myLines = Math.round(myPredictArray[1]*100)
+    let myDiagonal = Math.round(myPredictArray[2]*100)
+    if ((myLines > myGrey) || (myDiagonal > myGrey)) {
+        if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
+     }  // lines
+                                                                          
+                                                                          
+  //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
+                                                                          
+     document.getElementById('myOutput').value = myGlobalAnswer                                                                    
+     //console.log('myGlobalAnswer')                                                                                             
+    // console.log(myGlobalAnswer)    
+     
+     // clear the interpretations chart                                                                  
+     myInterpretArray.length = 0
+     document.getElementById('myShowArray').click()                                                                     
+                                                                       
+                                                                       
+ })()   // end the inline async function
+}" >  
+ 
+ 
+<input  type="button" id="myInterpretButton"  value="Interpret" onclick="{  
+  (async function () { 
+/////////////////////////////start to parse the original /////////////////////////////////
+     let myCutOff = parseFloat(document.getElementById('myCut').value)
+     let myVal2 = globalOriginal.split('\n')
+     let myVal = new Array(4)
+     myVal[0] = myVal2[0].split(',')
+     myVal[1] = myVal2[1].split(',')
+     myVal[2] = myVal2[2].split(',')
+     myVal[3] = myVal2[3].split(',')
+     for (var myOne=0;  myOne < 4; myOne++){
+       if (Math.random() > myCutOff){myVal[0][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[1][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[2][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[3][myOne] = 0}
+     }
+    document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+///////////////////////////// done parsing the original /////////////////////////////////
+    document.all.myAsk2.onchange(); // have it show the pattern
+    // defined as global    myPredictArray above                                                        
+                                                                   
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b><br>'        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
+                                                             
+ })()   // end the inline async function
+}" > 
+ 
+ 
+<input  type="button"  value="+10 INTERPRETATIONS" onclick="{      
+      let myCount = 0                                                      
+      let myCheck = setInterval(function(){ 
+           myCount++                                                 
+           document.getElementById('myCut').value = Math.random().toFixed(3)
+           document.getElementById('myInterpretMore').click()                                                       
+           if (myCount >= 10){clearInterval(myCheck)}                                                 
+       }, 100);                                                          
+                                                                                                                                                                         
+ }">
+ <input  type="button"  value="Randomizer:" onclick="{                                                  
+           document.getElementById('myCut').value = Math.random().toFixed(3)                                                                                                                                                                         
+ }">
+ <input id="myCut" type=text value = 0.5 size=5>
+ 
+ 
+ 
+ 
+ 
+ 
  <input  type="button"  value="Save-Model" onclick="{ 
 (async function () { 
-    alert('Make a new folder on your computer, save the model (both json and bin extensions seperately but with the same file name) to the folder, then upload the folder to a website')
-    const myFileName = 'downloads://myFileName'
+    alert('make a new folder on your computer, save the model (both bin and json extensions) to the folder, then upload the folder to a website')
+    const myFileName = prompt('Enter filename to store this model','downloads://40-interpret0-grey');
     const saveResults = await model.save(myFileName);
     //document.getElementById('myDivSummary').innerHTML = ''    
     model.summary() 
@@ -784,23 +530,206 @@ async function myGo() { // inline async so we can use promises and await
 }">
  
  
-<input id="myButton7979a" type="button" value="Load Model" onclick="{ 
-  (async function () {                                                                 
-  const myFileName = document.getElementById('myFileIn').value  
-  if (myFileName != null){  
-    model = await tf.loadLayersModel(myFileName); 
-  } 
-  globalOriginal = document.getElementById('myAsk2').value                                                                               
-  await   document.getElementById('mySetOriginal').click()  
-                                                                   
-  })()     //end async                                                            
-                                                                                                                                     
-}"> load this file URL: <input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
+
+ 
+ 
+ 
+
+ 
+ 
+</div>
+<div id='myDiv7979'>...</div>
+
+  <!--   *************************************************************************************** -->
+ <h2 align=center>Minimalist Interpretation of the Neural Network Black Box</h2>
+ 
+ 
+
+ 
+ 
+ 
+<div id='myInterpret'>
+ 
+  <input type=button id="myShowShade" value="show shade" onclick="{
+ // alert(document.getElementById('myIntTable').rows.length)
+   //alert(document.getElementById('myIntArray1').value)                                                                  
+  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
+     myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
+  }
+}">
+ 
+ <input type=button id="myShowArray" value="Array to table" onclick="{
+   document.getElementById('myIntTable').innerHTML =''
+                                                                     
+  // myInterpretArray = new Array()        declared globally above    
+   //console.log(myInterpretArray)                                                     
+                                                    
+    var myTemp =`<tr><th>Data</th><th>Visual</th><th>Grey Scale<br><input type=button value='+' onclick='{mySortResultsUp(1)}'><input type=button value='-' onclick='{mySortResultsDown(1)}'></th><th>Blocks, Lines<br><input type=button value='+' onclick='{mySortResultsUp(2)}'><input type=button value='-' onclick='{mySortResultsDown(2)}'></th><th>Diagonals<br><input type=button value='+' onclick='{mySortResultsUp(3)}'><input type=button value='-' onclick='{mySortResultsDown(3)}'></th></tr>`
+    for (let myStore=0; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
+       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=10>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
+      // console.log(myTemp2)
+       myTemp   += myTemp2                                           
+           // myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
+   }   
+                                                    
+         setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
+                                                    
+        //  alert(document.getElementById('myIntArray1').value)                                                  
+    myTemp +=    ''                                               
+   document.getElementById('myIntTable').innerHTML    = myTemp                                            
+                                                    
+}"> 
+ 
+ 
+ 
+ <input type=button value="Clear Interpret" onclick="{
+  myInterpretArray.length = 0
+  document.getElementById('myShowArray').click() 
+                                               
+                                               
+  // myInterpretArray[0] = ['1,2,1,2,\n2,1,2,1,\n1,2,1,2,\n2,1,2,1', 100, 0, 0];
+  // myInterpretArray[1] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
+  // myInterpretArray[2] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];  
+   //console.log(myInterpretArray)
+ }">
+ 
+<input type=button id="myInterpretMore" value="interpret more" onclick="{
+   let myAr = new Array()   
+                                       
+   document.getElementById('myInterpretButton').click() 
+                                                   
+      setTimeout(function(){                                            
+   myAr[0] = document.getElementById('myAsk2').value
+   myAr[1] =  Math.round(myPredictArray[0]*100)                          
+   myAr[2] =  Math.round(myPredictArray[1]*100)                          
+   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
+  // console.log(myAr)                                            
+   myInterpretArray.push(myAr)
+   document.getElementById('myShowArray').click() 
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
+     }, 30);                                                    
+                                                  
+ }">
+
+ 
+ 
+ <input type=button id="myInterpretMore" value="Just add" onclick="{
+   let myAr = new Array()   
+                                       
+  // document.getElementById('myInterpretButton').click() 
+                                                   
+      setTimeout(function(){                                            
+   myAr[0] = document.getElementById('myAsk2').value
+   myAr[1] =  Math.round(myPredictArray[0]*100)                          
+   myAr[2] =  Math.round(myPredictArray[1]*100)                          
+   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
+  // console.log(myAr)                                            
+   myInterpretArray.push(myAr)
+   document.getElementById('myShowArray').click() 
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
+     }, 30);                                                    
+                                                  
+ }">
+ 
+ 
+ 
+ Sort By Descending:<select id="myOutput" size=1 onChange="{
+  //alert(this.value)
+  if (this.value == 0){mySortResultsUp(1) }
+  if (this.value == 1){mySortResultsUp(2) }
+  if (this.value == 2){mySortResultsUp(3) }
+}">
+   <option value=0>Grey Scale
+   <option value=1>Blocks and Lines
+   <option value=2>Diagonals
+ </select><br>
+ 
+  
+ 
+ 
+<h3>Original Prediction</h3>
+ <table border=1>
+  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><td><span id="mySpan02">...</span></td><td><span id="mySpan03">...</span></td></tr>
+ </table> <br>
+ 
+ 
+ 
+<h3> Interpretations</h3>
+By inserting transparent ("0") pixels as data not trained on the neural network<br> 
+ 
+<table id="myIntTable" border=1>
+ 
+
+ </table>
+ </div> 
  
  
  
  
  
+ 
+
+ <!--   *************************************************************************************** --> 
+ 
+
+<input id="myUpdate7979" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea7979').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv7979Code').innerHTML =    myJoe 
+  document.getElementById('myButton7979').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea7979"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce7979){
+     myTextGrow('myTextarea7979', 'myDiv7979Code')
+     document.getElementById('myUpdate7979').style.visibility = 'visible'
+     myOnce7979 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+Blah Blah Blah Blah 
+</div><br>
+
+
+<div id="myDiv124Code"> 
+
+<input id="myButton124" type=button value="Tensorflowjs Version?"  onclick="{
+      document.getElementById('myDiv124').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
 
 </div>
 <div id='myDiv124'>...</div><br>
