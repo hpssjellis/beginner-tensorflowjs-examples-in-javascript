@@ -245,7 +245,24 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
 }" >  
  
  
-<input  type="button" id="myInterpretButton"  value="Interpret" onclick="{  
+
+ 
+<input  type="button"  value="+10 INTERPRETATIONS" onclick="{      
+      let myCount = 0                                                      
+      let myCheck = setInterval(function(){ 
+           myCount++                                                 
+           document.getElementById('myCut').value = Math.random().toFixed(3)
+           document.getElementById('myInterpretMore').click()                                                       
+           if (myCount >= 10){clearInterval(myCheck)}                                                 
+       }, 100);                                                          
+                                                                                                                                                                         
+ }">
+<br>
+ 
+ 
+ <table border=1>
+  <tr><td>Manual Entry:
+ <input  type="button" id="myInterpretButton"  value="View" onclick="{  
   (async function () { 
 /////////////////////////////start to parse the original /////////////////////////////////
      let myCutOff = parseFloat(document.getElementById('myCut').value)
@@ -274,82 +291,7 @@ Following image has the pattern repeated 16x16 = 256 times to show the larger sh
                                                              
  })()   // end the inline async function
 }" > 
- 
- 
-<input  type="button"  value="+10 INTERPRETATIONS" onclick="{      
-      let myCount = 0                                                      
-      let myCheck = setInterval(function(){ 
-           myCount++                                                 
-           document.getElementById('myCut').value = Math.random().toFixed(3)
-           document.getElementById('myInterpretMore').click()                                                       
-           if (myCount >= 10){clearInterval(myCheck)}                                                 
-       }, 100);                                                          
-                                                                                                                                                                         
- }">
-Ratio Original/transparent:
- <input id="myCut" type=text value = 0.5 size=5 onclick="{
-      document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
- }">
- 
- 
- 
- 
- 
-
- 
- 
-
- 
- 
- 
-
- 
- 
-</div>
-<div id='myDiv7979'>...</div>
-
-  <!--   *************************************************************************************** -->
- <h2 align=center>Minimalist Interpretation of the Neural Network Black Box</h2>
- 
- 
-
- 
- 
- 
-<div id='myInterpret'>
- 
-  <input type=button id="myShowShade" value="show shade" onclick="{
- // alert(document.getElementById('myIntTable').rows.length)
-   //alert(document.getElementById('myIntArray1').value)                                                                  
-  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
-     myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
-  }
-}">
- 
- <input type=button id="myShowArray" value="Array to table" onclick="{
-   document.getElementById('myIntTable').innerHTML =''
-                                                                     
-  // myInterpretArray = new Array()        declared globally above    
-   //console.log(myInterpretArray)                                                     
-                                                    
-    var myTemp =`<tr><th>Data</th><th>Visual</th><th>Grey Scale<br><input type=button value='+' onclick='{mySortResultsUp(1)}'><input type=button value='-' onclick='{mySortResultsDown(1)}'></th><th>Blocks, Lines<br><input type=button value='+' onclick='{mySortResultsUp(2)}'><input type=button value='-' onclick='{mySortResultsDown(2)}'></th><th>Diagonals<br><input type=button value='+' onclick='{mySortResultsUp(3)}'><input type=button value='-' onclick='{mySortResultsDown(3)}'></th></tr>`
-    for (let myStore=0; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
-       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=10>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
-      // console.log(myTemp2)
-       myTemp   += myTemp2                                           
-           // myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
-   }   
-                                                    
-         setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
-                                                    
-        //  alert(document.getElementById('myIntArray1').value)                                                  
-    myTemp +=    ''                                               
-   document.getElementById('myIntTable').innerHTML    = myTemp                                            
-                                                    
-}"> 
- 
- 
- 
+   
  <input type=button value="Clear Interpret" onclick="{
   myInterpretArray.length = 0
   document.getElementById('myShowArray').click() 
@@ -404,6 +346,71 @@ Ratio Original/transparent:
      }, 30);                                                    
                                                   
  }">
+ 
+   
+   
+   Ratio Original/transparent:
+ <input id="myCut" type=text value = 0.5 size=5 onclick="{
+      document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
+ }">
+   </td></tr> 
+ </table>
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+</div>
+<div id='myDiv7979'>...</div>
+
+  <!--   *************************************************************************************** -->
+ <h2 align=center>Minimalist Interpretation of the Neural Network Black Box</h2>
+ 
+ 
+
+ 
+ 
+ 
+<div id='myInterpret'>
+ 
+  <input type=hidden id="myShowShade" value="show shade" onclick="{
+ // alert(document.getElementById('myIntTable').rows.length)
+   //alert(document.getElementById('myIntArray1').value)                                                                  
+  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
+     myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
+  }
+}">
+ 
+ <input type=hidden id="myShowArray" value="Array to table" onclick="{
+   document.getElementById('myIntTable').innerHTML =''
+                                                                     
+  // myInterpretArray = new Array()        declared globally above    
+   //console.log(myInterpretArray)                                                     
+                                                    
+    var myTemp =`<tr><th>Data</th><th>Visual</th><th>Grey Scale<br><input type=button value='+' onclick='{mySortResultsUp(1)}'><input type=button value='-' onclick='{mySortResultsDown(1)}'></th><th>Blocks, Lines<br><input type=button value='+' onclick='{mySortResultsUp(2)}'><input type=button value='-' onclick='{mySortResultsDown(2)}'></th><th>Diagonals<br><input type=button value='+' onclick='{mySortResultsUp(3)}'><input type=button value='-' onclick='{mySortResultsDown(3)}'></th></tr>`
+    for (let myStore=0; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
+       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=10>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
+      // console.log(myTemp2)
+       myTemp   += myTemp2                                           
+           // myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
+   }   
+                                                    
+         setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
+                                                    
+        //  alert(document.getElementById('myIntArray1').value)                                                  
+    myTemp +=    ''                                               
+   document.getElementById('myIntTable').innerHTML    = myTemp                                            
+                                                    
+}"> 
+ 
+ 
  
  
  
