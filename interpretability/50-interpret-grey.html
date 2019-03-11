@@ -595,7 +595,11 @@ Click here to see the working HTML code.
 The above example uses a premade 3000 epoch model. <br>
 Your job is to make a better model, look at the code in the black textarea, change it and improve the model.
 You can also change the input data to create a better model. When done	either use local storage or saving the model 
-and then loading it on the internet. The main interpretability buttons once the model is loaded are still above.
+and then loading it on the internet. The main interpretability buttons once the model is loaded are still above.<br><br>
+	
+I was thinking of making this really easy to edit, but anyone who has looked at the previous 50 ish examples 
+	should be able to edit this file directly in the black textarea and then local save the file.
+	
 </div><br>
 
 
@@ -791,10 +795,10 @@ const xs = tf.tensor4d([
 2,1,2,1,                                                                                                                                                                
 1,2,1,2
                                                                                     
-], shape=[32, 4, 4, 1] );    // 8 input images that are 4 x 4 with only one color either on or off (I guess you could have 10 colors 0-9)                                                                                                                                                     
+], shape=[32, 4, 4, 1] );    // 32 input images in groups of 8 that are 4 x 4 pixels with only one color either 1 or 2 (did not train with 0)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity 
-// grey, blocks, diagonals, 
+// grey, blocks or lines, diagonals, 
 const ys = tf.tensor2d([
                                                                                      
 0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,                                                                                     
@@ -802,7 +806,7 @@ const ys = tf.tensor2d([
 0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,
 0,1,0,      0,0,1,      0,0,1,      0,0,1,      0,0,1,    0,0,1,       1,0,0,      1,0,0
                                                                                      
-], shape=[32, 3], 'int32');        // 8 images 3 dimension                                                                                                                  
+], shape=[32, 3], 'int32');        // 32 images 3 one hot dimensions                                                                                                                  
                                                                                                                                                                         
                                                                                                                                                                         
                                                                                                                                         
@@ -826,12 +830,12 @@ const myOptimizer = tf.train.adamax()
 model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                                                         
                                                                                                                                                                         
 async function myGo() { // inline async so we can use promises and await                                                                                                   
-                                                                                                                                                                        
-  for ( let myLoop = 1; myLoop <= 60; myLoop++ ) {                                                                                                                     
+ let myEpochs = 100       // original trained at 3000 epochs                                                                                                                                                                 
+  for ( let myLoop = 1; myLoop <= myEpochs; myLoop++ ) {                                                                                                                     
     var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
     if (myLoop % 20 == 0){                                                                                                                                              
       await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
-      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/60 : ' + myFit.history.loss[0] +' <br><br>'                                          
+      document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/'+myEpochs+' : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
  // await   document.getElementById('mySetOriginal').click()
