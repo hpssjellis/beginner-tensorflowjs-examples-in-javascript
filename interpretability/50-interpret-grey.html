@@ -838,7 +838,7 @@ async function myGo() { // inline async so we can use promises and await
                                                                                                                                                                       
  myGo() // call the main async function 
  //globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
-}" > 
+}" > <br>
 
  
   
@@ -851,8 +851,9 @@ async function myGo() { // inline async so we can use promises and await
     model.summary() 
 })()
                                                     
-}">
+}"> <br>
  
+Load this file URL: <input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
  
 <input id="myButton7979a" type="button" value="Load Model" onclick="{ 
   (async function () {                                                                 
@@ -865,10 +866,39 @@ async function myGo() { // inline async so we can use promises and await
                                                                    
   })()     //end async                                                            
                                                                                                                                      
-}"> 
+}"> <br>
  
-load this file URL: <input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
   
+ 
+ 
+ 
+ 
+ 
+ 
+Local Storage base file name (For both saving and loading): <input type=text id="myFileName" value ="my-local-model-02">
+	
+<input id="myLocal5858s" type="button" value="local storage save" onclick="{
+   ( async function (){									    
+       const saveResults = await model.save('localstorage://'+document.getElementById('myFileName').value)								    
+       alert(JSON.stringify(saveResults))
+   })()  // inline async function									    
+}">
+
+<input id="myLocal5858l" type="button" value="local storage load" onclick="{	 
+                                                                                                                                                        
+  (async function myGo3() {
+    model = await tf.loadLayersModel ('localstorage://'+document.getElementById('myFileName').value);		
+    model.summary()         
+  })()
+
+
+						     
+}">
+ 
+ 
+ 
+ 
+ 
  
  
 
