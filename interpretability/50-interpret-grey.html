@@ -838,9 +838,9 @@ async function myGo() { // inline async so we can use promises and await
                                                                                                                                                                       
  myGo() // call the main async function 
  //globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
-}" > <br>
+}" > <br><br>
 
- 
+	<h2>Saving and Loading Files</h2>
   
  <input  type="button"  value="Save-Model" onclick="{ 
 (async function () { 
@@ -854,7 +854,7 @@ async function myGo() { // inline async so we can use promises and await
 }"> <br>
  
 Load this file URL: <input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
- 
+ <br>
 <input id="myButton7979a" type="button" value="Load Model" onclick="{ 
   (async function () {                                                                 
   const myFileName = document.getElementById('myFileIn').value 
@@ -873,10 +873,10 @@ Load this file URL: <input id="myFileIn" size="100%" type = text value="https://
  
  
  
- 
+	<h2> Local Storage From Browser </h2>
  
 Local Storage base file name (For both saving and loading): <input type=text id="myFileName" value ="my-local-model-02">
-	
+<br>	
 <input id="myLocal5858s" type="button" value="local storage save" onclick="{
    ( async function (){									    
        const saveResults = await model.save('localstorage://'+document.getElementById('myFileName').value)								    
