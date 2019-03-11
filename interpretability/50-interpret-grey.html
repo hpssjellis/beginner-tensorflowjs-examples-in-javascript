@@ -617,7 +617,7 @@ The above example uses a premade model. Your job is to make a better model, eith
  //model.layers.dispose()   // delete the old model                                                                                        
 //alert('May have to refresh the page if the above load function was already pressed')
  document.getElementById('myDiv124').innerHTML = 'Defining model'                                                                                      
- document.all.myAsk2.onchange(); // have it show the pattern
+// document.all.myAsk2.onchange(); // have it show the pattern
 // document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
                                                                                                                                                                         
 const xs = tf.tensor4d([                                                                                                                                                
@@ -832,7 +832,7 @@ async function myGo() { // inline async so we can use promises and await
       document.getElementById('myDiv124').innerHTML = 'Loss after Batch ' + myLoop + '/60 : ' + myFit.history.loss[0] +' <br><br>'                                          
     }                                                                                                                                                                   
   }    
-  await   document.getElementById('mySetOriginal').click()
+ // await   document.getElementById('mySetOriginal').click()
   document.getElementById('myDiv124').innerHTML += '<br> Check the above area for predictions<br>'
 }
                                                                                                                                                                       
