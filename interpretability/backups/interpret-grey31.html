@@ -1,0 +1,1005 @@
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+<!-- the online version that these examples were made with  -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
+
+
+
+
+
+<!-- the newest version script tag is below but by using it all the examples may not work 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+-->
+
+
+
+<!-- Or you could download the newest version, save it as myNewDownloadedTensorflow.js and use the link below and work completely offline using a tag similar to
+<script src="myNewDownloadedTensorflow.js"></script>
+-->
+
+ <!-- Note: often nice to load the readable version of the src file. Remember to match the numbers to whatever the newest version is.
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3/dist/tf.js"></script>
+--> 
+
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+<body BGcolor=yellow>
+
+    
+    
+<h2 align=center>Interpretability Minimalist Example using Tensorflowjs Keras Convolutional Layers.</h2>
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+<h2>Shedding a small beam of light into the Neural Network Black Box.</h2>
+Hopefully Machine Learning Libraries will provide more interpretability tools and 
+ Machine Learning Developers will incorporate more interpretability within their model design.<br><br>
+ 
+ I saw this <a href="http://machine-master.blogspot.com/2017/01/explaining-predictions-of-any-classifier.html">article</a> and I was intrigued, but would have difficulties building something that advanced.<br>
+ <a href="http://machine-master.blogspot.com/2017/01/explaining-predictions-of-any-classifier.html"><img src="husky-wolf.png"></a> <br>
+ So I built something more at my level.<br>
+ 
+ <img src="interpret-grey.png"><br><br>
+ 
+ From this very quick test it looks like, all libraries would need is:<br>
+ <ol>
+ <li> Various abilities to parse the input data: <font color=blue><b>interpret.input.parse() </b></font> 
+  <i>I have done a very simple random parse injecting 
+  transparent pixels into the data. I am sure other people could come up with more complex ways to parse the input data. 
+   Perhaps use mobinet to exclude non-identified objects or take turns removing obects, etc.</i>
+ <li> The predict feature (which is already available):   <font color=blue><b> model.predict()</b></font>
+ <li> A method to store, sort and show the interpretations: <font color=blue><b>interpret.add(), interpret.sort(), interpret.show() </b></font> <br><br>
+ </ol>
+ Note: I have not used those method names I have simply got the example working.<br>
+ 
+This demo is loosely based on:  
+ <a href="https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime">LIME</a>, 
+ but I have built it into the model <br><BR>
+  
+  
+<h3> This is a minimalist setup of a grey shade detector but using only black and white pixels.</h3>
+  
+ Using a 4x4 input array of pixels with 0=transparent, 1=black, 2=white; <br>
+ Note: this makes a very small screen pattern. I have presented it repeated 256 times to make a much larger image.<br>
+ Output is a 1x3 one hot array in this order: grey scale, blocks or lines, diagonal lines  <br><br>
+ 
+ Note: For interpretability I will not train the NN on the transparent feature "0" <br>
+ To run an interpretability test, I will run the prediction multiple times with inserted transparent blocks, then show and 
+ sort the test results.<br><br>
+ 
+</div><br>
+
+
+
+<div id="myDiv7979Code"> 
+
+<!-- <script> tags only load once and are not dynamic. I use <style> below change it if you wish-->
+<style id="myButton123"  onload="{document.getElementById('myButton123').click()}"  onclick="{
+
+// global variables                                                                                             
+                                                                                             
+myInterpretArray = new Array()       
+myPredictArray = new Array()
+myGlobalAnswer = ''
+model = tf.sequential();  // the main global model
+
+// global functions (Dynamic means you can change them onthe webpage. see black textarea)
+                                                                                             
+mySortResultsUp = function(myNum){                                                                                                                                                                                          
+//function mySortResultsUp(myNum){
+   if (myNum == 0) {myNum = 1}
+   myInterpretArray.sort((a, b) => b[myNum] - a[myNum]);   // for number sorting max first
+   //console.log('sorted by  column')
+   //console.log(myInterpretArray)
+   document.getElementById('myShowArray').click()
+} 
+ 
+ 
+mySortResultsDown = function(myNum){
+   if (myNum == 0) {myNum = 1}
+   myInterpretArray.sort((a, b) => a[myNum] - b[myNum]);   // for number sorting max last
+   //console.log('sorted by  column')
+   //console.log(myInterpretArray)
+   document.getElementById('myShowArray').click()
+} 
+ 
+myShowGrid = function(myArea2, myCanvas2){
+var myCanvas2Element = document.getElementById(myCanvas2);
+var ctx = myCanvas2Element.getContext('2d');
+var myMax = 64
+var imgData = ctx.createImageData(myMax, myMax);
+//for (var i = 0; i < imgData.data.length; i += 4) {
+//  imgData.data[i+0] = 0;
+//  imgData.data[i+1] = 0;
+//  imgData.data[i+2] = 0;
+//  imgData.data[i+3] = 0;
+//}
+let myTransparent, myColor
+var myCountX = -1
+var myCountY = 0
+var globalOriginal
+myInput = document.getElementById(myArea2).value.split('\n')
+var myIn  = new Array(4)
+myIn[0] = myInput[0].split(',')
+myIn[1] = myInput[1].split(',')
+myIn[2] = myInput[2].split(',')
+myIn[3] = myInput[3].split(',')
+//console.log(myIn)
+//alert(myIn[2,2])
+//alert(imgData.data.length)
+for (var i = 0;  i < imgData.data.length; i += 4){
+    if (i % 4  == 0 ) {myCountX += 1}   // should do all the rows first
+    if (myCountX >= 4){
+       myCountX = 0; 
+       if (i % (myMax*4) == 0){myCountY += 1}    // then ones each of 4 for each pixel in a row do next row                                                  
+    }
+    if (myCountY >= 4){myCountY = 0; }
+   // console.log('i:' + i + ', myCountX:' + myCountX + ', myCountY:' + myCountY + ', array:'+myIn[myCountY][myCountX])
+    if(myIn[myCountY][myCountX] == 0){myTransparent=0; myColor=100;} // transparent
+    if(myIn[myCountY][myCountX] == 1){myTransparent=255; myColor=0;} // black
+    if(myIn[myCountY][myCountX] == 2){myTransparent=255; myColor=255;}  // white
+    imgData.data[i+0] = myColor;
+    imgData.data[i+1] = myColor;
+    imgData.data[i+2] = myColor;
+    imgData.data[i+3] = myTransparent;
+}
+ctx.putImageData(imgData, 0, 0);
+//console.log(imgData);
+   // ctx.fillRect(myCountX, myCountY, 0, 0); // fill the canvas with the pixel 
+//var imageData = ctx.getImageData(0, 0, 1, 1);  // get the ImageData for the top/left 10 pixels
+//console.log(imageData.data); // logs an array of 10 x 10 x 4 (400 items)                                                
+            
+} 
+ 
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+}"></style>
+<!-- If you replaced the <style> tag way above with a <script> tag don't forget to change the above line to just </script>  -->
+ 
+ 
+ 
+ 
+Test or change this 4x4 pixel data array: 0 = transparent, 1 = black. 2=white <br>
+Following image has the pattern repeated 16x16 = 256 times to show the larger block or the shade<br><br>
+ Note: you must load a model before any of the buttons will work!<br><br>
+ 
+ 
+ <table border=1>
+ <tr><td> 
+ 
+ 
+Only this table can be changed<br>
+<textarea id="myAsk2" rows=4 cols=9 wrap=false onChange="{myShowGrid('myAsk2','myCanvasTest')}">
+1,2,1,2,
+2,1,2,1,
+1,2,1,2,
+2,1,2,1</textarea>
+ 
+ <!--<canvas id="myCanvas2" width="100" height="100" style="border: 1px solid #ddd; image-rendering: pixelated; interpolation-mode: nearest-neighbor;  "></canvas> -->
+ 
+<canvas id="myCanvasTest" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> <br>
+
+Automatic Interpretations:
+ 
+<input id="myButton7979" type="button" value="LOAD SAVED MODEL" title="You must load a model first" onclick="{ 
+  (async function () {                                                                 
+  const myFileName = 'https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json'
+  if (myFileName != null){  
+    model = await tf.loadLayersModel(myFileName); 
+  } 
+  globalOriginal = document.getElementById('myAsk2').value                                                                               
+  await   document.getElementById('mySetOriginal').click()  
+                                                                   
+  })()     //end async                                                            
+                                                                                                                                     
+}">
+ 
+ 
+
+
+ 
+ 
+<input  type="button"  value="+10 INTERPRETATIONS" title="Auto runs 10 interpretations. Best button to try" onclick="{      
+      let myCount = 0                                                      
+      let myCheck = setInterval(function(){ 
+           myCount++                                                 
+           document.getElementById('myCut').value = Math.random().toFixed(3)
+           document.getElementById('myInterpretMore').click()                                                       
+           if (myCount >= 10){clearInterval(myCheck)}                                                 
+       }, 100);                                                          
+                                                                                                                                                                         
+ }">
+
+  </td></tr> 
+ </table><br>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ <table border=1>
+  <tr><td>Manual Interpretations:
+ <input  type="button"  value="Show" title="Shows and does a prediction on what is in the textarea. Make changes first" onclick="{  
+  (async function () { 
+    //document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+    document.all.myAsk2.onchange(); // have it show the pattern
+    // defined as global    myPredictArray above                                                        
+                                                                   
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'                   
+                                                             
+ })()   // end the inline async function
+}" > 
+ 
+ 
+
+ <input  type="button"  value="Recall" title="Recalls the original textrea so you can start again making changes"  onclick="{  
+  (async function () { 
+    document.getElementById('myAsk2').value   = globalOriginal                                     
+   // document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+    document.all.myAsk2.onchange(); // have it show the pattern
+    // defined as global    myPredictArray above                                                        
+                                                                   
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'                   
+                                                             
+ })()   // end the inline async function
+}" > 
+ 
+
+ <input  type="button" id="myInterpretButton"  value="Try"  title="Trys an interpretation but does not record it in the chart"  onclick="{  
+  (async function () { 
+/////////////////////////////start to parse the original /////////////////////////////////
+     let myCutOff = parseFloat(document.getElementById('myCut').value)
+     let myVal2 = globalOriginal.split('\n')
+     let myVal = new Array(4)
+     myVal[0] = myVal2[0].split(',')
+     myVal[1] = myVal2[1].split(',')
+     myVal[2] = myVal2[2].split(',')
+     myVal[3] = myVal2[3].split(',')
+     for (var myOne=0;  myOne < 4; myOne++){
+       if (Math.random() > myCutOff){myVal[0][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[1][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[2][myOne] = 0}
+       if (Math.random() > myCutOff){myVal[3][myOne] = 0}
+     }
+    document.getElementById('myAsk2').value   = myVal[0].join() + '\n' + myVal[1].join() + '\n' +myVal[2].join() + '\n' +myVal[3].join() + '\n' 
+///////////////////////////// done parsing the original /////////////////////////////////
+    document.all.myAsk2.onchange(); // have it show the pattern
+    // defined as global    myPredictArray above                                                        
+                                                                   
+    myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br>'                   
+                                                             
+ })()   // end the inline async function
+}" > 
+   
+   
+   <input type=button id="myInterpretMore2" value="Add" title="Adds to the chart what you tried"  onclick="{
+   let myAr = new Array()   
+                                       
+  // document.getElementById('myInterpretButton').click() 
+                                                   
+      setTimeout(function(){                                            
+   myAr[0] = document.getElementById('myAsk2').value
+   myAr[1] =  Math.round(myPredictArray[0]*100)                          
+   myAr[2] =  Math.round(myPredictArray[1]*100)                          
+   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
+  // console.log(myAr)                                            
+   myInterpretArray.push(myAr)
+   document.getElementById('myShowArray').click() 
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
+     }, 30);                                                    
+                                                  
+ }">
+  
+   
+   
+
+ 
+<input type=button id="myInterpretMore" value="Interpret"  title="Interprets and adds to chart"  onclick="{
+   let myAr = new Array()   
+                                       
+   document.getElementById('myInterpretButton').click() 
+                                                   
+      setTimeout(function(){                                            
+   myAr[0] = document.getElementById('myAsk2').value
+   myAr[1] =  Math.round(myPredictArray[0]*100)                          
+   myAr[2] =  Math.round(myPredictArray[1]*100)                          
+   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
+  // console.log(myAr)                                            
+   myInterpretArray.push(myAr)
+   document.getElementById('myShowArray').click() 
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
+     }, 30);                                                    
+                                                  
+ }">
+
+ 
+ <input type=button  value="Interpret Random"  title="Random interpretations and adds to chart"  onclick="{
+  document.getElementById('myCut').value = Math.random().toFixed(3)  
+   let myAr = new Array()   
+                                       
+   document.getElementById('myInterpretButton').click() 
+                                                   
+      setTimeout(function(){                                            
+   myAr[0] = document.getElementById('myAsk2').value
+   myAr[1] =  Math.round(myPredictArray[0]*100)                          
+   myAr[2] =  Math.round(myPredictArray[1]*100)                          
+   myAr[3] =  Math.round(myPredictArray[2]*100)                                           
+  // console.log(myAr)                                            
+   myInterpretArray.push(myAr)
+   document.getElementById('myShowArray').click() 
+                                                   
+  if (document.getElementById('myOutput').value == 0){mySortResultsUp(1) }
+  if (document.getElementById('myOutput').value == 1){mySortResultsUp(2) }
+  if (document.getElementById('myOutput').value == 2){mySortResultsUp(3) }                                                 
+     }, 30);                                                    
+                                                  
+ }"><br>
+
+ 
+
+   
+   
+   Ratio original/transparent (can edit):
+ <input id="myCut" type=text value = 0.5 size=5  title="Determines the amount of regular pixels to leave or random transparent pixels to add"  onclick="{
+      document.getElementById('myCut').value = Math.random().toFixed(3)                                                   
+ }">
+   
+   
+   
+  
+ 
+  
+<input  type="button" id="mySetOriginal" value="Set-Original" title="Sets the original input that will forever be interpreted until you change it again"  onclick="{ 
+   globalOriginal =  document.getElementById('myAsk2').value  
+   document.getElementById('myAsk3').value  = globalOriginal 
+   document.all.myAsk2.onchange(); // have it show the pattern
+                                                                 
+                                                                 
+  (async function () {  
+                                                                       
+    await myShowGrid('myAsk3', 'myCanvasTest2')                                                                                                                                                        
+    const myPredictArray = await model.predict(tf.tensor4d(document.getElementById('myAsk2').value.split(','), [1, 4, 4, 1], 'int32')).data()                                                                                                                                      
+    document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = '
+    document.getElementById('myDiv7979').innerHTML += '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>, '          
+    document.getElementById('myDiv7979').innerHTML += '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>, '        
+    document.getElementById('myDiv7979').innerHTML += '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b><br><br>'  
+  
+    // mySpan01    
+    document.getElementById('mySpan01').innerHTML = '<b>Grey Scale: ' + await Math.round(myPredictArray[0]*100) +'%</b>'          
+    document.getElementById('mySpan02').innerHTML = '<b>Lines or Blocks: ' + await Math.round(myPredictArray[1]*100) +'%</b>'        
+    document.getElementById('mySpan03').innerHTML = '<b>Diagonals: ' + await Math.round(myPredictArray[2]*100) +'%</b>'                                                    
+                                               
+                                                     
+                                                     
+     myGlobalAnswer = 0 // greyscale
+    let myGrey = Math.round(myPredictArray[0]*100)
+    let myLines = Math.round(myPredictArray[1]*100)
+    let myDiagonal = Math.round(myPredictArray[2]*100)
+    if ((myLines > myGrey) || (myDiagonal > myGrey)) {
+        if (myDiagonal > myLines) {myGlobalAnswer = 2} else {myGlobalAnswer = 1}                                                                  
+     }  // lines
+                                                                          
+                                                                          
+  //  if (myDiagonal > myGrey) {myGlobalAnswer = 2}    // diagonals     
+                                                                          
+     document.getElementById('myOutput').value = myGlobalAnswer                                                                    
+     //console.log('myGlobalAnswer')                                                                                             
+    // console.log(myGlobalAnswer)    
+     
+     // clear the interpretations chart                                                                  
+     myInterpretArray.length = 0
+     document.getElementById('myShowArray').click()                                                                     
+                                                                       
+                                                                       
+ })()   // end the inline async function
+}" >  
+ 
+  
+   
+   
+   
+   
+   
+  <input type=button value="Clear Interpret"  title="Clears the chart below"  onclick="{
+  myInterpretArray.length = 0
+  document.getElementById('myShowArray').click() 
+                                               
+                                               
+  // myInterpretArray[0] = ['1,2,1,2,\n2,1,2,1,\n1,2,1,2,\n2,1,2,1', 100, 0, 0];
+  // myInterpretArray[1] = ['1,2,0,2,\n2,1,0,1,\n1,2,1,0,\n0,1,2,1', 60, 40, 20];
+  // myInterpretArray[2] = ['1,2,1,2,\n2,1,2,0,\n1,2,1,2,\n2,0,0,0', 30, 50, 90];  
+   //console.log(myInterpretArray)
+ }">  
+   
+   
+   </td></tr> 
+ </table>
+  
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+</div>
+<div id='myDiv7979'>...</div>
+
+  <!--   *************************************************************************************** -->
+
+ 
+
+ 
+ 
+ 
+<div id='myInterpret'>
+ 
+  <input type=hidden id="myShowShade" value="show shade" onclick="{
+ // alert(document.getElementById('myIntTable').rows.length)
+   //alert(document.getElementById('myIntArray1').value)                                                                  
+  for (let myRows=0;  myRows < document.getElementById('myIntTable').rows.length -1; myRows++) {   // extra title row                                          
+     myShowGrid('myIntArray'+myRows,'myIntShow'+myRows) 
+  }
+}">
+ 
+ <input type=hidden id="myShowArray" value="Array to table" onclick="{
+   document.getElementById('myIntTable').innerHTML =''
+                                                                     
+  // myInterpretArray = new Array()        declared globally above    
+   //console.log(myInterpretArray)                                                     
+                                                    
+    var myTemp =`<tr><th>Data</th><th>Visual</th><th>Grey Scale<br><input type=button value='+' onclick='{mySortResultsUp(1)}'><input type=button value='-' onclick='{mySortResultsDown(1)}'></th><th>Blocks, Lines<br><input type=button value='+' onclick='{mySortResultsUp(2)}'><input type=button value='-' onclick='{mySortResultsDown(2)}'></th><th>Diagonals<br><input type=button value='+' onclick='{mySortResultsUp(3)}'><input type=button value='-' onclick='{mySortResultsDown(3)}'></th></tr>`
+    for (let myStore=0; myStore < myInterpretArray.length; myStore++){  // since extra row for titles
+       let myTemp2 =    `<tr><td><textarea id='myIntArray`+myStore+`' readonly rows=4 cols=10>`+myInterpretArray[myStore][0]+`</textarea></td><td><canvas id='myIntShow`+myStore+`' width='65' height='65' style='border: 1px; solid #ddd;'></canvas></td><td>`+myInterpretArray[myStore][1]+`</td><td>`+myInterpretArray[myStore][2]+`</td><td>`+myInterpretArray[myStore][3]+`</td></tr>`                                     
+      // console.log(myTemp2)
+       myTemp   += myTemp2                                           
+           // myShowGrid('myIntArray'+myStore,'myIntShow'+myStore)                         
+   }   
+                                                    
+         setTimeout(function(){ document.getElementById('myShowShade').click() }, 30);                                                    
+                                                    
+        //  alert(document.getElementById('myIntArray1').value)                                                  
+    myTemp +=    ''                                               
+   document.getElementById('myIntTable').innerHTML    = myTemp                                            
+                                                    
+}"> 
+ 
+ 
+ 
+
+
+ 
+ 
+
+ 
+
+  
+ 
+ 
+<b>Original Prediction</b>
+ <table border=1>
+  <tr><td><textarea id="myAsk3" rows=4 cols=9 wrap=false readonly></textarea><td><canvas id="myCanvasTest2" width="65" height="65" style="border: 1px solid #ddd;  "></canvas> </td><td><span id="mySpan01">...</span></td><td><span id="mySpan02">...</span></td><td><span id="mySpan03">...</span></td></tr>
+ </table> <br>
+ 
+ 
+ 
+<b> Interpretations</b>
+ 
+  
+ Sort by:<select id="myOutput" size=1 onChange="{
+  //alert(this.value)
+  if (this.value == 0){mySortResultsUp(1) }
+  if (this.value == 1){mySortResultsUp(2) }
+  if (this.value == 2){mySortResultsUp(3) }
+}">
+   <option value=0>Grey Scale
+   <option value=1>Blocks and Lines
+   <option value=2>Diagonals
+ </select><br>
+ 
+ 
+By inserting transparent ("0") pixels as data not trained on the neural network<br> 
+ 
+<table id="myIntTable" border=1>
+ 
+
+ </table>
+ </div> 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ <!--   *************************************************************************************** --> 
+ 
+
+<input id="myUpdate7979" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea7979').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv7979Code').innerHTML =    myJoe 
+  document.getElementById('myButton7979').click()
+                                             
+}"><br>
+
+
+<textarea id="myTextarea7979"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce7979){
+     myTextGrow('myTextarea7979', 'myDiv7979Code')
+     document.getElementById('myUpdate7979').style.visibility = 'visible'
+     myOnce7979 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+The above example uses a premade 3000 epoch model. <br>
+Your job is to make a better model, look at the code in the black textarea, change it and improve the model.
+You can also change the input data to create a better model. When done	either use local storage or saving the model 
+and then loading it on the internet. The main interpretability buttons once the model is loaded are still above.<br><br>
+	
+I was thinking of making this really easy to edit, but anyone who has looked at the previous 50 ish examples 
+	should be able to edit this file directly in the black textarea and then local save the file.
+	
+</div><br>
+
+
+<div id="myDiv124Code"> 
+
+ 
+ 
+ 
+
+ 
+ 
+
+
+
+ 
+ 
+ 
+<input  type="button"  id="myButton124"   value="Convolutional Train" onclick="{
+                                                                                        
+ model = tf.sequential();  // the main global model                                                                                       
+ //model.layers.dispose()   // delete the old model                                                                                        
+//alert('May have to refresh the page if the above load function was already pressed')
+ document.getElementById('myDiv124').innerHTML = 'Defining model'                                                                                      
+// document.all.myAsk2.onchange(); // have it show the pattern
+// document.getElementById('myButton7979').style.backgroundColor = 'red'                                                                                     
+                                                                                                                                                                        
+const xs = tf.tensor4d([                                                                                                                                                
+                                                                                                                                                                        
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                    
+   
+2,2,2,2,  
+2,2,2,2,  
+2,2,2,2, 
+2,2,2,2,  
+                                                                                     
+2,2,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2, 
+                                                                                        
+2,2,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+2,2,2,2, 
+                                                                                        
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+2,2,2,2, 
+                                                                                        
+1,1,1,1,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+1,2,2,2, 
+                                                                                        
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,1,1,1, 
+                                                                                        
+2,2,2,1,                                                                                                                                                                
+2,2,2,1,                                                                                                                                                                
+2,2,2,1,                                                                                                                                                                
+1,1,1,1, 
+                                                                                     
+1,2,1,2,                                                                                     
+2,1,2,1,                                                                                     
+1,2,1,2,
+2,1,2,1,
+                                                                                     
+                                                                                     
+2,1,2,1,
+1,2,1,2,
+2,1,2,1,
+1,2,1,2,                                                                                                                                                                
+                                                                                                                                                                        
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,     
+                                                                                    
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,      
+                                                                                     
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,   
+                                                                                                                                                              
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+2,1,2,2,   
+                                                                                                                                                              
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+2,1,2,1,    
+                                                                                                                                                                        
+2,1,1,2,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+2,1,1,2,                                                                                                                                                                
+1,2,2,1, 
+                                                                                     
+ 
+                                                                                     
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+                                                                                                                                                                        
+2,2,2,2,                                                                                                                                                                
+1,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+                                                                                                                                                                        
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,                                                                                                                                                                
+1,2,2,1,    
+                                                                                    
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,     
+                                                                                     
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,  
+                                                                                                                                                              
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+1,1,1,1,  
+                                                                                                                                                              
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+2,2,2,2,                                                                                                                                                                
+2,2,2,2,   
+                                                                                                                                                                        
+2,1,1,1,                                                                                                                                                                
+2,1,1,1,                                                                                                                                                                
+2,1,1,1,                                                                                                                                                                
+2,1,1,1,
+                                                                                      
+                                                                                     
+                                                                                     
+                                                                                     
+                                                                                     
+1,1,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+1,1,1,1,                                                                                                                                                                
+                                                                                                                                                                        
+2,1,1,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+                                                                                                                                                                        
+1,1,1,2,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+1,2,1,1,                                                                                                                                                                
+2,1,1,1,    
+                                                                                    
+1,2,1,1,                                                                                                                                                                
+1,1,2,1,                                                                                                                                                                
+2,1,1,2,                                                                                                                                                                
+1,2,1,1,     
+                                                                                     
+1,2,1,1,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+1,1,2,1,  
+                                                                                                                                                              
+1,1,2,2,                                                                                                                                                                
+1,1,1,2,                                                                                                                                                                
+2,1,1,1,                                                                                                                                                                
+2,2,1,1,  
+                                                                                                                                                              
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,   
+                                                                                                                                                                        
+2,1,2,1,                                                                                                                                                                
+1,2,1,2,                                                                                                                                                                
+2,1,2,1,                                                                                                                                                                
+1,2,1,2
+                                                                                    
+], shape=[32, 4, 4, 1] );    // 32 input images in groups of 8 that are 4 x 4 pixels with only one color either 1 or 2 (did not train with 0)                                                                                                                                                     
+                                                                                                                                                                        
+// Labels of how many lines in each image. I can make much more images just few here for simplicity 
+// grey, blocks or lines, diagonals, 
+const ys = tf.tensor2d([
+                                                                                     
+0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,                                                                                     
+1,0,0,      1,0,0,      1,0,0,      1,0,0,      1,0,0,    1,0,0,       1,0,0,      1,0,0,
+0,1,0,      0,1,0,      0,1,0,      0,1,0,      0,1,0,    0,1,0,       0,1,0,      0,1,0,
+0,1,0,      0,0,1,      0,0,1,      0,0,1,      0,0,1,    0,0,1,       1,0,0,      1,0,0
+                                                                                     
+], shape=[32, 3], 'int32');        // 32 images 3 one hot dimensions                                                                                                                  
+                                                                                                                                                                        
+                                                                                                                                                                        
+                                                                                                                                        
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({                                                                                                                                            
+    inputShape: [4, 4, 1],                                                                                                                                                  
+    kernelSize: 2,                                                                                                                                                          
+    filters: 4,                                                                                                                                                             
+    strides: 1,                                                                                                                                                             
+    activation: 'relu',                                                                                                                                                     
+    kernelInitializer: 'varianceScaling'                                                                                                                                    
+}));                                                                                                                                                                    
+                                                                                                                                                                        
+model.add(tf.layers.conv2d({ kernelSize: 2, filters: 4, strides: 1, activation: 'relu', kernelInitializer: 'varianceScaling' }));                                       
+                                                                                                                                                                        
+model.add(tf.layers.flatten());                                                                                                                                         
+model.add(tf.layers.dense({ units: 30, kernelInitializer: 'varianceScaling', activation: 'softmax' }));                                                                 
+model.add(tf.layers.dense({ units: 3, activation: 'linear' }) ); 
+                                                                                     
+const myOptimizer = tf.train.adamax()             
+model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});                                                                                                         
+                                                                                                                                                                        
+async function myGo() { // inline async so we can use promises and await                                                                                                   
+ let myEpochs = 100       // original trained at 3000 epochs                                                                                                                                                                 
+  for ( let myLoop = 1; myLoop <= myEpochs; myLoop++ ) {                                                                                                                     
+    var myFit = await model.fit(xs, ys, { epochs: 10 });                                                                                                                
+    if (myLoop % 20 == 0){                                                                                                                                              
+      await tf.nextFrame(); // This allows the GUI to update but only every 20 batches                                                                                  
+      document.getElementById('myDiv124b').innerHTML = 'Loss after Batch ' + myLoop + '/'+myEpochs+' : ' + myFit.history.loss[0] +' <br><br>'                                          
+    }                                                                                                                                                                   
+  }    
+ // await   document.getElementById('mySetOriginal').click()
+  document.getElementById('myDiv124b').innerHTML += '<br> Check the above area for predictions<br> Click the button set original to prove it worked.'
+}
+                                                                                                                                                                      
+ myGo() // call the main async function 
+ //globalOriginal = document.getElementById('myAsk2').value                                                                                                                                                                       
+}" > <br><br>
+
+<div id='myDiv124b'>...</div><br>	
+	
+	<h2>Saving and Loading Files</h2>
+  
+ <input  type="button"  value="Save-Model" onclick="{ 
+(async function () { 
+    alert('Make a new folder on your computer, save the model (both json and bin extensions seperately but with the same file name) to the folder, then upload the folder to a website')
+    const myFileName = 'downloads://myFileName'
+    const saveResults = await model.save(myFileName);
+    //document.getElementById('myDivSummary').innerHTML = ''    
+    model.summary() 
+})()
+                                                    
+}"> <br>
+ 
+Load this file URL: <input id="myFileIn" size="100%" type = text value="https://www.rocksetta.com/tensorflowjs/saved-models/interpret/40-interpret0-grey.json" ><br>
+ <br>
+<input id="myButton7979a" type="button" value="Load Model" onclick="{ 
+  (async function () {                                                                 
+  const myFileName = document.getElementById('myFileIn').value 
+  if (myFileName != null){  
+    model = await tf.loadLayersModel(myFileName); 
+  } 
+  globalOriginal = document.getElementById('myAsk2').value                                                                               
+  await   document.getElementById('mySetOriginal').click()  
+                                                                   
+  })()     //end async                                                            
+                                                                                                                                     
+}"> <br>
+ 
+  
+ 
+ 
+ 
+ 
+	<h2> Local Storage From Browser </h2>
+ 
+Local Storage base file name (For both saving and loading): <input type=text id="myFileName" value ="my-local-model-02">
+<br>	
+<input id="myLocal5858s" type="button" value="local storage save" onclick="{
+   ( async function (){									    
+       const saveResults = await model.save('localstorage://'+document.getElementById('myFileName').value)								    
+       alert(JSON.stringify(saveResults))
+   })()  // inline async function									    
+}">
+
+<input id="myLocal5858l" type="button" value="local storage load" onclick="{	 
+                                                                                                                                                        
+  (async function myGo3() {
+    model = await tf.loadLayersModel ('localstorage://'+document.getElementById('myFileName').value);		
+    model.summary()         
+  })()
+
+
+						     
+}">
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+</div>
+<div id='myDiv124'>...</div><br>
+
+<input id="myUpdate124" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea124').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv124Code').innerHTML =    myJoe 
+  document.getElementById('myButton124').click()
+                                             
+}"><br>
+
+<textarea id="myTextarea124"  wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce124){
+     myTextGrow('myTextarea124', 'myDiv124Code')
+     document.getElementById('myUpdate124').style.visibility = 'visible'
+     myOnce124 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+
+
+
+
+<br><br><br><hr><br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+    
+    
+
+
+ 
+ 
+ 
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce7979 = true    // so textareas are only clicked once
+myOnce124 = true  
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>
