@@ -59,12 +59,12 @@ Checkout a really good matrix math explanation site at <a href="http://www.maths
 //////////////////////////// define extended class /////////////////////////////
 
 class myTensor extends tf.Tensor {
-    constructor(a,b) {
-        const myTempTensor = tf.tensor(a,b)
+    constructor(a,b,c) {
+        const myTempTensor = tf.tensor(a,b,c)
    
    myTempTensor.myInverse2DSquare = function(b) {     
       const myInverseMultiplier  = 1 / ( (b.dataSync()[0] * b.dataSync()[3]) - (b.dataSync()[1] * b.dataSync()[2]) )
-      const myMatrixConverted = tf.tensor2d([ b.dataSync()[3]*myInverseMultiplier, b.dataSync()[1]*-1*myInverseMultiplier, b.dataSync()[2]*-1*myInverseMultiplier, b.dataSync()[0]*myInverseMultiplier], [2, 2])
+      const myMatrixConverted = tf.tensor2d([ b.dataSync()[3]*myInverseMultiplier, b.dataSync()[1]*-1*myInverseMultiplier, b.dataSync()[2]*-1*myInverseMultiplier, b.dataSync()[0]*myInverseMultiplier], [2, 2], 'float32')
          
       return myMatrixConverted
       myInverseMultiplier.dispose()
@@ -91,8 +91,8 @@ class myTensor extends tf.Tensor {
    var myResult1 = myOwnTensor.myInverse2DSquare(myMatrixOriginal)
    document.getElementById('myDiv333').innerHTML += 'Intermediate Inverse Matrix shape = ' + myResult1.shape+ ' Intermediate Values = ' + myResult1.dataSync()+'<br>'   
 
- //  var myResult2 =  tf.vectorTimesMatrix(myVector1D, myResult1);
- //  document.getElementById('myDiv333').innerHTML +=   'Final Result shape:'+ myResult2.shape  +   ',  Train and Bus results: Children = ' + Math.round(myResult2.dataSync()[0]) +   ',  Adults = '  +  Math.round(myResult2.dataSync()[1])                                            
+   var myResult2 =  tf.mul(myVector1D, myResult1);
+   document.getElementById('myDiv333').innerHTML +=   'Final Result shape:'+ myResult2.shape  +   ',  Train and Bus results: Children = ' + Math.round(myResult2.dataSync()[0]) +   ',  Adults = '  +  Math.round(myResult2.dataSync()[1])                                            
 
 }"><br>
 
