@@ -58,8 +58,8 @@ Take a simple Matrix math caculation using Tensorflowjs Tensors and Scalars and 
 
 <input id="myButton1234" type=button value="Use GPU math" onclick="{
                                                                                                                                  
-  const myA = tf.tensor1d([10,20,30])
-  const myB = tf.scalar(2.1)
+  const myA = tf.tensor1d([10,20,30], 'int32')
+  const myB = tf.scalar(2.1, 'float32')
   const myResult = tf.add(myA, myB);
   document.getElementById('myDiv1234').innerHTML = myResult.dataSync() 
                                                                  
@@ -131,7 +131,7 @@ myResult.dataSync()[ <input id="myText03" type=number value=2> ] <= -1 to show a
 
 <input id="myButton12345" type=button value="Use GPU math dynamic" onclick="{
 
-   const myA = tf.tensor1d(document.getElementById('myText01').value.split(','),'float32') // must make the string into an array for the tensor1d
+   const myA = tf.tensor1d(document.getElementById('myText01').value.split(','),'int32') // must make the string into an array for the tensor1d
    const myB = tf.scalar(document.getElementById('myText02').value,'float32')
    const myResult = tf.add(myA, myB);
  
