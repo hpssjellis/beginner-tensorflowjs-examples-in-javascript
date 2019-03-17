@@ -59,9 +59,10 @@ Traditional Javascript function, updated by using the "async" and "await" key wo
                                                                  
 async function myTypicalFunction(){                                                             
       const matrixShape = [2, 3];  // 2 rows, 3 columns.
-      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape,);
-      const vector = tf.tensor1d([0, 1, 2]);
-      const myResult = tf.matrixTimesVector(matrix, vector);
+      const matrix = tf.tensor2d([10, 20, 30, 40, 50, 60], matrixShape, 'int32');
+      const vector = tf.tensor1d([0, 1, 2], 'int32');
+      //const myResult = tf.matrixTimesVector(matrix, vector);
+      const myResult = tf.mul(matrix, vector);
                                                            
       document.getElementById('myDiv223').innerHTML = 'Awaiting the result of the tf.matrixTimesVector() function: The array shape is ' + myResult.shape + ' data is ' + await myResult.data()
 }
