@@ -91,8 +91,8 @@ class myTensor extends tf.Tensor {
    var myResult1 = myOwnTensor.myInverse2DSquare(myMatrixOriginal)
    document.getElementById('myDiv333').innerHTML += 'Intermediate Inverse Matrix shape = ' + myResult1.shape+ ' Intermediate Values = ' + myResult1.dataSync()+'<br>'   
 
-   var myResult2 =  tf.vectorTimesMatrix(myVector1D, myResult1);
-   document.getElementById('myDiv333').innerHTML +=   'Final Result shape:'+ myResult2.shape  +   ',  Train and Bus results: Children = ' + Math.round(myResult2.dataSync()[0]) +   ',  Adults = '  +  Math.round(myResult2.dataSync()[1])                                            
+ //  var myResult2 =  tf.vectorTimesMatrix(myVector1D, myResult1);
+ //  document.getElementById('myDiv333').innerHTML +=   'Final Result shape:'+ myResult2.shape  +   ',  Train and Bus results: Children = ' + Math.round(myResult2.dataSync()[0]) +   ',  Adults = '  +  Math.round(myResult2.dataSync()[1])                                            
 
 }"><br>
 
