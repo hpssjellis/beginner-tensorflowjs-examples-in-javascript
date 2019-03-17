@@ -85,8 +85,8 @@ class myTensor extends tf.Tensor {
 
    var myOwnTensor = new myTensor()
  
-   var myMatrixOriginal = tf.tensor2d([3, 3.5, 3.2, 3.6], [2, 2]);
-   var myVector1D = tf.tensor1d([118.4, 135.2]);
+   var myMatrixOriginal = tf.tensor2d([3, 3.5, 3.2, 3.6], [2, 2], 'float32');
+   var myVector1D = tf.tensor1d([118.4, 135.2], 'float32');
 
    var myResult1 = myOwnTensor.myInverse2DSquare(myMatrixOriginal)
    document.getElementById('myDiv333').innerHTML += 'Intermediate Inverse Matrix shape = ' + myResult1.shape+ ' Intermediate Values = ' + myResult1.dataSync()+'<br>'   
