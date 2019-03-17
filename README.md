@@ -3,6 +3,10 @@ For anyone who knows a bit of Javascript and wants to know some Machine Learning
 
 
 Updating to Tensorflowjs version 1.0.0 started Mar 16, 2019
+Finished: 01,
+
+
+
 
 
 
