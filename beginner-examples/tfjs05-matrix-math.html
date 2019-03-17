@@ -62,9 +62,9 @@ class myTensor extends tf.Tensor {
     constructor(a,b,c) {
         const myTempTensor = tf.tensor(a,b,c)
    
-   myTempTensor.myInverse2DSquare = function(b) {     
+   myTempTensor.myInverse2DSquare = function(b,c) {     
       const myInverseMultiplier  = 1 / ( (b.dataSync()[0] * b.dataSync()[3]) - (b.dataSync()[1] * b.dataSync()[2]) )
-      const myMatrixConverted = tf.tensor2d([ b.dataSync()[3]*myInverseMultiplier, b.dataSync()[1]*-1*myInverseMultiplier, b.dataSync()[2]*-1*myInverseMultiplier, b.dataSync()[0]*myInverseMultiplier], [2, 2], 'float32')
+      const myMatrixConverted = tf.tensor2d([ b.dataSync()[3]*myInverseMultiplier, b.dataSync()[1]*-1*myInverseMultiplier, b.dataSync()[2]*-1*myInverseMultiplier, b.dataSync()[0]*myInverseMultiplier], [2, 2], c)
          
       return myMatrixConverted
       myInverseMultiplier.dispose()
@@ -88,7 +88,7 @@ class myTensor extends tf.Tensor {
    var myMatrixOriginal = tf.tensor2d([3, 3.5, 3.2, 3.6], [2, 2], 'float32');
    var myVector1D = tf.tensor1d([118.4, 135.2], 'float32');
 
-   var myResult1 = myOwnTensor.myInverse2DSquare(myMatrixOriginal)
+   var myResult1 = myOwnTensor.myInverse2DSquare(myMatrixOriginal, 'float32')
    document.getElementById('myDiv333').innerHTML += 'Intermediate Inverse Matrix shape = ' + myResult1.shape+ ' Intermediate Values = ' + myResult1.dataSync()+'<br>'   
 
    var myResult2 =  tf.mul(myVector1D, myResult1);
