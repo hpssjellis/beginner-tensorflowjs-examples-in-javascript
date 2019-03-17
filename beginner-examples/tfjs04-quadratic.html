@@ -67,7 +67,7 @@ const optimizer = tf.train.sgd(learningRate);
 function predict(input) {
   // y = a * x ^ 2 + b * x + c
   return tf.tidy(() => {
-    const x = tf.scalar(input);
+    const x = tf.scalar(input, 'float32');
     const ax2 = a.mul(x.square());
     const bx = b.mul(x);
     const y = ax2.add(bx).add(c);
@@ -218,7 +218,7 @@ const optimizer = tf.train.sgd(learningRate);
 function predict(input) {
   // y = a * x ^ 2 + b * x + c
   return tf.tidy(() => {
-    const x = tf.scalar(input);
+    const x = tf.scalar(input, 'float32');
     const ax2 = a.mul(x.square());
     const bx = b.mul(x);
     const y = ax2.add(bx).add(c);
