@@ -57,9 +57,9 @@ a curve.
 
 <input id="myButton123" type=button value="Quadratic y = a * x^2 + b * x + c" onclick="{
                                                                                        
-const a = tf.variable(tf.scalar(Math.random()));
-const b = tf.variable(tf.scalar(Math.random()));
-const c = tf.variable(tf.scalar(Math.random()));
+const a = tf.variable(tf.scalar(Math.random(),'float32'));
+const b = tf.variable(tf.scalar(Math.random(),'float32'));
+const c = tf.variable(tf.scalar(Math.random(),'float32'));
                                                                                        
 const learningRate = 0.01;
 const optimizer = tf.train.sgd(learningRate);
@@ -210,9 +210,9 @@ Solve for x=<input id="myText14" type=text value=4><br><br><br>
 
 
 <input id="myButton124" type=button value="Dynamic Quadratic" onclick="{
-const a = tf.variable(tf.scalar(Math.random()));
-const b = tf.variable(tf.scalar(Math.random()));
-const c = tf.variable(tf.scalar(Math.random()));
+const a = tf.variable(tf.scalar(Math.random(),'float32'));
+const b = tf.variable(tf.scalar(Math.random(),'float32'));
+const c = tf.variable(tf.scalar(Math.random(),'float32'));
 const learningRate =  document.getElementById('myText02').value    // 0.01;
 const optimizer = tf.train.sgd(learningRate);
 function predict(input) {
