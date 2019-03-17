@@ -226,7 +226,7 @@ function predict(input) {
   });
 }
 function loss(prediction, actual) {
-  const error = tf.scalar(actual).sub(prediction).square();
+  const error = tf.scalar(actual, 'float32').sub(prediction).square();
   return error.asScalar();
 }
 async function train(xs, ys, numIterations, done) {
