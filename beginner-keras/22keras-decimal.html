@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.2"></script>
 
 
 
@@ -66,8 +67,8 @@ I have made the Keras model.fit a bit simpler than the Web App below. This model
    document.getElementById('myButton123').style.backgroundColor = 'red'  
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
                                                                                    
-   const xTrainingData   = tf.tensor2d([1.20, 2.10, 3.40, 4.20], shape=[4, 1]);
-   const yTrainingTarget = tf.tensor2d([5.40, 7.20, 9.80, 11.40], shape=[4, 1]);
+   const xTrainingData   = tf.tensor2d([1.20, 2.10, 3.40, 4.20], shape=[4, 1],'float32');
+   const yTrainingTarget = tf.tensor2d([5.40, 7.20, 9.80, 11.40], shape=[4, 1],'float32');
                                            
   // console.log(xTrainingData)
   // console.log(yTrainingTarget)  
@@ -115,7 +116,7 @@ I have made the Keras model.fit a bit simpler than the Web App below. This model
  
 /////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////  
                                                                                    
-    const myPredictArray = await  model.predict(tf.tensor2d([5.32], shape=[1, 1]))  
+    const myPredictArray = await  model.predict(tf.tensor2d([5.32], shape=[1, 1], 'float32'))  
                                                                                     
     document.getElementById('myDiv123').innerHTML += 'Input fixed at 5.32, Output = ' + await myPredictArray.data() +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'  
@@ -376,8 +377,8 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1], 'float32');
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1], 'float32');
                                            
    // console.log(xTrainingData)
    // console.log(yTrainingTarget) 
@@ -407,7 +408,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'float32' )) 
   document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
                                                                                              
@@ -420,7 +421,7 @@ myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   if (myFileName != null){  
-    model = await tf.loadModel(myFileName); 
+    model = await tf.loadLayersModel(myFileName); 
     document.getElementById('myDivSummary').innerHTML = ''     
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     await myTest()
@@ -431,7 +432,7 @@ myLoadLocal = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/myModel01.json');
   if (myFileName != null){  
-    model = await tf.loadModel(myFileName);
+    model = await tf.loadLayersModel(myFileName);
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     await myTest()
@@ -543,7 +544,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.2"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
