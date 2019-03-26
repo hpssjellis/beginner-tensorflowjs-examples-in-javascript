@@ -611,17 +611,17 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
  // console.log('myDataArray2')                                                                                       
  // console.log(myDataArray2)  
   console.log()
-                                                                                
+                                                                     
+  console.log('myMainArray.length')                                                                                 
+  console.log(myMainArray.length)                                                                                         
   console.log('myHeadingsArray.length')                                           
   console.log(myHeadingsArray.length)                                                                              
-  console.log('myMainArray.length')                                                                                 
-  console.log(myMainArray.length)                                                                              
                                                                                 
  //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
 
 
   // myData = tf.tensor(myDataArray2, [150, 4], 'float32');   // need to extract the shape   
-   myData = tf.tensor(myDataArray2, [150, 4], 'float32');      
+   myData = tf.tensor(myDataArray2, [myMainArray.length, myHeadingsArray.length], 'float32');   // should adjust to the amount of data   
   
 
 
