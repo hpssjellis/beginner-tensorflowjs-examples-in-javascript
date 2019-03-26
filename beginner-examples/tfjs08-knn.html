@@ -65,9 +65,9 @@ The K-Nearest Neighbor code in Tensorflowjs is fairly easy. It is just calculati
   (async function (){     
       // need to setup the tensors
                                                               
-      const myData    = tf.tensor2d([0, 0], [1, 2])
-      const myUnknown = tf.tensor2d([3, 4], [1, 2])
-      const mySqrt    = tf.tensor1d([0.5])
+      const myData    = tf.tensor2d([0, 0], [1, 2], 'float32')    
+      const myUnknown = tf.tensor2d([3, 4], [1, 2], 'float32')
+      const mySqrt    = tf.tensor1d([0.5], 'float32')
                                                
                                                               
       // now do the distance formula  
@@ -143,9 +143,9 @@ Same thing as above but stringing the operations together in one line which is s
   (async function (){     
       // need to setup the tensors
                                                               
-      const myData    = tf.tensor2d([0, 0], [1, 2])
-      const myUnknown = tf.tensor2d([3, 4], [1, 2])
-      const mySqrt    = tf.tensor1d([0.5])
+      const myData    = tf.tensor2d([0, 0], [1, 2], 'float32')
+      const myUnknown = tf.tensor2d([3, 4], [1, 2], 'float32')
+      const mySqrt    = tf.tensor1d([0.5], 'float32')
       const axis = 1
                                                
                                                               
@@ -571,7 +571,7 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
    myMainArray = document.getElementById('myArea01').value.split(/\r\n|\n/);  // split at end of line
                                                     
    //myData = tf.tensor1d(myMainArray); 
-   myUnknown = tf.tensor1d(document.getElementById('myText01').value.split(',')); 
+   myUnknown = tf.tensor1d(document.getElementById('myText01').value.split(','), 'float32'); 
                                            
    myHeadingsArray = document.getElementById('myText03').value.split(',')
 
@@ -592,7 +592,7 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
  //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
 
    //myData = tf.tensor1d(flatten(myDataArray),'float32', [5,2]); 
-   myData = tf.tensor(myDataArray); 
+   myData = tf.tensor(myDataArray, 'float32');        // 'float32' needed or it thinks it is a string 
 
 
 //////////////////////////////////////////////////////////////
