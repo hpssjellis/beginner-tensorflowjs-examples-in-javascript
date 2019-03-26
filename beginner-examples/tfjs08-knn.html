@@ -3,8 +3,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>  -->
+ <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"></script> 
 
 
 
@@ -591,13 +591,13 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
    }
 
                                                                                 
- var myDataArray2 = myDataArray.map(Number);                                                                               
+ var myDataArray2 = myDataArray.map(parseFloat);                                                                               
                                                                                 
                                                                                 
  //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
 
    //myData = tf.tensor1d(flatten(myDataArray),'float32', [5,2]); 
-  // myData = tf.tensor(myDataArray, 'float32');        // 'float32' needed or it thinks it is a string 
+  // myData = tf.tensor(myDataArray2, 'float32');        // 'float32' needed or it thinks it is a string 
    myData = tf.tensor(myDataArray2);        
 
 
@@ -836,7 +836,7 @@ function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
    var myCursorEnd = document.getElementById(myT).selectionEnd
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
