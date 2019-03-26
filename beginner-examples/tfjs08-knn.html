@@ -571,7 +571,8 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
    myMainArray = document.getElementById('myArea01').value.split(/\r\n|\n/);  // split at end of line
                                                     
    //myData = tf.tensor1d(myMainArray); 
-   myUnknown = tf.tensor1d(document.getElementById('myText01').value.split(','), 'float32'); 
+  // myUnknown = tf.tensor1d(document.getElementById('myText01').value.split(','), 'float32'); 
+   myUnknown = tf.tensor1d(document.getElementById('myText01').value.split(',')); 
                                            
    myHeadingsArray = document.getElementById('myText03').value.split(',')
 
@@ -592,7 +593,8 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
  //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
 
    //myData = tf.tensor1d(flatten(myDataArray),'float32', [5,2]); 
-   myData = tf.tensor(myDataArray, 'float32');        // 'float32' needed or it thinks it is a string 
+  // myData = tf.tensor(myDataArray, 'float32');        // 'float32' needed or it thinks it is a string 
+   myData = tf.tensor(myDataArray);        
 
 
 //////////////////////////////////////////////////////////////
@@ -637,7 +639,8 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
       //alert(JSON.stringify(myMainShape))
   
       //const mySqrt = tf.tensor1d([0.5, 0.5, 0.5, 0.5, 0.5]);                                                                             
-      const mySqrt = tf.fill([myLabelsArray.length], 0.5, 'float32')                                                             
+     // const mySqrt = tf.fill([myLabelsArray.length], 0.5, 'float32')                                                                       
+      const mySqrt = tf.fill([myLabelsArray.length], 0.5)                                                            
      // const mySqrt = tf.fill(myMainShape, 0.5)         // thought I needed multi-dimensional squareRoot, but will sum tensor first
 
 
