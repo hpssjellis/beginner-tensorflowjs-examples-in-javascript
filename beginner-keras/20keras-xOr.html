@@ -81,7 +81,7 @@ The expected output for xOr input is<br>
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
 
-    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape
+    const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape  // note should also add , 'int32'
     const yTrainingTarget = tf.tensor2d([0,1,1,0], shape=[4,1]);            // needs shape defined
                                                                                  
     var myFit = await model.fit(xTrainingData, yTrainingTarget, {
@@ -312,8 +312,8 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/2, 2]);  // hopefully that becomes  shape=[4,2]
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/2, 2], 'int32');  // hopefully that becomes  shape=[4,2]
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1], 'int32');
                                            
   // console.log(xTrainingData)
   // console.log(yTrainingTarget) 
@@ -353,7 +353,7 @@ myLoadData = async function(){
   
 
       //document.getElementById('myButtonTest').style.backgroundColor = 'red'  
-      const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+      const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'int32' )) 
       document.getElementById('myDiv124').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await myPredictArray.data() +'<br>'
       //document.getElementById('myButtonTest').style.backgroundColor = 'lightgray'
