@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"></script>  -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.2"></script>
 
 
 
@@ -62,8 +63,8 @@ Test the data: <input type="number" id="myAsk123" value="5"><br>
    document.getElementById('myButton123').style.backgroundColor = 'red'  
 /////////////////////////////////// PREPARE DATA /////////////////////////////////////////////////////////    
                                                                                    
-   const xTrainingData   = tf.tensor2d([[1], [2], [3], [4]], shape=[4, 1]);
-   const yTrainingTarget = tf.tensor2d([[1], [3], [5], [7]], shape=[4, 1]);
+   const xTrainingData   = tf.tensor2d([[1], [2], [3], [4]], shape=[4, 1], 'int32');
+   const yTrainingTarget = tf.tensor2d([[1], [3], [5], [7]], shape=[4, 1], 'int32');
                                                                           
 /////////////////////////////////// PREPARE MODEL /////////////////////////////////////////////////////////  
                                                                                    
@@ -100,7 +101,7 @@ Test the data: <input type="number" id="myAsk123" value="5"><br>
  
 /////////////////////////////////// PREDICT UNKOWN /////////////////////////////////////////////////////////  
                                                                                    
-    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk123').value.split(',')], shape=[1, 1]))  
+    const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk123').value.split(',')], shape=[1, 1], 'int32'))  
                                                                                     
     document.getElementById('myDiv123').innerHTML += 'Input '+document.getElementById('myAsk123').value+', Output = ' + Math.round(await myPredictArray.data()) +'<br>'
     document.getElementById('myButton123').style.backgroundColor = 'lightgray'  
@@ -110,7 +111,7 @@ Test the data: <input type="number" id="myAsk123" value="5"><br>
  
  <input id="myButton123b" type="button" value="re-Test" onclick="{
    (async function () {                                                                
-   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk123').value.split(',')], shape=[1, 1]))  
+   const myPredictArray = await  model.predict(tf.tensor2d([document.getElementById('myAsk123').value.split(',')], shape=[1, 1], 'int32'))  
                                                                                     
    document.getElementById('myDiv123').innerHTML = 'Input '+document.getElementById('myAsk123').value+', Output = ' + Math.round(await myPredictArray.data()) +'<br>'
    })() // end the inline async funciton                                                                                     
@@ -348,8 +349,8 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1], 'int32');
                                            
    // console.log(xTrainingData)
    // console.log(yTrainingTarget) 
@@ -379,7 +380,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )) 
+  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'int32' )) 
   document.getElementById('myDiv124-A').innerHTML = 'Input '+document.getElementById('myAsk').value +
         ', Output = ' + await Math.round(await myPredictArray.data()) +'<br>'   // NOTE: rounded output
                                                                                              
@@ -515,7 +516,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.2"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
