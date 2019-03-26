@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
 
 
 
@@ -236,7 +237,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
                                                                                                                                                         
   async function myGo3() {
 
-    const loadedModel = await tf.loadModel('localstorage://'+document.getElementById('myInFileName').value);		
+    const loadedModel = await tf.loadLayersModel('localstorage://'+document.getElementById('myInFileName').value);		
     const training_data3 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
     const myPredictArray3 = await loadedModel.predict(training_data3).data()
 
@@ -273,7 +274,7 @@ json-upload: <input type=file id="json-upload">   weights-upload:	<input type=fi
      const weightsUpload = document.getElementById('weights-upload');
 
 
-     const loadedModel5 = await tf.loadModel(tf.io.browserFiles([jsonUpload.files[0], weightsUpload.files[0]]));
+     const loadedModel5 = await tf.loadLayersModel(tf.io.browserFiles([jsonUpload.files[0], weightsUpload.files[0]]));
 								       
 								       	
     const training_data5 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  
@@ -546,7 +547,7 @@ Data Shape <input id="myInShape" type=text value="4,2"><br>
                                                                                                                                                         
   async function myGo6() {
 			
-    const loadedModel6 = await	 tf.loadModel(document.getElementById('myInFile').value)
+    const loadedModel6 = await	 tf.loadLayersModel(document.getElementById('myInFile').value)
     const training_data6 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);  												    
 												    
     //const training_data6 = tf.tensor2d(document.getElementById('myInData').value.split(','),document.getElementById('myInShape').value.split(','));  
@@ -654,7 +655,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
