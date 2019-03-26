@@ -3,8 +3,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>  -->
- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"></script> 
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script> 
+<!--  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"></script>  -->
 
 
 
@@ -578,7 +578,19 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
 
 
 
-//////////////////////////////////////////////////////////////////// issues
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+//////////////////////////////////////////////////////////////////////////////////////////// issues start
 
 
    // Need to load the data
@@ -592,20 +604,28 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
 
                                                                                 
  //var myDataArray2 = myDataArray.map(parseFloat);                                                                               
+  var myDataArray2 = myDataArray.flat()                                                                                     
                                                                                 
+ // console.log('myDataArray')                                                                                           
+ // console.log(myDataArray)                                                                                        
+ // console.log('myDataArray2')                                                                                       
+ // console.log(myDataArray2)  
+  console.log()
+                                                                     
+  console.log('myMainArray.length')                                                                                 
+  console.log(myMainArray.length)                                                                                         
+  console.log('myHeadingsArray.length')                                           
+  console.log(myHeadingsArray.length)                                                                              
                                                                                 
  //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
 
-   //myData = tf.tensor1d(flatten(myDataArray),'float32', [5,2]); 
-  // myData = tf.tensor(myDataArray2, 'float32');        // 'float32' needed or it thinks it is a string 
-                                                                                
-  console.log('myDataArray')                                                      
-  console.log(myDataArray)                                                                             
-                                                                                
-   myData = tf.tensor(myDataArray);        
+
+  // myData = tf.tensor(myDataArray2, [150, 4], 'float32');   // need to extract the shape   
+   myData = tf.tensor(myDataArray2, [myMainArray.length, myHeadingsArray.length], 'float32');   // should adjust to the amount of data   
+  
 
 
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////// issues end
 
  
 
@@ -840,7 +860,7 @@ function myTextGrow(myT, myB){
    var myCursorStart = document.getElementById(myT).selectionStart
    var myCursorEnd = document.getElementById(myT).selectionEnd
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.6"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
