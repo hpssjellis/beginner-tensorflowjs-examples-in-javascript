@@ -578,7 +578,19 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
 
 
 
-//////////////////////////////////////////////////////////////////// issues
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+//////////////////////////////////////////////////////////////////////////////////////////// issues start
 
 
    // Need to load the data
@@ -602,12 +614,12 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
  //alert(JSON.stringify(myDataArray))  // shows javascript array with squarebrackets
 
    //myData = tf.tensor1d(flatten(myDataArray),'float32', [5,2]); 
-   myData = tf.tensor(myDataArray2, [150,4] 'float32');        // 'float32' needed or it thinks it is a string 
-   myData = tf.tensor(myDataArray3, 'float32');        // 'float32' needed or it thinks it is a string 
+   myData = tf.tensor(myDataArray2, [150,4], 'float32');        // 'float32' needed or it thinks it is a string 
+  // myData = tf.tensor(myDataArray3, 'float32');        // 'float32' needed or it thinks it is a string 
   // myData = tf.tensor(myDataArray);        
 
 
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////// issues end
 
  
 
