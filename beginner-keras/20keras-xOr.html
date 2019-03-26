@@ -367,7 +367,7 @@ myLoadData = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://20keras-xOr');
   
-  model = await tf.loadModel(myFileName); 
+  model = await tf.loadLayersModel(myFileName); 
   document.getElementById('myDivSummary').innerHTML = ''     
   await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
   await myTest()
@@ -377,7 +377,7 @@ myLoadData = async function(){
   alert('The test function will need to be changed if other models are loaded')
   const myFileName = prompt('Enter URL of stored model', '');
   
-  model = await tf.loadModel(myFileName);
+  model = await tf.loadLayersModel(myFileName);
   document.getElementById('myDivSummary').innerHTML = ''      
   await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
    await myTest()
