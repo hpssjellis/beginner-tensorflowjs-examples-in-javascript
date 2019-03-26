@@ -637,7 +637,7 @@ The unknown: <input id="myText01" type=text value="3.5, 56" placeholder="4.2, 5.
       //alert(JSON.stringify(myMainShape))
   
       //const mySqrt = tf.tensor1d([0.5, 0.5, 0.5, 0.5, 0.5]);                                                                             
-      const mySqrt = tf.fill([myLabelsArray.length], 0.5)                                                             
+      const mySqrt = tf.fill([myLabelsArray.length], 0.5, 'float32')                                                             
      // const mySqrt = tf.fill(myMainShape, 0.5)         // thought I needed multi-dimensional squareRoot, but will sum tensor first
 
 
