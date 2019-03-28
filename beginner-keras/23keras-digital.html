@@ -96,8 +96,8 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
-    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   1,0,1,0,0,1,1,0], shape=[6,8]);      
-    const yTrainingTarget = tf.tensor2d([0,0,1,1,           1,0,0,0,           0,1,0,0,           0,1,1,0,           1,1,0,0,           1,0,1,1        ], shape=[6,4]);          
+    const xTrainingData   = tf.tensor2d([0,0,0,0,0,0,0,0,   0,1,0,1,0,1,0,1,   1,0,1,0,1,0,1,0,   0,0,0,1,1,1,0,1,   0,0,0,1,1,1,1,1,   1,0,1,0,0,1,1,0], shape=[6,8],'int32');      
+    const yTrainingTarget = tf.tensor2d([0,0,1,1,           1,0,0,0,           0,1,0,0,           0,1,1,0,           1,1,0,0,           1,0,1,1        ], shape=[6,4],'int32');          
 
     console.log('xTrainingData')
     xTrainingData.print()
@@ -116,7 +116,7 @@ Like the xOr example the inputs and outputs will be a series of ones and zeros, 
       })       // end model.fit                                                                                      
     
     const xTestArray = [0,0,1,1,0,0,0,1]
-    const xTestData  = tf.tensor2d(xTestArray, shape=[1,8])                                                                         
+    const xTestData  = tf.tensor2d(xTestArray, shape=[1,8],'int32')                                                                         
     const myPredictArray = await model.predict(xTestData).data()   
     
     console.log('myPredictArray')       
@@ -370,8 +370,8 @@ myLoadData = async function(){
    let xArray = document.getElementById('myX').value.split(',')
    let yArray = document.getElementById('myY').value.split(',')   
                                                                                    
-   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/8, 8]);
-   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/4, 4]);
+   const xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length/8, 8],'int32');
+   const yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length/4, 4],'int32');
                                            
 
     console.log('xTrainingData')
@@ -404,7 +404,7 @@ myTest = async function(){
  
   const myShape = document.getElementById('myShape').value.split(',').map(Number);
   
-  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )).data() 
+  const myPredictArray = await   model.predict(tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape,'int32' )).data() 
                                                                                              
   document.getElementById('myDiv124-A').innerHTML = 'Sensors: light, rangefinder, air, soil, CO2 x2, Temp x2<br>'+
        'Input: '+document.getElementById('myAsk').value + '<br><br>'+
