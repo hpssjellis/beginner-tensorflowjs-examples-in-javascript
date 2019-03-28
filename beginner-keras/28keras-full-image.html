@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.2"></script>
 
 
 
@@ -140,14 +141,14 @@ document.getElementById('myButton7979').style.backgroundColor = 'red'
                                                                               
                                                                               
                                                                               
-//const xs = tf.tensor4d([ ], shape=[8, 64, 48, 1] );    // 8 input images that are 64 x 48 with RGB colors)                                                                                                                                                     
+//const xs = tf.tensor4d([ ], shape=[8, 64, 48, 1], 'int32');    // 8 input images that are 64 x 48 with RGB colors)                                                                                                                                                     
                                                                                                                                                                         
 // Labels of how many lines in each image. I can make much more images just few here for simplicity 
 
 const ysArray =  document.getElementById('myLabels').value.split(',')                                                                             
                                                                               
-//const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4]);        // 8 images 4 dimension                                                                                                                  
-const ys = tf.tensor2d(ysArray, shape=[ysArray.length/4, 4]);        // 8 images 4 dimension                                                                                                                  
+//const ys = tf.tensor2d([0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    0,1,0,0,    1,0,0,0,   1,0,0,0 ], shape=[8, 4], 'int32');        // 8 images 4 dimension                                                                                                                  
+const ys = tf.tensor2d(ysArray, shape=[ysArray.length/4, 4], 'int32');        // 8 images 4 dimension                                                                                                                  
                                                                                                                                                                        
                                                                                                                                                                         
 model = tf.sequential();                                                                                                                                          
@@ -224,14 +225,14 @@ model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});
     var ctxReshape = canvasReshape.getContext('2d');   /// assume image has already been loaded
     var imageData = ctxReshape.getImageData(0,0,canvasReshape.width,canvasReshape.height);
     var data = imageData.data;
-    const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+    const latestTensor2 = tf.browser.fromPixels(imageData, 3);     // this time get rid of the alpha component
     myTestArray = latestTensor2.dataSync()                // bit goofy but easier for me to convert the tensor to an array to make the nest tensor
 
     console.log('myTestArray two'+await myTestArray[0])
-    const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 64, 48, 3])                                              
+    const xsTesting =   tf.tensor4d(myTestArray, shape=[1, 64, 48, 3], 'int32')                                              
     //xsTesting.print(true)                                                             
     const myPredictArray = await model.predict(xsTesting).data()       
-    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 64, 48, 3])).data()                                                                                                                                      
+    //const myPredictArray = await model.predict(tf.tensor4d(myTestDataArray, [1, 64, 48, 3], 'int32')).data()                                                                                                                                      
    // document.getElementById('myDiv7979').innerHTML = 'Input '+document.getElementById('myAsk2').value+'<br><br> Output = <br>'                                                                                                                                    
     document.getElementById('myDiv7979').innerHTML  = 'Output for image URL: ' + document.getElementById('myAsk2').value + ' <br>'
     document.getElementById('myDiv7979').innerHTML += '<b>No Shape ' + await Math.round(myPredictArray[0]*100) +'%</b><br>'          
@@ -380,7 +381,7 @@ mySingleLoad = async function(myFileName2, newX, newY, loop) {
       var data = imageData.data;
       myMainData[loop] = data;
 
-      const latestTensor = tf.fromPixels(imageData, 4);
+      const latestTensor = tf.browser.fromPixels(imageData, 4);
       // not sure how to drop the alpha channel so I just included it
 
       // tf.stack([myMainTensor, latestTensor]);
@@ -463,7 +464,7 @@ myLoadImage = async function() {
      // var data = imageData.data;
      // myMainData[loop] = data;
 
-     // const latestTensor2 = tf.fromPixels(imageData, 3);     // this time get rid of the alpha component
+     // const latestTensor2 = tf.browser.fromPixels(imageData, 3);     // this time get rid of the alpha component
     // myTestArray = latestTensor2.dataSync() 
     };
   }
@@ -660,7 +661,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.4"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.2"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                               
