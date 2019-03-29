@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.5/build/dat.gui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"> </script> 
     <script src="https://unpkg.com/@tensorflow-models/posenet"></script> 
-    <script src="stats.min.js"></script>   <!--  will get rid of this later   -->
+  <!--  <script src="stats.min.js"></script> -->  <!--  Got rid of this   -->
     
  
 <!-- Following script files have just been included in this file  -->      
@@ -250,7 +250,7 @@ function drawOffsetVectors(
 
 const videoWidth = 600;
 const videoHeight = 500;
-const stats = new Stats();
+///const stats = new Stats();
 
 function isAndroid() {
   return /Android/i.test(navigator.userAgent);
@@ -415,10 +415,10 @@ function setupGui(cameras, net) {
 /**
  * Sets up a frames per second panel on the top-left of the window
  */
-function setupFPS() {
-  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-  document.body.appendChild(stats.dom);
-}
+///function setupFPS() {
+///  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
+///  document.body.appendChild(stats.dom);
+///}
 
 /**
  * Feeds an image to posenet to estimate poses - this is where the magic
@@ -446,7 +446,7 @@ function detectPoseInRealTime(video, net) {
     }
 
     // Begin monitoring code for frames per second
-    stats.begin();
+    ///stats.begin();
 
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
@@ -505,7 +505,7 @@ function detectPoseInRealTime(video, net) {
     });
 
     // End monitoring code for frames per second
-    stats.end();
+   /// stats.end();
 
     requestAnimationFrame(poseDetectionFrame);
   }
