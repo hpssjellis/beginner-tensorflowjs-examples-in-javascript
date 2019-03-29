@@ -627,16 +627,34 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
 <br>Use at your own risk!<br>    <br> <br> <br> 
  
     Working on the following <br><br>
-            
-<input type=button value="Start user/facing Camera" onclick="{                                                        
-   myFacingMode = 'user'                                                                                                                                                         
-   bindPage() 
+        
+ Set variables<br>   
+    
+    
+     
+<input type=button value="flipHorizontal = false" onclick="{                                                                                                                                                                                                                
+    flipHorizontal = false 
+}">    
+    
+<input type=button value="flipHorizontal = true" onclick="{                                                                                                                                                                                                                
+    flipHorizontal = true 
+}">        
+    
+    
+<input type=button value="user/front" onclick="{                                                                                                                                                                                                                
+   myFacingMode = 'user'  
 }">           
  
-<input type=button value="Start environment/back Camera" onclick="{
-   myFacingMode = 'environment'                                                                                                                                                         
-   bindPage()                                                                
-}">Refresh page to switch cameras<br><br>           
+<input type=button value="environment/back Camera" onclick="{
+   myFacingMode = 'environment'                                                                                                                                                                                                                      
+}"> <br>
+    
+Now click start    
+     
+<input type=button value="Start" onclick="{                                                                                                                                                                                                                
+   bindPage() 
+}">   
+    Refresh page to switch cameras<br><br>           
      
     
 <input type=button value="Switch Pose Mode" onclick="{
