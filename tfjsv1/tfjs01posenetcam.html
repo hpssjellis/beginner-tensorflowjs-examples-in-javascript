@@ -531,9 +531,9 @@ async function bindPage() {
   document.getElementById('info').innerHTML = 'loading....'  
   const net = await posenet.load(0.75);
 
-  document.getElementById('info').style.display = 'none';
+  document.getElementById('info').innerHTML = ''  
   ///document.getElementById('loading').style.display = 'none';
-  document.getElementById('main').style.display = 'block';
+ /// document.getElementById('main').style.display = 'block';
 
   let video;
 
@@ -543,7 +543,7 @@ async function bindPage() {
     let info = document.getElementById('info');
     info.textContent = 'this browser does not support video capture,' +
         'or this device does not have a camera';
-    info.style.display = 'block';
+    //info.style.display = 'block';
     throw e;
   }
 
@@ -581,38 +581,18 @@ navigator.getUserMedia = navigator.getUserMedia ||
 
 <head>
     <title>PoseNet - Camera Feed Demo</title>
-    <style>
-    .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        color: black;
-    }
 
-    .footer-text {
-        max-width: 600px;
-        text-align: center;
-        margin: auto;
-    }
-
-    @media only screen and (max-width: 600px) {
-      .footer-text, .dg {
-        display: none;
-      }
-    }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
 
-    <div id="info" style='display:none'>
+    <div id="info" >
     </div>
     
 
-    <div id='main' style='display:none'>
+    <div id='main' >
         <video id="video" playsinline style=" -moz-transform: scaleX(-1);
         -o-transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
