@@ -436,7 +436,7 @@ function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
   // since images are being fed from a webcam
-  const flipHorizontal = true;
+ /// const flipHorizontal = true;
 
   canvas.width = videoWidth;
   canvas.height = videoHeight;
@@ -645,10 +645,18 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
   alert()                                                
 }">  
     
-<input type=button value="flipHorizontal" onclick="{
-  flipHorizontal = false                                              
+<input type=button value="flipHorizontal=false" onclick="{
+  flipHorizontal = false  
+  detectPoseInRealTime(video, net);                                                 
 }">  
 
+        
+<input type=button value="flipHorizontal=true" onclick="{
+  flipHorizontal = true  
+  detectPoseInRealTime(video, net);                                                 
+}"> 
+    
+    
 <ul>Defaults:
    <li> pose the object containing all the output data
    <li> multiplier = 1.01      Smaller value faster less accurate, larger value slower but better
