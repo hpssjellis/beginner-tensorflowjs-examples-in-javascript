@@ -26,7 +26,7 @@
  // global variables
      
      myFacingMode = 'environment'
-     
+     flipHorizontal = true
      
      
 </script>    
@@ -624,7 +624,7 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
 <input type=button value="Start environment/back Camera" onclick="{
    myFacingMode = 'environment'                                                                                                                                                         
    bindPage()                                                                
-}"><br>           
+}">Refresh page to switch cameras<br><br>           
      
     
 <input type=button value="Switch Pose Mode" onclick="{
@@ -643,7 +643,11 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
             
 <input type=button value="Set Image Scale Factor to" onclick="{
   alert()                                                
-}">        
+}">  
+    
+<input type=button value="flipHorizontal" onclick="{
+  flipHorizontal = false                                              
+}">  
 
 <ul>Defaults:
    <li> pose the object containing all the output data
