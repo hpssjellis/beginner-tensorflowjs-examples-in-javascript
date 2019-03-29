@@ -22,12 +22,6 @@
   <!--  <script src="camera.js"></script>    -->
 
     
- 
-<!-- Global variables  -->
- <script>   
-    let myFacingMode = 'environment'    // 'user' front camera or 'environment' back camera
- </script>   
-    
     
     
         
@@ -41,8 +35,8 @@
     
     
     
-///import * as posenet from '@tensorflow-models/posenet';
-///import * as tf from '@tensorflow/tfjs';
+//import * as posenet from '@tensorflow-models/posenet';
+//import * as tf from '@tensorflow/tfjs';
 
 const color = 'aqua';
 const boundingBoxColor = 'red';
@@ -248,11 +242,11 @@ function drawOffsetVectors(
  <script>   
     
     
-///import * as posenet from '@tensorflow-models/posenet';
-///import dat from 'dat.gui';
-///import Stats from 'stats.js';
+//import * as posenet from '@tensorflow-models/posenet';
+//import dat from 'dat.gui';
+//import Stats from 'stats.js';
 
-///import {drawBoundingBox, drawKeypoints, drawSkeleton} from './demo_util';
+//import {drawBoundingBox, drawKeypoints, drawSkeleton} from './demo_util';
 
 const videoWidth = 600;
 const videoHeight = 500;
@@ -269,49 +263,45 @@ function isiOS() {
 function isMobile() {
   return isAndroid() || isiOS();
 }
-let currentStream = null;
 
-function stopCurrentVideoStream() {
-  if (currentStream) {
-    currentStream.getTracks().forEach((track) => {
-      track.stop();
-    });
+/**
+ * Loads a the camera to be used in the demo
+ *
+ */
+async function setupCamera() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    throw new Error(
+        'Browser API navigator.mediaDevices.getUserMedia not available');
   }
-}
 
-function loadVideo(cameraId) {
-  return new Promise((resolve, reject) => {
-    stopCurrentVideoStream();
+  const video = document.getElementById('video');
+  video.width = videoWidth;
+  video.height = videoHeight;
 
-    const video = document.getElementById('video');
+  const mobile = isMobile();
+  const stream = await navigator.mediaDevices.getUserMedia({
+    'audio': false,
+    'video': {
+      facingMode: 'user',
+      width: mobile ? undefined : videoWidth,
+      height: mobile ? undefined : videoHeight,
+    },
+  });
+  video.srcObject = stream;
 
-    video.width = maxVideoSize;
-    video.height = maxVideoSize;
-
-    if (navigator.getUserMedia) {
-      navigator.getUserMedia({
-        video: {
-          width: maxVideoSize,
-          height: maxVideoSize,
-          deviceId: {exact: cameraId},
-        },
-      }, handleVideo, videoError);
-    }
-
-    function handleVideo(stream) {
-      currentStream = stream;
-      video.srcObject = stream;
-
+  return new Promise((resolve) => {
+    video.onloadedmetadata = () => {
       resolve(video);
-    }
-
-    function videoError(e) {
-      // do something
-      reject(e);
-    }
+    };
   });
 }
 
+async function loadVideo() {
+  const video = await setupCamera();
+  video.play();
+
+  return video;
+}
 
 const guiState = {
   algorithm: 'multi-pose',
@@ -532,8 +522,8 @@ async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
   const net = await posenet.load(0.75);
 
-  ///document.getElementById('loading').style.display = 'none';
- /// document.getElementById('main').style.display = 'block';
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
 
   let video;
 
@@ -581,24 +571,54 @@ bindPage();
 
 <head>
     <title>PoseNet - Camera Feed Demo</title>
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: black;
+    }
 
+    .footer-text {
+        max-width: 600px;
+        text-align: center;
+        margin: auto;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .footer-text, .dg {
+        display: none;
+      }
+    }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
- <div>      
-   <video id="video" playsinline style=" -moz-transform: scaleX(-1);
+<orignal Tensorflowjs Version 1.0.0 Posnet by Dan Oved at github <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet"></a>
+
+    <div id="info" style='display:none'>
+    </div>
+    <div id="loading">
+        Loading the model...
+    </div>
+
+    <div id='main' style='display:none'>
+        <video id="video" playsinline style=" -moz-transform: scaleX(-1);
         -o-transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
         display: none;
-   "></video>
-    
-  <canvas id="output" />
-</div>
+        ">
+        </video>
+        <canvas id="output" />
+    </div>
+    <div class="footer">
+        <div class="footer-text">
 
-    
+             
 <h2 align=center>Posenet by Dan Oved, converted to a single Webpage by Jeremy Ellis</h2>
     I have tried to simplify Posenet with this single file html/javascript <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/blob/master/tfjsv1/tfjs01posenetcam.html">Github here</a> <br>
 Posenet by Dan Oved using Tensorflowjs Machine Learning in Javascript for Node and your browser. Orignial github at
@@ -606,7 +626,7 @@ Posenet by Dan Oved using Tensorflowjs Machine Learning in Javascript for Node a
 Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html"> Posenet Demo Here</a><br><br>
     
  Converted by Jeremy Ellis Twitter <a href="https://twitter.com/rocksetta?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">@rocksetta</a> Machine Learning Website at <a href="https://www.rocksetta.com/tensorflowjs/">https://www.rocksetta.com/tensorflowjs/</a>    
-<br>Use at your own risk!<br>    
+<br>Use at your own risk!<br>    <br> <br> <br> 
  
     Working on the following <br><br>
             
@@ -621,7 +641,7 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  }                                                       
                                                         
                                               
- setupCamera()                                                 
+ //setupCamera()                                                 
 }">           
             
 <input type=button value="Switch Pose Mode" onclick="{
@@ -665,8 +685,3 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
 <!-- **************************************************************************************************  -->
 <!-- ************************************* End of Original HTML ***************************************  -->
 <!-- **************************************************************************************************  -->
-
-
-
-
-
