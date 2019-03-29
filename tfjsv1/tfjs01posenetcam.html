@@ -625,8 +625,10 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
 <input type=button value="Switch Phone Camera" onclick="{
 
  if (myFacingMode == 'user'){
-   myFacingMode = 'environment'
+    alert(switching from user to environment)                                                     
+    myFacingMode = 'environment'
  } else {
+    alert(switching from environment to user)                                                    
     myFacingMode = 'user'
  }                                                       
                                                         
