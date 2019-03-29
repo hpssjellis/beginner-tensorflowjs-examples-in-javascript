@@ -647,13 +647,15 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
 <input type=button value="flipHorizontal=false" onclick="{
   flipHorizontal = false  
-  detectPoseInRealTime(video, net);                                                 
+  setupGui([], net);
+  detectPoseInRealTime(video, net);                                                
 }">  
 
         
 <input type=button value="flipHorizontal=true" onclick="{
   flipHorizontal = true  
-  detectPoseInRealTime(video, net);                                                 
+  setupGui([], net);
+  detectPoseInRealTime(video, net);                                                
 }"> 
     
     
