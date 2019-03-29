@@ -270,6 +270,15 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
 
+     
+ function stopMediaTracks(stream) {
+  stream.getTracks().forEach(track => {
+    track.stop();
+  });
+}     
+     
+     
+     
 /**
  * Loads a the camera to be used in the demo
  *
@@ -608,7 +617,11 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     Working on the following <br><br>
             
 <input type=button value="Switch Camera" onclick="{
- myFacingMode = 'environment'
+ myFacingMode = 'user'
+                                                  
+                                                 
+                                                  
+ stopMediaTracks(stream)                                                 
  setupCamera()                                                 
 }">           
             
