@@ -269,61 +269,49 @@ function isiOS() {
 function isMobile() {
   return isAndroid() || isiOS();
 }
-
-let stream = null;    //global stream
+let currentStream = null;
 
 function stopCurrentVideoStream() {
-  if (stream) {
-    stream.getTracks().forEach((track) => {
+  if (currentStream) {
+    currentStream.getTracks().forEach((track) => {
       track.stop();
     });
   }
-}    
-     
-     
-     
-/**
- * Loads a the camera to be used in the demo
- *
- */
-async function setupCamera() {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    throw new Error(
-        'Browser API navigator.mediaDevices.getUserMedia not available');
-  }
-  
-  stopCurrentVideoStream()  
-    
-  const video = document.getElementById('video');
-  video.width = videoWidth;
-  video.height = videoHeight;
+}
 
-  const mobile = isMobile();
-  //const stream = await navigator.mediaDevices.getUserMedia({
-  stream = await navigator.mediaDevices.getUserMedia({      /// make it a global variable
-    'audio': false,
-    'video': {
-      facingMode: myFacingMode,               // use a global variable here eitherr 'user' or 'environment'
-      width: mobile ? undefined : videoWidth,
-      height: mobile ? undefined : videoHeight,
-    },
-  });
-  video.srcObject = stream;
+function loadVideo(cameraId) {
+  return new Promise((resolve, reject) => {
+    stopCurrentVideoStream();
 
-  return new Promise((resolve) => {
-    video.onloadedmetadata = () => {
+    const video = document.getElementById('video');
+
+    video.width = maxVideoSize;
+    video.height = maxVideoSize;
+
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia({
+        video: {
+          width: maxVideoSize,
+          height: maxVideoSize,
+          deviceId: {exact: cameraId},
+        },
+      }, handleVideo, videoError);
+    }
+
+    function handleVideo(stream) {
+      currentStream = stream;
+      video.srcObject = stream;
+
       resolve(video);
-    };
+    }
+
+    function videoError(e) {
+      // do something
+      reject(e);
+    }
   });
 }
 
-async function loadVideo() {
-  ///const video = await setupCamera();
-  const video = await setupCamera();
-  video.play();
-
-  return video;
-}
 
 const guiState = {
   algorithm: 'multi-pose',
