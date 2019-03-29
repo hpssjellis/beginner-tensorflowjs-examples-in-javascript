@@ -637,17 +637,22 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  
     Working on the following <br><br>
             
-<input type=button value="Start user/facing Camera" onclick="{                                                              
+<input type=button value="Start user/facing Camera" onclick="{ 
+                                     
+   if (stream) {alert(stream)}                                                           
    myFacingMode = 'user'                                                                                                                                                         
-   bindPage()                                                 
+   bindPage() 
+                                                                                               
+   if (stream) {alert(stream)} 
 }">           
  
 <input type=button value="Start environment/back Camera" onclick="{
                                                                   
-   alert(stream) 
+   if (stream) {alert(stream)} 
    myFacingMode = 'environment'                                                                                                                                                         
    bindPage()   
-   alert(stream)                                                               
+                                  
+   if (stream) {alert(stream)}                                                               
 }"><br>           
      
     
