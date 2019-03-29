@@ -597,7 +597,8 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
  Converted by Jeremy Ellis Twitter <a href="https://twitter.com/rocksetta?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">@rocksetta</a> Machine Learning Website at <a href="https://www.rocksetta.com/tensorflowjs/">https://www.rocksetta.com/tensorflowjs/</a>    
 <br>Use at your own risk!<br>    
-    
+ 
+    Working on the following <br><br>
             
 <input type=button value="Switch Camera" onclick="{
   alert()                                                
@@ -616,9 +617,24 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
   alert()                                                
 }">        
 
-    
-    
-
+<ul>Defaults:
+   <li> pose the object containing all the output data
+   <li> multiplier = 1.01      Smaller value faster less accurate, larger value slower but better
+  <li>image     can be any of  ImageData|HTMLImageElement|HTMLCanvasElement|HTMLVideoElement
+  <li>imageScaleFactor = 0.5  0.2 to 1.0
+  <li>flipHorizontal = false
+  <li>outputStride = 16    32, 16, 8
+  <ul> following only for Multi-Person Pose Estimation    
+      
+  <li>maxPoseDetections = 5
+  <li>scoreThreshold = 0.5
+  <li>nmsRadius = 20   must be >= 0
+  <li>
+  </ul>    
+  <li>
+  <li>      
+   
+</ul>
     
     
 </body>
