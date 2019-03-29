@@ -294,7 +294,8 @@ async function setupCamera() {
   video.height = videoHeight;
 
   const mobile = isMobile();
-  const stream = await navigator.mediaDevices.getUserMedia({
+  //const stream = await navigator.mediaDevices.getUserMedia({
+  stream = await navigator.mediaDevices.getUserMedia({      /// make it a global variable
     'audio': false,
     'video': {
       facingMode: myFacingMode,               // use a global variable here eitherr 'user' or 'environment'
