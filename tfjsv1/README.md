@@ -22,7 +22,20 @@ https://github.com/tensorflow/tfjs-examples
 
 Working on 
 
+
+
+
+Working on 
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjsv1/tfjs01-posenet-webcam.html
+
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjsv1/tfjs01posenetcam.html
+
+
+
+
+
+
 
 
 
