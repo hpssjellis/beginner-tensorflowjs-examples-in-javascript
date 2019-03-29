@@ -22,6 +22,12 @@
   <!--  <script src="camera.js"></script>    -->
 
     
+ 
+// Global variables
+    
+    myFacingMode = 'user'    // user front camera or environment back camera
+    
+    
     
     
         
@@ -282,7 +288,7 @@ async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
-      facingMode: 'user',
+      facingMode: myFacingMode,               // use a global variable here eitherr 'user' or 'environment'
       width: mobile ? undefined : videoWidth,
       height: mobile ? undefined : videoHeight,
     },
@@ -297,6 +303,7 @@ async function setupCamera() {
 }
 
 async function loadVideo() {
+  ///const video = await setupCamera();
   const video = await setupCamera();
   video.play();
 
