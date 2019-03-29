@@ -290,7 +290,7 @@ async function setupCamera() {
   const stream = await navigator.mediaDevices.getUserMedia({
     'audio': false,
     'video': {
-      facingMode: 'user',
+      facingMode: myFacingMode,
       width: mobile ? undefined : videoWidth,
       height: mobile ? undefined : videoHeight,
     },
@@ -553,7 +553,7 @@ async function bindPage() {
 navigator.getUserMedia = navigator.getUserMedia ||
     navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 // kick off the demo
-bindPage();  
+///bindPage();  
     
     
  </script>   
@@ -637,20 +637,22 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  
     Working on the following <br><br>
             
-<input type=button value="Switch Phone Camera" onclick="{
-
- if (myFacingMode == 'user'){
-    alert('switching from user to environment/back')                                                     
-    myFacingMode = 'environment'
- } else {
-    alert('switching from environment to user/front')                                                    
-    myFacingMode = 'user'
- }                                                       
-                                                        
-                                              
- //setupCamera()                                                 
+<input type=button value="Start user/facing Camerra" onclick="{                                                 
+   myFacingMode = 'user'                                                                                                                                                         
+   bindPage()                                                 
 }">           
-            
+ 
+<input type=button value="Start environment/back Camerra" onclick="{                                                 
+   myFacingMode = 'environment'                                                                                                                                                         
+   bindPage()                                                 
+}">           
+     
+    
+<input type=button value="Switch Pose Mode" onclick="{
+  alert()                                                
+}">      
+    
+    
 <input type=button value="Switch Pose Mode" onclick="{
   alert()                                                
 }">           
