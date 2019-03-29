@@ -270,12 +270,15 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
 
-     
- function stopMediaTracks(stream) {
-  stream.getTracks().forEach(track => {
-    track.stop();
-  });
-}     
+let currentStream = null;    //global stream
+
+function stopCurrentVideoStream() {
+  if (currentStream) {
+    currentStream.getTracks().forEach((track) => {
+      track.stop();
+    });
+  }
+}    
      
      
      
@@ -288,14 +291,16 @@ async function setupCamera() {
     throw new Error(
         'Browser API navigator.mediaDevices.getUserMedia not available');
   }
-
+  
+  stopCurrentVideoStream()  
+    
   const video = document.getElementById('video');
   video.width = videoWidth;
   video.height = videoHeight;
 
   const mobile = isMobile();
   //const stream = await navigator.mediaDevices.getUserMedia({
-  stream = await navigator.mediaDevices.getUserMedia({      /// make it a global variable
+  currentStream = await navigator.mediaDevices.getUserMedia({      /// make it a global variable
     'audio': false,
     'video': {
       facingMode: myFacingMode,               // use a global variable here eitherr 'user' or 'environment'
@@ -303,7 +308,7 @@ async function setupCamera() {
       height: mobile ? undefined : videoHeight,
     },
   });
-  video.srcObject = stream;
+  video.srcObject = currentStream;
 
   return new Promise((resolve) => {
     video.onloadedmetadata = () => {
@@ -618,11 +623,14 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     Working on the following <br><br>
             
 <input type=button value="Switch Phone Camera" onclick="{
- myFacingMode = 'user'
-                                                  
-                                                 
-                                                  
- stopMediaTracks(stream)                                                 
+
+ if (myFacingMode == 'user'){
+   myFacingMode = 'environment'
+ } else {
+    myFacingMode = 'user'
+ }                                                       
+                                                        
+                                              
  setupCamera()                                                 
 }">           
             
