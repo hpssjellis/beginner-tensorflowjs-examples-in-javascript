@@ -528,9 +528,11 @@ function detectPoseInRealTime(video, net) {
 ///export async function bindPage() {
 async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
+  document.getElementById('info').innerHTML = 'loading....'  
   const net = await posenet.load(0.75);
 
-  document.getElementById('loading').style.display = 'none';
+  document.getElementById('info').style.display = 'none';
+  ///document.getElementById('loading').style.display = 'none';
   document.getElementById('main').style.display = 'block';
 
   let video;
@@ -609,9 +611,6 @@ navigator.getUserMedia = navigator.getUserMedia ||
     <div id="info" style='display:none'>
     </div>
     
-    <div id="loading">
-        Loading the model...
-    </div>
 
     <div id='main' style='display:none'>
         <video id="video" playsinline style=" -moz-transform: scaleX(-1);
@@ -637,22 +636,14 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  
     Working on the following <br><br>
             
-<input type=button value="Start user/facing Camera" onclick="{ 
-                                     
-   if (stream) {alert(stream)}                                                           
+<input type=button value="Start user/facing Camera" onclick="{                                                        
    myFacingMode = 'user'                                                                                                                                                         
    bindPage() 
-                                                                                               
-   if (stream) {alert(stream)} 
 }">           
  
 <input type=button value="Start environment/back Camera" onclick="{
-                                                                  
-   if (stream) {alert(stream)} 
    myFacingMode = 'environment'                                                                                                                                                         
-   bindPage()   
-                                  
-   if (stream) {alert(stream)}                                                               
+   bindPage()                                                                
 }"><br>           
      
     
