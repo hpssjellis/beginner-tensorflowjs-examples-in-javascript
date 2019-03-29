@@ -270,11 +270,11 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
 
-let currentStream = null;    //global stream
+let stream = null;    //global stream
 
 function stopCurrentVideoStream() {
-  if (currentStream) {
-    currentStream.getTracks().forEach((track) => {
+  if (stream) {
+    stream.getTracks().forEach((track) => {
       track.stop();
     });
   }
@@ -300,7 +300,7 @@ async function setupCamera() {
 
   const mobile = isMobile();
   //const stream = await navigator.mediaDevices.getUserMedia({
-  currentStream = await navigator.mediaDevices.getUserMedia({      /// make it a global variable
+  stream = await navigator.mediaDevices.getUserMedia({      /// make it a global variable
     'audio': false,
     'video': {
       facingMode: myFacingMode,               // use a global variable here eitherr 'user' or 'environment'
@@ -308,7 +308,7 @@ async function setupCamera() {
       height: mobile ? undefined : videoHeight,
     },
   });
-  video.srcObject = currentStream;
+  video.srcObject = stream;
 
   return new Promise((resolve) => {
     video.onloadedmetadata = () => {
