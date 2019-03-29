@@ -642,9 +642,12 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
    bindPage()                                                 
 }">           
  
-<input type=button value="Start environment/back Camera" onclick="{                                                 
+<input type=button value="Start environment/back Camera" onclick="{
+                                                                  
+   alert(stream) 
    myFacingMode = 'environment'                                                                                                                                                         
-   bindPage()                                                 
+   bindPage()   
+   alert(stream)                                                               
 }"><br>           
      
     
