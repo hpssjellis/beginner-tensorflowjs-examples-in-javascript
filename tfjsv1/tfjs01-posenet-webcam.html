@@ -410,7 +410,7 @@ function detectPoseInRealTime(video, net) {
     let minPartConfidence;
     switch (myAlgorithm) {
       case 'single-pose':
-        const pose = await estimateSinglePose(
+        const pose = await posenet.estimateSinglePose(
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
         poses.push(pose);
 
@@ -418,7 +418,7 @@ function detectPoseInRealTime(video, net) {
         minPartConfidence = myMinPartConfidence;
         break;
       case 'multi-pose':
-        poses = await estimateMultiplePoses(
+        poses = await posenet.estimateMultiplePoses(
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride,
             myMaxPoseDetections,
             myMinPartConfidence,
