@@ -657,8 +657,11 @@ Now click start
      
     
 
- <input type=button value="Lets grab a pose" onclick ="{
-     document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3)                                 
+ <input type=button value="Full pose info" onclick ="{
+     let myTemp = JSON.stringify(poses, null, 3) 
+     mytemp2 = myTemp.replace(' ','&nbsp')                  
+     mytemp3 = myTemp2.replace('\n','<br>')                                                 
+     document.getElementById('myPose').innerHTML = myTemp3                                 
                                        
 }"> <br>  
 
