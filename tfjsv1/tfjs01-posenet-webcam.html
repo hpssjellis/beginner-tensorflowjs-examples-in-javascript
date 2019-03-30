@@ -667,15 +667,15 @@ Now click start
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
     
-<input type=button value="poses[0].keypoints" onclick ="{                                                     
-      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+<input type=button value="poses[0].keypoints.score" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.score, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
          
-  <input type=button value="poses[0].keypoints" onclick ="{                                                     
-      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+  <input type=button value="poses[0].keypoints.part" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.part, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
      
-  <input type=button value="poses[0].keypoints.part" onclick ="{                                                     
+  <input type=button value="poses[0].keypoints" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">        
  <input type=button value="poses[0].score" onclick ="{                                                     
