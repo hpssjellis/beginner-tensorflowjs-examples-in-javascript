@@ -541,7 +541,7 @@ function detectPoseInRealTime(video, net) {
 async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
   document.getElementById('info').innerHTML = 'loading....'  
-  net = await posenet.load(0.75);   // make it global   can have 0.5 or 1.0
+  net = await posenet.load(0.75);   // make it global   0.50, 0.75, 1.00, or 1.01
 
   document.getElementById('info').innerHTML = ''  
   ///document.getElementById('loading').style.display = 'none';
