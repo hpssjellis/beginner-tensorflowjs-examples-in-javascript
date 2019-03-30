@@ -32,7 +32,7 @@
  <script>
      
  // global variables
-   let myPoseNetVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
+   let myPosenetMultiplierVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
    let myAlgorithm = 'multi-pose'
    let myFacingMode = 'environment'
    
@@ -370,7 +370,7 @@ function detectPoseInRealTime(video, net) {
       case 'single-pose':
         const pose = await net.estimateSinglePose(
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
-            console.log(pose)
+          
         poses.push(pose);
 
         minPoseConfidence = myMinPoseConfidence;
@@ -385,7 +385,7 @@ function detectPoseInRealTime(video, net) {
 
         minPoseConfidence = myMinPoseConfidence;
         minPartConfidence = myMinPartConfidence;
-            console.log(poses)
+        
         break;
     }
 
@@ -433,7 +433,7 @@ function detectPoseInRealTime(video, net) {
 async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
   document.getElementById('info').innerHTML = 'loading....'  
-  net = await posenet.load(myPoseNetVersion);   // make it global   0.50, 0.75, 1.00, or 1.01
+  net = await posenet.load(myPosenetMultiplierVersion);   // make it global   0.50, 0.75, 1.00, or 1.01
 
   document.getElementById('info').innerHTML = ''  
   ///document.getElementById('loading').style.display = 'none';
@@ -525,9 +525,8 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
      
 <input type=button value="Defults" onclick="{ 
-   myPoseNetVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
-   myAlgorithm = 'single-pose'
-   myMultiplier = 1.01      
+   myPosenetMultiplierVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
+   myAlgorithm = 'single-pose'     
    myImageScaleFactor = 1.0
    myFlipHorizontal = true
    myOutputStride = 32  
@@ -536,8 +535,22 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
    myNmsRadius = 20  
 }">    
     
+    
+    
+         
+<input type=button value="mobile" onclick="{ 
+   myPosenetMultiplierVersion = 0.50   // 0.50, 0.75, 1.00, or 1.01  
+   myAlgorithm = 'multi-pose'     
+   myImageScaleFactor = 0.2
+   myFlipHorizontal = false
+   myOutputStride = 8  
+   myMaxPoseDetections = 5  
+   myScoreThreshold = 0.2 
+   myNmsRadius = 30  
+}">  
+    
 <input type=button value="defaults changed" onclick="{  
-   myPoseNetVersion = 1.01   // 0.50, 0.75, 1.00, or 1.01 
+   myPosenetMultiplierVersion = 1.01   // 0.50, 0.75, 1.00, or 1.01 
    myAlgorithm = 'multi-pose'                                                  
    myMultiplier = 0.75      
    myImageScaleFactor = 0.5
