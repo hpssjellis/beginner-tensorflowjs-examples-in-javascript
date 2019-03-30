@@ -527,10 +527,10 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
 
     
     
-<input type=button value="Mobile" onclick="{      
+<input type=button value="Mobile back camera" onclick="{      
  myPosenetMultiplierVersion = 0.50   // 0.50, 0.75, 1.00, or 1.01    
  myAlgorithm = 'multi-pose'   
- myFacingMode = 'user'      
+ myFacingMode = 'environment'      
  myImageScaleFactor = 0.5  
  myFlipHorizontal = true    
  myOutputStride = 8    
@@ -627,9 +627,13 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
 <input type=button value="Plus click Front camera for mobile only" onclick="{                                                                                                                                                                                                                
    myFacingMode = 'user'  
-}">      <br><br>     
+}">          
  
-
+    
+    
+<input type=button value="Plus single pose onlyy" onclick="{                                                                                                                                                                                                                
+    myAlgorithm = 'single-pose' 
+}">      <br><br>     
    
     
   
