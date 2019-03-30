@@ -35,8 +35,7 @@
    let myPosenetMultiplierVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
    let myAlgorithm = 'multi-pose'
    let myFacingMode = 'environment'
-   
-   let myMultiplier = 0.75      
+
    let myImageScaleFactor = 0.5
    let myFlipHorizontal = false 
    let myOutputStride = 16  
@@ -49,7 +48,7 @@
    let myMinPartConfidence = 0.2
    
    let myShowVideo = true
-   let myShowSkeleton = false
+   let myShowSkeleton = true
    let myShowBoundingBox = false
    let myShowPoints = false
    
@@ -363,7 +362,8 @@ function detectPoseInRealTime(video, net) {
     const imageScaleFactor = myImageScaleFactor;
     const outputStride = myOutputStride;
 
-    let poses = [];
+    ///let poses = [];
+    poses = [];                          // make it global
     let minPoseConfidence;
     let minPartConfidence;
     switch (myAlgorithm) {
@@ -372,7 +372,7 @@ function detectPoseInRealTime(video, net) {
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
           
         poses.push(pose);
-
+        document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3) 
         minPoseConfidence = myMinPoseConfidence;
         minPartConfidence = myMinPartConfidence;
         break;
@@ -382,7 +382,8 @@ function detectPoseInRealTime(video, net) {
             myMaxPoseDetections,
             myMinPartConfidence,
             myNmsRadius);
-
+            
+        document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3) 
         minPoseConfidence = myMinPoseConfidence;
         minPartConfidence = myMinPartConfidence;
         
@@ -657,11 +658,11 @@ Now click start
     
 
  <input type=button value="Lets grab a pose" onclick ="{
-     document.getElementById('myPose').innerHTML = 'wow'                                 
+     document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3)                                 
                                        
-}">   
+}"> <br>  
 
-    <iv id="myPose">...</div>    
+<div id="myPose">...</div>    
     
     
 <ul>Defaults:
