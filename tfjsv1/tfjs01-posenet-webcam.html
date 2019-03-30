@@ -659,8 +659,8 @@ Now click start
 
  <input type=button value="Full pose info" onclick ="{
      let myTemp = JSON.stringify(poses, null, 3) 
-     let myTemp2 = myTemp.replace(' ','&nbsp')                  
-     let myTemp3 = myTemp2.replace('\n','<br>')                                                 
+     let myTemp2 = myTemp.replace(/ /g,'&nbsp')                  
+     let myTemp3 = myTemp2.replace(/\n/g,'<br>')                                                 
      document.getElementById('myPose').innerHTML = myTemp3                                 
                                        
 }"> <br>  
