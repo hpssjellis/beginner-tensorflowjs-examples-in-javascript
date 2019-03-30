@@ -33,7 +33,7 @@
      
  // global variables
    let myPoseNetVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
-   let myAlgorithm = 'single-pose'
+   let myAlgorithm = 'multi-pose'
    let myFacingMode = 'environment'
    
    let myMultiplier = 0.75      
@@ -370,7 +370,7 @@ function detectPoseInRealTime(video, net) {
       case 'single-pose':
         const pose = await net.estimateSinglePose(
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
-        poses.push(pose);
+       // poses.push(pose);
 
         minPoseConfidence = myMinPoseConfidence;
         minPartConfidence = myMinPartConfidence;
