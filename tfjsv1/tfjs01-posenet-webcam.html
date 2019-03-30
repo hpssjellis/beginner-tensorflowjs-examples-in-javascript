@@ -685,9 +685,9 @@ Now click start
       } else {document.getElementById('myPose').innerHTML = 'try again'}
 }">    
      
-<input type=button value="poses[0].keypoints" onclick ="{                                                     
-      if (poses[0].keypoints != null){                                               
-           document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+<input type=button value="poses[0].keypoints[0]" onclick ="{                                                     
+      if (poses[0].keypoints[0] != null){                                               
+           document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0], null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } else {document.getElementById('myPose').innerHTML = 'try again'}
 }"> 
     
