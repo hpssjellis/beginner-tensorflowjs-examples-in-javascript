@@ -653,22 +653,49 @@ Now click start
 <input type=button value="Start" onclick="{                                                                                                                                                                                                                
    bindPage() 
 }">   
-    Refresh page to switch cameras<br><br>           
-     
+    Refresh page to switch cameras<br><br>    
     
+<input type=button value="pose[0].keypoints.postion.x" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion.x, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">      
+    
+<input type=button value="pose[0].keypoints.postion.y" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion.y, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">      
+        
+<input type=button value="pose[0].keypoints.postion" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">    
+    
+<input type=button value="pose[0].keypoints" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">    
+         
+  <input type=button value="pose[0].keypoints" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">    
+     
+  <input type=button value="pose[0].keypoints.part" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">        
+ <input type=button value="pose[0].score" onclick ="{                                                     
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].score, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">    
+    
+ <input type=button value="first pose[0]" onclick ="{                                                
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses[0], null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+}">    
 
  <input type=button value="Full pose info" onclick ="{
-    // let myTemp = JSON.stringify(poses, null, 3) 
-    // let myTemp2 = myTemp.replace(/ /g,'&nbsp')                  
-    // let myTemp3 = myTemp2.replace(/\n/g,'<br>')   
+     // for a textarea just do
+     // document.getElementById('textareaID').value =  = JSON.stringify(poses, null, 3)                                                                                                  
+     // have to make poses object visible on a webpage, so replace spaces and line endings
                                                      
-     // have to make poses objec t visible on a webpage, easier in a textbox 
-     let myTemp = JSON.stringify(poses, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')   
+      document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')   
                                                   
-                                                     
-     document.getElementById('myPose').innerHTML = myTemp                                 
-                                       
-}"> <br>  
+}"> 
+    
+    <br>  
 
 <div id="myPose">...</div>    
     
