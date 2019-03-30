@@ -518,7 +518,7 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  Converted by Jeremy Ellis Twitter <a href="https://twitter.com/rocksetta?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">@rocksetta</a> Machine Learning Website at <a href="https://www.rocksetta.com/tensorflowjs/">https://www.rocksetta.com/tensorflowjs/</a>    
 <br>Use at your own risk!<br>    <br> <br> <br> 
  
-    Working on the following <br><br>
+    Working on the following, presently single pose not working <br><br>
         
  Set variables<br>   
     
@@ -656,8 +656,12 @@ Now click start
      
     
 
-    
+ <input type=button value="Lets grab a pose" onclick ="{
+     document.getElementById('myPose').innerHTML = 'wow'                                 
+                                       
+}">   
 
+    <iv id="myPose">...</div>    
     
     
 <ul>Defaults:
