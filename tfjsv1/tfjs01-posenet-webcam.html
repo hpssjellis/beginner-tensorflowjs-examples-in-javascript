@@ -658,10 +658,15 @@ Now click start
     
 
  <input type=button value="Full pose info" onclick ="{
-     let myTemp = JSON.stringify(poses, null, 3) 
-     let myTemp2 = myTemp.replace(/ /g,'&nbsp')                  
-     let myTemp3 = myTemp2.replace(/\n/g,'<br>')                                                 
-     document.getElementById('myPose').innerHTML = myTemp3                                 
+    // let myTemp = JSON.stringify(poses, null, 3) 
+    // let myTemp2 = myTemp.replace(/ /g,'&nbsp')                  
+    // let myTemp3 = myTemp2.replace(/\n/g,'<br>')   
+                                                     
+     // have to make poses objec t visible on a webpage, easier in a textbox 
+     let myTemp = JSON.stringify(poses, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')   
+                                                  
+                                                     
+     document.getElementById('myPose').innerHTML = myTemp                                 
                                        
 }"> <br>  
 
