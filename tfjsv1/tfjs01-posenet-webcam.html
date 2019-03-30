@@ -524,35 +524,29 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
     
      
-<input type=button value="Defults" onclick="{ 
-   myPosenetMultiplierVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
-   myAlgorithm = 'single-pose'     
-   myImageScaleFactor = 1.0
-   myFlipHorizontal = true
-   myOutputStride = 32  
-   myMaxPoseDetections = 10  
-   myScoreThreshold = 0.5 
-   myNmsRadius = 20  
-}">    
+
     
     
+<input type=button value="Mobile" onclick="{      
+ myPosenetMultiplierVersion = 0.50   // 0.50, 0.75, 1.00, or 1.01    
+ myAlgorithm = 'multi-pose'   
+ myFacingMode = 'user'      
+ myImageScaleFactor = 0.5  
+ myFlipHorizontal = true    
+ myOutputStride = 8    
+ myMaxPoseDetections = 3    
+ myScoreThreshold = 0.2    
+ myNmsRadius = 10   
+ myMinPoseConfidence = 0.1  
+ myMinPartConfidence = 0.2  
+ myShowVideo = true   
+ myShowSkeleton = true   
+ myShowBoundingBox = false  
+ myShowPoints = true  
+ myMobileNetArchitecture = 0.75   //  isMobile() ? '0.50' : '0.75'   
     
-         
-<input type=button value="mobile" onclick="{ 
-   myPosenetMultiplierVersion = 0.50   // 0.50, 0.75, 1.00, or 1.01  
-   myAlgorithm = 'multi-pose'     
-   myImageScaleFactor = 0.2
-   myFlipHorizontal = false
-   myOutputStride = 8  
-   myMaxPoseDetections = 5  
-   myScoreThreshold = 0.2 
-   myNmsRadius = 30  
-}">  
-    
-    
-    
-    
-<input type=button value="full" onclick="{      
+ }">      
+<input type=button value="default" onclick="{      
  myPosenetMultiplierVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01    
  myAlgorithm = 'multi-pose'   
  myFacingMode = 'environment'      
@@ -566,7 +560,26 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  myMinPartConfidence = 0.2  
  myShowVideo = true   
  myShowSkeleton = true   
- myShowBoundingBox = true  
+ myShowBoundingBox = false  
+ myShowPoints = true  
+ myMobileNetArchitecture = 0.75   //  isMobile() ? '0.50' : '0.75'   
+    
+ }">      
+<input type=button value="better" onclick="{      
+ myPosenetMultiplierVersion = 1.00   // 0.50, 0.75, 1.00, or 1.01    
+ myAlgorithm = 'multi-pose'   
+ myFacingMode = 'environment'      
+ myImageScaleFactor = 1  
+ myFlipHorizontal = true    
+ myOutputStride = 32    
+ myMaxPoseDetections = 20    
+ myScoreThreshold = 0.2    
+ myNmsRadius = 30   
+ myMinPoseConfidence = 0.1  
+ myMinPartConfidence = 0.2  
+ myShowVideo = true   
+ myShowSkeleton = true   
+ myShowBoundingBox = false  
  myShowPoints = true  
  myMobileNetArchitecture = 0.75   //  isMobile() ? '0.50' : '0.75'   
     
@@ -578,26 +591,45 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
     
     
-<input type=button value="defaults changed" onclick="{  
-   myPosenetMultiplierVersion = 1.01   // 0.50, 0.75, 1.00, or 1.01 
-   myAlgorithm = 'multi-pose'                                                  
-   myMultiplier = 0.75      
-   myImageScaleFactor = 0.5
-   myFlipHorizontal = false 
-   myOutputStride = 16  
-   myMaxPoseDetections = 5  
-   myScoreThreshold = 0.8 
-   myNmsRadius = 10  
-}">     <br>   
     
     
-<input type=button value="user/front" onclick="{                                                                                                                                                                                                                
-   myFacingMode = 'user'  
-}">           
+    
+<input type=button value="full" onclick="{      
+ myPosenetMultiplierVersion = 1.01   // 0.50, 0.75, 1.00, or 1.01    
+ myAlgorithm = 'multi-pose'   
+ myFacingMode = 'environment'      
+ myImageScaleFactor = 1  
+ myFlipHorizontal = true    
+ myOutputStride = 32    
+ myMaxPoseDetections = 5    
+ myScoreThreshold = 0.8    
+ myNmsRadius = 10   
+ myMinPoseConfidence = 0.1  
+ myMinPartConfidence = 0.2  
+ myShowVideo = true   
+ myShowSkeleton = true   
+ myShowBoundingBox = false  
+ myShowPoints = true  
+ myMobileNetArchitecture = 0.75   //  isMobile() ? '0.50' : '0.75'   
+    
+ }">     <br><br>
+    
+    
+    
+    
+    
  
-<input type=button value="environment/back Camera" onclick="{
-   myFacingMode = 'environment'                                                                                                                                                                                                                      
-}"> <br><br>
+    
+    
+    
+ 
+    
+    
+<input type=button value="Plus click Front camera for mobile only" onclick="{                                                                                                                                                                                                                
+   myFacingMode = 'user'  
+}">      <br><br>     
+ 
+
    
     
   
