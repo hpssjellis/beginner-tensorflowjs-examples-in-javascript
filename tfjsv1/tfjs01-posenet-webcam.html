@@ -372,7 +372,7 @@ function detectPoseInRealTime(video, net) {
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
           
         poses.push(pose);
-        document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3) 
+       // document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3) 
         minPoseConfidence = myMinPoseConfidence;
         minPartConfidence = myMinPartConfidence;
         break;
@@ -383,7 +383,7 @@ function detectPoseInRealTime(video, net) {
             myMinPartConfidence,
             myNmsRadius);
             
-        document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3) 
+       // document.getElementById('myPose').innerHTML = JSON.stringify(poses, null, 3) 
         minPoseConfidence = myMinPoseConfidence;
         minPartConfidence = myMinPartConfidence;
         
