@@ -541,16 +541,16 @@ function detectPoseInRealTime(video, net) {
 async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
   document.getElementById('info').innerHTML = 'loading....'  
-  const net = await posenet.load(0.75);
+  net = await posenet.load(0.75);   // make it global   can have 0.5 or 1.0
 
   document.getElementById('info').innerHTML = ''  
   ///document.getElementById('loading').style.display = 'none';
- /// document.getElementById('main').style.display = 'block';
+ /// document.getElementById('main').style.display = 'block';   
 
   let video;
 
   try {
-    video = await loadVideo();
+    video = await loadVideo(
   } catch (e) {
     let info = document.getElementById('info');
     info.textContent = 'this browser does not support video capture,' +
@@ -638,7 +638,7 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
 <input type=button value="flipHorizontal = true" onclick="{                                                                                                                                                                                                                
     flipHorizontal = true 
-}">        
+}">     <br>   
     
     
 <input type=button value="user/front" onclick="{                                                                                                                                                                                                                
@@ -647,7 +647,13 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
  
 <input type=button value="environment/back Camera" onclick="{
    myFacingMode = 'environment'                                                                                                                                                                                                                      
-}"> <br>
+}"> <br><br>
+   
+    
+    
+    
+    
+    
     
 Now click start    
      
