@@ -48,12 +48,12 @@
    let myMinPoseConfidence = 0.1
    let myMinPartConfidence = 0.2
    
-   let myShowVideo = false
+   let myShowVideo = true
    let myShowSkeleton = false
    let myShowBoundingBox = false
    let myShowPoints = false
    
-   let myMobileNetArchitecture    //  isMobile() ? '0.50' : '0.75'
+   let myMobileNetArchitecture = 0.75   //  isMobile() ? '0.50' : '0.75'
    
      
 </script>    
@@ -338,40 +338,7 @@ async function loadVideo() {
   return video;
 }
 
-const guiState = {
-  algorithm: 'multi-pose',
-  input: {
-    mobileNetArchitecture: isMobile() ? '0.50' : '0.75',
-    outputStride: 16,
-    imageScaleFactor: 0.5,
-  },
-  singlePoseDetection: {
-    minPoseConfidence: 0.1,
-    minPartConfidence: 0.5,
-  },
-  multiPoseDetection: {
-    maxPoseDetections: 5,
-    minPoseConfidence: 0.15,
-    minPartConfidence: 0.1,
-    nmsRadius: 30.0,
-  },
-  output: {
-    showVideo: true,
-    showSkeleton: true,
-    showPoints: true,
-    showBoundingBox: false,
-  },
-  net: null,
-};
-
-     
-     
-     
-     
-     
-     
-     
-     
+   
      
      
      
@@ -392,22 +359,7 @@ function detectPoseInRealTime(video, net) {
   canvas.height = videoHeight;
 
   async function poseDetectionFrame() {
-   // if (guiState.changeToArchitecture) {
-      // Important to purge variables and free up GPU memory
-     // guiState.net.dispose();
 
-      // Load the PoseNet model weights for either the 0.50, 0.75, 1.00, or 1.01
-      // version
-   //   guiState.net = await posenet.load(+guiState.changeToArchitecture);
-
-     // guiState.changeToArchitecture = null;
-   // }
-
-    // Begin monitoring code for frames per second
-    ///stats.begin();
-
-    // Scale an image down to a certain factor. Too large of an image will slow
-    // down the GPU
     const imageScaleFactor = myImageScaleFactor;
     const outputStride = myOutputStride;
 
