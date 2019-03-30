@@ -655,21 +655,21 @@ Now click start
 }">   
     Refresh page to switch cameras<br><br>    
     
-<input type=button value="poses[0].keypoints[0].postion.x" onclick ="{                                                     
+<input type=button value="poses[0].keypoints[0].position.x" onclick ="{                                                     
       try {                                              
-          document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0].postion.x, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+          document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0].position.x, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } catch(err) {document.getElementById('myPose').innerHTML = 'try again'}
 }">      
     
-<input type=button value="poses[0].keypoints[0].postion.y" onclick ="{                                                     
+<input type=button value="poses[0].keypoints[0].position.y" onclick ="{                                                     
       try {                                             
-           document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0].postion.y, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0].position.y, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } catch(err) {document.getElementById('myPose').innerHTML = 'try again'}
 }">      
         
-<input type=button value="poses[0].keypoints[0].postion" onclick ="{                                                     
+<input type=button value="poses[0].keypoints[0].position" onclick ="{                                                     
       try {                                            
-           document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0].postion, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints[0].position, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } catch(err) {document.getElementById('myPose').innerHTML = 'try again'}
 }">    
     
