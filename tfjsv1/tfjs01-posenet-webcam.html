@@ -24,10 +24,23 @@
  <script>
      
  // global variables
-     
-     myFacingMode = 'environment'
-     flipHorizontal = true
-     
+   let myPoseNetVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
+   let myAlgorithm = 'single-pose'
+   let myFacingMode = 'environment'
+   let myMultiplier = 0.75      
+   let myImageScaleFactor = 0.5
+   let myFlipHorizontal = false 
+   let myOutputStride = 16  
+   let myMaxPoseDetections = 5  
+   let myScoreThreshold = 0.8 
+   let myNmsRadius = 10 
+   
+   
+   let myMinPoseConfidence = 1
+   let myMinPartConfidence = 1
+   let myShowVideo = true
+   let myShowSkeleton = true
+   let myShowBoundingBox = true    
      
 </script>    
     
@@ -440,6 +453,13 @@ function setupGui(cameras, net) {
 ///  document.body.appendChild(stats.dom);
 ///}
 
+     
+     
+     
+     
+     
+     
+     
 /**
  * Feeds an image to posenet to estimate poses - this is where the magic
  * happens. This function loops with a requestAnimationFrame method.
@@ -454,15 +474,15 @@ function detectPoseInRealTime(video, net) {
   canvas.height = videoHeight;
 
   async function poseDetectionFrame() {
-    if (guiState.changeToArchitecture) {
+   // if (guiState.changeToArchitecture) {
       // Important to purge variables and free up GPU memory
-      guiState.net.dispose();
+     // guiState.net.dispose();
 
       // Load the PoseNet model weights for either the 0.50, 0.75, 1.00, or 1.01
       // version
-      guiState.net = await posenet.load(+guiState.changeToArchitecture);
+   //   guiState.net = await posenet.load(+guiState.changeToArchitecture);
 
-      guiState.changeToArchitecture = null;
+     // guiState.changeToArchitecture = null;
     }
 
     // Begin monitoring code for frames per second
@@ -470,36 +490,36 @@ function detectPoseInRealTime(video, net) {
 
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
-    const imageScaleFactor = guiState.input.imageScaleFactor;
-    const outputStride = +guiState.input.outputStride;
+    const imageScaleFactor = myImageScaleFactor;
+    const outputStride = myOutputStride;
 
     let poses = [];
     let minPoseConfidence;
     let minPartConfidence;
-    switch (guiState.algorithm) {
+    switch (myAlgorithm) {
       case 'single-pose':
-        const pose = await guiState.net.estimateSinglePose(
-            video, imageScaleFactor, flipHorizontal, outputStride);
+        const pose = await estimateSinglePose(
+            video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
         poses.push(pose);
 
-        minPoseConfidence = +guiState.singlePoseDetection.minPoseConfidence;
-        minPartConfidence = +guiState.singlePoseDetection.minPartConfidence;
+        minPoseConfidence = myMinPoseConfidence;
+        minPartConfidence = myMinPartConfidence;
         break;
       case 'multi-pose':
-        poses = await guiState.net.estimateMultiplePoses(
-            video, imageScaleFactor, flipHorizontal, outputStride,
-            guiState.multiPoseDetection.maxPoseDetections,
-            guiState.multiPoseDetection.minPartConfidence,
-            guiState.multiPoseDetection.nmsRadius);
+        poses = await estimateMultiplePoses(
+            video, myImageScaleFactor, myFlipHorizontal, myOutputStride,
+            myMaxPoseDetections,
+            myMinPartConfidence,
+            myNmsRadius);
 
-        minPoseConfidence = +guiState.multiPoseDetection.minPoseConfidence;
-        minPartConfidence = +guiState.multiPoseDetection.minPartConfidence;
+        minPoseConfidence = myMinPoseConfidence;
+        minPartConfidence = myMinPartConfidence;
         break;
     }
 
     ctx.clearRect(0, 0, videoWidth, videoHeight);
 
-    if (guiState.output.showVideo) {
+    if (myShowVideo) {
       ctx.save();
       ctx.scale(-1, 1);
       ctx.translate(-videoWidth, 0);
@@ -512,13 +532,13 @@ function detectPoseInRealTime(video, net) {
     // scores
     poses.forEach(({score, keypoints}) => {
       if (score >= minPoseConfidence) {
-        if (guiState.output.showPoints) {
+        if (mySshowPoints) {
           drawKeypoints(keypoints, minPartConfidence, ctx);
         }
-        if (guiState.output.showSkeleton) {
+        if (myShowSkeleton) {
           drawSkeleton(keypoints, minPartConfidence, ctx);
         }
-        if (guiState.output.showBoundingBox) {
+        if (myShowBoundingBox) {
           drawBoundingBox(keypoints, ctx);
         }
       }
@@ -541,7 +561,7 @@ function detectPoseInRealTime(video, net) {
 async function bindPage() {
   // Load the PoseNet model weights with architecture 0.75
   document.getElementById('info').innerHTML = 'loading....'  
-  net = await posenet.load(0.75);   // make it global   0.50, 0.75, 1.00, or 1.01
+  net = await posenet.load(myPoseNetVersion);   // make it global   0.50, 0.75, 1.00, or 1.01
 
   document.getElementById('info').innerHTML = ''  
   ///document.getElementById('loading').style.display = 'none';
@@ -632,12 +652,28 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
     
      
-<input type=button value="flipHorizontal = false" onclick="{                                                                                                                                                                                                                
-    flipHorizontal = false 
+<input type=button value="Defults" onclick="{ 
+   myPoseNetVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
+   myAlgorithm = 'single-pose'
+   myMultiplier = 1.01      
+   myImageScaleFactor = 1.0
+   myFlipHorizontal = true
+   myOutputStride = 32  
+   myMaxPoseDetections = 10  
+   myScoreThreshold = 0.5 
+   myNmsRadius = 20  
 }">    
     
-<input type=button value="flipHorizontal = true" onclick="{                                                                                                                                                                                                                
-    flipHorizontal = true 
+<input type=button value="defaults changed" onclick="{  
+   myPoseNetVersion = 1.01   // 0.50, 0.75, 1.00, or 1.01 
+   myAlgorithm = 'multi-pose'                                                  
+   myMultiplier = 0.75      
+   myImageScaleFactor = 0.5
+   myFlipHorizontal = false 
+   myOutputStride = 16  
+   myMaxPoseDetections = 5  
+   myScoreThreshold = 0.8 
+   myNmsRadius = 10  
 }">     <br>   
     
     
