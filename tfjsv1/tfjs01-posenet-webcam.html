@@ -655,38 +655,38 @@ Now click start
 }">   
     Refresh page to switch cameras<br><br>    
     
-<input type=button value="pose[0].keypoints.postion.x" onclick ="{                                                     
+<input type=button value="poses[0].keypoints.postion.x" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion.x, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">      
     
-<input type=button value="pose[0].keypoints.postion.y" onclick ="{                                                     
+<input type=button value="poses[0].keypoints.postion.y" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion.y, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">      
         
-<input type=button value="pose[0].keypoints.postion" onclick ="{                                                     
+<input type=button value="poses[0].keypoints.postion" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints.postion, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
     
-<input type=button value="pose[0].keypoints" onclick ="{                                                     
+<input type=button value="poses[0].keypoints" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
          
-  <input type=button value="pose[0].keypoints" onclick ="{                                                     
+  <input type=button value="poses[0].keypoints" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
      
-  <input type=button value="pose[0].keypoints.part" onclick ="{                                                     
+  <input type=button value="poses[0].keypoints.part" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].keypoints, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">        
- <input type=button value="pose[0].score" onclick ="{                                                     
+ <input type=button value="poses[0].score" onclick ="{                                                     
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0].score, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
     
- <input type=button value="first pose[0]" onclick ="{                                                
+ <input type=button value="first poses[0]" onclick ="{                                                
       document.getElementById('myPose').innerHTML = JSON.stringify(poses[0], null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
 }">    
 
- <input type=button value="Full pose info" onclick ="{
+ <input type=button value="Full poses info" onclick ="{
      // for a textarea just do
      // document.getElementById('textareaID').value =  = JSON.stringify(poses, null, 3)                                                                                                  
      // have to make poses object visible on a webpage, so replace spaces and line endings
