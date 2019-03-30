@@ -35,6 +35,7 @@
    let myPoseNetVersion = 0.75   // 0.50, 0.75, 1.00, or 1.01  
    let myAlgorithm = 'single-pose'
    let myFacingMode = 'environment'
+   
    let myMultiplier = 0.75      
    let myImageScaleFactor = 0.5
    let myFlipHorizontal = false 
@@ -44,11 +45,16 @@
    let myNmsRadius = 10 
    
    
-   let myMinPoseConfidence = 1
-   let myMinPartConfidence = 1
-   let myShowVideo = true
-   let myShowSkeleton = true
-   let myShowBoundingBox = true    
+   let myMinPoseConfidence = 0.1
+   let myMinPartConfidence = 0.2
+   
+   let myShowVideo = false
+   let myShowSkeleton = false
+   let myShowBoundingBox = false
+   let myShowBoundingBox = false
+   
+   let myMobileNetArchitecture    //  isMobile() ? '0.50' : '0.75'
+   
      
 </script>    
     
