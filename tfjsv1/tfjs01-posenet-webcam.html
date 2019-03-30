@@ -570,7 +570,7 @@ async function bindPage() {
   let video;
 
   try {
-    video = await loadVideo(
+    video = await loadVideo()
   } catch (e) {
     let info = document.getElementById('info');
     info.textContent = 'this browser does not support video capture,' +
