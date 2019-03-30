@@ -4,6 +4,33 @@ Started March 29th, 2019
 
 
 
+Working on 
+
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjsv1/tfjs01-posenet-webcam.html
+
+.
+
+
+
+
+.
+
+
+
+
+
+.
+
+
+
+
+
+
+
+
+
+
+
 Main link at 
 
 
@@ -25,11 +52,6 @@ Working on
 
 
 
-Working on 
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjsv1/tfjs01-posenet-webcam.html
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjsv1/tfjs01posenetcam.html
 
 
 
