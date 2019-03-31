@@ -659,37 +659,37 @@ Now click start
     
 <input type=button value="poses[0].keypoints[0].position.x" onclick ="{                                                     
       try {                                              
-          document.getElementById('myPoseDiv').innerHTML = JSON.stringify(poses[0].keypoints[0].position.x, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+          document.getElementById('myPoseDiv').innerHTML = JSON.stringify(myPosesBackup[0].keypoints[0].position.x, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } catch(err) {document.getElementById('myPoseDiv').innerHTML = 'try again'}
 }">      
     
 <input type=button value="poses[0].keypoints[0].position.y" onclick ="{                                                     
       try {                                             
-           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(poses[0].keypoints[0].position.y, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(myPosesBackup[0].keypoints[0].position.y, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } catch(err) {document.getElementById('myPoseDiv').innerHTML = 'try again'}
 }">      
         
 <input type=button value="poses[0].keypoints[0].position" onclick ="{                                                     
       try {                                            
-           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(poses[0].keypoints[0].position, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(myPosesBackup[0].keypoints[0].position, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } catch(err) {document.getElementById('myPoseDiv').innerHTML = 'try again'}
 }">    
     
 <input type=button value="poses[0].keypoints[0].score" onclick ="{                                                     
       if (poses[0].keypoints[0].score != null){                                               
-           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(poses[0].keypoints[0].score, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(myPosesBackup[0].keypoints[0].score, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } else {document.getElementById('myPoseDiv').innerHTML = 'try again'}
 }">    
          
 <input type=button value="poses[0].keypoints[0].part" onclick ="{                                                     
       if (poses[0].keypoints[0].part != null){                                               
-           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(poses[0].keypoints[0].part, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(myPosesBackup[0].keypoints[0].part, null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } else {document.getElementById('myPoseDiv').innerHTML = 'try again'}
 }">    
      
 <input type=button value="poses[0].keypoints[0]" onclick ="{                                                     
       if (poses[0].keypoints[0] != null){                                               
-           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(poses[0].keypoints[0], null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
+           document.getElementById('myPoseDiv').innerHTML = JSON.stringify(myPosesBackup[0].keypoints[0], null, 3).replace(/ /g,'&nbsp').replace(/\n/g,'<br>')                                                     
       } else {document.getElementById('myPoseDiv').innerHTML = 'try again'}
 }"> 
     
