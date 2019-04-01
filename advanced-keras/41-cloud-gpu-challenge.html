@@ -3,7 +3,8 @@
     <title>MNIST in TensorFlow.js Layers API</title>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css" />
    
-      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> </script> 
+     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> </script> -->
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"> </script> 
   
   </head>
   
@@ -123,7 +124,7 @@ Note: I have made this model a fair bit bigger than needed to drag out the train
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
   if (myFileName != null){  
-    const model = await tf.loadModel(myFileName);     // should make the model a global variable
+    const model = await tf.loadlayersModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     //const endTime = performance.now();
@@ -243,9 +244,9 @@ class MnistData {
   getTrainData() {
     const xs = tf.tensor4d(
         this.trainImages,
-        [this.trainImages.length / IMAGE_SIZE, IMAGE_H, IMAGE_W, 1]);
+        [this.trainImages.length / IMAGE_SIZE, IMAGE_H, IMAGE_W, 1], 'int32');
     const labels = tf.tensor2d(
-        this.trainLabels, [this.trainLabels.length / NUM_CLASSES, NUM_CLASSES]);
+        this.trainLabels, [this.trainLabels.length / NUM_CLASSES, NUM_CLASSES], 'int32');
     return {xs, labels};
   }
 
