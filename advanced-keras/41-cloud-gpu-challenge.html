@@ -64,7 +64,7 @@
       should have a reading in a few minutes, you don't have to finish the training.<br><br>
       
       <b>Update: Now running tensorflowjs version 1.0.3 things are a fair bit faster and more stable. My school laptop 
-      extimates 2 hours. will have to test my other computers.</b>
+      extimates 2 hours. My Desktop estimates 1.8 hours and my Ubuntu Laptop estimates </b>
       
 
     <br>
@@ -640,12 +640,13 @@ async function train(model) {
         trainBatchCount++;
         let endTime = new Date();
         const theDuration = ((endTime-startTime)/1000).toFixed(0)
+        const estimateEndMinutes = ((theDuration * totalNumBatches) / trainBatchCount / 60).toFixed(2)
         const estimateEndHours = ((theDuration * totalNumBatches) / trainBatchCount / 3600).toFixed(2)
         ui.logStatus(
             `Training... ${trainBatchCount} batches /  ${totalNumBatches} total (` +
             `${(trainBatchCount / totalNumBatches * 100).toFixed(1)}%` +
             ` complete). To stop training, refresh or close page. 
-              Duration: ${theDuration} seconds. Full Time estimate ${estimateEndHours} hours `);
+              Duration: ${theDuration} seconds. (Estimate trained in ${estimateEndMinutes} minutes), Full Time estimate ${estimateEndHours} hours `);
         ui.plotLoss(trainBatchCount, logs.loss, 'train');
         ui.plotAccuracy(trainBatchCount, logs.acc, 'train');
         await tf.nextFrame();
