@@ -128,7 +128,7 @@ Note: I have made this model a fair bit bigger than needed to drag out the train
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
   if (myFileName != null){  
-    const model = await tf.loadlayersModel(myFileName);     // should make the model a global variable
+    const model = await tf.loadLayersModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     //const endTime = performance.now();
