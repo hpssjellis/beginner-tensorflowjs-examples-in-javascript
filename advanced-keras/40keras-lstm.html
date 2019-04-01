@@ -5,7 +5,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"></script>
 
 
 
@@ -231,10 +232,10 @@ myToOneHot = async function() {
   const myTrainArrayFlattened = myTrainArray.join().split(',');
   const myTargetArrayFlattened = myTargetArray.join().split(',');
 
-  xTrainingData = tf.tensor3d(myTrainArrayFlattened,(shape = [myString.length - myLSTM-2, myLSTM, myUnique.length]));
+  xTrainingData = tf.tensor3d(myTrainArrayFlattened,(shape = [myString.length - myLSTM-2, myLSTM, myUnique.length], 'int32'));
   //xTrainingData.print(true);
   
-  yTrainingTarget = tf.tensor2d(myTargetArrayFlattened,(shape = [myString.length - myLSTM-2, myUnique.length]));
+  yTrainingTarget = tf.tensor2d(myTargetArrayFlattened,(shape = [myString.length - myLSTM-2, myUnique.length], 'int32'));
   //yTrainingTarget.print(true);
 };
 
@@ -341,7 +342,7 @@ myGenerate = async function() {
     
     
     
-  let xTestData  = tf.tensor3d(xTestArray.split(','), shape=[1, sequenceLength, myUnique.length])   
+  let xTestData  = tf.tensor3d(xTestArray.split(','), shape=[1, sequenceLength, myUnique.length], 'int32')   
    
   let myPredict = await model.predict(xTestData);
  
@@ -489,7 +490,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
