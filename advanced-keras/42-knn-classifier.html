@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>  -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"></script>
 
 
 
@@ -152,7 +153,7 @@ myNewTrain = async function(){
    let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
-   const img1 = tf.fromPixels(my32x32CanvasA);
+   const img1 = tf.browser.fromPixels(my32x32CanvasA);
    const logits1 = mobilenetModule.infer(img1, 'conv_preds');                                                                                           
    classifier.addExample(logits1, parseInt(document.getElementById('myClassNumber').value));
    myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
@@ -171,7 +172,7 @@ myPredict = async function(){
   if (classifier.getNumClasses() >= 1){
                                                                                              
                                                                                              
-   const x = tf.fromPixels(myVideo); // using live video                                                                      
+   const x = tf.browser.fromPixels(myVideo); // using live video                                                                      
    const xlogits = await mobilenetModule.infer(x, 'conv_preds');
    const result = await classifier.predictClass(xlogits, 3);   // number of groups
     
@@ -246,7 +247,7 @@ myStopAuto  = async function(){
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
   if (myFileName != null){  
-    model = await tf.loadModel(myFileName);     // should make the model a global variable
+    model = await tf.loadLayersModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
    // await myPredict()
@@ -362,7 +363,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
