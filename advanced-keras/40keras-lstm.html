@@ -232,10 +232,10 @@ myToOneHot = async function() {
   const myTrainArrayFlattened = myTrainArray.join().split(',');
   const myTargetArrayFlattened = myTargetArray.join().split(',');
 
-  xTrainingData = tf.tensor3d(myTrainArrayFlattened,(shape = [myString.length - myLSTM-2, myLSTM, myUnique.length], 'int32'));
+  xTrainingData = tf.tensor3d(myTrainArrayFlattened,(shape = [myString.length - myLSTM-2, myLSTM, myUnique.length]), 'int32');
   //xTrainingData.print(true);
   
-  yTrainingTarget = tf.tensor2d(myTargetArrayFlattened,(shape = [myString.length - myLSTM-2, myUnique.length], 'int32'));
+  yTrainingTarget = tf.tensor2d(myTargetArrayFlattened,(shape = [myString.length - myLSTM-2, myUnique.length]), 'int32');
   //yTrainingTarget.print(true);
 };
 
