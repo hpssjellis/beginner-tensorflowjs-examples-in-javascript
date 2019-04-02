@@ -174,28 +174,33 @@ myNewTrain = async function(){
    //console.log('boxes and scores loaded')  
 
   const wow = await net.detectLandmarks(img1)                                                                                           
-  console.log('wow')                                                                                                                    
-  console.log(wow)                                                                                                                     
-  console.log('wow._faceLandmarks')                                                                                                      
-  console.log(wow._faceLandmarks)                                                                                             
+ // console.log('wow')                                                                                                                    
+ // console.log(wow)                                                                                                                     
+ // console.log('wow._faceLandmarks')                                                                                                      
+ // console.log(wow._faceLandmarks)                                                                                             
  // console.log('wow._faceLandmarks.length')                                                                                                      
  // console.log(wow._faceLandmarks.length)  
                                                                                              
                                                                                                                                                                                        
-  console.log('wow._positions')                                                                                                      
-  console.log(wow._positions)                                                                                             
-  console.log('wow._positions.length')                                                                                                      
-  console.log(wow._positions.length)  
+  //console.log('wow._positions')                                                                                                      
+  //console.log(wow._positions)                                                                                             
+ // console.log('wow._positions.length')                                                                                                      
+ // console.log(wow._positions.length)  
   
                                                                                              
   newArray = []                                                                                           
 
-                                                                                             
     
-  for (let j=0;  j < wow._faceLandmarks.length; j++ ){  
+  //for (let j=0;  j < wow._faceLandmarks.length; j++ ){  
+ //    newArray[j] = []                                                                                        
+ //    newArray[j][0] = wow._faceLandmarks[j].x                                                                
+ //    newArray[j][1] = wow._faceLandmarks[j].y  
+ //  }                                                                                                  
+    
+  for (let j=0;  j < wow._positions.length; j++ ){  
      newArray[j] = []                                                                                        
-     newArray[j][0] = wow._faceLandmarks[j].x                                                                
-     newArray[j][1] = wow._faceLandmarks[j].y  
+     newArray[j][0] = wow._positions[j].x                                                                
+     newArray[j][1] = wow._positions[j].y  
    }                                                                                          
     
                                                                                                                                                                                     
@@ -230,13 +235,19 @@ myPredict = async function(){
 
                                                                                              
     
-  for (let j=0;  j < wow2._faceLandmarks.length; j++ ){  
-     newArray2[j] = []                                                                                        
-     newArray2[j][0] = wow2._faceLandmarks[j].x                                                                
-     newArray2[j][1] = wow2._faceLandmarks[j].y  
-   }                                                                                          
+ // for (let j=0;  j < wow2._faceLandmarks.length; j++ ){  
+ //    newArray2[j] = []                                                                                        
+  //   newArray2[j][0] = wow2._faceLandmarks[j].x                                                                
+  //   newArray2[j][1] = wow2._faceLandmarks[j].y  
+ //  }                                                                                          
     
-                                                                                                                                                                                    
+    
+  for (let j=0;  j < wow2._positions.length; j++ ){  
+     newArray2[j] = []                                                                                        
+     newArray2[j][0] = wow2._positions[j].x                                                                
+     newArray2[j][1] = wow2._positions[j].y  
+   }                                                                                          
+                                                                                                                                                                                        
 
    const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2], 'int32'), 3);   // number of groups
     
