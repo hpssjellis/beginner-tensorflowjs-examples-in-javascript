@@ -355,7 +355,7 @@ mySetClassiferModelWeights  = async function(){
 myClassifierLoad  = async function(){
    // note global variable called        myIncomingClassifier        
                                                                                              
-   const myLoadedModel  = await	tf.loadlayersModel(document.getElementById('myInFile').value)                                                                                          
+   const myLoadedModel  = await	tf.loadLayersModel(document.getElementById('myInFile').value)                                                                                          
    console.log('myLoadedModel.layers.length')   
    console.log(myLoadedModel.layers.length) 
                                            
@@ -459,7 +459,7 @@ myStopAuto  = async function(){
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
   if (myFileName != null){  
-    model = await tf.loadlayersModel(myFileName);     // should make the model a global variable
+    model = await tf.loadLayersModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
    // await myPredict()
