@@ -374,13 +374,13 @@ myLoadData = async function(){
    let yArray = document.getElementById('myY').value.split(',')   
                                                                    
    xArrayTrainingData  = []     // make it a global array                                                                                     
-   xArrayTrainingData[0] =  tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');                                                                                         
-   xArrayTrainingData[1] =  tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');                                                                                         
+   xArrayTrainingData[0] =  tf.tensor2d(xArray, shape=[xArray.length, 1], 'float32');                                                                                         
+   xArrayTrainingData[1] =  tf.tensor2d(xArray, shape=[xArray.length, 1], 'float32');                                                                                         
                                                                                              
-   //xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');    // old one input tensor
+   //xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1], 'float32');    // old one input tensor
                                                                                              
                                                                                              
-   yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1], 'int32');
+   yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1], 'float32');
                                            
     //console.log(xTrainingData)
     //console.log(yTrainingTarget) 
@@ -556,8 +556,8 @@ myTest = async function(){
                                                                                              
                                                                                              
   let myInArray = []
-  myInArray[0] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'int32' )
-  myInArray[1] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'int32' )
+  myInArray[0] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'float32' )
+  myInArray[1] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'float32' )
                                                                                              
                                                                                              
   const myPredictArray = await   model.predict(myInArray) 
