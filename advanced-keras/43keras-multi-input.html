@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>  -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"></script>
 
 
 
@@ -373,13 +374,13 @@ myLoadData = async function(){
    let yArray = document.getElementById('myY').value.split(',')   
                                                                    
    xArrayTrainingData  = []     // make it a global array                                                                                     
-   xArrayTrainingData[0] =  tf.tensor2d(xArray, shape=[xArray.length, 1]);                                                                                         
-   xArrayTrainingData[1] =  tf.tensor2d(xArray, shape=[xArray.length, 1]);                                                                                         
+   xArrayTrainingData[0] =  tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');                                                                                         
+   xArrayTrainingData[1] =  tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');                                                                                         
                                                                                              
-   //xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1]);    // old one input tensor
+   //xTrainingData   = tf.tensor2d(xArray, shape=[xArray.length, 1], 'int32');    // old one input tensor
                                                                                              
                                                                                              
-   yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1]);
+   yTrainingTarget = tf.tensor2d(yArray, shape=[yArray.length, 1], 'int32');
                                            
     //console.log(xTrainingData)
     //console.log(yTrainingTarget) 
@@ -555,8 +556,8 @@ myTest = async function(){
                                                                                              
                                                                                              
   let myInArray = []
-  myInArray[0] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
-  myInArray[1] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape )
+  myInArray[0] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'int32' )
+  myInArray[1] = tf.tensor2d([document.getElementById('myAsk').value.split(',')], myShape, 'int32' )
                                                                                              
                                                                                              
   const myPredictArray = await   model.predict(myInArray) 
@@ -580,7 +581,7 @@ myLoadLocal = async function(){
   const myFileName = prompt('Enter stored base filename. ctrl-shift-i in browser, then Applications, localstorage', 'localstorage://myModel01');
   if (myFileName != null){  
     myButtonsForLoadedModel()                                                                                         
-    model = await tf.loadModel(myFileName); 
+    model = await tf.loadLayersModel(myFileName); 
     document.getElementById('myDivSummary').innerHTML = ''     
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     await myTest()
@@ -593,7 +594,7 @@ myLoadLocal = async function(){
   const myFileName = prompt('Enter URL of stored model', 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/advanced-keras-saving/45/myModel01.json');
   if (myFileName != null){  
     myButtonsForLoadedModel()
-    model = await tf.loadModel(myFileName);
+    model = await tf.loadLayersModel(myFileName);
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
     await myTest()
@@ -705,7 +706,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
