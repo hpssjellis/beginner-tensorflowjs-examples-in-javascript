@@ -205,7 +205,7 @@ myNewTrain = async function(){
     
                                                                                                                                                                                     
                                                                                              
-   classifier.addExample(tf.tensor2d(newArray, shape=[68,2], 'int32'), parseInt(document.getElementById('myClassNumber').value));                                                              
+   classifier.addExample(tf.tensor2d(newArray, shape=[68,2], 'float32'), parseInt(document.getElementById('myClassNumber').value));                                                              
    myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
  
    const myAddCount = classifier.getClassExampleCount()[document.getElementById('myClassNumber').value]
@@ -249,7 +249,7 @@ myPredict = async function(){
    }                                                                                          
                                                                                                                                                                                         
 
-   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2], 'int32'), 3);   // number of groups
+   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2], 'float32'), 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
