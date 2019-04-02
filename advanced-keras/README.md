@@ -21,6 +21,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanc
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/41-cloud-gpu-challenge.html
 
+new version
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/41b-cloud-gpu-challenge.html
+
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/advanced-keras/41-headless.html
 
