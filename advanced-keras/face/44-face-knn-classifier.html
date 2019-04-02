@@ -4,7 +4,8 @@
 
 <!-- the online version that these examples were made with  -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"></script>
 
 
 
@@ -167,7 +168,7 @@ myNewTrain = async function(){
     let myCanvasElement = document.getElementById('my32x32CanvasA');
    let myCTX = myCanvasElement.getContext('2d');
    myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
-   const img1 = tf.fromPixels(my32x32CanvasA);                                                                                            
+   const img1 = tf.browser.fromPixels(my32x32CanvasA);                                                                                            
   // const { boxes, scores } = await net.forward(img1) 
    //console.log('boxes and scores loaded')  
 
@@ -190,7 +191,7 @@ myNewTrain = async function(){
     
                                                                                                                                                                                     
                                                                                              
-   classifier.addExample(tf.tensor2d(newArray, shape=[68,2]), parseInt(document.getElementById('myClassNumber').value));                                                              
+   classifier.addExample(tf.tensor2d(newArray, shape=[68,2], 'int32'), parseInt(document.getElementById('myClassNumber').value));                                                              
    myGroups[document.getElementById('myClassNumber').value] = document.getElementById('myClassText').value
  
    const myAddCount = classifier.getClassExampleCount()[document.getElementById('myClassNumber').value]
@@ -214,7 +215,7 @@ myPredict = async function(){
   // let myCanvasElement = document.getElementById('myVideo');
   // let myCTX = myCanvasElement.getContext('2d');
   // myCTX.drawImage(myVideoStream, 0, 0, myCanvasElement.width, myCanvasElement.height);                                                                                           
-   const img2 = tf.fromPixels(myVideo);                                                                                            
+   const img2 = tf.browser.fromPixels(myVideo);                                                                                            
    const wow2 = await net.detectLandmarks(img2)                                                                                                                                                                                       
    newArray2 = []                                                                                           
 
@@ -228,7 +229,7 @@ myPredict = async function(){
     
                                                                                                                                                                                     
 
-   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2]), 3);   // number of groups
+   const result = await classifier.predictClass(tf.tensor2d(newArray2, shape=[68,2], 'int32'), 3);   // number of groups
     
    document.getElementById('myDivTest').innerHTML = 'Group: ' + result.classIndex + ', '+ 
        Math.round(result.confidences[result.classIndex]*100)+ '% ' + myGroups[result.classIndex]+ '<br>' 
@@ -299,7 +300,7 @@ myStopAuto  = async function(){
   document.getElementById('myDivTest').innerHTML = 'Expect major code changes if you load a different model than what is expected'  
   const myFileName = document.getElementById('myInFile').value
   if (myFileName != null){  
-    model = await tf.loadModel(myFileName);     // should make the model a global variable
+    model = await tf.loadLayersModel(myFileName);     // should make the model a global variable
     document.getElementById('myDivSummary').innerHTML = ''      
     await model.summary(null,null,x => {document.getElementById('myDivSummary').innerHTML += x + '<br>'});
    // await myPredict()
@@ -415,7 +416,7 @@ function myTextGrow(myT, myB){
    var myCursorEnd = document.getElementById(myT).selectionEnd
 
    myDivName = myB.replace('Code','')
-   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.1"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
    document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
    setTimeout(function() {
       while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
