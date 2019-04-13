@@ -638,8 +638,17 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     myAlgorithm = 'single-pose' 
 }">          
    
+     
     
-  
+<input type=button value="myFlipHorizontal = true " onclick="{                                                                                                                                                                                                                
+    myFlipHorizontal = true 
+}">          
+      
+    
+<input type=button value="myFlipHorizontal = false " onclick="{                                                                                                                                                                                                                
+    myFlipHorizontal = false 
+}">          
+        
 <input type=button value="show bounding box" onclick="{
    let myShowBoundingBox = true                                                                                                                                                                                                                 
 }"> <br><br>
@@ -655,7 +664,13 @@ Now click start
 <input type=button value="Start" onclick="{                                                                                                                                                                                                                
    bindPage() 
 }">   
-    Refresh page to switch cameras<br><br>    
+Refresh page to switch cameras<br><br>    
+    
+    
+    
+    
+    
+    
     
 <input type=button value="poses[0].keypoints[0].position.x" onclick ="{                                                     
       try {                                              
