@@ -12,20 +12,14 @@
 <!-- Important script tags used by this program. Always best if they have a version number  -->   
     
 <!--    <script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.5/build/dat.gui.js"></script>  -->
-  <!--  <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2"> </script> 
-
-
--->
+  <!--  <script src="https://unpkg.com/@tensorflow-models/posenet"></script> -->
     
     
     
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.3"> </script> 
-   <script src="https://unpkg.com/@tensorflow-models/posenet@1.0.3/dist/posenet.min.js"></script> -->
-<!--     <script src="backups/posenet-for-tfjs104-min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.4"> </script> 
+    <script src="https://unpkg.com/@tensorflow-models/posenet@1.0.3/dist/posenet.min.js"></script> 
     
-  
+    
 <!--
 Any changes to posenet might break your app for this version of tensorflowjs 1.0.4 
 so I have backedup posenet in this folders backups directory and called the file 
@@ -383,7 +377,6 @@ function detectPoseInRealTime(video, net) {
     let minPartConfidence;
     switch (myAlgorithm) {
       case 'single-pose':
-      ctx.clearRect(0, 0, canvas.width, canvas.height);   // my attempt to no canvas refresh
         const pose = await net.estimateSinglePose(
             video, myImageScaleFactor, myFlipHorizontal, myOutputStride);
           
@@ -528,7 +521,9 @@ navigator.getUserMedia = navigator.getUserMedia ||
 <div>
              
 <h2 align=center>Posenet by Dan Oved, converted to a single Webpage by Jeremy Ellis</h2>
-    I have tried to simplify Posenet with this single file html/javascript <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/blob/master/tfjsv1/tfjs01posenetcam.html">Github here</a> <br>
+    I have tried to simplify Posenet with this single file html/javascript
+    
+    <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/blob/master/tfjsv1/tfjs01-posenet-webcam.html">Github here</a> <br>
 Posenet by Dan Oved using Tensorflowjs Machine Learning in Javascript for Node and your browser. Orignial github at
 <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet"> Posenet Github </a>
 Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html"> Posenet Demo Here</a><br><br>
@@ -676,7 +671,7 @@ Original Demo at <a href="https://storage.googleapis.com/tfjs-models/demos/posen
     
 Now click start    
      
-<input type=button value="Start" onclick="{                                                                                                                                                                                                                
+<input type=button value="Start" style="font-size:35px; background-color:green" onclick="{                                                                                                                                                                                                                
    bindPage() 
 }">   
 Refresh page to switch cameras<br><br>    
