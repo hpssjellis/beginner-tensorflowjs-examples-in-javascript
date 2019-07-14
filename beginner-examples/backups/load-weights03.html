@@ -61,78 +61,14 @@ Took 138 seconds to train 10,000 batches (epoch only 1) on my browser
 
 <div id="myDiv5858Code"> 
 
-<textarea type=text id ="myJsonArea" rows=10 cols=100 wrap=false>
-{
-   "keras_version": "2.1.2",
-   "backend": "tensorflow",
-   "weights": {
-      "hiddenLayer": [
-         {
-            "name": "denseLayer/kernel:0",
-            "dtype": "float32",
-            "shape": [
-               2,
-               3
-            ],
-            "value": [
-               [
-                  -7.0955453,
-                  4.7261367,
-                  -5.5323949
-               ],
-               [
-                  4.9381752,
-                  5.4428835,
-                  7.3709011
-               ]
-            ]
-         },
-         {
-            "name": "denseLayer/bias:0",
-            "dtype": "float32",
-            "shape": [
-               3
-            ],
-            "value": [
-               -1.7896707,
-               -0.3296011,
-               2.4894311
-            ]
-         }
-      ],
-      "outputLayer": [
-         {
-            "name": "denseLayer/kernel:0",
-            "dtype": "float32",
-            "shape": [
-               3,
-               1
-            ],
-            "value": [
-               [
-                  8.2123137
-               ],
-               [
-                  5.1289654
-               ],
-               [
-                  -8.3957253
-               ]
-            ]
-         },
-         {
-            "name": "denseLayer/bias:0",
-            "dtype": "float32",
-            "shape": [
-               1
-            ],
-            "value": [
-               -0.6637133
-            ]
-         }
-      ]
-   }
-}</textarea><br>
+<textarea type=text id ="myJsonArea" rows=10 cols=100 wrap=false>Tensor
+    [[7.5341792 , 5.4297247 , 5.1593933],
+     [-5.2944899, -7.5436902, 5.2156711]],Tensor
+    [2.019094, -2.1382227, -0.3969847],Tensor
+    [[-8.5899086],
+     [8.6366701 ],
+     [5.2399182 ]],Tensor
+    [-0.7577306]</textarea><br>
 
 
 
@@ -187,7 +123,8 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 */
 
 
-  const weightsJSON =   JSON.parse(document.getElementById('myJsonArea').value)
+  //const weightsJSON =   JSON.parse(document.getElementById('myJsonArea').value)
+  const weightsJSON =   document.getElementById('myJsonArea').value
   const startTime = performance.now();
   document.getElementById('myDiv5858').innerHTML = '<br>'
   document.getElementById('myButton5858').style.backgroundColor = 'red'  
