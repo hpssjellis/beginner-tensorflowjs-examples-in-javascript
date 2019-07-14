@@ -200,7 +200,7 @@ document.getElementById('myJsonArea').value = JSON.stringify(weightsJSON2, null,
 
 
  
-    model.loadWeights(weightsJSON);
+    model.getWeights(weightsJSON);
 
 
     const training_data2 = tf.tensor2d([[0,0],[0,1],[1,0],[1,1]]);   // array defines shape
