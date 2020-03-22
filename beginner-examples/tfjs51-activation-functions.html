@@ -71,7 +71,9 @@ The expected output for xOr input is<br>
  
 <input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
      
-                                                                            
+
+                                                                              
+ /**
                                                                               
 class Relu6b extends tf.layers.activation  {
   constructor() {
@@ -94,7 +96,40 @@ function relu6b() {    // note relu6b and Relu6b
 }                                                                              
                                                                               
                                                                               
+ */
                                                                               
+                                                                              
+                                                                                class Swish extends tf.layers.Layer {
+      //static className = 'Swish';
+      constructor(config) {
+        super(config);
+        this.alpha = config.alpha;
+      }
+
+      call(input) {
+        return tf.tidy(() => {
+          const x = input[0]; //tf.getExactlyOneTensor(input);
+          return tf.sigmoid(x.mul(this.alpha)).mul(x);
+        });
+      }
+
+      computeOutputShape(inputShape){
+        return inputShape;
+      }
+
+      static get className() {
+      return 'Swish';
+      }
+
+      getConfig() {
+        const config = {alpha: this.alpha};
+        const baseConfig = super.getConfig();
+        Object.assign(config, baseConfig);
+        return config;
+      }
+    }
+
+    tf.serialization.registerClass(Swish);
                                                                               
                                                                               
    class Antirectifier extends tf.layers.Layer {
@@ -168,7 +203,7 @@ function antirectifier() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
 
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'Swish',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
