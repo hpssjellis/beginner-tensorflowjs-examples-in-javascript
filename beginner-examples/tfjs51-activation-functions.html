@@ -86,7 +86,7 @@ class Relu6b extends tf.layers.activation  {
     return tf.tidy(() => tf.minimum(6.0, tf.relu(x)));
   }
 }
-serialization.registerClass(Relu6b);  
+//serialization.registerClass(Relu6b);  
  tf.serialization.registerClass(Relu6b);  
 
 function relu6b() {    // note relu6b and Relu6b
