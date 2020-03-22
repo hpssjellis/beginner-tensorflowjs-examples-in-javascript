@@ -70,7 +70,33 @@ The expected output for xOr input is<br>
 
  
 <input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
-   
+     
+                                                                            
+                                                                              
+class Relu6b extends tf.layers.activation  {
+  constructor() {
+    super({});
+    this.supportsMasking = true;
+  }
+ // static readonly className = 'relu6b';
+  static get className() {
+    return 'Relu6b';
+  }
+  apply(x: Tensor): tf.Tensor {
+    return tf.tidy(() => tf.minimum(6.0, tf.relu(x)));
+  }
+}
+serialization.registerClass(Relu6b);  
+ tf.serialization.registerClass(Relu6b);  
+
+function relu6b() {    // note relu6b and Relu6b
+  return new Relu6b();
+}                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
    class Antirectifier extends tf.layers.Layer {
   constructor() {
     super({});
@@ -129,7 +155,7 @@ The expected output for xOr input is<br>
 tf.serialization.registerClass(Antirectifier);  // Needed for serialization.
 
 //export function antirectifier() {
-export function antirectifier() {
+function antirectifier() {
   return new Antirectifier();
 }                                                                           
                                                                               
