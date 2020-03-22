@@ -95,6 +95,23 @@ function relu6b() {    // note relu6b and Relu6b
   return new Relu6b();
 }                                                                              
                                                                               
+   
+                                                                              
+                                                                              
+
+    const sw = new Swish({alpha: 1});
+    const sw2 = new Swish2(1);
+    // create Model
+    const m_in = tf.input({shape: [1]});
+    // this doesn't work!!! activations have to be defined manually as layers and then added, see below
+    //const test = tf.layers.dense({units: 8, activation: sw}).apply(m_in);
+    // sw2 can't be called this way either, yields 'Improper config format' error
+    //const test2 = tf.layers.dense({units: 8, activation: sw2}).apply(m_in);
+    const dense1 = tf.layers.dense({units: 8}).apply(m_in);                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
                                                                               
  */
                                                                               
@@ -203,7 +220,7 @@ function antirectifier() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
 
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'Swish',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
