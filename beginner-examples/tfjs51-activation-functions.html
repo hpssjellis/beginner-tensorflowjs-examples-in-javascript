@@ -73,6 +73,7 @@ The expected output for xOr input is<br>
      
 
                                                                               
+                                                                             
                                                                               
                                                                                
 class Relu6b extends tf.layers.activation  {
@@ -83,8 +84,8 @@ class Relu6b extends tf.layers.activation  {
   }
                                                                               
   static get className() {
-   //return 'Relu6b';
-    return 'relu6b';
+  // return 'Relu6b';
+   return 'relu6b';
   }
 
   apply(x) {
@@ -97,127 +98,7 @@ function relu6b() {    // note relu6b and Relu6b
   return new Relu6b();
 }                                                                                 
                                                                               
-                                                                              
- /**
-                                                                           
-                                                                              
-   
-                                                                              
-                                                                              
-
-    const sw = new Swish({alpha: 1});
-    const sw2 = new Swish2(1);
-    // create Model
-    const m_in = tf.input({shape: [1]});
-    // this doesn't work!!! activations have to be defined manually as layers and then added, see below
-    //const test = tf.layers.dense({units: 8, activation: sw}).apply(m_in);
-    // sw2 can't be called this way either, yields 'Improper config format' error
-    //const test2 = tf.layers.dense({units: 8, activation: sw2}).apply(m_in);
-    const dense1 = tf.layers.dense({units: 8}).apply(m_in);                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
-                                                                              
- */
-                                                                              
-  class Swish extends tf.layers.Layer {
-      //static className = 'Swish';
-      constructor(config) {
-        super(config);
-        this.alpha = config.alpha;
-      }
-
-      call(input) {
-        return tf.tidy(() => {
-          const x = input[0]; //tf.getExactlyOneTensor(input);
-          return tf.sigmoid(x.mul(this.alpha)).mul(x);
-        });
-      }
-
-      computeOutputShape(inputShape){
-        return inputShape;
-      }
-
-      static get className() {
-      return 'Swish';
-      }
-
-      getConfig() {
-        const config = {alpha: this.alpha};
-        const baseConfig = super.getConfig();
-        Object.assign(config, baseConfig);
-        return config;
-      }
-    }
-
-    tf.serialization.registerClass(Swish);
-                                                                              
-                                                                              
-   class Antirectifier extends tf.layers.Layer {
-  constructor() {
-    super({});
-    // TODO(bileschi): Can we point to documentation on masking here?
-    this.supportsMasking = true;
-  }
-
-  /**
-   * This layer only works on 4D Tensors [batch, height, width, channels],
-   * and produces output with twice as many channels.
-   *
-   * layer.computeOutputShapes must be overridden in the case that the output
-   * shape is not the same as the input shape.
-   * @param {*} inputShapes
-   */
-  computeOutputShape(inputShape) {
-    return [inputShape[0], inputShape[1], inputShape[2], 2 * inputShape[3]]
-  }
-
-  /**
-   * Centers the input and applies the following function to every element of
-   * the input.
-   *
-   *     x => [max(x, 0), max(-x, 0)]
-   *
-   * The theory being that there may be signal in the both negative and positive
-   * portions of the input.  Note that this will double the number of channels.
-   * @param inputs Tensor to be treated.
-   * @param kwargs Only used as a pass through to call hooks.  Unused in this
-   *   example code.
-   */
-  call(inputs, kwargs) {
-    let input = inputs;
-    if (Array.isArray(input)) {
-      input = input[0];
-    }
-    this.invokeCallHook(inputs, kwargs);
-    const origShape = input.shape;
-    const flatShape =
-        [origShape[0], origShape[1] * origShape[2] * origShape[3]];
-    const flattened = input.reshape(flatShape);
-    const centered = tf.sub(flattened, flattened.mean(1).expandDims(1));
-    const pos = centered.relu().reshape(origShape);
-    const neg = centered.neg().relu().reshape(origShape);
-    return tf.concat([pos, neg], 3);
-  }
-
-  /**
-   * If a custom layer class is to support serialization, it must implement
-   * the `className` static getter.
-   */
-  static get className() {
-    return 'Antirectifier';
-  }
-}
-tf.serialization.registerClass(Antirectifier);  // Needed for serialization.
-
-//export function antirectifier() {
-function antirectifier() {
-  return new Antirectifier();
-}                                                                           
-                                                                              
-                                                                              
-                                                                              
+                                                                                                       
                                                                               
                                                                               
                                                                               
