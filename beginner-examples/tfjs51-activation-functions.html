@@ -75,12 +75,41 @@ The expected output for xOr input is<br>
 
  
 <input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
+                                                                              
+                                                                              
+ 
+class mySigmoidLayer extends tf.layers.Layer {
+  constructor(config) {
+    super(config);
+    this.alpha = config.alpha;
+  }
+
+  call(x) {
+    return tf.tidy(() => {
+      return tf.sigmoid(x);
+    });
+  }
+
+  static get className() {
+    return 'mySigmoidLayer';
+  }
+
+  getConfig() {
+    const config = super.getConfig();
+    Object.assign(config, {alpha: this.alpha});
+    return config;
+  }
+
+}
+
+tf.serialization.registerClass(mySigmoidLayer);                                                                             
+                                                                              
+                                                                              
      
-                                                                               
-class MySigmoid extends tf.layers.activation  {
+class MySigmoidActivation extends tf.layers.activation  {
                                                                                                                                                        
   static get className() {
-   return 'mysigmoid';   //no capital letters
+   return 'MySigmoidActivation';   
   }
 
   apply(x) {
@@ -90,21 +119,25 @@ class MySigmoid extends tf.layers.activation  {
   }
 }     
                                                                     
-tf.serialization.registerClass(MySigmoid);   
-
-function mysigmoid() {    
-  return new MySigmoid();
-}                                                                                
-                                                                                                                                                                                                                                                                               
+tf.serialization.registerClass(MySigmoidActivation);                                                                               
+           
+                                                                              
+                                                                              
+                                                                              
+                                                                              
                                                                               
   (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'mysigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
-    const myOptimizer = tf.train.sgd(0.5); 
-                                                                                               
+   // model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'MySigmoidActivation',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+  
+    model.add(tf.layers.dense({inputShape: [10], units: 1, }) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+    model.add(new mySigmoidLayer());
+                                                                              
+                                                                              
+    const myOptimizer = tf.train.sgd(0.5);                                                                                             
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
 
     const xTrainingData   = tf.tensor2d([[0,0], [0,1], [1,0], [1,1]]);      // array defines shape  // note should also add , 'int32'
