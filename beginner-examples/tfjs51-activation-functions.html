@@ -39,7 +39,7 @@
 
     
     
-<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Examples using an xOr style Neural Network</h2>
+<h2 align=center> As easy as I can make Tensorflowjs Keras Layers Custom Activation Function</h2>
 
 
 
@@ -90,7 +90,11 @@ class MySigmoid extends tf.layers.activation  {
   }
 }     
                                                                     
-tf.serialization.registerClass(MySigmoid);                                                                               
+tf.serialization.registerClass(MySigmoid);   
+
+function mysigmoid() {    
+  return new MySigmoid();
+}                                                                                
                                                                                                                                                                                                                                                                                
                                                                               
   (async function myGo() {
