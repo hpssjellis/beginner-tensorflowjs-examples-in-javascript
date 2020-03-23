@@ -73,27 +73,28 @@ The expected output for xOr input is<br>
      
 
                                                                               
- /**
                                                                               
+                                                                               
 class Relu6b extends tf.layers.activation  {
-  constructor() {
-    super({});
-    this.supportsMasking = true;
-  }
- // static readonly className = 'relu6b';
+
   static get className() {
-    return 'Relu6b';
+   //return 'Relu6b';
+    return 'relu6b';
   }
-  apply(x: Tensor): tf.Tensor {
+
+  apply(x) {
     return tf.tidy(() => tf.minimum(6.0, tf.relu(x)));
   }
 }
-//serialization.registerClass(Relu6b);  
- tf.serialization.registerClass(Relu6b);  
+ tf.serialization.registerClass(Relu6b);  // which ???
 
 function relu6b() {    // note relu6b and Relu6b
   return new Relu6b();
-}                                                                              
+}                                                                                 
+                                                                              
+                                                                              
+ /**
+                                                                           
                                                                               
    
                                                                               
@@ -115,8 +116,7 @@ function relu6b() {    // note relu6b and Relu6b
                                                                               
  */
                                                                               
-                                                                              
-                                                                                class Swish extends tf.layers.Layer {
+  class Swish extends tf.layers.Layer {
       //static className = 'Swish';
       constructor(config) {
         super(config);
