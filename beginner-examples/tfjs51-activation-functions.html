@@ -49,7 +49,7 @@
 
 
 <div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
-On this page I am trying, not very successfully, to get a simple custom vanilla javascript activation function woring
+On this page I am trying to get a simple custom vanilla javascript activation function woring
 for a sequential model without having to create an entire layer.<br>
  
  To customize an entire layer try https://codepen.io/caisq/pen/jdBgwB just need to change tf.loadModel to tf.loadLayersModel 
@@ -60,7 +60,9 @@ The expected output for xOr input is<br>
 [0,0] = ~ 0<br>
 [1,0] = ~ 1<br>
 [0,1] = ~ 1<br>
-[1,1] = ~ 0<br>
+[1,1] = ~ 0<br><br>
+ 
+ Reminder: The black textarea is updateable. Make changes and click the "Update and Run" button. <br>
  
  
  
@@ -74,39 +76,29 @@ The expected output for xOr input is<br>
  
 <input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
      
-
-                                                                              
-                                                                             
-                                                                              
                                                                                
-                                                                               
-class Relu6b extends tf.layers.activation  {
+class MySigmoid extends tf.layers.activation  {
                                                                                                                                                        
   static get className() {
-   return 'relu6b';   //no capital letter
+   return 'mysigmoid';   //no capital letters
   }
 
   apply(x) {
     return tf.tidy(() => {
-      tf.minimum(6.0, tf.relu(x))
-      tf.relu(x).print()     
+      tf.sigmoid(x)   
       });
   }
-}
-     
+}     
                                                                     
-tf.serialization.registerClass(Relu6b);                                                                               
-                                                                              
-                                                                                                       
-                                                                              
-                                                                              
+tf.serialization.registerClass(MySigmoid);                                                                               
+                                                                                                                                                                                                                                                                               
                                                                               
   (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'relu6b',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'mysigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
