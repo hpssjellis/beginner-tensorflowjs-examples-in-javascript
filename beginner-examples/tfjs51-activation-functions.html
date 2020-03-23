@@ -76,7 +76,12 @@ The expected output for xOr input is<br>
                                                                               
                                                                                
 class Relu6b extends tf.layers.activation  {
-
+                                                                              
+  constructor() {
+    super({});
+    this.supportsMasking = true;
+  }
+                                                                              
   static get className() {
    //return 'Relu6b';
     return 'relu6b';
