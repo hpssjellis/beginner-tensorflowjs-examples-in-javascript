@@ -77,22 +77,17 @@ The expected output for xOr input is<br>
                                                                               
                                                                                
 class Relu6b extends tf.layers.activation  {
-                                                                              
-  constructor() {
-    super({});
-    this.supportsMasking = true;
-  }
-                                                                              
+                                                                                                                                                       
   static get className() {
-  // return 'Relu6b';
-   return 'relu6b';
+   return 'relu6b';   //no capital letter
   }
 
   apply(x) {
     return tf.tidy(() => tf.minimum(6.0, tf.relu(x)));
   }
 }
- tf.serialization.registerClass(Relu6b);  // which ???
+                                                                              
+tf.serialization.registerClass(Relu6b);  
 
 function relu6b() {    // note relu6b and Relu6b
   return new Relu6b();
@@ -106,7 +101,7 @@ function relu6b() {    // note relu6b and Relu6b
     document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
 
-    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
+    model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'relu6b',}) );  // 2 inputs to 10 hidden layer nodes
     model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'sigmoid',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
     const myOptimizer = tf.train.sgd(0.5); 
                                                                                                
