@@ -77,16 +77,11 @@ The expected output for xOr input is<br>
 <input id="myButton123" type="button" value="xOr using Keras Layers" onclick="{
                                                                               
                                                                               
- 
+////////////////// Start Layers class test ////////////////////////// 
 class mySigmoidLayer extends tf.layers.Layer {
 
   static get className() {
     return 'mySigmoidLayer';
-  }
-
-  constructor(config) {
-    super(config);
-    this.alpha = config.alpha;
   }
 
   call(input) {
@@ -95,18 +90,12 @@ class mySigmoidLayer extends tf.layers.Layer {
     });
   }
 
-
-  getConfig() {
-    const config = super.getConfig();
-    Object.assign(config, {alpha: this.alpha});
-    return config;
-  }
-
 }
 
 tf.serialization.registerClass(mySigmoidLayer);                                                                             
-                                                                              
-                                                                              
+       
+////////////////// End Layers class test //////////////////////////          
+////////////////// Start Activation class test //////////////////////////                                                                             
      
 class MySigmoidActivation extends tf.layers.activation  {
                                                                                                                                                        
@@ -123,11 +112,9 @@ class MySigmoidActivation extends tf.layers.activation  {
                                                                     
 tf.serialization.registerClass(MySigmoidActivation);                                                                               
            
+////////////////// End Activation class test //////////////////////////                                                                               
                                                                               
-                                                                              
-                                                                              
-                                                                              
-                                                                              
+                                                                             
   (async function myGo() {
     document.getElementById('myButton123').style.backgroundColor = 'red'  
     const model = tf.sequential();
@@ -136,9 +123,8 @@ tf.serialization.registerClass(MySigmoidActivation);
    // model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'MySigmoidActivation',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
   
     model.add(tf.layers.dense({inputShape: [10], units: 1, }) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
-    model.add(new mySigmoidLayer({alpha: 1.5}));
-                                                                              
-                                                                              
+    model.add(new mySigmoidLayer({}));
+                                                                                                                                                           
     const myOptimizer = tf.train.sgd(0.5);                                                                                             
     model.compile({optimizer: myOptimizer, loss: 'meanSquaredError'});    
 
