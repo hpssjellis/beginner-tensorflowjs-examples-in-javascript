@@ -79,20 +79,22 @@ The expected output for xOr input is<br>
                                                                               
  
 class mySigmoidLayer extends tf.layers.Layer {
+
+  static get className() {
+    return 'mySigmoidLayer';
+  }
+
   constructor(config) {
     super(config);
     this.alpha = config.alpha;
   }
 
-  call(x) {
+  call(input) {
     return tf.tidy(() => {
-      return tf.sigmoid(x);
+      return tf.sigmoid(input[0]);
     });
   }
 
-  static get className() {
-    return 'mySigmoidLayer';
-  }
 
   getConfig() {
     const config = super.getConfig();
@@ -131,10 +133,10 @@ tf.serialization.registerClass(MySigmoidActivation);
     const model = tf.sequential();
 
     model.add(tf.layers.dense({inputShape: [2],  units: 10, activation: 'sigmoid',}) );  // 2 inputs to 10 hidden layer nodes
-    model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'MySigmoidActivation',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+   // model.add(tf.layers.dense({inputShape: [10], units: 1,  activation: 'MySigmoidActivation',}) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
   
-  //  model.add(tf.layers.dense({inputShape: [10], units: 1, }) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
-  //  model.add(new mySigmoidLayer());
+    model.add(tf.layers.dense({inputShape: [10], units: 1, }) );  // from the 10 hidden layer nodes to 1 output layer                                                                                  
+    model.add(new mySigmoidLayer({alpha: 1.5}));
                                                                               
                                                                               
     const myOptimizer = tf.train.sgd(0.5);                                                                                             
