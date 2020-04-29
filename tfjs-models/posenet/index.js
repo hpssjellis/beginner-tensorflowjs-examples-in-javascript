@@ -474,7 +474,7 @@ async function bindPage() {
   }
 
   setupGui([], net);
-  setupFPS();
+  //setupFPS();  // dont need STATS.js
   detectPoseInRealTime(video, net);
 }
 
