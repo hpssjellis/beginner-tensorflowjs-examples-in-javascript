@@ -160,7 +160,7 @@ const renderPrediction = async () => {
 
   if (predictions.length > 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+       document.getElementById('myDiv01').innerHTML = ''
     for (let i = 0; i < predictions.length; i++) {
       if (returnTensors) {
         predictions[i].topLeft = predictions[i].topLeft.arraySync();
@@ -170,7 +170,7 @@ const renderPrediction = async () => {
         }
       }
       try {
-          document.getElementById('myDiv01').innerHTML = predictions[i]
+          document.getElementById('myDiv01').innerHTML = 'probability:' + predictions[i].probability + '<br>'
           console.log(predictions[i])
       }
       catch(err){
