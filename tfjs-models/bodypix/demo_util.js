@@ -14,15 +14,17 @@
  * limitations under the License.
  * =============================================================================
  */
-import * as posenet from '@tensorflow-models/posenet';
-import * as tf from '@tensorflow/tfjs-core';
+//import * as posenet from '@tensorflow-models/posenet';
+//import * as tf from '@tensorflow/tfjs-core';
 
 const COLOR = 'aqua';
 const BOUNDING_BOX_COLOR = 'red';
 const LINE_WIDTH = 2;
 
-export const TRY_RESNET_BUTTON_NAME = 'tryResNetButton';
-export const TRY_RESNET_BUTTON_TEXT = '[New] Try ResNet50';
+//export const TRY_RESNET_BUTTON_NAME = 'tryResNetButton';
+//export const TRY_RESNET_BUTTON_TEXT = '[New] Try ResNet50';
+const TRY_RESNET_BUTTON_NAME = 'tryResNetButton';
+const TRY_RESNET_BUTTON_TEXT = '[New] Try ResNet50';
 const TRY_RESNET_BUTTON_TEXT_CSS = 'width:100%;text-decoration:underline;';
 const TRY_RESNET_BUTTON_BACKGROUND_CSS = 'background:#e61d5f;';
 
@@ -34,7 +36,7 @@ function isiOS() {
   return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
-export function isMobile() {
+ function isMobile() {
   return isAndroid() || isiOS();
 }
 
@@ -51,7 +53,7 @@ function setDatGuiPropertyCss(propertyText, liCssString, spanCssString = '') {
   }
 }
 
-export function updateTryResNetButtonDatGuiCss() {
+ function updateTryResNetButtonDatGuiCss() {
   setDatGuiPropertyCss(
       TRY_RESNET_BUTTON_TEXT, TRY_RESNET_BUTTON_BACKGROUND_CSS,
       TRY_RESNET_BUTTON_TEXT_CSS);
@@ -60,7 +62,7 @@ export function updateTryResNetButtonDatGuiCss() {
 /**
  * Toggles between the loading UI and the main canvas UI.
  */
-export function toggleLoadingUI(
+ function toggleLoadingUI(
     showLoadingUI, loadingDivId = 'loading', mainDivId = 'main') {
   if (showLoadingUI) {
     document.getElementById(loadingDivId).style.display = 'block';
@@ -71,7 +73,7 @@ export function toggleLoadingUI(
   }
 }
 
-export function drawPoint(ctx, y, x, r, color) {
+ function drawPoint(ctx, y, x, r, color) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
   ctx.fillStyle = color;
@@ -81,7 +83,7 @@ export function drawPoint(ctx, y, x, r, color) {
 /**
  * Draws a line on a canvas, i.e. a joint
  */
-export function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
+ function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
   ctx.beginPath();
   ctx.moveTo(ax * scale, ay * scale);
   ctx.lineTo(bx * scale, by * scale);
@@ -93,7 +95,7 @@ export function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
 /**
  * Draws a pose skeleton by looking up all adjacent keypoints/joints
  */
-export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+ function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
   const adjacentKeyPoints =
       posenet.getAdjacentKeyPoints(keypoints, minConfidence);
 
@@ -111,7 +113,7 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
 /**
  * Draw pose keypoints onto a canvas
  */
-export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   for (let i = 0; i < keypoints.length; i++) {
     const keypoint = keypoints[i];
 
@@ -129,7 +131,7 @@ export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
  * in an image, the bounding box will begin at the nose and extend to one of
  * ankles
  */
-export function drawBoundingBox(keypoints, ctx) {
+function drawBoundingBox(keypoints, ctx) {
   const boundingBox = posenet.getBoundingBox(keypoints);
 
   ctx.rect(
@@ -143,7 +145,7 @@ export function drawBoundingBox(keypoints, ctx) {
 /**
  * Converts an array of pixel data into an ImageData object
  */
-export async function renderToCanvas(a, ctx) {
+ async function renderToCanvas(a, ctx) {
   const [height, width] = a.shape;
   const imageData = new ImageData(width, height);
 
@@ -165,7 +167,7 @@ export async function renderToCanvas(a, ctx) {
 /**
  * Draw an image on a canvas
  */
-export function renderImageToCanvas(image, size, canvas) {
+ function renderImageToCanvas(image, size, canvas) {
   canvas.width = size[0];
   canvas.height = size[1];
   const ctx = canvas.getContext('2d');
@@ -178,7 +180,7 @@ export function renderImageToCanvas(image, size, canvas) {
  * Read our blog post for a description of PoseNet's heatmap outputs
  * https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5
  */
-export function drawHeatMapValues(heatMapValues, outputStride, canvas) {
+function drawHeatMapValues(heatMapValues, outputStride, canvas) {
   const ctx = canvas.getContext('2d');
   const radius = 5;
   const scaledValues = heatMapValues.mul(tf.scalar(outputStride, 'int32'));
@@ -211,7 +213,7 @@ function drawPoints(ctx, points, radius, color) {
  * Read our blog post for a description of PoseNet's offset vector outputs
  * https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5
  */
-export function drawOffsetVectors(
+ function drawOffsetVectors(
     heatMapValues, offsets, outputStride, scale = 1, ctx) {
   const offsetPoints =
       posenet.singlePose.getOffsetPoints(heatMapValues, outputStride, offsets);
