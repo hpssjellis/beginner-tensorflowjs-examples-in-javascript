@@ -702,7 +702,7 @@ function segmentBodyInRealTime() {
 /**
  * Kicks off the demo.
  */
-export async function bindPage() {
+ async function bindPage() {
   // Load the BodyPix model weights with architecture 0.75
   await loadBodyPix();
   document.getElementById('loading').style.display = 'none';
