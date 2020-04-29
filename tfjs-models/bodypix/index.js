@@ -573,6 +573,26 @@ function drawPoses(personOrPersonPartSegmentation, flipHorizontally, ctx) {
   if (Array.isArray(personOrPersonPartSegmentation)) {
     personOrPersonPartSegmentation.forEach(personSegmentation => {
       let pose = personSegmentation.pose;
+      
+      
+      
+      /////////////////////////////// start my stuff //////////////////////////////////////////////////////
+      
+       try {
+          document.getElementById('myDiv01').innerHTML += 'probability ' + pose + '<br>'
+          console.log(pose)
+      }
+      catch(err){
+          document.getElementById('myDiv01').innerHTML = err.message
+      }
+     
+      
+    
+      /////////////////////////////// start my stuff //////////////////////////////////////////////////////  
+      
+      
+      
+      
       if (flipHorizontally) {
         pose = bodyPix.flipPoseHorizontal(pose, personSegmentation.width);
       }
