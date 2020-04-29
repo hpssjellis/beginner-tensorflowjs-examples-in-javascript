@@ -380,7 +380,7 @@ function detectPoseInRealTime(video, net) {
     }
 
     // Begin monitoring code for frames per second
-    stats.begin();
+    //stats.begin();
 
     let poses = [];
     let minPoseConfidence;
@@ -438,7 +438,7 @@ function detectPoseInRealTime(video, net) {
     });
 
     // End monitoring code for frames per second
-    stats.end();
+    //stats.end();
 
     requestAnimationFrame(poseDetectionFrame);
   }
