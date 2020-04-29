@@ -158,9 +158,9 @@ const renderPrediction = async () => {
   const predictions = await model.estimateFaces(
     video, returnTensors, flipHorizontal, annotateBoxes);
 
+  document.getElementById('myDiv01').innerHTML = ''
   if (predictions.length > 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-       document.getElementById('myDiv01').innerHTML = ''
     for (let i = 0; i < predictions.length; i++) {
       if (returnTensors) {
         predictions[i].topLeft = predictions[i].topLeft.arraySync();
@@ -170,7 +170,7 @@ const renderPrediction = async () => {
         }
       }
       try {
-          document.getElementById('myDiv01').innerHTML = 'probability:' + predictions[i].probability + '<br>'
+          document.getElementById('myDiv01').innerHTML = 'probability:' + predictions[i].probability.toFixed(4) + '<br>'
           console.log(predictions[i])
       }
       catch(err){
