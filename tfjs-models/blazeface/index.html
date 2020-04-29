@@ -63,6 +63,7 @@ limitations under the License.
       ">
     </video>
   </div>
+    <div id="myDiv01">...</div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
@@ -168,7 +169,12 @@ const renderPrediction = async () => {
           predictions[i].landmarks = predictions[i].landmarks.arraySync();
         }
       }
-
+      try {
+          document.getElementById().innerHTML = predictions[i]
+      }
+      catch(err){
+          document.getElementById().innerHTML = err.message
+      }
       const start = predictions[i].topLeft;
       const end = predictions[i].bottomRight;
       const size = [end[0] - start[0], end[1] - start[1]];
