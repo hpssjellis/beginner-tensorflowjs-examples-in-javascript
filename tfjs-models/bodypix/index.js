@@ -22,7 +22,7 @@
 //import * as partColorScales from './part_color_scales';
 
 
-const stats = new Stats();
+//const stats = new Stats();
 
 const state = {
   video: null,
@@ -476,11 +476,11 @@ function setupGui(cameras) {
   });
 
   gui.add(guiState, 'showFps').onChange(showFps => {
-    if (showFps) {
-      document.body.appendChild(stats.dom);
-    } else {
-      document.body.removeChild(stats.dom);
-    }
+   // if (showFps) {
+   //   document.body.appendChild(stats.dom);
+   // } else {
+   //   document.body.removeChild(stats.dom);
+   // }
   })
 }
 
@@ -508,10 +508,10 @@ function setShownPartColorScales(colorScale) {
  * Sets up a frames per second panel on the top-left of the window
  */
 function setupFPS() {
-  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-  if (guiState.showFps) {
-    document.body.appendChild(stats.dom);
-  }
+ // stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
+ // if (guiState.showFps) {
+ //   document.body.appendChild(stats.dom);
+//  }
 }
 
 async function estimateSegmentation() {
@@ -625,7 +625,7 @@ function segmentBodyInRealTime() {
     }
 
     // Begin monitoring code for frames per second
-    stats.begin();
+    //stats.begin();
 
     const flipHorizontally = guiState.flipHorizontal;
 
@@ -691,7 +691,7 @@ function segmentBodyInRealTime() {
     }
 
     // End monitoring code for frames per second
-    stats.end();
+   // stats.end();
 
     requestAnimationFrame(bodySegmentationFrame);
   }
@@ -712,7 +712,7 @@ function segmentBodyInRealTime() {
 
   let cameras = await getVideoInputs();
 
-  setupFPS();
+//  setupFPS();
   setupGui(cameras);
 
   segmentBodyInRealTime();
