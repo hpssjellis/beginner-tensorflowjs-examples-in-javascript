@@ -170,10 +170,10 @@ const renderPrediction = async () => {
         }
       }
       try {
-          document.getElementById().innerHTML = predictions[i]
+          document.getElementById('myDiv01').innerHTML = predictions[i]
       }
       catch(err){
-          document.getElementById().innerHTML = err.message
+          document.getElementById('myDiv01').innerHTML = err.message
       }
       const start = predictions[i].topLeft;
       const end = predictions[i].bottomRight;
