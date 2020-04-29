@@ -14,12 +14,12 @@
  * limitations under the License.
  * =============================================================================
  */
-import * as bodyPix from '@tensorflow-models/body-pix';
-import dat from 'dat.gui';
-import Stats from 'stats.js';
+//import * as bodyPix from '@tensorflow-models/body-pix';
+//import dat from 'dat.gui';
+//import Stats from 'stats.js';
 
-import {drawKeypoints, drawSkeleton, toggleLoadingUI, TRY_RESNET_BUTTON_NAME, TRY_RESNET_BUTTON_TEXT, updateTryResNetButtonDatGuiCss} from './demo_util';
-import * as partColorScales from './part_color_scales';
+//import {drawKeypoints, drawSkeleton, toggleLoadingUI, TRY_RESNET_BUTTON_NAME, TRY_RESNET_BUTTON_TEXT, updateTryResNetButtonDatGuiCss} from './demo_util';
+//import * as partColorScales from './part_color_scales';
 
 
 const stats = new Stats();
