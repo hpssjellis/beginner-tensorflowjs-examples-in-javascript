@@ -168,7 +168,7 @@ const renderPrediction = async () => {
         }
       }
       try {
-          document.getElementById('myDiv01').innerHTML = 'probability:' + predictions[i].probability.toFixed(4) + '<br>'
+          document.getElementById('myDiv01').innerHTML = 'probability:' + predictions[i].probability.toFixed(4)  + '<br>'
           console.log(predictions[i])
       }
       catch(err){
