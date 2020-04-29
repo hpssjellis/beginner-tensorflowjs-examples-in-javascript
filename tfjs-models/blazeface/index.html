@@ -171,6 +171,7 @@ const renderPrediction = async () => {
       }
       try {
           document.getElementById('myDiv01').innerHTML = predictions[i]
+          console.log(predictions[i])
       }
       catch(err){
           document.getElementById('myDiv01').innerHTML = err.message
