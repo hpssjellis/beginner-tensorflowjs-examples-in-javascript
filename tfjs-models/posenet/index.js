@@ -22,7 +22,7 @@
 
 const videoWidth = 600;
 const videoHeight = 500;
-const stats = new Stats();
+//const stats = new Stats();
 
 /**
  * Loads a the camera to be used in the demo
@@ -278,10 +278,10 @@ function setupGui(cameras, net) {
 /**
  * Sets up a frames per second panel on the top-left of the window
  */
-function setupFPS() {
-  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-  document.getElementById('main').appendChild(stats.dom);
-}
+//function setupFPS() {
+//  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
+//  document.getElementById('main').appendChild(stats.dom);
+//}
 
 /**
  * Feeds an image to posenet to estimate poses - this is where the magic
