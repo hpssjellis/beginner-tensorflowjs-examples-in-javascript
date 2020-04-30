@@ -25,7 +25,7 @@ import * as knnClassifier from '../src/index';
 
 const videoWidth = 300;
 const videoHeight = 250;
-const stats = new Stats();
+// const stats = new Stats();
 
 // Number of classes to classify
 const NUM_CLASSES = 3;
