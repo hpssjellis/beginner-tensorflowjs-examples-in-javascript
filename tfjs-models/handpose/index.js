@@ -26,15 +26,22 @@ import {version} from '@tensorflow/tfjs-backend-wasm/dist/version';
  */
 
 
-
+/*
 tfjsWasm.setWasmPath(
     `https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@${
         version}/dist/tfjs-backend-wasm.wasm`);
+
+*/
+
+
 function isMobile() {
   const isAndroid = /Android/i.test(navigator.userAgent);
   const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   return isAndroid || isiOS;
 }
+
+
+
 
 let videoWidth, videoHeight, scatterGLHasInitialized = false, scatterGL,
   fingerLookupIndices = {
