@@ -4,6 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4"></script>
 
 <img id="img" src="coffee.jpg"/>
+<div id="myDiv01">...</div>
 
 <script>
   const img = document.getElementById('img');
@@ -16,8 +17,13 @@
 
     // Classify the image.
     const predictions = await model.classify(img);
-    console.log('Predictions');
-    console.log(predictions);
+    document.getElementById().innerHTML = 'Predictions: ' + 
+      predictions[0].probability + ', '+ predictions[0].className +'<br>' + 
+      predictions[1].probability + ', '+ predictions[1].className +'<br>' + 
+      predictions[2].probability + ', '+ predictions[2].className +'<br>' +
+      'See console for other info'
+   // console.log('Predictions');
+    //console.log(predictions);
 
     // Get the logits.
     const logits = model.infer(img);
