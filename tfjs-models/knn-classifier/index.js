@@ -36,7 +36,7 @@ const TOPK = 3;
 const infoTexts = [];
 let training = -1;
 let classifier;
-let myModel;
+let mobilenet;
 let video;
 
 function isAndroid() {
@@ -131,7 +131,7 @@ async function animate() {
   let logits;
   // 'conv_preds' is the logits activation of MobileNet.
   //const infer = () => mobilenet.infer(image, 'conv_preds');
-  const infer = () => myModel.infer(image, 'conv_preds');
+  const infer = () => mobilenet.infer(image, 'conv_preds');
 
   // Train class if one of the buttons is held down
   if (training != -1) {
@@ -182,9 +182,7 @@ async function animate() {
  */
 async function bindPage() {
   classifier = knnClassifier.create();
- // mobilenet = await mobilenetModule.load();
- // myModel = await mobilenet.load();
-  const myModel = await mobilenet.load();
+  const mobilenet = await mobilenet.load();
   document.getElementById('loading').style.display = 'none';
   document.getElementById('main').style.display = 'block';
 
