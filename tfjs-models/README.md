@@ -15,7 +15,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-m
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/posenet/
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeeplab/
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/
 
 
 .
