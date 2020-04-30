@@ -3,7 +3,7 @@
 <script src="https://unpkg.com/@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4"></script>
 
-<img id="img" src="coffee.jpg"/>
+<img id="img" width = 200 src="coffee.jpg"/>
 <div id="myDiv01">...</div>
 
 <script>
@@ -17,13 +17,13 @@
 
     // Classify the image.
     const predictions = await model.classify(img);
-    document.getElementById('myDiv01').innerHTML = 'Predictions: ' + 
+    document.getElementById('myDiv01').innerHTML = 'Predictions: Probability, Class Names<br>' + 
       predictions[0].probability + ', '+ predictions[0].className +'<br>' + 
       predictions[1].probability + ', '+ predictions[1].className +'<br>' + 
       predictions[2].probability + ', '+ predictions[2].className +'<br>' +
       'See console for other info'
-   // console.log('Predictions');
-    //console.log(predictions);
+    console.log('Predictions');
+    console.log(predictions);
 
     // Get the logits.
     const logits = model.infer(img);
