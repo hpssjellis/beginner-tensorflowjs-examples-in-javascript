@@ -19,13 +19,14 @@ import 'bulma/css/bulma.css';
 
 import {load} from '@tensorflow-models/deeplab';
 import * as tf from '@tensorflow/tfjs-core';
- */
+
 
 
 import ade20kExampleImage from './examples/ade20k.jpg';
 import cityscapesExampleImage from './examples/cityscapes.jpg';
 import pascalExampleImage from './examples/pascal.jpg';
 
+ */
 
 
 const modelNames = ['pascal', 'cityscapes', 'ade20k'];
@@ -33,9 +34,9 @@ const deeplab = {};
 const state = {};
 
 const deeplabExampleImages = {
-  pascal: pascalExampleImage,
-  cityscapes: cityscapesExampleImage,
-  ade20k: ade20kExampleImage,
+  pascal: './examples/pascal.jpg',
+  cityscapes: './examples/cityscapes.jpg',
+  ade20k: './examples/ade20k.jpg',
 };
 
 const toggleInvisible = (elementId, force = undefined) => {
