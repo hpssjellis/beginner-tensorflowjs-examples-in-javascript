@@ -39,9 +39,6 @@ let classifier;
 let mobilenet;
 let video;
 
-const version = 2;
-const alpha = 0.5;
-
 function isAndroid() {
   return /Android/i.test(navigator.userAgent);
 }
