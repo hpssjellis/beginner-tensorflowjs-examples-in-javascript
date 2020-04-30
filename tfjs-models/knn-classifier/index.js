@@ -115,16 +115,16 @@ function setupGui() {
 /**
  * Sets up a frames per second panel on the top-left of the window
  */
-function setupFPS() {
-  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-  document.body.appendChild(stats.dom);
-}
+//function setupFPS() {
+//  stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
+//  document.body.appendChild(stats.dom);
+//}
 
 /**
  * Animation function called on each frame, running prediction
  */
 async function animate() {
-  stats.begin();
+ // stats.begin();
 
   // Get image data from video element
   const image = tf.browser.fromPixels(video);
@@ -170,7 +170,7 @@ async function animate() {
     logits.dispose();
   }
 
-  stats.end();
+ // stats.end();
 
   requestAnimationFrame(animate);
 }
@@ -188,7 +188,7 @@ async function bindPage() {
 
   // Setup the GUI
   setupGui();
-  setupFPS();
+ // setupFPS();
 
   // Setup the camera
   try {
