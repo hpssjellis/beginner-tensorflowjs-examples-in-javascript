@@ -60,7 +60,7 @@ const mobile = isMobile();
 const renderPointcloud = mobile === false;
 
 const state = {
-  backend: 'webgl'
+  backend: 'wasm'
 };
 
 if (renderPointcloud) {
@@ -164,7 +164,7 @@ async function loadVideo() {
 }
 
 const main = async () => {
-  await tf.setBackend(state.backend);
+ // await tf.setBackend(state.backend);
   model = await handpose.load();
   let video;
 
@@ -181,6 +181,7 @@ const main = async () => {
 }
 
 const landmarksRealTime = async (video) => {
+  await tf.setBackend(state.backend);
   setupDatGui();
 
   const stats = new Stats();
@@ -213,7 +214,7 @@ const landmarksRealTime = async (video) => {
   [-VIDEO_WIDTH, 0, 0], [-VIDEO_WIDTH, -VIDEO_HEIGHT, 0]];
 
   async function frameLandmarks() {
-    stats.begin();
+  //  stats.begin();
     ctx.drawImage(video, 0, 0, videoWidth, videoHeight, 0, 0, canvas.width, canvas.height);
     const predictions = await model.estimateHands(video);
     if (predictions.length > 0) {
@@ -245,7 +246,7 @@ const landmarksRealTime = async (video) => {
         scatterGLHasInitialized = true;
       }
     }
-    stats.end();
+ //   stats.end();
     requestAnimationFrame(frameLandmarks);
   };
 
