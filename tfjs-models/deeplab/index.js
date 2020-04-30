@@ -19,12 +19,14 @@ import 'bulma/css/bulma.css';
 
 import {load} from '@tensorflow-models/deeplab';
 import * as tf from '@tensorflow/tfjs-core';
+ */
+
 
 import ade20kExampleImage from './examples/ade20k.jpg';
 import cityscapesExampleImage from './examples/cityscapes.jpg';
 import pascalExampleImage from './examples/pascal.jpg';
 
- */
+
 
 const modelNames = ['pascal', 'cityscapes', 'ade20k'];
 const deeplab = {};
