@@ -60,7 +60,7 @@ const mobile = isMobile();
 const renderPointcloud = mobile === false;
 
 const state = {
-  backend: 'wasm'
+  backend: 'webgl'
 };
 
 if (renderPointcloud) {
