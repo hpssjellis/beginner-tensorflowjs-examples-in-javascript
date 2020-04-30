@@ -29,13 +29,13 @@ import pascalExampleImage from './examples/pascal.jpg';
  */
 
 
-//let pascalExampleImage = new Image()
+let pascalExampleImage = new Image();
 pascalExampleImage.src = './examples/pascal.jpg'
 
-//let cityscapesExampleImage = new Image()
+let cityscapesExampleImage = new Image();
 cityscapesExampleImage.src = './examples/cityscapes.jpg'
 
-//let ade20kExampleImage = new Image()
+let ade20kExampleImage = new Image();
 ade20kExampleImage.src = './examples/ade20k.jpg'
 
 
