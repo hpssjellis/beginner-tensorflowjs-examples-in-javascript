@@ -18,6 +18,7 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-m
 NOT YET WORKING  https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/
 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/mobilenet/
 .
 
 
