@@ -181,7 +181,8 @@ async function animate() {
  */
 async function bindPage() {
   classifier = knnClassifier.create();
-  mobilenet = await mobilenetModule.load();
+ // mobilenet = await mobilenetModule.load();
+  mobilenet = await mobilenet.load();
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('main').style.display = 'block';
