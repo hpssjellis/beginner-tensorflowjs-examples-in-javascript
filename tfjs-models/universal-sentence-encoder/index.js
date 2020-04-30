@@ -65,7 +65,9 @@ const init = async () => {
               .dataSync();
 
      // ctx.fillStyle = interpolateReds(score);
-      ctx.fillStyle = d3.interpolateYlGn(score);
+      //ctx.fillStyle = d3.interpolateYlGn(score);
+      ctx.fillStyle = d3.schemeRdBu(score);
+      
    
       ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
       ctx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
