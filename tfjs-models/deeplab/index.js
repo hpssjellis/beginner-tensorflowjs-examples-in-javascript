@@ -29,14 +29,28 @@ import pascalExampleImage from './examples/pascal.jpg';
  */
 
 
+
+//var img = new Image();
+//img.src = "http://yourimage.jpg";
+
+let ade20kExampleImage = new Image()
+ade20kExampleImage.src = './examples/ade20k.jpg'
+
+let cityscapesExampleImage = new Image()
+cityscapesExampleImage.src = './examples/cityscapes.jpg'
+
+let pascalExampleImage = new Image()
+pascalExampleImage.src = './examples/pascal.jpg'
+
+
 const modelNames = ['pascal', 'cityscapes', 'ade20k'];
 const deeplab = {};
 const state = {};
 
 const deeplabExampleImages = {
-  pascal: './examples/pascal.jpg',
-  cityscapes: './examples/cityscapes.jpg',
-  ade20k: './examples/ade20k.jpg',
+  pascal: pascalExampleImage,
+  cityscapes: cityscapesExampleImage,
+  ade20k: ade20kExampleImage,
 };
 
 const toggleInvisible = (elementId, force = undefined) => {
