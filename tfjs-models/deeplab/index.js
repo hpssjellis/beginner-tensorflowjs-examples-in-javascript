@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * =============================================================================
- */
+
 
 import 'bulma/css/bulma.css';
 
@@ -23,6 +23,8 @@ import * as tf from '@tensorflow/tfjs-core';
 import ade20kExampleImage from './examples/ade20k.jpg';
 import cityscapesExampleImage from './examples/cityscapes.jpg';
 import pascalExampleImage from './examples/pascal.jpg';
+
+ */
 
 const modelNames = ['pascal', 'cityscapes', 'ade20k'];
 const deeplab = {};
