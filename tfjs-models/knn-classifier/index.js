@@ -36,7 +36,7 @@ const TOPK = 3;
 const infoTexts = [];
 let training = -1;
 let classifier;
-let mobilenet;
+//let mobilenet;
 let video;
 
 function isAndroid() {
@@ -182,7 +182,7 @@ async function animate() {
  */
 async function bindPage() {
   classifier = knnClassifier.create();
-  const mobilenet = await mobilenet.load();
+  const myModel = await mobilenet.load();
   document.getElementById('loading').style.display = 'none';
   document.getElementById('main').style.display = 'block';
 
