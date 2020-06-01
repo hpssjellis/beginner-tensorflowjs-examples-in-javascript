@@ -63,8 +63,6 @@ limitations under the License.
     </video>
   </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
@@ -126,12 +124,14 @@ const state = {
   backend: 'wasm'
 };
 
-const gui = new dat.GUI();
-gui.add(state, 'backend', ['wasm', 'webgl', 'cpu']).onChange(async backend => {
-  await tf.setBackend(backend);
-});
+//const gui = new dat.GUI();
+//gui.add(state, 'backend', ['wasm', 'webgl', 'cpu']).onChange(async backend => {
+ // await tf.setBackend(backend);
+//});
 
 async function setupCamera() {
+    await tf.setBackend(backend);
+    
   video = document.getElementById('video');
 
   const stream = await navigator.mediaDevices.getUserMedia({
