@@ -136,7 +136,7 @@ import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
 async function setupCamera() {
 
     
-    await tf.setBackend(backend);
+   // await tf.setBackend(backend);
     
   video = document.getElementById('video');
 
@@ -154,7 +154,7 @@ async function setupCamera() {
 }
 
 const renderPrediction = async () => {
-  stats.begin();
+  //stats.begin();
 
   const returnTensors = false;
   const flipHorizontal = true;
@@ -199,13 +199,14 @@ const renderPrediction = async () => {
     }
   }
 
-  stats.end();
+ // stats.end();
 
   requestAnimationFrame(renderPrediction);
 };
 
 const setupPage = async () => {
-  await tf.setBackend(state.backend);
+ // await tf.setBackend(state.backend);
+  await tf.setBackend('wasm');
   await setupCamera();
   video.play();
 
