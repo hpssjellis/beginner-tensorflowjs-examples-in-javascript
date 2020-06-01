@@ -1,4 +1,5 @@
 april 29, 2020 just getting started on these
+## Note: As of May 20 ish all of these are broken as Tensorflowjs switched to version 2.0.0 (Possible useful information at the main github at https://github.com/tensorflow/tfjs-models )
 
 
 
