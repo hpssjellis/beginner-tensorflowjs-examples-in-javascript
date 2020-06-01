@@ -22,7 +22,7 @@ NOT YET WORKING  https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/mobilenet/
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/knn-classifier/
+NOT YET WORKING https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/knn-classifier/
 
 
 .
