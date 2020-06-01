@@ -114,15 +114,15 @@ import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
 
 //tfjsWasm.setWasmPath('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@latest/dist/tfjs-backend-wasm.wasm');
 
-const stats = new Stats();
-stats.showPanel(0);
-document.body.prepend(stats.domElement);
+//const stats = new Stats();
+//stats.showPanel(0);
+//document.body.prepend(stats.domElement);
 
-let model, ctx, videoWidth, videoHeight, video, canvas;
+//let model, ctx, videoWidth, videoHeight, video, canvas;
 
-const state = {
-  backend: 'wasm'
-};
+//const state = {
+//  backend: 'wasm'
+//};
 
 //const gui = new dat.GUI();
 //gui.add(state, 'backend', ['wasm', 'webgl', 'cpu']).onChange(async backend => {
@@ -130,6 +130,10 @@ const state = {
 //});
 
 async function setupCamera() {
+    const state = {
+  backend: 'wasm'
+};
+    
     await tf.setBackend(backend);
     
   video = document.getElementById('video');
