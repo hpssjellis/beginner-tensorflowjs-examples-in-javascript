@@ -31,6 +31,18 @@ import pascalExampleImage from './examples/pascal.jpg';
 */
 
 
+  ade20kExampleImage     = new Image();
+  cityscapesExampleImage = new Image();
+  pascalExampleImage = new Image();
+
+  ade20kExampleImage.src = './examples/ade20k.jpg'
+  cityscapesExampleImage.src = './examples/cityscapes.jpg'
+  pascalExampleImage.src = './examples/pascal.jpg'
+
+
+
+
+
 const modelNames = ['pascal', 'cityscapes', 'ade20k'];
 const deeplab = {};
 const state = {};
