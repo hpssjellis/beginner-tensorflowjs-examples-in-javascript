@@ -5,36 +5,36 @@ april 29, 2020 just getting started on these
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/blazeface/
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/blazeface/
 
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/bodypix/
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/bodypix/
 
 
-NOT YET WORKING  https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/
+1. NOT YET WORKING  https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/facemesh/
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/facemesh/
 
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/handpose/
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/handpose/
 
 
-NOT YET WORKING https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/knn-classifier/
-
-
-.
-
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/mobilenet/
+1. NOT YET WORKING https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/knn-classifier/
 
 
 .
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/posenet/
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/mobilenet/
+
+
+.
+
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/posenet/
 
 
 
@@ -42,9 +42,9 @@ https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-m
 
 
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/qna
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/qna
 
-https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/universal-sentence-encoder/
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/universal-sentence-encoder/
 
 
 
