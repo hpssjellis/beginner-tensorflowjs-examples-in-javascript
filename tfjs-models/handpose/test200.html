@@ -142,8 +142,8 @@ const mobile = isMobile();
 const renderPointcloud = mobile === false;
 
 const state = {
-  backend: 'webgl'
-  //backend: 'wasm'
+ // backend: 'webgl'
+  backend: 'wasm'
 };
 
 if (renderPointcloud) {
@@ -166,6 +166,7 @@ async function setupDatGui() {
   gui.add(state, 'backend', ['wasm', 'webgl', 'cpu', 'webgpu'])
       .onChange(async backend => {
         await tf.setBackend(backend);
+        await tf.ready()
       });
 
   if (renderPointcloud) {
@@ -248,6 +249,7 @@ async function loadVideo() {
 
 const main = async () => {
   await tf.setBackend(state.backend);
+  await tf.ready()
   model = await handpose.load();
   let video;
 
