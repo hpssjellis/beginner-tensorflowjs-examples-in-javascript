@@ -74,8 +74,7 @@ The following tag without the @ can be used to get the latest version but may ev
 
     
 
-<!--      
-/////////////////////////////////////////// old index.js file -------------------------------------------
+<!--  -------------------------------------------old index.js file -------------------------------------------  -->
 
 
 /**
@@ -98,7 +97,7 @@ The following tag without the @ can be used to get the latest version but may ev
 
 
 
-
+<!-- 
 import * as blazeface from '@tensorflow-models/blazeface';
 import * as tf from '@tensorflow/tfjs-core';
 import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
@@ -111,23 +110,7 @@ import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
 <script>
 
     
-
 //tfjsWasm.setWasmPath('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@latest/dist/tfjs-backend-wasm.wasm');
-
-//const stats = new Stats();
-//stats.showPanel(0);
-//document.body.prepend(stats.domElement);
-
-//let model, ctx, videoWidth, videoHeight, video, canvas;
-
-//const state = {
-//  backend: 'wasm'
-//};
-
-//const gui = new dat.GUI();
-//gui.add(state, 'backend', ['wasm', 'webgl', 'cpu']).onChange(async backend => {
- // await tf.setBackend(backend);
-//});
 
 async function setupCamera() {
 
@@ -150,7 +133,7 @@ async function setupCamera() {
 }
 
 const renderPrediction = async () => {
-  //stats.begin();
+
 
   const returnTensors = false;
   const flipHorizontal = true;
@@ -195,7 +178,7 @@ const renderPrediction = async () => {
     }
   }
 
- // stats.end();
+
 
   requestAnimationFrame(renderPrediction);
 };
