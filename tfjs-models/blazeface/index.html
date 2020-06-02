@@ -12,19 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================-->
-<style>
-
-  canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-</style>
-
 
 <body>
   <div id="main">
+      
     <video id="video" playsinline="" style="
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
@@ -32,12 +23,15 @@ limitations under the License.
       height: auto;
       ">
     </video>
-    <canvas id="output"></canvas>
+      
+    <canvas id="output" stye="position:absolute; top:0px; left:0px;"></canvas>
+      
     <div id="description">
       <div id="description-title">Blazeface demo</div>
 
-    <div id="myDiv01">...</div>
+      <div id="myDiv01">...</div>
     </div>
+      
     <video id="video" playsinline="" style="
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
@@ -46,14 +40,13 @@ limitations under the License.
       height: auto;
       ">
     </video>
+      
   </div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.5"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script>
-
-
 
 
 <!-- 
@@ -74,7 +67,7 @@ The following tag without the @ can be used to get the latest version but may ev
 
     
 
-<!--  -------------------------------------------old index.js file -------------------------------------------  -->
+<!--  -------------------------------------------old index.js file -------------------------------------------  
 
 
 /**
@@ -94,28 +87,18 @@ The following tag without the @ can be used to get the latest version but may ev
  * =============================================================================
  */
 
-
-
-
-<!-- 
-import * as blazeface from '@tensorflow-models/blazeface';
-import * as tf from '@tensorflow/tfjs-core';
-import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
-
 -->
-
-
-
 
 <script>
 
-    
+//import * as blazeface from '@tensorflow-models/blazeface';
+//import * as tf from '@tensorflow/tfjs-core';
+//import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
+
+   
 //tfjsWasm.setWasmPath('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@latest/dist/tfjs-backend-wasm.wasm');
 
-async function setupCamera() {
-
-    
-   // await tf.setBackend(backend);
+async function setupCamera() {    
     
   video = document.getElementById('video');
 
@@ -133,7 +116,6 @@ async function setupCamera() {
 }
 
 const renderPrediction = async () => {
-
 
   const returnTensors = false;
   const flipHorizontal = true;
@@ -188,8 +170,7 @@ const setupPage = async () => {
   const state = {
      backend: 'wasm'
   }; 
-    
-    
+        
   await tf.setBackend(state.backend);
  // await tf.setBackend('wasm');
   await setupCamera();
