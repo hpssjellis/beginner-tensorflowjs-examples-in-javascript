@@ -21,6 +21,9 @@ april 29, 2020 just getting started on these
 
 1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/posenet/
 
+
+1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/speech-commands/
+
 1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/qna
 
 1. https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/universal-sentence-encoder/
