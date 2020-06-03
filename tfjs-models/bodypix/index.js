@@ -579,7 +579,7 @@ function drawPoses(personOrPersonPartSegmentation, flipHorizontally, ctx) {
       /////////////////////////////// start my stuff //////////////////////////////////////////////////////
       
        try {
-          document.getElementById('myDiv01').innerHTML += 'Probability ' + pose.score + '<br>'
+          document.getElementById('myDiv01').innerHTML = 'Probability ' + pose.score + '<br>'
           console.log(pose)
       }
       catch(err){
