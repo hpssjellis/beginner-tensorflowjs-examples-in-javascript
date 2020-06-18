@@ -241,7 +241,7 @@ async function animate() {
  * Kicks off the demo by loading the knn model, finding and loading
  * available camera devices, and setting off the animate function.
  */
-export async function bindPage() {
+async function bindPage() {
   classifier = knnClassifier.create();
   myMobilenet = await mobilenet.load();
   console.log('loaded mobilenet')
