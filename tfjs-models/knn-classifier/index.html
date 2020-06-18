@@ -81,13 +81,11 @@
  
 //import * as mobilenetModule from '@tensorflow-models/mobilenet';
 //import * as tf from '@tensorflow/tfjs';
-//import Stats from 'stats.js';
 
 //import * as knnClassifier from '../src/index';
 
 const videoWidth = 300;
 const videoHeight = 250;
-//const stats = new Stats();
 
 // Number of classes to classify
 const NUM_CLASSES = 3;
@@ -175,18 +173,9 @@ function setupGui() {
 }
 
 /**
- * Sets up a frames per second panel on the top-left of the window
- */
-//function setupFPS() {
-// stats.showPanel(0);  // 0: fps, 1: ms, 2: mb, 3+: custom
-// document.body.appendChild(stats.dom);
-//}
-
-/**
  * Animation function called on each frame, running prediction
  */
 async function animate() {
-  //stats.begin();
 
   // Get image data from video element
   const image = tf.browser.fromPixels(video);
@@ -232,7 +221,6 @@ async function animate() {
     logits.dispose();
   }
 
-  //stats.end();
 
   requestAnimationFrame(animate);
 }
@@ -251,7 +239,6 @@ async function bindPage() {
 
   // Setup the GUI
   setupGui();
-  //setupFPS();
 
   // Setup the camera
   try {
@@ -275,8 +262,6 @@ navigator.getUserMedia = navigator.getUserMedia ||
 bindPage();
 
 </script>
-
-
 
 
 </html>
