@@ -406,7 +406,7 @@ const runDeeplab = async (modelName) => {
   if (!deeplab[modelName]) {
     status('Loading the model...');
     const loadingStart = performance.now();
-    deeplab[modelName] = load({base: modelName, quantizationBytes});
+    deeplab[modelName] = deeplab.load({base: modelName, quantizationBytes});
     await deeplab[modelName];
     status(`Loaded the model in ${
       ((performance.now() - loadingStart) / 1000).toFixed(2)} s`);
