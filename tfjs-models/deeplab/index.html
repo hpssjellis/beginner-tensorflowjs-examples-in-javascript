@@ -288,7 +288,7 @@ const initializeModels = async () => {
     const quantizationBytes =
         Number(selector.options[selector.selectedIndex].text);
     state.quantizationBytes = quantizationBytes;
-    deeplab[base] = load({base, quantizationBytes});
+    deeplab[base] = deeplab.load({base, quantizationBytes});
     const toggler = document.getElementById(`toggle-${base}-image`);
     toggler.onclick = () => setImage(deeplabExampleImages[base]);
     const runner = document.getElementById(`run-${base}`);
