@@ -264,7 +264,7 @@ import pascalExampleImage from './examples/pascal.jpg';
 
 
 const modelNames = ['pascal', 'cityscapes', 'ade20k'];
-const deeplab = {};
+const myDeeplab = {};
 const state = {};
 
 const deeplabExampleImages = {
@@ -288,7 +288,7 @@ const initializeModels = async () => {
     const quantizationBytes =
         Number(selector.options[selector.selectedIndex].text);
     state.quantizationBytes = quantizationBytes;
-    deeplab[base] = deeplab.load({base, quantizationBytes});
+    myDeeplab[base] = deeplab.load({base, quantizationBytes});
     const toggler = document.getElementById(`toggle-${base}-image`);
     toggler.onclick = () => setImage(deeplabExampleImages[base]);
     const runner = document.getElementById(`run-${base}`);
@@ -373,7 +373,7 @@ const status = (message) => {
 };
 
 const runPrediction = (modelName, input, initialisationStart) => {
-  deeplab[modelName].then((model) => {
+  myDeeplab[modelName].then((model) => {
     model.segment(input).then((output) => {
       displaySegmentationMap(modelName, output);
       status(`Ran in ${
@@ -389,9 +389,9 @@ const runDeeplab = async (modelName) => {
       Number(selector.options[selector.selectedIndex].text);
   if (state.quantizationBytes !== quantizationBytes) {
     for (const base of modelNames) {
-      if (deeplab[base]) {
-        (await deeplab[base]).dispose();
-        deeplab[base] = undefined;
+      if (myDeeplab[base]) {
+        (await myDeeplab[base]).dispose();
+        myDeeplab[base] = undefined;
       }
     };
     state.quantizationBytes = quantizationBytes;
@@ -403,11 +403,11 @@ const runDeeplab = async (modelName) => {
   }
   toggleInvisible('input-card', false);
 
-  if (!deeplab[modelName]) {
+  if (!myDeeplab[modelName]) {
     status('Loading the model...');
     const loadingStart = performance.now();
-    deeplab[modelName] = deeplab.load({base: modelName, quantizationBytes});
-    await deeplab[modelName];
+    myDeeplab[modelName] = deeplab.load({base: modelName, quantizationBytes});
+    await myDeeplab[modelName];
     status(`Loaded the model in ${
       ((performance.now() - loadingStart) / 1000).toFixed(2)} s`);
   }
