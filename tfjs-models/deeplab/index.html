@@ -86,6 +86,9 @@ limitations under the License.
 </head>
 
 <body>
+ <input type=button value=0 onclick="{
+   document.getElementById('upload-image').src =   ade20kExampleImage.src                                 
+ }"><br>
   
  <input type=button value=1 onclick="{
    toggleInvisible('pascal')                                    
@@ -313,9 +316,9 @@ import pascalExampleImage from './examples/pascal.jpg';
   cityscapesExampleImage = new Image();
   pascalExampleImage = new Image();
 
-  ade20kExampleImage.src = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/examples/ade20k.jpg'
-  cityscapesExampleImage.src = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/examples/cityscapes.jpg'
-  pascalExampleImage.src = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/examples/pascal.jpg'
+  ade20kExampleImage.src ='./examples/ade20k.jpg'
+  cityscapesExampleImage.src = './examples/cityscapes.jpg'
+  pascalExampleImage.src = './examples/pascal.jpg'
 
 
 
