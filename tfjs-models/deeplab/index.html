@@ -280,6 +280,10 @@ const toggleInvisible = (elementId, force = undefined) => {
 
 const initializeModels = async () => {
   modelNames.forEach((base) => {
+    console.log('base')
+    console.log(base)
+    
+    
     const selector = document.getElementById('quantizationBytes');
     const quantizationBytes =
         Number(selector.options[selector.selectedIndex].text);
