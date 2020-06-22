@@ -1,0 +1,522 @@
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============================================================================= -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <style>
+    .is-on-top {
+  z-index: 100;
+}
+
+.flex-should-wrap {
+  flex-wrap: wrap;
+}
+
+.is-inline-flex {
+  display: inline-flex;
+}
+
+.is-flex-column {
+  flex-direction: column;
+}
+
+.is-concise-message {
+  padding: 0.7em;
+  display: block;
+  width: 150px;
+}
+
+.is-flex-centered {
+  justify-content: center;
+}
+
+.is-vcentered {
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.is-full-width {
+  width: 100%;
+}
+
+.m-r-sm {
+  margin-right: 0.5rem;
+}
+
+.no-breaks {
+  white-space: nowrap;
+}
+
+.min-content {
+  min-width: min-content !important;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+  </style>
+  
+  
+  
+  
+  <title>DeepLab Demo</title>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/deeplab@0.1.0"></script>
+  
+  <!-- Adds the WASM backend to the global backend registry -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@1.7.0/dist/tf-backend-wasm.js"></script>
+  
+  
+</head>
+
+<body>
+ <input type=button value=ade20k-image onclick="{
+    setImage(ade20kExampleImage.src)                                     
+ }">  <br>
+  
+   <input type=button value=cityscape-image onclick="{
+    setImage(cityscapesExampleImage.src)                                     
+ }">  <br>
+  
+ <input type=button value=pascal-image onclick="{
+    setImage(pascalExampleImage.src)                                     
+ }">  <br><br><br>
+  
+   
+
+   
+  
+  
+  
+  
+  
+  
+  
+  
+   <input type=button value=run-ade20k onclick="{
+    runDeeplab('ade20k')                                     
+ }"><br>  
+  
+   <input type=button value=run-cityscapes onclick="{
+    runDeeplab('cityscapes')                                     
+ }"><br>  
+  
+   <input type=button value=run-pascal onclick="{
+    runDeeplab('pascal')                                     
+ }"><br><br><br>
+
+  
+  
+   <input type=button value=state onclick="{
+    console.log('state')                                        
+    console.log(state)                                                                                                                           
+ }"><br>
+  
+  
+   <input type=button value=version onclick="{
+    console.log('tf.version.tfjs')     
+    console.log(tf.version.tfjs)                                                                                                                                
+ }"><br>
+  
+  <div class="container">
+    <div class="section">
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <h1 class="navbar-item">
+            <img alt="TensorFlow.js Logo" src="tfjs-logo.png" />
+            <span class="tag is-white is-medium">
+              <b>DeepLab Demo</b>
+            </span>
+          </h1>
+        </div>
+      </nav>
+      <div class="tile is-ancestor flex-should-wrap space-evenly">
+        <div class="tile is-parent is-8 min-content">
+          <div class="tile is-child">
+            <article class="message">
+              <div class="message-header">
+                <h1>Three types of pre-trained weights are available:</h1>
+              </div>
+              <div class="message-body">
+                <div class="columns is-flex-centered">
+                  <div class="column">
+                    <div class="card large">
+                      <div class="card-content">
+                        <div class="content">
+                          <b>DeepLab
+                            <a href="http://host.robots.ox.ac.uk/pascal/VOC/">
+                              Pascal
+                            </a>
+                          </b>
+                        </div>
+                      </div>
+                      <footer class="card-footer">
+                        <a class="button card-footer-item is-unselectable" id="toggle-pascal-image">Load
+                          example image</a>
+                        <a class="button card-footer-item is-unselectable" id="run-pascal">Run</a>
+                      </footer>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="card large">
+                      <div class="card-content">
+                        <div class="content">
+                          <b>DeepLab
+                            <a href="https://www.cityscapes-dataset.com">
+                              Cityscapes
+                            </a>
+                          </b>
+                        </div>
+                      </div>
+                      <footer class="card-footer">
+                        <a class="button card-footer-item is-unselectable" id="toggle-cityscapes-image">Load
+                          example image</a>
+                        <a class="button card-footer-item is-unselectable" id="run-cityscapes">Run</a>
+                      </footer>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="card large">
+                      <div class="card-content">
+                        <div class="content">
+                          <b>DeepLab
+                            <a href="https://groups.csail.mit.edu/vision/datasets/ADE20K/">
+                              ADE20K
+                            </a>
+                          </b>
+                        </div>
+                      </div>
+                      <footer class="card-footer">
+                        <a class="button card-footer-item is-unselectable" id="toggle-ade20k-image">Load
+                          example image</a>
+                        <a class="button card-footer-item is-unselectable" id="run-ade20k">Run</a>
+                      </footer>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <div class="is-inline-flex is-vcentered flex-should-wrap">
+              <div class="is-inline-flex no-breaks m-r-sm">
+                <span class="is-vcentered m-r-sm">
+                  <b>Quantization:</b>
+                </span>
+                <div class="control">
+                  <div class="select">
+                    <select id="quantizationBytes">
+                      <option>1</option>
+                      <option>2</option>
+                      <option selected>4</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <span class="is-inline-flex no-breaks">
+                <b class="m-r-sm">Status:</b>
+                <span id="status-message">Loading models...</span>
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <div class="tile is-parent is-3">
+          <div class="box tile is-child is-on-top is-inline-flex is-flex-column ">
+            <div class="notification">
+              For best performance, upload images with objects (chairs,
+              plants) or animals (humans, cats).
+            </div>
+            <div class="file is-boxed is-centered">
+              <label class="file-label">
+                <input class="file-input" type="file" name="image" id="upload-image" />
+                <span class="file-cta">
+                  <span class="file-label">
+                    Upload an image
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tile is-ancestor">
+        <div class="tile is-horizontal">
+          <div class="tile is-parent is-5">
+            <div class="tile is-child card large is-invisible" id="input-card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Input image
+                </p>
+              </header>
+              <div class="card-content">
+                <figure class="image">
+                  <img alt="Input image" id="input-image" src="./placeholder.png" />
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="tile is-parent is-5">
+            <div class="tile is-child card large is-invisible" id="output-card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Segmentation map
+                </p>
+              </header>
+              <div class="card-content">
+                <figure class="image">
+                  <canvas id="output-image"></canvas>
+                </figure>
+              </div>
+            </div>
+          </div>
+          <div class="tile is-parent">
+            <div class="tile is-child card large is-invisible" id="legend-card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  Legend
+                </p>
+              </header>
+              <div class="card-content">
+                <div id="legend" class="columns is-multiline"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+<!-- Start old index.js   -->
+<script>
+ /**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+
+
+/**
+
+import 'bulma/css/bulma.css';
+
+import {load} from '@tensorflow-models/deeplab';
+import * as tf from '@tensorflow/tfjs-core';
+
+import ade20kExampleImage from './examples/ade20k.jpg';
+import cityscapesExampleImage from './examples/cityscapes.jpg';
+import pascalExampleImage from './examples/pascal.jpg';
+
+
+*/
+
+
+  ade20kExampleImage     = new Image();
+  cityscapesExampleImage = new Image();
+  pascalExampleImage = new Image();
+
+//  ade20kExampleImage.src ='./examples/ade20k.jpg'
+//  cityscapesExampleImage.src = './examples/cityscapes.jpg'
+ // pascalExampleImage.src = './examples/pascal.jpg'
+
+  ade20kExampleImage.src ='https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/examples/ade20k.jpg'
+  cityscapesExampleImage.src = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/examples/cityscapes.jpg'
+  pascalExampleImage.src = 'https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tfjs-models/deeplab/examples/pascal.jpg'
+  
+  
+
+
+
+
+const modelNames = ['pascal', 'cityscapes', 'ade20k'];
+const myDeeplab = {};
+const state = {};
+
+const deeplabExampleImages = {
+  pascal: pascalExampleImage,
+  cityscapes: cityscapesExampleImage,
+  ade20k: ade20kExampleImage,
+};
+
+const toggleInvisible = function(elementId, force = undefined) {
+  const outputContainer = document.getElementById(elementId);
+  outputContainer.classList.toggle('is-invisible', force);
+};
+
+const initializeModels = async function() {
+  modelNames.forEach((base) => {
+    console.log('base')
+    console.log(base)
+    
+    
+    const selector = document.getElementById('quantizationBytes');
+    const quantizationBytes =
+        Number(selector.options[selector.selectedIndex].text);
+    state.quantizationBytes = quantizationBytes;
+    myDeeplab[base] = deeplab.load({base, quantizationBytes});
+    const toggler = document.getElementById(`toggle-${base}-image`);
+    toggler.onclick = () => setImage(deeplabExampleImages[base]);
+    const runner = document.getElementById(`run-${base}`);
+    runner.onclick = async function() {
+      toggleInvisible('output-card', true);
+      toggleInvisible('legend-card', true);
+      await tf.nextFrame();
+      await runDeeplab(base);
+    };
+  });
+  const uploader = document.getElementById('upload-image');
+  uploader.addEventListener('change', processImages);
+  status('Initialised models, waiting for input...');
+};
+
+const setImage = function(src) {
+  toggleInvisible('output-card', true);
+  toggleInvisible('legend-card', true);
+  const image = document.getElementById('input-image');
+  image.src = src;
+  toggleInvisible('input-card', false);
+  status('Waiting until the model is picked...');
+};
+
+const processImage = function(file) {
+  if (!file.type.match('image.*')) {
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    setImage(event.target.result);
+  };
+  reader.readAsDataURL(file);
+};
+
+const processImages = function(event) {
+  const files = event.target.files;
+  Array.from(files).forEach(processImage);
+};
+
+const displaySegmentationMap = function(modelName, deeplabOutput) {
+  const {legend, height, width, segmentationMap} = deeplabOutput;
+  const canvas = document.getElementById('output-image');
+  const ctx = canvas.getContext('2d');
+
+  toggleInvisible('output-card', false);
+  const segmentationMapData = new ImageData(segmentationMap, width, height);
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.width = width;
+  canvas.height = height;
+  ctx.putImageData(segmentationMapData, 0, 0);
+
+  const legendList = document.getElementById('legend');
+  while (legendList.firstChild) {
+    legendList.removeChild(legendList.firstChild);
+  }
+
+  Object.keys(legend).forEach((label) => {
+    const tag = document.createElement('span');
+    tag.innerHTML = label;
+    const [red, green, blue] = legend[label];
+    tag.classList.add('column');
+    tag.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+    tag.style.padding = '1em';
+    tag.style.margin = '1em';
+    tag.style.color = '#ffffff';
+
+    legendList.appendChild(tag);
+  });
+  toggleInvisible('legend-card', false);
+
+
+  const inputContainer = document.getElementById('input-card');
+  inputContainer.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+};
+
+const status = function(message) {
+  const statusMessage = document.getElementById('status-message');
+  statusMessage.innerText = message;
+  console.log(message);
+};
+
+const runPrediction = function(modelName, input, initialisationStart) {
+  myDeeplab[modelName].then((model) => {
+    model.segment(input).then((output) => {
+      displaySegmentationMap(modelName, output);
+      status(`Ran in ${
+        ((performance.now() - initialisationStart) / 1000).toFixed(2)} s`);
+    });
+  });
+};
+
+const runDeeplab = async function(modelName) {
+  status(`Running the inference...`);
+  const selector = document.getElementById('quantizationBytes');
+  const quantizationBytes = Number(selector.options[selector.selectedIndex].text);
+  if (state.quantizationBytes !== quantizationBytes) {
+    for (const base of modelNames) {
+      if (myDeeplab[base]) {
+        (await myDeeplab[base]).dispose();
+        myDeeplab[base] = undefined;
+      }
+    };
+    state.quantizationBytes = quantizationBytes;
+  }
+  const input = document.getElementById('input-image');
+  if (!input.src || !input.src.length || input.src.length === 0) {
+    status('Failed! Please load an image first.');
+    return;
+  }
+  toggleInvisible('input-card', false);
+
+  if (!myDeeplab[modelName]) {
+    status('Loading the model...');
+    const loadingStart = performance.now();
+    myDeeplab[modelName] = deeplab.load({base: modelName, quantizationBytes});
+    await myDeeplab[modelName];
+    status(`Loaded the model in ${
+      ((performance.now() - loadingStart) / 1000).toFixed(2)} s`);
+  }
+  const predictionStart = performance.now();
+  if (input.complete && input.naturalHeight !== 0) {
+    runPrediction(modelName, input, predictionStart);
+  } else {
+    input.onload = function() {
+      runPrediction(modelName, input, predictionStart);
+    };
+  }
+};
+
+window.onload = initializeModels; 
+  
+  
+</script>
+
+<!-- end old index.js  -->
