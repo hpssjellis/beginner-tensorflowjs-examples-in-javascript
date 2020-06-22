@@ -110,6 +110,14 @@ limitations under the License.
     runDeeplab('pascal')                                     
  }"><br>
   
+  
+   <input type=button value=state onclick="{
+    console.log('state')                                       
+ 
+    console.log(state)                                                                                 
+                                           
+ }"><br>
+  
   <div class="container">
     <div class="section">
       <nav class="navbar">
@@ -437,7 +445,7 @@ const status = function(message) {
   console.log(message);
 };
 
-const runPrediction = (modelName, input, initialisationStart) => {
+const runPrediction = function(modelName, input, initialisationStart) {
   myDeeplab[modelName].then((model) => {
     model.segment(input).then((output) => {
       displaySegmentationMap(modelName, output);
