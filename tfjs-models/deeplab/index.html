@@ -87,21 +87,18 @@ limitations under the License.
 
 <body>
  <input type=button value=ade20k-image onclick="{
-   document.getElementById('input-image').src = ade20kExampleImage.src                                                                                                 
- }"><br>
+    setImage(ade20kExampleImage.src)                                     
+ }">  <br>
   
- <input type=button value=pascal1-image onclick="{
-   document.getElementById('input-image').src = pascalExampleImage.src                                                                                              
- }"><br>
   
- <input type=button value=pascal2-image onclick="{
+ <input type=button value=pascal-image onclick="{
     setImage(pascalExampleImage.src)                                     
  }">  <br>
   
    
  <input type=button value=cityscape-image onclick="{
-    setImage(cityscapeExampleImage.src)                                     
- }">  <br>
+    setImage(cityscapesExampleImage.src)                                     
+ }">  <br><br><br>
   
    
   
@@ -116,17 +113,14 @@ limitations under the License.
     runDeeplab('ade20k')                                     
  }"><br>  
   
-   <input type=button value=run-cityscape onclick="{
+   <input type=button value=run-cityscapes onclick="{
     runDeeplab('cityscape')                                     
  }"><br>  
   
    <input type=button value=run-pascal onclick="{
     runDeeplab('pascal')                                     
- }"><br>
-  
-     <input type=button value=ade20k onclick="{
-    runDeeplab('ade20k')                                     
- }"><br>
+ }"><br><br><br>
+
   
   
    <input type=button value=state onclick="{
