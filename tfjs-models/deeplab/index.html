@@ -86,27 +86,28 @@ limitations under the License.
 </head>
 
 <body>
- <input type=button value=0 onclick="{
-   document.getElementById('input-image').src = ade20kExampleImage.src                                                                  
-   console.log('ade20kExampleImage.src')                                  
-   console.log(ade20kExampleImage.src)                                  
+ <input type=button value=ade20k-image onclick="{
+   document.getElementById('input-image').src = ade20kExampleImage.src                                                                                                 
  }"><br>
   
- <input type=button value=1 onclick="{
-   document.getElementById('input-image').src = pascalExampleImage.src                                                                  
-   console.log('ade20kExampleImage.src')                                  
-   console.log(ade20kExampleImage.src)                                  
+ <input type=button value=pascal1-image onclick="{
+   document.getElementById('input-image').src = pascalExampleImage.src                                                                                              
  }"><br>
   
- <input type=button value=2 onclick="{
+ <input type=button value=pascal2-image onclick="{
     setImage(pascalExampleImage.src)                                     
  }">  <br>
   
-   <input type=button value=3 onclick="{
-    processImage(event)                                     
- }"><br>
   
-   <input type=button value=pascal onclick="{
+   <input type=button value=run-ade20k onclick="{
+    runDeeplab('ade20k')                                     
+ }"><br>  
+  
+   <input type=button value=run-cityscape onclick="{
+    runDeeplab('cityscape')                                     
+ }"><br>  
+  
+   <input type=button value=run-pascal onclick="{
     runDeeplab('pascal')                                     
  }"><br>
   
