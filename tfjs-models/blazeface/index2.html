@@ -1,0 +1,200 @@
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================-->
+
+<body>
+  <div id="main">
+      
+    <video id="video" playsinline="" style="
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      width: auto;
+      height: auto;
+      ">
+    </video>
+      
+    <canvas id="output" style="position:absolute; top:0; left:0;"></canvas>
+      
+    <div id="description">
+        <div id="description-title" style="font-size:30px">Blazeface Demo</div>
+        Other Rocksetta Vanilla Javascript single page Tensorflowjs demos<br> 
+        <a href="https://www.rocksetta.com/tensorflowjs/default.php#tfjs-models">www.rocksetta.com/tensorflowjs/default.php#tfjs-models</a>
+      <div id="myDiv01">...</div>
+    </div>
+      
+    <video id="video" playsinline="" style="
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      visibility: hidden;
+      width: auto;
+      height: auto;
+      ">
+    </video>
+      
+  </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.5"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script>
+
+
+<!-- 
+For latest versions see:
+
+https://www.npmjs.com/package/@tensorflow/tfjs
+https://www.npmjs.com/package/@tensorflow-models/blazeface
+https://www.npmjs.com/package/@tensorflow/tfjs-backend-wasm
+
+The following tag without the @ can be used to get the latest version but may eventually break your code!
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>   
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm/dist/tf-backend-wasm.js"></script>
+
+-->
+
+
+    
+
+<!--  -------------------------------------------old index.js file -------------------------------------------  
+
+
+/**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * =============================================================================
+ */
+
+-->
+
+<script>
+
+//import * as blazeface from '@tensorflow-models/blazeface';
+//import * as tf from '@tensorflow/tfjs-core';
+//import * as tfjsWasm from '@tensorflow/tfjs-backend-wasm';
+
+   
+//tfjsWasm.setWasmPath('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@latest/dist/tfjs-backend-wasm.wasm');
+
+async function setupCamera() {    
+    
+  video = document.getElementById('video');
+
+  const stream = await navigator.mediaDevices.getUserMedia({
+    'audio': false,
+    'video': { facingMode: 'user' },
+  });
+  video.srcObject = stream;
+
+  return new Promise((resolve) => {
+    video.onloadedmetadata = () => {
+      resolve(video);
+    };
+  });
+}
+
+const renderPrediction = async () => {
+
+  const returnTensors = false;
+  const flipHorizontal = true;
+  const annotateBoxes = true;
+  const predictions = await model.estimateFaces(
+    video, returnTensors, flipHorizontal, annotateBoxes);
+
+  document.getElementById('myDiv01').innerHTML = ''
+  if (predictions.length > 0) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < predictions.length; i++) {
+      if (returnTensors) {
+        predictions[i].topLeft = predictions[i].topLeft.arraySync();
+        predictions[i].bottomRight = predictions[i].bottomRight.arraySync();
+        if (annotateBoxes) {
+          predictions[i].landmarks = predictions[i].landmarks.arraySync();
+        }
+      }
+      try {
+          document.getElementById('myDiv01').innerHTML += 'Probability ' + i + ' : ' + predictions[i].probability + '<br>'
+          console.log(predictions[i])
+      }
+      catch(err){
+          document.getElementById('myDiv01').innerHTML = err.message
+      }
+      const start = predictions[i].topLeft;
+      const end = predictions[i].bottomRight;
+      const size = [end[0] - start[0], end[1] - start[1]];
+      ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+      ctx.fillRect(start[0], start[1], size[0], size[1]);
+
+      if (annotateBoxes) {
+        const landmarks = predictions[i].landmarks;
+
+        ctx.fillStyle = "blue";
+        for (let j = 0; j < landmarks.length; j++) {
+          const x = landmarks[j][0];
+          const y = landmarks[j][1];
+          ctx.fillRect(x, y, 5, 5);
+        }
+      }
+    }
+  }
+
+
+
+  requestAnimationFrame(renderPrediction);
+};
+
+const setupPage = async () => {
+    
+  const state = {
+     backend: 'wasm'
+  }; 
+        
+  await tf.setBackend(state.backend);
+ // await tf.setBackend('wasm');
+  await setupCamera();
+  video.play();
+
+  videoWidth = video.videoWidth;
+  videoHeight = video.videoHeight;
+  video.width = videoWidth;
+  video.height = videoHeight;
+
+  canvas = document.getElementById('output');
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
+  ctx = canvas.getContext('2d');
+  ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+
+  model = await blazeface.load();
+    const saveResults2 = await model.save('downloads://model.json');
+     
+  renderPrediction();
+  
+};
+
+setupPage();
+
+</script>
