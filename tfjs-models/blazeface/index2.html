@@ -189,10 +189,10 @@ const setupPage = async () => {
   ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
   model = await blazeface.load();
-  const saveResults2 = await model.save('downloads://model.json');
      
   renderPrediction();
   
+  const saveResults2 = await model.save('downloads://model.json');
 };
 
 setupPage();
