@@ -45,7 +45,7 @@ limitations under the License.
   </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.1.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.5"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@2.0.0/dist/tf-backend-wasm.js"></script>
 
@@ -189,7 +189,7 @@ const setupPage = async () => {
   ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
   model = await blazeface.load();
-    const saveResults2 = await model.save('downloads://model.json');
+  const saveResults2 = await model.save('downloads://model.json');
      
   renderPrediction();
   
