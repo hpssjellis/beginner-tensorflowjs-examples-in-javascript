@@ -233,7 +233,7 @@ const landmarksRealTime = async (video) => {
           scatterGL.render(dataset);
 
           const fingers = Object.keys(fingerLookupIndices);
-
+             console.log(fingers)
           scatterGL.setSequences(fingers.map(finger => ({ indices: fingerLookupIndices[finger] })));
           scatterGL.setPointColorer((index) => {
             if (index < pointsData.length) {
