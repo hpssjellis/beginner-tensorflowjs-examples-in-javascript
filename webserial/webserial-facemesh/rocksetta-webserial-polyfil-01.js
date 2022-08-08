@@ -6,7 +6,7 @@
   var exports = {};
 </script>  
 
-
+<script src="https://cdn.jsdelivr.net/npm/web-serial-polyfill@1.0.13/dist/serial.js"> </script> 
 
 
 <script>
