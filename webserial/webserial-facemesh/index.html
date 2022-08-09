@@ -81,7 +81,7 @@ limitations under the License.
 
     
     
-   <h6> Version 0.1.2-9 </h6>
+   <h6> Version 0.3.0-10 </h6>
 
     
 <input type=button value="new connect" onclick="{
@@ -273,6 +273,12 @@ async function renderPrediction() {
         let myMouthOpen = (keypoints[14][1] - keypoints[13][1])   // x = 0,  y=1
         let myMouthShut =  ( (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth) )   // myMouthOpenCutoff default ~0.03  
           
+        if (myMouthOpen > 10){  // random cutoff between open and closed
+          mySendIt('b')  // arduino off or on, depends on the coding
+        } else {
+          mySendIt('a')  
+        }
+        
         document.getElementById('myDiv03').innerHTML = 'myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
       }
       catch(err){
