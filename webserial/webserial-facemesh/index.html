@@ -81,7 +81,7 @@ limitations under the License.
 
     
     
-   <h6> Version 0.1.1-5 </h6>
+   <h6> Version 0.1.2-7 </h6>
 
     
 <input type=button value="new connect" onclick="{
@@ -261,6 +261,8 @@ async function renderPrediction() {
       try {
         document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + '<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
+        const keypoints = prediction.scaledMesh;
+        console.log(keypoints[234])
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
