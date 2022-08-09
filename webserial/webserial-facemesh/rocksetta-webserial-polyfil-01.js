@@ -132,7 +132,7 @@ async function myPoly(){
                                             
     const results = mySerial.getInfo();
     
-    //document.getElementById('myDiv02').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
+    document.getElementById('myDiv02').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
     console.log('get info results', results);
     document.getElementById('myDiv02').innerHTML += 'results.usbVendorId: ' + results.usbVendorId + '<br>'
     document.getElementById('myDiv02').innerHTML += 'results.usbProductId: ' + results.usbProductId + '<br>'
