@@ -14,6 +14,8 @@
   let port
   
 
+  
+  /*
 document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
     connectSerial();
@@ -23,6 +25,8 @@ document.getElementById('connectButton').addEventListener('click', () => {
 
   }
 });
+
+*/
 
 async function connectSerial() {
   const log = document.getElementById('target');
