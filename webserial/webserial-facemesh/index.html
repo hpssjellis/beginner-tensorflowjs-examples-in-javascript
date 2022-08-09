@@ -262,7 +262,17 @@ async function renderPrediction() {
         document.getElementById('myDiv01').innerHTML += 'Confidence: ' + prediction.faceInViewConfidence.toFixed(4) + '<br>'
         // console.log(prediction.faceInViewConfidence.toFixed(4))
         const keypoints = prediction.scaledMesh;
-        console.log(keypoints[234])
+       // console.log(keypoints[234])
+        let myFaceWidth =  keypoints[454][0] - keypoints[234][0]  // x = 0,  y=1
+        let myDistanceCutoff = 50
+        let myCloseness =  (myFaceWidth - myDistanceCutoff)/ myDistanceCutoff    // myDistanceCutoff default ~50
+      //  if (myCloseness < 0 ){myCloseness = 0}
+        
+        let myMouthOpenCutoff = 0.03
+        let myMouthOpen = (keypoints[14][1] - keypoints[13][1])   // x = 0,  y=1
+        let myMouthShut =  ( (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth) )   // myMouthOpenCutoff default ~0.03  
+          
+        document.getElementById('myDiv02').innerHTML += 'myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
