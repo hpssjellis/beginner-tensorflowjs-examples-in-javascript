@@ -82,7 +82,7 @@ limitations under the License.
 
     
     
-   <h6> Version 0.3.0-10 </h6>
+   <h6> Version 0.3.1-11 </h6>
 
     
 <input type=button value="new connect" onclick="{
@@ -297,7 +297,7 @@ async function renderPrediction() {
      //          mySendIt('b')  // arduino off or on, depends on the coding     
           
         
-        document.getElementById('myDiv03').innerHTML = 'myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
+        document.getElementById('myDiv03').innerHTML ='myOn: ' + myOn + ',myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
