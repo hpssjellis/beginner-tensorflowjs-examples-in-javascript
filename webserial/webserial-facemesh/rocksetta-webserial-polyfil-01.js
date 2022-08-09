@@ -4,7 +4,7 @@
   //Global Variables
   // Version 0.1.2-18
   // latest change from myDiv01 to myDiv02
-  var exports = {};
+ // var exports = {};
 
 
   /////////////////////////////////////// webSerial code first ///////////////////////////////////////////
