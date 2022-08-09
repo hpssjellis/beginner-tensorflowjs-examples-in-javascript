@@ -77,6 +77,31 @@ limitations under the License.
     <div id="myDiv01">...</div>   
     
     
+    
+    <button id="connectButton">Connect via Serial Port</button>
+
+<input type=text id="mySendText" value="a">
+<input type=button value="send" onclick="{ mySendIt(document.getElementById('mySendText').value) }"><br><br>
+
+<input type=button value="send 'a' LED On" onclick="{mySendIt('a')}"><br><br>
+<input type=button value="send 'b' LED Off" onclick="{mySendIt('b')}"><br><br>
+
+<div id="target">...</div> <br><br>
+
+  
+    
+    
+    
+
+
+  Here is the latest sketch I am using. The .txt is for viewing the .ino is to download<br>
+ <li><a href="arduino04-webserial.txt">arduino04-webserial.txt</a>  This arduino sketch can be viewed
+<li><a href="arduino04-webserial.ino">arduino04-webserial.ino</a>  Click to download: Note: New ArduinoWebSerial testing code. Make sure in Arduino Serial Monitor you don't send a new-line
+ 
+
+  This Github at <a href="https://github.com/hpssjellis/web-serial-polyfill">https://github.com/hpssjellis/web-serial-polyfill</a>
+<p><small>Original Demo from <a href="https://codelabs.developers.google.com/codelabs/web-serial/" target="_blank" rel="noopener">Google Developers</a> codelabs.</small></p>    
+    
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
 
