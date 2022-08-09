@@ -81,7 +81,7 @@ limitations under the License.
 
     
     
-   <h6> Version 0.1.2-8 </h6>
+   <h6> Version 0.1.2-9 </h6>
 
     
 <input type=button value="new connect" onclick="{
@@ -104,6 +104,7 @@ limitations under the License.
 <input type=button value="send 'b' LED Off" onclick="{mySendIt('b')}"><br><br>
 
 <div id="target">...</div> <br><br>
+<div id="myDiv03">...</div>      
 <div id="myDiv02">...</div>      
 <div id="myDiv01">...</div>   
   
@@ -272,7 +273,7 @@ async function renderPrediction() {
         let myMouthOpen = (keypoints[14][1] - keypoints[13][1])   // x = 0,  y=1
         let myMouthShut =  ( (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth) )   // myMouthOpenCutoff default ~0.03  
           
-        document.getElementById('myDiv02').innerHTML += 'myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
+        document.getElementById('myDiv03').innerHTML = 'myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
       }
       catch(err){
       document.getElementById('myDiv01').innerHTML = err.message;
