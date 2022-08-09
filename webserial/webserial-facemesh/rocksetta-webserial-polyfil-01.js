@@ -2,7 +2,8 @@
 
 <script>
   //Global Variables
-  // Version 0.1.2-16 
+  // Version 0.1.2-17
+  // latest change from myDiv01 to myDiv02
   var exports = {};
 </script>  
 
@@ -22,7 +23,7 @@ document.getElementById('connectButton').addEventListener('click', () => {
   if (navigator.serial) {
     connectSerial();
   } else {
-    document.getElementById('myDiv01').innerHTML = 'Web Serial API not supported. Switching to Polyfill<br>'
+    document.getElementById('myDiv02').innerHTML = 'Web Serial API not supported. Switching to Polyfill<br>'
     myPoly()
 
   }
@@ -110,7 +111,7 @@ async function myRead(){
       },
       error => {
       console.error('error from read', error)
-     document.getElementById('myDiv01').innerHTML = 'error from read' + error
+     document.getElementById('myDiv02').innerHTML = 'error from read' + error
      }
     );
 }
@@ -120,7 +121,7 @@ async function myRead(){
 async function myPoly(){  
     mySerial = await serial.requestPort()
                                                                      
-    document.getElementById('myDiv01').innerHTML += await '<b>mySerial: </b><br><pre>' +  JSON.stringify(mySerial, null, 3) + '</pre><br><br>'      
+    document.getElementById('myDiv02').innerHTML += await '<b>mySerial: </b><br><pre>' +  JSON.stringify(mySerial, null, 3) + '</pre><br><br>'      
                                             
                                                                                      
     console.log('mySerial')                    
@@ -132,10 +133,10 @@ async function myPoly(){
                                             
     const results = mySerial.getInfo();
     
-    //document.getElementById('myDiv01').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
+    //document.getElementById('myDiv02').innerHTML += await 'Results:<b>: </b><br><pre>' +  JSON.stringify(results, null, 3) + '</pre><br><br>'                                          
     console.log('get info results', results);
-    document.getElementById('myDiv01').innerHTML += 'results.usbVendorId: ' + results.usbVendorId + '<br>'
-    document.getElementById('myDiv01').innerHTML += 'results.usbProductId: ' + results.usbProductId + '<br>'
+    document.getElementById('myDiv02').innerHTML += 'results.usbVendorId: ' + results.usbVendorId + '<br>'
+    document.getElementById('myDiv02').innerHTML += 'results.usbProductId: ' + results.usbProductId + '<br>'
  
     
     // start looping the serial read. Is there a better way to do this?
@@ -150,7 +151,7 @@ async function myPoly(){
       console.log('myWritten')
       console.log(myWritten)
                                          
-      //document.getElementById('myDiv01').innerHTML = '<br><br><b>myWriter: </b><br><pre>' +  JSON.stringify(myWritten, null, 3) + '</pre><br><br>'  
+      //document.getElementById('myDiv02').innerHTML = '<br><br><b>myWriter: </b><br><pre>' +  JSON.stringify(myWritten, null, 3) + '</pre><br><br>'  
                                             
    
     })    
