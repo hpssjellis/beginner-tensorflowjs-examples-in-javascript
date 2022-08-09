@@ -1,16 +1,11 @@
 
 
-<script>
+
   //Global Variables
   // Version 0.1.2-17
   // latest change from myDiv01 to myDiv02
   var exports = {};
-</script>  
 
-<script src="https://cdn.jsdelivr.net/npm/web-serial-polyfill@1.0.13/dist/serial.js"> </script> 
-
-
-<script>
 
   /////////////////////////////////////// webSerial code first ///////////////////////////////////////////
   
