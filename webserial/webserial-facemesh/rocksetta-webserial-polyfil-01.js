@@ -2,7 +2,7 @@
 
 
   //Global Variables
-  // Version 0.1.2-17
+  // Version 0.1.2-18
   // latest change from myDiv01 to myDiv02
   var exports = {};
 
@@ -153,7 +153,7 @@ async function myPoly(){
 } 
   
 /////////////////////////////////////// end Polyfill for Android ////////////////////////////////  
-</script>
+
 
 
 
