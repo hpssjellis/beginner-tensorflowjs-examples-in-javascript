@@ -82,7 +82,8 @@ async function mySendIt(myData) {
   
   //Global Variables for Polyfill
   var serial = exports.serial;  // is this needed as defined in the npm
- 
+  console.log(serial);
+
   let myLooping  // for read setinterval
   var mySerial;
   //let receivedText = '';
