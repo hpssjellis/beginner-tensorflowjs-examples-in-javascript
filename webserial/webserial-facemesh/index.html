@@ -79,6 +79,15 @@ limitations under the License.
     
     
     <button id="connectButton">Connect via Serial Port</button>
+    
+<input type=button value="new connect" onclick="{
+  if (navigator.serial) {
+     connectSerial();
+  } else {
+    document.getElementById('myDiv02').innerHTML = 'Web Serial API not supported. Switching to Polyfill<br>'
+    myPoly()
+  }
+}"><br><br>
 
 <input type=text id="mySendText" value="a">
 <input type=button value="send" onclick="{ mySendIt(document.getElementById('mySendText').value) }"><br><br>
