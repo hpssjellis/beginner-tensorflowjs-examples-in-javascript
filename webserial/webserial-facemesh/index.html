@@ -82,7 +82,7 @@ limitations under the License.
 
     
     
-   <h6> Version 0.3.1-12 </h6>
+   <h6> Version 0.3.1-14 </h6>
 
     
 <input type=button value="new connect" onclick="{
@@ -279,12 +279,12 @@ async function renderPrediction() {
             // do nothing since already done
         } else {
           myOn = true  
-          mySendIt('b')  
+          mySendIt('b')  // b or a means on depending on the code on the arduino
         }
-        if (myMouthOpen <= 10 && ! myOn ){  // random cutoff between open and closed  
+        if (myMouthOpen <= 10 &&  myOn ){  // random cutoff between open and closed  
             // do nothing since already done
             myOn = false
-            mySendIt('b')  
+            mySendIt('a')  
         } else {
           // do nothing since myOn already false and data sent  
 
