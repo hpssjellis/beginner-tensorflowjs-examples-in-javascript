@@ -31,6 +31,7 @@ limitations under the License.
 <script>
    // needed to save the exports for the polyfill
     var exports = {};
+    let myOn = true
 </script>
     
 <script src="https://cdn.jsdelivr.net/npm/web-serial-polyfill@1.0.13/dist/serial.js"> </script>   <!-- is this done in the js file-->
@@ -273,11 +274,28 @@ async function renderPrediction() {
         let myMouthOpen = (keypoints[14][1] - keypoints[13][1])   // x = 0,  y=1
         let myMouthShut =  ( (myMouthOpen )/ (myMouthOpenCutoff * myFaceWidth) )   // myMouthOpenCutoff default ~0.03  
           
-        if (myMouthOpen > 10){  // random cutoff between open and closed
-          mySendIt('b')  // arduino off or on, depends on the coding
+        
+        if (myMouthOpen > 10 && myOn ){  // random cutoff between open and closed  
+            // do nothing since already done
         } else {
-          mySendIt('a')  
+          myOn = true  
+          mySendIt('b')  
         }
+        if (myMouthOpen <= 10 && myOn ){  // random cutoff between open and closed  
+            // do nothing since already done
+            myOn = false
+            mySendIt('b')  
+        } else {
+          // do nothing since myOn already false and data sent  
+
+        }          
+          
+          
+          
+          
+          
+     //          mySendIt('b')  // arduino off or on, depends on the coding     
+          
         
         document.getElementById('myDiv03').innerHTML = 'myFaceWidth: '+ myFaceWidth + ', myCloseness: ' + myCloseness  + ', myMouthOpen: ' +  myMouthOpen   + ', myMouthShut: ' +   myMouthShut  + '<br>'
       }
