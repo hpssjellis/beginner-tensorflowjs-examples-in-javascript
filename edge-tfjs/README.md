@@ -15,7 +15,7 @@ Starting point called edge-tfj001.html is from https://www.rocksetta.com/tensorf
 
 All other pages will have higher numbers. 
 
-## [Demo Page index [here](https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/)  or see the full link below
+## [Demo Page index here](https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/)  or see the full link below
 
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/
