@@ -20,4 +20,4 @@ All other pages will have higher numbers.
 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/
 
-The latest version should always be at https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/edge-tfjs.html
+The latest stable demo version should always be at https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/edge-tfjs.html
