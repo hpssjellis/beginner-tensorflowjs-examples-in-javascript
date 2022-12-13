@@ -1,8 +1,18 @@
-A place to make a client side tfjs data load and present, model develop and use site, kind of like [teachable machine](https://teachablemachine.withgoogle.com/) but on the client side.
+
+
+
+### A place to make a client side tfjs data load and present, model develop and use site, kind of like [teachable machine](https://teachablemachine.withgoogle.com/) but on the client side.
+
+Dec 2022
+
+This github site is at 
+
+https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/edit/master/edge-tfjs/
+
 
 
 Starting point called edge-tfj001.html is from https://www.rocksetta.com/tensorflowjs/beginner-keras/28keras-full-image.html and is clunky and not very useable.
 
-All other pages will have higher numbers. An index will be at https://www.rocksetta.com/tensorflowjs/edge-tfjs/index.html
+All other pages will have higher numbers. An index will be at https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/
 
-The latest version should always be at https://www.rocksetta.com/tensorflowjs/edge-tfjs/edge-tfjs.html
+The latest version should always be at https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/edge-tfjs.html
