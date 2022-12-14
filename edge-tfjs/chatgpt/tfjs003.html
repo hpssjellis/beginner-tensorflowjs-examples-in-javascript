@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>My HTML and CSS Page</h1>
+<!-- Add a select element to choose between front and rear camera -->
+<select id="myCamera">
+  <option value="front">Front Camera</option>
+  <option value="rear">Rear Camera</option>
+</select>
+<!-- Add a button to activate the camera -->
+<button onclick="activateCamera()">Activate Camera</button>
+
+<!-- Add a canvas to display the video stream -->
+<canvas id="myCanvas" width="640" height="480"></canvas>
+  
+  
+ 
+<!-- Add a button to store the webcam image in an array -->
+<button onclick="storeImage()">Store Image</button>
+
+<!-- Add the script to handle storing the webcam image in an array -->
+<script>
+function storeImage() {
+  // Get the canvas element
+  var canvas = document.getElementById("myCanvas");
+
+  // Create an array to store the image data
+  var imageArray = [];
+
+  // Get the image data from the canvas and store it in the array
+  var imageData = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height);
+  for (var i = 0; i < imageData.data.length; i++) {
+    imageArray.push(imageData.data[i]);
+  }
+
+  // Input the image array into the TensorFlow.js model
+  model.predict(imageArray);
+}
+
+  
+  
+  
+
+// <!-- Add the script to handle activating the camera and displaying the video stream -->
+
+function activateCamera() {
+  // Get the selected camera
+  var selectedCamera = document.getElementById("myCamera").value;
+
+  // Create a new instance of the video element
+  var video = document.createElement("video");
+
+  // Get access to the camera
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Set the constraints for the video stream
+    var constraints = {};
+    if (selectedCamera == "front") {
+      constraints = {
+        facingMode: "user"
+      };
+    } else {
+      constraints = {
+        facingMode: "environment"
+      };
+    }
+
+    // Get the video stream
+    navigator.mediaDevices.getUserMedia({ video: constraints }).then(function(stream) {
+      // Set the source of the video element with the stream from the camera
+      video.srcObject = stream;
+      video.play();
+    });
+  }
+
+  // Set the dimensions of the video element and append it to the canvas
+  video.addEventListener("loadedmetadata", function() {
+    document.getElementById("myCanvas").width = this.videoWidth;
+    document.getElementById("myCanvas").height = this.videoHeight;
+    document.getElementById("myCanvas").getContext("2d").drawImage(this, 0, 0);
+  });
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
