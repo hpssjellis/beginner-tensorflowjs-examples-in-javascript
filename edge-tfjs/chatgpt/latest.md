@@ -1,7 +1,7 @@
 latest chatgpt suggestions, but it is timing out before it can give the complete code
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.1.0/dist/tf.min.js"></script>
 
 
 
