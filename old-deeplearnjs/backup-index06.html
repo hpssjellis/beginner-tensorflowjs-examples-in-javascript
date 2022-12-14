@@ -1,0 +1,581 @@
+
+
+
+<!--   *******************************Start: What source js file to use? ****************************************************   -->
+
+
+
+
+<!-- the newest version but all examples may not work -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+
+  
+<!-- the online version that these examples were made with  
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.10.3"></script>
+-->
+
+
+<!--   *******************************Stop: What source js file to use? ****************************************************   -->
+
+
+
+
+<body  bgcolor="lightblue" onload="{              
+   document.getElementById('myVerDiv').innerHTML = 'Active Tensorflowjs version = '+ tf.version.tfjs
+}">
+
+
+
+
+  <h3 align=center>    Beginner <a href="https://js.tensorflow.org/">Tensorflowjs</a> Examples in Javascript <br>
+    This is the easiest set of Machine Learning examples that I can find or make. I hope you enjoy it.
+  
+  </h3> <br><br>
+
+ 
+
+<div style="color:green;font-size:40px;" id="myVerDiv">...</div></h2>
+
+
+
+<br><br>
+The main github for these pages is at:
+<a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">   https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript </a>
+<br><br><br>
+<a href="https://www.youtube.com/watch?v=dnDb-RAvxHg&index=0&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E">Youtube Tutorials Video Playlist</a>
+<br>
+
+A lightening Talk in the Pecha Kucha format about this site is <a href="https://hpssjellis.github.io/lightening-talk-Pecha-Kucha-tensorflowjs/">here</a>
+
+
+<br><br><br>
+
+For some robotics and IOT solutions using the <a href="https://www.particle.io/">Particle.io</a> Photon and Mesh Devices try my other main 
+teaching stie at this github <a href="https://github.com/hpssjellis/particle.io-photon-high-school-robotics">Robotics IOT Particle.io</a>
+which also has lots of videos linked from that page.<br><br>
+
+<a name="myEditable"></a>
+<div style="font-size:15px; background-color:lightyellow; width:88%;  border:5px solid blue; padding:5px; margin:5px;"> 
+   <ol> Most of the examples are in the following format:
+     <li> A description similar to these lines
+     <li> A button to click to see if the Javascript code works
+     <li> A textarea to click to see the working code  
+     <li> An expanding textarea, that you can right-click and select-all to copy the code into your text editor
+     <li> An edit button that shows after clicking the textarea and can dynamically make changes to any non-script tag enclosed Javascript
+  </ol>
+  
+  Go ahead, try editing something and click the Update and run button! It's a whole new way to program.
+</div><br>
+    
+
+
+
+
+   
+
+
+<div id="myDiv123Code"> 
+
+<input id="myButton123" type=button value="Tensorflowjs Version?" onclick="{
+      document.getElementById('myDiv123').innerHTML = 'This version of Tensorflowjs = ' + tf.version.tfjs                                                           
+}"><br><br>
+
+</div>
+<div id='myDiv123'>...</div><br>
+
+<input id="myUpdate123" type=button value="Update and Run" style="visibility:hidden;" onclick="{
+   // first remove first and last line since they are injected
+  myFred = document.getElementById('myTextarea123').value.split('\n')
+  myFred.pop()
+  myFred.push('')
+  myFred.shift()
+  myFred.shift()
+  myJoe = myFred.join('\n')
+  document.getElementById('myDiv123Code').innerHTML =    myJoe 
+  document.getElementById('myButton123').click()
+                                             
+}">
+
+<br>
+<textarea id="myTextarea123"    wrap="off"  style= "font-size:15px; color:white; background-color:black; width:90%;"   rows=2 onclick="{
+  if (myOnce123){
+     myTextGrow('myTextarea123', 'myDiv123Code')
+     document.getElementById('myUpdate123').style.visibility = 'visible'
+     myOnce123 = false
+  }
+}">
+Click here to see the working HTML code.
+</textarea><br>
+
+<br><br><hr><br><br><br><br>
+
+    
+
+<h2>Try these <a href="https://gitpod.io">Gitpod.io</a> pre-made workspaces</h2><br>
+Heres a link to a few more at <a href="https://rocksetta.com/rocksetta-gitpod-links.html">https://rocksetta.com/rocksetta-gitpod-links.html</a> <br><br>
+
+
+
+<table border=1>
+
+  <tr><td>tfjs-models</td><td><a href="https://gitpod.io#snapshot/ea94384e-2d87-4887-a3c1-189dddb6ea87"><img alt="Open in Gitpod" src="https://gitpod.io/button/open-in-gitpod.svg"></a></td><td rowspan="2"><iframe width="560" height="315" src="https://www.youtube.com/embed/_OpfgbQ_iT8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td></tr>
+
+
+
+<tr><td>tfjs-examples</td><td><a href="https://gitpod.io#snapshot/b90e5b82-d0fa-47aa-83ca-7ef3b1ee4b1b"><img alt="Open in Gitpod" src="https://gitpod.io/button/open-in-gitpod.svg"></a></td></tr>
+</table>
+
+
+
+
+<br><br>
+
+
+
+<br><br><h2>  Following is my main table of Pure Javascript, Machine Learning, no need to compile, web examples:</h2><br>
+
+
+<table border=1>
+
+<tr><th >Web Page </th><th>Explanation</th><th> Video </th><th><a href="https://codepen.io/">CodePen, </a><a href="https://glitch.com/">Glitch</a></th><th> Deprecated at Version </th></tr>
+
+
+<tr><th colspan=5 align=center style="font-size:30px; color:green">Tensorflowjs Version 1.0.0 and newer</th></tr>    
+<tr><td><a href="beginner-examples/tfjs01-functions.html">tfjs01-functions.html</a><td> Updated to also show functions with multiple variable returns using arrays and objects and module solutions using namespacing  </td><td><a href="https://www.youtube.com/watch?v=nF6nTVCly_Q&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=1">Video</a></td><td>....</td><td style="color:green"> Active Version </td></tr>
+<tr><td><a href="beginner-examples/tfjs02-basics.html">tfjs02-basics.html</a><td> Beware lots of Tensors in one function </td><td><a href="https://www.youtube.com/watch?v=ACQy0FhL5RY&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=2">Video</a></td><td>....</td><td style="color:green"> Active Version </td></tr>
+<tr><td><a href="beginner-examples/tfjs03-general.html">tfjs03-general.html</a><td>General Tensors and how to use them</td><td><a href="https://www.youtube.com/watch?v=Ovf4bv1Fn1Y&index=3&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E">Video</a></td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="beginner-examples/tfjs04-quadratic.html">tfjs04-quadratic.html</a><td>First Neural Network solving the quadratic equation</td><td><a href="https://www.youtube.com/watch?v=-VdLfQNux5g&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=5">Video</a></td><td>....</td><td style="color:green">Active Version</td></tr>
+
+<tr><td><a href="beginner-examples/tfjs05-matrix-math.html">tfjs05-matrix-math.html</a><td>Tensors and Matrix Math</td><td><a href="https://www.youtube.com/watch?v=LjzybJbSXCQ&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=4">Video</a></td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="beginner-examples/tfjs06-javascript.html">tfjs06-javascript.html</a><td>A reminder of many things Javascript can do. This is still in draft mode. I have a lot still to do here</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="beginner-examples/tfjs07-xor-neural-network.html">tfjs07-xor-neural-network.html</a><td>Solving an XOR Neural Network</td><td><a href="https://youtu.be/92BToEKkDio">Video</a></td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="beginner-examples/tfjs08-knn.html">tfjs08-knn.html</a><td>K-Nearest Neighbor Machine Learning Classification </td><td><a href="https://www.youtube.com/watch?v=rfyD8Jf12Yw&index=6&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E">Video</a></td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="beginner-examples/tfjs10-xor-layers.html">tfjs10-xor-layers.html</a><td>Bit slow but very easy to read the layers. Original by <a href="https://twitter.com/mattcameron">Matt Cameron</a>. His <a href="https://github.com/mattcam/tfjs_xor_example">Code</a> is here. </td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+   
+<tr><td><a href="beginner-examples/tfjs11-load-weights.html">tfjs11-load-weights.html</a><td>Finally got weight saving and loading working</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="beginner-examples/tfjs14-sinusoidal.html">tfjs14-sinusoidal.html</a><td>I just really like sinusoidals</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+
+<!--   
+<tr><td><a href="beginner-examples/tfjs15-keras.html">tfjs15-keras.html</a><td>As simple as I can make Keras models</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr> 
+<tr><td><a href="beginner-examples/tfjs16-console.html">tfjs16-console.html</a><td>For that one in a 1000 time when you need to test something in the console</td><td>Paste the code without the script tags into the browser console.</td><td>Some fancy stuff here that is interesting to checkout</td><td style="color:green"><a href="beginner-examples/tfjs16b-console.html">tfjs16b-console.html</a> Even easier example of using the console</td></tr>
+<tr><td><a href="keras/keras-links.html">keras-links.html</a><td>So I am having trouble learning Keras. This page is my attempt to get many examples in one location so that I can study them and find the easiest way to teach it</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+-->
+
+
+<tr><td><a href="beginner-keras/20keras-xOr.html">20keras-xOr.html</a><td>Finally made a system for working with Keras Layers. This is the easiest example</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/21keras-integers.html">21keras-integers.html</a><td>Now Keras Layers using Integer inputs and outputs</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/22keras-decimal.html">22keras-decimal.html</a><td>Now Keras Layers using float (Decimal) inputs and outputs</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/23keras-digital.html">23keras-digital.html</a><td>Example IoT device 8 bit input 4 bit output Smart Garden example</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/24keras-one-hot.html">24keras-one-hot.html</a><td>Why use one-hot encoding</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/26keras-small-image.html">26keras-small-image.html</a><td>Loading really small black and white images using a convolutional Keras Layer</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/27keras-medium-image.html">27keras-medium-image.html</a><td>Very cool, takes any image and converts it to a 32 x 32 single digit text image, 0=white, 1=black, 2-8 ROY-G-BIV 9=brown.</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="beginner-keras/28keras-full-image.html">28keras-full-image.html</a><td>Now much more difficult. Full RGB color 64 x 48 pixel images, loaded from the web (CORS OK) with webcam analysis</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<!--   not working well yet
+  <tr><td><a href="beginner-keras/29keras-cifar.html ">29keras-cifar.html </a><td>Full web app. MUch more difficult. RGB color 32 x 32 pixel images, loaded from CIFAR-10 dataset of 10 items cats, dogs etc with webcam analysis</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+-->
+  <tr><td><a href="pre-trained/31-squeezenet.html">pre-trained/31-squeezenet.html </a><td>Finally got this very cool Squeezenet webcam demo working. 
+  I didn't have the image data normalized between 0 and 255</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+  
+<tr><td><a href="pre-trained/32-mobilenet.html">pre-trained/32-mobilenet.html </a><td>Finally got this very cool Mobilenet webcam demo working. 
+  I didn't have the image data normalized between -1 and 1</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+<tr><td><a href="pre-trained/33-mnist.html">pre-trained/33-mnist.html </a><td>MNIST white numbers on a black background</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>  
+ 
+<tr><td><a href="pre-trained/34-switch-models.html">pre-trained/34-switch-models.html </a><td>Model switching example. Must first find a "4" then trapped on the second model until you find an "8". Note: must be white numbers on a black background</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+
+  
+<tr><td><a href="advanced-keras/40keras-lstm.html">advanced-keras/40keras-lstm.html </a><td>An LSTM attempt presently not optimzed for large inputs</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+<tr><td><a href="advanced-keras/41b-cloud-gpu-challenge.html">advanced-keras/41b-cloud-gpu-challenge.html </a><td>My Cloud GPU TPU challenge. this is the new version. It has a link to the old version</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+<tr><td><a href="advanced-keras/42-knn-classifier.html">advanced-keras/42-knn-classifier.html  </a><td>Very cool KNN-Classifier example that you can easily train in the browser. Just waiting for how to save and load the data</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+<tr><td><a href="advanced-keras/43keras-multi-input.html">advanced-keras/43keras-multi-input.html   </a><td>For a while I have wanted to start making Advanced Keras Models. This is the  first. It has two inputs and one output, unlike a regular sequential model that always has one input and one output</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+<tr><td><a href="advanced-keras/face/44-face-knn-classifier.html">advanced-keras/face/44-face-knn-classifier.html  </a><td>This is a KNN-Classifier connected to a face-api.js Should be able to identify your friends. Waiting for saving the knn-Classifier</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+<tr><td><a href="advanced-keras/face/45-face-classifier-saving.html">advanced-keras/face/45-face-classifier-saving.html  </a><td>Made this a while back and forgot to put it up. Shows how to save and load a knn classifier, by tricking tfjs to think the classifier is a multilayer tfjs model. </td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+<tr><td><a href="advanced-keras/46keras-multi-output.html">advanced-keras/46keras-multi-output.html   </a><td>This has one input and two outputs. </td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>   
+    
+  
+
+  
+<tr><td><a href="https://hpssjellis.github.io/face-api.js-for-beginners/">47 Webcam face-api.js for Mobile or desktop for beginners</a><td><a href="https://github.com/hpssjellis/face-api.js-for-beginners">Github here</a></td><td>A must lookat Face Landmark detection webpage</td><td><a href="https://codepen.io/rocksetta/pen/JeEPqm">On CodePen.io, </a><a href="https://glitch.com/~face-api-js-for-beginners">On Glitch.com</a></td><td style="color:green">.....</td></tr> 
+<tr><td><a href="interpretability/50-interpret-grey.html">interpretability/50-interpret-grey.html</a><td>Sheding light on the black box</td><td>Using black "1" and white "2" to make shades of grey then using interpretabilty to analyse the predictions using "0" for transparent, which the neural network has not been trained on.</td><td>....</td><td style="color:green">Active Version</td></tr> 
+
+  <tr><td><a href="beginner-examples/tfjs51-activation-functions.html">beginner-examples/tfjs51-activation-functions.html</a><td>Testing making your own activation functions. not yet working</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+  
+</table>  
+  <br><br><br>
+
+ 
+
+<a name="tfjs-webserial"></a><a href="#tfjs-webserial">link to here</a>
+<h1 align=center>Updated Vanilla Javascript of tfjs with webserial. Started Aug 2022</h1>
+
+<table border=1>
+  <tr><th>My Demo Link</th>      <th>My Github Location</th>      <th>Gitpod</th>   <th>Demo Image</th>     <th>TFJS Demo</th>      <th>TFJS Github</th>           </tr>
+  <tr><td><a href="webserial/webserial-facemesh/">Rocksetta: webserial-facemesh </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/webserial/webserial-facemesh/">my webserial facemesh Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/facemesh/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/facemesh">Original facemesh Github</a></td></tr>
+  <tr><td><a href="">Rocksetta: ... </a></td><td><a href="">my facemesh Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="">Original Demo</a></td><td><a href=""> Original Github Github</a></td></tr>
+
+</table>  
+
+
+<br><br><br><br>
+
+
+<a name="tfjs-models"></a><a href="#tfjs-models">link to here</a>
+<h1 align=center>Updated Vanilla Javascript of tfjs-models started Apr 28th, 2020 Now with Tensorflowjs Version 2.0.0</h1>
+
+<table border=1>
+  <tr><th>My Demo Link</th>      <th>My Github Location</th>      <th>Gitpod</th>   <th>Demo Image</th>     <th>TFJS Demo</th>      <th>TFJS Github</th>           </tr>
+  <tr><td><a href="tfjs-models/blazeface/index.html">Rocksetta: tfjs-models/blazeface </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/blazeface/">My blazeface Github</a></td><td>....</td>      <td><img width=100 src="https://www.rocksetta.com/tensorflowjs/tfjs-models/blazeface/blazeFaceImage.png" /></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/blazeface/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/blazeface">Original blazeface Github</a></td></tr>
+  <tr><td><a href="tfjs-models/bodypix/index.html">Rocksetta: tfjs-models/bodypix </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/bodypix/">My bodypix Github</a></td><td>....</td>     <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/body-pix/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/body-pix">Original body-pix Github</a></td></tr>
+   <tr><td><a href="tfjs-models/deeplab/index.html">Rocksetta: tfjs-models/deeplab </a></td><td>Not working yet: <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/deeplab/"> My deeplab Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="https://github.com/hpssjellis/tfjs-models/blob/master/deeplab/docs/deeplab-demo.gif">Original Demo Animated Gif</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/deeplab">Original deeplab Github</a></td></tr>
+  <tr><td><a href="tfjs-models/facemesh/index.html">Rocksetta: tfjs-models/facemesh </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/facemesh/">my facemesh Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/facemesh/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/facemesh">Original facemesh Github</a></td></tr>
+  <tr><td><a href="tfjs-models/handpose/index.html">Rocksetta: tfjs-models/handpose </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/handpose">My handpose Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/handpose/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/handpose">Original handpose Github</a></td></tr>
+  <tr><td><a href="tfjs-models/knn-classifier/index.html">Rocksetta: tfjs-models/knn-classifier </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/knn-classifier">My knn-classifier Github</a></td><td>....</td>     <td><a href="">...</a></td>  <td><a href="">No Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/knn-classifier">Original knn-classifier Github</a></td></tr>
+  <tr><td><a href="tfjs-models/mobilenet/index.html">Rocksetta: tfjs-models/mobilenet </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/mobilenet">My mobilenet Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="">No Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/mobilenet">Original mobilenet Github</a></td></tr>
+  <tr><td><a href="tfjs-models/posenet/index.html">Rocksetta: tfjs-models/posenet </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/posenet">My posenet Github</a></td><td>....</td>      <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/posenet">Original posenet Github</a></td></tr>
+  <tr><td><a href="tfjs-models/qna/index.html">Rocksetta: tfjs-models/qna </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/qna">My qna Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/mobilebert-qna/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/qna">Original qna Github</a></td></tr>
+  <tr><td><a href="tfjs-models/speech-commands/index.html">Rocksetta: tfjs-models/speech-commands </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/speech-commands">My speech-commands Github</a></td><td>....</td>     <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-speech-model-test/2019-01-03a/dist/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/speech-commands">Original speech-commands Github</a></td></tr>
+  <tr><td><a href="tfjs-models/toxicity/index.html">Rocksetta: tfjs-models/toxicity </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/toxicity">My toxicity Github</a></td><td>....</td>      <td><a href="">...</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/toxicity/index.html">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/toxicity">Original toxicity Github</a></td></tr>
+  <tr><td><a href="tfjs-models/universal-sentence-encoder/index.html">Rocksetta: tfjs-models/universal-sentence-encoder </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjs-models/universal-sentence-encoder">My universal-sentence-encoder Github</a></td><td>....</td>    <td><a href="">...</a></td>  <td><a href="https://github.com/hpssjellis/tfjs-models/blob/master/universal-sentence-encoder/demo/index.js">Original Demo</a></td><td><a href="https://github.com/hpssjellis/tfjs-models/tree/master/universal-sentence-encoder">Original universal-sentence-encoder Github</a></td></tr>
+
+</table>  
+
+  <br><br><br>
+
+<a name="mytfjsV1"></a>
+<h1 align=center>New Tensorflowjs Version 1.0.0 Examples hopefully condensed into one html/javascript file</h1>
+
+<table border=1>
+  <tr><th>My Demo</th><th>My Github</th><th>Notes </th> <th>Repl.it</th><th>Repl.it Demo</th>    <th>Original Demo</th><th>Original Github</th></tr>
+  <tr><td><a href="tfjsv1/tfjs01-posenet-webcam.html">Rocksetta: tfjs01-posenet-webcam.html</a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjsv1/tfjs01-posenet-webcam.html">Github</a> and also at <a href="https://github.com/hpssjellis/tfjs-models-purejs-posenet"> other github</a></td><td>WebCam posing program for single or multiple users using posenet</td>    <td><a href="https://repl.it/@jerteach/rocksetta-tfjs-posenet01">Repl.it</a></td>  <td><a href="https://rocksetta-tfjs-posenet01--jerteach.repl.co/">Repl.it Demo</a></td>  <td><a href="https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html">Original Demo</a></td><td><a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet/demos">Original Github</a></td></tr>
+  <tr><td><a href="tfjsv1/">Rocksetta: tfjs </a></td><td><a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript/tree/master/tfjsv1/">Github</a></td><td>....</td>    <td><a href="">Repl.it</a></td>  <td><a href="">Repl.it Demo</a></td>  <td><a href="">Original Demo</a></td><td><a href="">Original Github</a></td></tr>
+
+</table>  
+
+
+
+
+
+
+
+
+
+<table border=1>
+
+<tr><th >Web Page </th><th>Explanation</th><th> Video </th><th><a href="https://codepen.io/">CodePen, </a><a href="https://glitch.com/">Glitch</a></th><th> Deprecated at Version </th></tr>
+
+<tr><th colspan=5 align=center style="font-size:30px; color:green">Some General Stuff I am working on</th></tr>      
+
+<tr><td><a href="https://codepen.io/collection/AYVRVZ">My CodePen.io Tensorflowjs collection</a><td>I have made a collection of examples in both CodePen and Glitch.</td><td>Trying tofigure out which online IDE I like Best.</td><td>Presently leaning towards CodePen for Front End and Glitch for Front and Backend in node.</td><td style="color:green">.....</td></tr>  
+
+<tr><td><a href="https://glitch.com/@hpssjellis/my-tensorflowjs">My Glitch.com Tensorflowjs collection</a><td>I have made a collection of examples in both CodePen and Glitch.</td><td>Trying tofigure out which online IDE I like Best.</td><td>Presently leaning towards CodePen for Front End and Glitch for Front and Backend in node.</td><td style="color:green">.....</td></tr>  
+  
+  
+<tr><td><a href="https://www.rocksetta.com/tensorflowjs/saved-models/from-keras/DenseNet121/model.json">DenseNet121/model.json</a><td>A fully useable DenseNet121 Model with shard files in Keras Layers style made ready for Tensorflowjs</td><td>This means you can edit it, add layers, freeze layers etc, much more powerful than taking a model from Tensorflow which is a frozen model.</td><td>You may use these files. I have others just the download sizes start to get a bit big.</td><td style="color:green">.....</td></tr>
+<tr><td><a href="https://www.rocksetta.com/tensorflowjs/saved-models/from-keras/MobileNet/model.json">MobileNet/model.json</a><td>A fully useable MobileNet Model with shard files  in Keras Layers style made ready for Tensorflowjs</td><td>This means you can edit it, add layers, freeze layers etc, much more powerful than taking a model from Tensorflow which is a frozen model.</td><td>You may use these files. I have others just the download sizes start to get a bit big.</td><td style="color:green">.....</td></tr>
+<tr><td><a href="https://www.rocksetta.com/tensorflowjs/saved-models/from-keras/MobileNetV2/model.json">MobileNetV2/model.json</a><td>A fully useable MobileNetV2 Model with shard files  in Keras Layers style made ready for Tensorflowjs</td><td>This means you can edit it, add layers, freeze layers etc, much more powerful than taking a model from Tensorflow which is a frozen model.</td><td>You may use these files. I have others just the download sizes start to get a bit big.</td><td style="color:green">.....</td></tr>
+<tr><td><a href="https://www.rocksetta.com/tensorflowjs/saved-models/from-keras/NASNetMobile/model.json">NASNetMobile/model.json</a><td>A fully useable NASNetMobile Model with shard files  in Keras Layers style made ready for Tensorflowjs</td><td>This means you can edit it, add layers, freeze layers etc, much more powerful than taking a model from Tensorflow which is a frozen model.</td><td>You may use these files. I have others just the download sizes start to get a bit big.</td><td style="color:green">.....</td></tr>
+  
+  
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/machine2learn/m2l.html">Machine2learn</a><td>Powerful online Keras model generator and full app development. My test program showing a generated model can be loaded</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+  
+ <tr><td><a href="https://github.com/hpssjellis/tfjs-node-saving-parallel-training">Parallel Browser Training</a><td>Can't really show a demo, but you could install this nodejs server and have multiple browsers help train individual layers</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+   
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/saved-models/cifar/index.html">Loading 10000 of the  50,000 CIFAR-10 images</a><td>Same as the below one except this uses the .png files and actually works</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+  
+<tr><td><a href="http://rocksetta.com/tensorflowjs/cifar/index.html">Loading 50,000 CIFAR-10 images</a><td>NOT REALLY WORKING Takes about a min to load the first 10 K images, presently colors are messed up</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/getting-started/rocksetta.html">Rocksetta version of TFJS Getting Started</a><td>My version of the Tensorflowjs Getting Started. Can edit and run even from a cell phone</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mobinet/rocksetta.html">Rocksetta version of TFJS Mobinet</a><td>Edit online even from a Mobile device</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/addition-rnn/easier/index.html">android-issue.html</a><td>Using the Addition RNN. I have included the ability to adjust the learning rate to show the issue with android phone. Try a learning rate of 0.01 for no NAN loss.  The easiest version of the issue many Android phones are having using Tensorflowjs. Looks like it is part of the loss caculation with Layers.</td><td>...</td><td>...</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/kickstarter.html">kickstarter.html</a><td>Just having fun with Vega-Lite graphs and my <a href="https://www.kickstarter.com/projects/rocksetta/as-simple-as-possible-deep-learning-tensorflowjs-j">New Kickstarter</a>.</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/tensorflowjs-bvh/index.html">PoseNet Web Cam to BVH</a><td>Web cam working not yet converting to BVH animation format</td><td>...</td><td><a href="https://github.com/hpssjellis/tensorflowjs-bvh/tree/master/cam">Code</a></td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/tensorflowjs-bvh/save-video/index.html">PoseNet Security Camera</a><td>Proof of concept. Using PoseNet to start or stop web cam recording</td><td>...</td><td><a href="https://github.com/hpssjellis/tensorflowjs-bvh/tree/master/save-video">Code</a></td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/TensorHtmlPrint.html">TensorHtmlPrint.html</a><td>Prints any dimension Tensor onto a web page. Not very well written but does seem to work</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+
+  
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/Submarineering-knn.html">Submarineering-knn.html</a><td>His original tweet is an interesting take on running Javascript. This page is the IRIS Dataset KNN to identify flowers based on Petal Length etc.</td><td>...</td><td>....</td><td style="color:green">From a tweet by <a href="https://twitter.com/Submarineering/status/1000600501149454336">@Submarineering</a></td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/face-api/next-index.html">Face API for the Big Bang characters (Proof of concept)</a><td>..</td><td>Original github at <a href="https://github.com/justadudewhohacks/face-api.js">Code</a></td><td>....</td><td style="color:green">.....</td></tr>
+
+  
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-rpi3.html">keras-rpi3.html</a><td>Most simple webpage for testing if a device like a Raspberry Pi 3 can use Tensorflowjs</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs14-sinusoidal.html">tfjs14-sinusoidal.html</a><td>I just really like sinusoidals</td><td>...</td><td>....</td><td style="color:green">Active Version</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/tfjs16-console.html">tfjs16-console.html</a><td>For that one in a 1000 time when you need to test something in the console</td><td>Paste the code without the script tags into the browser console.</td><td>Some fancy stuff here that is interesting to checkout</td><td style="color:green"><a href="beginner-examples/tfjs16b-console.html">tfjs16b-console.html</a> Even easier example of using the console</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/keras/keras-links.html">keras-links.html</a><td>So I am having trouble learning Keras. This page is my attempt to get many examples in one location so that I can study them and find the easiest way to teach it</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+  
+ 
+<tr><td><a href="https://codepen.io/rocksetta/pen/BPbaxQ">Codepen about video stream and image taking</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr> 
+<tr><td><a href="https://codepen.io/rocksetta/pen/vadozJ">My CodePen of loading lots of image files into a tensor</a><td>CodePen of loading groups of image files</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+<tr><td><a href="https://codepen.io/rocksetta/pen/jppBjY">My Codepen about converting RGB to a 10 digit number</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>
+  
+  
+
+
+</table><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="mytfjs"></a>
+<h1 align=center>Old versions of Tensorflowjs Examples, done when deeplearnjs first became Tensorflowjs</h1>
+<h3>My take on the <a href="https://github.com/tensorflow/tfjs-examples">Tensorflowjs ES6 examples</a>. My examples do not have to be compiled using Yarn. I have converted them all to 
+  pure Javascript
+ that can simply be put on your own computer and ran from there. No need to use a server, no need to use compile tools. If you 
+download the script source then these files can be ran without an internet connection.</h3>
+
+<table border=1>
+  <tr><th>Link</th><th>Code</th><th>Notes: use (ctrl-shift-I) to open browser console </th></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/addition-rnn/index.html">Rocksetta: Addition RNN</a></td><td>Right Click-->View Page Source</td><td>Works!   May not work on Android 8.0.0</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/getting-started/index.html">Tensorflow: Getting Started</a></td><td>Right Click-->View Page Source</td><td>No Changes to this Tensorflow Beginner Page</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/iris/index.html">Rocksetta Layers: Iris Demo</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-core/index.html">Rocksetta: Train MNIST with the Core API</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-transfer/index.html">Rocksetta Layers: MNIST CNN Transfer Learning Demo</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mnist-with-layers/index.html">Rocksetta: Train MNIST with the Layers API</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/mobinet/index.html">Rocksetta: Using a pretrained MobileNet</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/polynomial-regression-core/index.html">Rocksetta: Fitting a curve to synthetic data </a> </td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/polynomial-regression/index.html">Rocksetta: Polynomial Regression Training Example</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/sentiment/index.html">Rocksetta: Layers: Sentiment Analysis Demo</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/translation/index.html">Rocksetta:Layers: Sequence-to-Sequence (English-French Translation) </a></td><td>Right Click-->View Page Source<td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/webcam-transfer-learning/index.html">Rocksetta: Pacman Game webcam-transfer-learning</a></td><td>Right Click-->View Page Source</td><td>Works!</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/tfjs-yolo-tiny/index.html">Rocksetta: tiny-yolo-demo</a></td><td>Right Click-->View Page Source</td><td>Works! just not on my Android 8.0 Mobile, but does on iPhone</td></tr>
+
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/Browser-Sentiment-Classification/index.html">Rocksetta:Sentiment Analysis converting Keras</a></td><td>Right Click-->View Page Source</td><td>Works!....</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/posenet/camera/index.html">Rocksetta:posenet/camera</a></td><td>Right Click-->View Page Source</td><td>WebCam posing program for single or multiple users using posenet</td></tr>
+  <tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/tf-examples/posenet/coco/index.html">Rocksetta: posenet/coco images</a></td><td>Right Click-->View Page Source</td><td>Loads images for multiple or single pose positions using posenet</td></tr>
+  <tr><td><a href="">Rocksetta:</a></td><td>Right Click-->View Page Source</td><td>....</td></tr>
+  <tr><td><a href="">Rocksetta:</a></td><td>Right Click-->View Page Source</td><td>....</td></tr>
+  <tr><td><a href="">Rocksetta:</a></td><td>Right Click-->View Page Source</td><td>....</td></tr>
+  <tr><td><a href="">Rocksetta:</a></td><td>Right Click-->View Page Source</td><td>....</td></tr>
+  <tr><td><a href="">Rocksetta:</a></td><td>Right Click-->View Page Source</td><td>....</td></tr>
+
+</table>  <br><br><br>
+
+
+<table border=1>
+  
+<tr><th colspan=5 align=center style="font-size:30px; color:red">DEPRECATED examples that I can't get working with the latest versions of Tensorflowjs,  help appreciated</th></tr>
+  
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/old-deeplearnjs/jj06-squeezenet.html"> jj06-squeezenet.html </a></td>  <td>..</td>   <td><a href="https://www.youtube.com/watch?v=DBF_sTTkDZw&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=6"> video </a></td> <td>...</td> <td style="color:red">0.3.13</td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/old-deeplearnjs/jj07-mnist.html"> jj07-mnist.html </a></td>  <td>..</td>   <td><a href="https://www.youtube.com/watch?v=cUI6VozmVgQ&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E&index=7"> video </a></td> <td>...</td> <td style="color:red">0.6.0 </td></tr>
+<tr><td><a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/beginner-examples/char-rnn.html">Char-RNN.html</a><td>Interesting Character RNN learns a sentence</td><td>...</td><td>I really want to make this simpler and make LSTM and GRU out of it but stuck getting it to run on any version higer than 0.9.1</td><td style="color:red">0.10.3</td></tr> 
+
+  
+
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>  
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>  
+<tr><td><a href="">.</a><td>..</td><td>...</td><td>....</td><td style="color:green">.....</td></tr>  
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br>
+ 
+ <!--  don't want these links anymore
+ 
+<a name="tfjslinks"></a>
+  <h3>Unorganized links to other TensorFlow.js example programs on the web</h3>
+Note: I have only included Tensorflowjs examples in this chart ignoring the  Deeplearnjs Demos<br> <br> 
+<table border=1>
+  <tr><th>Link</th><th>Code</th><th>Notes: use (ctrl-shift-I) to open browser console </th></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/addition-rnn/dist/index.html">TensorFlow.js: Addition RNN</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/addition-rnn">Code</a></td><td>Fine on Desktop. Some issues on my mobile device. Shows NaN When training</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/iris/dist/index.html">TensorFlow.js Layers: Iris Demo</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/iris">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/mnist-core/dist/index.html">TensorFlow.js: Train MNIST with the Core API</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/mnist-core">Code</a></td><td>Fine on Desktop. Works on mobile but shows NaN for loss value</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/mnist-transfer-cnn/dist/index.html">TensorFlow.js Layers: MNIST CNN Transfer Learning Demo</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/mnist-transfer-cnn">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/mnist/dist/index.html">TensorFlow.js: Train MNIST with the Layers API</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/mnist">Code</a></td><td> Takes a few minutes to run on mobile. Last Loss shows NaN</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/mobilenet/dist/index.html">TensorFlow.js: Using a pretrained MobileNet</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/mobilenet">Code</a></td><td>Have some downloaded images of animals to try</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/polynomial-regression-core/dist/index.html"> TensorFlow.js: Fitting a curve to synthetic data </a> </td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/polynomial-regression-core">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/polynomial-regression/dist/index.html">TensorFlow.js: Polynomial Regression Training Example</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/polynomial-regression">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/sentiment/dist/index.html">TensorFlow.js Layers: Sentiment Analysis Demo</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/sentiment">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/translation/dist/index.html">TensorFlow.js Layers: Sequence-to-Sequence (English-French Translation) </a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/translation">Code</a></td><td>..</td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-examples/webcam-transfer-learning/dist/index.html"> Tensorflow Pacman Game webcam-transfer-learning</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/webcam-transfer-learning">Code</a></td><td>Not working on my mobile Samsung S8+, Training shows NaN</td></tr>
+  <tr><td><a href="https://beta.observablehq.com/@jashkenas/sentiment-analysis-with-tensorflow-js">Observable Sentiment Analysis with Tensorflow.js  </a></td><td>Not Needed by Observables</td><td>By Jeremy Ashkenas Twitter <a href="https://twitter.com/jashkenas">@jashkenas</a></td></tr>
+  <tr><td><a href="https://emojiscavengerhunt.withgoogle.com/">Emoji Scavenger Hunt</a></td><td><a href="https://github.com/google/emoji-scavenger-hunt">Code</a></td><td>Best done on a Mobile Device</td></tr>
+  <tr><td><a href="https://www.advancedintegrals.com/facerec/index.html">Webcam Binary Learning</a></td><td><a href="https://github.com/zaidalyafeai/tensorflowjs-binary">Code</a></td><td>Twitter by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a> </td></tr>
+  <tr><td><a href="https://medium.com/@alyafey22/a-gentle-introduction-to-tensorflow-js-dba2e5257702">A gentle Introduction to Tensorflowjs</a></td><td>Blog</td><td>Twitter by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a> </td></tr>
+  <tr><td><a href="https://medium.com/using-tensorflowjs-to-classify-objects/what-is-tensorflow-js-895a2e0997dc">What is Tensorflowjs</a></td><td>Blog</td><td>Twitter by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a> </td></tr> 
+  <tr><td><a href="https://github.com/ModelDepot/tfjs-yolo-tiny-demo">tfjs-yolo-tiny-demo: object detection in browser</a></td><td><a href="https://github.com/ModelDepot/tfjs-yolo-tiny-demo">Demo Code</a>, <a href="https://github.com/ModelDepot/tfjs-yolo-tiny">tfjs-yolo-tiny Code</a></td><td>by Michael Shi. This is a really nice demo object detection demo <a href="https://twitter.com/MikeShi42">@MikeShi42</a></td></tr>
+  <tr><td><a href="https://medium.com/@alyafey22/sentiment-classification-from-keras-to-the-browser-7eda0d87cdc6">Sentiment Analysis loading Keras</a></td><td><a href="https://github.com/zaidalyafeai/Browser-Sentiment-Classification">Code</a></td><td>I could not find the demo, so I made one in the list above</td></tr>
+  <tr><td><a href="https://beta.observablehq.com/@tvirot">https://beta.observablehq.com/@tvirot</a></td><td>Not Needed by Observables</td><td>A gold mine of Obervables about Machine Learning in Tensorflowjs by Virot "Ta" Chiraphadhanakul Twitter <a href="https://twitter.com/tvirot">@tvirot</a></td></tr>
+
+  <tr><td><a href="https://towardsdatascience.com/deep-learning-in-your-browser-a-brisk-guide-ca06c2198846">https://towardsdatascience.com/deep-learning-in-your-browser-a-brisk-guide-ca06c2198846</a></td><td>Blog</td><td>By Mike SHi at Twitter <a href="https://twitter.com/MikeShi42">@MikeShi42</a></td></tr>
+  <tr><td><a href="https://alantian.net/ganshowcase/">https://alantian.net/ganshowcase/</a></td><td><a href="https://github.com/alantian/ganshowcase">Code</a></td><td>Very interesting generated faces morph into other faces. Large Download <a href="https://alantian.net/">Yingtao Tian</a></td></tr>
+  <tr><td><a href="https://juansensio.github.io/tfjs/">https://juansensio.github.io/tfjs/</a></td><td><a href="https://github.com/juansensio/tfjs/">Code</a></td><td>Camera Detection page by <a href="https://twitter.com/juansensio"> Juan Sensio </a> </td></tr>
+  <tr><td><a href="http://advancedintegrals.com/fast-style/fast-style.html">fast style transfer</a></td><td><a href="https://github.com/zaidalyafeai/Fast-Style-Transfer-Keras-TF.js">Code</a></td><td>by Zaid Alyafeai <a href="https://twitter.com/zaidalyafeai">@zaidalyafeai</a></td></tr>
+  <tr><td><a href="https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html">PoseNet Camera</a></td><td><a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet/demos">Code</a></td><td>Have a look in the code for coco_images, does the same thing but with pictures</td></tr>
+  <tr><td><a href="https://mood.gg/ow">Game Based Music Playlist selector for overwatch</a></td><td><a href="https://github.com/farzaa/MoodGGDesktopForOW">Code</a></td><td>..</td></tr>
+  <tr><td><a href="">Baseball Curve Estimation</a></td><td><a href="https://github.com/tensorflow/tfjs-examples/tree/master/baseball-node">Code</a></td><td>This looks really interesting but needs a demo page.</td></tr>
+  <tr><td><a href="https://hello-tensorflow.glitch.me/">https://hello-tensorflow.glitch.me/</a>Awesome animated graph</td><td><a href="https://glitch.com/edit/#!/hello-tensorflow?path=script.js:95:10">Code</a></td><td>Interesting about glitch and plot.ly</td></tr>
+  <tr><td><a href="https://radhorizon.com/SITES/RadLense/">RadLense Bone Fracture Analysis</a></td><td><a href=""></a></td><td>By Twitter<a href="https://twitter.com/CarpioEjt">CarpioEjt</a></td></tr>
+  <tr><td><a href="https://adityathebe.github.io/evolutionSimulator/">Modeling_Evolution_with_TensorflowJS a Cool evolution of bouncy things that gets better over generations. Think Darwin</a></td><td><a href="https://github.com/adityathebe/evolutionSimulator">Code</a></td><td>Siraj Raval video about it <a href="https://www.youtube.com/watch?v=HT1_BHA3ecY&feature=youtu.be">here</a></td></tr>
+  <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
+  <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
+  <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
+  <tr><td><a href=""></a></td><td><a href="">Code</a></td><td>..</td></tr>
+  
+</table>  <br><br><br><br>
+
+
+-->
+
+
+
+
+<hr><br><br>
+<h3 align=center>Best resource for Tensorflowjs information is on the TFJS gallery</h3>
+<a href="https://github.com/tensorflow/tfjs/blob/master/GALLERY.md">https://github.com/tensorflow/tfjs/blob/master/GALLERY.md</a><br><br><hr>
+
+
+
+
+
+
+
+<br><br><br><br>
+
+
+
+
+<a name="nobuildtool"></a>
+    <h1 align=center>Why don't I use build tools!</h1>
+    I do use build tools! I just don't like debugging build tools code. I also don't like using any frameworks. You see, since I teach 
+    and don't 
+    work on production anything, getting the concept and code working as simply as possible is my main concern. Whenever I am 
+    working on a complex new idea I don't want a framework or build tool being the problem. I want to get my code working in pure 
+    Javascript and not dealing with the mind blowing frustration of someone elses bug.<br><br>I have a short video on how to work with the TSC 
+    build tool to use 
+    Intellisense for writing code and then easily switch to pure javascript to see if it works.<br>
+    I used to  work with jQuery only when absolutely necessary, but now the Javascript language has changed so much 
+    that I rarely have to use jQuery. I mainly use it when I am to lazy to convert the code.<br><br>
+    
+   <iframe width="250" height="140" src="https://www.youtube.com/embed/aq4JByHZt9E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
+    
+    <br>Please subscribe to my channel. It is very important as Google/youtube will shut down any cash flow without enough subscribers.<br>
+    
+ 
+ 
+<br><br><br><br>
+ 
+ 
+ 
+ 
+<br> My old deprecated website for Deeplearnjs is at <a href="https://hpssjellis.github.io/deeplearnjs-javascript-examples/">My Old Deeplearnjs Site</a>
+  
+
+<br><br><br>  
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!<br><br><br>
+    
+    
+ 
+
+A few related Tensorflowjs videos:<br><br>
+<a href="https://www.youtube.com/watch?v=dnDb-RAvxHg&index=0&list=PL57Dnr1H_egukaDgFqwEnDVStd7Jktg1E">Tensorflowjs As Simple As Possible Deep Learning Tutorials Using Javascript</a><br><br><br>
+
+    
+ <iframe width="250" height="140" src="https://www.youtube.com/embed/dnDb-RAvxHg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      
+    
+ <iframe width="250" height="140" src="https://www.youtube.com/embed/Oo_WY88JgAg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+ 
+        
+ <iframe width="250" height="140" src="https://www.youtube.com/embed/XmN1-s8loIs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+ 
+        
+         
+ <iframe width="250" height="140" src="https://www.youtube.com/embed/KgYr4IKcydE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+ 
+  
+  
+  
+
+ 
+<br><br><br><hr><br><br><br><br>
+
+
+
+This <a href="https://github.com/hpssjellis/beginner-tensorflowjs-examples-in-javascript">Github</a>, ...  
+this <a href="https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/">Github Website Version</a>, ... 
+this <a href="http://rocksetta.com/tensorflowjs/">Hosted Website Version</a>, ... 
+<a href="https://js.tensorflow.org/">Tensorflowjs</a> <br> <br>
+
+
+
+By Jeremy Ellis <br>
+Twitter<a href="https://twitter.com/@rocksetta">@rocksetta</a><br>
+Website <a href="http://rocksetta.com">http://rocksetta.com</a><br>
+Use at your own risk!
+    
+
+
+<!--  Following is a helper functions  to grow the textareas  -->
+
+<script>
+myOnce123 = true    // so textareas are only clicked once
+  
+  
+function myTextGrow(myT, myB){
+   var myCursorStart = document.getElementById(myT).selectionStart
+   var myCursorEnd = document.getElementById(myT).selectionEnd
+   myDivName = myB.replace('Code','')
+   document.getElementById(myT).value = '\x3Cscript src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> \x3C/script> \n\n' + document.getElementById(myB).innerHTML 
+   document.getElementById(myT).value += '<div id=\''+myDivName+'\'>...</div><br>'     
+   setTimeout(function() {
+      while (  document.getElementById(myT).clientHeight < document.getElementById(myT).scrollHeight){                                                                                                                                              
+          document.getElementById(myT).rows += 3; 
+      } 
+   }, 100)
+  document.getElementById(myT).selectionStart = myCursorStart
+  document.getElementById(myT).selectionEnd = myCursorEnd
+}  
+</script>  
+ 
+ 
+</body>
