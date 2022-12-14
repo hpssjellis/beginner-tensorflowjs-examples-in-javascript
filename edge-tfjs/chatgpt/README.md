@@ -25,3 +25,4 @@ just write the code for an input type button to be added to the above code that 
 
 
 7. [tfjs004.html](tfjs004.html)  
+write a webpage to use tensorflowjs to train a machine learning model based on array of images
