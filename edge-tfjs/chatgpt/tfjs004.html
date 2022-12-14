@@ -1,0 +1,178 @@
+<html>
+<head>
+  <title>TensorFlow.js Image Classification</title>
+</head>
+<body>
+  <h1>TensorFlow.js Image Classification</h1>
+  <p>This webpage uses TensorFlow.js to train a machine learning model based on an array of images.</p>
+
+  <!-- Load TensorFlow.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+  <script>
+    // Array of images to use for training
+    const trainingImages = [
+      'https://pixabay.com/photos/dog-pet-animal-friend-face-2958997/',
+      'https://pixabay.com/photos/cat-kitten-pet-animals-3967771/',
+      'https://pixabay.com/photos/bird-toucan-beak-bright-colorful-3255264/',
+      'https://pixabay.com/photos/fish-tropical-ocean-reef-coral-3050769/'
+    ];
+
+    // Array of labels corresponding to the images
+    const trainingLabels = [
+      'dog',
+      'cat',
+      'bird',
+      'fish'
+    ];
+
+    // Function to load an image from a URL and return a Tensor
+    async function loadImage(imageUrl) {
+      // Load the image as a tensor
+      const response = await fetch(imageUrl);
+      const image = await response.blob();
+      const imageTensor = tf.browser.fromPixels(image);
+
+      // Resize the image to a fixed size
+      const resizedImage = tf.image.resizeBilinear(imageTensor, [224, 224]);
+
+      // Normalize the image between 0 and 1
+      const normalizedImage = resizedImage.div(255.0);
+
+      // Return the normalized image as a tensor
+      return normalizedImage;
+    }
+
+    // Load the training images and labels
+    async function loadTrainingData() {
+      // Array to hold the training data
+      const trainingData = [];
+
+      // Loop through the training images
+      for (let i = 0; i < trainingImages.length; i++) {
+        // Load the image and label
+        const image = await loadImage(trainingImages[i]);
+        const label = trainingLabels[i];
+
+        // Add the image and label to the training data
+        trainingData.push({ image, label });
+      }
+
+      // Return the training data
+      return trainingData;
+    }
+
+    // Train the model
+    async function trainModel() {
+      // Load the training data
+      const trainingData = await loadTrainingData();
+
+      // Create a model
+      const model = tf.sequential();
+
+      // Add a convolutional layer
+      model.add(tf.layers.conv2d({
+        inputShape: [224, 224, 3],
+        kernelSize: 5,
+        filters: 8,
+        strides: 1,
+        activation: 'relu',
+        kernelInitializer: 'varianceScaling'
+}));
+
+   // Add a max pooling layer
+  model.add(tf.layers.maxPooling2d({
+    poolSize: [2, 2],
+    strides: [2, 2]
+  }));
+
+  // Add another convolutional layer
+  model.add(tf.layers.conv2d({
+    kernelSize: 5,
+    filters: 16,
+    strides: 1,
+    activation: 'relu',
+    kernelInitializer: 'varianceScaling'
+  }));
+
+  // Add another max pooling layer
+  model.add(tf.layers.maxPooling2d({
+    poolSize: [2, 2],
+    strides: [2, 2]
+  }));
+
+  // Flatten the output from the convolutional layers
+  model.add(tf.layers.flatten());
+
+  // Add a dense layer with an output size of the number of classes
+  model.add(tf.layers.dense({
+    units: trainingLabels.length,
+    kernelInitializer: 'varianceScaling',
+    activation: 'softmax'
+  }));
+
+  // Compile the model
+  model.compile({
+    optimizer: tf.train.adam(),
+    loss: 'categoricalCrossentropy',
+    metrics: ['accuracy']
+  });
+
+  // One-hot encode the labels
+  const encodedLabels = tf.oneHot(trainingLabels, trainingLabels.length);
+
+  // Train the model
+  const history = await model.fit(
+    // Training data
+    trainingData,
+    // One-hot encoded labels
+    encodedLabels,
+    // Training options
+    {
+      epochs: 5,
+      validationSplit: 0.1,
+      shuffle: true
+    }
+  );
+
+  // Plot the training and validation accuracy/loss
+  const accuracy = history.history.acc;
+  const loss = history.history.loss;
+  const valAccuracy = history.history.val_acc;
+  const valLoss = history.history.val_loss;
+
+  const accData = {
+    x: Array.from(Array(accuracy.length).keys()),
+    y: accuracy,
+    type: 'scatter',
+    name: 'Training Accuracy'
+  };
+  const lossData = {
+    x: Array.from(Array(loss.length).keys()),
+    y: loss,
+    type: 'scatter',
+    name: 'Training Loss'
+  };
+  const valAccData = {
+    x: Array.from(Array(valAccuracy.length).keys()),
+    y: valAccuracy,
+    type: 'scatter',
+    name: 'Validation Accuracy'
+  };
+  const valLossData = {
+    x: Array.from(Array(valLoss.length).keys()),
+    y: valLoss,
+    type: 'scatter',
+    name: 'Validation Loss'
+  };
+  const data = [accData, lossData, valAccData, valLossData];
+
+  Plotly.newPlot('training-plot', data);
+}
+
+// Run the training when the page loads
+trainModel();
+     
+   </script>
+  <!-- Placeholder for the training plot -->     
+      
