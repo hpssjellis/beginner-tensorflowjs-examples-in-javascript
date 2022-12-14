@@ -18,7 +18,11 @@
 //import * as tf from '@tensorflow/tfjs';
 
 
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+//  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+
+
+import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js'; 
+
 
 const IMAGE_SIZE = 784;
 const NUM_CLASSES = 10;
