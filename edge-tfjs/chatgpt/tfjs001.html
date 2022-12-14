@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* Add some styling to the page */
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 30px;
+}
+/* Style the input fields and buttons */
+input[type="text"], input[type="number"], button {
+padding: 10px;
+border: none;
+margin: 5px;
+font-size: 16px;
+border-radius: 3px;
+}
+
+/* Style the output */
+#myOutput {
+font-size: 18px;
+margin: 30px;
+color: #333;
+}
+</style>
+
+</head>
+<body>
+<h1>My HTML and CSS Page</h1>
+<!-- Add input fields and a button -->
+<input type="text" id="myInput1" placeholder="Enter a value">
+<input type="number" id="myInput2" placeholder="Enter a number">
+<button onclick="myFunction()">Calculate</button>
+<!-- Add a div to display the output -->
+<div id="myOutput"></div>
+<!-- Add the script to handle the button click and calculate the result -->
+<script>
+function myFunction() {
+  // Get the values from the input fields
+  var myInput1 = document.getElementById("myInput1").value;
+  var myInput2 = document.getElementById("myInput2").value;
+
+  // Calculate the result
+  var result = myInput1 + myInput2;
+
+  // Display the result
+  document.getElementById("myOutput").innerHTML = result;
+}
+</script>
+</body>
+</html>
+
+
