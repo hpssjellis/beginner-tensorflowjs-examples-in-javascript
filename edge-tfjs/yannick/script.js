@@ -1,4 +1,6 @@
-import {MnistData} from './data.js';
+//import {MnistData} from './data.js';
+
+  <script src="./data.js"></script>
 
 async function showExamples(data) {
   // Create a container in the visor
