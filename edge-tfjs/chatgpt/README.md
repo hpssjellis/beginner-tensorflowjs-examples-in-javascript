@@ -1,8 +1,11 @@
 
 
 
-Final version will be at the index.html and the demo at 
+The final stable version will be at the [tfjs.html](tfjs.html) and the demo will always be at 
 
+https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/chatgpt/tfjs.html
+
+An index like this file will be at 
 https://hpssjellis.github.io/beginner-tensorflowjs-examples-in-javascript/edge-tfjs/chatgpt/index.html
 
 
@@ -13,7 +16,7 @@ I will list what I asked chatgpt and then you can see the code. The last stable 
 1. [tfjs001.html](tfjs001.html)    for this thread write every answer as a single file html webpage with css and scripts in the same file. Put "my" in front of all variables and where appropriate use input tags for buttons and include the script in the button onclick handler. For now format the page.
 
 
-3. [tfjs002.html](tfjs002.html)  
+3. [tfjs002.html](tfjs002.html)    update code so that the first button activates the webcam and puts the live image onto a canvas. The webcam should have a selection box to select for the front or rear camera.
 
 
 
