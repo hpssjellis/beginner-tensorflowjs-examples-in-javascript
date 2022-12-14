@@ -99,6 +99,8 @@ export class MnistData {
 
     // Create shuffled indices into the train/test set for when we select a
     // random dataset element for training / validation.
+    console.log('NUM_TRAIN_ELEMENTS')
+    console.log(NUM_TRAIN_ELEMENTS)
     this.trainIndices = tf.util.createShuffledIndices(NUM_TRAIN_ELEMENTS);
     this.testIndices = tf.util.createShuffledIndices(NUM_TEST_ELEMENTS);
 
