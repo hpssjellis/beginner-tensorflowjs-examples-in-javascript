@@ -5,7 +5,7 @@ latest chatgpt suggestions, but it is timing out before it can give the complete
 
 
 
-'''
+```
 
 // Create a new TensorFlow.js model
 var model = tf.sequential();
@@ -63,7 +63,6 @@ function trainModel(imageArray) {
 
 
 
-
-'''
+```
 
 
