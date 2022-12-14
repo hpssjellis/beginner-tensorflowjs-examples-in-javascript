@@ -21,7 +21,7 @@
 //  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
 
 
-import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.1.0/dist/tf.min.js'; 
+//import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.1.0/dist/tf.min.js'; 
 
 
 const IMAGE_SIZE = 784;
