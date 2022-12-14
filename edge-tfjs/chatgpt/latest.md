@@ -5,7 +5,7 @@ latest chatgpt suggestions, but it is timing out before it can give the complete
 
 
 
-
+'''
 
 // Create a new TensorFlow.js model
 var model = tf.sequential();
@@ -32,3 +32,38 @@ model.compile({
   loss: 'categoricalCrossentropy', // The loss function to use for training
   metrics: ['accuracy'] // The metric to use for evaluating the model
 });
+
+
+
+
+function trainModel(imageArray) {
+  // Define the model architecture
+  const model = tf.sequential();
+  model.add(tf.layers.dense({units: 1, inputShape: [1]}));
+
+  // Compile the model
+  model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+
+  // Convert the image array to a 2D tensor
+  const xs = tf.tensor2d(imageArray, [imageArray.length, 1]);
+
+  // Define the labels for the images
+  const ys = tf.tensor2d(labels, [labels.length, 1]);
+
+  // Train the model using the image and label data
+  model.fit(xs, ys, {epochs: 10}).then(() => {
+    // Use the model to make predictions on the image data
+    model.predict(xs).print();
+  });
+}
+
+
+
+
+
+
+
+
+'''
+
+
